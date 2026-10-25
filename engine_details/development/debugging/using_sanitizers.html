@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using sanitizers" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/development/debugging/using_sanitizers.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="What are sanitizers?: Sanitizers are static instrumentation tools that help find bugs that traditional debuggers usually cannot catch. This is particularly useful when combined with Unit testing in..." />
+<meta name="description" content="What are sanitizers?: Sanitizers are static instrumentation tools that help find bugs that traditional debuggers usually cannot catch. This is particularly useful when combined with Unit testing in..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using sanitizers &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Debugging on macOS" href="macos_debug.html" />
+    <link rel="prev" title="Debugging" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/development/debugging/using_sanitizers" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="engine_details/development/debugging/using_sanitizers.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Engine development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Debugging</a></li>
+      <li class="breadcrumb-item active">Using sanitizers</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/development/debugging/using_sanitizers.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-sanitizers">
+<span id="doc-using-sanitizers"></span><h1>Using sanitizers<a class="headerlink" href="#using-sanitizers" title="Link to this heading"></a></h1>
+<section id="what-are-sanitizers">
+<h2>What are sanitizers?<a class="headerlink" href="#what-are-sanitizers" title="Link to this heading"></a></h2>
+<p>Sanitizers are static instrumentation tools that help find bugs that traditional
+debuggers usually cannot catch. This is particularly useful when combined with
+<a class="reference internal" href="../../architecture/unit_testing.html#doc-unit-testing"><span class="std std-ref">Unit testing</span></a> in continuous integration.</p>
+<p>Sanitizers can be used on Windows, macOS and Linux by using the Clang (LLVM),
+GCC or Visual Studio compilers.
+<a class="reference internal" href="#doc-using-sanitizers-platform-specific-sanitizers"><span class="std std-ref">Certain platforms</span></a>
+may also have their own sanitizers available.
+In situations where a single sanitizer is provided by several different compilers,
+remember that their output and behavior will differ slightly.</p>
+</section>
+<section id="using-sanitizers-on-godot">
+<h2>Using sanitizers on Godot<a class="headerlink" href="#using-sanitizers-on-godot" title="Link to this heading"></a></h2>
+<p>Sanitizers <strong>require</strong> recompiling the binary. This means you cannot use
+official Godot binaries to run sanitizers.</p>
+<p>When <a class="reference internal" href="../compiling/index.html#toc-devel-compiling"><span class="std std-ref">compiling</span></a> with any of the sanitizers enabled,
+the resulting binary will have the <code class="docutils literal notranslate"><span class="pre">.san</span></code> suffix added to its name to
+distinguish it from a binary without sanitizers.</p>
+<p>There is a performance impact as many additional runtime checks need to be
+performed. Memory utilization will also increase. It is possible to enable
+certain combinations of multiple sanitizers in a single build. Beware of the
+performance impact when using multiple sanitizers at once though, as the
+resulting binary may be excessively slow.</p>
+<p>Certain options can be passed to sanitizers without having to recompile the
+binary using environment variables.</p>
+</section>
+<section id="address-sanitizer-asan">
+<span id="doc-using-sanitizers-address-sanitizer"></span><h2>Address sanitizer (ASAN)<a class="headerlink" href="#address-sanitizer-asan" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Available in Clang and GCC.</p></li>
+<li><p><strong>Supported platforms:</strong> Linux, macOS, Windows (Visual Studio), Web</p></li>
+<li><p><a class="reference external" href="https://clang.llvm.org/docs/AddressSanitizer.html">Clang ASAN documentation</a></p></li>
+</ul>
+<p>The address sanitizer is generally the most frequently used sanitizer. It can
+diagnose issues such as buffer overruns and out-of-bounds access. If the engine
+crashes with a message such as <code class="docutils literal notranslate"><span class="pre">free():</span> <span class="pre">invalid</span> <span class="pre">pointer</span></code>, this is typically
+the result of a buffer overrun. (This message is printed by the C runtime, not
+Godot.)</p>
+<p>In certain situations (such as detecting uninitialized memory reads),
+the address sanitizer doesn't suffice. The <a class="reference internal" href="#doc-using-sanitizers-memory-sanitizer"><span class="std std-ref">Memory sanitizer (MSAN)</span></a>
+should be used instead.</p>
+<p>It is also possible to detect use-after-return situations by specifying the
+<code class="docutils literal notranslate"><span class="pre">ASAN_OPTIONS=detect_stack_use_after_return=1</span></code> environment variable before
+<em>running</em> Godot (not when compiling it). This increases the address sanitizer's
+runtime overhead, so only enable this feature when you actually need it.</p>
+<p>To enable the address sanitizer in a Godot build, pass the <code class="docutils literal notranslate"><span class="pre">use_asan=yes</span></code>
+SCons option when compiling. Enabling ASAN generally makes the resulting binary
+about 2× slower.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Due to a <a class="reference external" href="https://stackoverflow.com/questions/36971902/why-cant-clang-enable-all-sanitizers/">design decision</a>,
+the address, memory and thread sanitizers are mutually exclusive. This means
+you can only use one of those sanitizers in a given binary.</p>
+</div>
+</section>
+<section id="leak-sanitizer-lsan">
+<h2>Leak sanitizer (LSAN)<a class="headerlink" href="#leak-sanitizer-lsan" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Available in Clang and GCC.</p></li>
+<li><p><strong>Supported platforms:</strong> Linux, Web</p></li>
+<li><p><a class="reference external" href="https://clang.llvm.org/docs/LeakSanitizer.html">Clang LSAN documentation</a></p></li>
+</ul>
+<p>The leak sanitizer can detect memory leaks, which are situations where memory
+that is no longer in use is never freed by the running program. This can
+potentially lead to out-of-memory situations if the program runs for long
+enough. Since Godot may run on
+<a class="reference internal" href="../../../tutorials/export/exporting_for_dedicated_servers.html#doc-exporting-for-dedicated-servers"><span class="std std-ref">dedicated servers</span></a> for months or
+even years without a restart, it's important to fix memory leaks when they occur.</p>
+<p>To enable the leak sanitizer in a Godot build, pass the <code class="docutils literal notranslate"><span class="pre">use_lsan=yes</span></code> SCons
+option when compiling. Enabling LSAN only has a small performance overhead, but
+the program will be much slower to exit as leak detection occurs when the
+program exits.</p>
+</section>
+<section id="memory-sanitizer-msan">
+<span id="doc-using-sanitizers-memory-sanitizer"></span><h2>Memory sanitizer (MSAN)<a class="headerlink" href="#memory-sanitizer-msan" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Available in Clang only, not GCC.</p></li>
+<li><p><strong>Supported platforms:</strong> Linux</p></li>
+<li><p><a class="reference external" href="https://clang.llvm.org/docs/MemorySanitizer.html">Clang MSAN documentation</a></p></li>
+</ul>
+<p>The memory sanitizer complements the
+<a class="reference internal" href="#doc-using-sanitizers-address-sanitizer"><span class="std std-ref">Address sanitizer (ASAN)</span></a>. Unlike the address sanitizer,
+the memory sanitizer can detect uninitialized memory reads.</p>
+<p>To enable the memory sanitizer in a Godot build, pass the <code class="docutils literal notranslate"><span class="pre">use_msan=yes</span></code>
+SCons option when compiling. Enabling MSAN generally makes the resulting binary
+about 3× slower.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Due to a <a class="reference external" href="https://stackoverflow.com/questions/36971902/why-cant-clang-enable-all-sanitizers/">design decision</a>,
+the address, memory and thread sanitizers are mutually exclusive. This means
+you can only use one of those sanitizers in a given binary.</p>
+</div>
+</section>
+<section id="thread-sanitizer-tsan">
+<h2>Thread sanitizer (TSAN)<a class="headerlink" href="#thread-sanitizer-tsan" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Available in Clang and GCC.</p></li>
+<li><p><strong>Supported platforms:</strong> Linux, macOS</p></li>
+<li><p><a class="reference external" href="https://clang.llvm.org/docs/ThreadSanitizer.html">Clang TSAN documentation</a></p></li>
+</ul>
+<p>The thread sanitizer is used to track down race conditions related to
+multithreading. A race condition is when multiple threads try to modify the same
+data at the same time. Since thread scheduling can be ordered in any fashion by
+the operating system, this leads to incorrect behavior that only occurs
+occasionally (and can be difficult to track as a result). To prevent a race
+condition, you need to add a lock to ensure only one thread can access the
+shared data at a given time.</p>
+<p>To enable the thread sanitizer in a Godot build, pass the <code class="docutils literal notranslate"><span class="pre">use_tsan=yes</span></code> SCons
+option when compiling. Enabling TSAN generally makes the resulting binary 10×
+slower, while also multiplying memory usage by an approximately 8× factor.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Due to a <a class="reference external" href="https://stackoverflow.com/questions/36971902/why-cant-clang-enable-all-sanitizers/">design decision</a>,
+the address, memory and thread sanitizers are mutually exclusive. This means
+you can only use one of those sanitizers in a given binary.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On Linux, if you stumble upon the following error:</p>
+<p><code class="docutils literal notranslate"><span class="pre">FATAL:</span> <span class="pre">ThreadSanitizer:</span> <span class="pre">unexpected</span> <span class="pre">memory</span> <span class="pre">mapping</span></code></p>
+<p>You may need to temporarily lower the Address Space Layout Randomization (ASLR) entropy in your system with:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>sysctl<span class="w"> </span>vm.mmap_rnd_bits<span class="o">=</span><span class="m">28</span>
+</pre></div>
+</div>
+<p>Or preferably disable it entirely with:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>sysctl<span class="w"> </span>kernel.randomize_va_space<span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<p>And as soon as you are done with the thread sanitizer, increase the ASLR entropy with:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>sysctl<span class="w"> </span>vm.mmap_rnd_bits<span class="o">=</span><span class="m">32</span>
+</pre></div>
+</div>
+<p>Or re-enable ASLR with:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>sysctl<span class="w"> </span>kernel.randomize_va_space<span class="o">=</span><span class="m">2</span>
+</pre></div>
+</div>
+<p>Rebooting your machine will also revert the ASLR state to its default values.</p>
+<p>It's important to revert the changes as soon as possible because lowering the ASLR entropy or disabling ASLR entirely can be a security risk.</p>
+</div>
+</section>
+<section id="undefined-behavior-sanitizer-ubsan">
+<h2>Undefined behavior sanitizer (UBSAN)<a class="headerlink" href="#undefined-behavior-sanitizer-ubsan" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Available in Clang and GCC.</p></li>
+<li><p><strong>Supported platforms:</strong> Linux, macOS, Web</p></li>
+<li><p><a class="reference external" href="https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html">Clang UBSAN documentation</a></p></li>
+</ul>
+<p>The undefined behavior sanitizer is used to track down situations where the
+program exhibits random and unpredictable behavior. This is due to C/C++ code
+that is accepted by the compiler, but is not <em>correct</em>. Compiling with a
+different set of optimizations can also change the observed results of undefined
+behavior.</p>
+<p>To enable the undefined behavior sanitizer in a Godot build, pass the
+<code class="docutils literal notranslate"><span class="pre">use_ubsan=yes</span></code> SCons option when compiling. Enabling UBSAN only has a small
+performance overhead.</p>
+</section>
+<section id="platform-specific-sanitizers">
+<span id="doc-using-sanitizers-platform-specific-sanitizers"></span><h2>Platform-specific sanitizers<a class="headerlink" href="#platform-specific-sanitizers" title="Link to this heading"></a></h2>
+<section id="web">
+<h3>Web<a class="headerlink" href="#web" title="Link to this heading"></a></h3>
+<p>When <a class="reference internal" href="../compiling/compiling_for_web.html#doc-compiling-for-web"><span class="std std-ref">compiling for the Web</span></a>,
+there are 2 additional sanitizer SCons options available:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">use_assertions=yes</span></code> enables runtime Emscripten assertions, which can catch
+various issues.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_safe_heap=yes</span></code> enables <a class="reference external" href="https://emscripten.org/docs/debugging/Sanitizers.html">Emscripten's SAFE_HEAP sanitizer</a>.
+It provides similar functionality to ASAN, but it focuses on issues that
+are specific to WebAssembly. <code class="docutils literal notranslate"><span class="pre">SAFE_HEAP</span></code> is not guaranteed to be compatible
+with ASAN and UBSAN in the same binary, so you may have to build it separately.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Debugging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="macos_debug.html" class="btn btn-neutral float-right" title="Debugging on macOS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1061 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Upgrading from Godot 4.2 to Godot 4.3" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/migrating/upgrading_to_godot_4.3.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="For most games and apps made with 4.2 it should be relatively safe to migrate to 4.3. This page intends to cover everything you need to pay attention to when migrating your project. Breaking change..." />
+<meta name="description" content="For most games and apps made with 4.2 it should be relatively safe to migrate to 4.3. This page intends to cover everything you need to pay attention to when migrating your project. Breaking change..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Upgrading from Godot 4.2 to Godot 4.3 &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Upgrading from Godot 4.3 to Godot 4.4" href="upgrading_to_godot_4.4.html" />
+    <link rel="prev" title="Upgrading from Godot 4.1 to Godot 4.2" href="upgrading_to_godot_4.2.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/migrating/upgrading_to_godot_4.3" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/migrating/upgrading_to_godot_4.3.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Migrating to a new version</a></li>
+      <li class="breadcrumb-item active">Upgrading from Godot 4.2 to Godot 4.3</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/migrating/upgrading_to_godot_4.3.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="upgrading-from-godot-4-2-to-godot-4-3">
+<span id="doc-upgrading-to-godot-4-3"></span><h1>Upgrading from Godot 4.2 to Godot 4.3<a class="headerlink" href="#upgrading-from-godot-4-2-to-godot-4-3" title="Link to this heading"></a></h1>
+<p>For most games and apps made with 4.2 it should be relatively safe to migrate to 4.3.
+This page intends to cover everything you need to pay attention to when migrating
+your project.</p>
+<section id="breaking-changes">
+<h2>Breaking changes<a class="headerlink" href="#breaking-changes" title="Link to this heading"></a></h2>
+<p>If you are migrating from 4.2 to 4.3, the breaking changes listed here might
+affect you. Changes are grouped by areas/systems.</p>
+<p>This article indicates whether each breaking change affects GDScript and whether
+the C# breaking change is <em>binary compatible</em> or <em>source compatible</em>:</p>
+<ul class="simple">
+<li><p><strong>Binary compatible</strong> - Existing binaries will load and execute successfully without
+recompilation, and the runtime behavior won't change.</p></li>
+<li><p><strong>Source compatible</strong> - Source code will compile successfully without changes when
+upgrading Godot.</p></li>
+</ul>
+<section id="gdextension">
+<h3>GDExtension<a class="headerlink" href="#gdextension" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change</p></th>
+<th class="head"><p>GDScript Compatible</p></th>
+<th class="head"><p>C# Binary Compatible</p></th>
+<th class="head"><p>C# Source Compatible</p></th>
+<th class="head"><p>Introduced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>GDExtension</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">close_library</span></code> removed</p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/88418">GH-88418</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">initialize_library</span></code> removed</p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/88418">GH-88418</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">open_library</span></code> removed</p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/88418">GH-88418</a></p></td>
+</tr>
+</tbody>
+</table>
+<p>Since it was basically impossible to use these methods in any useful way, these methods have been removed. Use <code class="docutils literal notranslate"><span class="pre">GDExtensionManager::load_extension</span></code> and <code class="docutils literal notranslate"><span class="pre">GDExtensionManager::unload_extension</span></code> instead to correctly load and unload a GDExtension.</p>
+</section>
+<section id="animation">
+<h3>Animation<a class="headerlink" href="#animation" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change</p></th>
+<th class="head"><p>GDScript Compatible</p></th>
+<th class="head"><p>C# Binary Compatible</p></th>
+<th class="head"><p>C# Source Compatible</p></th>
+<th class="head"><p>Introduced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Animation</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">position_track_interpolate</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">backward</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/86629">GH-86629</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">rotation_track_interpolate</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">backward</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/86629">GH-86629</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">scale_track_interpolate</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">backward</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/86629">GH-86629</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">blend_shape_track_interpolate</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">backward</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/86629">GH-86629</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">value_track_interpolate</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">backward</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/86629">GH-86629</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">track_find_key</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">limit</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/86661">GH-86661</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">track_find_key</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">backward</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/92861">GH-92861</a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>AnimationMixer</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">_post_process_key_value</span></code> changes <code class="docutils literal notranslate"><span class="pre">object</span></code> parameter type from <code class="docutils literal notranslate"><span class="pre">Object</span></code> to <code class="docutils literal notranslate"><span class="pre">uint64</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/86687">GH-86687</a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Skeleton3D</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">add_bone</span></code> changes return type from <code class="docutils literal notranslate"><span class="pre">void</span></code> to <code class="docutils literal notranslate"><span class="pre">int32</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/88791">GH-88791</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Signal <code class="docutils literal notranslate"><span class="pre">bone_pose_changed</span></code> replaced by <code class="docutils literal notranslate"><span class="pre">skeleton_updated</span></code></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/90575">GH-90575</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>BoneAttachment3D</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">on_bone_pose_update</span></code> replaced by <code class="docutils literal notranslate"><span class="pre">on_skeleton_update</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/90575">GH-90575</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gui-nodes">
+<h3>GUI nodes<a class="headerlink" href="#gui-nodes" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change</p></th>
+<th class="head"><p>GDScript Compatible</p></th>
+<th class="head"><p>C# Binary Compatible</p></th>
+<th class="head"><p>C# Source Compatible</p></th>
+<th class="head"><p>Introduced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>AcceptDialog</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">register_text_enter</span></code> changes parameter <code class="docutils literal notranslate"><span class="pre">line_edit</span></code> type from <code class="docutils literal notranslate"><span class="pre">Control</span></code> to <code class="docutils literal notranslate"><span class="pre">LineEdit</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/89419">GH-89419</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">remove_button</span></code> changes parameter <code class="docutils literal notranslate"><span class="pre">button</span></code> type from <code class="docutils literal notranslate"><span class="pre">Control</span></code> to <code class="docutils literal notranslate"><span class="pre">Button</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/89419">GH-89419</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="physics">
+<h3>Physics<a class="headerlink" href="#physics" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change</p></th>
+<th class="head"><p>GDScript Compatible</p></th>
+<th class="head"><p>C# Binary Compatible</p></th>
+<th class="head"><p>C# Source Compatible</p></th>
+<th class="head"><p>Introduced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>PhysicsShapeQueryParameters3D</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Property <code class="docutils literal notranslate"><span class="pre">motion</span></code> changes type from <code class="docutils literal notranslate"><span class="pre">Vector2</span></code> to <code class="docutils literal notranslate"><span class="pre">Vector3</span></code></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/85393">GH-85393</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In C#, the enum <code class="docutils literal notranslate"><span class="pre">PhysicsServer3D.G6DofJointAxisFlag</span></code> breaks compatibility because of the way the bindings generator
+detects the enum prefix. New members were added in <a class="reference external" href="https://github.com/godotengine/godot/pull/89851">GH-89851</a> to the enum that caused the enum members to be renamed.</p>
+</div>
+</section>
+<section id="rendering">
+<h3>Rendering<a class="headerlink" href="#rendering" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change</p></th>
+<th class="head"><p>GDScript Compatible</p></th>
+<th class="head"><p>C# Binary Compatible</p></th>
+<th class="head"><p>C# Source Compatible</p></th>
+<th class="head"><p>Introduced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>RenderingDevice</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Enum field <code class="docutils literal notranslate"><span class="pre">FinalAction.FINAL_ACTION_CONTINUE</span></code> changes value from <code class="docutils literal notranslate"><span class="pre">2</span></code> to <code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Enum field <code class="docutils literal notranslate"><span class="pre">InitialAction.INITIAL_ACTION_CLEAR</span></code> changes value from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Enum field <code class="docutils literal notranslate"><span class="pre">InitialAction.INITIAL_ACTION_CLEAR_REGION_CONTINUE</span></code> changes value from <code class="docutils literal notranslate"><span class="pre">2</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Enum field <code class="docutils literal notranslate"><span class="pre">InitialAction.INITIAL_ACTION_CONTINUE</span></code> changes value from <code class="docutils literal notranslate"><span class="pre">5</span></code> to <code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Enum field <code class="docutils literal notranslate"><span class="pre">InitialAction.INITIAL_ACTION_DROP</span></code> changes value from <code class="docutils literal notranslate"><span class="pre">4</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Enum field <code class="docutils literal notranslate"><span class="pre">InitialAction.INITIAL_ACTION_KEEP</span></code> changes value from <code class="docutils literal notranslate"><span class="pre">3</span></code> to <code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">buffer_clear</span></code> removes <code class="docutils literal notranslate"><span class="pre">post_barrier</span></code> parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">buffer_update</span></code> removes <code class="docutils literal notranslate"><span class="pre">post_barrier</span></code> parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">compute_list_begin</span></code> removes <code class="docutils literal notranslate"><span class="pre">allow_draw_overlap</span></code> parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">compute_list_end</span></code> removes <code class="docutils literal notranslate"><span class="pre">post_barrier</span></code> parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">draw_list_begin</span></code> removes <code class="docutils literal notranslate"><span class="pre">storage_textures</span></code> parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">draw_list_end</span></code> removes <code class="docutils literal notranslate"><span class="pre">post_barrier</span></code> parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">texture_clear</span></code> removes <code class="docutils literal notranslate"><span class="pre">post_barrier</span></code> parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">texture_copy</span></code> removes <code class="docutils literal notranslate"><span class="pre">post_barrier</span></code> parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">texture_resolve_multisample</span></code> removes <code class="docutils literal notranslate"><span class="pre">post_barrier</span></code> parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">texture_update</span></code> removes <code class="docutils literal notranslate"><span class="pre">post_barrier</span></code> parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84976">GH-84976</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>RenderingServer</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">environment_set_fog</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">fog_mode</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84792">GH-84792</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>RenderSceneBuffersRD</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_color_layer</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">msaa</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/80214">GH-80214</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_depth_layer</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">msaa</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/80214">GH-80214</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_velocity_layer</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">msaa</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/80214">GH-80214</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_color_texture</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">msaa</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/80214">GH-80214</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_depth_texture</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">msaa</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/80214">GH-80214</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_velocity_texture</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">msaa</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/80214">GH-80214</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While the values of the enum fields in <code class="docutils literal notranslate"><span class="pre">RenderingDevice.InitialAction</span></code> and <code class="docutils literal notranslate"><span class="pre">RenderingDevice.FinalAction</span></code> changed,
+the only method that consumed them (<code class="docutils literal notranslate"><span class="pre">draw_list_begin</span></code>) added a compatibility method which supports the old values.
+So in practice it doesn't break compatibility.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In C#, the enum <code class="docutils literal notranslate"><span class="pre">RenderingDevice.DriverResource</span></code> breaks compatibility because of the way the bindings generator
+detects the enum prefix. New members were added in <a class="reference external" href="https://github.com/godotengine/godot/pull/83452">GH-83452</a> to the enum that caused the enum members to be
+renamed.</p>
+</div>
+</section>
+<section id="text">
+<h3>Text<a class="headerlink" href="#text" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change</p></th>
+<th class="head"><p>GDScript Compatible</p></th>
+<th class="head"><p>C# Binary Compatible</p></th>
+<th class="head"><p>C# Source Compatible</p></th>
+<th class="head"><p>Introduced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Font</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">find_variation</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">baseline_offset</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/87668">GH-87668</a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>RichTextLabel</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">push_meta</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">underline_mode</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/89024">GH-89024</a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>TextServer</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">shaped_text_get_word_breaks</span></code> adds a new optional <code class="docutils literal notranslate"><span class="pre">skip_grapheme_flags</span></code> parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/90732">GH-90732</a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>TextServerExtension</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">_shaped_text_get_word_breaks</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">skip_grapheme_flags</span></code> parameter</p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/90732">GH-90732</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="audio">
+<h3>Audio<a class="headerlink" href="#audio" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change</p></th>
+<th class="head"><p>GDScript Compatible</p></th>
+<th class="head"><p>C# Binary Compatible</p></th>
+<th class="head"><p>C# Source Compatible</p></th>
+<th class="head"><p>Introduced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>AudioStreamPlaybackPolyphonic</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">play_stream</span></code> adds new <code class="docutils literal notranslate"><span class="pre">playback_type</span></code>, and <code class="docutils literal notranslate"><span class="pre">bus</span></code> optional parameters</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/91382">GH-91382</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="navigation">
+<h3>Navigation<a class="headerlink" href="#navigation" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change</p></th>
+<th class="head"><p>GDScript Compatible</p></th>
+<th class="head"><p>C# Binary Compatible</p></th>
+<th class="head"><p>C# Source Compatible</p></th>
+<th class="head"><p>Introduced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>AStar2D</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_id_path</span></code> adds new <code class="docutils literal notranslate"><span class="pre">allow_partial_path</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/88047">GH-88047</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_point_path</span></code> adds new <code class="docutils literal notranslate"><span class="pre">allow_partial_path</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/88047">GH-88047</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>AStar3D</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_id_path</span></code> adds new <code class="docutils literal notranslate"><span class="pre">allow_partial_path</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/88047">GH-88047</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_point_path</span></code> adds new <code class="docutils literal notranslate"><span class="pre">allow_partial_path</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/88047">GH-88047</a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>AStarGrid2D</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_id_path</span></code> adds new <code class="docutils literal notranslate"><span class="pre">allow_partial_path</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/88047">GH-88047</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_point_path</span></code> adds new <code class="docutils literal notranslate"><span class="pre">allow_partial_path</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/88047">GH-88047</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>NavigationRegion2D</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Property <code class="docutils literal notranslate"><span class="pre">avoidance_layers</span></code> removed</p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/90747">GH-90747</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Property <code class="docutils literal notranslate"><span class="pre">constrain_avoidance</span></code> removed</p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/90747">GH-90747</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_avoidance_layer_value</span></code> removed</p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/90747">GH-90747</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">set_avoidance_layer_value</span></code> removed</p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/90747">GH-90747</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The constrain avoidance feature in <code class="docutils literal notranslate"><span class="pre">NavigationRegion2D</span></code> was experimental and has been discontinued with no
+replacement.</p>
+</div>
+</section>
+<section id="tilemap">
+<h3>TileMap<a class="headerlink" href="#tilemap" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change</p></th>
+<th class="head"><p>GDScript Compatible</p></th>
+<th class="head"><p>C# Binary Compatible</p></th>
+<th class="head"><p>C# Source Compatible</p></th>
+<th class="head"><p>Introduced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>TileData</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_navigation_polygon</span></code> adds new <code class="docutils literal notranslate"><span class="pre">flip_h</span></code>, <code class="docutils literal notranslate"><span class="pre">flip_v</span></code>, and <code class="docutils literal notranslate"><span class="pre">transpose</span></code> optional parameters</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84660">GH-84660</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_occluder</span></code> adds new <code class="docutils literal notranslate"><span class="pre">flip_h</span></code>, <code class="docutils literal notranslate"><span class="pre">flip_v</span></code>, and <code class="docutils literal notranslate"><span class="pre">transpose</span></code> optional parameters</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/84660">GH-84660</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="xr">
+<h3>XR<a class="headerlink" href="#xr" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change</p></th>
+<th class="head"><p>GDScript Compatible</p></th>
+<th class="head"><p>C# Binary Compatible</p></th>
+<th class="head"><p>C# Source Compatible</p></th>
+<th class="head"><p>Introduced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>WebXRInterface</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_input_source_tracker</span></code> changes return type from <code class="docutils literal notranslate"><span class="pre">XRPositionalTracker</span></code> to <code class="docutils literal notranslate"><span class="pre">XRControllerTracker</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/90645">GH-90645</a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>XRServer</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">get_tracker</span></code> changes return type from <code class="docutils literal notranslate"><span class="pre">XRPositionalTracker</span></code> to <code class="docutils literal notranslate"><span class="pre">XRTracker</span></code></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/90645">GH-90645</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="editor-plugins">
+<h3>Editor plugins<a class="headerlink" href="#editor-plugins" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change</p></th>
+<th class="head"><p>GDScript Compatible</p></th>
+<th class="head"><p>C# Binary Compatible</p></th>
+<th class="head"><p>C# Source Compatible</p></th>
+<th class="head"><p>Introduced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>EditorInspectorPlugin</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">add_property_editor</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">label</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/92322">GH-92322</a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>EditorPlugin</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Method <code class="docutils literal notranslate"><span class="pre">add_control_to_bottom_panel</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">shortcut</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/88081">GH-88081</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Method <code class="docutils literal notranslate"><span class="pre">add_control_to_dock</span></code> adds a new <code class="docutils literal notranslate"><span class="pre">shortcut</span></code> optional parameter</p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility. A compatibility method was added.">✔️</abbr></p></td>
+<td><p><abbr title="This API does not break compatibility.">✔️</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/88081">GH-88081</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>EditorSceneFormatImporterFBX</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Type renamed to <code class="docutils literal notranslate"><span class="pre">EditorSceneFormatImporterFBX2GLTF</span></code></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><abbr title="This API breaks compatibility.">❌</abbr></p></td>
+<td><p><a class="reference external" href="https://github.com/godotengine/godot/pull/81746">GH-81746</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="behavior-changes">
+<h2>Behavior changes<a class="headerlink" href="#behavior-changes" title="Link to this heading"></a></h2>
+<p>In 4.3, some behavior changes have been introduced, which might require you to adjust your project.</p>
+<section id="core">
+<h3>Core<a class="headerlink" href="#core" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Binary serialization was modified to fix some issues with the serialization of scripted Objects and typed Arrays (<a class="reference external" href="https://github.com/godotengine/godot/pull/78219">GH-78219</a>).
+This breaks compat with script encoding/decoding.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">PackedByteArray</span></code> is now able to use a more compact base64 encoding for storage. But the trade-off is that it breaks
+compatibility, meaning that older versions of Godot may not be able to open resources saved by 4.3 (<a class="reference external" href="https://github.com/godotengine/godot/pull/89186">GH-89186</a>).</p>
+<p>To maximize compatibility, this new storage format will only be enabled for resources and scenes that contain large
+PackedByteArrays for now. Support for this new format will also be added in patch updates for older versions of Godot.
+Once all supported Godot versions are able to read the new format, we will gradually retire the compatibility measures
+and have all resources and scenes use the new storage format.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In C#, the <code class="docutils literal notranslate"><span class="pre">Transform3D.InterpolateWith</span></code> implementation was fixed to use the right order of operations, applying the rotation before the scale (<a class="reference external" href="https://github.com/godotengine/godot/pull/89843">GH-89843</a>).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In C#, the <code class="docutils literal notranslate"><span class="pre">Aabb.GetSupport</span></code> implementation was fixed to properly return the support vector (<a class="reference external" href="https://github.com/godotengine/godot/pull/88919">GH-88919</a>).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In C#, the Variant types' <code class="docutils literal notranslate"><span class="pre">ToString</span></code> implementation now defaults to using the <code class="docutils literal notranslate"><span class="pre">InvariantCulture</span></code> (<a class="reference external" href="https://github.com/godotengine/godot/pull/89547">GH-89547</a>)
+which means <code class="docutils literal notranslate"><span class="pre">Vector2(1.2,</span> <span class="pre">3.4)</span></code> is formatted using <code class="docutils literal notranslate"><span class="pre">.</span></code> as the decimal separator independently of the language
+of the operating system that the program is running on.</p>
+</div>
+</section>
+<section id="id1">
+<h3>Animation<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">AnimationMixer</span></code> replaced its Capture mode with a new Capture feature that works much better than the old one,
+this replaces the existing cache (<a class="reference external" href="https://github.com/godotengine/godot/pull/86715">GH-86715</a>).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">AnimationNode</span></code> has a reworked process for retrieving the semantic time info. This ensures that time-related
+behavior works as expected, but changes the blending behavior. Implementors of the <code class="docutils literal notranslate"><span class="pre">_process</span></code> virtual method
+should also note that this method is now deprecated and will be replaced by a new one in the future (<a class="reference external" href="https://github.com/godotengine/godot/pull/87171">GH-87171</a>).</p>
+</div>
+<p>More information about the changes to Animation can be found in the
+<a class="reference external" href="https://godotengine.org/article/migrating-animations-from-godot-4-0-to-4-3">Migrating Animations from Godot 4.0 to 4.3</a>
+article.</p>
+</section>
+<section id="id2">
+<h3>GUI nodes<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The default font outline color was changed from white to black (<a class="reference external" href="https://github.com/godotengine/godot/pull/54641">GH-54641</a>).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">auto_translate</span></code> property is deprecated in favor of the <code class="docutils literal notranslate"><span class="pre">auto_translate_mode</span></code> property which is now in <code class="docutils literal notranslate"><span class="pre">Node</span></code> (<a class="reference external" href="https://github.com/godotengine/godot/pull/87530">GH-87530</a>).
+The default value for <code class="docutils literal notranslate"><span class="pre">auto_translate_mode</span></code> is <code class="docutils literal notranslate"><span class="pre">AUTO_TRANSLATE_INHERIT</span></code>, which means nodes inherit the <code class="docutils literal notranslate"><span class="pre">auto_translate_mode</span></code> value
+from their parent. This means, existing nodes with the <code class="docutils literal notranslate"><span class="pre">auto_translate</span></code> property set to <code class="docutils literal notranslate"><span class="pre">true</span></code> may no longer be translated if they
+are children of a node with the <code class="docutils literal notranslate"><span class="pre">auto_translate</span></code> property set to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</div>
+</section>
+<section id="multiplayer">
+<h3>Multiplayer<a class="headerlink" href="#multiplayer" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">SceneMultiplayer</span></code> caching protocol was changed to send the received ID instead of the Node path when sending a node removal confirmation packet (<a class="reference external" href="https://github.com/godotengine/godot/pull/90027">GH-90027</a>).</p>
+<p>This is a breaking change for the high-level multiplayer protocol making it incompatible with previous Godot versions.
+Upgrade both your server and client versions to Godot 4.3 to handle this change gracefully.</p>
+<p>Note that high-level multiplayer facilities are only ever meant to be compatible with server and client using the same Godot version. It is recommended to implement some kind of version checking.</p>
+</div>
+</section>
+<section id="id3">
+<h3>Rendering<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Decals now convert the modulate color from an sRGB color to a linear color, like all other inputs, to ensure proper
+blending (<a class="reference external" href="https://github.com/godotengine/godot/pull/89849">GH-89849</a>). Existing projects that were using the decal's modulate property will notice a change in
+their visuals.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The reverse Z depth buffer technique is now implemented. This may break compatibility for some shaders.
+Read the <a class="reference external" href="https://godotengine.org/article/introducing-reverse-z/">Introducing Reverse Z (AKA I'm sorry for breaking your shader)</a>
+article for more information and guidance on how to fix common scenarios.</p>
+</div>
+</section>
+<section id="id4">
+<h3>TileMap<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">TileMap</span></code> layers were moved to individual nodes (<a class="reference external" href="https://github.com/godotengine/godot/pull/87379">GH-87379</a> and <a class="reference external" href="https://github.com/godotengine/godot/pull/89179">GH-89179</a>).</p>
+</div>
+</section>
+<section id="android">
+<h3>Android<a class="headerlink" href="#android" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Android permissions are no longer requested automatically because it goes against the recommended best practices (<a class="reference external" href="https://github.com/godotengine/godot/pull/87080">GH-87080</a>).
+Use the <code class="docutils literal notranslate"><span class="pre">request_permission</span></code> method in <code class="docutils literal notranslate"><span class="pre">OS</span></code> and the <code class="docutils literal notranslate"><span class="pre">on_request_permissions_result</span></code> signal on <code class="docutils literal notranslate"><span class="pre">MainLoop</span></code> to request
+permissions and wait for the user response.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="upgrading_to_godot_4.2.html" class="btn btn-neutral float-left" title="Upgrading from Godot 4.1 to Godot 4.2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="upgrading_to_godot_4.4.html" class="btn btn-neutral float-right" title="Upgrading from Godot 4.3 to Godot 4.4" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Prototyping levels with CSG" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/csg_tools.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="CSG stands for Constructive Solid Geometry, and is a tool to combine basic shapes or custom meshes to create more complex shapes. In 3D modeling software, CSG is mostly known as &quot;Boolean Opera..." />
+<meta name="description" content="CSG stands for Constructive Solid Geometry, and is a tool to combine basic shapes or custom meshes to create more complex shapes. In 3D modeling software, CSG is mostly known as &quot;Boolean Opera..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Prototyping levels with CSG &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using GridMaps" href="using_gridmaps.html" />
+    <link rel="prev" title="Variable rate shading" href="variable_rate_shading.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/csg_tools" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/3d/csg_tools.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">3D</a></li>
+      <li class="breadcrumb-item active">Prototyping levels with CSG</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/csg_tools.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+    <div class="admonition attention article-status">
+      <p class="first admonition-title">Work in progress</p>
+      <p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.7</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+    </div>
+    
+  </div>
+  
+
+  
+  <section id="prototyping-levels-with-csg">
+<span id="doc-csg-tools"></span><h1>Prototyping levels with CSG<a class="headerlink" href="#prototyping-levels-with-csg" title="Link to this heading"></a></h1>
+<p>CSG stands for <strong>Constructive Solid Geometry</strong>, and is a tool to combine basic
+shapes or custom meshes to create more complex shapes. In 3D modeling software,
+CSG is mostly known as &quot;Boolean Operators&quot;.</p>
+<p>Level prototyping is one of the main uses of CSG in Godot. This technique allows
+users to create the most common shapes by combining primitives.
+Interior environments can be created by using inverted primitives.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The CSG nodes in Godot are mainly intended for prototyping. There is
+no built-in support for UV mapping or editing 3D polygons (though
+extruded 2D polygons can be used with the CSGPolygon3D node).</p>
+<p>If you're looking for an easy to use level design tool for a project,
+you may want to use <a class="reference external" href="https://github.com/func-godot/func_godot_plugin">FuncGodot</a>
+or <a class="reference external" href="https://github.com/blackears/cyclopsLevelBuilder">Cyclops Level Builder</a>
+instead.</p>
+</div>
+<div  class="sphinx-contrib-video-container align-default"><video autoplay="True" controls="True" loop="True" muted="True" preload="auto"><source src="../../_images/csg_tools.webm" type="video/webm">CSG being used to subtract a torus shape from a box</video></div><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>You can check how to use CSG nodes to build various shapes (such as stairs or roads) using the
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/3d/csg">Constructive Solid Geometry demo project</a>.</p>
+</div>
+<section id="introduction-to-csg-nodes">
+<h2>Introduction to CSG nodes<a class="headerlink" href="#introduction-to-csg-nodes" title="Link to this heading"></a></h2>
+<p>Like other features of Godot, CSG is supported in the form of nodes. These are
+the CSG nodes:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../classes/class_csgbox3d.html#class-csgbox3d"><span class="std std-ref">CSGBox3D</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_csgcylinder3d.html#class-csgcylinder3d"><span class="std std-ref">CSGCylinder3D</span></a> (also supports cone)</p></li>
+<li><p><a class="reference internal" href="../../classes/class_csgsphere3d.html#class-csgsphere3d"><span class="std std-ref">CSGSphere3D</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_csgtorus3d.html#class-csgtorus3d"><span class="std std-ref">CSGTorus3D</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_csgpolygon3d.html#class-csgpolygon3d"><span class="std std-ref">CSGPolygon3D</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_csgmesh3d.html#class-csgmesh3d"><span class="std std-ref">CSGMesh3D</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_csgcombiner3d.html#class-csgcombiner3d"><span class="std std-ref">CSGCombiner3D</span></a></p></li>
+</ul>
+<img alt="../../_images/csg_nodes.png" src="../../_images/csg_nodes.png" />
+<img alt="../../_images/csg_mesh.png" src="../../_images/csg_mesh.png" />
+<section id="csg-tools-features">
+<h3>CSG tools features<a class="headerlink" href="#csg-tools-features" title="Link to this heading"></a></h3>
+<p>Every CSG node supports 3 kinds of boolean operations:</p>
+<ul class="simple">
+<li><p><strong>Union:</strong> Geometry of both primitives is merged, intersecting geometry
+is removed.</p></li>
+<li><p><strong>Intersection:</strong> Only intersecting geometry remains, the rest is removed.</p></li>
+<li><p><strong>Subtraction:</strong> The second shape is subtracted from the first, leaving a dent
+with its shape.</p></li>
+</ul>
+<img alt="../../_images/csg_operation_menu.png" src="../../_images/csg_operation_menu.png" />
+<img alt="../../_images/csg_operation.png" src="../../_images/csg_operation.png" />
+</section>
+<section id="csgpolygon">
+<h3>CSGPolygon<a class="headerlink" href="#csgpolygon" title="Link to this heading"></a></h3>
+<p>The <a class="reference internal" href="../../classes/class_csgpolygon3d.html#class-csgpolygon3d"><span class="std std-ref">CSGPolygon3D</span></a> node extrude along a Polygon drawn in
+2D (in X, Y coordinates) in the following ways:</p>
+<ul class="simple">
+<li><p><strong>Depth:</strong> Extruded back a given amount.</p></li>
+<li><p><strong>Spin:</strong> Extruded while spinning around its origin.</p></li>
+<li><p><strong>Path:</strong> Extruded along a Path node. This operation is commonly called
+lofting.</p></li>
+</ul>
+<img alt="../../_images/csg_poly_mode.png" src="../../_images/csg_poly_mode.png" />
+<img alt="../../_images/csg_poly.png" src="../../_images/csg_poly.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <strong>Path</strong> mode must be provided with a <a class="reference internal" href="../../classes/class_path3d.html#class-path3d"><span class="std std-ref">Path3D</span></a>
+node to work. In the Path node, draw the path and the polygon in
+CSGPolygon3D will extrude along the given path.</p>
+</div>
+</section>
+<section id="custom-meshes">
+<h3>Custom meshes<a class="headerlink" href="#custom-meshes" title="Link to this heading"></a></h3>
+<p>Custom meshes can be used for <a class="reference internal" href="../../classes/class_csgmesh3d.html#class-csgmesh3d"><span class="std std-ref">CSGMesh3D</span></a> as long as the
+mesh is <em>manifold</em>. The mesh can be modeled in other software and imported into
+Godot. Multiple materials are supported.</p>
+<p>For a mesh to be used as a CSG mesh, it is required to:</p>
+<ul class="simple">
+<li><p>be closed</p></li>
+<li><p>have each edge connect to only two faces</p></li>
+<li><p>have volume</p></li>
+</ul>
+<p>And it is recommended to avoid:</p>
+<ul class="simple">
+<li><p>negative volume</p></li>
+<li><p>self-intersection</p></li>
+<li><p>interior faces</p></li>
+</ul>
+<p>Godot uses the <a class="reference external" href="https://github.com/elalish/manifold">manifold</a> library to
+implement CSG meshes. The technical definition of &quot;manifold&quot; used by Godot is
+the following, adapted from that library's <a class="reference external" href="https://github.com/elalish/manifold/wiki/Manifold-Library#manifoldness-definition">definition of &quot;manifold&quot;</a>:</p>
+<blockquote>
+<div><p>Every edge of every triangle must contain the same two vertices (by index) as
+exactly one other triangle edge, and the start and end vertices must switch
+places between these two edges. The triangle vertices must appear in clockwise
+order when viewed from the outside of the Godot Engine manifold mesh.</p>
+</div></blockquote>
+<img alt="../../_images/csg_custom_mesh.png" src="../../_images/csg_custom_mesh.png" />
+<section id="making-an-existing-mesh-manifold-with-blender">
+<h4>Making an existing mesh manifold with Blender<a class="headerlink" href="#making-an-existing-mesh-manifold-with-blender" title="Link to this heading"></a></h4>
+<p>If you have an existing mesh that is not already manifold, you can make it
+manifold using Blender.</p>
+<p>In Blender, install and enable the
+<a class="reference external" href="https://extensions.blender.org/add-ons/print3d-toolbox/">3D Print Toolbox</a>
+addon.</p>
+<p>Select the mesh you want to make manifold. Open the sidebar by clicking on the arrow:</p>
+<img alt="../../_images/csg_manifold_step_1.webp" src="../../_images/csg_manifold_step_1.webp" />
+<p>In the <strong>3D Print</strong> tab, under <strong>Clean Up</strong>, click the <strong>Make Manifold</strong> button:</p>
+<img alt="../../_images/csg_manifold_step_2.webp" src="../../_images/csg_manifold_step_2.webp" />
+<p>The mesh should now be manifold, and can be used as a custom mesh.</p>
+</section>
+</section>
+<section id="csgcombiner3d">
+<h3>CSGCombiner3D<a class="headerlink" href="#csgcombiner3d" title="Link to this heading"></a></h3>
+<p>The <a class="reference internal" href="../../classes/class_csgcombiner3d.html#class-csgcombiner3d"><span class="std std-ref">CSGCombiner3D</span></a> node is an empty shape used for
+organization. It will only combine children nodes.</p>
+</section>
+<section id="processing-order">
+<h3>Processing order<a class="headerlink" href="#processing-order" title="Link to this heading"></a></h3>
+<p>Every CSG node will first process its children nodes and their operations:
+union, intersection, or subtraction, in tree order, and apply them to itself one
+after the other.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the interest of performance, make sure CSG geometry remains
+relatively simple, as complex meshes can take a while to process.
+If adding objects together (such as table and room objects), create
+them as separate CSG trees. Forcing too many objects in a single tree
+will eventually start affecting performance.
+Only use binary operations where you actually need them.</p>
+</div>
+</section>
+</section>
+<section id="prototyping-a-level">
+<h2>Prototyping a level<a class="headerlink" href="#prototyping-a-level" title="Link to this heading"></a></h2>
+<p>We will prototype a room to practice the use of CSG tools.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Working in <strong>Orthogonal</strong> projection gives a better view when combining
+the CSG shapes.</p>
+</div>
+<p>Our level will contain these objects:</p>
+<ul class="simple">
+<li><p>a room,</p></li>
+<li><p>a bed,</p></li>
+<li><p>a lamp,</p></li>
+<li><p>a desk,</p></li>
+<li><p>a bookshelf.</p></li>
+</ul>
+<p>Create a scene with a Node3D node as root node.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The default lighting of the environment doesn't provide clear shading
+at some angles. Change the display mode using <strong>Display Overdraw</strong> in
+the 3D viewport menu, or add a DirectionalLight node to help you see
+clearly.</p>
+</div>
+<img alt="../../_images/csg_overdraw.png" src="../../_images/csg_overdraw.png" />
+<p>Create a CSGBox3D and name it <code class="docutils literal notranslate"><span class="pre">room</span></code>, enable <strong>Invert Faces</strong> and change the
+dimensions of your room.</p>
+<img alt="../../_images/csg_room.png" src="../../_images/csg_room.png" />
+<img alt="../../_images/csg_room_invert.png" src="../../_images/csg_room_invert.png" />
+<p>Next, create a CSGCombiner3D and name it <code class="docutils literal notranslate"><span class="pre">desk</span></code>.</p>
+<p>A desk has one surface and 4 legs:</p>
+<ul class="simple">
+<li><p>Create 1 CSGBox3D children node in <strong>Union</strong> mode for the surface
+and adjust the dimensions.</p></li>
+<li><p>Create 4 CSGBox3D children nodes in <strong>Union</strong> mode for the legs
+and adjust the dimensions.</p></li>
+</ul>
+<p>Adjust their placement to resemble a desk.</p>
+<img alt="../../_images/csg_desk.png" src="../../_images/csg_desk.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CSG nodes inside a CSGCombiner3D will only process their operation
+within the combiner. Therefore, CSGCombiner3Ds are used to organize
+CSG nodes.</p>
+</div>
+<p>Create a CSGCombiner3D and name it <code class="docutils literal notranslate"><span class="pre">bed</span></code>.</p>
+<p>Our bed consists of 3 parts: the bed, the mattress and a pillow. Create a CSGBox3D
+and adjust its dimension for the bed. Create another CSGBox3D and adjust its
+dimension for the mattress.</p>
+<img alt="../../_images/csg_bed_mat.png" src="../../_images/csg_bed_mat.png" />
+<p>We will create another CSGCombiner3D named <code class="docutils literal notranslate"><span class="pre">pillow</span></code> as the child of  <code class="docutils literal notranslate"><span class="pre">bed</span></code>.
+The scene tree should look like this:</p>
+<img alt="../../_images/csg_bed_tree.png" src="../../_images/csg_bed_tree.png" />
+<p>We will combine 3 CSGSphere3D nodes in <strong>Union</strong> mode to form a pillow. Scale the
+Y axis of the spheres and enable <strong>Smooth Faces</strong>.</p>
+<img alt="../../_images/csg_pillow_smooth.png" src="../../_images/csg_pillow_smooth.png" />
+<p>Select the <code class="docutils literal notranslate"><span class="pre">pillow</span></code> node and switch the mode to <strong>Subtraction</strong>; the combined
+spheres will cut a hole into the mattress.</p>
+<img alt="../../_images/csg_pillow_hole.png" src="../../_images/csg_pillow_hole.png" />
+<p>Try to re-parent the <code class="docutils literal notranslate"><span class="pre">pillow</span></code> node to the root <code class="docutils literal notranslate"><span class="pre">Node3D</span></code> node; the hole will
+disappear.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is to illustrate the effect of CSG processing order.
+Since the root node is not a CSG node, the CSGCombiner3D nodes are
+the end of the operations; this shows the use of CSGCombiner3D to
+organize the CSG scene.</p>
+</div>
+<p>Undo the re-parent after observing the effect. The bed you've built should look
+like this:</p>
+<img alt="../../_images/csg_bed.png" src="../../_images/csg_bed.png" />
+<p>Create a CSGCombiner3D and name it <code class="docutils literal notranslate"><span class="pre">lamp</span></code>.</p>
+<p>A lamp consists of 3 parts: the stand, the pole and the lampshade.
+Create a CSGCylinder3D, enable the <strong>Cone</strong> option and make it the stand. Create
+another CSGCylinder3D and adjust the dimensions to use it as a pole.</p>
+<img alt="../../_images/csg_lamp_pole_stand.png" src="../../_images/csg_lamp_pole_stand.png" />
+<p>We will use a CSGPolygon3D for the lampshade. Use the <strong>Spin</strong> mode for the
+CSGPolygon3D and draw a <a class="reference external" href="https://en.wikipedia.org/wiki/Trapezoid">trapezoid</a>
+while in <strong>Front View</strong> (numeric keypad 1); this shape will extrude around the
+origin and form the lampshade.</p>
+<img alt="../../_images/csg_lamp_spin.png" src="../../_images/csg_lamp_spin.png" />
+<img alt="../../_images/csg_lamp_polygon.png" src="../../_images/csg_lamp_polygon.png" />
+<img alt="../../_images/csg_lamp_extrude.png" src="../../_images/csg_lamp_extrude.png" />
+<p>Adjust the placement of the 3 parts to make it look like a lamp.</p>
+<img alt="../../_images/csg_lamp.png" src="../../_images/csg_lamp.png" />
+<p>Create a CSGCombiner3D and name it <code class="docutils literal notranslate"><span class="pre">bookshelf</span></code>.</p>
+<p>We will use 3 CSGBox3D nodes for the bookshelf. Create a CSGBox3D and adjust its
+dimensions; this will be the size of the bookshelf.</p>
+<img alt="../../_images/csg_shelf_big.png" src="../../_images/csg_shelf_big.png" />
+<p>Duplicate the CSGBox3D and shorten the dimensions of each axis and change the mode
+to <strong>Subtraction</strong>.</p>
+<img alt="../../_images/csg_shelf_subtract.png" src="../../_images/csg_shelf_subtract.png" />
+<img alt="../../_images/csg_shelf_subtract_menu.png" src="../../_images/csg_shelf_subtract_menu.png" />
+<p>You've almost built a shelf. Create one more CSGBox3D for dividing the shelf into
+two levels.</p>
+<img alt="../../_images/csg_shelf.png" src="../../_images/csg_shelf.png" />
+<p>Position your furniture in your room as you like and your scene should look
+this:</p>
+<img alt="../../_images/csg_room_result.png" src="../../_images/csg_room_result.png" />
+<p>You've successfully prototyped a room level with the CSG tools in Godot.
+CSG tools can be used for designing all kinds of levels, such as a maze
+or a city; explore its limitations when designing your game.</p>
+</section>
+<section id="using-prototype-textures">
+<h2>Using prototype textures<a class="headerlink" href="#using-prototype-textures" title="Link to this heading"></a></h2>
+<p>Godot's <a class="reference internal" href="standard_material_3d.html#doc-standard-material-3d"><span class="std std-ref">Standard Material 3D and ORM Material 3D</span></a> supports <em>triplanar mapping</em>, which can be
+used to automatically apply a texture to arbitrary objects without distortion.
+This is handy when using CSG as Godot doesn't support editing UV maps on CSG
+nodes yet. Triplanar mapping is relatively slow, which usually restricts its
+usage to organic surfaces like terrain. Still, when prototyping, it can be used
+to quickly apply textures to CSG-based levels.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you need some textures for prototyping, Kenney made a
+<a class="reference external" href="https://kenney.nl/assets/prototype-textures">set of CC0-licensed prototype textures</a>.</p>
+</div>
+<p>There are two ways to apply a material to a CSG node:</p>
+<ul class="simple">
+<li><p>Applying it to a CSGCombiner3D node as a material override
+(<strong>Geometry &gt; Material Override</strong> in the Inspector). This will affect its
+children automatically, but will make it impossible to change the material in
+individual children.</p></li>
+<li><p>Applying a material to individual nodes (<strong>Material</strong> in the Inspector). This
+way, each CSG node can have its own appearance. Subtractive CSG nodes will
+apply their material to the nodes they're &quot;digging&quot; into.</p></li>
+</ul>
+<p>To apply triplanar mapping to a CSG node, select it, go to the Inspector, click
+the <strong>[empty]</strong> text next to <strong>Material Override</strong> (or <strong>Material</strong> for
+individual CSG nodes). Choose <strong>New StandardMaterial3D</strong>. Click the newly created
+material's icon to edit it. Unfold the <strong>Albedo</strong> section and load a texture
+into the <strong>Texture</strong> property. Now, unfold the <strong>Uv1</strong> section and check
+<strong>Triplanar</strong>. You can change the texture offset and scale on each axis by
+playing with the <strong>Scale</strong> and <strong>Offset</strong> properties just above. Higher values
+in the <strong>Scale</strong> property will cause the texture to repeat more often.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can copy a StandardMaterial3D to reuse it across CSG nodes. To do so,
+click the dropdown arrow next to a material property in the Inspector
+and choose <strong>Copy</strong>. To paste it, select the node you'd like to apply
+the material onto, click the dropdown arrow next to its material
+property then choose <strong>Paste</strong>.</p>
+</div>
+</section>
+<section id="converting-to-meshinstance3d">
+<span id="doc-csg-tools-converting-to-mesh-instance-3d"></span><h2>Converting to MeshInstance3D<a class="headerlink" href="#converting-to-meshinstance3d" title="Link to this heading"></a></h2>
+<p>Since Godot 4.4, you can convert a CSG node and its children to a <a class="reference internal" href="../../classes/class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a> node.</p>
+<p>This has several benefits:</p>
+<ul class="simple">
+<li><p>Bake lightmaps, since UV2 can be generated on a MeshInstance3D.</p></li>
+<li><p>Bake occlusion culling, since the occlusion culling bake process only takes MeshInstance3D into account.</p></li>
+<li><p>Faster loading times, since the CSG mesh no longer needs to be rebuilt when the scene loads.</p></li>
+<li><p>Better performance when updating the node's transform if using the mesh within another CSG node.</p></li>
+</ul>
+<p>To convert a CSG node to a MeshInstance3D node, select it, then choose
+<strong>CSG &gt; Bake Mesh Instance</strong> in the toolbar. The MeshInstance3D node
+will be created as a sibling. Note that the CSG node that was used for baking is <strong>not</strong> hidden
+automatically, so remember to hide it to prevent its geometry from overlapping with the newly created
+MeshInstance3D.</p>
+<p>You can also create a trimesh collision shape using <strong>CSG &gt; Bake Collision Shape</strong>.
+The generated <a class="reference internal" href="../../classes/class_collisionshape3d.html#class-collisionshape3d"><span class="std std-ref">CollisionShape3D</span></a> node must be a child of a <a class="reference internal" href="../../classes/class_staticbody3d.html#class-staticbody3d"><span class="std std-ref">StaticBody3D</span></a>
+or <a class="reference internal" href="../../classes/class_animatablebody3d.html#class-animatablebody3d"><span class="std std-ref">AnimatableBody3D</span></a> node to be effective.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remember to keep the original CSG node in the scene tree, so that you can
+perform changes to the geometry later if needed. To make changes to the
+geometry, remove the MeshInstance3D node and make the root CSG node visible
+again.</p>
+</div>
+</section>
+<section id="exporting-as-gltf">
+<h2>Exporting as glTF<a class="headerlink" href="#exporting-as-gltf" title="Link to this heading"></a></h2>
+<p>It can be useful to block out a level using CSG, then export it as a 3d model, to
+import into 3D modeling software. You can do this by selecting <strong>Scene &gt; Export As... &gt;
+glTF 2.0 Scene</strong>.</p>
+<img alt="../../_images/export_as_gltf.webp" src="../../_images/export_as_gltf.webp" />
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="variable_rate_shading.html" class="btn btn-neutral float-left" title="Variable rate shading" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="using_gridmaps.html" class="btn btn-neutral float-right" title="Using GridMaps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

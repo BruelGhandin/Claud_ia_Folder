@@ -1,0 +1,618 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Godot notifications" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/best_practices/godot_notifications.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Every Object in Godot implements a_notification method. Its purpose is to allow the Object to respond to a variety of engine-level callbacks that may relate to it. For example, if the engine tells ..." />
+<meta name="description" content="Every Object in Godot implements a_notification method. Its purpose is to allow the Object to respond to a variety of engine-level callbacks that may relate to it. For example, if the engine tells ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Godot notifications &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Data preferences" href="data_preferences.html" />
+    <link rel="prev" title="Godot interfaces" href="godot_interfaces.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/best_practices/godot_notifications" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/best_practices/godot_notifications.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Best practices</a></li>
+      <li class="breadcrumb-item active">Godot notifications</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/best_practices/godot_notifications.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="godot-notifications">
+<span id="doc-godot-notifications"></span><h1>Godot notifications<a class="headerlink" href="#godot-notifications" title="Link to this heading"></a></h1>
+<p>Every Object in Godot implements a
+<a class="reference internal" href="../../classes/class_object.html#class-object-private-method-notification"><span class="std std-ref">_notification</span></a> method. Its purpose is to
+allow the Object to respond to a variety of engine-level callbacks that may
+relate to it. For example, if the engine tells a
+<a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem"><span class="std std-ref">CanvasItem</span></a> to &quot;draw&quot;, it will call
+<code class="docutils literal notranslate"><span class="pre">_notification(NOTIFICATION_DRAW)</span></code>.</p>
+<p>Some of these notifications, like draw, are useful to override in scripts. So
+much so that Godot exposes many of them with dedicated functions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_ready()</span></code>: <code class="docutils literal notranslate"><span class="pre">NOTIFICATION_READY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_enter_tree()</span></code>: <code class="docutils literal notranslate"><span class="pre">NOTIFICATION_ENTER_TREE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_exit_tree()</span></code>: <code class="docutils literal notranslate"><span class="pre">NOTIFICATION_EXIT_TREE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_process(delta)</span></code>: <code class="docutils literal notranslate"><span class="pre">NOTIFICATION_PROCESS</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_physics_process(delta)</span></code>: <code class="docutils literal notranslate"><span class="pre">NOTIFICATION_PHYSICS_PROCESS</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_draw()</span></code>: <code class="docutils literal notranslate"><span class="pre">NOTIFICATION_DRAW</span></code></p></li>
+</ul>
+<p>What users might <em>not</em> realize is that notifications exist for types other
+than Node alone, for example:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../classes/class_object.html#class-object-constant-notification-postinitialize"><span class="std std-ref">Object::NOTIFICATION_POSTINITIALIZE</span></a>:
+a callback that triggers during object initialization. Not accessible to scripts.</p></li>
+<li><p><a class="reference internal" href="../../classes/class_object.html#class-object-constant-notification-predelete"><span class="std std-ref">Object::NOTIFICATION_PREDELETE</span></a>:
+a callback that triggers before the engine deletes an Object, i.e. a
+&quot;destructor&quot;.</p></li>
+</ul>
+<p>And many of the callbacks that <em>do</em> exist in Nodes don't have any dedicated
+methods, but are still quite useful.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../classes/class_node.html#class-node-constant-notification-parented"><span class="std std-ref">Node::NOTIFICATION_PARENTED</span></a>:
+a callback that triggers anytime you add a child node to another node.</p></li>
+<li><p><a class="reference internal" href="../../classes/class_node.html#class-node-constant-notification-unparented"><span class="std std-ref">Node::NOTIFICATION_UNPARENTED</span></a>:
+a callback that triggers anytime you remove a child node from another
+node.</p></li>
+</ul>
+<p>The universal <code class="docutils literal notranslate"><span class="pre">_notification()</span></code> method provides access to all these custom
+notifications.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Methods in the documentation labeled as &quot;virtual&quot; are also intended to be
+overridden by scripts.</p>
+<p>A classic example is the
+<a class="reference internal" href="../../classes/class_object.html#class-object-private-method-init"><span class="std std-ref">_init</span></a> method in Object. While it has no
+<code class="docutils literal notranslate"><span class="pre">NOTIFICATION_*</span></code> equivalent, the engine still calls the method. Most languages
+(except C#) rely on it as a constructor.</p>
+</div>
+<p>So, when should you use each of these notifications or
+virtual functions?</p>
+<section id="process-vs-physics-process-vs-input">
+<h2>_process vs. _physics_process vs. *_input<a class="headerlink" href="#process-vs-physics-process-vs-input" title="Link to this heading"></a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">_process()</span></code> when you need a framerate-dependent delta time between
+frames. If code that updates object data needs to update as often as
+possible, this is the right place. Recurring logic checks and data caching
+often execute here, but it comes down to how often
+the evaluations need to update. If they don't need to execute every frame, then
+implementing a Timer-timeout loop is another option.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button><button aria-controls="panel-0-Qysr" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Allows for recurring operations that don&#39;t trigger script logic</span>
+<span class="c1"># every frame (or even every fixed frame).</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Timer</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">timer</span><span class="o">.</span><span class="vi">autostart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="w">    </span><span class="n">timer</span><span class="o">.</span><span class="vi">wait_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="w">    </span><span class="nf">add_child</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span>
+<span class="w">    </span><span class="n">timer</span><span class="o">.</span><span class="vi">timeout</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="k">func</span><span class="p">():</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;This block runs every 0.5 seconds&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Allows for recurring operations that don&#39;t trigger script logic</span>
+<span class="w">    </span><span class="c1">// every frame (or even every fixed frame).</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Timer</span><span class="p">();</span>
+<span class="w">        </span><span class="n">timer</span><span class="p">.</span><span class="n">Autostart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">        </span><span class="n">timer</span><span class="p">.</span><span class="n">WaitTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span>
+<span class="w">        </span><span class="n">AddChild</span><span class="p">(</span><span class="n">timer</span><span class="p">);</span>
+<span class="w">        </span><span class="n">timer</span><span class="p">.</span><span class="n">Timeout</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;This block runs every 0.5 seconds&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-Qysr" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-Qysr" name="Qysr" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">godot</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">MyNode</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="p">)</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="c1">// Allows for recurring operations that don&#39;t trigger script logic</span>
+<span class="w">    </span><span class="c1">// every frame (or even every fixed frame).</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Timer</span><span class="w"> </span><span class="o">*</span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memnew</span><span class="p">(</span><span class="n">Timer</span><span class="p">);</span>
+<span class="w">        </span><span class="n">timer</span><span class="o">-&gt;</span><span class="n">set_autostart</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="w">        </span><span class="n">timer</span><span class="o">-&gt;</span><span class="n">set_wait_time</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="w">        </span><span class="n">add_child</span><span class="p">(</span><span class="n">timer</span><span class="p">);</span>
+<span class="w">        </span><span class="n">timer</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;timeout&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">MyNode</span><span class="o">::</span><span class="n">run</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">UtilityFunctions</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;This block runs every 0.5 seconds.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">_physics_process()</span></code> when you need a framerate-independent delta time
+between frames. If code needs consistent updates over time, regardless
+of how fast or slow time advances, this is the right place.
+Recurring kinematic and object transform operations should execute here.</p>
+<p>While it is possible, to achieve the best performance, you should avoid
+making input checks during these callbacks. <code class="docutils literal notranslate"><span class="pre">_process()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">_physics_process()</span></code> will trigger at every opportunity (they do not &quot;rest&quot; by
+default). In contrast, <code class="docutils literal notranslate"><span class="pre">*_input()</span></code> callbacks will trigger only on frames in
+which the engine has actually detected the input.</p>
+<p>You can check for input actions within the input callbacks just the same.
+If you want to use delta time, you can fetch it from the related
+delta time methods as needed.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button><button aria-controls="panel-1-Qysr" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Called every frame, even when the engine detects no input.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_just_pressed</span><span class="p">(</span><span class="s2">&quot;ui_select&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+
+<span class="c1"># Called during every input event.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_unhandled_input</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">match</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="nf">get_class</span><span class="p">():</span>
+<span class="w">        </span><span class="s2">&quot;InputEventKey&quot;</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_just_pressed</span><span class="p">(</span><span class="s2">&quot;ui_accept&quot;</span><span class="p">):</span>
+<span class="w">                </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="nf">get_process_delta_time</span><span class="p">())</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Called every frame, even when the engine detects no input.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Process</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionJustPressed</span><span class="p">(</span><span class="s">&quot;ui_select&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">delta</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Called during every input event. Equally true for _input().</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_UnhandledInput</span><span class="p">(</span><span class="n">InputEvent</span><span class="w"> </span><span class="n">@event</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">@event</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">InputEventKey</span><span class="p">:</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionJustPressed</span><span class="p">(</span><span class="s">&quot;ui_accept&quot;</span><span class="p">))</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">GetProcessDeltaTime</span><span class="p">());</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-Qysr" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-Qysr" name="Qysr" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">godot</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">MyNode</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="p">)</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="c1">// Called every frame, even when the engine detects no input.</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">p_delta</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="o">::</span><span class="n">get_singleton</span><span class="o">-&gt;</span><span class="n">is_action_just_pressed</span><span class="p">(</span><span class="s">&quot;ui_select&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">UtilityFunctions</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">p_delta</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Called during every input event. Equally true for _input().</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">_unhandled_input</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">InputEvent</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_event</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">InputEventKey</span><span class="o">&gt;</span><span class="w"> </span><span class="n">key_event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">key_event</span><span class="p">.</span><span class="n">is_valid</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">Input</span><span class="o">::</span><span class="n">get_singleton</span><span class="o">-&gt;</span><span class="n">is_action_just_pressed</span><span class="p">(</span><span class="s">&quot;ui_accept&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">UtilityFunctions</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">get_process_delta_time</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="init-vs-initialization-vs-export">
+<h2>_init vs. initialization vs. export<a class="headerlink" href="#init-vs-initialization-vs-export" title="Link to this heading"></a></h2>
+<p>If the script initializes its own node subtree, without a scene,
+that code should execute in <code class="docutils literal notranslate"><span class="pre">_init()</span></code>. Other property or SceneTree-independent
+initializations should also run here.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The C# equivalent to GDScript's <code class="docutils literal notranslate"><span class="pre">_init()</span></code> method is the constructor.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">_init()</span></code> triggers before <code class="docutils literal notranslate"><span class="pre">_enter_tree()</span></code> or <code class="docutils literal notranslate"><span class="pre">_ready()</span></code>, but after a script
+creates and initializes its properties. When instantiating a scene, property
+values will set up according to the following sequence:</p>
+<ol class="arabic simple">
+<li><p><strong>Initial value assignment:</strong> the property is assigned its initialization value,
+or its default value if one is not specified. If a setter exists, it is not used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_init()</span></code> <strong>assignment:</strong> the property's value is replaced by any assignments
+made in <code class="docutils literal notranslate"><span class="pre">_init()</span></code>, triggering the setter.</p></li>
+<li><p><strong>Exported value assignment:</strong> an exported property's value is again replaced by
+any value set in the Inspector, triggering the setter.</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button><button aria-controls="panel-2-Qysr" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># test is initialized to &quot;one&quot;, without triggering the setter.</span>
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">test</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="nf">set</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;!&quot;</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_init</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Triggers the setter, changing test&#39;s value from &quot;one&quot; to &quot;two!&quot;.</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+
+<span class="c1"># If you set test to &quot;three&quot; from the Inspector, it would trigger</span>
+<span class="c1"># the setter, changing test&#39;s value from &quot;two!&quot; to &quot;three!&quot;.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">_test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Test</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">_test</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="k">set</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$&quot;{value}!&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">MyNode</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Triggers the setter, changing _test&#39;s value from &quot;one&quot; to &quot;two!&quot;.</span>
+<span class="w">        </span><span class="n">Test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// If you set Test to &quot;three&quot; in the Inspector, it would trigger</span>
+<span class="w">    </span><span class="c1">// the setter, changing _test&#39;s value from &quot;two!&quot; to &quot;three!&quot;.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-Qysr" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-Qysr" name="Qysr" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">godot</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">MyNode</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">;</span>
+
+<span class="k">protected</span><span class="o">:</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">_bind_methods</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&quot;get_test&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">MyNode</span><span class="o">::</span><span class="n">get_test</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&quot;set_test&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">MyNode</span><span class="o">::</span><span class="n">set_test</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">STRING</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;set_test&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;get_test&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">get_test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">test</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">set_test</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">p_test</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_test</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;!&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MyNode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Triggers the setter, changing _test&#39;s value from &quot;one&quot; to &quot;two!&quot;.</span>
+<span class="w">        </span><span class="n">set_test</span><span class="p">(</span><span class="s">&quot;two&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// If you set test to &quot;three&quot; in the Inspector, it would trigger</span>
+<span class="w">    </span><span class="c1">// the setter, changing test&#39;s value from &quot;two!&quot; to &quot;three!&quot;.</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></div>
+<p>As a result, instantiating a script versus a scene may affect both the
+initialization <em>and</em> the number of times the engine calls the setter.</p>
+</section>
+<section id="ready-vs-enter-tree-vs-notification-parented">
+<h2>_ready vs. _enter_tree vs. NOTIFICATION_PARENTED<a class="headerlink" href="#ready-vs-enter-tree-vs-notification-parented" title="Link to this heading"></a></h2>
+<p>When instantiating a scene connected to the first executed scene, Godot will
+instantiate nodes down the tree (making <code class="docutils literal notranslate"><span class="pre">_init()</span></code> calls) and build the tree
+going downwards from the root. This causes <code class="docutils literal notranslate"><span class="pre">_enter_tree()</span></code> calls to cascade
+down the tree. Once the tree is complete, leaf nodes call <code class="docutils literal notranslate"><span class="pre">_ready</span></code>. A node
+will call this method once all child nodes have finished calling theirs. This
+then causes a reverse cascade going up back to the tree's root.</p>
+<p>When instantiating a script or a standalone scene, nodes are not
+added to the SceneTree upon creation, so no <code class="docutils literal notranslate"><span class="pre">_enter_tree()</span></code> callbacks
+trigger. Instead, only the <code class="docutils literal notranslate"><span class="pre">_init()</span></code> call occurs. When the scene is added
+to the SceneTree, the <code class="docutils literal notranslate"><span class="pre">_enter_tree()</span></code> and <code class="docutils literal notranslate"><span class="pre">_ready()</span></code> calls occur.</p>
+<p>If you need to trigger behavior that occurs as nodes parent to another,
+regardless of whether it occurs as part of the main/active scene or not, you
+can use the <a class="reference internal" href="../../classes/class_node.html#class-node-constant-notification-parented"><span class="std std-ref">PARENTED</span></a> notification.
+For example, here is a snippet that connects a node's method to
+a custom signal on the parent node without failing. Useful on data-centric
+nodes potentially created at runtime.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button><button aria-controls="panel-3-Qysr" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">parent_cache</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">connection_check</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">parent_cache</span><span class="o">.</span><span class="nf">has_user_signal</span><span class="p">(</span><span class="s2">&quot;interacted_with&quot;</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_notification</span><span class="p">(</span><span class="n">what</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">match</span><span class="w"> </span><span class="n">what</span><span class="p">:</span>
+<span class="w">        </span><span class="n">NOTIFICATION_PARENTED</span><span class="p">:</span>
+<span class="w">            </span><span class="n">parent_cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_parent</span><span class="p">()</span>
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nf">connection_check</span><span class="p">():</span>
+<span class="w">                </span><span class="n">parent_cache</span><span class="o">.</span><span class="vi">interacted_with</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_parent_interacted_with</span><span class="p">)</span>
+<span class="w">        </span><span class="n">NOTIFICATION_UNPARENTED</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nf">connection_check</span><span class="p">():</span>
+<span class="w">                </span><span class="n">parent_cache</span><span class="o">.</span><span class="vi">interacted_with</span><span class="o">.</span><span class="nf">disconnect</span><span class="p">(</span><span class="n">_on_parent_interacted_with</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_parent_interacted_with</span><span class="p">():</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;I&#39;m reacting to my parent&#39;s interaction!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">_parentCache</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">ConnectionCheck</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">_parentCache</span><span class="p">.</span><span class="n">HasUserSignal</span><span class="p">(</span><span class="s">&quot;InteractedWith&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Notification</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">what</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">((</span><span class="kt">long</span><span class="p">)</span><span class="n">what</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">NotificationParented</span><span class="p">:</span>
+<span class="w">                </span><span class="n">_parentCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetParent</span><span class="p">();</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ConnectionCheck</span><span class="p">())</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">_parentCache</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="s">&quot;InteractedWith&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Callable</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">OnParentInteractedWith</span><span class="p">));</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">NotificationUnparented</span><span class="p">:</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ConnectionCheck</span><span class="p">())</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">_parentCache</span><span class="p">.</span><span class="n">Disconnect</span><span class="p">(</span><span class="s">&quot;InteractedWith&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Callable</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">OnParentInteractedWith</span><span class="p">));</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnParentInteractedWith</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;I&#39;m reacting to my parent&#39;s interaction!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-Qysr" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-Qysr" name="Qysr" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">godot</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">MyNode</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">parent_cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">on_parent_interacted_with</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">UtilityFunctions</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;I&#39;m reacting to my parent&#39;s interaction!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">connection_check</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">parent_cache</span><span class="o">-&gt;</span><span class="n">has_user_signal</span><span class="p">(</span><span class="s">&quot;interacted_with&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">_notification</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">p_what</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">p_what</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">NOTIFICATION_PARENTED</span><span class="p">:</span>
+<span class="w">                </span><span class="n">parent_cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_parent</span><span class="p">();</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">connection_check</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">parent_cache</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;interacted_with&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">MyNode</span><span class="o">::</span><span class="n">on_parent_interacted_with</span><span class="p">));</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">NOTIFICATION_UNPARENTED</span><span class="p">:</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">connection_check</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">parent_cache</span><span class="o">-&gt;</span><span class="n">disconnect</span><span class="p">(</span><span class="s">&quot;interacted_with&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">MyNode</span><span class="o">::</span><span class="n">on_parent_interacted_with</span><span class="p">));</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="godot_interfaces.html" class="btn btn-neutral float-left" title="Godot interfaces" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="data_preferences.html" class="btn btn-neutral float-right" title="Data preferences" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

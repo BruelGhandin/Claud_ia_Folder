@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using InputEvent" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/inputs/inputevent.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="What is it?: Managing input is usually complex, no matter the OS or platform. To ease this a little, a special built-in type is provided, InputEvent. This datatype can be configured to contain seve..." />
+<meta name="description" content="What is it?: Managing input is usually complex, no matter the OS or platform. To ease this a little, a special built-in type is provided, InputEvent. This datatype can be configured to contain seve..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using InputEvent &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Input examples" href="input_examples.html" />
+    <link rel="prev" title="Input handling" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/inputs/inputevent" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/inputs/inputevent.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Input handling</a></li>
+      <li class="breadcrumb-item active">Using InputEvent</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/inputs/inputevent.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-inputevent">
+<span id="doc-inputevent"></span><h1>Using InputEvent<a class="headerlink" href="#using-inputevent" title="Link to this heading"></a></h1>
+<section id="what-is-it">
+<h2>What is it?<a class="headerlink" href="#what-is-it" title="Link to this heading"></a></h2>
+<p>Managing input is usually complex, no matter the OS or platform. To ease
+this a little, a special built-in type is provided, <a class="reference internal" href="../../classes/class_inputevent.html#class-inputevent"><span class="std std-ref">InputEvent</span></a>.
+This datatype can be configured to contain several types of input
+events. Input events travel through the engine and can be received in
+multiple locations, depending on the purpose.</p>
+<p>Here is a quick example, closing your game if the escape key is hit:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_unhandled_input</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nb">InputEventKey</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="vi">pressed</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="vi">keycode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">KEY_ESCAPE</span><span class="p">:</span>
+<span class="w">            </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="nf">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_UnhandledInput</span><span class="p">(</span><span class="n">InputEvent</span><span class="w"> </span><span class="n">@event</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">@event</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">InputEventKey</span><span class="w"> </span><span class="n">eventKey</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eventKey</span><span class="p">.</span><span class="n">Pressed</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">eventKey</span><span class="p">.</span><span class="n">Keycode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Key</span><span class="p">.</span><span class="n">Escape</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">GetTree</span><span class="p">().</span><span class="n">Quit</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>However, it is cleaner and more flexible to use the provided <a class="reference internal" href="../../classes/class_inputmap.html#class-inputmap"><span class="std std-ref">InputMap</span></a> feature,
+which allows you to define input actions and assign them different keys. This way,
+you can define multiple keys for the same action (e.g. the keyboard escape key and the start button on a gamepad).
+You can then more easily change this mapping in the project settings without updating your code,
+and even build a key mapping feature on top of it to allow your game to change the key mapping at runtime!</p>
+<p>You can set up your InputMap under <strong>Project &gt; Project Settings &gt; Input Map</strong> and then use those actions like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;ui_right&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="c1"># Move right.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Process</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_right&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Move right.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="how-does-it-work">
+<h2>How does it work?<a class="headerlink" href="#how-does-it-work" title="Link to this heading"></a></h2>
+<p>Every input event is originated from the user/player (though it's
+possible to generate an InputEvent and feed them back to the engine,
+which is useful for gestures). The DisplayServer for each platform will read
+events from the operating system, then feed them to the root <a class="reference internal" href="../../classes/class_window.html#class-window"><span class="std std-ref">Window</span></a>.</p>
+<p>The window's <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> does quite a lot of stuff with the
+received input, in order:</p>
+<img alt="../../_images/input_event_flow.webp" src="../../_images/input_event_flow.webp" />
+<ol class="arabic simple">
+<li><p>If the Viewport is embedding Windows, the Viewport tries to interpret the event in its
+capability as a Window-Manager (e.g. for resizing or moving Windows).</p></li>
+<li><p>Next if an embedded Window is focused, the event is sent to that Window and processed in
+the Window's Viewport and afterwards treated as handled. If no embedded Window is focused,
+the event is sent to the nodes of the current viewport in the following order.</p></li>
+<li><p>First of all, the standard <a class="reference internal" href="../../classes/class_node.html#class-node-private-method-input"><span class="std std-ref">Node._input()</span></a> function
+will be called in any node that overrides it (and hasn't disabled input processing with <a class="reference internal" href="../../classes/class_node.html#class-node-method-set-process-input"><span class="std std-ref">Node.set_process_input()</span></a>).
+If any function consumes the event, it can call <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-method-set-input-as-handled"><span class="std std-ref">Viewport.set_input_as_handled()</span></a>, and the event will
+not spread any more. This ensures that you can filter all events of interest, even before the GUI.
+For gameplay input, <a class="reference internal" href="../../classes/class_node.html#class-node-private-method-unhandled-input"><span class="std std-ref">Node._unhandled_input()</span></a> is generally a better fit, because it allows the GUI to intercept the events.</p></li>
+<li><p>Second, it will try to feed the input to the GUI, and see if any
+control can receive it. If so, the <a class="reference internal" href="../../classes/class_control.html#class-control"><span class="std std-ref">Control</span></a> will be called via the
+virtual function <a class="reference internal" href="../../classes/class_control.html#class-control-private-method-gui-input"><span class="std std-ref">Control._gui_input()</span></a> and the signal
+&quot;gui_input&quot; will be emitted (this function is re-implementable by
+script by inheriting from it). If the control wants to &quot;consume&quot; the
+event, it will call <a class="reference internal" href="../../classes/class_control.html#class-control-method-accept-event"><span class="std std-ref">Control.accept_event()</span></a> and the event will
+not spread any more. Use the <a class="reference internal" href="../../classes/class_control.html#class-control-property-mouse-filter"><span class="std std-ref">Control.mouse_filter</span></a>
+property to control whether a <a class="reference internal" href="../../classes/class_control.html#class-control"><span class="std std-ref">Control</span></a> is notified
+of mouse events via <a class="reference internal" href="../../classes/class_control.html#class-control-private-method-gui-input"><span class="std std-ref">Control._gui_input()</span></a>
+callback, and whether these events are propagated further.</p></li>
+<li><p>If so far no one consumed the event, the <a class="reference internal" href="../../classes/class_node.html#class-node-private-method-shortcut-input"><span class="std std-ref">Node._shortcut_input()</span></a> callback
+will be called if overridden (and not disabled with
+<a class="reference internal" href="../../classes/class_node.html#class-node-method-set-process-shortcut-input"><span class="std std-ref">Node.set_process_shortcut_input()</span></a>).
+This happens only for <a class="reference internal" href="../../classes/class_inputeventkey.html#class-inputeventkey"><span class="std std-ref">InputEventKey</span></a>,
+<a class="reference internal" href="../../classes/class_inputeventshortcut.html#class-inputeventshortcut"><span class="std std-ref">InputEventShortcut</span></a> and <a class="reference internal" href="../../classes/class_inputeventjoypadbutton.html#class-inputeventjoypadbutton"><span class="std std-ref">InputEventJoypadButton</span></a>.
+If any function consumes the event, it can call <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-method-set-input-as-handled"><span class="std std-ref">Viewport.set_input_as_handled()</span></a>, and the
+event will not spread any more. The shortcut input callback is ideal for treating events that are intended as shortcuts.</p></li>
+<li><p>If so far no one consumed the event, the <a class="reference internal" href="../../classes/class_node.html#class-node-private-method-unhandled-key-input"><span class="std std-ref">Node._unhandled_key_input()</span></a> callback
+will be called if overridden (and not disabled with
+<a class="reference internal" href="../../classes/class_node.html#class-node-method-set-process-unhandled-key-input"><span class="std std-ref">Node.set_process_unhandled_key_input()</span></a>).
+This happens only if the event is an <a class="reference internal" href="../../classes/class_inputeventkey.html#class-inputeventkey"><span class="std std-ref">InputEventKey</span></a>.
+If any function consumes the event, it can call <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-method-set-input-as-handled"><span class="std std-ref">Viewport.set_input_as_handled()</span></a>, and the
+event will not spread any more. The unhandled key input callback is ideal for key events.</p></li>
+<li><p>If so far no one consumed the event, the <a class="reference internal" href="../../classes/class_node.html#class-node-private-method-unhandled-input"><span class="std std-ref">Node._unhandled_input()</span></a> callback
+will be called if overridden (and not disabled with
+<a class="reference internal" href="../../classes/class_node.html#class-node-method-set-process-unhandled-input"><span class="std std-ref">Node.set_process_unhandled_input()</span></a>).
+If any function consumes the event, it can call <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-method-set-input-as-handled"><span class="std std-ref">Viewport.set_input_as_handled()</span></a>, and the
+event will not spread any more. The unhandled input callback is ideal for full-screen gameplay events, so they are not received when a GUI is active.</p></li>
+<li><p>If no one wanted the event so far, and <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-physics-object-picking"><span class="std std-ref">Object Picking</span></a>
+is turned on, the event is used for object picking. For the root viewport, this can also be
+enabled in <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-physics-common-enable-object-picking"><span class="std std-ref">Project Settings</span></a>.
+In the case of a 3D scene if a <a class="reference internal" href="../../classes/class_camera3d.html#class-camera3d"><span class="std std-ref">Camera3D</span></a> is assigned to the Viewport, a ray
+to the physics world (in the ray direction from the click) will be cast. If this ray hits an object,
+it will call the <a class="reference internal" href="../../classes/class_collisionobject3d.html#class-collisionobject3d-private-method-input-event"><span class="std std-ref">CollisionObject3D._input_event()</span></a>
+function in the relevant physics object.
+In the case of a 2D scene, conceptually the same happens with <a class="reference internal" href="../../classes/class_collisionobject2d.html#class-collisionobject2d-private-method-input-event"><span class="std std-ref">CollisionObject2D._input_event()</span></a>.</p></li>
+</ol>
+<p>When sending events to its child and descendant nodes, the viewport will do so, as depicted in
+the following graphic, in a reverse depth-first order, starting with the node at the bottom of
+the scene tree, and ending at the root node. Excluded from this process are Windows
+and SubViewports.</p>
+<img alt="../../_images/input_event_scene_flow.webp" src="../../_images/input_event_scene_flow.webp" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This order doesn't apply to <a class="reference internal" href="../../classes/class_control.html#class-control-private-method-gui-input"><span class="std std-ref">Control._gui_input()</span></a>, which uses
+a different method based on event location or focused Control. GUI <strong>mouse</strong> events also travel
+up the scene tree, subject to the <a class="reference internal" href="../../classes/class_control.html#class-control-property-mouse-filter"><span class="std std-ref">Control.mouse_filter</span></a>
+restrictions described above. However, since these events target specific Controls, only direct ancestors of
+the targeted Control node receive the event. GUI <strong>keyboard and joypad</strong> events <em>do not</em> travel
+up the scene tree, and can only be handled by the Control that received them. Otherwise, they will be
+propagated as non-GUI events through <a class="reference internal" href="../../classes/class_node.html#class-node-private-method-unhandled-input"><span class="std std-ref">Node._unhandled_input()</span></a>.</p>
+</div>
+<p>Since Viewports don't send events to other <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewports</span></a>, one of the following
+methods has to be used:</p>
+<ol class="arabic simple">
+<li><p>Use a <a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer"><span class="std std-ref">SubViewportContainer</span></a>, which automatically
+sends events to its child <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewports</span></a> after
+<a class="reference internal" href="../../classes/class_node.html#class-node-private-method-input"><span class="std std-ref">Node._input()</span></a> or <a class="reference internal" href="../../classes/class_control.html#class-control-private-method-gui-input"><span class="std std-ref">Control._gui_input()</span></a>.</p></li>
+<li><p>Implement event propagation based on the individual requirements.</p></li>
+</ol>
+<p>In accordance with Godot's node-based design, this enables
+specialized child nodes to handle and consume particular events, while
+their ancestors, and ultimately the scene root, can provide more
+generalized behavior if needed.</p>
+</section>
+<section id="anatomy-of-an-inputevent">
+<h2>Anatomy of an InputEvent<a class="headerlink" href="#anatomy-of-an-inputevent" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../../classes/class_inputevent.html#class-inputevent"><span class="std std-ref">InputEvent</span></a> is just a base built-in type, it does not represent
+anything and only contains some basic information, such as event ID
+(which is increased for each event), device index, etc.</p>
+<p>There are several specialized types of InputEvent, described in the table below:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Event</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_inputevent.html#class-inputevent"><span class="std std-ref">InputEvent</span></a></p></td>
+<td><p>Empty Input Event.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_inputeventkey.html#class-inputeventkey"><span class="std std-ref">InputEventKey</span></a></p></td>
+<td><p>Contains a keycode and Unicode value,
+as well as modifiers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_inputeventmousebutton.html#class-inputeventmousebutton"><span class="std std-ref">InputEventMouseButton</span></a></p></td>
+<td><p>Contains click information, such as
+button, modifiers, etc.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_inputeventmousemotion.html#class-inputeventmousemotion"><span class="std std-ref">InputEventMouseMotion</span></a></p></td>
+<td><p>Contains motion information, such as
+relative and absolute positions and
+speed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_inputeventjoypadmotion.html#class-inputeventjoypadmotion"><span class="std std-ref">InputEventJoypadMotion</span></a></p></td>
+<td><p>Contains Joystick/Joypad analog axis
+information.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_inputeventjoypadbutton.html#class-inputeventjoypadbutton"><span class="std std-ref">InputEventJoypadButton</span></a></p></td>
+<td><p>Contains Joystick/Joypad button
+information.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_inputeventscreentouch.html#class-inputeventscreentouch"><span class="std std-ref">InputEventScreenTouch</span></a></p></td>
+<td><p>Contains multi-touch press/release
+information. (only available on mobile
+devices)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_inputeventscreendrag.html#class-inputeventscreendrag"><span class="std std-ref">InputEventScreenDrag</span></a></p></td>
+<td><p>Contains multi-touch drag information.
+(only available on mobile devices)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_inputeventmagnifygesture.html#class-inputeventmagnifygesture"><span class="std std-ref">InputEventMagnifyGesture</span></a></p></td>
+<td><p>Contains a position, a factor as well
+as modifiers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_inputeventpangesture.html#class-inputeventpangesture"><span class="std std-ref">InputEventPanGesture</span></a></p></td>
+<td><p>Contains a position, a delta as well as
+modifiers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_inputeventmidi.html#class-inputeventmidi"><span class="std std-ref">InputEventMIDI</span></a></p></td>
+<td><p>Contains MIDI-related information.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_inputeventshortcut.html#class-inputeventshortcut"><span class="std std-ref">InputEventShortcut</span></a></p></td>
+<td><p>Contains a shortcut.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_inputeventaction.html#class-inputeventaction"><span class="std std-ref">InputEventAction</span></a></p></td>
+<td><p>Contains a generic action. These events
+are often generated by the programmer
+as feedback. (more on this below)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="input-actions">
+<h2>Input actions<a class="headerlink" href="#input-actions" title="Link to this heading"></a></h2>
+<p>Input actions are a grouping of zero or more InputEvents into a commonly
+understood title (for example, the default &quot;ui_left&quot; action grouping both joypad-left input and a keyboard's left arrow key). They are not required to represent an
+InputEvent but are useful because they abstract various inputs when
+programming the game logic.</p>
+<p>This allows for:</p>
+<ul class="simple">
+<li><p>The same code to work on different devices with different inputs (e.g.,
+keyboard on PC, Joypad on console).</p></li>
+<li><p>Input to be reconfigured at runtime.</p></li>
+<li><p>Actions to be triggered programmatically at runtime.</p></li>
+</ul>
+<p>Actions can be created from the Project Settings menu in the <strong>Input Map</strong>
+tab and assigned input events.</p>
+<p>Any event has the methods <a class="reference internal" href="../../classes/class_inputevent.html#class-inputevent-method-is-action"><span class="std std-ref">InputEvent.is_action()</span></a>,
+<a class="reference internal" href="../../classes/class_inputevent.html#class-inputevent-method-is-pressed"><span class="std std-ref">InputEvent.is_pressed()</span></a> and <a class="reference internal" href="../../classes/class_inputevent.html#class-inputevent-method-is-echo"><span class="std std-ref">InputEvent.is_echo()</span></a>.</p>
+<p>Alternatively, it may be desired to supply the game back with an action
+from the game code (a good example of this is detecting gestures).
+The Input singleton has a method for this:
+<a class="reference internal" href="../../classes/class_input.html#class-input-method-parse-input-event"><span class="std std-ref">Input.parse_input_event()</span></a>. You would normally use it like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">ev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">InputEventAction</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="c1"># Set as ui_left, pressed.</span>
+<span class="n">ev</span><span class="o">.</span><span class="vi">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ui_left&quot;</span>
+<span class="n">ev</span><span class="o">.</span><span class="vi">pressed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="c1"># Feedback.</span>
+<span class="nb">Input</span><span class="o">.</span><span class="nf">parse_input_event</span><span class="p">(</span><span class="n">ev</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">ev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InputEventAction</span><span class="p">();</span>
+<span class="c1">// Set as ui_left, pressed.</span>
+<span class="n">ev</span><span class="p">.</span><span class="n">Action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ui_left&quot;</span><span class="p">;</span>
+<span class="n">ev</span><span class="p">.</span><span class="n">Pressed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="c1">// Feedback.</span>
+<span class="n">Input</span><span class="p">.</span><span class="n">ParseInputEvent</span><span class="p">(</span><span class="n">ev</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="../../getting_started/first_3d_game/02.player_input.html#doc-first-3d-game-input-actions"><span class="std std-ref">Creating input actions</span></a> for a tutorial on adding input
+actions in the project settings.</p>
+</div>
+</section>
+<section id="inputmap">
+<h2>InputMap<a class="headerlink" href="#inputmap" title="Link to this heading"></a></h2>
+<p>Customizing and re-mapping input from code is often desired. If your
+whole workflow depends on actions, the <a class="reference internal" href="../../classes/class_inputmap.html#class-inputmap"><span class="std std-ref">InputMap</span></a> singleton is
+ideal for reassigning or creating different actions at runtime. This
+singleton is not saved (must be modified manually) and its state is run
+from the project settings (project.godot). So any dynamic system of this
+type needs to store settings in the way the programmer best sees fit.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Input handling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="input_examples.html" class="btn btn-neutral float-right" title="Input examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

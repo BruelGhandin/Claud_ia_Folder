@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using the SurfaceTool" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/procedural_geometry/surfacetool.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="The SurfaceTool provides a useful interface for constructing geometry. The interface is similar to the ImmediateMesh class. You set each per-vertex attribute (e.g. normal, uv, color) and then when ..." />
+<meta name="description" content="The SurfaceTool provides a useful interface for constructing geometry. The interface is similar to the ImmediateMesh class. You set each per-vertex attribute (e.g. normal, uv, color) and then when ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using the SurfaceTool &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Using ImmediateMesh" href="immediatemesh.html" />
+    <link rel="prev" title="Using the MeshDataTool" href="meshdatatool.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/procedural_geometry/surfacetool" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/3d/procedural_geometry/surfacetool.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">3D</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Procedural geometry</a></li>
+      <li class="breadcrumb-item active">Using the SurfaceTool</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/procedural_geometry/surfacetool.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-the-surfacetool">
+<span id="doc-surfacetool"></span><h1>Using the SurfaceTool<a class="headerlink" href="#using-the-surfacetool" title="Link to this heading"></a></h1>
+<p>The <a class="reference internal" href="../../../classes/class_surfacetool.html#class-surfacetool"><span class="std std-ref">SurfaceTool</span></a> provides a useful interface for constructing geometry.
+The interface is similar to the <a class="reference internal" href="../../../classes/class_immediatemesh.html#class-immediatemesh"><span class="std std-ref">ImmediateMesh</span></a> class. You
+set each per-vertex attribute (e.g. normal, uv, color) and then when you add a vertex it
+captures the attributes.</p>
+<p>The SurfaceTool also provides some useful helper functions like <code class="docutils literal notranslate"><span class="pre">index()</span></code> and <code class="docutils literal notranslate"><span class="pre">generate_normals()</span></code>.</p>
+<p>Attributes are added before each vertex is added:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">SurfaceTool</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+
+<span class="n">st</span><span class="o">.</span><span class="nf">begin</span><span class="p">(</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">PRIMITIVE_TRIANGLES</span><span class="p">)</span>
+
+<span class="n">st</span><span class="o">.</span><span class="nf">set_normal</span><span class="p">()</span><span class="w"> </span><span class="c1"># Overwritten by normal below.</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">set_normal</span><span class="p">()</span><span class="w"> </span><span class="c1"># Added to next vertex.</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">set_color</span><span class="p">()</span><span class="w"> </span><span class="c1"># Added to next vertex.</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">()</span><span class="w"> </span><span class="c1"># Captures normal and color above.</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">set_normal</span><span class="p">()</span><span class="w"> </span><span class="c1"># Normal never added to a vertex.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="p">.</span><span class="n">SetNormal</span><span class="p">();</span><span class="w"> </span><span class="c1">// Overwritten by normal below.</span>
+<span class="n">st</span><span class="p">.</span><span class="n">SetNormal</span><span class="p">();</span><span class="w"> </span><span class="c1">// Added to next vertex.</span>
+<span class="n">st</span><span class="p">.</span><span class="n">SetColor</span><span class="p">();</span><span class="w"> </span><span class="c1">// Added to next vertex.</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">();</span><span class="w"> </span><span class="c1">// Captures normal and color above.</span>
+<span class="n">st</span><span class="p">.</span><span class="n">SetNormal</span><span class="p">();</span><span class="w"> </span><span class="c1">// Normal never added to a vertex.</span>
+</pre></div>
+</div>
+</div></div>
+<p>When finished generating your geometry with the <a class="reference internal" href="../../../classes/class_surfacetool.html#class-surfacetool"><span class="std std-ref">SurfaceTool</span></a>,
+call <code class="docutils literal notranslate"><span class="pre">commit()</span></code> to finish generating the mesh. If an <a class="reference internal" href="../../../classes/class_arraymesh.html#class-arraymesh"><span class="std std-ref">ArrayMesh</span></a> is passed
+to <code class="docutils literal notranslate"><span class="pre">commit()</span></code>, then it appends a new surface to the end of the ArrayMesh. While if nothing is passed
+in, <code class="docutils literal notranslate"><span class="pre">commit()</span></code> returns an ArrayMesh.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add surface to existing ArrayMesh.</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">commit</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+
+<span class="c1"># -- Or Alternatively --</span>
+
+<span class="c1"># Create new ArrayMesh.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">mesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st</span><span class="o">.</span><span class="nf">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="p">.</span><span class="n">Commit</span><span class="p">(</span><span class="n">mesh</span><span class="p">);</span>
+<span class="c1">// Or:</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">mesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st</span><span class="p">.</span><span class="n">Commit</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>The code below creates a triangle without indices.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">SurfaceTool</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+
+<span class="n">st</span><span class="o">.</span><span class="nf">begin</span><span class="p">(</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">PRIMITIVE_TRIANGLES</span><span class="p">)</span>
+
+<span class="c1"># Prepare attributes for add_vertex.</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">set_normal</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">set_uv</span><span class="p">(</span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="c1"># Call last for each vertex, adds the above attributes.</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">st</span><span class="o">.</span><span class="nf">set_normal</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">set_uv</span><span class="p">(</span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">st</span><span class="o">.</span><span class="nf">set_normal</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">set_uv</span><span class="p">(</span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># Commit to a mesh.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">mesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st</span><span class="o">.</span><span class="nf">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SurfaceTool</span><span class="p">();</span>
+
+<span class="n">st</span><span class="p">.</span><span class="n">Begin</span><span class="p">(</span><span class="n">Mesh</span><span class="p">.</span><span class="n">PrimitiveType</span><span class="p">.</span><span class="n">Triangles</span><span class="p">);</span>
+
+<span class="c1">// Prepare attributes for AddVertex.</span>
+<span class="n">st</span><span class="p">.</span><span class="n">SetNormal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="n">st</span><span class="p">.</span><span class="n">SetUV</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="c1">// Call last for each vertex, adds the above attributes.</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+
+<span class="n">st</span><span class="p">.</span><span class="n">SetNormal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="n">st</span><span class="p">.</span><span class="n">SetUV</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+
+<span class="n">st</span><span class="p">.</span><span class="n">SetNormal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="n">st</span><span class="p">.</span><span class="n">SetUV</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+
+<span class="c1">// Commit to a mesh.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">mesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st</span><span class="p">.</span><span class="n">Commit</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>You can optionally add an index array, either by calling <code class="docutils literal notranslate"><span class="pre">add_index()</span></code> and adding
+vertices to the index array manually, or by calling <code class="docutils literal notranslate"><span class="pre">index()</span></code> once,
+which generates the index array automatically and
+shrinks the vertex array to remove duplicate vertices.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Suppose we have a quad defined by 6 vertices as follows</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># We can make the quad more efficient by using an index array and only utilizing 4 vertices:</span>
+
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_vertex</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># Creates a quad from four corner vertices.</span>
+<span class="c1"># add_index() can be called before or after add_vertex()</span>
+<span class="c1"># since it&#39;s not an attribute of a vertex itself.</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_index</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_index</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">st</span><span class="o">.</span><span class="nf">add_index</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_index</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">add_index</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Alternatively we can use ``st.index()`` which will create the quad for us and remove the duplicate vertices</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Suppose we have a quad defined by 6 vertices as follows.</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+
+<span class="c1">// We can make the quad more efficient by using an index array and only utilizing 4 vertices:</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddVertex</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+
+<span class="c1">// Creates a quad from four corner vertices.</span>
+<span class="c1">// AddIndex does not need to be called before AddVertex.</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddIndex</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="n">st</span><span class="p">.</span><span class="n">AddIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddIndex</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">st</span><span class="p">.</span><span class="n">AddIndex</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="c1">// Alternatively we can use `st.Index()` which will create the quad for us and remove the duplicate vertices.</span>
+<span class="n">st</span><span class="p">.</span><span class="n">Index</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>Similarly, if you have an index array, but you want each vertex to be unique (e.g. because
+you want to use unique normals or colors per face instead of per-vertex), you can call <code class="docutils literal notranslate"><span class="pre">deindex()</span></code>.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="nf">deindex</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="p">.</span><span class="n">Deindex</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>If you don't add custom normals yourself, you can add them using <code class="docutils literal notranslate"><span class="pre">generate_normals()</span></code>, which should
+be called after generating geometry and before committing the mesh using <code class="docutils literal notranslate"><span class="pre">commit()</span></code> or
+<code class="docutils literal notranslate"><span class="pre">commit_to_arrays()</span></code>. Calling <code class="docutils literal notranslate"><span class="pre">generate_normals(true)</span></code> will flip the resulting normals. As a side
+note, <code class="docutils literal notranslate"><span class="pre">generate_normals()</span></code> only works if the primitive type is set to <code class="docutils literal notranslate"><span class="pre">Mesh.PRIMITIVE_TRIANGLES</span></code>.</p>
+<p>You may notice that normal mapping or other material properties look broken on
+the generated mesh. This is because normal mapping <strong>requires</strong> the mesh to
+feature <em>tangents</em>, which are separate from <em>normals</em>. You can either add custom
+tangents manually, or generate them automatically with
+<code class="docutils literal notranslate"><span class="pre">generate_tangents()</span></code>. This method requires that each vertex have UVs and
+normals set already.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="nf">generate_normals</span><span class="p">()</span>
+<span class="n">st</span><span class="o">.</span><span class="nf">generate_tangents</span><span class="p">()</span>
+
+<span class="n">st</span><span class="o">.</span><span class="nf">commit</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="p">.</span><span class="n">GenerateNormals</span><span class="p">();</span>
+<span class="n">st</span><span class="p">.</span><span class="n">GenerateTangents</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>By default, when generating normals, they will be calculated on a per-vertex basis (i.e. they will
+be &quot;smooth normals&quot;). If you want flat vertex normals (i.e. a single normal vector per face), when
+adding vertices, call <code class="docutils literal notranslate"><span class="pre">add_smooth_group(i)</span></code> where <code class="docutils literal notranslate"><span class="pre">i</span></code> is a unique number per vertex.
+<code class="docutils literal notranslate"><span class="pre">add_smooth_group()</span></code> needs to be called while building the geometry, e.g. before the call to
+<code class="docutils literal notranslate"><span class="pre">add_vertex()</span></code>.</p>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="meshdatatool.html" class="btn btn-neutral float-left" title="Using the MeshDataTool" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="immediatemesh.html" class="btn btn-neutral float-right" title="Using ImmediateMesh" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

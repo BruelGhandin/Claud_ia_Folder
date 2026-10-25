@@ -1,0 +1,628 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using AnimationTree" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/animation/animation_tree.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: With AnimationPlayer, Godot has one of the most flexible animation systems that you can find in any game engine. It is pretty much unique in its ability to animate almost any property..." />
+<meta name="description" content="Introduction: With AnimationPlayer, Godot has one of the most flexible animation systems that you can find in any game engine. It is pretty much unique in its ability to animate almost any property..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using AnimationTree &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Playing videos" href="playing_videos.html" />
+    <link rel="prev" title="2D skeletons" href="2d_skeletons.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/animation/animation_tree" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/animation/animation_tree.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Animation</a></li>
+      <li class="breadcrumb-item active">Using AnimationTree</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/animation/animation_tree.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-animationtree">
+<span id="doc-animation-tree"></span><h1>Using AnimationTree<a class="headerlink" href="#using-animationtree" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>With <a class="reference internal" href="../../classes/class_animationplayer.html#class-animationplayer"><span class="std std-ref">AnimationPlayer</span></a>, Godot has one of the most flexible animation systems that you can find in any game engine.
+It is pretty much unique in its ability to animate almost any property in any node or resource, and its dedicated transform, bezier,
+function calling, audio, and sub-animation tracks.</p>
+<p>However, the support for blending those animations via <code class="docutils literal notranslate"><span class="pre">AnimationPlayer</span></code> is limited, as you can only set a fixed cross-fade transition time.</p>
+<p><a class="reference internal" href="../../classes/class_animationtree.html#class-animationtree"><span class="std std-ref">AnimationTree</span></a> is a node designed to deal with advanced transitions.</p>
+</section>
+<section id="animationtree-and-animationplayer">
+<h2>AnimationTree and AnimationPlayer<a class="headerlink" href="#animationtree-and-animationplayer" title="Link to this heading"></a></h2>
+<p>Before starting, know that an <code class="docutils literal notranslate"><span class="pre">AnimationTree</span></code> node does not contain its own animations.
+Instead, it uses animations contained in an <code class="docutils literal notranslate"><span class="pre">AnimationPlayer</span></code> node. You create, edit, or import your animations in an <code class="docutils literal notranslate"><span class="pre">AnimationPlayer</span></code>
+and then use an <code class="docutils literal notranslate"><span class="pre">AnimationTree</span></code> to control the playback.</p>
+<p><code class="docutils literal notranslate"><span class="pre">AnimationPlayer</span></code> and <code class="docutils literal notranslate"><span class="pre">AnimationTree</span></code> can be used in both 2D and 3D scenes. When importing 3D scenes and their animations, you can use
+<a class="reference external" href="https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/node_type_customization.html#animation-loop-loop-cycle">name suffixes</a>
+to simplify the process and import with the correct properties. At the end, the imported Godot scene will contain the animations in an <code class="docutils literal notranslate"><span class="pre">AnimationPlayer</span></code> node.
+Since you rarely use imported scenes directly in Godot (they are either instantiated or inherited from), you can place the <code class="docutils literal notranslate"><span class="pre">AnimationTree</span></code> node in your
+new scene which contains the imported one. Afterwards, point the <code class="docutils literal notranslate"><span class="pre">AnimationTree</span></code> node to the <code class="docutils literal notranslate"><span class="pre">AnimationPlayer</span></code> that was created in the imported scene.</p>
+<p>This is how it's done in the <a class="reference external" href="https://godotengine.org/asset-library/asset/2710">Third Person Shooter demo</a>, for reference:</p>
+<img alt="../../_images/animtree_treeandplayersetup.png" src="../../_images/animtree_treeandplayersetup.png" />
+<p>A new scene was created for the player with a <code class="docutils literal notranslate"><span class="pre">CharacterBody3D</span></code> as root. Inside this scene, the original <code class="docutils literal notranslate"><span class="pre">.dae</span></code> (Collada) file was instantiated
+and an <code class="docutils literal notranslate"><span class="pre">AnimationTree</span></code> node was created.</p>
+</section>
+<section id="creating-a-tree">
+<h2>Creating a tree<a class="headerlink" href="#creating-a-tree" title="Link to this heading"></a></h2>
+<p>To use an <code class="docutils literal notranslate"><span class="pre">AnimationTree</span></code>, you have to set a root node. An animation root node is a class that contains and evaluates sub-nodes and outputs an animation.
+There are 3 types of sub-nodes:</p>
+<ol class="arabic simple">
+<li><p>Animation nodes, which reference an animation from the linked <code class="docutils literal notranslate"><span class="pre">AnimationPlayer</span></code>.</p></li>
+<li><p>Animation Root nodes, which are used to blend sub-nodes and can be nested.</p></li>
+<li><p>Animation Blend nodes, which are used in an <code class="docutils literal notranslate"><span class="pre">AnimationNodeBlendTree</span></code>, a 2D graph of nodes. Blend nodes take multiple input ports and give one output port.</p></li>
+</ol>
+<p>A few types of root nodes are available:</p>
+<img alt="../../_images/animtree_rootnodes.png" src="../../_images/animtree_rootnodes.png" />
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AnimationNodeAnimation</span></code>: Selects an animation from the list and plays it. This is the simplest root node, and generally not used as a root.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AnimationNodeBlendTree</span></code>: Contains multiple nodes as children in a graph. Many blend nodes are available, such as mix, blend2, blend3, one shot, etc.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AnimationNodeBlendSpace1D</span></code>: Allows linear blending between two animation nodes. Control the blend position in a 1D blend space to mix between animations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AnimationNodeBlendSpace2D</span></code>: Allows linear blending between three animation nodes. Control the blend position in a 2D blend space to mix between animations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AnimationNodeStateMachine</span></code>: Contains multiple nodes as children in a graph. Each node is used as a state, with multiple functions used to alternate between states.</p></li>
+</ul>
+</section>
+<section id="blend-tree">
+<h2>Blend tree<a class="headerlink" href="#blend-tree" title="Link to this heading"></a></h2>
+<p>When you make an <code class="docutils literal notranslate"><span class="pre">AnimationNodeBlendTree</span></code>, you get an empty 2d graph in the bottom panel, under the AnimationTree tab. It contains only an <code class="docutils literal notranslate"><span class="pre">Output</span></code>
+node by default.</p>
+<img alt="../../_images/animtree_emptyblendtree.webp" src="../../_images/animtree_emptyblendtree.webp" />
+<p>In order for animations to play, a node has to be connected to the output. You can add nodes from the <strong>Add Node..</strong> menu or by right clicking an empty space:</p>
+<img alt="../../_images/animtree_blendnodes.webp" src="../../_images/animtree_blendnodes.webp" />
+<p>The simplest connection to make is to connect an <code class="docutils literal notranslate"><span class="pre">Animation</span></code> node to the output directly, which will just play back the animation.</p>
+<img alt="../../_images/animtree_animtooutput.png" src="../../_images/animtree_animtooutput.png" />
+<p>Following is a description of the other available nodes:</p>
+<section id="blend2-blend3">
+<h3>Blend2 / Blend3<a class="headerlink" href="#blend2-blend3" title="Link to this heading"></a></h3>
+<p>These nodes will blend between two or three inputs by a user-specified blend value:</p>
+<img alt="../../_images/animtree_blend2.gif" src="../../_images/animtree_blend2.gif" />
+<p>Blending can use <strong>filters</strong> to control individually which tracks get blended and which do not. This can be useful for layering animations on top of each other.</p>
+<img alt="../../_images/animtree_filtering.png" src="../../_images/animtree_filtering.png" />
+<p>For more complex blending, it is recommended to use blend spaces instead.</p>
+</section>
+<section id="oneshot">
+<h3>OneShot<a class="headerlink" href="#oneshot" title="Link to this heading"></a></h3>
+<p>This node will execute an animation once and return when it finishes. You can customize blend times for fading in and out, as well as filters.</p>
+<img alt="../../_images/animtree_oneshot.gif" src="../../_images/animtree_oneshot.gif" />
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Play child animation connected to &quot;shot&quot; port.</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;parameters/OneShot/request&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">AnimationNodeOneShot</span><span class="o">.</span><span class="vi">ONE_SHOT_REQUEST_FIRE</span><span class="p">)</span>
+<span class="c1"># Alternative syntax (same result).</span>
+<span class="n">animation_tree</span><span class="p">[</span><span class="s2">&quot;parameters/OneShot/request&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">AnimationNodeOneShot</span><span class="o">.</span><span class="vi">ONE_SHOT_REQUEST_FIRE</span>
+
+<span class="c1"># Abort child animation connected to &quot;shot&quot; port.</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;parameters/OneShot/request&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">AnimationNodeOneShot</span><span class="o">.</span><span class="vi">ONE_SHOT_REQUEST_ABORT</span><span class="p">)</span>
+<span class="c1"># Alternative syntax (same result).</span>
+<span class="n">animation_tree</span><span class="p">[</span><span class="s2">&quot;parameters/OneShot/request&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">AnimationNodeOneShot</span><span class="o">.</span><span class="vi">ONE_SHOT_REQUEST_ABORT</span>
+
+<span class="c1"># Get current state (read-only).</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s2">&quot;parameters/OneShot/active&quot;</span><span class="p">))</span>
+<span class="c1"># Alternative syntax (same result).</span>
+<span class="n">animation_tree</span><span class="p">[</span><span class="s2">&quot;parameters/OneShot/active&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Play child animation connected to &quot;shot&quot; port.</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="s">&quot;parameters/OneShot/request&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">AnimationNodeOneShot</span><span class="p">.</span><span class="n">OneShotRequest</span><span class="p">.</span><span class="n">Fire</span><span class="p">);</span>
+
+<span class="c1">// Abort child animation connected to &quot;shot&quot; port.</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="s">&quot;parameters/OneShot/request&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">AnimationNodeOneShot</span><span class="p">.</span><span class="n">OneShotRequest</span><span class="p">.</span><span class="n">Abort</span><span class="p">);</span>
+
+<span class="c1">// Get current state (read-only).</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="s">&quot;parameters/OneShot/active&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="timeseek">
+<h3>TimeSeek<a class="headerlink" href="#timeseek" title="Link to this heading"></a></h3>
+<p>This node allows you to seek to a time in the animation connected to its <cite>in</cite> input. Use this node to play an <code class="docutils literal notranslate"><span class="pre">Animation</span></code> starting from a certain playback position.
+Note that the seek request value is measured in seconds, so if you would like to play an animation from the beginning, set the value to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, or if you would like
+to play an animation from 3 seconds in, set the value to <code class="docutils literal notranslate"><span class="pre">3.0</span></code>.</p>
+<img alt="../../_images/animtree_timeseek.webp" src="../../_images/animtree_timeseek.webp" />
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Play child animation from the start.</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;parameters/TimeSeek/seek_request&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
+<span class="c1"># Alternative syntax (same result).</span>
+<span class="n">animation_tree</span><span class="p">[</span><span class="s2">&quot;parameters/TimeSeek/seek_request&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+
+<span class="c1"># Play child animation from 12 second timestamp.</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;parameters/TimeSeek/seek_request&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">12.0</span><span class="p">)</span>
+<span class="c1"># Alternative syntax (same result).</span>
+<span class="n">animation_tree</span><span class="p">[</span><span class="s2">&quot;parameters/TimeSeek/seek_request&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12.0</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Play child animation from the start.</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="s">&quot;parameters/TimeSeek/seek_request&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+
+<span class="c1">// Play child animation from 12 second timestamp.</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="s">&quot;parameters/TimeSeek/seek_request&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">12.0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="timescale">
+<h3>TimeScale<a class="headerlink" href="#timescale" title="Link to this heading"></a></h3>
+<p>This node allows you to scale the speed of the animation connected to its <cite>in</cite> input. The speed of the animation will be multiplied by the number in the <cite>scale</cite>
+parameter. Setting the scale to 0 will pause the animation. Setting the scale to a negative number will play the animation backwards.</p>
+<img alt="../../_images/animtree_timescale.webp" src="../../_images/animtree_timescale.webp" />
+</section>
+<section id="transition">
+<h3>Transition<a class="headerlink" href="#transition" title="Link to this heading"></a></h3>
+<p>This node is a simplified version of a StateMachine. You connect animations to the inputs, and the current state index determines which animation to play.
+You may specify a crossfade transition time. In the Inspector, you may change the number of input ports, rearrange inputs, or delete inputs.</p>
+<img alt="../../_images/animtree_transition.webp" src="../../_images/animtree_transition.webp" />
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Play child animation connected to &quot;state_2&quot; port.</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;parameters/Transition/transition_request&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;state_2&quot;</span><span class="p">)</span>
+<span class="c1"># Alternative syntax (same result).</span>
+<span class="n">animation_tree</span><span class="p">[</span><span class="s2">&quot;parameters/Transition/transition_request&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;state_2&quot;</span>
+
+<span class="c1"># Get current state name (read-only).</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s2">&quot;parameters/Transition/current_state&quot;</span><span class="p">)</span>
+<span class="c1"># Alternative syntax (same result).</span>
+<span class="n">animation_tree</span><span class="p">[</span><span class="s2">&quot;parameters/Transition/current_state&quot;</span><span class="p">]</span>
+
+<span class="c1"># Get current state index (read-only).</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s2">&quot;parameters/Transition/current_index&quot;</span><span class="p">))</span>
+<span class="c1"># Alternative syntax (same result).</span>
+<span class="n">animation_tree</span><span class="p">[</span><span class="s2">&quot;parameters/Transition/current_index&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Play child animation connected to &quot;state_2&quot; port.</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="s">&quot;parameters/Transition/transition_request&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;state_2&quot;</span><span class="p">);</span>
+
+<span class="c1">// Get current state name (read-only).</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="s">&quot;parameters/Transition/current_state&quot;</span><span class="p">);</span>
+
+<span class="c1">// Get current state index (read-only).</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="s">&quot;parameters/Transition/current_index&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="statemachine">
+<h3>StateMachine<a class="headerlink" href="#statemachine" title="Link to this heading"></a></h3>
+<p>When you make an <code class="docutils literal notranslate"><span class="pre">AnimationNodeStateMachine</span></code>, you get an empty 2d graph in the bottom panel, under the AnimationTree tab. It contains a <code class="docutils literal notranslate"><span class="pre">Start</span></code> and <code class="docutils literal notranslate"><span class="pre">End</span></code>
+state by default.</p>
+<img alt="../../_images/animtree_emptystatemachine.webp" src="../../_images/animtree_emptystatemachine.webp" />
+<p>To add states, right click or use the <strong>create new nodes</strong> button, whose icon is a plus in a box. You can add animations, blendspaces, blendtrees, or even
+another StateMachine. To edit one of these more complex sub-nodes, click on the pencil icon on the right of the state. To return to the original StateMachine,
+click <strong>Root</strong> on the top left of the panel.</p>
+<p>Before the StateMachine can do anything useful, the states must be connected with transitions. To add a transition, click the <strong>connect nodes</strong> button, which is
+a line with a right-facing arrow, and drag between two states. You can create 2 transitions between states, one going in each direction.</p>
+<img alt="../../_images/animtree_connections.gif" src="../../_images/animtree_connections.gif" />
+<p>There are 3 types of transitions:</p>
+<img alt="../../_images/animtree_transitiontypes.png" src="../../_images/animtree_transitiontypes.png" />
+<ul class="simple">
+<li><p><em>Immediate</em>: Will switch to the next state immediately.</p></li>
+<li><p><em>Sync</em>: Will switch to the next state immediately, but will seek the new state to the playback position of the old state.</p></li>
+<li><p><em>At End</em>: Will wait for the current state playback to end, then switch to the beginning of the next state animation.</p></li>
+</ul>
+<p>Transitions also have a few properties. Click a transition and it will be displayed in the inspector:</p>
+<img alt="../../_images/animtree_statemachinetransitionproperties.webp" src="../../_images/animtree_statemachinetransitionproperties.webp" />
+<ul class="simple">
+<li><p><em>Xfade Time</em> is the time to cross-fade between this state and the next.</p></li>
+<li><p><em>Xfade Curve</em> is a cross-fade following a curve rather than a linear blend.</p></li>
+<li><p><em>Reset</em> determines whether the state you are switching into plays from the beginning (true) or not (false).</p></li>
+<li><p><em>Priority</em> is used together with the <code class="docutils literal notranslate"><span class="pre">travel()</span></code> function from code (more on this later). Lower priority transitions are preferred when travelling through the tree.</p></li>
+<li><p><em>Switch Mode</em> is the transition type (see above). It can be changed after creation here.</p></li>
+<li><p><em>Advance Mode</em> determines the advance mode. If <code class="docutils literal notranslate"><span class="pre">Disabled</span></code>, the transition will not be used. If <code class="docutils literal notranslate"><span class="pre">Enabled</span></code>, the transition will only be used during <code class="docutils literal notranslate"><span class="pre">travel()</span></code>. If <code class="docutils literal notranslate"><span class="pre">Auto</span></code>, the transition will be used if the advance condition and expression are true, or if there are no advance conditions/expressions.</p></li>
+</ul>
+<section id="advance-condition-and-advance-expression">
+<h4>Advance Condition and Advance Expression<a class="headerlink" href="#advance-condition-and-advance-expression" title="Link to this heading"></a></h4>
+<p>The last 2 properties in a StateMachine transition are <code class="docutils literal notranslate"><span class="pre">Advance</span> <span class="pre">Condition</span></code> and <code class="docutils literal notranslate"><span class="pre">Advance</span> <span class="pre">Expression.</span></code> When the Advance Mode is set to <em>Auto</em>, these
+determine if the transition will advance or not.</p>
+<p>Advance Condition is a true/false check. You may put a custom variable name in the text field, and when the StateMachine reaches this transition,
+it will check if your variable is <em>true</em>. If so, the transition continues. Note that the advance condition <strong>only</strong> checks if a variable is <em>true</em>,
+and it cannot check for falseness.</p>
+<p>This gives the Advance Condition a very limited capability. If you wanted to make a transition back and forth based on one property, you would need to make
+2 variables that have opposite values, and check if either of them are true. This is why, in Godot 4, the Advance Expression was added.</p>
+<p>The Advance Expression works similar to the Advance Condition, but instead of checking if one variable is true, it evaluates any expression. An expression
+is anything you could put in an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement. These are all examples of expressions that would work in the Advance Expression:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">is_walking</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_walking</span> <span class="pre">==</span> <span class="pre">true</span></code> (behaves the same as the one above)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_walking</span> <span class="pre">&amp;&amp;</span> <span class="pre">!is_idle</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">velocity</span> <span class="pre">&gt;</span> <span class="pre">0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">player.is_on_floor()</span></code></p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The expression is <strong>case-sensitive</strong>. If you reference engine properties,
+such as <code class="docutils literal notranslate"><span class="pre">velocity</span></code> on a <a class="reference internal" href="../../classes/class_characterbody3d.html#class-characterbody3d"><span class="std std-ref">CharacterBody3D</span></a> node, you should use
+<code class="docutils literal notranslate"><span class="pre">snake_case</span></code> naming conventions. If you reference script properties,
+you should match the style used in the script, which is typically
+<code class="docutils literal notranslate"><span class="pre">snake_case</span></code> in GDScript and <code class="docutils literal notranslate"><span class="pre">PascalCase</span></code> in C#.</p>
+</div>
+<p>Here is an example of an improperly-set-up StateMachine transition using Advance Condition:</p>
+<img alt="../../_images/animtree_badanimcondition.webp" src="../../_images/animtree_badanimcondition.webp" />
+<img alt="../../_images/animtree_badanimcondition.gif" src="../../_images/animtree_badanimcondition.gif" />
+<p>This is not working because there is a <code class="docutils literal notranslate"><span class="pre">!</span></code> variable in the Advance Condition, which cannot be checked.</p>
+<p>Here is the same example, set up properly, using two opposite variables:</p>
+<img alt="../../_images/animtree_goodanimcondition.webp" src="../../_images/animtree_goodanimcondition.webp" />
+<img alt="../../_images/animtree_goodanimcondition.gif" src="../../_images/animtree_goodanimcondition.gif" />
+<p>Here is the same example, but using Advance Expression rather than Advance Condition, which eliminates the need for two variables:</p>
+<img alt="../../_images/animtree_goodanimexpression.webp" src="../../_images/animtree_goodanimexpression.webp" />
+<img alt="../../_images/animtree_goodanimexpression2.webp" src="../../_images/animtree_goodanimexpression2.webp" />
+<img alt="../../_images/animtree_goodanimexpression.gif" src="../../_images/animtree_goodanimexpression.gif" />
+<p>In order to use Advance Expressions, the Advance Expression Base Node has to be set from the Inspector of the AnimationTree node. By default, it is set
+to the AnimationTree node itself, but it needs to point to whatever node contains the script with your animation variables.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The Advance Expression is evaluated using Godot's <a class="reference internal" href="../../classes/class_expression.html#class-expression"><span class="std std-ref">Expression</span></a> class.
+See <a class="reference internal" href="../scripting/evaluating_expressions.html#doc-evaluating-expressions"><span class="std std-ref">Evaluating expressions</span></a> for more information on writing expressions.</p>
+</div>
+</section>
+<section id="statemachine-travel">
+<h4>StateMachine travel<a class="headerlink" href="#statemachine-travel" title="Link to this heading"></a></h4>
+<p>One of the nice features in Godot's <code class="docutils literal notranslate"><span class="pre">StateMachine</span></code> implementation is the ability to travel. You can instruct the graph to go from the
+current state to another one, while visiting all the intermediate ones. This is done via the A* algorithm.
+If there is no path of transitions starting at the current state and finishing at the destination state, the graph teleports to the destination state.</p>
+<p>To use the travel ability, you should first retrieve the <a class="reference internal" href="../../classes/class_animationnodestatemachineplayback.html#class-animationnodestatemachineplayback"><span class="std std-ref">AnimationNodeStateMachinePlayback</span></a>
+object from the <code class="docutils literal notranslate"><span class="pre">AnimationTree</span></code> node (it is exported as a property), and then call one of its many functions:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">state_machine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">animation_tree</span><span class="p">[</span><span class="s2">&quot;parameters/playback&quot;</span><span class="p">]</span>
+<span class="n">state_machine</span><span class="o">.</span><span class="nf">travel</span><span class="p">(</span><span class="s2">&quot;SomeState&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">AnimationNodeStateMachinePlayback</span><span class="w"> </span><span class="n">stateMachine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">AnimationNodeStateMachinePlayback</span><span class="p">)</span><span class="n">animationTree</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="s">&quot;parameters/playback&quot;</span><span class="p">);</span>
+<span class="n">stateMachine</span><span class="p">.</span><span class="n">Travel</span><span class="p">(</span><span class="s">&quot;SomeState&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>The StateMachine must be running before you can travel. Make sure to either call <code class="docutils literal notranslate"><span class="pre">start()</span></code> or connect a node to <strong>Start</strong>.</p>
+</section>
+</section>
+</section>
+<section id="blendspace2d-and-blendspace1d">
+<h2>BlendSpace2D and BlendSpace1D<a class="headerlink" href="#blendspace2d-and-blendspace1d" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">BlendSpace2D</span></code> is a node to do advanced blending in two dimensions. Points representing animations are added to a 2D space and then a position between them
+is controlled to determine the blending:</p>
+<img alt="../../_images/animtree_blendspace2d.gif" src="../../_images/animtree_blendspace2d.gif" />
+<p>You may insert these points anywhere on the graph by right-clicking or using the <strong>add point</strong> button in the toolbar. On creation, a point gets its name from the chosen animation
+or <a class="reference internal" href="../../classes/class_animationrootnode.html#class-animationrootnode"><span class="std std-ref">AnimationRootNode</span></a> type. This point can then be renamed by clicking on its name, or repositioned by clicking and dragging the name or the point.
+If <strong>Auto Triangles</strong> is enabled, a blend triangle between inserted points will be automatically generated using <a class="reference external" href="https://en.wikipedia.org/wiki/Delaunay_triangulation">Delaunay triangulation</a>.</p>
+<img alt="../../_images/animtree_blendspacepoints.webp" src="../../_images/animtree_blendspacepoints.webp" />
+<p>This node's animation blend target can be manipulated in the editor by pressing Shift while dragging the left mouse button, or using the dedicated tool.</p>
+<p><code class="docutils literal notranslate"><span class="pre">BlendSpace1D</span></code> works just like <code class="docutils literal notranslate"><span class="pre">BlendSpace2D</span></code>, but in a single dimension (a horizontal line). Since triangles are not used, it is able to function with fewer than three blend points.</p>
+<img alt="../../_images/animtree_blendspace1d.webp" src="../../_images/animtree_blendspace1d.webp" />
+<section id="sync-mode">
+<h3>Sync mode<a class="headerlink" href="#sync-mode" title="Link to this heading"></a></h3>
+<p>Both <code class="docutils literal notranslate"><span class="pre">BlendSpace1D</span></code> and <code class="docutils literal notranslate"><span class="pre">BlendSpace2D</span></code> have a <strong>Sync Mode</strong> property that controls how animations advance when they are blended.
+This replaces the older boolean <code class="docutils literal notranslate"><span class="pre">sync</span></code> property and offers more precise control.</p>
+<img alt="../../_images/animtree_syncmode_mutable.webp" src="../../_images/animtree_syncmode_mutable.webp" />
+<p>There are four modes available:</p>
+<ul class="simple">
+<li><p><strong>None</strong> (default): Inactive animations are frozen and do not advance. Only the currently active (highest-weight) animation moves forward.</p></li>
+<li><p><strong>Independent</strong>: Inactive animations advance with a weight of <code class="docutils literal notranslate"><span class="pre">0</span></code>. This matches the behavior of the old <code class="docutils literal notranslate"><span class="pre">sync</span> <span class="pre">=</span> <span class="pre">true</span></code> setting.</p></li>
+<li><p><strong>Cyclic Mutable</strong>: All animations are time-scaled so their phases stay aligned. The shared cycle length is computed dynamically from the active blend weights,
+which means a single unblended animation plays at its normal speed. This is useful when all your animations have the same logical cycle (e.g. locomotion loops)
+but may differ slightly in length.</p></li>
+<li><p><strong>Cyclic Constant</strong>: All animations are time-scaled to complete one full cycle in exactly <strong>Cyclic Length</strong> seconds, regardless of their individual lengths.
+Set the <code class="docutils literal notranslate"><span class="pre">cyclic_length</span></code> property to your desired cycle duration (must be greater than <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Cyclic sync modes require that all blend points use <a class="reference internal" href="../../classes/class_animationnodeanimation.html#class-animationnodeanimation"><span class="std std-ref">AnimationNodeAnimation</span></a>
+with a finite, immutable length. If any blend point uses a different node type, a warning will be shown
+and cyclic sync will not take effect:</p>
+<img alt="../../_images/animtree_syncmode_warning.webp" src="../../_images/animtree_syncmode_warning.webp" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using either cyclic mode with animations of different lengths, applying an
+<a class="reference internal" href="../../classes/class_animationnodetimeseek.html#class-animationnodetimeseek"><span class="std std-ref">AnimationNodeTimeSeek</span></a> to the output will break synchronization.
+In that case, use <a class="reference internal" href="../../classes/class_animationnodeanimation.html#class-animationnodeanimation-property-use-custom-timeline"><span class="std std-ref">AnimationNodeAnimation.use_custom_timeline</span></a>
+to normalize animation lengths before syncing.</p>
+</div>
+</section>
+<section id="blend-mode">
+<h3>Blend mode<a class="headerlink" href="#blend-mode" title="Link to this heading"></a></h3>
+<p>By default, blending happens in the <em>Continuous</em> mode, by interpolating points inside the closest triangle in <code class="docutils literal notranslate"><span class="pre">BlendSpace2D</span></code>, or in the line between points in <code class="docutils literal notranslate"><span class="pre">BlendSpace1D</span></code>.
+However, this may not always be the best choice. For instance, when dealing with frame-by-frame 2D animations, you may want to switch to the <em>Discrete</em> mode,
+in which the intermediate states of the blend do not appear in the result. Alternatively, if you want to retain the current play position
+when switching between discrete animations, the <em>Carry</em> mode allows you to do so. These modes can be set with the <em>Blend</em> menu.</p>
+<img alt="../../_images/animtree_blendmode.webp" src="../../_images/animtree_blendmode.webp" />
+</section>
+</section>
+<section id="for-better-blending">
+<h2>For better blending<a class="headerlink" href="#for-better-blending" title="Link to this heading"></a></h2>
+<p>For the blending results to be deterministic (reproducible and always consistent),
+the blended property values must have a specific initial value.
+For example, in the case of two animations to be blended, if one animation has a property track and the other does not,
+the blended animation is calculated as if the latter animation had a property track with the initial value.</p>
+<p>When using Position/Rotation/Scale 3D tracks for Skeleton3D bones, the initial value is Bone Rest.
+For other properties, the initial value is <code class="docutils literal notranslate"><span class="pre">0</span></code> and if the track is present in the <code class="docutils literal notranslate"><span class="pre">RESET</span></code> animation,
+the value of its first keyframe is used instead.</p>
+<p>For example, the following AnimationPlayer has two animations, but one of them lacks a Property track for Position.</p>
+<img alt="../../_images/blending1.webp" src="../../_images/blending1.webp" />
+<p>This means that the animation lacking that will treat those Positions as <code class="docutils literal notranslate"><span class="pre">Vector2(0,</span> <span class="pre">0)</span></code>.</p>
+<img alt="../../_images/blending2.webp" src="../../_images/blending2.webp" />
+<p>This problem can be solved by adding a Property track for Position as an initial value to the <code class="docutils literal notranslate"><span class="pre">RESET</span></code> animation.</p>
+<img alt="../../_images/blending3.webp" src="../../_images/blending3.webp" />
+<img alt="../../_images/blending4.webp" src="../../_images/blending4.webp" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be aware that the <code class="docutils literal notranslate"><span class="pre">RESET</span></code> animation exists to define the default pose when loading an object originally.
+It is assumed to have only one frame and is not expected to be played back using the timeline.</p>
+</div>
+<p>Also keep in mind that the Rotation 3D tracks and the Property tracks for 2D rotation
+with Interpolation Type set to Linear Angle or Cubic Angle will prevent rotations greater than 180 degrees
+from the initial value as blended animation.</p>
+<p>This can be useful for Skeleton3Ds to prevent the bones penetrating the body when blending animations.
+Therefore, Skeleton3D's Bone Rest values should be as close to the midpoint of the movable range as possible.
+<strong>This means that for humanoid models, it is preferable to import them in a T-pose</strong>.</p>
+<img alt="../../_images/blending5.webp" src="../../_images/blending5.webp" />
+<p>You can see that the shortest rotation path from Bone Rests is prioritized rather than the shortest rotation path between animations.</p>
+<p>If you need to rotate Skeleton3D itself more than 180 degrees by blend animations for movement, you can use Root Motion.</p>
+</section>
+<section id="root-motion">
+<h2>Root motion<a class="headerlink" href="#root-motion" title="Link to this heading"></a></h2>
+<p>When working with 3D animations, a popular technique is for animators to use the root skeleton bone to give motion to the rest of the skeleton.
+This allows animating characters in a way where steps actually match the floor below. It also allows precise interaction with objects during cinematics.</p>
+<p>When playing back the animation in Godot, it is possible to select this bone as the <em>root motion track</em>. Doing so will cancel the bone
+transformation visually (the animation will stay in place).</p>
+<img alt="../../_images/animtree_rootmotiontrack.webp" src="../../_images/animtree_rootmotiontrack.webp" />
+<p>Afterwards, the actual motion can be retrieved via the <a class="reference internal" href="../../classes/class_animationtree.html#class-animationtree"><span class="std std-ref">AnimationTree</span></a> API as a transform:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the motion delta.</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">get_root_motion_position</span><span class="p">()</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">get_root_motion_rotation</span><span class="p">()</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">get_root_motion_scale</span><span class="p">()</span>
+
+<span class="c1"># Get the actual blended value of the animation.</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">get_root_motion_position_accumulator</span><span class="p">()</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">get_root_motion_rotation_accumulator</span><span class="p">()</span>
+<span class="n">animation_tree</span><span class="o">.</span><span class="nf">get_root_motion_scale_accumulator</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get the motion delta.</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">GetRootMotionPosition</span><span class="p">();</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">GetRootMotionRotation</span><span class="p">();</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">GetRootMotionScale</span><span class="p">();</span>
+
+<span class="c1">// Get the actual blended value of the animation.</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">GetRootMotionPositionAccumulator</span><span class="p">();</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">GetRootMotionRotationAccumulator</span><span class="p">();</span>
+<span class="n">animationTree</span><span class="p">.</span><span class="n">GetRootMotionScaleAccumulator</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>This can be fed to functions such as <a class="reference internal" href="../../classes/class_characterbody3d.html#class-characterbody3d-method-move-and-slide"><span class="std std-ref">CharacterBody3D.move_and_slide</span></a> to control the character movement.</p>
+<p>There is also a tool node, <code class="docutils literal notranslate"><span class="pre">RootMotionView</span></code>, you can place a scene that will act as a custom floor for your
+character and animations (this node is disabled by default during the game).</p>
+<img alt="../../_images/animtree15.gif" src="../../_images/animtree15.gif" />
+</section>
+<section id="controlling-from-code">
+<h2>Controlling from code<a class="headerlink" href="#controlling-from-code" title="Link to this heading"></a></h2>
+<p>After building the tree and previewing it, the only question remaining is &quot;How is all this controlled from code?&quot;.</p>
+<p>Keep in mind that the animation nodes are just resources, so they are shared between all instances using them.
+Setting values in the nodes directly will affect all instances of the scene that uses this <code class="docutils literal notranslate"><span class="pre">AnimationTree</span></code>.
+This is generally undesirable, but does have some cool use cases, e.g. you can copy and paste parts of your animation tree,
+or reuse nodes with a complex layout (such as a StateMachine or blend space) in different animation trees.</p>
+<p>The actual animation data is contained in the <code class="docutils literal notranslate"><span class="pre">AnimationTree</span></code> node and is accessed via properties.
+Check the &quot;Parameters&quot; section of the <code class="docutils literal notranslate"><span class="pre">AnimationTree</span></code> node to see all the parameters that can be modified in real-time:</p>
+<img alt="../../_images/animtree_parameters.webp" src="../../_images/animtree_parameters.webp" />
+<p>This is handy because it makes it possible to animate them from an <code class="docutils literal notranslate"><span class="pre">AnimationPlayer</span></code>, or even the <code class="docutils literal notranslate"><span class="pre">AnimationTree</span></code> itself,
+allowing very complex animation logic.</p>
+<p>To modify these values from code, you must obtain the property path. You can find them by hovering your mouse over any of the parameters:</p>
+<img alt="../../_images/animtree_propertypath.webp" src="../../_images/animtree_propertypath.webp" />
+<p>Then you can set or read them:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">animation_tree</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;parameters/eye_blend/blend_amount&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)</span>
+<span class="c1"># Alternate syntax (same result)</span>
+<span class="n">animation_tree</span><span class="p">[</span><span class="s2">&quot;parameters/eye_blend/blend_amount&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">animationTree</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="s">&quot;parameters/eye_blend/blend_amount&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Advance Expressions from a StateMachine will not be found under the parameters. This is because they are held in another script rather than the
+AnimationTree itself. Advance <cite>Conditions</cite> will be found under parameters.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2d_skeletons.html" class="btn btn-neutral float-left" title="2D skeletons" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="playing_videos.html" class="btn btn-neutral float-right" title="Playing videos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

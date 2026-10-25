@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Common engine methods and macros" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/architecture/common_engine_methods_and_macros.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Godot&#x27;s C++ codebase makes use of dozens of custom methods and macros which are used in almost every file. This page is geared towards beginner contributors, but it can also be useful for thos..." />
+<meta name="description" content="Godot&#x27;s C++ codebase makes use of dozens of custom methods and macros which are used in almost every file. This page is geared towards beginner contributors, but it can also be useful for thos..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Common engine methods and macros &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Core types" href="core_types.html" />
+    <link rel="prev" title="Godot&#39;s architecture overview" href="godot_architecture_diagram.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/architecture/common_engine_methods_and_macros" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="engine_details/architecture/common_engine_methods_and_macros.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Engine architecture</a></li>
+      <li class="breadcrumb-item active">Common engine methods and macros</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/architecture/common_engine_methods_and_macros.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="common-engine-methods-and-macros">
+<span id="doc-common-engine-methods-and-macros"></span><h1>Common engine methods and macros<a class="headerlink" href="#common-engine-methods-and-macros" title="Link to this heading"></a></h1>
+<p>Godot's C++ codebase makes use of dozens of custom methods and macros which are
+used in almost every file. This page is geared towards beginner contributors,
+but it can also be useful for those writing custom C++ modules.</p>
+<section id="print-text">
+<h2>Print text<a class="headerlink" href="#print-text" title="Link to this heading"></a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Prints a message to standard output.</span>
+<span class="n">print_line</span><span class="p">(</span><span class="s">&quot;Message&quot;</span><span class="p">);</span>
+
+<span class="c1">// Non-String arguments are automatically converted to String for printing.</span>
+<span class="c1">// If passing several arguments, they will be concatenated together with a</span>
+<span class="c1">// space between each argument.</span>
+<span class="n">print_line</span><span class="p">(</span><span class="s">&quot;There are&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nodes&quot;</span><span class="p">);</span>
+
+<span class="c1">// Prints a message to standard output, but only when the engine</span>
+<span class="c1">// is started with the `--verbose` command line argument.</span>
+<span class="n">print_verbose</span><span class="p">(</span><span class="s">&quot;Message&quot;</span><span class="p">);</span>
+
+<span class="c1">// Prints a rich-formatted message using BBCode to standard output.</span>
+<span class="c1">// This supports a subset of BBCode tags supported by RichTextLabel</span>
+<span class="c1">// and will also appear formatted in the editor Output panel.</span>
+<span class="c1">// On Windows, this requires Windows 10 or later to work in the terminal.</span>
+<span class="n">print_line_rich</span><span class="p">(</span><span class="s">&quot;[b]Bold[/b], [color=red]Red text[/color]&quot;</span><span class="p">)</span>
+
+<span class="c1">// Prints a formatted error or warning message with a trace.</span>
+<span class="n">ERR_PRINT</span><span class="p">(</span><span class="s">&quot;Message&quot;</span><span class="p">);</span>
+<span class="n">WARN_PRINT</span><span class="p">(</span><span class="s">&quot;Message&quot;</span><span class="p">);</span>
+
+<span class="c1">// Prints an error or warning message only once per session.</span>
+<span class="c1">// This can be used to avoid spamming the console output.</span>
+<span class="n">ERR_PRINT_ONCE</span><span class="p">(</span><span class="s">&quot;Message&quot;</span><span class="p">);</span>
+<span class="n">WARN_PRINT_ONCE</span><span class="p">(</span><span class="s">&quot;Message&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If you need to add placeholders in your messages, use format strings as
+described below.</p>
+</section>
+<section id="format-a-string">
+<h2>Format a string<a class="headerlink" href="#format-a-string" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">vformat()</span></code> function returns a formatted <a class="reference internal" href="../../classes/class_string.html#class-string"><span class="std std-ref">String</span></a>. It behaves
+in a way similar to C's <code class="docutils literal notranslate"><span class="pre">sprintf()</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">vformat</span><span class="p">(</span><span class="s">&quot;My name is %s.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Godette&quot;</span><span class="p">);</span>
+<span class="n">vformat</span><span class="p">(</span><span class="s">&quot;%d bugs on the wall!&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1234</span><span class="p">);</span>
+<span class="n">vformat</span><span class="p">(</span><span class="s">&quot;Pi is approximately %f.&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">3.1416</span><span class="p">);</span>
+
+<span class="c1">// Converts the resulting String into a `const char *`.</span>
+<span class="c1">// You may need to do this if passing the result as an argument</span>
+<span class="c1">// to a method that expects a `const char *` instead of a String.</span>
+<span class="n">vformat</span><span class="p">(</span><span class="s">&quot;My name is %s.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Godette&quot;</span><span class="p">).</span><span class="n">utf8</span><span class="p">().</span><span class="n">get_data</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>In most cases, try to use <code class="docutils literal notranslate"><span class="pre">vformat()</span></code> instead of string concatenation as it
+makes for more readable code.</p>
+</section>
+<section id="convert-an-integer-or-float-to-a-string">
+<h2>Convert an integer or float to a string<a class="headerlink" href="#convert-an-integer-or-float-to-a-string" title="Link to this heading"></a></h2>
+<p>This is not needed when printing numbers using <code class="docutils literal notranslate"><span class="pre">print_line()</span></code>, but you may
+still need to perform manual conversion for some other use cases.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Stores the string &quot;42&quot; using integer-to-string conversion.</span>
+<span class="n">String</span><span class="w"> </span><span class="n">int_to_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">itos</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+
+<span class="c1">// Stores the string &quot;123.45&quot; using real-to-string conversion.</span>
+<span class="n">String</span><span class="w"> </span><span class="n">real_to_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rtos</span><span class="p">(</span><span class="mf">123.45</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="internationalize-a-string">
+<h2>Internationalize a string<a class="headerlink" href="#internationalize-a-string" title="Link to this heading"></a></h2>
+<p>There are two types of internationalization in Godot's codebase:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TTR()</span></code>: <strong>Editor (&quot;tools&quot;) translations</strong> will only be processed in the
+editor. If a user uses the same text in one of their projects, it won't be
+translated if they provide a translation for it. When contributing to the
+engine, this is generally the macro you should use for localizable strings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RTR()</span></code>: <strong>Runtime translations</strong> will be automatically localized in
+projects if they provide a translation for the given string. This kind of
+translation shouldn't be used in editor-only code.</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Returns the translated string that matches the user&#39;s locale settings.</span>
+<span class="c1">// Translations are located in `editor/translations`.</span>
+<span class="c1">// The localization template is generated automatically; don&#39;t modify it.</span>
+<span class="n">TTR</span><span class="p">(</span><span class="s">&quot;Exit the editor?&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To insert placeholders in localizable strings, wrap the localization macro in a
+<code class="docutils literal notranslate"><span class="pre">vformat()</span></code> call as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">file_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;example.txt&quot;</span><span class="p">;</span>
+<span class="n">vformat</span><span class="p">(</span><span class="n">TTR</span><span class="p">(</span><span class="s">&quot;Couldn&#39;t open </span><span class="se">\&quot;</span><span class="s">%s</span><span class="se">\&quot;</span><span class="s"> for reading.&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">file_path</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using <code class="docutils literal notranslate"><span class="pre">vformat()</span></code> and a translation macro together, always wrap the
+translation macro in <code class="docutils literal notranslate"><span class="pre">vformat()</span></code>, not the other way around. Otherwise, the
+string will never match the translation as it will have the placeholder
+already replaced when it's passed to TranslationServer.</p>
+</div>
+</section>
+<section id="clamp-a-value">
+<h2>Clamp a value<a class="headerlink" href="#clamp-a-value" title="Link to this heading"></a></h2>
+<p>Godot provides macros for clamping a value with a lower bound (<code class="docutils literal notranslate"><span class="pre">MAX</span></code>), an
+upper bound (<code class="docutils literal notranslate"><span class="pre">MIN</span></code>) or both (<code class="docutils literal notranslate"><span class="pre">CLAMP</span></code>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="n">MAX</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">);</span><span class="w"> </span><span class="c1">// 6</span>
+<span class="n">MIN</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2</span>
+<span class="n">CLAMP</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span><span class="w"> </span><span class="c1">// 10</span>
+</pre></div>
+</div>
+<p>This works with any type that can be compared to other values (like <code class="docutils literal notranslate"><span class="pre">int</span></code> and
+<code class="docutils literal notranslate"><span class="pre">float</span></code>).</p>
+</section>
+<section id="microbenchmarking">
+<h2>Microbenchmarking<a class="headerlink" href="#microbenchmarking" title="Link to this heading"></a></h2>
+<p>If you want to benchmark a piece of code but don't know how to use a profiler,
+use this snippet:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">begin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Time</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_ticks_usec</span><span class="p">();</span>
+
+<span class="c1">// Your code here...</span>
+
+<span class="kt">uint64_t</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Time</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_ticks_usec</span><span class="p">();</span>
+<span class="n">print_line</span><span class="p">(</span><span class="n">vformat</span><span class="p">(</span><span class="s">&quot;Snippet took %d microseconds&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">begin</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>This will print the time spent between the <code class="docutils literal notranslate"><span class="pre">begin</span></code> declaration and the <code class="docutils literal notranslate"><span class="pre">end</span></code>
+declaration.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may have to <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;core/os/time.h&quot;</span></code> if it's not present already.</p>
+<p>When opening a pull request, make sure to remove this snippet as well as the
+include if it wasn't there previously.</p>
+</div>
+</section>
+<section id="get-project-editor-settings">
+<h2>Get project/editor settings<a class="headerlink" href="#get-project-editor-settings" title="Link to this heading"></a></h2>
+<p>There are four macros available for this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Returns the specified project setting&#39;s value,</span>
+<span class="c1">// defaulting to `false` if it doesn&#39;t exist.</span>
+<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&quot;section/subsection/value&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+
+<span class="c1">// Returns the specified editor setting&#39;s value,</span>
+<span class="c1">// defaulting to &quot;Untitled&quot; if it doesn&#39;t exist.</span>
+<span class="n">EDITOR_DEF</span><span class="p">(</span><span class="s">&quot;section/subsection/value&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Untitled&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If a default value has been specified elsewhere, don't specify it again to avoid
+repetition:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Returns the value of the project setting.</span>
+<span class="n">GLOBAL_GET</span><span class="p">(</span><span class="s">&quot;section/subsection/value&quot;</span><span class="p">);</span>
+<span class="c1">// Returns the value of the editor setting.</span>
+<span class="n">EDITOR_GET</span><span class="p">(</span><span class="s">&quot;section/subsection/value&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>It's recommended to use <code class="docutils literal notranslate"><span class="pre">GLOBAL_DEF</span></code>/<code class="docutils literal notranslate"><span class="pre">EDITOR_DEF</span></code> only once per setting and
+use <code class="docutils literal notranslate"><span class="pre">GLOBAL_GET</span></code>/<code class="docutils literal notranslate"><span class="pre">EDITOR_GET</span></code> in all other places where it's referenced.</p>
+</section>
+<section id="error-macros">
+<span id="doc-common-engine-methods-and-macros-error-macros"></span><h2>Error macros<a class="headerlink" href="#error-macros" title="Link to this heading"></a></h2>
+<p>Godot features many error macros to make error reporting more convenient.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Conditions in error macros work in the <strong>opposite</strong> way of GDScript's
+built-in <code class="docutils literal notranslate"><span class="pre">assert()</span></code> function. An error is reached if the condition inside
+evaluates to <code class="docutils literal notranslate"><span class="pre">true</span></code>, not <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only variants with custom messages are documented here, as these should
+always be used in new contributions. Make sure the custom message provided
+includes enough information for people to diagnose the issue, even if they
+don't know C++. In case a method was passed invalid arguments, you can print
+the invalid value in question to ease debugging.</p>
+<p>For internal error checking where displaying a human-readable message isn't
+necessary, remove <code class="docutils literal notranslate"><span class="pre">_MSG</span></code> at the end of the macro name and don't supply a
+message argument.</p>
+<p>Also, always try to return processable data so the engine can keep running
+well.</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Conditionally prints an error message and returns from the function.</span>
+<span class="c1">// Use this in methods which don&#39;t return a value.</span>
+<span class="n">ERR_FAIL_COND_MSG</span><span class="p">(</span><span class="o">!</span><span class="n">mesh</span><span class="p">.</span><span class="n">is_valid</span><span class="p">(),</span><span class="w"> </span><span class="n">vformat</span><span class="p">(</span><span class="s">&quot;Couldn&#39;t load mesh at: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">));</span>
+
+<span class="c1">// Conditionally prints an error message and returns `0` from the function.</span>
+<span class="c1">// Use this in methods which must return a value.</span>
+<span class="n">ERR_FAIL_COND_V_MSG</span><span class="p">(</span><span class="n">rect</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">rect</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;Couldn&#39;t calculate the rectangle&#39;s area.&quot;</span><span class="p">);</span>
+
+<span class="c1">// Prints an error message if `index` is &lt; 0 or &gt;= `SomeEnum::QUALITY_MAX`,</span>
+<span class="c1">// then returns from the function.</span>
+<span class="n">ERR_FAIL_INDEX_MSG</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">SomeEnum</span><span class="o">::</span><span class="n">QUALITY_MAX</span><span class="p">,</span>
+<span class="w">        </span><span class="n">vformat</span><span class="p">(</span><span class="s">&quot;Invalid quality: %d. See SomeEnum for allowed values.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="p">));</span>
+
+<span class="c1">// Prints an error message if `index` is &lt; 0 &gt;= `some_array.size()`,</span>
+<span class="c1">// then returns `-1` from the function.</span>
+<span class="n">ERR_FAIL_INDEX_V_MSG</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">some_array</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">vformat</span><span class="p">(</span><span class="s">&quot;Item %d is out of bounds.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="p">));</span>
+
+<span class="c1">// Unconditionally prints an error message and returns from the function.</span>
+<span class="c1">// Only use this if you need to perform complex error checking.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">complex_error_checking_routine</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ERR_FAIL_MSG</span><span class="p">(</span><span class="s">&quot;Couldn&#39;t reload the filesystem cache.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Unconditionally prints an error message and returns `false` from the function.</span>
+<span class="c1">// Only use this if you need to perform complex error checking.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">complex_error_checking_routine</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ERR_FAIL_V_MSG</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Couldn&#39;t parse the input arguments.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Crashes the engine. This should generally never be used</span>
+<span class="c1">// except for testing crash handling code. Godot&#39;s philosophy</span>
+<span class="c1">// is to never crash, both in the editor and in exported projects.</span>
+<span class="n">CRASH_NOW_MSG</span><span class="p">(</span><span class="s">&quot;Can&#39;t predict the future! Aborting.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/error/error_macros.h">core/error/error_macros.h</a>
+in Godot's codebase for more information about each error macro.</p>
+<p>Some functions return an error code (materialized by a return type of
+<code class="docutils literal notranslate"><span class="pre">Error</span></code>). This value can be returned directly from an error macro.
+See the list of available error codes in
+<a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/error/error_list.h">core/error/error_list.h</a>.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="godot_architecture_diagram.html" class="btn btn-neutral float-left" title="Godot&#39;s architecture overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="core_types.html" class="btn btn-neutral float-right" title="Core types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

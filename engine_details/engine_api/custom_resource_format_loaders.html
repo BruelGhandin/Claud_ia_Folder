@@ -1,0 +1,586 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Custom resource format loaders" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/engine_api/custom_resource_format_loaders.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: ResourceFormatLoader is a factory interface for loading file assets. Resources are primary containers. When load is called on the same file path again, the previous loaded Resource wi..." />
+<meta name="description" content="Introduction: ResourceFormatLoader is a factory interface for loading file assets. Resources are primary containers. When load is called on the same file path again, the previous loaded Resource wi..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Custom resource format loaders &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Custom AudioStreams" href="custom_audiostreams.html" />
+    <link rel="prev" title="Binding to external libraries" href="binding_to_external_libraries.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/engine_api/custom_resource_format_loaders" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="engine_details/engine_api/custom_resource_format_loaders.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Engine extension APIs</a></li>
+      <li class="breadcrumb-item active">Custom resource format loaders</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/engine_api/custom_resource_format_loaders.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="custom-resource-format-loaders">
+<span id="doc-custom-resource-format-loaders"></span><h1>Custom resource format loaders<a class="headerlink" href="#custom-resource-format-loaders" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>ResourceFormatLoader is a factory interface for loading file assets.
+Resources are primary containers. When load is called on the same file
+path again, the previous loaded Resource will be referenced. Naturally,
+loaded resources must be stateless.</p>
+<p>This guide assumes the reader knows how to create C++ modules and Godot
+data types. If not, refer to this guide: <a class="reference internal" href="custom_modules_in_cpp.html#doc-custom-modules-in-cpp"><span class="std std-ref">Custom modules in C++</span></a></p>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../classes/class_resourceloader.html#class-resourceloader"><span class="std std-ref">ResourceLoader</span></a></p></li>
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/io/resource_loader.cpp">core/io/resource_loader.cpp</a></p></li>
+</ul>
+</section>
+</section>
+<section id="what-for">
+<h2>What for?<a class="headerlink" href="#what-for" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Adding new support for many file formats</p></li>
+<li><p>Audio formats</p></li>
+<li><p>Video formats</p></li>
+<li><p>Machine learning models</p></li>
+</ul>
+</section>
+<section id="what-not">
+<h2>What not?<a class="headerlink" href="#what-not" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Raster images</p></li>
+</ul>
+<p>ImageFormatLoader should be used to load images.</p>
+<section id="id1">
+<h3>References<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/io/image_loader.h">core/io/image_loader.h</a></p></li>
+</ul>
+</section>
+</section>
+<section id="creating-a-resourceformatloader">
+<h2>Creating a ResourceFormatLoader<a class="headerlink" href="#creating-a-resourceformatloader" title="Link to this heading"></a></h2>
+<p>Each file format consist of a data container and a <code class="docutils literal notranslate"><span class="pre">ResourceFormatLoader</span></code>.</p>
+<p>ResourceFormatLoaders are classes which return all the
+necessary metadata for supporting new extensions in Godot. The
+class must return the format name and the extension string.</p>
+<p>In addition, ResourceFormatLoaders must convert file paths into
+resources with the <code class="docutils literal notranslate"><span class="pre">load</span></code> function. To load a resource, <code class="docutils literal notranslate"><span class="pre">load</span></code> must
+read and handle data serialization.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">resource_loader_json.h</span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/io/resource_loader.h&quot;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ResourceFormatLoaderJson</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">ResourceFormatLoader</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">ResourceFormatLoaderJson</span><span class="p">,</span><span class="w"> </span><span class="n">ResourceFormatLoader</span><span class="p">);</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">RES</span><span class="w"> </span><span class="n">load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_path</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_original_path</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="o">*</span><span class="n">r_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">get_recognized_extensions</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">r_extensions</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">handles_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_type</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">get_resource_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_path</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">resource_loader_json.cpp</span><a class="headerlink" href="#id6" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;resource_loader_json.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;resource_json.h&quot;</span>
+
+<span class="n">RES</span><span class="w"> </span><span class="nf">ResourceFormatLoaderJson::load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_path</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_original_path</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="o">*</span><span class="n">r_error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="n">Ref</span><span class="o">&lt;</span><span class="n">JsonResource</span><span class="o">&gt;</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memnew</span><span class="p">(</span><span class="n">JsonResource</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">r_error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">*</span><span class="n">r_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OK</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">Error</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">json</span><span class="o">-&gt;</span><span class="n">load_file</span><span class="p">(</span><span class="n">p_path</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">json</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">ResourceFormatLoaderJson::get_recognized_extensions</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">r_extensions</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">r_extensions</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;json&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">r_extensions</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="s">&quot;json&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">String</span><span class="w"> </span><span class="nf">ResourceFormatLoaderJson::get_resource_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_path</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Resource&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span><span class="w"> </span><span class="nf">ResourceFormatLoaderJson::handles_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_type</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">is_parent_class</span><span class="p">(</span><span class="n">p_type</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Resource&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="creating-a-resourceformatsaver">
+<h2>Creating a ResourceFormatSaver<a class="headerlink" href="#creating-a-resourceformatsaver" title="Link to this heading"></a></h2>
+<p>If you'd like to be able to edit and save a resource, you can implement a
+<code class="docutils literal notranslate"><span class="pre">ResourceFormatSaver</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">resource_saver_json.h</span><a class="headerlink" href="#id7" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/io/resource_saver.h&quot;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ResourceFormatSaverJson</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">ResourceFormatSaver</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">ResourceFormatSaverJson</span><span class="p">,</span><span class="w"> </span><span class="n">ResourceFormatSaver</span><span class="p">);</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="n">save</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_path</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">RES</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_resource</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">p_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">recognize</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">RES</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_resource</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">get_recognized_extensions</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">RES</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_resource</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">r_extensions</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">resource_saver_json.cpp</span><a class="headerlink" href="#id8" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;resource_saver_json.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;resource_json.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;scene/resources/resource_format_text.h&quot;</span>
+
+<span class="n">Error</span><span class="w"> </span><span class="nf">ResourceFormatSaverJson::save</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_path</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">RES</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_resource</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">p_flags</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">JsonResource</span><span class="o">&gt;</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memnew</span><span class="p">(</span><span class="n">JsonResource</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Error</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">json</span><span class="o">-&gt;</span><span class="n">save_file</span><span class="p">(</span><span class="n">p_path</span><span class="p">,</span><span class="w"> </span><span class="n">p_resource</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">error</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span><span class="w"> </span><span class="nf">ResourceFormatSaverJson::recognize</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">RES</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_resource</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Object</span><span class="o">::</span><span class="n">cast_to</span><span class="o">&lt;</span><span class="n">JsonResource</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="n">p_resource</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">ResourceFormatSaverJson::get_recognized_extensions</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">RES</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_resource</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">r_extensions</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Object</span><span class="o">::</span><span class="n">cast_to</span><span class="o">&lt;</span><span class="n">JsonResource</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="n">p_resource</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">r_extensions</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="s">&quot;json&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="creating-custom-data-types">
+<h2>Creating custom data types<a class="headerlink" href="#creating-custom-data-types" title="Link to this heading"></a></h2>
+<p>Godot may not have a proper substitute within its <a class="reference internal" href="../architecture/core_types.html#doc-core-types"><span class="std std-ref">Core types</span></a>
+or managed resources. Godot needs a new registered data type to
+understand additional binary formats such as machine learning models.</p>
+<p>Here is an example of creating a custom datatype:</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">resource_json.h</span><a class="headerlink" href="#id9" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/io/json.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/variant_parser.h&quot;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">JsonResource</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">JsonResource</span><span class="p">,</span><span class="w"> </span><span class="n">Resource</span><span class="p">);</span>
+
+<span class="k">protected</span><span class="o">:</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">_bind_methods</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&quot;set_dict&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dict&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">JsonResource</span><span class="o">::</span><span class="n">set_dict</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&quot;get_dict&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">JsonResource</span><span class="o">::</span><span class="n">get_dict</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">DICTIONARY</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;content&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;set_dict&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;get_dict&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Dictionary</span><span class="w"> </span><span class="n">content</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Error</span><span class="w"> </span><span class="n">load_file</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_path</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Error</span><span class="w"> </span><span class="nf">save_file</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_path</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">RES</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_resource</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">set_dict</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Dictionary</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_dict</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Dictionary</span><span class="w"> </span><span class="nf">get_dict</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">resource_json.cpp</span><a class="headerlink" href="#id10" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;resource_json.h&quot;</span>
+
+<span class="n">Error</span><span class="w"> </span><span class="nf">JsonResource::load_file</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Error</span><span class="w"> </span><span class="n">error</span><span class="p">;</span>
+<span class="w">    </span><span class="n">FileAccess</span><span class="w"> </span><span class="o">*</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileAccess</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="n">p_path</span><span class="p">,</span><span class="w"> </span><span class="n">FileAccess</span><span class="o">::</span><span class="n">READ</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">error</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">file</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">error</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">json_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">file</span><span class="o">-&gt;</span><span class="n">eof_reached</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">json_string</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">file</span><span class="o">-&gt;</span><span class="n">get_line</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">file</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">error_string</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">error_line</span><span class="p">;</span>
+<span class="w">    </span><span class="n">JSON</span><span class="w"> </span><span class="n">json</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Variant</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">json</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">json_string</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">error_string</span><span class="p">,</span><span class="w"> </span><span class="n">error_line</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">file</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">error</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Dictionary</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">OK</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Error</span><span class="w"> </span><span class="nf">JsonResource::save_file</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_path</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">RES</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_resource</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Error</span><span class="w"> </span><span class="n">error</span><span class="p">;</span>
+<span class="w">    </span><span class="n">FileAccess</span><span class="w"> </span><span class="o">*</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileAccess</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="n">p_path</span><span class="p">,</span><span class="w"> </span><span class="n">FileAccess</span><span class="o">::</span><span class="n">WRITE</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">error</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">file</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">error</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">JsonResource</span><span class="o">&gt;</span><span class="w"> </span><span class="n">json_ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_resource</span><span class="p">.</span><span class="n">get_ref_ptr</span><span class="p">();</span>
+<span class="w">    </span><span class="n">JSON</span><span class="w"> </span><span class="n">json</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">file</span><span class="o">-&gt;</span><span class="n">store_string</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">json_ref</span><span class="o">-&gt;</span><span class="n">get_dict</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;    &quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="n">file</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">OK</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">JsonResource::set_dict</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Dictionary</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_dict</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_dict</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Dictionary</span><span class="w"> </span><span class="nf">JsonResource::get_dict</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">content</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<section id="considerations">
+<h3>Considerations<a class="headerlink" href="#considerations" title="Link to this heading"></a></h3>
+<p>Some libraries may not define certain common routines such as IO handling.
+Therefore, Godot call translations are required.</p>
+<p>For example, here is the code for translating <code class="docutils literal notranslate"><span class="pre">FileAccess</span></code>
+calls into <code class="docutils literal notranslate"><span class="pre">std::istream</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/io/file_access.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;istream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;streambuf&gt;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GodotFileInStreamBuf</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">streambuf</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">GodotFileInStreamBuf</span><span class="p">(</span><span class="n">FileAccess</span><span class="w"> </span><span class="o">*</span><span class="n">fa</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fa</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">underflow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_file</span><span class="o">-&gt;</span><span class="n">eof_reached</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">EOF</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_file</span><span class="o">-&gt;</span><span class="n">get_position</span><span class="p">();</span>
+<span class="w">            </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_file</span><span class="o">-&gt;</span><span class="n">get_8</span><span class="p">();</span>
+<span class="w">            </span><span class="n">_file</span><span class="o">-&gt;</span><span class="n">seek</span><span class="p">(</span><span class="n">pos</span><span class="p">);</span><span class="w"> </span><span class="c1">// Required since get_8() advances the read head.</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">uflow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">_file</span><span class="o">-&gt;</span><span class="n">eof_reached</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">EOF</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_file</span><span class="o">-&gt;</span><span class="n">get_8</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">FileAccess</span><span class="w"> </span><span class="o">*</span><span class="n">_file</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>References<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cplusplus.com/reference/istream/istream/">istream</a></p></li>
+<li><p><a class="reference external" href="https://cplusplus.com/reference/streambuf/streambuf/?kw=streambuf">streambuf</a></p></li>
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/io/file_access.h">core/io/file_access.h</a></p></li>
+</ul>
+</section>
+</section>
+<section id="registering-the-new-file-format">
+<h2>Registering the new file format<a class="headerlink" href="#registering-the-new-file-format" title="Link to this heading"></a></h2>
+<p>Godot registers <code class="docutils literal notranslate"><span class="pre">ResourcesFormatLoader</span></code> with a <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code>
+handler. The handler selects the proper loader automatically
+when <code class="docutils literal notranslate"><span class="pre">load</span></code> is called.</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">register_types.h</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">register_json_types</span><span class="p">();</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">unregister_json_types</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">register_types.cpp</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;register_types.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/class_db.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;resource_loader_json.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;resource_saver_json.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;resource_json.h&quot;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">ResourceFormatLoaderJson</span><span class="o">&gt;</span><span class="w"> </span><span class="n">json_loader</span><span class="p">;</span>
+<span class="k">static</span><span class="w"> </span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">ResourceFormatSaverJson</span><span class="o">&gt;</span><span class="w"> </span><span class="n">json_saver</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">register_json_types</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">register_class</span><span class="o">&lt;</span><span class="n">JsonResource</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">json_loader</span><span class="p">.</span><span class="n">instantiate</span><span class="p">();</span>
+<span class="w">    </span><span class="n">ResourceLoader</span><span class="o">::</span><span class="n">add_resource_format_loader</span><span class="p">(</span><span class="n">json_loader</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">json_saver</span><span class="p">.</span><span class="n">instantiate</span><span class="p">();</span>
+<span class="w">    </span><span class="n">ResourceSaver</span><span class="o">::</span><span class="n">add_resource_format_saver</span><span class="p">(</span><span class="n">json_saver</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">unregister_json_types</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ResourceLoader</span><span class="o">::</span><span class="n">remove_resource_format_loader</span><span class="p">(</span><span class="n">json_loader</span><span class="p">);</span>
+<span class="w">    </span><span class="n">json_loader</span><span class="p">.</span><span class="n">unref</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">ResourceSaver</span><span class="o">::</span><span class="n">remove_resource_format_saver</span><span class="p">(</span><span class="n">json_saver</span><span class="p">);</span>
+<span class="w">    </span><span class="n">json_saver</span><span class="p">.</span><span class="n">unref</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<section id="id3">
+<h3>References<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/io/resource_loader.cpp">core/io/resource_loader.cpp</a></p></li>
+</ul>
+</section>
+</section>
+<section id="loading-it-on-gdscript">
+<h2>Loading it on GDScript<a class="headerlink" href="#loading-it-on-gdscript" title="Link to this heading"></a></h2>
+<p>Save a file called <code class="docutils literal notranslate"><span class="pre">demo.json</span></code> with the following contents and place it in the
+project's root folder:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;savefilename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;demo.json&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;demo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;welcome&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;to&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;godot&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;resource&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;loaders&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then attach the following script to any node:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">json_resource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">load</span><span class="p">(</span><span class="s2">&quot;res://demo.json&quot;</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">json_resource</span><span class="o">.</span><span class="nf">get_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="binding_to_external_libraries.html" class="btn btn-neutral float-left" title="Binding to external libraries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="custom_audiostreams.html" class="btn btn-neutral float-right" title="Custom AudioStreams" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

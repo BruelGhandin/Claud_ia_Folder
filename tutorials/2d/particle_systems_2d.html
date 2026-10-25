@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="2D particle systems" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/2d/particle_systems_2d.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Intro: Particle systems are used to simulate complex physical effects, such as sparks, fire, magic particles, smoke, mist, etc. The idea is that a &quot;particle&quot; is emitted at a fixed interva..." />
+<meta name="description" content="Intro: Particle systems are used to simulate complex physical effects, such as sparks, fire, magic particles, smoke, mist, etc. The idea is that a &quot;particle&quot; is emitted at a fixed interva..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>2D particle systems &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ParticleProcessMaterial 2D Usage" href="particle_process_material_2d.html" />
+    <link rel="prev" title="2D sprite animation" href="2d_sprite_animation.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/2d/particle_systems_2d" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/2d/particle_systems_2d.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">2D</a></li>
+      <li class="breadcrumb-item active">2D particle systems</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/2d/particle_systems_2d.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+    <div class="admonition attention article-status">
+      <p class="first admonition-title">Work in progress</p>
+      <p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.7</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+    </div>
+    
+  </div>
+  
+
+  
+  <section id="d-particle-systems">
+<span id="doc-particle-systems-2d"></span><h1>2D particle systems<a class="headerlink" href="#d-particle-systems" title="Link to this heading"></a></h1>
+<section id="intro">
+<h2>Intro<a class="headerlink" href="#intro" title="Link to this heading"></a></h2>
+<p>Particle systems are used to simulate complex physical effects,
+such as sparks, fire, magic particles, smoke, mist, etc.</p>
+<p>The idea is that a &quot;particle&quot; is emitted at a fixed interval and with a
+fixed lifetime. During its lifetime, every particle will have the same
+base behavior. What makes each particle different from the rest and provides a more
+organic look is the &quot;randomness&quot; associated with each parameter. In
+essence, creating a particle system means setting base physics
+parameters and then adding randomness to them.</p>
+<section id="particle-nodes">
+<h3>Particle nodes<a class="headerlink" href="#particle-nodes" title="Link to this heading"></a></h3>
+<p>Godot provides two different nodes for 2D particles, <a class="reference internal" href="../../classes/class_gpuparticles2d.html#class-gpuparticles2d"><span class="std std-ref">GPUParticles2D</span></a>
+and <a class="reference internal" href="../../classes/class_cpuparticles2d.html#class-cpuparticles2d"><span class="std std-ref">CPUParticles2D</span></a>. GPUParticles2D is more advanced and uses the
+GPU to process particle effects. CPUParticles2D is a CPU-driven option with
+near-feature parity with GPUParticles2D, but lower performance when using large
+amounts of particles. On the other hand, CPUParticles2D may perform better on
+low-end systems or in GPU-bottlenecked situations.</p>
+<p>While GPUParticles2D is configured via a <a class="reference internal" href="../../classes/class_particleprocessmaterial.html#class-particleprocessmaterial"><span class="std std-ref">ParticleProcessMaterial</span></a>
+(and optionally with a custom shader), the matching options are provided via
+node properties in CPUParticles2D (with the exception of the trail settings).</p>
+<p>Going forward there are no plans to add new features to CPUParticles2D, though
+pull requests to add features already in GPUParticles2D will be accepted. For
+that reason we recommend using GPUParticles2D unless you have an explicit reason
+not to.</p>
+<p>You can convert a CPUParticles2D node into a GPUParticles2D node by clicking on
+the node in the scene tree, selecting the 2D workspace, and selecting
+<strong>CPUParticles2D &gt; Convert to GPUParticles2D</strong> in the toolbar.</p>
+<img alt="../../_images/particles_convert.webp" src="../../_images/particles_convert.webp" />
+<p>It is also possible to convert a GPUParticles2D node to a CPUParticles2D node,
+however there may be issues if you use GPU-only features.</p>
+<p>The rest of this tutorial is going to use the GPUParticles2D node. First, add a GPUParticles2D
+node to your scene. After creating that node you will notice that only a white dot was created,
+and that there is a warning icon next to your GPUParticles2D node in the scene dock. This
+is because the node needs a ParticleProcessMaterial to function.</p>
+</section>
+<section id="particleprocessmaterial">
+<h3>ParticleProcessMaterial<a class="headerlink" href="#particleprocessmaterial" title="Link to this heading"></a></h3>
+<p>To add a process material to your particles node, go to <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">Material</span></code> in
+your inspector panel. Click on the box next to <code class="docutils literal notranslate"><span class="pre">Material</span></code>, and from the dropdown
+menu select <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">ParticleProcessMaterial</span></code>.</p>
+<img alt="../../_images/particles_material.webp" src="../../_images/particles_material.webp" />
+<p>Your GPUParticles2D node should now be emitting
+white points downward.</p>
+<img alt="../../_images/particles1.png" src="../../_images/particles1.png" />
+</section>
+<section id="texture">
+<h3>Texture<a class="headerlink" href="#texture" title="Link to this heading"></a></h3>
+<p>A particle system can use a single texture or an animation <em>flipbook</em>. A
+flipbook is a texture that contains several frames of animation that can be
+played back, or chosen at random during emission. This is equivalent to a
+spritesheet for particles.</p>
+<p>The texture is set via the <strong>Texture</strong> property:</p>
+<img alt="../../_images/particles2.webp" src="../../_images/particles2.webp" />
+<section id="using-an-animation-flipbook">
+<span id="doc-particle-systems-2d-using-flipbook"></span><h4>Using an animation flipbook<a class="headerlink" href="#using-an-animation-flipbook" title="Link to this heading"></a></h4>
+<p>Particle flipbooks are suited to reproduce complex effects such as smoke, fire,
+explosions. They can also be used to introduce random texture variation, by
+making every particle use a different texture. You can find existing particle
+flipbook images online, or pre-render them using external tools such as <a class="reference external" href="https://www.blender.org/">Blender</a> or <a class="reference external" href="https://jangafx.com/software/embergen/">EmberGen</a>.</p>
+<figure class="align-center" id="id1">
+<img alt="Example of a particle system that uses a flipbook texture" src="../../_images/particles_flipbook_result.webp" />
+<figcaption>
+<p><span class="caption-text">Example of a particle system that uses a flipbook texture</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Using an animation flipbook requires additional configuration compared to a
+single texture. For demonstration purposes, we'll use this texture with 5
+columns and 7 rows (right-click and choose <strong>Save as…</strong>):</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../../_images/particles_flipbook_example.webp"><img alt="Particle flipbook texture example" src="../../_images/particles_flipbook_example.webp" style="width: 240px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Credit: <a class="reference external" href="https://opengameart.org/content/alot-of-particles-indispersal-special-effect-alotofparticles30">JoesAlotofthings</a>
+(CC BY 4.0)</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>To use an animation flipbook, you must create a new CanvasItemMaterial in the
+Material section of the GPUParticles2D (or CPUParticles2D) node:</p>
+<figure class="align-center" id="id3">
+<img alt="Creating a CanvasItemMaterial at the bottom of the particles node inspector" src="../../_images/particles_flipbook_create_canvasitemmaterial.webp" />
+<figcaption>
+<p><span class="caption-text">Creating a CanvasItemMaterial at the bottom of the particles node inspector</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>In this CanvasItemMaterial, enable <strong>Particle Animation</strong> and set <strong>H Frames</strong> and <strong>V Frames</strong>
+to the number of columns and rows present in your flipbook texture:</p>
+<figure class="align-center" id="id4">
+<img alt="Configuring the CanvasItemMaterial for the example flipbook texture" src="../../_images/particles_flipbook_configure_canvasitemmaterial.webp" />
+<figcaption>
+<p><span class="caption-text">Configuring the CanvasItemMaterial for the example flipbook texture</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Once this is done, the <a class="reference internal" href="particle_process_material_2d.html#doc-particle-systems-2d-animation"><span class="std std-ref">Animation section</span></a>
+in ParticleProcessMaterial (for GPUParticles2D) or in the CPUParticles2D inspector
+will be effective.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If your flipbook texture has a black background instead of a transparent
+background, you will also need to set the blend mode to <strong>Add</strong> instead of
+<strong>Mix</strong> for correct display. Alternatively, you can modify the texture to
+have a transparent background in an image editor. In <a class="reference external" href="https://gimp.org">GIMP</a>,
+this can be done using the <strong>Color &gt; Color to Alpha</strong> menu.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="time-parameters">
+<h2>Time parameters<a class="headerlink" href="#time-parameters" title="Link to this heading"></a></h2>
+<section id="lifetime">
+<h3>Lifetime<a class="headerlink" href="#lifetime" title="Link to this heading"></a></h3>
+<p>The time in seconds that every particle will stay alive. When lifetime
+ends, a new particle is created to replace it.</p>
+<p>Lifetime: 0.5</p>
+<img alt="../../_images/paranim14.gif" src="../../_images/paranim14.gif" />
+<p>Lifetime: 4.0</p>
+<img alt="../../_images/paranim15.gif" src="../../_images/paranim15.gif" />
+</section>
+<section id="one-shot">
+<h3>One Shot<a class="headerlink" href="#one-shot" title="Link to this heading"></a></h3>
+<p>When enabled, a GPUParticles2D node will emit all of its particles once
+and then never again.</p>
+</section>
+<section id="preprocess">
+<h3>Preprocess<a class="headerlink" href="#preprocess" title="Link to this heading"></a></h3>
+<p>Particle systems begin with zero particles emitted, then start emitting.
+This can be an inconvenience when loading a scene and systems like
+a torch, mist, etc. begin emitting the moment you enter. Preprocess is
+used to let the system process a given number of seconds before it is
+actually drawn the first time.</p>
+</section>
+<section id="speed-scale">
+<h3>Speed Scale<a class="headerlink" href="#speed-scale" title="Link to this heading"></a></h3>
+<p>The speed scale has a default value of <code class="docutils literal notranslate"><span class="pre">1</span></code> and is used to adjust the
+speed of a particle system. Lowering the value will make the particles
+slower while increasing the value will make the particles much faster.</p>
+</section>
+<section id="explosiveness">
+<h3>Explosiveness<a class="headerlink" href="#explosiveness" title="Link to this heading"></a></h3>
+<p>If lifetime is <code class="docutils literal notranslate"><span class="pre">1</span></code> and there are 10 particles, it means a particle
+will be emitted every 0.1 seconds. The explosiveness parameter changes
+this, and forces particles to be emitted all together. Ranges are:</p>
+<ul class="simple">
+<li><p>0: Emit particles at regular intervals (default value).</p></li>
+<li><p>1: Emit all particles simultaneously.</p></li>
+</ul>
+<p>Values in the middle are also allowed. This feature is useful for
+creating explosions or sudden bursts of particles:</p>
+<img alt="../../_images/paranim18.gif" src="../../_images/paranim18.gif" />
+</section>
+<section id="randomness">
+<h3>Randomness<a class="headerlink" href="#randomness" title="Link to this heading"></a></h3>
+<p>All physics parameters can be randomized. Random values range from <code class="docutils literal notranslate"><span class="pre">0</span></code> to
+<code class="docutils literal notranslate"><span class="pre">1</span></code>. The formula to randomize a parameter is:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">initial_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">param_value</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">param_value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">randomness</span>
+</pre></div>
+</div>
+</section>
+<section id="fixed-fps">
+<h3>Fixed FPS<a class="headerlink" href="#fixed-fps" title="Link to this heading"></a></h3>
+<p>This setting can be used to set the particle system to render at a fixed
+FPS. For instance, changing the value to <code class="docutils literal notranslate"><span class="pre">2</span></code> will make the particles render
+at 2 frames per second. Note this does not slow down the particle system itself.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Godot 4.3 does not currently support physics interpolation for 2D particles.
+As a workaround, disable physics interpolation for the particles node by setting
+<strong>Node &gt; Physics Interpolation &gt; Mode</strong> at the bottom of the inspector.</p>
+</div>
+</section>
+<section id="fract-delta">
+<h3>Fract Delta<a class="headerlink" href="#fract-delta" title="Link to this heading"></a></h3>
+<p>Setting Fract Delta to <code class="docutils literal notranslate"><span class="pre">true</span></code> results in fractional delta calculation,
+which has a smoother particles display effect.
+This increased smoothness stems from higher accuracy.
+The difference is more noticeable in systems with high randomness or fast-moving particles.
+It helps maintain the visual consistency of the particle system,
+making sure that each particle's motion aligns with its actual lifespan.
+Without it, particles might appear to jump or move more than they should in a single frame
+if they are emitted at a point within the frame.
+The greater accuracy has a performance tradeoff,
+particularly in systems with a higher amount of particles.</p>
+</section>
+</section>
+<section id="drawing-parameters">
+<h2>Drawing parameters<a class="headerlink" href="#drawing-parameters" title="Link to this heading"></a></h2>
+<section id="visibility-rect">
+<h3>Visibility Rect<a class="headerlink" href="#visibility-rect" title="Link to this heading"></a></h3>
+<p>The visibility rectangle controls the visibility of the particles on screen. If this rectangle is outside of the viewport, the engine will not render the particles on screen.</p>
+<p>The rectangle's <code class="docutils literal notranslate"><span class="pre">W</span></code> and <code class="docutils literal notranslate"><span class="pre">H</span></code> properties respectively control its Width and its Height.
+The <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> properties control the position of the upper-left
+corner of the rectangle, relative to the particle emitter.</p>
+<p>You can have Godot generate a Visibility Rect automatically using the toolbar above the 2d view. To do so, select the GPUParticles2D node and Click <code class="docutils literal notranslate"><span class="pre">Particles</span> <span class="pre">&gt;</span> <span class="pre">Generate</span> <span class="pre">Visibility</span> <span class="pre">Rect</span></code>. Godot will simulate the Particles2D node emitting particles for a few seconds and set the rectangle to fit the surface the particles take.</p>
+<p>You can control the emit duration with the <code class="docutils literal notranslate"><span class="pre">Generation</span> <span class="pre">Time</span> <span class="pre">(sec)</span></code> option. The maximum value is 25 seconds. If you need more time for your particles to move around, you can temporarily change the <code class="docutils literal notranslate"><span class="pre">preprocess</span></code> duration on the Particles2D node.</p>
+</section>
+<section id="local-coords">
+<h3>Local Coords<a class="headerlink" href="#local-coords" title="Link to this heading"></a></h3>
+<p>By default, this option is off. It means that the space that particles are
+emitted to is global, and <strong>not</strong> relative to the node. If the node is moved,
+existing particles are not moved with it:</p>
+<img alt="../../_images/paranim21.gif" src="../../_images/paranim21.gif" />
+<p>If enabled, particles will emit to local space, meaning that if the
+node is moved, already emitted particles are also affected:</p>
+<img alt="../../_images/paranim20.gif" src="../../_images/paranim20.gif" />
+</section>
+<section id="draw-order">
+<h3>Draw Order<a class="headerlink" href="#draw-order" title="Link to this heading"></a></h3>
+<p>This controls the order in which individual particles are drawn. <code class="docutils literal notranslate"><span class="pre">Index</span></code>
+means particles are drawn according to their emission order (default).
+<code class="docutils literal notranslate"><span class="pre">Lifetime</span></code> means they are drawn in order of remaining lifetime.</p>
+</section>
+</section>
+<section id="particle-process-material-settings">
+<h2>Particle Process Material Settings<a class="headerlink" href="#particle-process-material-settings" title="Link to this heading"></a></h2>
+<p>For information on the settings in the ParticleProcessMaterial see <a class="reference internal" href="particle_process_material_2d.html#doc-particle-process-material-2d"><span class="std std-ref">this page</span></a>.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2d_sprite_animation.html" class="btn btn-neutral float-left" title="2D sprite animation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="particle_process_material_2d.html" class="btn btn-neutral float-right" title="ParticleProcessMaterial 2D Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

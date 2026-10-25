@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Node type customization using name suffixes" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/assets_pipeline/importing_3d_scenes/node_type_customization.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Many times, when editing a scene, there are common tasks that need to be done after exporting: Adding collision detection to objects., Setting objects as navigation meshes., Deleting nodes that are..." />
+<meta name="description" content="Many times, when editing a scene, there are common tasks that need to be done after exporting: Adding collision detection to objects., Setting objects as navigation meshes., Deleting nodes that are..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Node type customization using name suffixes &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Import configuration" href="import_configuration.html" />
+    <link rel="prev" title="Model export considerations" href="model_export_considerations.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/assets_pipeline/importing_3d_scenes/node_type_customization" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/assets_pipeline/importing_3d_scenes/node_type_customization.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Assets pipeline</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Importing 3D scenes</a></li>
+      <li class="breadcrumb-item active">Node type customization using name suffixes</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/assets_pipeline/importing_3d_scenes/node_type_customization.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="node-type-customization-using-name-suffixes">
+<span id="doc-importing-3d-scenes-node-type-customization"></span><h1>Node type customization using name suffixes<a class="headerlink" href="#node-type-customization-using-name-suffixes" title="Link to this heading"></a></h1>
+<p>Many times, when editing a scene, there are common tasks that need to be done
+after exporting:</p>
+<ul class="simple">
+<li><p>Adding collision detection to objects.</p></li>
+<li><p>Setting objects as navigation meshes.</p></li>
+<li><p>Deleting nodes that are not used in the game engine (like specific lights used
+for modeling).</p></li>
+</ul>
+<p>To simplify this workflow, Godot offers several suffixes that can be added to
+the names of the objects in your 3D modeling software. When imported, Godot
+will detect suffixes in object names and will perform actions automatically.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>All the suffixes described below can be used with <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">$</span></code>, and <code class="docutils literal notranslate"><span class="pre">_</span></code> and are
+<strong>case-insensitive</strong>.</p>
+</div>
+<section id="opting-out">
+<h2>Opting out<a class="headerlink" href="#opting-out" title="Link to this heading"></a></h2>
+<p>If you do not want Godot to perform any of the actions described below, you
+can set the <code class="docutils literal notranslate"><span class="pre">nodes/use_node_type_suffixes</span></code> import option to <code class="docutils literal notranslate"><span class="pre">false</span></code>.
+This will disable all node type suffixes, which keeps nodes the same type
+as the original file indicated. However, the <code class="docutils literal notranslate"><span class="pre">-noimp</span></code> suffix will still
+be respected, as well as non-node suffixes like <code class="docutils literal notranslate"><span class="pre">-vcol</span></code> or <code class="docutils literal notranslate"><span class="pre">-loop</span></code>.</p>
+<p>Alternatively, you can completely opt out of all name suffixes by setting
+the <code class="docutils literal notranslate"><span class="pre">nodes/use_name_suffixes</span></code> import option to <code class="docutils literal notranslate"><span class="pre">false</span></code>. This will
+completely stop the general scene import code from looking at name suffixes.
+However, the format-specific import code may still look at name suffixes,
+such as the glTF importer checking for the <code class="docutils literal notranslate"><span class="pre">-loop</span></code> suffix.</p>
+<p>Disabling these options makes editor-imported files more similar to the
+original files, and more similar to importing files at runtime.
+For an import workflow that works at runtime, gives more predictable
+results, and only has explicitly defined behavior, consider setting these
+options to <code class="docutils literal notranslate"><span class="pre">false</span></code> and using <a class="reference internal" href="../../../classes/class_gltfdocumentextension.html#class-gltfdocumentextension"><span class="std std-ref">GLTFDocumentExtension</span></a> instead.</p>
+</section>
+<section id="remove-nodes-and-animations-noimp">
+<h2>Remove nodes and animations (-noimp)<a class="headerlink" href="#remove-nodes-and-animations-noimp" title="Link to this heading"></a></h2>
+<p>Nodes and animations that have the <code class="docutils literal notranslate"><span class="pre">-noimp</span></code> suffix will be removed at
+import time no matter what their type is. They will not appear in the
+imported scene.</p>
+<p>This is equivalent to enabling <strong>Skip Import</strong> for a node in the Advanced Import
+Settings dialog.</p>
+</section>
+<section id="create-collisions-col-convcol-colonly-convcolonly">
+<h2>Create collisions (-col, -convcol, -colonly, -convcolonly)<a class="headerlink" href="#create-collisions-col-convcol-colonly-convcolonly" title="Link to this heading"></a></h2>
+<p>The option <code class="docutils literal notranslate"><span class="pre">-col</span></code> will work only for Mesh objects. If it is detected, a child
+static collision node will be added, using the same geometry as the mesh. This
+will create a triangle mesh collision shape, which is a slow, but accurate
+option for collision detection. This option is usually what you want for level
+geometry (but see also <code class="docutils literal notranslate"><span class="pre">-colonly</span></code> below).</p>
+<p>The option <code class="docutils literal notranslate"><span class="pre">-convcol</span></code> will create a <a class="reference internal" href="../../../classes/class_convexpolygonshape3d.html#class-convexpolygonshape3d"><span class="std std-ref">ConvexPolygonShape3D</span></a> instead of
+a <a class="reference internal" href="../../../classes/class_concavepolygonshape3d.html#class-concavepolygonshape3d"><span class="std std-ref">ConcavePolygonShape3D</span></a>. Unlike triangle meshes which can be concave,
+a convex shape can only accurately represent a shape that doesn't have any
+concave angles (a pyramid is convex, but a hollow box is concave). Due to this,
+convex collision shapes are generally not suited for level geometry. When
+representing simple enough meshes, convex collision shapes can result in better
+performance compared to a triangle collision shape. This option is ideal for
+simple or dynamic objects that require mostly-accurate collision detection.</p>
+<p>However, in both cases, the visual geometry may be too complex or not smooth
+enough for collisions. This can create physics glitches and slow down the engine
+unnecessarily.</p>
+<p>To solve this, the <code class="docutils literal notranslate"><span class="pre">-colonly</span></code> modifier exists. It will remove the mesh upon
+importing and will create a <a class="reference internal" href="../../../classes/class_staticbody3d.html#class-staticbody3d"><span class="std std-ref">StaticBody3D</span></a> collision instead.
+This helps the visual mesh and actual collision to be separated.</p>
+<p>The option <code class="docutils literal notranslate"><span class="pre">-convcolonly</span></code> works in a similar way, but will create a
+<a class="reference internal" href="../../../classes/class_convexpolygonshape3d.html#class-convexpolygonshape3d"><span class="std std-ref">ConvexPolygonShape3D</span></a> instead using convex decomposition.</p>
+<p>With Collada files, the option <code class="docutils literal notranslate"><span class="pre">-colonly</span></code> can also be used with Blender's
+empty objects. On import, it will create a <a class="reference internal" href="../../../classes/class_staticbody3d.html#class-staticbody3d"><span class="std std-ref">StaticBody3D</span></a> with a
+collision node as a child. The collision node will have one of a number of
+predefined shapes, depending on Blender's empty draw type:</p>
+<figure class="align-center" id="id1">
+<img alt="Choosing a draw type for an Empty on creation in Blender" src="../../../_images/importing_3d_scenes_blender_empty_draw_types.webp" />
+<figcaption>
+<p><span class="caption-text">Choosing a draw type for an Empty on creation in Blender</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>Single arrow will create a <a class="reference internal" href="../../../classes/class_separationrayshape3d.html#class-separationrayshape3d"><span class="std std-ref">SeparationRayShape3D</span></a>.</p></li>
+<li><p>Cube will create a <a class="reference internal" href="../../../classes/class_boxshape3d.html#class-boxshape3d"><span class="std std-ref">BoxShape3D</span></a>.</p></li>
+<li><p>Image will create a <a class="reference internal" href="../../../classes/class_worldboundaryshape3d.html#class-worldboundaryshape3d"><span class="std std-ref">WorldBoundaryShape3D</span></a>.</p></li>
+<li><p>Sphere (and the others not listed) will create a <a class="reference internal" href="../../../classes/class_sphereshape3d.html#class-sphereshape3d"><span class="std std-ref">SphereShape3D</span></a>.</p></li>
+</ul>
+<p>When possible, <strong>try to use a few primitive collision shapes</strong> instead of triangle
+mesh or convex shapes. Primitive shapes often have the best performance and
+reliability.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For better visibility on Blender's editor, you can set the &quot;X-Ray&quot; option
+on collision empties and set some distinct color for them by changing
+<strong>Edit &gt; Preferences &gt; Themes &gt; 3D Viewport &gt; Empty</strong>.</p>
+<p>If using Blender 2.79 or older, follow these steps instead:
+<strong>User Preferences &gt; Themes &gt; 3D View &gt; Empty</strong>.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="../../physics/collision_shapes_3d.html#doc-collision-shapes-3d"><span class="std std-ref">Collision shapes (3D)</span></a> for a comprehensive overview of collision
+shapes.</p>
+</div>
+</section>
+<section id="create-occluder-occ-occonly">
+<h2>Create Occluder (-occ, -occonly)<a class="headerlink" href="#create-occluder-occ-occonly" title="Link to this heading"></a></h2>
+<p>If a mesh is imported with the <code class="docutils literal notranslate"><span class="pre">-occ</span></code> suffix an <a class="reference internal" href="../../../classes/class_occluder3d.html#class-occluder3d"><span class="std std-ref">Occluder3D</span></a> node
+will be created based on the geometry of the mesh, it does not replace the mesh.
+A mesh node with the <code class="docutils literal notranslate"><span class="pre">-occonly</span></code> suffix will be converted to an
+<a class="reference internal" href="../../../classes/class_occluder3d.html#class-occluder3d"><span class="std std-ref">Occluder3D</span></a> on import.</p>
+</section>
+<section id="create-navigation-navmesh">
+<h2>Create navigation (-navmesh)<a class="headerlink" href="#create-navigation-navmesh" title="Link to this heading"></a></h2>
+<p>A mesh node with the <code class="docutils literal notranslate"><span class="pre">-navmesh</span></code> suffix will be converted to a navigation mesh.
+The original Mesh object will be removed at import-time.</p>
+</section>
+<section id="create-a-vehiclebody-vehicle">
+<h2>Create a VehicleBody (-vehicle)<a class="headerlink" href="#create-a-vehiclebody-vehicle" title="Link to this heading"></a></h2>
+<p>A mesh node with the <code class="docutils literal notranslate"><span class="pre">-vehicle</span></code> suffix will be imported as a child to a
+<a class="reference internal" href="../../../classes/class_vehiclebody3d.html#class-vehiclebody3d"><span class="std std-ref">VehicleBody3D</span></a> node.</p>
+</section>
+<section id="create-a-vehiclewheel-wheel">
+<h2>Create a VehicleWheel (-wheel)<a class="headerlink" href="#create-a-vehiclewheel-wheel" title="Link to this heading"></a></h2>
+<p>A mesh node with the <code class="docutils literal notranslate"><span class="pre">-wheel</span></code> suffix will be imported as a child to a
+<a class="reference internal" href="../../../classes/class_vehiclewheel3d.html#class-vehiclewheel3d"><span class="std std-ref">VehicleWheel3D</span></a> node.</p>
+</section>
+<section id="rigid-body-rigid">
+<h2>Rigid Body (-rigid)<a class="headerlink" href="#rigid-body-rigid" title="Link to this heading"></a></h2>
+<p>A mesh node with the <code class="docutils literal notranslate"><span class="pre">-rigid</span></code> suffix will be imported as a <a class="reference internal" href="../../../classes/class_rigidbody3d.html#class-rigidbody3d"><span class="std std-ref">RigidBody3D</span></a>.</p>
+</section>
+<section id="animation-loop-loop-cycle">
+<h2>Animation loop (-loop, -cycle)<a class="headerlink" href="#animation-loop-loop-cycle" title="Link to this heading"></a></h2>
+<p>Animation clips in the source 3D file that start or end with the token <code class="docutils literal notranslate"><span class="pre">loop</span></code> or <code class="docutils literal notranslate"><span class="pre">cycle</span></code>
+will be imported as a Godot <a class="reference internal" href="../../../classes/class_animation.html#class-animation"><span class="std std-ref">Animation</span></a> with the loop flag set.
+<strong>Unlike the other suffixes described above, this does not require a hyphen.</strong></p>
+<p>In Blender, this requires using the NLA Editor and naming the Action with the <code class="docutils literal notranslate"><span class="pre">loop</span></code> or
+<code class="docutils literal notranslate"><span class="pre">cycle</span></code> prefix or suffix.</p>
+</section>
+<section id="material-alpha-alpha">
+<h2>Material alpha (-alpha)<a class="headerlink" href="#material-alpha-alpha" title="Link to this heading"></a></h2>
+<p>A material with the <code class="docutils literal notranslate"><span class="pre">-alpha</span></code> suffix will be imported with the
+<a class="reference internal" href="../../../classes/class_basematerial3d.html#class-basematerial3d-constant-transparency-alpha"><span class="std std-ref">TRANSPARENCY_ALPHA</span></a> transparency mode.</p>
+</section>
+<section id="material-vertex-color-vcol">
+<h2>Material vertex color (-vcol)<a class="headerlink" href="#material-vertex-color-vcol" title="Link to this heading"></a></h2>
+<p>A material with the <code class="docutils literal notranslate"><span class="pre">-vcol</span></code> suffix will be imported with the
+<a class="reference internal" href="../../../classes/class_basematerial3d.html#class-basematerial3d-constant-flag-albedo-from-vertex-color"><span class="std std-ref">FLAG_ALBEDO_FROM_VERTEX_COLOR</span></a> and
+<a class="reference internal" href="../../../classes/class_basematerial3d.html#class-basematerial3d-constant-flag-srgb-vertex-color"><span class="std std-ref">FLAG_SRGB_VERTEX_COLOR</span></a> flags set.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="model_export_considerations.html" class="btn btn-neutral float-left" title="Model export considerations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="import_configuration.html" class="btn btn-neutral float-right" title="Import configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

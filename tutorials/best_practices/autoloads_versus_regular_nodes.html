@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Autoloads versus regular nodes" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/best_practices/autoloads_versus_regular_nodes.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Godot offers a feature to automatically load nodes at the root of your project, allowing you to access them globally, that can fulfill the role of a Singleton: Singletons (Autoload). These autoload..." />
+<meta name="description" content="Godot offers a feature to automatically load nodes at the root of your project, allowing you to access them globally, that can fulfill the role of a Singleton: Singletons (Autoload). These autoload..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Autoloads versus regular nodes &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="When and how to avoid using nodes for everything" href="node_alternatives.html" />
+    <link rel="prev" title="When to use scenes versus scripts" href="scenes_versus_scripts.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/best_practices/autoloads_versus_regular_nodes" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/best_practices/autoloads_versus_regular_nodes.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Best practices</a></li>
+      <li class="breadcrumb-item active">Autoloads versus regular nodes</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/best_practices/autoloads_versus_regular_nodes.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="autoloads-versus-regular-nodes">
+<span id="doc-autoloads-versus-regular-nodes"></span><h1>Autoloads versus regular nodes<a class="headerlink" href="#autoloads-versus-regular-nodes" title="Link to this heading"></a></h1>
+<p>Godot offers a feature to automatically load nodes at the root of your project,
+allowing you to access them globally, that can fulfill the role of a Singleton:
+<a class="reference internal" href="../scripting/singletons_autoload.html#doc-singletons-autoload"><span class="std std-ref">Singletons (Autoload)</span></a>. These autoloaded nodes are not freed when you
+change the scene from code with <a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree-method-change-scene-to-file"><span class="std std-ref">SceneTree.change_scene_to_file</span></a>.</p>
+<p>In this guide, you will learn when to use the Autoload feature, and techniques
+you can use to avoid it.</p>
+<section id="the-cutting-audio-issue">
+<h2>The cutting audio issue<a class="headerlink" href="#the-cutting-audio-issue" title="Link to this heading"></a></h2>
+<p>Other engines can encourage the use of creating manager classes, singletons that
+organize a lot of functionality into a globally accessible object. Godot offers
+many ways to avoid global state thanks to the node tree and signals.</p>
+<p>For example, let's say we are building a platformer and want to collect coins
+that play a sound effect. There's a node for that: the <a class="reference internal" href="../../classes/class_audiostreamplayer.html#class-audiostreamplayer"><span class="std std-ref">AudioStreamPlayer</span></a>. But if we call the <code class="docutils literal notranslate"><span class="pre">AudioStreamPlayer</span></code> while it is
+already playing a sound, the new sound interrupts the first.</p>
+<p>A solution is to code a global, autoloaded sound manager class. It generates a
+pool of <code class="docutils literal notranslate"><span class="pre">AudioStreamPlayer</span></code> nodes that cycle through as each new request for
+sound effects comes in. Say we call that class <code class="docutils literal notranslate"><span class="pre">Sound</span></code>, you can use it from
+anywhere in your project by calling <code class="docutils literal notranslate"><span class="pre">Sound.play(&quot;coin_pickup.ogg&quot;)</span></code>. This
+solves the problem in the short term but causes more problems:</p>
+<ol class="arabic simple">
+<li><p><strong>Global state</strong>: one object is now responsible for all objects' data. If the
+<code class="docutils literal notranslate"><span class="pre">Sound</span></code> class has errors or doesn't have an AudioStreamPlayer available,
+all the nodes calling it can break.</p></li>
+<li><p><strong>Global access</strong>: now that any object can call <code class="docutils literal notranslate"><span class="pre">Sound.play(sound_path)</span></code>
+from anywhere, there's no longer an easy way to find the source of a bug.</p></li>
+<li><p><strong>Global resource allocation</strong>: with a pool of <code class="docutils literal notranslate"><span class="pre">AudioStreamPlayer</span></code> nodes
+stored from the start, you can either have too few and face bugs, or too many
+and use more memory than you need.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>About global access, the problem is that any code anywhere could pass wrong
+data to the <code class="docutils literal notranslate"><span class="pre">Sound</span></code> autoload in our example. As a result, the domain to
+explore to fix the bug spans the entire project.</p>
+<p>When you keep code inside a scene, only one or two scripts may be
+involved in audio.</p>
+</div>
+<p>Contrast this with each scene keeping as many <code class="docutils literal notranslate"><span class="pre">AudioStreamPlayer</span></code> nodes as it
+needs within itself and all these problems go away:</p>
+<ol class="arabic simple">
+<li><p>Each scene manages its own state information. If there is a problem with the
+data, it will only cause issues in that one scene.</p></li>
+<li><p>Each scene accesses only its own nodes. Now, if there is
+a bug, it's easy to find which node is at fault.</p></li>
+<li><p>Each scene allocates exactly the amount of resources it needs.</p></li>
+</ol>
+</section>
+<section id="managing-shared-functionality-or-data">
+<h2>Managing shared functionality or data<a class="headerlink" href="#managing-shared-functionality-or-data" title="Link to this heading"></a></h2>
+<p>Another reason to use an Autoload can be that you want to reuse the same method
+or data across many scenes.</p>
+<p>In the case of functions, you can create a new type of <code class="docutils literal notranslate"><span class="pre">Node</span></code> that provides
+that feature for an individual scene using the <a class="reference internal" href="../scripting/gdscript/gdscript_basics.html#doc-gdscript-basics-class-name"><span class="std std-ref">class_name</span></a> keyword in GDScript.</p>
+<p>When it comes to data, you can either:</p>
+<ol class="arabic simple">
+<li><p>Create a new type of <a class="reference internal" href="../../classes/class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> to share the data.</p></li>
+<li><p>Store the data in an object to which each node has access, for example using
+the <code class="docutils literal notranslate"><span class="pre">owner</span></code> property to access the scene's root node.</p></li>
+</ol>
+</section>
+<section id="when-you-should-use-an-autoload">
+<h2>When you should use an Autoload<a class="headerlink" href="#when-you-should-use-an-autoload" title="Link to this heading"></a></h2>
+<p>GDScript supports the creation of <code class="docutils literal notranslate"><span class="pre">static</span></code> functions using <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">func</span></code>.
+When combined with <code class="docutils literal notranslate"><span class="pre">class_name</span></code>, this makes it possible to create libraries of
+helper functions without having to create an instance to call them. The
+limitation of static functions is that they can't reference member variables,
+non-static functions or <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<p>Since Godot 4.1, GDScript also supports <code class="docutils literal notranslate"><span class="pre">static</span></code> variables using <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">var</span></code>.
+This means you can now share variables across instances of a class without
+having to create a separate autoload.</p>
+<p>Still, autoloaded nodes can simplify your code for systems with a wide scope. If
+the autoload is managing its own information and not invading the data of other
+objects, then it's a great way to create systems that handle broad-scoped tasks.
+For example, a quest or a dialogue system.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An autoload is <em>not</em> necessarily a singleton. Nothing prevents you from
+instantiating copies of an autoloaded node. An autoload is only a tool that
+makes a node load automatically as a child of the root of your scene tree,
+regardless of your game's node structure or which scene you run, e.g. by
+pressing the <kbd class="kbd docutils literal notranslate">F6</kbd> key.</p>
+<p>As a result, you can get the autoloaded node, for example an autoload called
+<code class="docutils literal notranslate"><span class="pre">Sound</span></code>, by calling <code class="docutils literal notranslate"><span class="pre">get_node(&quot;/root/Sound&quot;)</span></code>.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scenes_versus_scripts.html" class="btn btn-neutral float-left" title="When to use scenes versus scripts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="node_alternatives.html" class="btn btn-neutral float-right" title="When and how to avoid using nodes for everything" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

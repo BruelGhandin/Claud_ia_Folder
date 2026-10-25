@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="When to use scenes versus scripts" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/best_practices/scenes_versus_scripts.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="We&#x27;ve already covered how scenes and scripts are different. Scripts define an engine class extension with imperative code, scenes with declarative code. Each system&#x27;s capabilities are dif..." />
+<meta name="description" content="We&#x27;ve already covered how scenes and scripts are different. Scripts define an engine class extension with imperative code, scenes with declarative code. Each system&#x27;s capabilities are dif..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>When to use scenes versus scripts &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Autoloads versus regular nodes" href="autoloads_versus_regular_nodes.html" />
+    <link rel="prev" title="Scene organization" href="scene_organization.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/best_practices/scenes_versus_scripts" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/best_practices/scenes_versus_scripts.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Best practices</a></li>
+      <li class="breadcrumb-item active">When to use scenes versus scripts</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/best_practices/scenes_versus_scripts.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="when-to-use-scenes-versus-scripts">
+<span id="doc-scenes-versus-scripts"></span><h1>When to use scenes versus scripts<a class="headerlink" href="#when-to-use-scenes-versus-scripts" title="Link to this heading"></a></h1>
+<p>We've already covered how scenes and scripts are different. Scripts
+define an engine class extension with imperative code, scenes with
+declarative code.</p>
+<p>Each system's capabilities are different as a result.
+Scenes can define how an extended class initializes, but not what its
+behavior actually is. Scenes are often used in conjunction with a script,
+the scene declaring a composition of nodes, and the script adding behavior with imperative code.</p>
+<section id="anonymous-types">
+<h2>Anonymous types<a class="headerlink" href="#anonymous-types" title="Link to this heading"></a></h2>
+<p>It <em>is</em> possible to completely define a scenes' contents using a script alone.
+This is, in essence, what the Godot Editor does, only in the C++ constructor
+of its objects.</p>
+<p>But, choosing which one to use can be a dilemma. Creating script instances
+is identical to creating in-engine classes whereas handling scenes requires
+a change in API:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;my_node.gd&quot;</span><span class="p">)</span>
+<span class="k">const</span><span class="w"> </span><span class="nc">MyScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;my_scene.tscn&quot;</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Node</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">my_node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">MyNode</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span><span class="w"> </span><span class="c1"># Same method call.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">my_scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">MyScene</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span><span class="w"> </span><span class="c1"># Different method call.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">my_inherited_scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">MyScene</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">(</span><span class="nb">PackedScene</span><span class="o">.</span><span class="vi">GEN_EDIT_STATE_MAIN</span><span class="p">)</span><span class="w"> </span><span class="c1"># Create scene inheriting from MyScene.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Game</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">CSharpScript</span><span class="w"> </span><span class="n">MyNode</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">CSharpScript</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://Path/To/MyNode.cs&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">PackedScene</span><span class="w"> </span><span class="n">MyScene</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">PackedScene</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://Path/To/MyScene.tscn&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">_node</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">_myNode</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">_myScene</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">_myInheritedScene</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Game</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">();</span>
+<span class="w">        </span><span class="n">_myNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyNode</span><span class="p">.</span><span class="n">New</span><span class="p">().</span><span class="n">As</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Different than calling new() or MyNode.New(). Instantiated from a PackedScene.</span>
+<span class="w">        </span><span class="n">_myScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyScene</span><span class="p">.</span><span class="n">Instantiate</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Create scene inheriting from MyScene.</span>
+<span class="w">        </span><span class="n">_myInheritedScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyScene</span><span class="p">.</span><span class="n">Instantiate</span><span class="p">(</span><span class="n">PackedScene</span><span class="p">.</span><span class="n">GenEditState</span><span class="p">.</span><span class="n">Main</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Also, scripts will operate a little slower than scenes due to the
+speed differences between engine and script code. The larger and more complex
+the node, the more reason there is to build it as a scene.</p>
+</section>
+<section id="named-types">
+<h2>Named types<a class="headerlink" href="#named-types" title="Link to this heading"></a></h2>
+<p>Scripts can be registered as a new type within the editor
+itself. This displays it as a new type in the node or resource creation dialog
+with an optional icon. This way, the user's ability to use the script
+is much more streamlined. Rather than having to...</p>
+<ol class="arabic simple">
+<li><p>Know the base type of the script they would like to use.</p></li>
+<li><p>Create an instance of that base type.</p></li>
+<li><p>Add the script to the node.</p></li>
+</ol>
+<p>With a registered script, the scripted type instead becomes a creation option
+like the other nodes and resources in the system.
+The creation dialog even has a search bar to look up the type by
+name.</p>
+<p>There are two systems for registering types:</p>
+<ul>
+<li><p><a class="reference internal" href="../plugins/editor/making_plugins.html#doc-making-plugins"><span class="std std-ref">Custom Types</span></a></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Editor-only. Typenames are not accessible at runtime.</p></li>
+<li><p>Does not support inherited custom types.</p></li>
+<li><p>An initializer tool. Creates the node with the script. Nothing more.</p></li>
+<li><p>Editor has no type-awareness of the script or its relationship
+to other engine types or scripts.</p></li>
+<li><p>Allows users to define an icon.</p></li>
+<li><p>Works for all scripting languages because it deals with Script resources in abstract.</p></li>
+<li><p>Set up using <a class="reference internal" href="../../classes/class_editorplugin.html#class-editorplugin-method-add-custom-type"><span class="std std-ref">EditorPlugin.add_custom_type</span></a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><a class="reference internal" href="../scripting/gdscript/gdscript_basics.html#doc-gdscript-basics-class-name"><span class="std std-ref">Script Classes</span></a></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Editor and runtime accessible.</p></li>
+<li><p>Displays inheritance relationships in full.</p></li>
+<li><p>Creates the node with the script, but can also change types
+or extend the type from the editor.</p></li>
+<li><p>Editor is aware of inheritance relationships between scripts,
+script classes, and engine C++ classes.</p></li>
+<li><p>Allows users to define an icon.</p></li>
+<li><p>Engine developers must add support for languages manually (both name exposure and
+runtime accessibility).</p></li>
+<li><p>The Editor scans project folders and registers any exposed names for all
+scripting languages. Each scripting language must implement its own
+support for exposing this information.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Both methodologies add names to the creation dialog, but script classes, in
+particular, also allow for users to access the typename without loading the
+script resource. Creating instances and accessing constants or static methods
+is viable from anywhere.</p>
+<p>With features like these, one may wish their type to be a script without a
+scene due to the ease of use it grants users. Those developing plugins or
+creating in-house tools for designers to use will find an easier time of things
+this way.</p>
+<p>On the downside, it also means having to use largely imperative programming.</p>
+</section>
+<section id="performance-of-script-vs-packedscene">
+<h2>Performance of Script vs PackedScene<a class="headerlink" href="#performance-of-script-vs-packedscene" title="Link to this heading"></a></h2>
+<p>One last aspect to consider when choosing scenes and scripts is execution speed.</p>
+<p>As the size of objects increases, the scripts' necessary size to create and
+initialize them grows much larger. Creating node hierarchies demonstrates this.
+Each Node's logic could be several hundred lines of code in length.</p>
+<p>The code example below creates a new <code class="docutils literal notranslate"><span class="pre">Node</span></code>, changes its name, assigns a
+script to it, sets its future parent as its owner so it gets saved to disk along
+with it, and finally adds it as a child of the <code class="docutils literal notranslate"><span class="pre">Main</span></code> node:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># main.gd</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_init</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Node</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">child</span><span class="o">.</span><span class="vi">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Child&quot;</span>
+<span class="w">    </span><span class="n">child</span><span class="o">.</span><span class="vi">script</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;child.gd&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">add_child</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+<span class="w">    </span><span class="n">child</span><span class="o">.</span><span class="vi">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Main</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">Child</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Child</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Child&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">childID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Child</span><span class="p">.</span><span class="n">GetInstanceId</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Child</span><span class="p">.</span><span class="n">SetScript</span><span class="p">(</span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">Script</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://Path/To/Child.cs&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="c1">// SetScript() causes the C# wrapper object to be disposed, so obtain a new</span>
+<span class="w">        </span><span class="c1">// wrapper for the Child node using its instance ID before proceeding.</span>
+<span class="w">        </span><span class="n">Child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="p">)</span><span class="n">GodotObject</span><span class="p">.</span><span class="n">InstanceFromId</span><span class="p">(</span><span class="n">childID</span><span class="p">);</span>
+<span class="w">        </span><span class="n">AddChild</span><span class="p">(</span><span class="n">Child</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Child</span><span class="p">.</span><span class="n">Owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Script code like this is much slower than engine-side C++ code. Each instruction
+makes a call to the scripting API which leads to many &quot;lookups&quot; on the back-end
+to find the logic to execute.</p>
+<p>Scenes help to avoid this performance issue. <a class="reference internal" href="../../classes/class_packedscene.html#class-packedscene"><span class="std std-ref">PackedScene</span></a>, the base type that scenes inherit from, defines resources
+that use serialized data to create objects. The engine can process scenes in
+batches on the back-end and provide much better performance than scripts.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>In the end, the best approach is to consider the following:</p>
+<ul>
+<li><p>If one wishes to create a basic tool that is going to be reused in several
+different projects and which people of all skill levels will likely use
+(including those who don't label themselves as &quot;programmers&quot;), then chances
+are that it should probably be a script, likely one with a custom name/icon.</p></li>
+<li><p>If one wishes to create a concept that is particular to their game, then it
+should always be a scene. Scenes are easier to track/edit and provide more
+security than scripts.</p></li>
+<li><p>If one would like to give a name to a scene, then they can still sort of do
+this by declaring a script class and giving it a scene as a constant.
+The script becomes, in effect, a namespace:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># game.gd</span>
+<span class="k">class_name</span><span class="w"> </span><span class="nc">Game</span><span class="w"> </span><span class="c1"># extends RefCounted, so it won&#39;t show up in the node creation dialog.</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">RefCounted</span>
+
+<span class="k">const</span><span class="w"> </span><span class="nc">MyScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;my_scene.tscn&quot;</span><span class="p">)</span>
+
+<span class="c1"># main.gd</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">add_child</span><span class="p">(</span><span class="nc">Game</span><span class="o">.</span><span class="vi">MyScene</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">())</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Game.cs</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Game</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RefCounted</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">PackedScene</span><span class="w"> </span><span class="n">MyScene</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">PackedScene</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://Path/To/MyScene.tscn&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Main.cs</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Main</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">AddChild</span><span class="p">(</span><span class="n">Game</span><span class="p">.</span><span class="n">MyScene</span><span class="p">.</span><span class="n">Instantiate</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</li>
+</ul>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scene_organization.html" class="btn btn-neutral float-left" title="Scene organization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="autoloads_versus_regular_nodes.html" class="btn btn-neutral float-right" title="Autoloads versus regular nodes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

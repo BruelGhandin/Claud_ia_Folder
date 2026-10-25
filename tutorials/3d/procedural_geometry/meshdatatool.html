@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using the MeshDataTool" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/procedural_geometry/meshdatatool.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="The MeshDataTool is not used to generate geometry. But it is helpful for dynamically altering geometry, for example if you want to write a script to tessellate, simplify, or deform meshes. The Mesh..." />
+<meta name="description" content="The MeshDataTool is not used to generate geometry. But it is helpful for dynamically altering geometry, for example if you want to write a script to tessellate, simplify, or deform meshes. The Mesh..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using the MeshDataTool &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Using the SurfaceTool" href="surfacetool.html" />
+    <link rel="prev" title="Using the ArrayMesh" href="arraymesh.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/procedural_geometry/meshdatatool" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/3d/procedural_geometry/meshdatatool.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">3D</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Procedural geometry</a></li>
+      <li class="breadcrumb-item active">Using the MeshDataTool</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/procedural_geometry/meshdatatool.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-the-meshdatatool">
+<span id="doc-meshdatatool"></span><h1>Using the MeshDataTool<a class="headerlink" href="#using-the-meshdatatool" title="Link to this heading"></a></h1>
+<p>The <a class="reference internal" href="../../../classes/class_meshdatatool.html#class-meshdatatool"><span class="std std-ref">MeshDataTool</span></a> is not used to generate geometry. But it is helpful for dynamically altering geometry, for example
+if you want to write a script to tessellate, simplify, or deform meshes.</p>
+<p>The MeshDataTool is not as fast as altering arrays directly using <a class="reference internal" href="../../../classes/class_arraymesh.html#class-arraymesh"><span class="std std-ref">ArrayMesh</span></a>. However, it provides more information
+and tools to work with meshes than the ArrayMesh does. When the MeshDataTool
+is used, it calculates mesh data that is not available in ArrayMeshes such as faces and edges, which are necessary
+for certain mesh algorithms. If you do not need this extra information then it may be better to use an ArrayMesh.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MeshDataTool can only be used on Meshes that use the PrimitiveType <code class="docutils literal notranslate"><span class="pre">Mesh.PRIMITIVE_TRIANGLES</span></code>.</p>
+</div>
+<p>We initialize the MeshDataTool from an ArrayMesh by calling <a class="reference internal" href="../../../classes/class_meshdatatool.html#class-meshdatatool-method-create-from-surface"><span class="std std-ref">create_from_surface()</span></a>. If there is already data initialized in the MeshDataTool,
+calling <code class="docutils literal notranslate"><span class="pre">create_from_surface()</span></code> will clear it for you. Alternatively, you can call <a class="reference internal" href="../../../classes/class_meshdatatool.html#class-meshdatatool-method-clear"><span class="std std-ref">clear()</span></a> yourself before reusing the MeshDataTool.</p>
+<p>In the examples below, assume an ArrayMesh called <code class="docutils literal notranslate"><span class="pre">mesh</span></code> has already been created. See <a class="reference internal" href="arraymesh.html#doc-arraymesh"><span class="std std-ref">ArrayMesh tutorial</span></a> for an example of mesh generation.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">mdt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">MeshDataTool</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="n">mdt</span><span class="o">.</span><span class="nf">create_from_surface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">mdt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeshDataTool</span><span class="p">();</span>
+<span class="n">mdt</span><span class="p">.</span><span class="n">CreateFromSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p><code class="docutils literal notranslate"><span class="pre">create_from_surface()</span></code> uses the vertex arrays from the ArrayMesh to calculate two additional arrays,
+one for edges and one for faces, for a total of three arrays.</p>
+<p>An edge is a connection between any two vertices. Each edge in the edge array contains a reference to
+the two vertices it is composed of, and up to two faces that it is contained within.</p>
+<p>A face is a triangle made up of three vertices and three corresponding edges. Each face in the face array contains
+a reference to the three vertices and three edges it is composed of.</p>
+<p>The vertex array contains edge, face, normal, color, tangent, uv, uv2, bone, and weight information connected
+with each vertex.</p>
+<p>To access information from these arrays you use a function of the form <code class="docutils literal notranslate"><span class="pre">get_****()</span></code>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex_count</span><span class="p">()</span><span class="w"> </span><span class="c1"># Returns the number of vertices in the vertex array.</span>
+<span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex_faces</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1"># Returns an array of faces that contain vertex[0].</span>
+<span class="n">mdt</span><span class="o">.</span><span class="nf">get_face_normal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1"># Calculates and returns the face normal of the second face.</span>
+<span class="n">mdt</span><span class="o">.</span><span class="nf">get_edge_vertex</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1"># Returns the second vertex comprising the edge at index 10.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertexCount</span><span class="p">();</span><span class="w"> </span><span class="c1">// Returns the number of vertices in the vertex array.</span>
+<span class="n">mdt</span><span class="p">.</span><span class="n">GetVertexFaces</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Returns an array of faces that contain vertex[0].</span>
+<span class="n">mdt</span><span class="p">.</span><span class="n">GetFaceNormal</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// Calculates and returns the face normal of the second face.</span>
+<span class="n">mdt</span><span class="p">.</span><span class="n">GetEdgeVertex</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// Returns the second vertex comprising the edge at index 10.</span>
+</pre></div>
+</div>
+</div></div>
+<p>What you choose to do with these functions is up to you. A common use case is to iterate over all vertices
+and transform them in some way:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex_count</span><span class="p">()):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">vert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="n">vert</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="c1"># Scales the vertex by doubling its size.</span>
+<span class="w">    </span><span class="n">mdt</span><span class="o">.</span><span class="nf">set_vertex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">vert</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertexCount</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Vector3</span><span class="w"> </span><span class="n">vert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertex</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vert</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// Scales the vertex by doubling its size.</span>
+<span class="w">    </span><span class="n">mdt</span><span class="p">.</span><span class="n">SetVertex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">vert</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>These modifications are not done in place on the ArrayMesh. If you are dynamically updating an existing ArrayMesh,
+first delete the existing surface before adding a new one using <a class="reference internal" href="../../../classes/class_meshdatatool.html#class-meshdatatool-method-commit-to-surface"><span class="std std-ref">commit_to_surface()</span></a>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span><span class="o">.</span><span class="nf">clear_surfaces</span><span class="p">()</span><span class="w"> </span><span class="c1"># Deletes all of the mesh&#39;s surfaces.</span>
+<span class="n">mdt</span><span class="o">.</span><span class="nf">commit_to_surface</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span><span class="p">.</span><span class="n">ClearSurfaces</span><span class="p">();</span><span class="w"> </span><span class="c1">// Deletes all of the mesh&#39;s surfaces.</span>
+<span class="n">mdt</span><span class="p">.</span><span class="n">CommitToSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>Below is a complete example that turns a spherical mesh called <code class="docutils literal notranslate"><span class="pre">mesh</span></code> into a randomly deformed blob complete with updated normals and vertex colors.
+See <a class="reference internal" href="arraymesh.html#doc-arraymesh"><span class="std std-ref">ArrayMesh tutorial</span></a> for how to generate the base mesh.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">MeshInstance3D</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">fnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">FastNoiseLite</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">mdt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">MeshDataTool</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="n">fnl</span><span class="o">.</span><span class="vi">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.7</span>
+
+<span class="w">    </span><span class="n">mdt</span><span class="o">.</span><span class="nf">create_from_surface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex_count</span><span class="p">()):</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">vertex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="nf">normalized</span><span class="p">()</span>
+<span class="w">        </span><span class="c1"># Scale the vertices using noise.</span>
+<span class="w">        </span><span class="n">vertex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertex</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">fnl</span><span class="o">.</span><span class="nf">get_noise_3dv</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.75</span><span class="p">)</span>
+<span class="w">        </span><span class="n">mdt</span><span class="o">.</span><span class="nf">set_vertex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">vertex</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Calculate the vertex normals, face-by-face.</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_face_count</span><span class="p">()):</span>
+<span class="w">        </span><span class="c1"># Get the index in the vertex array.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_face_vertex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_face_vertex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_face_vertex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="c1"># Get the vertex position using the vertex index.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">ap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">bp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">cp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="w">        </span><span class="c1"># Calculate the normal of the face.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">bp</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cp</span><span class="p">)</span><span class="o">.</span><span class="nf">cross</span><span class="p">(</span><span class="n">ap</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">bp</span><span class="p">)</span><span class="o">.</span><span class="nf">normalized</span><span class="p">()</span>
+<span class="w">        </span><span class="c1"># Add this face normal to the current vertex normals.</span>
+<span class="w">        </span><span class="c1"># This will not result in perfect normals, but it will be close.</span>
+<span class="w">        </span><span class="n">mdt</span><span class="o">.</span><span class="nf">set_vertex_normal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex_normal</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="w">        </span><span class="n">mdt</span><span class="o">.</span><span class="nf">set_vertex_normal</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex_normal</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="w">        </span><span class="n">mdt</span><span class="o">.</span><span class="nf">set_vertex_normal</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex_normal</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+
+<span class="w">    </span><span class="c1"># Run through the vertices one last time to normalize their normals and</span>
+<span class="w">    </span><span class="c1"># set the vertex colors to these new normals.</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex_count</span><span class="p">()):</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="o">.</span><span class="nf">get_vertex_normal</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="nf">normalized</span><span class="p">()</span>
+<span class="w">        </span><span class="n">mdt</span><span class="o">.</span><span class="nf">set_vertex_normal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">)</span>
+<span class="w">        </span><span class="n">mdt</span><span class="o">.</span><span class="nf">set_vertex_color</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="vi">x</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="o">.</span><span class="vi">y</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="o">.</span><span class="vi">z</span><span class="p">))</span>
+
+<span class="w">    </span><span class="n">mesh</span><span class="o">.</span><span class="nf">clear_surfaces</span><span class="p">()</span>
+<span class="w">    </span><span class="n">mdt</span><span class="o">.</span><span class="nf">commit_to_surface</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyMeshInstance3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MeshInstance3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">MeshDataTool</span><span class="w"> </span><span class="n">mdt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeshDataTool</span><span class="p">();</span>
+<span class="w">    </span><span class="n">FastNoiseLite</span><span class="w"> </span><span class="n">fnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FastNoiseLite</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fnl</span><span class="p">.</span><span class="n">Frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.7f</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">ArrayMesh</span><span class="w"> </span><span class="n">mesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mesh</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ArrayMesh</span><span class="p">;</span><span class="w"> </span><span class="c1">// The mesh assigned the MeshInstance3D needs to be an ArrayMesh.</span>
+<span class="w">        </span><span class="n">mdt</span><span class="p">.</span><span class="n">CreateFromSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertexCount</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Vector3</span><span class="w"> </span><span class="n">vertex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertex</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">Normalized</span><span class="p">();</span>
+<span class="w">            </span><span class="c1">// Scale the vertices using noise.</span>
+<span class="w">            </span><span class="n">vertex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertex</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">fnl</span><span class="p">.</span><span class="n">GetNoise3Dv</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5f</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.75f</span><span class="p">);</span>
+<span class="w">            </span><span class="n">mdt</span><span class="p">.</span><span class="n">SetVertex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">vertex</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Calculate the vertex normals, face-by-face.</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetFaceCount</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Get the index in the vertex array.</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetFaceVertex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetFaceVertex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetFaceVertex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// Get the vertex position using the vertex index.</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">ap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertex</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">bp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertex</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">cp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertex</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// Calculate the normal of the face.</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">bp</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cp</span><span class="p">).</span><span class="n">Cross</span><span class="p">(</span><span class="n">ap</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">bp</span><span class="p">).</span><span class="n">Normalized</span><span class="p">();</span>
+<span class="w">            </span><span class="c1">// Add this face normal to the current vertex normals.</span>
+<span class="w">            </span><span class="c1">// This will not result in perfect normals, but it will be close.</span>
+<span class="w">            </span><span class="n">mdt</span><span class="p">.</span><span class="n">SetVertexNormal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertexNormal</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+<span class="w">            </span><span class="n">mdt</span><span class="p">.</span><span class="n">SetVertexNormal</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertexNormal</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>
+<span class="w">            </span><span class="n">mdt</span><span class="p">.</span><span class="n">SetVertexNormal</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertexNormal</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Run through the vertices one last time to normalize their normals and</span>
+<span class="w">        </span><span class="c1">// set the vertex colors to these new normals.</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertexCount</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mdt</span><span class="p">.</span><span class="n">GetVertexNormal</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">Normalized</span><span class="p">();</span>
+<span class="w">            </span><span class="n">mdt</span><span class="p">.</span><span class="n">SetVertexNormal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">);</span>
+<span class="w">            </span><span class="n">mdt</span><span class="p">.</span><span class="n">SetVertexColor</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Color</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">Z</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">mesh</span><span class="p">.</span><span class="n">ClearSurfaces</span><span class="p">();</span>
+<span class="w">        </span><span class="n">mdt</span><span class="p">.</span><span class="n">CommitToSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="arraymesh.html" class="btn btn-neutral float-left" title="Using the ArrayMesh" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="surfacetool.html" class="btn btn-neutral float-right" title="Using the SurfaceTool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

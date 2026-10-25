@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Scene organization" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/best_practices/scene_organization.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="This article covers topics related to the effective organization of scene content. Which nodes should you use? Where should you place them? How should they interact? How to build relationships effe..." />
+<meta name="description" content="This article covers topics related to the effective organization of scene content. Which nodes should you use? Where should you place them? How should they interact? How to build relationships effe..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Scene organization &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="When to use scenes versus scripts" href="scenes_versus_scripts.html" />
+    <link rel="prev" title="Applying object-oriented principles in Godot" href="what_are_godot_classes.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/best_practices/scene_organization" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/best_practices/scene_organization.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Best practices</a></li>
+      <li class="breadcrumb-item active">Scene organization</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/best_practices/scene_organization.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="scene-organization">
+<span id="doc-scene-organization"></span><h1>Scene organization<a class="headerlink" href="#scene-organization" title="Link to this heading"></a></h1>
+<p>This article covers topics related to the effective organization of
+scene content. Which nodes should you use? Where should you place them?
+How should they interact?</p>
+<section id="how-to-build-relationships-effectively">
+<h2>How to build relationships effectively<a class="headerlink" href="#how-to-build-relationships-effectively" title="Link to this heading"></a></h2>
+<p>When Godot users begin crafting their own scenes, they often run into the
+following problem:</p>
+<p>They create their first scene and fill it with content only to eventually end
+up saving branches of their scene into separate scenes as the nagging feeling
+that they should split things up starts to accumulate. However, they then
+notice that the hard references they were able to rely on before are no longer
+possible. Reusing the scene in multiple places creates issues because the
+node paths do not find their targets and signal connections established in the
+editor break.</p>
+<p>To fix these problems, you must instantiate the sub-scenes without them
+requiring details about their environment. You need to be able to trust
+that the sub-scene will create itself without being picky about how it's used.</p>
+<p>One of the biggest things to consider in <a class="reference external" href="https://en.wikipedia.org/wiki/Object-oriented_programming">Object-Oriented Programming (OOP)</a> is maintaining
+focused, singular-purpose classes with
+<a class="reference external" href="https://en.wikipedia.org/wiki/Loose_coupling">loose coupling</a>
+to other parts of the codebase. This keeps the size of objects small (for
+maintainability) and improves their reusability.</p>
+<p>These OOP best practices have <em>several</em> implications for best practices
+in scene structure and script usage.</p>
+<p><strong>If at all possible, you should design scenes to have no dependencies.</strong>
+That is, you should create scenes that keep everything they need within
+themselves.</p>
+<p>If a scene must interact with an external context, experienced developers
+recommend the use of
+<a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection</a>.
+This technique involves having a high-level API provide the dependencies of the
+low-level API. Why do this? Because classes which rely on their external
+environment can inadvertently trigger bugs and unexpected behavior.</p>
+<p>To do this, you must expose data and then rely on a parent context to
+initialize it:</p>
+<ol class="arabic">
+<li><p>Connect to a signal. Extremely safe, but should be used only to &quot;respond&quot; to
+behavior, not start it. By convention, signal names are usually past-tense verbs
+like &quot;entered&quot;, &quot;skill_activated&quot;, or &quot;item_collected&quot;.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button><button aria-controls="panel-0-Qysr" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parent</span>
+<span class="sx">$Child</span><span class="o">.</span><span class="vi">signal_name</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">method_on_the_object</span><span class="p">)</span>
+
+<span class="c1"># Child</span>
+<span class="n">signal_name</span><span class="o">.</span><span class="nf">emit</span><span class="p">()</span><span class="w"> </span><span class="c1"># Triggers parent-specified behavior.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parent</span>
+<span class="n">GetNode</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">).</span><span class="n">Connect</span><span class="p">(</span><span class="s">&quot;SignalName&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Callable</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">ObjectWithMethod</span><span class="p">.</span><span class="n">MethodOnTheObject</span><span class="p">));</span>
+
+<span class="c1">// Child</span>
+<span class="n">EmitSignal</span><span class="p">(</span><span class="s">&quot;SignalName&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Triggers parent-specified behavior.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-Qysr" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-Qysr" name="Qysr" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parent</span>
+<span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_node</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Note that get_node may return a nullptr, which would make calling the connect method crash the engine if &quot;Child&quot; does not exist!</span>
+<span class="w">    </span><span class="c1">// So unless you are 1000% sure get_node will never return a nullptr, it&#39;s a good idea to always do a nullptr check.</span>
+<span class="w">    </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;signal_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ObjectWithMethod</span><span class="o">::</span><span class="n">method_on_the_object</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// Child</span>
+<span class="n">emit_signal</span><span class="p">(</span><span class="s">&quot;signal_name&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Triggers parent-specified behavior.</span>
+</pre></div>
+</div>
+</div></div>
+</li>
+<li><p>Call a method. Used to start behavior.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button><button aria-controls="panel-1-Qysr" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parent</span>
+<span class="sx">$Child</span><span class="o">.</span><span class="vi">method_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;do&quot;</span>
+
+<span class="c1"># Child, assuming it has String property &#39;method_name&#39; and method &#39;do&#39;.</span>
+<span class="nf">call</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span><span class="w"> </span><span class="c1"># Call parent-specified method (which child must own).</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parent</span>
+<span class="n">GetNode</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">).</span><span class="n">Set</span><span class="p">(</span><span class="s">&quot;MethodName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Do&quot;</span><span class="p">);</span>
+
+<span class="c1">// Child</span>
+<span class="n">Call</span><span class="p">(</span><span class="n">MethodName</span><span class="p">);</span><span class="w"> </span><span class="c1">// Call parent-specified method (which child must own).</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-Qysr" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-Qysr" name="Qysr" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parent</span>
+<span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_node</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;method_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;do&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Child</span>
+<span class="n">call</span><span class="p">(</span><span class="n">method_name</span><span class="p">);</span><span class="w"> </span><span class="c1">// Call parent-specified method (which child must own).</span>
+</pre></div>
+</div>
+</div></div>
+</li>
+<li><p>Initialize a <a class="reference internal" href="../../classes/class_callable.html#class-callable"><span class="std std-ref">Callable</span></a> property. Safer than a method
+as ownership of the method is unnecessary. Used to start behavior.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button><button aria-controls="panel-2-Qysr" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parent</span>
+<span class="sx">$Child</span><span class="o">.</span><span class="vi">func_property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">object_with_method</span><span class="o">.</span><span class="vi">method_on_the_object</span>
+
+<span class="c1"># Child</span>
+<span class="n">func_property</span><span class="o">.</span><span class="nf">call</span><span class="p">()</span><span class="w"> </span><span class="c1"># Call parent-specified method (can come from anywhere).</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parent</span>
+<span class="n">GetNode</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">).</span><span class="n">Set</span><span class="p">(</span><span class="s">&quot;FuncProperty&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Callable</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">ObjectWithMethod</span><span class="p">.</span><span class="n">MethodOnTheObject</span><span class="p">));</span>
+
+<span class="c1">// Child</span>
+<span class="n">FuncProperty</span><span class="p">.</span><span class="n">Call</span><span class="p">();</span><span class="w"> </span><span class="c1">// Call parent-specified method (can come from anywhere).</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-Qysr" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-Qysr" name="Qysr" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parent</span>
+<span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_node</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;func_property&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Callable</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ObjectWithMethod</span><span class="o">::</span><span class="n">method_on_the_object</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// Child</span>
+<span class="n">func_property</span><span class="p">.</span><span class="n">call</span><span class="p">();</span><span class="w"> </span><span class="c1">// Call parent-specified method (can come from anywhere).</span>
+</pre></div>
+</div>
+</div></div>
+</li>
+<li><p>Initialize a Node or other Object reference.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button><button aria-controls="panel-3-Qysr" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parent</span>
+<span class="sx">$Child</span><span class="o">.</span><span class="vi">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span>
+
+<span class="c1"># Child</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="c1"># Use parent-specified node.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parent</span>
+<span class="n">GetNode</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">).</span><span class="n">Set</span><span class="p">(</span><span class="s">&quot;Target&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
+
+<span class="c1">// Child</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">Target</span><span class="p">);</span><span class="w"> </span><span class="c1">// Use parent-specified node.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-Qysr" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-Qysr" name="Qysr" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parent</span>
+<span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_node</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;target&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Child</span>
+<span class="n">UtilityFunctions</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+</li>
+<li><p>Initialize a NodePath.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button><button aria-controls="panel-4-Qysr" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parent</span>
+<span class="sx">$Child</span><span class="o">.</span><span class="vi">target_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;..&quot;</span>
+
+<span class="c1"># Child</span>
+<span class="nf">get_node</span><span class="p">(</span><span class="n">target_path</span><span class="p">)</span><span class="w"> </span><span class="c1"># Use parent-specified NodePath.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parent</span>
+<span class="n">GetNode</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">).</span><span class="n">Set</span><span class="p">(</span><span class="s">&quot;TargetPath&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">NodePath</span><span class="p">(</span><span class="s">&quot;..&quot;</span><span class="p">));</span>
+
+<span class="c1">// Child</span>
+<span class="n">GetNode</span><span class="p">(</span><span class="n">TargetPath</span><span class="p">);</span><span class="w"> </span><span class="c1">// Use parent-specified NodePath.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-Qysr" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-Qysr" name="Qysr" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parent</span>
+<span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_node</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;target_path&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">NodePath</span><span class="p">(</span><span class="s">&quot;..&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// Child</span>
+<span class="n">get_node</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">(</span><span class="n">target_path</span><span class="p">);</span><span class="w"> </span><span class="c1">// Use parent-specified NodePath.</span>
+</pre></div>
+</div>
+</div></div>
+</li>
+</ol>
+<p>These options hide the points of access from the child node. This in turn
+keeps the child <strong>loosely coupled</strong> to its environment. You can reuse it
+in another context without any extra changes to its API.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the examples above illustrate parent-child relationships,
+the same principles apply towards all object relations. Nodes which
+are siblings should only be aware of their own hierarchies while an ancestor
+mediates their communications and references.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button><button aria-controls="panel-5-Qysr" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-Qysr" name="Qysr" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parent</span>
+<span class="sx">$Left</span><span class="o">.</span><span class="vi">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Right</span><span class="o">.</span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;Receiver&quot;</span><span class="p">)</span>
+
+<span class="c1"># Left</span>
+<span class="k">var</span><span class="w"> </span><span class="n">target</span><span class="p">:</span><span class="w"> </span><span class="nb">Node</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">execute</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Do something with &#39;target&#39;.</span>
+
+<span class="c1"># Right</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_init</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">receiver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Receiver</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">add_child</span><span class="p">(</span><span class="n">receiver</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parent</span>
+<span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Left</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Left&quot;</span><span class="p">).</span><span class="n">Target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="p">(</span><span class="s">&quot;Right/Receiver&quot;</span><span class="p">);</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Left</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">Target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Execute</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Do something with &#39;Target&#39;.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Right</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">Receiver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Right</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Receiver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResourceLoader</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">Script</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Receiver.cs&quot;</span><span class="p">).</span><span class="n">New</span><span class="p">();</span>
+<span class="w">        </span><span class="n">AddChild</span><span class="p">(</span><span class="n">Receiver</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-Qysr" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-Qysr" name="Qysr" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Parent</span>
+<span class="n">get_node</span><span class="o">&lt;</span><span class="n">Left</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Left&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_node</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Right/Receiver&quot;</span><span class="p">);</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Left</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">Left</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">protected</span><span class="o">:</span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">_bind_methods</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="o">:</span>
+<span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">Left</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">execute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Do something with &#39;target&#39;.</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Right</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">Right</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">protected</span><span class="o">:</span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">_bind_methods</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="o">:</span>
+<span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">receiver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">Right</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">receiver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memnew</span><span class="p">(</span><span class="n">Node</span><span class="p">);</span>
+<span class="w">            </span><span class="n">add_child</span><span class="p">(</span><span class="n">receiver</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></div>
+<p>The same principles also apply to non-Node objects that maintain dependencies
+on other objects. Whichever object owns the other objects should manage
+the relationships between them.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You should favor keeping data in-house (internal to a scene), though, as
+placing a dependency on an external context, even a loosely coupled one,
+still means that the node will expect something in its environment to be
+true. The project's design philosophies should prevent this from happening.
+If not, the code's inherent liabilities will force developers to use
+documentation to keep track of object relations on a microscopic scale; this
+is otherwise known as development hell. Writing code that relies on external
+documentation to use it safely is error-prone by default.</p>
+<p>To avoid creating and maintaining such documentation, you convert the
+dependent node (&quot;child&quot; above) into a tool script that implements
+<code class="docutils literal notranslate"><span class="pre">_get_configuration_warnings()</span></code>.
+Returning a non-empty PackedStringArray from it will make the Scene dock generate a
+warning icon with the string(s) as a tooltip by the node. This is the same icon
+that appears for nodes such as the
+<a class="reference internal" href="../../classes/class_area2d.html#class-area2d"><span class="std std-ref">Area2D</span></a> node when it has no child
+<a class="reference internal" href="../../classes/class_collisionshape2d.html#class-collisionshape2d"><span class="std std-ref">CollisionShape2D</span></a> nodes defined. The editor
+then self-documents the scene through the script code. No content duplication
+via documentation is necessary.</p>
+<p>A <a class="reference external" href="https://en.wikipedia.org/wiki/Graphical_user_interface">Graphical User Interface (GUI)</a>
+like this can better inform project users of critical information about
+a Node. Does it have external dependencies? Have those dependencies been
+satisfied? Other programmers, and especially designers and writers, will need
+clear instructions in the messages telling them what to do to configure it.</p>
+</div>
+<p>So, why does all this complex switcheroo work? Well, because scenes operate
+best when they operate alone. If unable to work alone, then working with
+others anonymously (with minimal hard dependencies, i.e. loose coupling)
+is the next best thing. Inevitably, changes may need to be made to a class, and
+if these changes cause it to interact with other scenes in unforeseen ways,
+then things will start to break down. The whole point of all this indirection
+is to avoid ending up in a situation where changing one class results in
+adversely affecting other classes dependent on it.</p>
+<p>Scripts and scenes, as extensions of engine classes, should abide
+by <em>all</em> OOP principles. Examples include...</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/SOLID">SOLID:</a></p>
+<ul>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Single-responsibility_principle">Single responsibility</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle">Open for extension, closed for modification</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Liskov substitution</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Interface_segregation_principle">Interface segregation</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency inversion</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY: Don't Repeat Yourself</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/KISS_principle">KISS: Keep It Simple Stupid</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it">YAGNI: You Aren't Gonna Need It</a></p></li>
+</ul>
+</section>
+<section id="choosing-a-node-tree-structure">
+<h2>Choosing a node tree structure<a class="headerlink" href="#choosing-a-node-tree-structure" title="Link to this heading"></a></h2>
+<p>You might start to work on a game but get overwhelmed by the vast possibilities
+before you. You might know what you want to do, what systems you want to
+have, but <em>where</em> do you put them all? How you go about making your game
+is always up to you. You can construct node trees in countless ways.
+If you are unsure, this guide can give you a sample of a decent structure to
+start with.</p>
+<p>A game should always have an &quot;entry point&quot;; somewhere you can definitively
+track where things begin so that you can follow the logic as it continues
+elsewhere. It also serves as a bird's eye view of all other data and logic
+in the program. For traditional applications, this is normally a &quot;main&quot;
+function. In Godot, it's a Main node.</p>
+<ul class="simple">
+<li><p>Node &quot;Main&quot; (main.gd)</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">main.gd</span></code> script will serve as the primary controller of your game.</p>
+<p>Then you have an in-game &quot;World&quot; (a 2D or 3D one). This can be a child
+of Main. In addition, you will need a primary GUI for your game that manages
+the various menus and widgets the project needs.</p>
+<ul class="simple">
+<li><p>Node &quot;Main&quot; (main.gd)</p>
+<ul>
+<li><p>Node2D/Node3D &quot;World&quot; (game_world.gd)</p></li>
+<li><p>Control &quot;GUI&quot; (gui.gd)</p></li>
+</ul>
+</li>
+</ul>
+<p>When changing levels, you can then swap out the children of the &quot;World&quot; node.
+<a class="reference internal" href="../scripting/change_scenes_manually.html#doc-change-scenes-manually"><span class="std std-ref">Changing scenes manually</span></a> gives you full
+control over how your game world transitions.</p>
+<p>The next step is to consider what gameplay systems your project requires.
+If you have a system that...</p>
+<ol class="arabic simple">
+<li><p>tracks all of its data internally</p></li>
+<li><p>should be globally accessible</p></li>
+<li><p>should exist in isolation</p></li>
+</ol>
+<p>... then you should create an <a class="reference internal" href="../scripting/singletons_autoload.html#doc-singletons-autoload"><span class="std std-ref">autoload 'singleton' node</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For smaller games, a simpler alternative with less control would be to have
+a &quot;Game&quot; singleton that simply calls the
+<a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree-method-change-scene-to-file"><span class="std std-ref">SceneTree.change_scene_to_file()</span></a> method
+to swap out the main scene's content. This structure more or less keeps
+the &quot;World&quot; as the main game node.</p>
+<p>Any GUI would also need to be either a singleton, a transitory part of the
+&quot;World&quot;, or manually added as a direct child of the root. Otherwise, the
+GUI nodes would also delete themselves during scene transitions.</p>
+</div>
+<p>If you have systems that modify other systems' data, you should define those as
+their own scripts or scenes, rather than autoloads. For more information, see
+<a class="reference internal" href="autoloads_versus_regular_nodes.html#doc-autoloads-versus-regular-nodes"><span class="std std-ref">Autoloads versus regular nodes</span></a>.</p>
+<p>Each subsystem within your game should have its own section within the
+SceneTree. You should use parent-child relationships only in cases where nodes
+are effectively elements of their parents. Does removing the parent reasonably
+mean that the children should also be removed? If not, then it should have its
+own place in the hierarchy as a sibling or some other relation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In some cases, you need these separated nodes to <em>also</em> position themselves
+relative to each other. You can use the
+<a class="reference internal" href="../../classes/class_remotetransform2d.html#class-remotetransform2d"><span class="std std-ref">RemoteTransform2D</span></a> /
+<a class="reference internal" href="../../classes/class_remotetransform3d.html#class-remotetransform3d"><span class="std std-ref">RemoteTransform3D</span></a> nodes for this purpose.
+They will allow a target node to conditionally inherit selected transform
+elements from the Remote* node. To assign the <code class="docutils literal notranslate"><span class="pre">target</span></code>
+<a class="reference internal" href="../../classes/class_nodepath.html#class-nodepath"><span class="std std-ref">NodePath</span></a>, use one of the following:</p>
+<ol class="arabic simple">
+<li><p>A reliable third party, likely a parent node, to mediate the assignment.</p></li>
+<li><p>A group, to pull a reference to the desired node (assuming there
+will only ever be one of the targets).</p></li>
+</ol>
+<p>When you should do this is subjective. The dilemma arises when you must
+micro-manage when a node must move around the SceneTree to preserve
+itself. For example...</p>
+<ul>
+<li><p>Add a &quot;player&quot; node to a &quot;room&quot;.</p></li>
+<li><p>Need to change rooms, so you must delete the current room.</p></li>
+<li><p>Before the room can be deleted, you must preserve and/or move the player.</p>
+<p>If memory is not a concern, you can...</p>
+<ul class="simple">
+<li><p>Create the new room.</p></li>
+<li><p>Move the player to the new room.</p></li>
+<li><p>Delete the old room.</p></li>
+</ul>
+<p>If memory is a concern, instead you will need to...</p>
+<ul class="simple">
+<li><p>Move the player somewhere else in the tree.</p></li>
+<li><p>Delete the room.</p></li>
+<li><p>Instantiate and add the new room.</p></li>
+<li><p>Re-add the player to the new room.</p></li>
+</ul>
+</li>
+</ul>
+<p>The issue is that the player here is a &quot;special case&quot; where the
+developers must <em>know</em> that they need to handle the player this way for the
+project. The only way to reliably share this information as a team
+is to <em>document</em> it. Keeping implementation details in documentation is
+dangerous. It's a maintenance burden, strains code readability, and
+unnecessarily bloats the intellectual content of a project.</p>
+<p>In a more complex game with larger assets, it can be a better idea to keep
+the player somewhere else in the SceneTree entirely. This results in:</p>
+<ol class="arabic simple">
+<li><p>More consistency.</p></li>
+<li><p>No &quot;special cases&quot; that must be documented and maintained somewhere.</p></li>
+<li><p>No opportunity for errors to occur because these details are not accounted
+for.</p></li>
+</ol>
+<p>In contrast, if you ever need a child node that does <em>not</em> inherit
+the transform of its parent, you have the following options:</p>
+<ol class="arabic simple">
+<li><p>The <strong>declarative</strong> solution: place a <a class="reference internal" href="../../classes/class_node.html#class-node"><span class="std std-ref">Node</span></a> in between
+them. Since it doesn't have a transform, they won't pass this information
+to its children.</p></li>
+<li><p>The <strong>imperative</strong> solution: Use the <code class="docutils literal notranslate"><span class="pre">top_level</span></code> property for the
+<a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem-property-top-level"><span class="std std-ref">CanvasItem</span></a> or
+<a class="reference internal" href="../../classes/class_node3d.html#class-node3d-property-top-level"><span class="std std-ref">Node3D</span></a> node. This will make
+the node ignore its inherited transform.</p></li>
+</ol>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If building a networked game, keep in mind which nodes and gameplay systems
+are relevant to all players versus those just pertinent to the authoritative
+server. For example, users do not all need to have a copy of every players'
+&quot;PlayerController&quot; logic - they only need their own. Keeping them in a
+separate branch from the &quot;world&quot; can help simplify the management of game
+connections and the like.</p>
+</div>
+<p>The key to scene organization is to consider the SceneTree in relational terms
+rather than spatial terms. Are the nodes dependent on their parent's existence?
+If not, then they can thrive all by themselves somewhere else.
+If they are dependent, then it stands to reason that they should be children of
+that parent (and likely part of that parent's scene if they aren't already).</p>
+<p>Does this mean nodes themselves are components? Not at all.
+Godot's node trees form an aggregation relationship, not one of composition.
+But while you still have the flexibility to move nodes around, it is still best
+when such moves are unnecessary by default.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="what_are_godot_classes.html" class="btn btn-neutral float-left" title="Applying object-oriented principles in Godot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scenes_versus_scripts.html" class="btn btn-neutral float-right" title="When to use scenes versus scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

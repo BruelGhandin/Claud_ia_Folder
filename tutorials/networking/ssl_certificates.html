@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="TLS/SSL certificates" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/networking/ssl_certificates.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: It is often desired to use TLS connections (also known as SSL connections) for communications to avoid &quot;man in the middle&quot; attacks. Godot has a connection wrapper, StreamPee..." />
+<meta name="description" content="Introduction: It is often desired to use TLS connections (also known as SSL connections) for communications to avoid &quot;man in the middle&quot; attacks. Godot has a connection wrapper, StreamPee..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>TLS/SSL certificates &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using WebSockets" href="websocket.html" />
+    <link rel="prev" title="HTTP client class" href="http_client_class.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/networking/ssl_certificates" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/networking/ssl_certificates.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Networking</a></li>
+      <li class="breadcrumb-item active">TLS/SSL certificates</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/networking/ssl_certificates.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="tls-ssl-certificates">
+<span id="doc-ssl-certificates"></span><h1>TLS/SSL certificates<a class="headerlink" href="#tls-ssl-certificates" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>It is often desired to use <abbr title="Transport Layer Security">TLS</abbr> connections (also
+known as <abbr title="Secure Sockets Layer">SSL</abbr> connections) for communications
+to avoid &quot;man in the middle&quot; attacks. Godot has a connection wrapper,
+<a class="reference internal" href="../../classes/class_streampeertls.html#class-streampeertls"><span class="std std-ref">StreamPeerTLS</span></a>, which can take a regular connection
+and add security around it. The <a class="reference internal" href="../../classes/class_httpclient.html#class-httpclient"><span class="std std-ref">HTTPClient</span></a> and
+<a class="reference internal" href="../../classes/class_httprequest.html#class-httprequest"><span class="std std-ref">HTTPRequest</span></a> classes also support HTTPS using
+this same wrapper.</p>
+<p>Godot will try to use the TLS certificate bundle provided by the operating system,
+but also includes the
+<a class="reference external" href="https://github.com/godotengine/godot/blob/master/thirdparty/certs/ca-certificates.crt">TLS certificate bundle from Mozilla</a>
+as a fallback.</p>
+<p>You can alternatively force your own certificate bundle in the Project Settings:</p>
+<figure class="align-center" id="id1">
+<img alt="Setting the TLS certificate bundle override project setting" src="../../_images/tls_certificates_project_setting.webp" />
+<figcaption>
+<p><span class="caption-text">Setting the TLS certificate bundle override project setting</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>When set, this file <em>overrides</em> the operating system provided bundle by default.
+This file should contain any number of public certificates in
+<a class="reference external" href="https://en.wikipedia.org/wiki/Privacy-enhanced_Electronic_Mail">PEM format</a>.</p>
+<p>There are two ways to obtain certificates:</p>
+</section>
+<section id="obtain-a-certificate-from-a-certificate-authority">
+<h2>Obtain a certificate from a certificate authority<a class="headerlink" href="#obtain-a-certificate-from-a-certificate-authority" title="Link to this heading"></a></h2>
+<p>The main approach to getting a certificate is to use a certificate authority
+(CA) such as <a class="reference external" href="https://letsencrypt.org/">Let's Encrypt</a>. This is a more
+cumbersome process than a self-signed certificate, but it's more &quot;official&quot; and
+ensures your identity is clearly represented. The resulting certificate is also
+trusted by applications such as web browsers, unlike a self-signed certificate
+which requires additional configuration on the client side before it's
+considered trusted.</p>
+<p>These certificates do not require any configuration on the client to work, since
+Godot already bundles the Mozilla certificate bundle in the editor and exported
+projects.</p>
+</section>
+<section id="generate-a-self-signed-certificate">
+<h2>Generate a self-signed certificate<a class="headerlink" href="#generate-a-self-signed-certificate" title="Link to this heading"></a></h2>
+<p>For most use cases, it's recommended to go through certificate authority as the
+process is free with certificate authorities such as Let's Encrypt. However, if
+using a certificate authority is not an option, then you can generate a
+self-signed certificate and tell the client to consider your self-signed
+certificate as trusted.</p>
+<p>To create a self-signed certificate, generate a private and public key pair and
+add the public key (in PEM format) to the CRT file specified in the Project
+Settings.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The private key should <strong>only</strong> go to your server. The client must not have
+access to it: otherwise, the security of the certificate will be
+compromised.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When specifying a self-signed certificate as TLS bundle in the project
+settings, normal domain name validation is enforced via the certificate
+<abbr title="common name">CN</abbr> and alternative names. See
+<a class="reference internal" href="../../classes/class_tlsoptions.html#class-tlsoptions"><span class="std std-ref">TLSOptions</span></a> to customize domain name validation.</p>
+</div>
+<p>For development purposes Godot can generate self-signed certificates via
+<a class="reference internal" href="../../classes/class_crypto.html#class-crypto-method-generate-self-signed-certificate"><span class="std std-ref">Crypto.generate_self_signed_certificate</span></a>.</p>
+<p>Alternatively, OpenSSL has some documentation about <a class="reference external" href="https://raw.githubusercontent.com/openssl/openssl/master/doc/HOWTO/keys.txt">generating keys</a>
+and <a class="reference external" href="https://raw.githubusercontent.com/openssl/openssl/master/doc/HOWTO/certificates.txt">certificates</a>.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="http_client_class.html" class="btn btn-neutral float-left" title="HTTP client class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="websocket.html" class="btn btn-neutral float-right" title="Using WebSockets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

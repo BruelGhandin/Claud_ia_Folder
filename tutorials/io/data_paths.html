@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="File paths in Godot projects" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/io/data_paths.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="This page explains how file paths work inside Godot projects. You will learn how to access paths in your projects using the res:// and user:// notations, and where Godot stores project and editor f..." />
+<meta name="description" content="This page explains how file paths work inside Godot projects. You will learn how to access paths in your projects using the res:// and user:// notations, and where Godot stores project and editor f..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>File paths in Godot projects &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Saving games" href="saving_games.html" />
+    <link rel="prev" title="Background loading" href="background_loading.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/io/data_paths" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/io/data_paths.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">File and data I/O</a></li>
+      <li class="breadcrumb-item active">File paths in Godot projects</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/io/data_paths.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="file-paths-in-godot-projects">
+<span id="doc-data-paths"></span><h1>File paths in Godot projects<a class="headerlink" href="#file-paths-in-godot-projects" title="Link to this heading"></a></h1>
+<p>This page explains how file paths work inside Godot projects. You will learn how
+to access paths in your projects using the <code class="docutils literal notranslate"><span class="pre">res://</span></code> and <code class="docutils literal notranslate"><span class="pre">user://</span></code> notations,
+and where Godot stores project and editor files on your and your users' systems.</p>
+<section id="path-separators">
+<h2>Path separators<a class="headerlink" href="#path-separators" title="Link to this heading"></a></h2>
+<p>To make supporting multiple platforms easier, Godot uses <strong>UNIX-style path
+separators</strong> (forward slash <code class="docutils literal notranslate"><span class="pre">/</span></code>). These work on all platforms, <strong>including
+Windows</strong>.</p>
+<p>Instead of writing paths like <code class="docutils literal notranslate"><span class="pre">C:\Projects\Game</span></code>, in Godot, you should write
+<code class="docutils literal notranslate"><span class="pre">C:/Projects/Game</span></code>.</p>
+<p>Windows-style path separators (backward slash <code class="docutils literal notranslate"><span class="pre">\</span></code>) are also supported in some
+path-related methods, but they need to be doubled (<code class="docutils literal notranslate"><span class="pre">\\</span></code>), as <code class="docutils literal notranslate"><span class="pre">\</span></code> is normally
+used as an escape for characters with a special meaning.</p>
+<p>This makes it possible to work with paths returned by other Windows
+applications. We still recommend using only forward slashes in your own code to
+guarantee that everything will work as intended.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The String class offers over a dozen methods to work with strings that represent file paths:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../classes/class_string.html#class-string-method-filecasecmp-to"><span class="std std-ref">String.filecasecmp_to()</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_string.html#class-string-method-filenocasecmp-to"><span class="std std-ref">String.filenocasecmp_to()</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_string.html#class-string-method-get-base-dir"><span class="std std-ref">String.get_base_dir()</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_string.html#class-string-method-get-basename"><span class="std std-ref">String.get_basename()</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_string.html#class-string-method-get-extension"><span class="std std-ref">String.get_extension()</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_string.html#class-string-method-get-file"><span class="std std-ref">String.get_file()</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_string.html#class-string-method-is-absolute-path"><span class="std std-ref">String.is_absolute_path()</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_string.html#class-string-method-is-relative-path"><span class="std std-ref">String.is_relative_path()</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_string.html#class-string-method-is-valid-filename"><span class="std std-ref">String.is_valid_filename()</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_string.html#class-string-method-path-join"><span class="std std-ref">String.path_join()</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_string.html#class-string-method-simplify-path"><span class="std std-ref">String.simplify_path()</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_string.html#class-string-method-validate-filename"><span class="std std-ref">String.validate_filename()</span></a></p></li>
+</ul>
+</div>
+</section>
+<section id="accessing-files-in-the-project-folder-res">
+<h2>Accessing files in the project folder (<code class="docutils literal notranslate"><span class="pre">res://</span></code>)<a class="headerlink" href="#accessing-files-in-the-project-folder-res" title="Link to this heading"></a></h2>
+<p>Godot considers that a project exists in any folder that contains a
+<code class="docutils literal notranslate"><span class="pre">project.godot</span></code> text file, even if the file is empty. The folder that contains
+this file is your project's root folder.</p>
+<p>You can access any file relative to it by writing paths starting with
+<code class="docutils literal notranslate"><span class="pre">res://</span></code>, which stands for resources. For example, you can access an image
+file <code class="docutils literal notranslate"><span class="pre">character.png</span></code> located in the project's root folder in code with the
+following path: <code class="docutils literal notranslate"><span class="pre">res://character.png</span></code>.</p>
+</section>
+<section id="accessing-persistent-user-data-user">
+<span id="doc-data-paths-accessing-persistent-user-data"></span><h2>Accessing persistent user data (<code class="docutils literal notranslate"><span class="pre">user://</span></code>)<a class="headerlink" href="#accessing-persistent-user-data-user" title="Link to this heading"></a></h2>
+<p>To store persistent data files, like the player's save or settings, you want to
+use <code class="docutils literal notranslate"><span class="pre">user://</span></code> instead of <code class="docutils literal notranslate"><span class="pre">res://</span></code> as your path's prefix. This is because
+when the game is running, the project's file system will likely be read-only.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">user://</span></code> prefix points to a different directory on the user's device.
+Unlike <code class="docutils literal notranslate"><span class="pre">res://</span></code>, the directory pointed at by <code class="docutils literal notranslate"><span class="pre">user://</span></code> is created
+automatically and <em>guaranteed</em> to be writable to, even in an exported project.</p>
+<p>The location of the <code class="docutils literal notranslate"><span class="pre">user://</span></code> folder depends on what is configured in the
+Project Settings:</p>
+<ul class="simple">
+<li><p>By default, the <code class="docutils literal notranslate"><span class="pre">user://</span></code> folder is created within Godot's
+<a class="reference internal" href="#doc-data-paths-editor-data-paths"><span class="std std-ref">editor data path</span></a> in the
+<code class="docutils literal notranslate"><span class="pre">app_userdata/[project_name]</span></code> folder. This is the default so that prototypes
+and test projects stay self-contained within Godot's data folder.</p></li>
+<li><p>If <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-application-config-use-custom-user-dir"><span class="std std-ref">application/config/use_custom_user_dir</span></a>
+is enabled in the Project Settings, the <code class="docutils literal notranslate"><span class="pre">user://</span></code> folder is created <strong>next
+to</strong> Godot's editor data path, i.e. in the standard location for applications
+data.</p>
+<ul>
+<li><p>By default, the folder name will be inferred from the project name, but it
+can be further customized with
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-application-config-custom-user-dir-name"><span class="std std-ref">application/config/custom_user_dir_name</span></a>.
+This path can contain path separators, so you can use it e.g. to group
+projects of a given studio with a <code class="docutils literal notranslate"><span class="pre">Studio</span> <span class="pre">Name/Game</span> <span class="pre">Name</span></code> structure.</p></li>
+</ul>
+</li>
+</ul>
+<p>On desktop platforms, the actual directory paths for <code class="docutils literal notranslate"><span class="pre">user://</span></code> are:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Location</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Default</p></td>
+<td><div class="line-block">
+<div class="line">Windows: <code class="docutils literal notranslate"><span class="pre">%APPDATA%\Godot\app_userdata\[project_name]</span></code></div>
+<div class="line">macOS: <code class="docutils literal notranslate"><span class="pre">~/Library/Application</span> <span class="pre">Support/Godot/app_userdata/[project_name]</span></code></div>
+<div class="line">Linux: <code class="docutils literal notranslate"><span class="pre">~/.local/share/godot/app_userdata/[project_name]</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Custom dir</p></td>
+<td><div class="line-block">
+<div class="line">Windows: <code class="docutils literal notranslate"><span class="pre">%APPDATA%\[project_name]</span></code></div>
+<div class="line">macOS: <code class="docutils literal notranslate"><span class="pre">~/Library/Application</span> <span class="pre">Support/[project_name]</span></code></div>
+<div class="line">Linux: <code class="docutils literal notranslate"><span class="pre">~/.local/share/[project_name]</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>Custom dir and name</p></td>
+<td><div class="line-block">
+<div class="line">Windows: <code class="docutils literal notranslate"><span class="pre">%APPDATA%\[custom_user_dir_name]</span></code></div>
+<div class="line">macOS: <code class="docutils literal notranslate"><span class="pre">~/Library/Application</span> <span class="pre">Support/[custom_user_dir_name]</span></code></div>
+<div class="line">Linux: <code class="docutils literal notranslate"><span class="pre">~/.local/share/[custom_user_dir_name]</span></code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">[project_name]</span></code> is based on the application name defined in the Project Settings, but
+you can override it on a per-platform basis using <a class="reference internal" href="../export/feature_tags.html#doc-feature-tags"><span class="std std-ref">feature tags</span></a>.</p>
+<p>On mobile platforms, this path is unique to the project and is not accessible
+by other applications for security reasons.</p>
+<p>On HTML5 exports, <code class="docutils literal notranslate"><span class="pre">user://</span></code> will refer to a virtual filesystem stored on the
+device via IndexedDB. (Interaction with the main filesystem can still be performed
+through the <a class="reference internal" href="../../classes/class_javascriptbridge.html#class-javascriptbridge"><span class="std std-ref">JavaScriptBridge</span></a> singleton.)</p>
+</section>
+<section id="file-logging">
+<h2>File logging<a class="headerlink" href="#file-logging" title="Link to this heading"></a></h2>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Documentation on file logging has been moved to <a class="reference internal" href="../scripting/logging.html#doc-logging"><span class="std std-ref">Logging</span></a>.</p>
+</div>
+</section>
+<section id="converting-paths-to-absolute-paths-or-local-paths">
+<h2>Converting paths to absolute paths or &quot;local&quot; paths<a class="headerlink" href="#converting-paths-to-absolute-paths-or-local-paths" title="Link to this heading"></a></h2>
+<p>You can use <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-method-globalize-path"><span class="std std-ref">ProjectSettings.globalize_path()</span></a>
+to convert a &quot;local&quot; path like <code class="docutils literal notranslate"><span class="pre">res://path/to/file.txt</span></code> to an absolute OS path.
+For example, <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-method-globalize-path"><span class="std std-ref">ProjectSettings.globalize_path()</span></a>
+can be used to open &quot;local&quot; paths in the OS file manager
+using <a class="reference internal" href="../../classes/class_os.html#class-os-method-shell-open"><span class="std std-ref">OS.shell_open()</span></a> since it only accepts
+native OS paths.</p>
+<p>To convert an absolute OS path to a &quot;local&quot; path starting with <code class="docutils literal notranslate"><span class="pre">res://</span></code>
+or <code class="docutils literal notranslate"><span class="pre">user://</span></code>, use <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-method-localize-path"><span class="std std-ref">ProjectSettings.localize_path()</span></a>.
+This only works for absolute paths that point to files or folders in your
+project's root or <code class="docutils literal notranslate"><span class="pre">user://</span></code> folders.</p>
+</section>
+<section id="editor-data-paths">
+<span id="doc-data-paths-editor-data-paths"></span><h2>Editor data paths<a class="headerlink" href="#editor-data-paths" title="Link to this heading"></a></h2>
+<p>The editor uses different paths for editor data, editor settings, and cache,
+depending on the platform. By default, these paths are:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Location</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Editor data</p></td>
+<td><div class="line-block">
+<div class="line">Windows: <code class="docutils literal notranslate"><span class="pre">%APPDATA%\Godot\</span></code></div>
+<div class="line">macOS: <code class="docutils literal notranslate"><span class="pre">~/Library/Application</span> <span class="pre">Support/Godot/</span></code></div>
+<div class="line">Linux: <code class="docutils literal notranslate"><span class="pre">~/.local/share/godot/</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Editor settings</p></td>
+<td><div class="line-block">
+<div class="line">Windows: <code class="docutils literal notranslate"><span class="pre">%APPDATA%\Godot\</span></code></div>
+<div class="line">macOS: <code class="docutils literal notranslate"><span class="pre">~/Library/Application</span> <span class="pre">Support/Godot/</span></code></div>
+<div class="line">Linux: <code class="docutils literal notranslate"><span class="pre">~/.config/godot/</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>Cache</p></td>
+<td><div class="line-block">
+<div class="line">Windows: <code class="docutils literal notranslate"><span class="pre">%TEMP%\Godot\</span></code></div>
+<div class="line">macOS: <code class="docutils literal notranslate"><span class="pre">~/Library/Caches/Godot/</span></code></div>
+<div class="line">Linux: <code class="docutils literal notranslate"><span class="pre">~/.cache/godot/</span></code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><strong>Editor data</strong> contains export templates and project-specific data.</p></li>
+<li><p><strong>Editor settings</strong> contains the main editor settings configuration file as
+well as various other user-specific customizations (editor layouts, feature
+profiles, script templates, etc.).</p></li>
+<li><p><strong>Cache</strong> contains data generated by the editor, or stored temporarily.
+It can safely be removed when Godot is closed.</p></li>
+</ul>
+<p>Godot complies with the <a class="reference external" href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html">XDG Base Directory Specification</a>
+on Linux/*BSD. You can override the <code class="docutils literal notranslate"><span class="pre">XDG_DATA_HOME</span></code>, <code class="docutils literal notranslate"><span class="pre">XDG_CONFIG_HOME</span></code> and
+<code class="docutils literal notranslate"><span class="pre">XDG_CACHE_HOME</span></code> environment variables to change the editor and project data
+paths.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you use <a class="reference external" href="https://flathub.org/apps/details/org.godotengine.Godot">Godot packaged as a Flatpak</a>, the
+editor data paths will be located in subfolders in
+<code class="docutils literal notranslate"><span class="pre">~/.var/app/org.godotengine.Godot/</span></code>.</p>
+</div>
+<section id="self-contained-mode">
+<span id="doc-data-paths-self-contained-mode"></span><h3>Self-contained mode<a class="headerlink" href="#self-contained-mode" title="Link to this heading"></a></h3>
+<p>If you create a file called <code class="docutils literal notranslate"><span class="pre">._sc_</span></code> or <code class="docutils literal notranslate"><span class="pre">_sc_</span></code> in the same directory as the
+editor binary (or in <cite>MacOS/Contents/</cite> for a macOS editor .app bundle), Godot
+will enable <em>self-contained mode</em>.
+This mode makes Godot write all editor data, settings, and cache to a directory
+named <code class="docutils literal notranslate"><span class="pre">editor_data/</span></code> in the same directory as the editor binary.
+You can use it to create a portable installation of the editor.</p>
+<p>The <a class="reference external" href="https://store.steampowered.com/app/404790/">Steam release of Godot</a> uses
+self-contained mode by default.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Self-contained mode is not supported in exported projects yet.
+To read and write files relative to the executable path, use
+<a class="reference internal" href="../../classes/class_os.html#class-os-method-get-executable-path"><span class="std std-ref">OS.get_executable_path()</span></a>.
+Note that writing files in the executable path only works if the executable
+is placed in a writable location (i.e. <strong>not</strong> Program Files or another
+directory that is read-only for regular users).</p>
+</div>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="background_loading.html" class="btn btn-neutral float-left" title="Background loading" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="saving_games.html" class="btn btn-neutral float-right" title="Saving games" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

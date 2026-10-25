@@ -1,0 +1,819 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Random number generation" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/math/random_number_generation.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Many games rely on randomness to implement core game mechanics. This page guides you through common types of randomness and how to implement them in Godot. After giving you a brief overview of usef..." />
+<meta name="description" content="Many games rely on randomness to implement core game mechanics. This page guides you through common types of randomness and how to implement them in Godot. After giving you a brief overview of usef..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Random number generation &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Navigation" href="../navigation/index.html" />
+    <link rel="prev" title="Beziers, curves and paths" href="beziers_and_curves.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/math/random_number_generation" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/math/random_number_generation.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Math</a></li>
+      <li class="breadcrumb-item active">Random number generation</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/math/random_number_generation.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="random-number-generation">
+<span id="doc-random-number-generation"></span><h1>Random number generation<a class="headerlink" href="#random-number-generation" title="Link to this heading"></a></h1>
+<p>Many games rely on randomness to implement core game mechanics. This page
+guides you through common types of randomness and how to implement them in
+Godot.</p>
+<p>After giving you a brief overview of useful functions that generate random
+numbers, you will learn how to get random elements from arrays, dictionaries,
+and how to use a noise generator in GDScript. Lastly, we'll take a look at
+cryptographically secure random number generation and how it differs from
+typical random number generation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Computers cannot generate &quot;true&quot; random numbers. Instead, they rely on
+<a class="reference external" href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">pseudorandom number generators</a> (PRNGs).</p>
+<p>Godot internally uses the <a class="reference external" href="https://www.pcg-random.org/">PCG Family</a>
+of pseudorandom number generators.</p>
+</div>
+<section id="global-scope-versus-randomnumbergenerator-class">
+<h2>Global scope versus RandomNumberGenerator class<a class="headerlink" href="#global-scope-versus-randomnumbergenerator-class" title="Link to this heading"></a></h2>
+<p>Godot exposes two ways to generate random numbers: via <em>global scope</em> methods or
+using the <a class="reference internal" href="../../classes/class_randomnumbergenerator.html#class-randomnumbergenerator"><span class="std std-ref">RandomNumberGenerator</span></a> class.</p>
+<p>Global scope methods are easier to set up, but they don't offer as much control.</p>
+<p>RandomNumberGenerator requires more code to use, but allows creating multiple
+instances, each with their own seed and state. This is useful in certain
+scenarios like networked multiplayer, replay systems, games that feature rewind
+mechanics, and more.</p>
+<p>This tutorial uses global scope methods, except when the method only exists in
+the RandomNumberGenerator class.</p>
+</section>
+<section id="random-seed-and-internal-state">
+<h2>Random seed and internal state<a class="headerlink" href="#random-seed-and-internal-state" title="Link to this heading"></a></h2>
+<p>By default, Godot uses a random seed set according to the device's local time.
+This means that results will be different on every run. To get deterministic
+results, you can set a fixed seed using the
+<a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-method-seed"><span class="std std-ref">seed()</span></a> method. The <em>seed</em> is an integer
+that initializes the random number generator's state. If you use the same seed,
+you'll get the same sequence of random numbers every run.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="nb nb-Function">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># To use a string as a seed, you can hash it to a number.</span>
+<span class="w">    </span><span class="nb nb-Function">seed</span><span class="p">(</span><span class="s2">&quot;Hello world&quot;</span><span class="o">.</span><span class="nf">hash</span><span class="p">())</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// To use a string as a seed, you can hash it to a number.</span>
+<span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Seed</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">.</span><span class="n">Hash</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>When using the RandomNumberGenerator class, you can set the
+<a class="reference internal" href="../../classes/class_randomnumbergenerator.html#class-randomnumbergenerator-property-seed"><span class="std std-ref">RandomNumberGenerator.seed</span></a>
+property on individual instances:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">RandomNumberGenerator</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="n">random</span><span class="o">.</span><span class="vi">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12345</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RandomNumberGenerator</span><span class="p">();</span>
+<span class="n">random</span><span class="p">.</span><span class="n">Seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12345</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>You can set the seed back to a randomly generated value using the
+<a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-method-randomize"><span class="std std-ref">randomize()</span></a> global scope method.
+This is also available as the
+<a class="reference internal" href="../../classes/class_randomnumbergenerator.html#class-randomnumbergenerator-method-randomize"><span class="std std-ref">RandomNumberGenerator.randomize()</span></a>
+method on RandomNumberGenerator instances.</p>
+<p>Random number generators also feature an internal <em>state</em> that changes every
+time a random number is generated. This state is used to generate the next
+random number in the sequence.</p>
+<p>Unlike global scope random number generation, RandomNumberGenerator features a
+<a class="reference internal" href="../../classes/class_randomnumbergenerator.html#class-randomnumbergenerator-property-state"><span class="std std-ref">state</span></a> property. This is
+useful if you are performing multiple random number operations, and you want to
+return to a previous state of the random number generator without changing the
+seed. To do so, store the current state in a variable, and then set the state
+property back to that variable when needed:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">RandomNumberGenerator</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="c1"># Changing the seed will reset the state, so make sure to set the seed first.</span>
+<span class="n">random</span><span class="o">.</span><span class="vi">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12345</span>
+<span class="k">var</span><span class="w"> </span><span class="n">previous_random_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random</span><span class="o">.</span><span class="vi">state</span>
+<span class="c1"># Each call to a random function on this instance alters its state.</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="nf">randi</span><span class="p">())</span>
+
+<span class="n">random</span><span class="o">.</span><span class="vi">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">previous_random_state</span>
+<span class="c1"># This will return the same value as the previous call,</span>
+<span class="c1"># even though we didn&#39;t change the seed.</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="nf">randi</span><span class="p">())</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RandomNumberGenerator</span><span class="p">();</span>
+<span class="c1">// Changing the seed will reset the state, so make sure to set the seed first.</span>
+<span class="n">random</span><span class="p">.</span><span class="n">Seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12345</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">previousRandomState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random</span><span class="p">.</span><span class="n">State</span><span class="p">;</span>
+<span class="c1">// Each call to a random function on this instance alters its state.</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">Randi</span><span class="p">());</span>
+
+<span class="n">random</span><span class="p">.</span><span class="n">State</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">previousRandomState</span><span class="p">;</span>
+<span class="c1">// This will return the same value as the previous call,</span>
+<span class="c1">// even though we didn&#39;t change the seed.</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">Randi</span><span class="p">());</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="getting-a-random-number">
+<h2>Getting a random number<a class="headerlink" href="#getting-a-random-number" title="Link to this heading"></a></h2>
+<p>Let's look at some of the most commonly used functions and methods to generate
+random numbers in Godot.</p>
+<p>The function <a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-method-randi"><span class="std std-ref">randi()</span></a> returns a random
+number between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">2^32</span> <span class="pre">-</span> <span class="pre">1</span></code>. Since the maximum value is huge, you most
+likely want to use the modulo operator (<code class="docutils literal notranslate"><span class="pre">%</span></code>) to bound the result between 0 and
+the denominator:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prints a random integer between 0 and 49.</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="nb nb-Function">randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Prints a random integer between 10 and 60.</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="nb nb-Function">randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">51</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Prints a random integer between 0 and 49.</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">GD</span><span class="p">.</span><span class="n">Randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
+
+<span class="c1">// Prints a random integer between 10 and 60.</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">GD</span><span class="p">.</span><span class="n">Randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">51</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p><a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-method-randf"><span class="std std-ref">randf()</span></a> returns a random floating-point
+number between 0 and 1. This is useful to implement a
+<a class="reference internal" href="#doc-random-number-generation-weighted-random-probability"><span class="std std-ref">Weighted random probability</span></a> system, among
+other things.</p>
+<p><a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-method-randfn"><span class="std std-ref">randfn()</span></a> returns a random
+floating-point number following a <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">normal distribution</a>. This means the returned
+value is more likely to be around the mean (0.0 by default),
+varying by the deviation (1.0 by default):</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prints a random floating-point number from a normal distribution with a mean 0.0 and deviation 1.0.</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="nb nb-Function">randfn</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Prints a random floating-point number from a normal distribution with a mean 0.0 and deviation 1.0.</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">GD</span><span class="p">.</span><span class="n">Randfn</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></div>
+<p><a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-method-randf-range"><span class="std std-ref">randf_range()</span></a> takes two arguments
+<code class="docutils literal notranslate"><span class="pre">from</span></code> and <code class="docutils literal notranslate"><span class="pre">to</span></code>, and returns a random floating-point number between <code class="docutils literal notranslate"><span class="pre">from</span></code>
+and <code class="docutils literal notranslate"><span class="pre">to</span></code>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prints a random floating-point number between -4 and 6.5.</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="nb nb-Function">randf_range</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mf">6.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Prints a random floating-point number between -4 and 6.5.</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">GD</span><span class="p">.</span><span class="n">RandRange</span><span class="p">(</span><span class="o">-</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mf">6.5</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></div>
+<p><a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-method-randi-range"><span class="std std-ref">randi_range()</span></a> takes two arguments <code class="docutils literal notranslate"><span class="pre">from</span></code>
+and <code class="docutils literal notranslate"><span class="pre">to</span></code>, and returns a random integer between <code class="docutils literal notranslate"><span class="pre">from</span></code> and <code class="docutils literal notranslate"><span class="pre">to</span></code>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-6-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-6-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-6-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prints a random integer between -10 and 10.</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="nb nb-Function">randi_range</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-6-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-6-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Prints a random integer number between -10 and 10.</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">GD</span><span class="p">.</span><span class="n">RandRange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="get-a-random-array-element">
+<h2>Get a random array element<a class="headerlink" href="#get-a-random-array-element" title="Link to this heading"></a></h2>
+<p>We can use random integer generation to get a random element from an array,
+or use the <a class="reference internal" href="../../classes/class_array.html#class-array-method-pick-random"><span class="std std-ref">Array.pick_random</span></a> method
+to do it for us:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-7-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-7-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-7-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">_fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;pear&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;banana&quot;</span><span class="p">]</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="c1"># Pick 100 fruits randomly.</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="nf">get_fruit</span><span class="p">())</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="c1"># Pick 100 fruits randomly, this time using the `Array.pick_random()`</span>
+<span class="w">        </span><span class="c1"># helper method. This has the same behavior as `get_fruit()`.</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">_fruits</span><span class="o">.</span><span class="nf">pick_random</span><span class="p">())</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">get_fruit</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">random_fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_fruits</span><span class="p">[</span><span class="nb nb-Function">randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">_fruits</span><span class="o">.</span><span class="nf">size</span><span class="p">()]</span>
+<span class="w">    </span><span class="c1"># Returns &quot;apple&quot;, &quot;orange&quot;, &quot;pear&quot;, or &quot;banana&quot; every time the code runs.</span>
+<span class="w">    </span><span class="c1"># We may get the same fruit multiple times in a row.</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">random_fruit</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-7-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-7-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Use Godot&#39;s Array type instead of a BCL type so we can use `PickRandom()` on it.</span>
+<span class="k">private</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pear&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;banana&quot;</span><span class="p">];</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Pick 100 fruits randomly.</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">GetFruit</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Pick 100 fruits randomly, this time using the `Array.PickRandom()`</span>
+<span class="w">        </span><span class="c1">// helper method. This has the same behavior as `GetFruit()`.</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">_fruits</span><span class="p">.</span><span class="n">PickRandom</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">GetFruit</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">randomFruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_fruits</span><span class="p">[</span><span class="n">GD</span><span class="p">.</span><span class="n">Randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">_fruits</span><span class="p">.</span><span class="n">Size</span><span class="p">()];</span>
+<span class="w">    </span><span class="c1">// Returns &quot;apple&quot;, &quot;orange&quot;, &quot;pear&quot;, or &quot;banana&quot; every time the code runs.</span>
+<span class="w">    </span><span class="c1">// We may get the same fruit multiple times in a row.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">randomFruit</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>To prevent the same fruit from being picked more than once in a row, we can add
+more logic to the above method. In this case, we can't use
+<a class="reference internal" href="../../classes/class_array.html#class-array-method-pick-random"><span class="std std-ref">Array.pick_random</span></a> since it lacks a way to
+prevent repetition:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-8-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-8-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-8-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-8-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">_fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;pear&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;banana&quot;</span><span class="p">]</span>
+<span class="k">var</span><span class="w"> </span><span class="n">_last_fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Pick 100 fruits randomly.</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="nf">get_fruit</span><span class="p">())</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">get_fruit</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">random_fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_fruits</span><span class="p">[</span><span class="nb nb-Function">randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">_fruits</span><span class="o">.</span><span class="nf">size</span><span class="p">()]</span>
+<span class="w">    </span><span class="k k-ControlFlow">while</span><span class="w"> </span><span class="n">random_fruit</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">_last_fruit</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># The last fruit was picked. Try again until we get a different fruit.</span>
+<span class="w">        </span><span class="n">random_fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_fruits</span><span class="p">[</span><span class="nb nb-Function">randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">_fruits</span><span class="o">.</span><span class="nf">size</span><span class="p">()]</span>
+
+<span class="w">    </span><span class="c1"># Note: if the random element to pick is passed by reference,</span>
+<span class="w">    </span><span class="c1"># such as an array or dictionary,</span>
+<span class="w">    </span><span class="c1"># use `_last_fruit = random_fruit.duplicate()` instead.</span>
+<span class="w">    </span><span class="n">_last_fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random_fruit</span>
+
+<span class="w">    </span><span class="c1"># Returns &quot;apple&quot;, &quot;orange&quot;, &quot;pear&quot;, or &quot;banana&quot; every time the code runs.</span>
+<span class="w">    </span><span class="c1"># The function will never return the same fruit more than once in a row.</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">random_fruit</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-8-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-8-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">_fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pear&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;banana&quot;</span><span class="p">];</span>
+<span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">_lastFruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Pick 100 fruits randomly.</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">GetFruit</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">GetFruit</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">randomFruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_fruits</span><span class="p">[</span><span class="n">GD</span><span class="p">.</span><span class="n">Randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">_fruits</span><span class="p">.</span><span class="n">Length</span><span class="p">];</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">randomFruit</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">_lastFruit</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// The last fruit was picked. Try again until we get a different fruit.</span>
+<span class="w">        </span><span class="n">randomFruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_fruits</span><span class="p">[</span><span class="n">GD</span><span class="p">.</span><span class="n">Randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">_fruits</span><span class="p">.</span><span class="n">Length</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">_lastFruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randomFruit</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Returns &quot;apple&quot;, &quot;orange&quot;, &quot;pear&quot;, or &quot;banana&quot; every time the code runs.</span>
+<span class="w">    </span><span class="c1">// The function will never return the same fruit more than once in a row.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">randomFruit</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>This approach can be useful to make random number generation feel less
+repetitive. Still, it doesn't prevent results from &quot;ping-ponging&quot; between a
+limited set of values. To prevent this, use the <a class="reference internal" href="#doc-random-number-generation-shuffle-bags"><span class="std std-ref">shuffle bag</span></a> pattern instead.</p>
+</section>
+<section id="get-a-random-dictionary-value">
+<h2>Get a random dictionary value<a class="headerlink" href="#get-a-random-dictionary-value" title="Link to this heading"></a></h2>
+<p>We can apply similar logic from arrays to dictionaries as well:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-9-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-9-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-9-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-9-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-9-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-9-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">_metals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;copper&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;silver&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;gold&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">},</span>
+<span class="p">}</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="nf">get_metal</span><span class="p">())</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">get_metal</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">random_metal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_metals</span><span class="o">.</span><span class="nf">values</span><span class="p">()[</span><span class="nb nb-Function">randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">metals</span><span class="o">.</span><span class="nf">size</span><span class="p">()]</span>
+<span class="w">    </span><span class="c1"># Returns a random metal value dictionary every time the code runs.</span>
+<span class="w">    </span><span class="c1"># The same metal may be selected multiple times in succession.</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">random_metal</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-9-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-9-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">_metals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="s">&quot;copper&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{{</span><span class="s">&quot;quantity&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;price&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">}}},</span>
+<span class="w">    </span><span class="p">{</span><span class="s">&quot;silver&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{{</span><span class="s">&quot;quantity&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;price&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">150</span><span class="p">}}},</span>
+<span class="w">    </span><span class="p">{</span><span class="s">&quot;gold&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{{</span><span class="s">&quot;quantity&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;price&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">}}},</span>
+<span class="p">};</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">GetMetal</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetMetal</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">randomMetal</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_metals</span><span class="p">.</span><span class="n">ElementAt</span><span class="p">((</span><span class="kt">int</span><span class="p">)(</span><span class="n">GD</span><span class="p">.</span><span class="n">Randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">_metals</span><span class="p">.</span><span class="n">Count</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">// Returns a random metal value dictionary every time the code runs.</span>
+<span class="w">    </span><span class="c1">// The same metal may be selected multiple times in succession.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">randomMetal</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="weighted-random-probability">
+<span id="doc-random-number-generation-weighted-random-probability"></span><h2>Weighted random probability<a class="headerlink" href="#weighted-random-probability" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-method-randf"><span class="std std-ref">randf()</span></a> method returns a
+floating-point number between 0.0 and 1.0. We can use this to create a
+&quot;weighted&quot; probability where different outcomes have different likelihoods:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-10-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-10-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-10-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-10-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-10-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-10-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="nf">get_item_rarity</span><span class="p">())</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">get_item_rarity</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">random_float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">randf</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">random_float</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.8</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># 80% chance of being returned.</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="s2">&quot;Common&quot;</span>
+<span class="w">    </span><span class="k k-ControlFlow">elif</span><span class="w"> </span><span class="n">random_float</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.95</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># 15% chance of being returned.</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="s2">&quot;Uncommon&quot;</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># 5% chance of being returned.</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="s2">&quot;Rare&quot;</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-10-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-10-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">GetItemRarity</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">GetItemRarity</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">randomFloat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Randf</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">randomFloat</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.8f</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 80% chance of being returned.</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Common&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">randomFloat</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.95f</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 15% chance of being returned.</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Uncommon&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 5% chance of being returned.</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Rare&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>You can also get a weighted random <em>index</em> using the
+<a class="reference internal" href="../../classes/class_randomnumbergenerator.html#class-randomnumbergenerator-method-rand-weighted"><span class="std std-ref">RandomNumberGenerator.rand_weighted()</span></a> method
+on a RandomNumberGenerator instance. This returns a random integer
+between 0 and the size of the array that is passed as a parameter. Each value in the
+array is a floating-point number that represents the <em>relative</em> likelihood that it
+will be returned as an index. A higher value means the value is more likely to be
+returned as an index, while a value of <code class="docutils literal notranslate"><span class="pre">0</span></code> means it will never be returned as an index.</p>
+<p>For example, if <code class="docutils literal notranslate"><span class="pre">[0.5,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">2]</span></code> is passed as a parameter, then the method is twice
+as likely to return <code class="docutils literal notranslate"><span class="pre">3</span></code> (the index of the value <code class="docutils literal notranslate"><span class="pre">2</span></code>) and twice as unlikely to return
+<code class="docutils literal notranslate"><span class="pre">0</span></code> (the index of the value <code class="docutils literal notranslate"><span class="pre">0.5</span></code>) compared to the indices <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
+<p>Since the returned value matches the array's size, it can be used as an index to
+get a value from another array as follows:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-11-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-11-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-11-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-11-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-11-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-11-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prints a random element using the weighted index that is returned by `rand_weighted()`.</span>
+<span class="c1"># Here, &quot;apple&quot; will be returned twice as rarely as &quot;orange&quot; and &quot;pear&quot;.</span>
+<span class="c1"># &quot;banana&quot; is twice as common as &quot;orange&quot; and &quot;pear&quot;, and four times as common as &quot;apple&quot;.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;pear&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;banana&quot;</span><span class="p">]</span>
+<span class="k">var</span><span class="w"> </span><span class="n">probabilities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">RandomNumberGenerator</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="nf">rand_weighted</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-11-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-11-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Prints a random element using the weighted index that is returned by `RandWeighted()`.</span>
+<span class="c1">// Here, &quot;apple&quot; will be returned twice as rarely as &quot;orange&quot; and &quot;pear&quot;.</span>
+<span class="c1">// &quot;banana&quot; is twice as common as &quot;orange&quot; and &quot;pear&quot;, and four times as common as &quot;apple&quot;.</span>
+<span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pear&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;banana&quot;</span><span class="p">];</span>
+<span class="kt">float</span><span class="p">[]</span><span class="w"> </span><span class="n">probabilities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0.5f</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
+
+<span class="kt">var</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RandomNumberGenerator</span><span class="p">();</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">fruits</span><span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="n">RandWeighted</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)]);</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="better-randomness-using-shuffle-bags">
+<span id="doc-random-number-generation-shuffle-bags"></span><h2>&quot;Better&quot; randomness using shuffle bags<a class="headerlink" href="#better-randomness-using-shuffle-bags" title="Link to this heading"></a></h2>
+<p>Taking the same example as above, we would like to pick fruits at random.
+However, relying on random number generation every time a fruit is selected can
+lead to a less <em>uniform</em> distribution. If the player is lucky (or unlucky), they
+could get the same fruit three or more times in a row.</p>
+<p>You can accomplish this using the <em>shuffle bag</em> pattern. It works by removing an
+element from the array after choosing it. After multiple selections, the array
+ends up empty. When that happens, you reinitialize it to its default value:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-12-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-12-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-12-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-12-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-12-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-12-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">_fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;pear&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;banana&quot;</span><span class="p">]</span>
+<span class="c1"># A copy of the fruits array so we can restore the original value into `fruits`.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">_fruits_full</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="n">_fruits_full</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_fruits</span><span class="o">.</span><span class="nf">duplicate</span><span class="p">()</span>
+<span class="w">    </span><span class="n">_fruits</span><span class="o">.</span><span class="nf">shuffle</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="mi">100</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="nf">get_fruit</span><span class="p">())</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">get_fruit</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">_fruits</span><span class="o">.</span><span class="nf">is_empty</span><span class="p">():</span>
+<span class="w">        </span><span class="c1"># Fill the fruits array again and shuffle it.</span>
+<span class="w">        </span><span class="n">_fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_fruits_full</span><span class="o">.</span><span class="nf">duplicate</span><span class="p">()</span>
+<span class="w">        </span><span class="n">_fruits</span><span class="o">.</span><span class="nf">shuffle</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># Get a random fruit, since we shuffled the array,</span>
+<span class="w">    </span><span class="c1"># and remove it from the `_fruits` array.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">random_fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_fruits</span><span class="o">.</span><span class="nf">pop_front</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Returns &quot;apple&quot;, &quot;orange&quot;, &quot;pear&quot;, or &quot;banana&quot; every time the code runs, removing it from the array.</span>
+<span class="w">    </span><span class="c1"># When all fruit are removed, it refills the array.</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">random_fruit</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-12-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-12-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pear&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;banana&quot;</span><span class="p">];</span>
+<span class="c1">// A copy of the fruits array so we can restore the original value into `fruits`.</span>
+<span class="k">private</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_fruitsFull</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">_fruitsFull</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_fruits</span><span class="p">.</span><span class="n">Duplicate</span><span class="p">();</span>
+<span class="w">    </span><span class="n">_fruits</span><span class="p">.</span><span class="n">Shuffle</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">GetFruit</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">GetFruit</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">_fruits</span><span class="p">.</span><span class="n">Count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Fill the fruits array again and shuffle it.</span>
+<span class="w">        </span><span class="n">_fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_fruitsFull</span><span class="p">.</span><span class="n">Duplicate</span><span class="p">();</span>
+<span class="w">        </span><span class="n">_fruits</span><span class="p">.</span><span class="n">Shuffle</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Get a random fruit, since we shuffled the array,</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">randomFruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_fruits</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">    </span><span class="c1">// and remove it from the `_fruits` array.</span>
+<span class="w">    </span><span class="n">_fruits</span><span class="p">.</span><span class="n">RemoveAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Returns &quot;apple&quot;, &quot;orange&quot;, &quot;pear&quot;, or &quot;banana&quot; every time the code runs, removing it from the array.</span>
+<span class="w">    </span><span class="c1">// When all fruit are removed, it refills the array.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">randomFruit</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>When running the above code, there is a chance to get the same fruit twice in a
+row. Once we picked a fruit, it will no longer be a possible return value unless
+the array is now empty. When the array is empty, we reset it back to its default
+value, making it possible to have the same fruit again, but only once.</p>
+</section>
+<section id="random-noise">
+<h2>Random noise<a class="headerlink" href="#random-noise" title="Link to this heading"></a></h2>
+<p>The random number generation shown above can show its limits when you need a
+value that <em>slowly</em> changes depending on the input. The input can be a position,
+time, or anything else.</p>
+<p>To achieve this, you can use random <em>noise</em> functions. Noise functions are
+especially popular in procedural generation to generate realistic-looking
+terrain. Godot provides <a class="reference internal" href="../../classes/class_fastnoiselite.html#class-fastnoiselite"><span class="std std-ref">FastNoiseLite</span></a> for this, which supports
+1D, 2D and 3D noise. Here's an example with 1D noise:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-13-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-13-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-13-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-13-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-13-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-13-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">_noise</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">FastNoiseLite</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Configure the FastNoiseLite instance.</span>
+<span class="w">    </span><span class="n">_noise</span><span class="o">.</span><span class="vi">noise_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">FastNoiseLite</span><span class="o">.</span><span class="vi">NoiseType</span><span class="o">.</span><span class="vi">TYPE_SIMPLEX_SMOOTH</span>
+<span class="w">    </span><span class="n">_noise</span><span class="o">.</span><span class="vi">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">randi</span><span class="p">()</span>
+<span class="w">    </span><span class="n">_noise</span><span class="o">.</span><span class="vi">fractal_octaves</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">    </span><span class="n">_noise</span><span class="o">.</span><span class="vi">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">20.0</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="mi">100</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Prints a slowly-changing series of floating-point numbers</span>
+<span class="w">        </span><span class="c1"># between -1.0 and 1.0.</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">_noise</span><span class="o">.</span><span class="nf">get_noise_1d</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-13-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-13-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="n">FastNoiseLite</span><span class="w"> </span><span class="n">_noise</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FastNoiseLite</span><span class="p">();</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Configure the FastNoiseLite instance.</span>
+<span class="w">    </span><span class="n">_noise</span><span class="p">.</span><span class="n">NoiseType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FastNoiseLite</span><span class="p">.</span><span class="n">NoiseTypeEnum</span><span class="p">.</span><span class="n">SimplexSmooth</span><span class="p">;</span>
+<span class="w">    </span><span class="n">_noise</span><span class="p">.</span><span class="n">Seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">GD</span><span class="p">.</span><span class="n">Randi</span><span class="p">();</span>
+<span class="w">    </span><span class="n">_noise</span><span class="p">.</span><span class="n">FractalOctaves</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="n">_noise</span><span class="p">.</span><span class="n">Frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">20.0f</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">_noise</span><span class="p">.</span><span class="n">GetNoise1D</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="cryptographically-secure-pseudorandom-number-generation">
+<h2>Cryptographically secure pseudorandom number generation<a class="headerlink" href="#cryptographically-secure-pseudorandom-number-generation" title="Link to this heading"></a></h2>
+<p>So far, the approaches mentioned above are <strong>not</strong> suitable for
+<em>cryptographically secure</em> pseudorandom number generation (CSPRNG). This is fine
+for games, but this is not sufficient for scenarios where encryption,
+authentication or signing is involved.</p>
+<p>Godot offers a <a class="reference internal" href="../../classes/class_crypto.html#class-crypto"><span class="std std-ref">Crypto</span></a> class for this. This class can perform
+asymmetric key encryption/decryption, signing/verification, while also
+generating cryptographically secure random bytes, RSA keys, HMAC digests, and
+self-signed <a class="reference internal" href="../../classes/class_x509certificate.html#class-x509certificate"><span class="std std-ref">X509Certificate</span></a>s.</p>
+<p>The downside of <abbr title="Cryptographically secure pseudorandom number generation">CSPRNG</abbr>
+is that it's much slower than standard pseudorandom number generation. Its API
+is also less convenient to use. As a result,
+<abbr title="Cryptographically secure pseudorandom number generation">CSPRNG</abbr>
+should be avoided for gameplay elements.</p>
+<p>Example of using the Crypto class to generate 2 random integers between <code class="docutils literal notranslate"><span class="pre">0</span></code>
+and <code class="docutils literal notranslate"><span class="pre">2^32</span> <span class="pre">-</span> <span class="pre">1</span></code> (inclusive):</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">crypto</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nb">Crypto</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="c1"># Request as many bytes as you need, but try to minimize the amount</span>
+<span class="c1"># of separate requests to improve performance.</span>
+<span class="c1"># Each 32-bit integer requires 4 bytes, so we request 8 bytes.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">byte_array</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">crypto</span><span class="o">.</span><span class="nf">generate_random_bytes</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Use the ``decode_u32()`` method from PackedByteArray to decode a 32-bit unsigned integer</span>
+<span class="c1"># from the beginning of `byte_array`. This method doesn&#39;t modify `byte_array`.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">random_int_1</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">byte_array</span><span class="o">.</span><span class="nf">decode_u32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Do the same as above, but with an offset of 4 bytes since we&#39;ve already decoded</span>
+<span class="c1"># the first 4 bytes previously.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">random_int_2</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">byte_array</span><span class="o">.</span><span class="nf">decode_u32</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="nb nb-Function">prints</span><span class="p">(</span><span class="s2">&quot;Random integers:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">random_int_1</span><span class="p">,</span><span class="w"> </span><span class="n">random_int_2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="../../classes/class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a>'s documentation for other methods you can
+use to decode the generated bytes into various types of data, such as
+integers or floats.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="beziers_and_curves.html" class="btn btn-neutral float-left" title="Beziers, curves and paths" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../navigation/index.html" class="btn btn-neutral float-right" title="Navigation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

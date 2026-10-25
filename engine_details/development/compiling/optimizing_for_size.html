@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Optimizing a build for size" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/development/compiling/optimizing_for_size.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Rationale: Sometimes, it is desired to optimize a build for size rather than speed. This means not compiling unused functions from the engine, as well as using specific compiler flags to aid on dec..." />
+<meta name="description" content="Rationale: Sometimes, it is desired to optimize a build for size rather than speed. This means not compiling unused functions from the engine, as well as using specific compiler flags to aid on dec..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Optimizing a build for size &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Debugging" href="../debugging/index.html" />
+    <link rel="prev" title="Compiling with PCK encryption key" href="compiling_with_script_encryption_key.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/development/compiling/optimizing_for_size" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="engine_details/development/compiling/optimizing_for_size.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Engine development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Building from source</a></li>
+      <li class="breadcrumb-item active">Optimizing a build for size</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/development/compiling/optimizing_for_size.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="optimizing-a-build-for-size">
+<span id="doc-optimizing-for-size"></span><h1>Optimizing a build for size<a class="headerlink" href="#optimizing-a-build-for-size" title="Link to this heading"></a></h1>
+<section id="rationale">
+<h2>Rationale<a class="headerlink" href="#rationale" title="Link to this heading"></a></h2>
+<p>Sometimes, it is desired to optimize a build for size rather than speed.
+This means not compiling unused functions from the engine, as well as using
+specific compiler flags to aid on decreasing build size.
+Common situations include creating builds for mobile and Web platforms.</p>
+<p>This tutorial aims to give an overview on different methods to create
+a smaller binary. Before continuing, it is recommended to read the previous tutorials
+on compiling Godot for each platform.</p>
+<p>The options below are listed from the most important (greatest size savings)
+to the least important (lowest size savings).</p>
+</section>
+<section id="stripping-binaries">
+<h2>Stripping binaries<a class="headerlink" href="#stripping-binaries" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Space savings:</strong> Very high</p></li>
+<li><p><strong>Difficulty:</strong> Easy</p></li>
+<li><p><strong>Performed in official builds:</strong> Yes</p></li>
+</ul>
+<p>If you build Windows (MinGW), Linux or macOS binaries from source, remember to
+strip debug symbols from binaries by installing the <code class="docutils literal notranslate"><span class="pre">strip</span></code> package from your
+distribution then running:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>strip<span class="w"> </span>path/to/godot.binary
+</pre></div>
+</div>
+<p>On Windows, <code class="docutils literal notranslate"><span class="pre">strip.exe</span></code> is included in most MinGW toolchain setups.</p>
+<p>This will reduce the size of compiled binaries by a factor between 5× and 10×.
+The downside is that crash backtraces will no longer provide accurate information
+(which is useful for troubleshooting the cause of a crash).
+<a class="reference internal" href="../profiling/index.html#doc-using-cpp-profilers"><span class="std std-ref">C++ profilers</span></a> will also no longer be able to display
+function names (this does not affect the built-in GDScript profiler).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above command will not work on Windows binaries compiled with MSVC
+and platforms such as Android and Web. Instead, pass <code class="docutils literal notranslate"><span class="pre">debug_symbols=no</span></code>
+on the SCons command line when compiling.</p>
+</div>
+</section>
+<section id="compiling-with-link-time-optimization">
+<h2>Compiling with link-time optimization<a class="headerlink" href="#compiling-with-link-time-optimization" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Space savings:</strong> High</p></li>
+<li><p><strong>Difficulty:</strong> Easy</p></li>
+<li><p><strong>Performed in official builds:</strong> Yes</p></li>
+</ul>
+<p>Enabling link-time optimization produces more efficient binaries, both in
+terms of performance and file size. It works by eliminating duplicate
+template functions and unused code. It can currently be used with the GCC
+and MSVC compilers:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">lto</span><span class="o">=</span>full
+</pre></div>
+</div>
+<p>Linking becomes much slower and more RAM-consuming with this option,
+so it should be used only for release builds. You need to have at least
+8 GB of RAM available for successful linking with LTO enabled. Since the operating
+system and programs will take up some RAM, in practice, you need 12 GB of RAM
+installed in your system (preferably 16 GB) to compile Godot with LTO enabled.</p>
+</section>
+<section id="optimizing-for-size-instead-of-speed">
+<h2>Optimizing for size instead of speed<a class="headerlink" href="#optimizing-for-size-instead-of-speed" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Space savings:</strong> High</p></li>
+<li><p><strong>Difficulty:</strong> Easy</p></li>
+<li><p><strong>Performed in official builds:</strong> Yes, but only for web builds</p></li>
+</ul>
+<p>It is possible to compile Godot using size optimizations (instead of speed).
+To enable this, set the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag to <code class="docutils literal notranslate"><span class="pre">size</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">optimize</span><span class="o">=</span>size
+</pre></div>
+</div>
+<p>Some platforms such as WebAssembly already use this mode by default.</p>
+<p>Godot 4.5 introduced the <code class="docutils literal notranslate"><span class="pre">size_extra</span></code> option, which can further reduce size.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">optimize</span><span class="o">=</span>size_extra
+</pre></div>
+</div>
+</section>
+<section id="detecting-used-features-from-the-current-project-and-disabling-unused-features">
+<h2>Detecting used features from the current project and disabling unused features<a class="headerlink" href="#detecting-used-features-from-the-current-project-and-disabling-unused-features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Space savings:</strong> Moderate to high depending on project</p></li>
+<li><p><strong>Difficulty:</strong> Easy to medium depending on project</p></li>
+<li><p><strong>Performed in official builds:</strong> No</p></li>
+</ul>
+<p>Godot features an <a class="reference internal" href="../../../tutorials/editor/using_engine_compilation_configuration_editor.html#doc-engine-compilation-configuration-editor"><span class="std std-ref">Using the engine compilation configuration editor</span></a> tool that can detect
+the features used in the current project and create a build profile. Once saved,
+this build profile can then be passed to SCons when compiling custom export templates:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">build_profile</span><span class="o">=</span>/path/to/profile.gdbuild
+</pre></div>
+</div>
+<p>Note that for certain projects, the feature detection may be too aggressive and disable
+features that are actually needed at runtime. This can occur if certain features are used
+in a way that their usage cannot be detected statically (such as a script being procedurally
+created and run at runtime).</p>
+<p>More specific features can be disabled by following the sections below, but remember
+that many of them are automatically detected by the engine compilation configuration detector.</p>
+</section>
+<section id="disabling-advanced-text-server">
+<h2>Disabling advanced text server<a class="headerlink" href="#disabling-advanced-text-server" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Space savings:</strong> High</p></li>
+<li><p><strong>Difficulty:</strong> Easy</p></li>
+<li><p><strong>Performed in official builds:</strong> No</p></li>
+</ul>
+<p>By default, Godot uses an advanced text server with the support for the
+following features:</p>
+<ul class="simple">
+<li><p>Right-to-left typesetting and complex scripts, required to write languages
+such as Arabic and Hebrew.</p></li>
+<li><p>Font ligatures and OpenType features (such as small capitals, fractions and
+slashed zero).</p></li>
+</ul>
+<p>Godot provides a fallback text server that isn't compiled by default. This text
+server can be used as a lightweight alternative to the default advanced text
+server:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">module_text_server_adv_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_text_server_fb_enabled</span><span class="o">=</span>yes
+</pre></div>
+</div>
+<p>If you only intend on supporting Latin, Greek and Cyrillic-based languages in
+your project, the fallback text server should suffice.</p>
+<p>This fallback text server can also process large amounts of text more quickly
+than the advanced text server. This makes the fallback text server a good fit
+for mobile/web projects.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember to always pass <code class="docutils literal notranslate"><span class="pre">module_text_server_fb_enabled=yes</span></code> when using
+<code class="docutils literal notranslate"><span class="pre">module_text_server_adv_enabled=no</span></code>. Otherwise, the compiled binary won't
+contain any text server, which means no text will be displayed at all when
+running the project.</p>
+</div>
+</section>
+<section id="disabling-3d">
+<h2>Disabling 3D<a class="headerlink" href="#disabling-3d" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Space savings:</strong> Moderate</p></li>
+<li><p><strong>Difficulty:</strong> Easy</p></li>
+<li><p><strong>Performed in official builds:</strong> No</p></li>
+</ul>
+<p>For 2D games, having the whole 3D engine available usually makes no sense.
+Because of this, there is a build flag to disable it:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">disable_3d</span><span class="o">=</span>yes
+</pre></div>
+</div>
+<p>Tools must be disabled in order to use this flag, as the editor is not designed
+to operate without 3D support. Without it, the binary size can be reduced
+by about 15%.</p>
+</section>
+<section id="disabling-advanced-gui-objects">
+<h2>Disabling advanced GUI objects<a class="headerlink" href="#disabling-advanced-gui-objects" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Space savings:</strong> Moderate</p></li>
+<li><p><strong>Difficulty:</strong> Easy</p></li>
+<li><p><strong>Performed in official builds:</strong> No</p></li>
+</ul>
+<p>Most small games don't require complex GUI controls such as Tree, ItemList,
+TextEdit or GraphEdit. They can be disabled using a build flag:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">disable_advanced_gui</span><span class="o">=</span>yes
+</pre></div>
+</div>
+<p>This is everything that will be disabled:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../classes/class_acceptdialog.html#class-acceptdialog"><span class="std std-ref">AcceptDialog</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_charfxtransform.html#class-charfxtransform"><span class="std std-ref">CharFXTransform</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_codeedit.html#class-codeedit"><span class="std std-ref">CodeEdit</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_codehighlighter.html#class-codehighlighter"><span class="std std-ref">CodeHighlighter</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_colorpicker.html#class-colorpicker"><span class="std std-ref">ColorPicker</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_colorpickerbutton.html#class-colorpickerbutton"><span class="std std-ref">ColorPickerButton</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_confirmationdialog.html#class-confirmationdialog"><span class="std std-ref">ConfirmationDialog</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_filedialog.html#class-filedialog"><span class="std std-ref">FileDialog</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_foldablecontainer.html#class-foldablecontainer"><span class="std std-ref">FoldableContainer</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_foldablegroup.html#class-foldablegroup"><span class="std std-ref">FoldableGroup</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_graphedit.html#class-graphedit"><span class="std std-ref">GraphEdit</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_graphelement.html#class-graphelement"><span class="std std-ref">GraphElement</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_graphframe.html#class-graphframe"><span class="std std-ref">GraphFrame</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_graphnode.html#class-graphnode"><span class="std std-ref">GraphNode</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_hsplitcontainer.html#class-hsplitcontainer"><span class="std std-ref">HSplitContainer</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_menubar.html#class-menubar"><span class="std std-ref">MenuBar</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_menubutton.html#class-menubutton"><span class="std std-ref">MenuButton</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_optionbutton.html#class-optionbutton"><span class="std std-ref">OptionButton</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_popupmenu.html#class-popupmenu"><span class="std std-ref">PopupMenu</span></a> (will make all popup menus unavailable in code for classes that use them,
+like <a class="reference internal" href="../../../classes/class_lineedit.html#class-lineedit"><span class="std std-ref">LineEdit</span></a>, even though those classes are still available)</p></li>
+<li><p><a class="reference internal" href="../../../classes/class_richtexteffect.html#class-richtexteffect"><span class="std std-ref">RichTextEffect</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_richtextlabel.html#class-richtextlabel"><span class="std std-ref">RichTextLabel</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_spinbox.html#class-spinbox"><span class="std std-ref">SpinBox</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_splitcontainer.html#class-splitcontainer"><span class="std std-ref">SplitContainer</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_subviewportcontainer.html#class-subviewportcontainer"><span class="std std-ref">SubViewportContainer</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_syntaxhighlighter.html#class-syntaxhighlighter"><span class="std std-ref">SyntaxHighlighter</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_textedit.html#class-textedit"><span class="std std-ref">TextEdit</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_tree.html#class-tree"><span class="std std-ref">Tree</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_treeitem.html#class-treeitem"><span class="std std-ref">TreeItem</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_vsplitcontainer.html#class-vsplitcontainer"><span class="std std-ref">VSplitContainer</span></a></p></li>
+</ul>
+</section>
+<section id="disabling-physics-engines">
+<h2>Disabling physics engines<a class="headerlink" href="#disabling-physics-engines" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Space savings:</strong> Low to moderate</p></li>
+<li><p><strong>Difficulty:</strong> Easy</p></li>
+<li><p><strong>Performed in official builds:</strong> No</p></li>
+</ul>
+<p>If your 3D project uses Jolt Physics, you can disable GodotPhysics3D at compile-time as
+it will never be used:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">module_godot_physics_3d_enabled</span><span class="o">=</span>no
+</pre></div>
+</div>
+<p>Inversely, if your 3D project uses GodotPhysics3D, you can disable Jolt Physics at compile-time:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">module_jolt_enabled</span><span class="o">=</span>no
+</pre></div>
+</div>
+<p>If your project uses 3D rendering but not physics (or 2D rendering but not physics),
+you can also disable 2D or 3D physics entirely. Most 3D projects can take advantage
+of this, as they don't make use of 2D physics:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">disable_physics_2d</span><span class="o">=</span>yes
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">disable_physics_3d</span><span class="o">=</span>yes
+</pre></div>
+</div>
+</section>
+<section id="disabling-unwanted-modules">
+<h2>Disabling unwanted modules<a class="headerlink" href="#disabling-unwanted-modules" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Space savings:</strong> Very low to moderate depending on modules</p></li>
+<li><p><strong>Difficulty:</strong> Medium to hard depending on modules</p></li>
+<li><p><strong>Performed in official builds:</strong> No</p></li>
+</ul>
+<p>A lot of Godot's functions are offered as modules.
+You can see a list of modules with the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span>--help
+</pre></div>
+</div>
+<p>The list of modules that can be disabled will appear, together with all
+build options. If you are working on a simple 2D game, you could disable
+a lot of them:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">module_astcenc_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_basis_universal_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_bcdec_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_bmp_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_camera_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_csg_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_dds_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_enet_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_etcpak_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_fbx_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_gltf_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_gridmap_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_hdr_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_interactive_music_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_jsonrpc_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_ktx_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_mbedtls_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_meshoptimizer_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_mp3_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_mobile_vr_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_msdfgen_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_multiplayer_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_noise_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_navigation_2d_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_navigation_3d_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_ogg_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_openxr_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_raycast_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_regex_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_svg_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_tga_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_theora_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_tinyexr_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_upnp_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_vhacd_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_vorbis_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_webrtc_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_websocket_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_webxr_enabled</span><span class="o">=</span>no<span class="w"> </span><span class="nv">module_zip_enabled</span><span class="o">=</span>no
+</pre></div>
+</div>
+<p>If this proves not to work for your use case, you should review the list of
+modules and see which ones you actually still need for your game (e.g. you might
+want to keep networking-related modules, regex support,
+<code class="docutils literal notranslate"><span class="pre">mp3</span></code>/<code class="docutils literal notranslate"><span class="pre">ogg</span></code>/<code class="docutils literal notranslate"><span class="pre">vorbis</span></code> to play music, or <code class="docutils literal notranslate"><span class="pre">theora</span></code> to play videos).</p>
+<p>Alternatively, you can supply a list of disabled modules by creating
+<code class="docutils literal notranslate"><span class="pre">custom.py</span></code> at the root of the source, with the contents similar to the
+following:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">custom.py</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">module_astcenc_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_basis_universal_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_bcdec_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_bmp_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_camera_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_csg_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_dds_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_enet_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_etcpak_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_fbx_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_gltf_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_gridmap_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_hdr_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_interactive_music_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_jsonrpc_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_ktx_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_mbedtls_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_meshoptimizer_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_mp3_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_mobile_vr_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_msdfgen_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_multiplayer_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_noise_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_navigation_2d_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_navigation_3d_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_ogg_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_openxr_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_raycast_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_regex_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_svg_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_tga_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_theora_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_tinyexr_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_upnp_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_vhacd_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_vorbis_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_webrtc_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_websocket_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_webxr_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="n">module_zip_enabled</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="introduction_to_the_buildsystem.html#doc-overriding-build-options"><span class="std std-ref">Overriding the build options</span></a>.</p>
+</div>
+</section>
+<section id="optimizing-the-distribution-of-your-project">
+<h2>Optimizing the distribution of your project<a class="headerlink" href="#optimizing-the-distribution-of-your-project" title="Link to this heading"></a></h2>
+<section id="desktop">
+<h3>Desktop<a class="headerlink" href="#desktop" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section is only relevant when distributing the files on a desktop
+platform that doesn't perform its own compression or packing. As such, this
+advice is relevant when you distribute ZIP archives on itch.io or GitHub
+Releases.</p>
+<p>Platforms like Steam already apply their own compression scheme, so you
+don't need to create a ZIP archive to distribute files in the first place.</p>
+</div>
+<p>As an aside, you can look into optimizing the distribution of your project itself.
+This can be done even without recompiling the export template.</p>
+<p><a class="reference external" href="https://7-zip.org/">7-Zip</a> can be used to create ZIP archives that are more
+efficient than usual, while remaining compatible with every ZIP extractor
+(including Windows' own built-in extractor). ZIP size reduction in a large
+project can reach dozens of megabytes compared to a typical ZIP compressor,
+although average savings are in the 1-5 MB range. Creating this ZIP archive will
+take longer than usual, but it will extract just as fast as any other ZIP
+archive.</p>
+<p>When using the 7-Zip GUI, this is done by creating a ZIP archive with the Ultra
+compression mode. When using the command line, this is done using the following
+command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>7z<span class="w"> </span>a<span class="w"> </span>-mx9<span class="w"> </span>my_project.zip<span class="w"> </span>folder_containing_executable_and_pck
+</pre></div>
+</div>
+</section>
+<section id="web">
+<h3>Web<a class="headerlink" href="#web" title="Link to this heading"></a></h3>
+<p>Enabling gzip or Brotli compression for all file types from the web export
+(especially the <code class="docutils literal notranslate"><span class="pre">.wasm</span></code> and <code class="docutils literal notranslate"><span class="pre">.pck</span></code>) can reduce the download size
+significantly, leading to faster loading times, especially on slow connections.</p>
+<p>Creating precompressed gzip or Brotli files with a high compression level can be
+even more efficient, as long as the web server is configured to serve those
+files when they exist. When supported, Brotli should be preferred over gzip as
+it has a greater potential for file size reduction.</p>
+<p>See <a class="reference internal" href="../../../tutorials/export/exporting_for_web.html#doc-exporting-for-web-serving-the-files"><span class="std std-ref">Serving the files</span></a> for instructions.</p>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="compiling_with_script_encryption_key.html" class="btn btn-neutral float-left" title="Compiling with PCK encryption key" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../debugging/index.html" class="btn btn-neutral float-right" title="Debugging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

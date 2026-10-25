@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="General optimization tips" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/performance/general_optimization.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: In an ideal world, computers would run at infinite speed. The only limit to what we could achieve would be our imagination. However, in the real world, it&#x27;s all too easy to produ..." />
+<meta name="description" content="Introduction: In an ideal world, computers would run at infinite speed. The only limit to what we could achieve would be our imagination. However, in the real world, it&#x27;s all too easy to produ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>General optimization tips &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Optimization using Servers" href="using_servers.html" />
+    <link rel="prev" title="Performance" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/performance/general_optimization" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/performance/general_optimization.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Performance</a></li>
+      <li class="breadcrumb-item active">General optimization tips</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/performance/general_optimization.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="general-optimization-tips">
+<span id="doc-general-optimization"></span><h1>General optimization tips<a class="headerlink" href="#general-optimization-tips" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>In an ideal world, computers would run at infinite speed. The only limit to
+what we could achieve would be our imagination. However, in the real world, it's
+all too easy to produce software that will bring even the fastest computer to
+its knees.</p>
+<p>Thus, designing games and other software is a compromise between what we would
+like to be possible, and what we can realistically achieve while maintaining
+good performance.</p>
+<p>To achieve the best results, we have two approaches:</p>
+<ul class="simple">
+<li><p>Work faster.</p></li>
+<li><p>Work smarter.</p></li>
+</ul>
+<p>And preferably, we will use a blend of the two.</p>
+<section id="smoke-and-mirrors">
+<h3>Smoke and mirrors<a class="headerlink" href="#smoke-and-mirrors" title="Link to this heading"></a></h3>
+<p>Part of working smarter is recognizing that, in games, we can often get the
+player to believe they're in a world that is far more complex, interactive, and
+graphically exciting than it really is. A good programmer is a magician, and
+should strive to learn the tricks of the trade while trying to invent new ones.</p>
+</section>
+<section id="the-nature-of-slowness">
+<h3>The nature of slowness<a class="headerlink" href="#the-nature-of-slowness" title="Link to this heading"></a></h3>
+<p>To the outside observer, performance problems are often lumped together.
+But in reality, there are several different kinds of performance problems:</p>
+<ul class="simple">
+<li><p>A slow process that occurs every frame, leading to a continuously low frame
+rate.</p></li>
+<li><p>An intermittent process that causes &quot;spikes&quot; of slowness, leading to
+stalls.</p></li>
+<li><p>A slow process that occurs outside of normal gameplay, for instance,
+when loading a level.</p></li>
+</ul>
+<p>Each of these are annoying to the user, but in different ways.</p>
+</section>
+</section>
+<section id="measuring-performance">
+<h2>Measuring performance<a class="headerlink" href="#measuring-performance" title="Link to this heading"></a></h2>
+<p>Probably the most important tool for optimization is the ability to measure
+performance - to identify where bottlenecks are, and to measure the success of
+our attempts to speed them up.</p>
+<p>There are several methods of measuring performance, including:</p>
+<ul class="simple">
+<li><p>Putting a start/stop timer around code of interest.</p></li>
+<li><p>Using the <a class="reference internal" href="../scripting/debug/the_profiler.html#doc-the-profiler"><span class="std std-ref">Godot profiler</span></a>.</p></li>
+<li><p>Using <a class="reference internal" href="../../engine_details/development/profiling/index.html#doc-using-cpp-profilers"><span class="std std-ref">external CPU profilers</span></a>.</p></li>
+<li><p>Using external GPU profilers/debuggers such as
+<a class="reference external" href="https://developer.nvidia.com/nsight-graphics">NVIDIA Nsight Graphics</a>,
+<a class="reference external" href="https://gpuopen.com/rgp/">Radeon GPU Profiler</a>,
+<a class="reference external" href="https://devblogs.microsoft.com/pix/download/">PIX</a> (Direct3D 12 only),
+<a class="reference external" href="https://developer.apple.com/documentation/xcode/optimizing-gpu-performance">Xcode</a> (Metal only), or
+<a class="reference external" href="https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio">Arm Performance Studio</a>.</p></li>
+<li><p>Checking the frame rate (with V-Sync disabled). Third-party utilities such as
+<a class="reference external" href="https://www.guru3d.com/files-details/rtss-rivatuner-statistics-server-download.html">RivaTuner Statistics Server</a> (Windows),
+<a class="reference external" href="https://www.special-k.info/">Special K</a> (Windows),
+or <a class="reference external" href="https://github.com/flightlessmango/MangoHud">MangoHud</a>
+(Linux) can also be useful here.</p></li>
+<li><p>Using an unofficial <a class="reference external" href="https://github.com/godot-extended-libraries/godot-debug-menu">debug menu add-on</a>.</p></li>
+</ul>
+<p>Be very aware that the relative performance of different areas can vary on
+different hardware. It's often a good idea to measure timings on more than one
+device. This is especially the case if you're targeting mobile devices.</p>
+<section id="limitations">
+<h3>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h3>
+<p>CPU profilers are often the go-to method for measuring performance. However,
+they don't always tell the whole story.</p>
+<ul class="simple">
+<li><p>Bottlenecks are often on the GPU, &quot;as a result&quot; of instructions given by the
+CPU.</p></li>
+<li><p>Spikes can occur in the operating system processes (outside of Godot) &quot;as a
+result&quot; of instructions used in Godot (for example, dynamic memory allocation).</p></li>
+<li><p>You may not always be able to profile specific devices like a mobile phone
+due to the initial setup required.</p></li>
+<li><p>You may have to solve performance problems that occur on hardware you don't
+have access to.</p></li>
+</ul>
+<p>As a result of these limitations, you often need to use detective work to find
+out where bottlenecks are.</p>
+</section>
+</section>
+<section id="detective-work">
+<h2>Detective work<a class="headerlink" href="#detective-work" title="Link to this heading"></a></h2>
+<p>Detective work is a crucial skill for developers (both in terms of performance,
+and also in terms of bug fixing). This can include hypothesis testing, and
+binary search.</p>
+<section id="hypothesis-testing">
+<h3>Hypothesis testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading"></a></h3>
+<p>Say, for example, that you believe sprites are slowing down your game.
+You can test this hypothesis by:</p>
+<ul class="simple">
+<li><p>Measuring the performance when you add more sprites, or take some away.</p></li>
+</ul>
+<p>This may lead to a further hypothesis: does the size of the sprite determine
+the performance drop?</p>
+<ul class="simple">
+<li><p>You can test this by keeping everything the same, but changing the sprite
+size, and measuring performance.</p></li>
+</ul>
+</section>
+<section id="binary-search">
+<h3>Binary search<a class="headerlink" href="#binary-search" title="Link to this heading"></a></h3>
+<p>If you know that frames are taking much longer than they should, but you're
+not sure where the bottleneck lies. You could begin by commenting out
+approximately half the routines that occur on a normal frame. Has the
+performance improved more or less than expected?</p>
+<p>Once you know which of the two halves contains the bottleneck, you can
+repeat this process until you've pinned down the problematic area.</p>
+</section>
+</section>
+<section id="profilers">
+<h2>Profilers<a class="headerlink" href="#profilers" title="Link to this heading"></a></h2>
+<p>Profilers allow you to time your program while running it. Profilers then
+provide results telling you what percentage of time was spent in different
+functions and areas, and how often functions were called.</p>
+<p>This can be very useful both to identify bottlenecks and to measure the results
+of your improvements. Sometimes, attempts to improve performance can backfire
+and lead to slower performance.
+<strong>Always use profiling and timing to guide your efforts.</strong></p>
+<p>For more info about using Godot's built-in profiler, see <a class="reference internal" href="../scripting/debug/the_profiler.html#doc-the-profiler"><span class="std std-ref">The Profiler</span></a>.</p>
+</section>
+<section id="principles">
+<h2>Principles<a class="headerlink" href="#principles" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a> said:</p>
+<blockquote>
+<div><p><em>Programmers waste enormous amounts of time thinking about, or worrying
+about, the speed of noncritical parts of their programs, and these attempts
+at efficiency actually have a strong negative impact when debugging and
+maintenance are considered. We should forget about small efficiencies, say
+about 97% of the time: premature optimization is the root of all evil. Yet
+we should not pass up our opportunities in that critical 3%.</em></p>
+</div></blockquote>
+<p>The messages are very important:</p>
+<ul class="simple">
+<li><p>Developer time is limited. Instead of blindly trying to speed up
+all aspects of a program, we should concentrate our efforts on the aspects
+that really matter.</p></li>
+<li><p>Efforts at optimization often end up with code that is harder to read and
+debug than non-optimized code. It is in our interests to limit this to areas
+that will really benefit.</p></li>
+</ul>
+<p>Just because we <em>can</em> optimize a particular bit of code, it doesn't necessarily
+mean that we <em>should</em>. Knowing when and when not to optimize is a great skill to
+develop.</p>
+<p>One misleading aspect of the quote is that people tend to focus on the subquote
+<em>&quot;premature optimization is the root of all evil&quot;</em>. While <em>premature</em>
+optimization is (by definition) undesirable, performant software is the result
+of performant design.</p>
+<section id="performant-design">
+<h3>Performant design<a class="headerlink" href="#performant-design" title="Link to this heading"></a></h3>
+<p>The danger with encouraging people to ignore optimization until necessary, is
+that it conveniently ignores that the most important time to consider
+performance is at the design stage, before a key has even hit a keyboard. If the
+design or algorithms of a program are inefficient, then no amount of polishing
+the details later will make it run fast. It may run <em>faster</em>, but it will never
+run as fast as a program designed for performance.</p>
+<p>This tends to be far more important in game or graphics programming than in
+general programming. A performant design, even without low-level optimization,
+will often run many times faster than a mediocre design with low-level
+optimization.</p>
+</section>
+<section id="incremental-design">
+<h3>Incremental design<a class="headerlink" href="#incremental-design" title="Link to this heading"></a></h3>
+<p>Of course, in practice, unless you have prior knowledge, you are unlikely to
+come up with the best design the first time. Instead, you'll often make a series
+of versions of a particular area of code, each taking a different approach to
+the problem, until you come to a satisfactory solution. It's important not to
+spend too much time on the details at this stage until you have finalized the
+overall design. Otherwise, much of your work will be thrown out.</p>
+<p>It's difficult to give general guidelines for performant design because this is
+so dependent on the problem. One point worth mentioning though, on the CPU side,
+is that modern CPUs are nearly always limited by memory bandwidth. This has led
+to a resurgence in data-oriented design, which involves designing data
+structures and algorithms for <em>cache locality</em> of data and linear access, rather
+than jumping around in memory.</p>
+</section>
+<section id="the-optimization-process">
+<h3>The optimization process<a class="headerlink" href="#the-optimization-process" title="Link to this heading"></a></h3>
+<p>Assuming we have a reasonable design, and taking our lessons from Knuth, our
+first step in optimization should be to identify the biggest bottlenecks - the
+slowest functions, the low-hanging fruit.</p>
+<p>Once we've successfully improved the speed of the slowest area, it may no
+longer be the bottleneck. So we should test/profile again and find the next
+bottleneck on which to focus.</p>
+<p>The process is thus:</p>
+<ol class="arabic simple">
+<li><p>Profile / Identify bottleneck.</p></li>
+<li><p>Optimize bottleneck.</p></li>
+<li><p>Return to step 1.</p></li>
+</ol>
+</section>
+<section id="optimizing-bottlenecks">
+<h3>Optimizing bottlenecks<a class="headerlink" href="#optimizing-bottlenecks" title="Link to this heading"></a></h3>
+<p>Some profilers will even tell you which part of a function (which data accesses,
+calculations) are slowing things down.</p>
+<p>As with design, you should concentrate your efforts first on making sure the
+algorithms and data structures are the best they can be. Data access should be
+local (to make best use of CPU cache), and it can often be better to use compact
+storage of data (again, always profile to test results). Often, you precalculate
+heavy computations ahead of time. This can be done by performing the computation
+when loading a level, by loading a file containing precalculated data, or
+by storing the results of complex calculations into a script constant and
+reading its value.</p>
+<p>Once algorithms and data are good, you can often make small changes in routines
+which improve performance. For instance, you can move some calculations outside
+of loops or transform nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loops into non-nested loops.
+(This should be feasible if you know a 2D array's width or height in advance.)</p>
+<p>Always retest your timing/bottlenecks after making each change. Some changes
+will increase speed, others may have a negative effect. Sometimes, a small
+positive effect will be outweighed by the negatives of more complex code, and
+you may choose to leave out that optimization.</p>
+</section>
+</section>
+<section id="appendix">
+<h2>Appendix<a class="headerlink" href="#appendix" title="Link to this heading"></a></h2>
+<section id="bottleneck-math">
+<h3>Bottleneck math<a class="headerlink" href="#bottleneck-math" title="Link to this heading"></a></h3>
+<p>The proverb <em>&quot;a chain is only as strong as its weakest link&quot;</em> applies directly to
+performance optimization. If your project is spending 90% of the time in
+function <code class="docutils literal notranslate"><span class="pre">A</span></code>, then optimizing <code class="docutils literal notranslate"><span class="pre">A</span></code> can have a massive effect on performance.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>A: 9 ms
+Everything else: 1 ms
+Total frame time: 10 ms
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>A: 1 ms
+Everything else: 1ms
+Total frame time: 2 ms
+</pre></div>
+</div>
+<p>In this example, improving this bottleneck <code class="docutils literal notranslate"><span class="pre">A</span></code> by a factor of 9× decreases
+overall frame time by 5× while increasing frames per second by 5×.</p>
+<p>However, if something else is running slowly and also bottlenecking your
+project, then the same improvement can lead to less dramatic gains:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>A: 9 ms
+Everything else: 50 ms
+Total frame time: 59 ms
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>A: 1 ms
+Everything else: 50 ms
+Total frame time: 51 ms
+</pre></div>
+</div>
+<p>In this example, even though we have hugely optimized function <code class="docutils literal notranslate"><span class="pre">A</span></code>,
+the actual gain in terms of frame rate is quite small.</p>
+<p>In games, things become even more complicated because the CPU and GPU run
+independently of one another. Your total frame time is determined by the slower
+of the two.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CPU: 9 ms
+GPU: 50 ms
+Total frame time: 50 ms
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CPU: 1 ms
+GPU: 50 ms
+Total frame time: 50 ms
+</pre></div>
+</div>
+<p>In this example, we optimized the CPU hugely again, but the frame time didn't
+improve because we are GPU-bottlenecked.</p>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Performance" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="using_servers.html" class="btn btn-neutral float-right" title="Optimization using Servers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

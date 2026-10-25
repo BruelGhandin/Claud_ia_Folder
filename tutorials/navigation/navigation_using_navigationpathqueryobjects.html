@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using NavigationPathQueryObjects" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/navigation/navigation_using_navigationpathqueryobjects.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="NavigationPathQueryObjects can be used together with NavigationServer.query_path() to obtain a heavily customized navigation path including optional metadata about the path. This requires more setu..." />
+<meta name="description" content="NavigationPathQueryObjects can be used together with NavigationServer.query_path() to obtain a heavily customized navigation path including optional metadata about the path. This requires more setu..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using NavigationPathQueryObjects &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using NavigationAgents" href="navigation_using_navigationagents.html" />
+    <link rel="prev" title="Using NavigationPaths" href="navigation_using_navigationpaths.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/navigation/navigation_using_navigationpathqueryobjects" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/navigation/navigation_using_navigationpathqueryobjects.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Navigation</a></li>
+      <li class="breadcrumb-item active">Using NavigationPathQueryObjects</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/navigation/navigation_using_navigationpathqueryobjects.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-navigationpathqueryobjects">
+<span id="doc-navigation-using-navigationpathqueryobjects"></span><h1>Using NavigationPathQueryObjects<a class="headerlink" href="#using-navigationpathqueryobjects" title="Link to this heading"></a></h1>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Path query parameters expose various options to improve pathfinding performance or lower memory consumption.</p>
+<p>They cater to more advanced pathfinding needs that the high-level nodes can not always cover.</p>
+<p>See the respective option sections below.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">NavigationPathQueryObjects</span></code> can be used together with <code class="docutils literal notranslate"><span class="pre">NavigationServer.query_path()</span></code>
+to obtain a heavily <strong>customized</strong> navigation path including optional <strong>metadata</strong> about the path.</p>
+<p>This requires more setup compared to obtaining a normal NavigationPath but lets you tailor
+the pathfinding and provided path data to the different needs of a project.</p>
+<p>NavigationPathQueryObjects consist of a pair of objects, a <code class="docutils literal notranslate"><span class="pre">NavigationPathQueryParameters</span></code> object holding the customization options
+for the query and a <code class="docutils literal notranslate"><span class="pre">NavigationPathQueryResult</span></code> that receives (regular) updates with the resulting path and metadata from the query.</p>
+<p>2D and 3D versions of <code class="docutils literal notranslate"><span class="pre">NavigationPathQueryParameters</span></code> are available as
+<a class="reference internal" href="../../classes/class_navigationpathqueryparameters2d.html#class-navigationpathqueryparameters2d"><span class="std std-ref">NavigationPathQueryParameters2D</span></a> and
+<a class="reference internal" href="../../classes/class_navigationpathqueryparameters3d.html#class-navigationpathqueryparameters3d"><span class="std std-ref">NavigationPathQueryParameters3D</span></a> respectively.</p>
+<p>2D and 3D versions of <code class="docutils literal notranslate"><span class="pre">NavigationPathQueryResult</span></code> are available as
+<a class="reference internal" href="../../classes/class_navigationpathqueryresult2d.html#class-navigationpathqueryresult2d"><span class="std std-ref">NavigationPathQueryResult2D</span></a> and
+<a class="reference internal" href="../../classes/class_navigationpathqueryresult3d.html#class-navigationpathqueryresult3d"><span class="std std-ref">NavigationPathQueryResult3D</span></a> respectively.</p>
+<section id="creating-a-basic-path-query">
+<h2>Creating a basic path query<a class="headerlink" href="#creating-a-basic-path-query" title="Link to this heading"></a></h2>
+<p>Both parameters and result are used as a pair with the <code class="docutils literal notranslate"><span class="pre">NavigationServer.query_path()</span></code> function.</p>
+<p>For the available customization options, see further below. See also the descriptions for each parameter in the class reference.</p>
+<p>While not a strict requirement, both objects are intended to be created once in advance, stored in a
+persistent variable for the agent and reused for every followup path query with updated parameters.</p>
+<p>Reusing the same objects improves performance when frequently creating objects or allocating memory.</p>
+<p>The following script creates the objects and provides a <code class="docutils literal notranslate"><span class="pre">query_path()</span></code> function to create new navigation paths.
+The resulting path is identical to using <code class="docutils literal notranslate"><span class="pre">NavigationServer.map_get_path()</span></code> while reusing the objects.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-MkQgR0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tab" tabindex="0">2D GDScript</button><button aria-controls="panel-0-M0QgR0RTY3JpcHQ=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tab" tabindex="-1">3D GDScript</button></div><div aria-labelledby="tab-0-MkQgR0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node2D</span>
+
+<span class="c1"># Prepare query objects.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">query_parameters</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationPathQueryParameters2D</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">query_result</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationPathQueryResult2D</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">query_path</span><span class="p">(</span><span class="n">p_start_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">,</span><span class="w"> </span><span class="n">p_target_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">,</span><span class="w"> </span><span class="n">p_navigation_layers</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">PackedVector2Array</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nf">is_inside_tree</span><span class="p">():</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb nb-Type">PackedVector2Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">map</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_world_2d</span><span class="p">()</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">map_get_iteration_id</span><span class="p">(</span><span class="n">map</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># This map has never synced and is empty, no point in querying it.</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb nb-Type">PackedVector2Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">query_parameters</span><span class="o">.</span><span class="vi">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span>
+<span class="w">    </span><span class="n">query_parameters</span><span class="o">.</span><span class="vi">start_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_start_position</span>
+<span class="w">    </span><span class="n">query_parameters</span><span class="o">.</span><span class="vi">target_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_target_position</span>
+<span class="w">    </span><span class="n">query_parameters</span><span class="o">.</span><span class="vi">navigation_layers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_navigation_layers</span>
+
+<span class="w">    </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">query_path</span><span class="p">(</span><span class="n">query_parameters</span><span class="p">,</span><span class="w"> </span><span class="n">query_result</span><span class="p">)</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">path</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">PackedVector2Array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">query_result</span><span class="o">.</span><span class="nf">get_path</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">path</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-M0QgR0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node3D</span>
+
+<span class="c1"># Prepare query objects.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">query_parameters</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationPathQueryParameters3D</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">query_result</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationPathQueryResult3D</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">query_path</span><span class="p">(</span><span class="n">p_start_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">,</span><span class="w"> </span><span class="n">p_target_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">,</span><span class="w"> </span><span class="n">p_navigation_layers</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nf">is_inside_tree</span><span class="p">():</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">map</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_world_3d</span><span class="p">()</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_get_iteration_id</span><span class="p">(</span><span class="n">map</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># This map has never synced and is empty, no point in querying it.</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">query_parameters</span><span class="o">.</span><span class="vi">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span>
+<span class="w">    </span><span class="n">query_parameters</span><span class="o">.</span><span class="vi">start_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_start_position</span>
+<span class="w">    </span><span class="n">query_parameters</span><span class="o">.</span><span class="vi">target_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_target_position</span>
+<span class="w">    </span><span class="n">query_parameters</span><span class="o">.</span><span class="vi">navigation_layers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_navigation_layers</span>
+
+<span class="w">    </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">query_path</span><span class="p">(</span><span class="n">query_parameters</span><span class="p">,</span><span class="w"> </span><span class="n">query_result</span><span class="p">)</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">path</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">query_result</span><span class="o">.</span><span class="nf">get_path</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">path</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="path-postprocessing-options">
+<h2>Path postprocessing options<a class="headerlink" href="#path-postprocessing-options" title="Link to this heading"></a></h2>
+<figure class="align-center" id="id1">
+<img alt="Path post-processing differences depending on navigation mesh polygon layout" src="../../_images/path_postprocess_diff.webp" />
+<figcaption>
+<p><span class="caption-text">Path post-processing differences depending on navigation mesh polygon layout.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>A path query search travels from the closest navigation mesh polygon edge to the closest edge along the available polygons.
+If possible it builds a polygon corridor towards the target position polygon.</p>
+<p>This raw &quot;search&quot; polygon corridor path is not very optimized and usually a bad fit for agents to travel along.
+E.g. the closest edge point on a navigation mesh polygon might cause a huge detour for agents on larger polygons.
+In order to improve the quality of paths returned by the query various <code class="docutils literal notranslate"><span class="pre">path_postprocessing</span></code> options exist.</p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">PATH_POSTPROCESSING_CORRIDORFUNNEL</span></code> post-processing shortens paths by funneling paths around corners <strong>inside the available polygon corridor</strong>.</p>
+<p>This is the default post-processing and usually also the most useful as it gives the shortest path result <strong>inside the available polygon corridor</strong>.
+If the polygon corridor is already suboptimal, e.g. due to a suboptimal navigation mesh layout,
+the funnel can snap to unexpected polygon corners causing detours.</p>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">PATH_POSTPROCESSING_EDGECENTERED</span></code> post-processing forces all path points to be placed in the middle of the crossed polygon edges  <strong>inside the available polygon corridor</strong>.</p>
+<p>This post-processing is usually only useful when used with strictly tile-like navigation mesh polygons that are all
+evenly sized and where the expected path following is also constrained to cell centers,
+e.g. typical grid game with movement constrained to grid cell centers.</p>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">PATH_POSTPROCESSING_NONE</span></code> post-processing returns the path as is how the pathfinding traveled <strong>inside the available polygon corridor</strong>.</p>
+<p>This post-processing is very useful for debug as it shows how the path search traveled from closest edge point to closet edge point and what polygons it picked.
+A lot of unexpected or suboptimal path results can be immediately explained by looking at this raw path and polygon corridor.</p>
+</li>
+</ul>
+</section>
+<section id="path-simplification">
+<h2>Path simplification<a class="headerlink" href="#path-simplification" title="Link to this heading"></a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Path simplification can help steering agents or agents that jitter on thin polygon edges.</p>
+</div>
+<figure class="align-center" id="id2">
+<img alt="Path point difference with or without path simplification" src="../../_images/path_simplification_diff.webp" />
+<figcaption>
+<p><span class="caption-text">Path point difference with or without path simplification.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>If <code class="docutils literal notranslate"><span class="pre">simplify_path</span></code> is enabled a variant of the Ramer-Douglas-Peucker path simplification algorithm is applied to the path.
+This algorithm straightens paths by removing less relevant path points depending on the <code class="docutils literal notranslate"><span class="pre">simplify_epsilon</span></code> used.</p>
+<p>Path simplification helps with all kinds of agent movement problems in &quot;open fields&quot; that are caused by having many unnecessary polygon edges.
+E.g. a terrain mesh when baked to a navigation mesh can cause an excessive polygon count due to all the small (but for pathfinding almost meaningless) height variations in the terrain.</p>
+<p>Path simplification also helps with &quot;steering&quot; agents because they only have more critical corner path points to aim for.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Path simplification is an additional final post-processing of the path. It adds extra performance costs to the query so only enable when actually needed.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Path simplification is exposed on the NavigationServer as a generic function. It can be used outside of navigation queries for all kinds of position arrays as well.</p>
+</div>
+</section>
+<section id="path-metadata">
+<h2>Path metadata<a class="headerlink" href="#path-metadata" title="Link to this heading"></a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Disabling unneeded path metadata options can improve performance and lower memory consumption.</p>
+</div>
+<p>A path query can return additional metadata for every path point.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">PATH_METADATA_INCLUDE_TYPES</span></code> flag collects an array with the primitive information about the point owners, e.g. if a point belongs to a region or link.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">PATH_METADATA_INCLUDE_RIDS</span></code> flag collects an array with the <a class="reference internal" href="../../classes/class_rid.html#class-rid"><span class="std std-ref">RIDs</span></a> of the point owners. Depending on point owner primitive, these RIDs can be used with the various NavigationServer functions related to regions or links.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">PATH_METADATA_INCLUDE_OWNERS</span></code> flag collects an array with the <code class="docutils literal notranslate"><span class="pre">ObjectIDs</span></code> of the point owners. These object IDs can be used with <a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-method-instance-from-id"><span class="std std-ref">&#64;GlobalScope.instance_from_id()</span></a> to retrieve the node behind that object instance, e.g. a NavigationRegion or NavigationLink node.</p></li>
+</ul>
+<p>By default all path metadata is collected as this metadata can be essential for more advanced navigation gameplay.</p>
+<ul class="simple">
+<li><p>E.g. to know what path point maps to what object or node owner inside the SceneTree.</p></li>
+<li><p>E.g. to know if a path point is the start or end of a navigation link that requires scripted takeover.</p></li>
+</ul>
+<p>For the most basic path uses metadata is not always needed.
+Path metadata collection can be selectively disabled to gain some performance and reduce memory consumption.</p>
+</section>
+<section id="excluding-or-including-regions">
+<h2>Excluding or including regions<a class="headerlink" href="#excluding-or-including-regions" title="Link to this heading"></a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Region filters can greatly help with performance on large navigation maps that are region partitioned.</p>
+</div>
+<p>Query parameters allow limiting the pathfinding to specific region navigation meshes.</p>
+<p>If a large navigation map is well partitioned into smaller regions this can greatly help with performance as the
+query can skip a large number of polygons at one of the earliest checks in the path search.</p>
+<ul class="simple">
+<li><p>By default and if left empty all regions of the queried navigation map are included.</p></li>
+<li><p>If a region <a class="reference internal" href="../../classes/class_rid.html#class-rid"><span class="std std-ref">RID</span></a> is added to the <code class="docutils literal notranslate"><span class="pre">excluded_regions</span></code> array the region's navigation mesh will be ignored in the path search.</p></li>
+<li><p>If a region <a class="reference internal" href="../../classes/class_rid.html#class-rid"><span class="std std-ref">RID</span></a> is added to the <code class="docutils literal notranslate"><span class="pre">included_regions</span></code> array the region's navigation mesh will be considered in the path search and also all other regions not included will be ignored as well.</p></li>
+<li><p>If a region ends up both included and excluded it is considered excluded.</p></li>
+</ul>
+<p>Region filters are very effective for performance when paired with navigation region chunks that are aligned on a grid.
+This way the filter can be set to only include the start position chunk and surrounding chunks instead of the entire navigation map.</p>
+<p>Even if the target might be outside these surrounding chunks (can always add more &quot;rings&quot;) the pathfinding will
+try to create a path to the polygon closest to the target.
+This usually creates half-paths heading in the general direction that are good enough,
+all for a fraction of the performance cost of a full map search.</p>
+<p>The following addition to the basic path query script showcases the idea how to integrate a region chunk mapping with the region filters.
+This is not a full working example.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-MkQgR0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tab" tabindex="0">2D GDScript</button><button aria-controls="panel-1-M0QgR0RTY3JpcHQ=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tab" tabindex="-1">3D GDScript</button></div><div aria-labelledby="tab-1-MkQgR0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node2D</span>
+
+<span class="c1"># ...</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">chunk_id_to_region_rid</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">[</span><span class="nb nb-Type">Vector2i</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">query_path</span><span class="p">(</span><span class="n">p_start_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">,</span><span class="w"> </span><span class="n">p_target_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">,</span><span class="w"> </span><span class="n">p_navigation_layers</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">PackedVector2Array</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># ...</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">regions_around_start_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nb nb-Type">RID</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">chunk_rings</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1"># Increase for very small regions or more quality.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">start_chunk_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">floor</span><span class="p">(</span><span class="n">p_start_position</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">))</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">start_chunk_id</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">chunk_rings</span><span class="p">,</span><span class="w"> </span><span class="n">start_chunk_id</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">chunk_rings</span><span class="p">):</span>
+<span class="w">        </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">start_chunk_id</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">chunk_rings</span><span class="p">,</span><span class="w"> </span><span class="n">start_chunk_id</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">chunk_rings</span><span class="p">):</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">chunk_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2i</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">chunk_id_to_region_rid</span><span class="o">.</span><span class="nf">has</span><span class="p">(</span><span class="n">chunk_id</span><span class="p">):</span>
+<span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">region</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chunk_id_to_region_rid</span><span class="p">[</span><span class="n">chunk_id</span><span class="p">]</span>
+<span class="w">                </span><span class="n">regions_around_start_position</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">query_parameters</span><span class="o">.</span><span class="vi">included_regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">regions_around_start_position</span>
+
+<span class="w">    </span><span class="c1"># ...</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-M0QgR0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node3D</span>
+
+<span class="c1"># ...</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">chunk_id_to_region_rid</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">[</span><span class="nb nb-Type">Vector3i</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">query_path</span><span class="p">(</span><span class="n">p_start_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">,</span><span class="w"> </span><span class="n">p_target_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">,</span><span class="w"> </span><span class="n">p_navigation_layers</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># ...</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">regions_around_start_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nb nb-Type">RID</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">chunk_rings</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1"># Increase for very small regions or more quality.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">start_chunk_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">floor</span><span class="p">(</span><span class="n">p_start_position</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">))</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1"># Assume a planar navigation map for simplicity.</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">start_chunk_id</span><span class="o">.</span><span class="vi">z</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">chunk_rings</span><span class="p">,</span><span class="w"> </span><span class="n">start_chunk_id</span><span class="o">.</span><span class="vi">z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">chunk_rings</span><span class="p">):</span>
+<span class="w">        </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">start_chunk_id</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">chunk_rings</span><span class="p">,</span><span class="w"> </span><span class="n">start_chunk_id</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">chunk_rings</span><span class="p">):</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">chunk_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3i</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">)</span>
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">chunk_id_to_region_rid</span><span class="o">.</span><span class="nf">has</span><span class="p">(</span><span class="n">chunk_id</span><span class="p">):</span>
+<span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">region</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chunk_id_to_region_rid</span><span class="p">[</span><span class="n">chunk_id</span><span class="p">]</span>
+<span class="w">                </span><span class="n">regions_around_start_position</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">query_parameters</span><span class="o">.</span><span class="vi">included_regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">regions_around_start_position</span>
+
+<span class="w">    </span><span class="c1"># ...</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="path-clipping-and-limits">
+<h2>Path clipping and limits<a class="headerlink" href="#path-clipping-and-limits" title="Link to this heading"></a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Sensibly set limits can greatly help with performance on large navigation maps, especially when targets end up being unreachable.</p>
+</div>
+<figure class="align-center" id="id3">
+<img alt="Clipping returned paths to specific distances" src="../../_images/path_clip_and_limits.gif" />
+<figcaption>
+<p><span class="caption-text">Clipping returned paths to specific distances.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Query parameters allow clipping returned paths to specific lengths.
+These options clip the path as a part of post-processing. The path is still searched as if at full length,
+so it will have the same quality.
+Path length clipping can be helpful in creating paths that better fit constrained gameplay, e.g. tactical games with limited movement ranges.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">path_return_max_length</span></code> property can be used to clip the returned path to a specific max length.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">path_return_max_radius</span></code> property can be used to clip the returned path inside a circle (2D) or sphere (3D) radius around the start position.</p></li>
+</ul>
+<p>Query parameters allow limiting the path search to only search up to a specific distance or a specific number of searched polygons.
+These options are for performance and affect the path search directly.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">path_search_max_distance</span></code> property can be used to stop the path search when going over this distance from the start position.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">path_search_max_polygons</span></code> property can be used to stop the path search when going over this searched polygon number.</p></li>
+</ul>
+<p>When the path search is stopped by reaching a limit the path resets and creates a path from the start position polygon
+to the polygon found so far that is closest to the target position.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>While good for performance, if path search limit values are set too low they can affect the path quality very negatively.
+Depending on polygon layout and search pattern the returned paths might go into completely wrong directions instead of the direction of the target.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="navigation_using_navigationpaths.html" class="btn btn-neutral float-left" title="Using NavigationPaths" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="navigation_using_navigationagents.html" class="btn btn-neutral float-right" title="Using NavigationAgents" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

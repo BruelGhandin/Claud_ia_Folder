@@ -1,0 +1,798 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Command line tutorial" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/editor/command_line_tutorial.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Some developers like using the command line extensively. Godot is designed to be friendly to them, so here are the steps for working entirely from the command line. Given the engine relies on almos..." />
+<meta name="description" content="Some developers like using the command line extensively. Godot is designed to be friendly to them, so here are the steps for working entirely from the command line. Given the engine relies on almos..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Command line tutorial &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using an external text editor" href="external_editor.html" />
+    <link rel="prev" title="Using the Web editor" href="using_the_web_editor.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/editor/command_line_tutorial" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/editor/command_line_tutorial.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Editor introduction</a></li>
+      <li class="breadcrumb-item active">Command line tutorial</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/editor/command_line_tutorial.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="command-line-tutorial">
+<span id="doc-command-line-tutorial"></span><h1>Command line tutorial<a class="headerlink" href="#command-line-tutorial" title="Link to this heading"></a></h1>
+<p>Some developers like using the command line extensively. Godot is
+designed to be friendly to them, so here are the steps for working
+entirely from the command line. Given the engine relies on almost no
+external libraries, initialization times are pretty fast, making it
+suitable for this workflow.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On Windows and Linux, you can run a Godot binary in a terminal by specifying
+its relative or absolute path.</p>
+<p>On macOS, the process is different due to Godot being contained within a
+<code class="docutils literal notranslate"><span class="pre">.app</span></code> bundle (which is a <em>folder</em>, not a file). To run a Godot binary
+from a terminal on macOS, you have to <code class="docutils literal notranslate"><span class="pre">cd</span></code> to the folder where the Godot
+application bundle is located, then run <code class="docutils literal notranslate"><span class="pre">Godot.app/Contents/MacOS/Godot</span></code>
+followed by any command line arguments. If you've renamed the application
+bundle from <code class="docutils literal notranslate"><span class="pre">Godot</span></code> to another name, make sure to edit this command line
+accordingly.</p>
+</div>
+<section id="command-line-reference">
+<h2>Command line reference<a class="headerlink" href="#command-line-reference" title="Link to this heading"></a></h2>
+<p><strong>Legend</strong></p>
+<ul class="simple">
+<li><p><img alt="release" src="../../_images/template_release.svg" /> Available in editor builds, debug export templates and release export templates.</p></li>
+<li><p><img alt="debug" src="../../_images/template_debug.svg" /> Available in editor builds and debug export templates only.</p></li>
+<li><p><img alt="extended" src="../../_images/template_extended.svg" /> Only available in editor builds, and export templates compiled with <code class="docutils literal notranslate"><span class="pre">disable_path_overrides=false</span></code>.</p></li>
+<li><p><img alt="editor" src="../../_images/editor.svg" /> Only available in editor builds.</p></li>
+</ul>
+<p>Note that unknown command line arguments have no effect whatsoever. The engine
+will <strong>not</strong> warn you when using a command line argument that doesn't exist with a
+given build type.</p>
+<p><strong>General options</strong></p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Display the list of command line options.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--version</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Display the version string.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-v</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Use verbose stdout mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-q</span></code>, <code class="docutils literal notranslate"><span class="pre">--quiet</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Quiet mode, silences stdout messages. Errors are still displayed.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--no-header</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Do not print engine version and rendering method header on startup.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Run options</strong></p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--</span></code>, <code class="docutils literal notranslate"><span class="pre">++</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Separator for user-provided arguments. Following arguments are not used by the engine, but can be read from <code class="docutils literal notranslate"><span class="pre">OS.get_cmdline_user_args()</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-e</span></code>, <code class="docutils literal notranslate"><span class="pre">--editor</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Start the editor instead of running the scene.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>, <code class="docutils literal notranslate"><span class="pre">--project-manager</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Start the Project Manager, even if a project is auto-detected.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--recovery-mode</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Start the editor in recovery mode, which disables features that can typically cause startup crashes, such as tool scripts, editor plugins, and
+GDExtension addons.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--debug-server</span> <span class="pre">&lt;uri&gt;</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Start the editor debug server (<code class="docutils literal notranslate"><span class="pre">&lt;protocol&gt;://&lt;host/IP&gt;[:&lt;port&gt;]</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">tcp://127.0.0.1:6007</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dap-port</span> <span class="pre">&lt;port&gt;</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Use the specified port for the GDScript Debug Adapter Protocol. Recommended port range <code class="docutils literal notranslate"><span class="pre">[1024,</span> <span class="pre">49151]</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--lsp-port</span> <span class="pre">&lt;port&gt;</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Use the specified port for the GDScript Language Server Protocol. Recommended port range <code class="docutils literal notranslate"><span class="pre">[1024,</span> <span class="pre">49151]</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--quit</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Quit after the first iteration.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--quit-after</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Quit after the given number of iterations. Set to 0 to disable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-l</span></code>, <code class="docutils literal notranslate"><span class="pre">--language</span> <span class="pre">&lt;locale&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Use a specific locale. <code class="docutils literal notranslate"><span class="pre">&lt;locale&gt;</span></code> follows the format <code class="docutils literal notranslate"><span class="pre">language_Script_COUNTRY_VARIANT</span></code> where language is a 2 or 3-letter language code in
+lowercase and the rest is optional. See <a class="reference internal" href="../i18n/locales.html#doc-locales"><span class="std std-ref">Locale codes</span></a> for more details.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--path</span> <span class="pre">&lt;directory&gt;</span></code></p></td>
+<td><p><img alt="extended" src="../../_images/template_extended.svg" /> Path to a project (<code class="docutils literal notranslate"><span class="pre">&lt;directory&gt;</span></code> must contain a &quot;project.godot&quot; file).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--scene</span> <span class="pre">&lt;path&gt;</span></code></p></td>
+<td><p><img alt="extended" src="../../_images/template_extended.svg" /> Path or UID of a scene in the project that should be started.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--main-pack</span> <span class="pre">&lt;file&gt;</span></code></p></td>
+<td><p><img alt="extended" src="../../_images/template_extended.svg" /> Path to a pack (.pck) file to load.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--render-thread</span> <span class="pre">&lt;mode&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Render thread mode (&quot;unsafe&quot;, &quot;safe&quot;, &quot;separate&quot;). See <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-rendering-driver-threads-thread-model"><span class="std std-ref">Thread Model</span></a>
+for more details.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--remote-fs</span> <span class="pre">&lt;address&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Remote filesystem (<code class="docutils literal notranslate"><span class="pre">&lt;host/IP&gt;[:&lt;port&gt;]</span></code> address).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--remote-fs-password</span> <span class="pre">&lt;password&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Password for remote filesystem.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--audio-driver</span> <span class="pre">&lt;driver&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Audio driver. Use <code class="docutils literal notranslate"><span class="pre">--help</span></code> first to display the list of available drivers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--display-driver</span> <span class="pre">&lt;driver&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Display driver (and rendering driver). Use <code class="docutils literal notranslate"><span class="pre">--help</span></code> first to display the list of available drivers.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--audio-output-latency</span> <span class="pre">&lt;ms&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Override audio output latency in milliseconds (default is 15 ms). Lower values make sound playback more reactive but increase CPU usage, and may
+result in audio cracking if the CPU can't keep up.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--rendering-method</span> <span class="pre">&lt;renderer&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Renderer name. Valid values are <code class="docutils literal notranslate"><span class="pre">forward_plus</span></code>, <code class="docutils literal notranslate"><span class="pre">mobile</span></code>, and <code class="docutils literal notranslate"><span class="pre">gl_compatibility</span></code>. Requires driver support.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--rendering-driver</span> <span class="pre">&lt;driver&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Rendering driver (depends on display driver). Use <code class="docutils literal notranslate"><span class="pre">--help</span></code> first to display the list of available drivers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--gpu-index</span> <span class="pre">&lt;device_index&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Use a specific GPU (only available on the Forward+/Mobile renderers; run with <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> to get available device list).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--text-driver</span> <span class="pre">&lt;driver&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Text driver (Fonts, BiDi, shaping).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--tablet-driver</span> <span class="pre">&lt;driver&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Pen tablet input driver.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--headless</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Enable headless mode (<code class="docutils literal notranslate"><span class="pre">--display-driver</span> <span class="pre">headless</span> <span class="pre">--audio-driver</span> <span class="pre">Dummy</span></code>). Useful for servers and with <code class="docutils literal notranslate"><span class="pre">--script</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--log-file</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Write output/error log to the specified path instead of the default location defined by the project. <code class="docutils literal notranslate"><span class="pre">&lt;file&gt;</span></code> path should be absolute or
+relative to the project directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--write-movie</span> <span class="pre">&lt;file&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Run the engine in a way that a movie is written (usually with .avi or .png extension).
+<code class="docutils literal notranslate"><span class="pre">--fixed-fps</span></code> is forced when enabled, but can be used to change movie FPS.
+<code class="docutils literal notranslate"><span class="pre">--disable-vsync</span></code> can speed up movie writing but makes interaction more difficult.
+<code class="docutils literal notranslate"><span class="pre">--quit-after</span></code> can be used to specify the number of frames to write.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Display options</strong></p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-f</span></code>, <code class="docutils literal notranslate"><span class="pre">--fullscreen</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Request fullscreen mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-m</span></code>, <code class="docutils literal notranslate"><span class="pre">--maximized</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Request a maximized window.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-w</span></code>, <code class="docutils literal notranslate"><span class="pre">--windowed</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Request windowed mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-t</span></code>, <code class="docutils literal notranslate"><span class="pre">--always-on-top</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Request an always-on-top window.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--resolution</span> <span class="pre">&lt;W&gt;x&lt;H&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Request window resolution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--position</span> <span class="pre">&lt;X&gt;,&lt;Y&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Request window position.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--screen</span> <span class="pre">&lt;N&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Request window screen.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--single-window</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Use a single window (no separate subwindows).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--xr-mode</span> <span class="pre">&lt;mode&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Select XR mode (&quot;default&quot;, &quot;off&quot;, &quot;on&quot;).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--wid</span> <span class="pre">&lt;window_id&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Request parented to window.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--accessibility</span> <span class="pre">&lt;mode&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Select accessibility mode [&quot;auto&quot; (when screen reader is running,
+default), &quot;always&quot;, &quot;disabled&quot;].</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Debug options</strong></p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-d</span></code>, <code class="docutils literal notranslate"><span class="pre">--debug</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Debug (local stdout debugger).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-b</span></code>, <code class="docutils literal notranslate"><span class="pre">--breakpoints</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Breakpoint list as source::line comma-separated pairs, no spaces (use <code class="docutils literal notranslate"><span class="pre">%20</span></code> instead).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--ignore-error-breaks</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> If debugger is connected, prevents sending error breakpoints.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--profiling</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Enable profiling in the script debugger.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--gpu-profile</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Show a GPU profile of the tasks that took the most time during frame rendering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--gpu-validation</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Enable graphics API <a class="reference internal" href="../../engine_details/development/debugging/vulkan/vulkan_validation_layers.html#doc-vulkan-validation-layers"><span class="std std-ref">validation layers</span></a> for debugging.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--gpu-abort</span></code></p></td>
+<td><p><img alt="debug" src="../../_images/template_debug.svg" /> Abort on GPU errors (usually validation layer errors), may help see the problem if your system freezes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--generate-spirv-debug-info</span></code></p></td>
+<td><p><img alt="debug" src="../../_images/template_debug.svg" /> Generate SPIR-V debug information. This allows source-level shader debugging with RenderDoc.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--extra-gpu-memory-tracking</span></code></p></td>
+<td><p><img alt="debug" src="../../_images/template_debug.svg" /> Enables additional memory tracking (see class reference for
+<cite>RenderingDevice.get_driver_and_device_memory_report()</cite> and linked methods). Currently only implemented for
+Vulkan. Enabling this feature may cause crashes on some systems due to buggy drivers or bugs in the Vulkan
+Loader. See <a class="reference external" href="https://github.com/godotengine/godot/issues/95967">https://github.com/godotengine/godot/issues/95967</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--accurate-breadcrumbs</span></code></p></td>
+<td><p><img alt="debug" src="../../_images/template_debug.svg" /> Force barriers between breadcrumbs. Useful for narrowing down a command causing GPU resets. Currently
+only implemented for Vulkan.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--remote-debug</span> <span class="pre">&lt;uri&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Remote debug (<code class="docutils literal notranslate"><span class="pre">&lt;protocol&gt;://&lt;host/IP&gt;[:&lt;port&gt;]</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">tcp://127.0.0.1:6007</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--single-threaded-scene</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Scene tree runs in single-threaded mode. Sub-thread groups are disabled and run on the main thread.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--debug-collisions</span></code></p></td>
+<td><p><img alt="debug" src="../../_images/template_debug.svg" /> Show collision shapes when running the scene.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--debug-paths</span></code></p></td>
+<td><p><img alt="debug" src="../../_images/template_debug.svg" /> Show path lines when running the scene.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--debug-navigation</span></code></p></td>
+<td><p><img alt="debug" src="../../_images/template_debug.svg" /> Show navigation polygons when running the scene.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--debug-avoidance</span></code></p></td>
+<td><p><img alt="debug" src="../../_images/template_debug.svg" /> Show navigation avoidance debug visuals when running the scene.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--debug-stringnames</span></code></p></td>
+<td><p><img alt="debug" src="../../_images/template_debug.svg" /> Print all StringName allocations to stdout when the engine quits.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--debug-canvas-item-redraw</span></code></p></td>
+<td><p><img alt="debug" src="../../_images/template_debug.svg" /> Display a rectangle each time a canvas item requests a redraw (useful to troubleshoot low processor
+mode).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--max-fps</span> <span class="pre">&lt;fps&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Set a maximum number of frames per second rendered (can be used to limit power usage). A value of 0
+results in unlimited framerate.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--frame-delay</span> <span class="pre">&lt;ms&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Simulate high CPU load (delay each frame by &lt;ms&gt; milliseconds). Do not use as a FPS limiter; use
+<code class="docutils literal notranslate"><span class="pre">--max-fps</span></code> instead.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--time-scale</span> <span class="pre">&lt;scale&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Force time scale (higher values are faster, 1.0 is normal speed).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--disable-vsync</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Forces disabling of vertical synchronization, even if enabled in the project settings.
+Does not override driver-level V-Sync enforcement.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--disable-render-loop</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Disable render loop so rendering only occurs when called explicitly from script.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--disable-crash-handler</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Disable crash handler when supported by the platform code.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--fixed-fps</span> <span class="pre">&lt;fps&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Force a fixed number of frames per second. This setting disables real-time synchronization.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--delta-smoothing</span> <span class="pre">&lt;enable&gt;</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Enable or disable frame delta smoothing (&quot;enable&quot;, &quot;disable&quot;).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--print-fps</span></code></p></td>
+<td><p><img alt="release" src="../../_images/template_release.svg" /> Print the frames per second to the stdout.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--editor-pseudolocalization</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Enable pseudolocalization for the editor and the project manager.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Standalone tools</strong></p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-s</span></code>, <code class="docutils literal notranslate"><span class="pre">--script</span> <span class="pre">&lt;script&gt;</span></code></p></td>
+<td><p><img alt="extended" src="../../_images/template_extended.svg" /> Run a script. <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> must be a resource path relative to the project (<code class="docutils literal notranslate"><span class="pre">myscript.gd</span></code> will be interpreted as <code class="docutils literal notranslate"><span class="pre">res://my_script.gd</span></code>)
+or an absolute filesystem path (for example, on Windows: <code class="docutils literal notranslate"><span class="pre">C:/tmp/my_script.gd</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--main-loop</span> <span class="pre">&lt;main_loop_name&gt;</span></code></p></td>
+<td><p><img alt="extended" src="../../_images/template_extended.svg" /> Run a MainLoop specified by its global class name.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--check-only</span></code></p></td>
+<td><p><img alt="extended" src="../../_images/template_extended.svg" /> Only parse for errors and quit (use with <code class="docutils literal notranslate"><span class="pre">--script</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--import</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Starts the editor, waits for any resources to be imported, and then quits. Implies <code class="docutils literal notranslate"><span class="pre">--editor</span></code> and <code class="docutils literal notranslate"><span class="pre">--quit</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--export-release</span> <span class="pre">&lt;preset&gt;</span> <span class="pre">&lt;path&gt;</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Export the project in release mode using the given preset and output path. The preset name should match one defined in &quot;export_presets.cfg&quot;.
+<code class="docutils literal notranslate"><span class="pre">&lt;path&gt;</span></code> should be absolute or relative to the project directory, and include the filename for the binary (e.g. &quot;builds/game.exe&quot;). The target
+directory must exist.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--export-debug</span> <span class="pre">&lt;preset&gt;</span> <span class="pre">&lt;path&gt;</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Like <code class="docutils literal notranslate"><span class="pre">--export-release</span></code>, but use debug template. Implies <code class="docutils literal notranslate"><span class="pre">--import</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--export-pack</span> <span class="pre">&lt;preset&gt;</span> <span class="pre">&lt;path&gt;</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Like <code class="docutils literal notranslate"><span class="pre">--export-release</span></code>, but only export the game pack for the given preset. The <code class="docutils literal notranslate"><span class="pre">&lt;path&gt;</span></code> extension determines whether it will be in PCK
+or ZIP format. Implies <code class="docutils literal notranslate"><span class="pre">--import</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--export-patch</span> <span class="pre">&lt;preset&gt;</span> <span class="pre">&lt;path&gt;</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Export pack with changed files only. See <code class="docutils literal notranslate"><span class="pre">--export-pack</span></code> description for other considerations.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--patches</span> <span class="pre">&lt;paths&gt;</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> List of patches to use with <code class="docutils literal notranslate"><span class="pre">--export-patch</span></code>. The list is comma-separated.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--install-android-build-template</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Install the Android build template. Used in conjunction with <code class="docutils literal notranslate"><span class="pre">--export-release</span></code> or <code class="docutils literal notranslate"><span class="pre">--export-debug</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--convert-3to4</span> <span class="pre">[&lt;max_file_kb&gt;]</span> <span class="pre">[&lt;max_line_size&gt;]</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Convert project from Godot 3.x to Godot 4.x.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--validate-conversion-3to4</span> <span class="pre">[&lt;max_file_kb&gt;]</span> <span class="pre">[&lt;max_line_size&gt;]</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Show what elements will be renamed when converting project from Godot 3.x to Godot 4.x.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--doctool</span> <span class="pre">[&lt;path&gt;]</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Dump the engine API reference to the given <code class="docutils literal notranslate"><span class="pre">&lt;path&gt;</span></code> in XML format, merging if existing files are found.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--no-docbase</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Disallow dumping the base types (used with <code class="docutils literal notranslate"><span class="pre">--doctool</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--gdextension-docs</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Rather than dumping the engine API, generate API reference from all the GDExtensions loaded in the current project (used with
+<code class="docutils literal notranslate"><span class="pre">--doctool</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--gdscript-docs</span> <span class="pre">&lt;path&gt;</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Rather than dumping the engine API, generate API reference from the inline documentation in the GDScript files found in <code class="docutils literal notranslate"><span class="pre">&lt;path&gt;</span></code>
+(used with <code class="docutils literal notranslate"><span class="pre">--doctool</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--build-solutions</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Build the scripting solutions (e.g. for C# projects). Implies <code class="docutils literal notranslate"><span class="pre">--editor</span></code> and requires a valid project to edit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dump-gdextension-interface</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Generate GDExtension header file &quot;gdextension_interface.h&quot; in the current folder. This file is the base file required to implement
+a GDExtension.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--dump-gdextension-interface-json</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Generate a JSON dump of the GDExtension interface named &quot;gdextension_interface.json&quot; in the current folder.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dump-extension-api</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Generate JSON dump of the Godot API for GDExtension bindings named &quot;extension_api.json&quot; in the current folder.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--dump-extension-api-with-docs</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Generate JSON dump of the Godot API like the previous option, but including documentation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--validate-extension-api</span> <span class="pre">&lt;path&gt;</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Validate an extension API file dumped (with the option above) from a previous version of the engine to ensure API compatibility.
+If incompatibilities or errors are detected, the return code will be non-zero.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--benchmark</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Benchmark the run time and print it to console.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--benchmark-file</span> <span class="pre">&lt;path&gt;</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Benchmark the run time and save it to a given file in JSON format. The path should be absolute.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--test</span> <span class="pre">[--help]</span></code></p></td>
+<td><p><img alt="editor" src="../../_images/editor.svg" /> Run <a class="reference internal" href="../../engine_details/architecture/unit_testing.html#doc-unit-testing"><span class="std std-ref">unit tests</span></a> (requires compiling the engine with <code class="docutils literal notranslate"><span class="pre">tests=yes</span></code>). Use <code class="docutils literal notranslate"><span class="pre">--test</span> <span class="pre">--help</span></code> for more information.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="path">
+<h2>Path<a class="headerlink" href="#path" title="Link to this heading"></a></h2>
+<p>It is recommended to place your Godot editor binary in your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment
+variable, so it can be executed easily from any place by typing <code class="docutils literal notranslate"><span class="pre">godot</span></code>.
+You can do so on Linux by placing the Godot binary in <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code> and
+making sure it is called <code class="docutils literal notranslate"><span class="pre">godot</span></code> (case-sensitive).</p>
+<p>To achieve this on Windows or macOS easily, you can install Godot using
+<a class="reference external" href="https://scoop.sh">Scoop</a> (on Windows) or <a class="reference external" href="https://brew.sh">Homebrew</a>
+(on macOS). This will automatically make the copy of Godot installed
+available in the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-V2luZG93cw==" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="0">Windows</button><button aria-controls="panel-0-bWFjT1M=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-bWFjT1M=" name="bWFjT1M=" role="tab" tabindex="-1">macOS</button></div><div aria-labelledby="tab-0-V2luZG93cw==" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add &quot;Extras&quot; bucket</span>
+scoop<span class="w"> </span>bucket<span class="w"> </span>add<span class="w"> </span>extras
+
+<span class="c1"># Standard editor:</span>
+scoop<span class="w"> </span>install<span class="w"> </span>godot
+
+<span class="c1"># Editor with C# support (will be available as `godot-mono` in `PATH`):</span>
+scoop<span class="w"> </span>install<span class="w"> </span>godot-mono
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-bWFjT1M=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-bWFjT1M=" name="bWFjT1M=" role="tabpanel" tabindex="0"><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Standard editor:</span>
+brew<span class="w"> </span>install<span class="w"> </span>godot
+
+<span class="c1"># Editor with C# support (will be available as `godot-mono` in `PATH`):</span>
+brew<span class="w"> </span>install<span class="w"> </span>godot-mono
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="setting-the-project-path">
+<h2>Setting the project path<a class="headerlink" href="#setting-the-project-path" title="Link to this heading"></a></h2>
+<p>Depending on where your Godot binary is located and what your current
+working directory is, you may need to set the path to your project
+for any of the following commands to work correctly.</p>
+<p>When running the editor, this can be done by giving the path to the <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> file
+of your project as either the first argument, like this:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot<span class="w"> </span>path_to_your_project/project.godot<span class="w"> </span><span class="o">[</span>other<span class="o">]</span><span class="w"> </span><span class="o">[</span>commands<span class="o">]</span><span class="w"> </span><span class="o">[</span>and<span class="o">]</span><span class="w"> </span><span class="o">[</span>args<span class="o">]</span>
+</pre></div>
+</div>
+<p>For all commands, this can be done by using the <code class="docutils literal notranslate"><span class="pre">--path</span></code> argument:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot<span class="w"> </span>--path<span class="w"> </span>path_to_your_project<span class="w"> </span><span class="o">[</span>other<span class="o">]</span><span class="w"> </span><span class="o">[</span>commands<span class="o">]</span><span class="w"> </span><span class="o">[</span>and<span class="o">]</span><span class="w"> </span><span class="o">[</span>args<span class="o">]</span>
+</pre></div>
+</div>
+<p>For example, the full command for exporting your game (as explained below) might look like this:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot<span class="w"> </span>--headless<span class="w"> </span>--path<span class="w"> </span>path_to_your_project<span class="w"> </span>--export-release<span class="w"> </span>my_export_preset_name<span class="w"> </span>game.exe
+</pre></div>
+</div>
+<p>When starting from a subdirectory of your project, use the <code class="docutils literal notranslate"><span class="pre">--upwards</span></code> argument for Godot to
+automatically find the <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> file by recursively searching the parent directories.</p>
+<p>For example, running a scene (as explained below) nested in a subdirectory might look like this
+when your working directory is in the same path:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot<span class="w"> </span>--upwards<span class="w"> </span>nested_scene.tscn
+</pre></div>
+</div>
+</section>
+<section id="creating-a-project">
+<h2>Creating a project<a class="headerlink" href="#creating-a-project" title="Link to this heading"></a></h2>
+<p>Creating a project from the command line can be done by navigating the
+shell to the desired place and making a <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> file.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>newgame
+<span class="nb">cd</span><span class="w"> </span>newgame
+touch<span class="w"> </span>project.godot
+</pre></div>
+</div>
+<p>The project can now be opened with Godot.</p>
+</section>
+<section id="running-the-editor">
+<h2>Running the editor<a class="headerlink" href="#running-the-editor" title="Link to this heading"></a></h2>
+<p>Running the editor is done by executing Godot with the <code class="docutils literal notranslate"><span class="pre">-e</span></code> flag. This
+must be done from within the project directory or by setting the project path as explained above,
+otherwise the command is ignored and the Project Manager appears.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot<span class="w"> </span>-e
+</pre></div>
+</div>
+<p>When passing in the full path to the <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> file, the <code class="docutils literal notranslate"><span class="pre">-e</span></code> flag may be omitted.</p>
+<p>If a scene has been created and saved, it can be edited later by running
+the same code with that scene as argument.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot<span class="w"> </span>-e<span class="w"> </span>scene.tscn
+</pre></div>
+</div>
+</section>
+<section id="erasing-a-scene">
+<h2>Erasing a scene<a class="headerlink" href="#erasing-a-scene" title="Link to this heading"></a></h2>
+<p>Godot is friends with your filesystem and will not create extra metadata files.
+Use <code class="docutils literal notranslate"><span class="pre">rm</span></code> to erase a scene file. Make sure nothing references that scene.
+Otherwise, an error will be thrown upon opening the project.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>scene.tscn
+</pre></div>
+</div>
+</section>
+<section id="running-the-game">
+<h2>Running the game<a class="headerlink" href="#running-the-game" title="Link to this heading"></a></h2>
+<p>To run the game, execute Godot within the project directory or with the project path as explained above.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot
+</pre></div>
+</div>
+<p>Note that passing in the <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> file will always run the editor instead of running the game.</p>
+<p>When a specific scene needs to be tested, pass that scene to the command line.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot<span class="w"> </span>scene.tscn
+</pre></div>
+</div>
+</section>
+<section id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Link to this heading"></a></h2>
+<p>Catching errors in the command line can be a difficult task because they
+scroll quickly. For this, a command line debugger is provided by adding
+<code class="docutils literal notranslate"><span class="pre">-d</span></code>. It works for running either the game or a single scene.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot<span class="w"> </span>-d
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot<span class="w"> </span>-d<span class="w"> </span>scene.tscn
+</pre></div>
+</div>
+</section>
+<section id="exporting">
+<span id="doc-command-line-tutorial-exporting"></span><h2>Exporting<a class="headerlink" href="#exporting" title="Link to this heading"></a></h2>
+<p>Exporting the project from the command line is also supported. This is
+especially useful for continuous integration setups.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">--headless</span></code> command line argument is <strong>required</strong> on platforms
+that do not have GPU access (such as continuous integration). On platforms
+with GPU access, <code class="docutils literal notranslate"><span class="pre">--headless</span></code> prevents a window from spawning while the
+project is exporting.</p>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># `godot` must be a Godot editor binary, not an export template.</span>
+<span class="c1"># Also, export templates must be installed for the editor</span>
+<span class="c1"># (or a valid custom export template must be defined in the export preset).</span>
+godot<span class="w"> </span>--headless<span class="w"> </span>--export-release<span class="w"> </span><span class="s2">&quot;Linux/X11&quot;</span><span class="w"> </span>/var/builds/project
+godot<span class="w"> </span>--headless<span class="w"> </span>--export-release<span class="w"> </span>Android<span class="w"> </span>/var/builds/project.apk
+</pre></div>
+</div>
+<p>The preset name must match the name of an export preset defined in the
+project's <code class="docutils literal notranslate"><span class="pre">export_presets.cfg</span></code> file. If the preset name contains spaces or
+special characters (such as &quot;Windows Desktop&quot;), it must be surrounded with quotes.</p>
+<p>To export a debug version of the game, use the <code class="docutils literal notranslate"><span class="pre">--export-debug</span></code> switch instead
+of <code class="docutils literal notranslate"><span class="pre">--export-release</span></code>. Their parameters and usage are the same.</p>
+<p>To export only a PCK file, use the <code class="docutils literal notranslate"><span class="pre">--export-pack</span></code> option followed by the
+preset name and output path, with the file extension, instead of
+<code class="docutils literal notranslate"><span class="pre">--export-release</span></code> or <code class="docutils literal notranslate"><span class="pre">--export-debug</span></code>. The output path extension determines
+the package's format, either PCK or ZIP.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When specifying a relative path as the path for <code class="docutils literal notranslate"><span class="pre">--export-release</span></code>, <code class="docutils literal notranslate"><span class="pre">--export-debug</span></code>
+or <code class="docutils literal notranslate"><span class="pre">--export-pack</span></code>, the path will be relative to the directory containing
+the <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> file, <strong>not</strong> relative to the current working directory.</p>
+</div>
+</section>
+<section id="running-a-script">
+<h2>Running a script<a class="headerlink" href="#running-a-script" title="Link to this heading"></a></h2>
+<p>It is possible to run a <code class="docutils literal notranslate"><span class="pre">.gd</span></code> script from the command line.
+This feature is especially useful in large projects, e.g. for batch
+conversion of assets or custom import/export.</p>
+<p>The script must inherit from <code class="docutils literal notranslate"><span class="pre">SceneTree</span></code> or <code class="docutils literal notranslate"><span class="pre">MainLoop</span></code>.</p>
+<p>Here is an example <code class="docutils literal notranslate"><span class="pre">sayhello.gd</span></code>, showing how it works:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env -S godot -s</span>
+<span class="n">extends</span> <span class="n">SceneTree</span>
+
+<span class="n">func</span> <span class="n">_init</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello!&quot;</span><span class="p">)</span>
+    <span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>And how to run it:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prints &quot;Hello!&quot; to standard output.</span>
+godot<span class="w"> </span>-s<span class="w"> </span>sayhello.gd
+</pre></div>
+</div>
+<p>If no <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> exists at the path, current path is assumed to be the
+current working directory (unless <code class="docutils literal notranslate"><span class="pre">--path</span></code> is specified).</p>
+<p>The script path will be interpreted as a resource path relative to
+the project, here <code class="docutils literal notranslate"><span class="pre">res://sayhello.gd</span></code>. You can also use an absolute
+filesystem path instead, which is useful if the script is located
+outside of the project directory.</p>
+<p>The first line of <code class="docutils literal notranslate"><span class="pre">sayhello.gd</span></code> above is commonly referred to as
+a <em>shebang</em>. If the Godot binary is in your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> as <code class="docutils literal notranslate"><span class="pre">godot</span></code>,
+it allows you to run the script as follows in modern Linux
+distributions, as well as macOS:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mark script as executable.</span>
+chmod<span class="w"> </span>+x<span class="w"> </span>sayhello.gd
+<span class="c1"># Prints &quot;Hello!&quot; to standard output.</span>
+./sayhello.gd
+</pre></div>
+</div>
+<p>If the above doesn't work in your current version of Linux or macOS, you can
+always have the shebang run Godot straight from where it is located as follows:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/godot -s</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="using_the_web_editor.html" class="btn btn-neutral float-left" title="Using the Web editor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="external_editor.html" class="btn btn-neutral float-right" title="Using an external text editor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

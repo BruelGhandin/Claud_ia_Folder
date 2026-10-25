@@ -1,0 +1,798 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Compiling for Linux, *BSD" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/development/compiling/compiling_for_linuxbsd.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Requirements: For compiling under Linux or other Unix variants, the following is required: GCC 9+ or Clang 6+., Python 3.9+., SCons 4.4+ build system., pkg-config (used to detect the development li..." />
+<meta name="description" content="Requirements: For compiling under Linux or other Unix variants, the following is required: GCC 9+ or Clang 6+., Python 3.9+., SCons 4.4+ build system., pkg-config (used to detect the development li..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Compiling for Linux, *BSD &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Compiling for macOS" href="compiling_for_macos.html" />
+    <link rel="prev" title="Compiling for Windows" href="compiling_for_windows.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/development/compiling/compiling_for_linuxbsd" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="engine_details/development/compiling/compiling_for_linuxbsd.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Engine development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Building from source</a></li>
+      <li class="breadcrumb-item active">Compiling for Linux, *BSD</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/development/compiling/compiling_for_linuxbsd.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="compiling-for-linux-bsd">
+<span id="doc-compiling-for-linuxbsd"></span><h1>Compiling for Linux, *BSD<a class="headerlink" href="#compiling-for-linux-bsd" title="Link to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>This page describes how to compile Linux editor and export template binaries from source.
+If you're looking to export your project to Linux instead, read <a class="reference internal" href="../../../tutorials/export/exporting_for_linux.html#doc-exporting-for-linux"><span class="std std-ref">Exporting for Linux</span></a>.</p>
+</div>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p>For compiling under Linux or other Unix variants, the following is
+required:</p>
+<ul class="simple">
+<li><p>GCC 9+ or Clang 6+.</p></li>
+<li><p><a class="reference external" href="https://www.python.org/downloads/">Python 3.9+</a>.</p></li>
+<li><p><a class="reference external" href="https://scons.org/pages/download.html">SCons 4.4+</a> build system.</p></li>
+<li><p>pkg-config (used to detect the development libraries listed below).</p></li>
+<li><p>Development libraries:</p>
+<ul>
+<li><p>X11, Xcursor, Xinerama, Xi and XRandR.</p></li>
+<li><p>Wayland and wayland-scanner.</p></li>
+<li><p>Mesa.</p></li>
+<li><p>ALSA.</p></li>
+<li><p>PulseAudio.</p></li>
+</ul>
+</li>
+<li><p><em>Optional</em> - libudev (build with <code class="docutils literal notranslate"><span class="pre">udev=yes</span></code>).</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To get the Godot source code for compiling, see <a class="reference internal" href="getting_source.html#doc-getting-source"><span class="std std-ref">Getting the source</span></a>.</p>
+<p>For a general overview of SCons usage for Godot, see <a class="reference internal" href="introduction_to_the_buildsystem.html#doc-introduction-to-the-buildsystem"><span class="std std-ref">Introduction to the buildsystem</span></a>.</p>
+</div>
+<section id="distro-specific-one-liners">
+<span id="doc-compiling-for-linuxbsd-oneliners"></span><h3>Distro-specific one-liners<a class="headerlink" href="#distro-specific-one-liners" title="Link to this heading"></a></h3>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Alpine Linux</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Arch Linux</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Debian/Ubuntu</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">Fedora</button><button aria-controls="panel-0-0-4" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-4" name="0-4" role="tab" tabindex="-1">FreeBSD</button><button aria-controls="panel-0-0-5" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-5" name="0-5" role="tab" tabindex="-1">Gentoo</button><button aria-controls="panel-0-0-6" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-6" name="0-6" role="tab" tabindex="-1">Mageia</button><button aria-controls="panel-0-0-7" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-7" name="0-7" role="tab" tabindex="-1">NetBSD</button><button aria-controls="panel-0-0-8" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-8" name="0-8" role="tab" tabindex="-1">OpenBSD</button><button aria-controls="panel-0-0-9" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-9" name="0-9" role="tab" tabindex="-1">openKylin</button><button aria-controls="panel-0-0-10" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-10" name="0-10" role="tab" tabindex="-1">openSUSE</button><button aria-controls="panel-0-0-11" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-11" name="0-11" role="tab" tabindex="-1">Solus</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apk<span class="w"> </span>add<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>scons<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pkgconf<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>gcc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>g++<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libx11-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxcursor-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxinerama-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxi-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxrandr-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mesa-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>eudev-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>alsa-lib-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pulseaudio-dev
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pacman<span class="w"> </span>-Sy<span class="w"> </span>--noconfirm<span class="w"> </span>--needed<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>scons<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pkgconf<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>gcc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxcursor<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxinerama<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxi<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxrandr<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>wayland-utils<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mesa<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>glu<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libglvnd<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>alsa-lib<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pulseaudio
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>build-essential<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>scons<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pkg-config<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libx11-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxcursor-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxinerama-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libgl1-mesa-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libglu1-mesa-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libasound2-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libpulse-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libudev-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxi-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxrandr-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libwayland-dev
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-3" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-3" name="0-3" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>scons<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pkgconfig<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>gcc-c++<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libstdc++-static<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>wayland-devel
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-4" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-4" name="0-4" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pkg<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>devel/scons<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pkgconf<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>xorg-libraries<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libXcursor<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libXrandr<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libXi<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>xorgproto<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libGLU<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>alsa-lib<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pulseaudio<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>wayland
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-5" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-5" name="0-5" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>emerge<span class="w"> </span>--sync
+emerge<span class="w"> </span>-an<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dev-build/scons<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>x11-libs/libX11<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>x11-libs/libXcursor<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>x11-libs/libXinerama<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>x11-libs/libXi<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dev-util/wayland-scanner<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>media-libs/mesa<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>media-libs/glu<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>media-libs/alsa-lib<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>media-sound/pulseaudio
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-6" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-6" name="0-6" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>urpmi<span class="w"> </span>--auto<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>scons<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>task-c++-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>wayland-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;pkgconfig(alsa)&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;pkgconfig(glu)&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;pkgconfig(libpulse)&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;pkgconfig(udev)&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;pkgconfig(x11)&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;pkgconfig(xcursor)&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;pkgconfig(xinerama)&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;pkgconfig(xi)&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;pkgconfig(xrandr)&quot;</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-7" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-7" name="0-7" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pkg_add<span class="w"> </span>pkgin
+pkgin<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pkg-config<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>py313-scons<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>wayland<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pulseaudio
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-8" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-8" name="0-8" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pkg_add<span class="w"> </span>-I<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>scons<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>wayland<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pulseaudio
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-9" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-9" name="0-9" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python3-pip<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>build-essential<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pkg-config<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libx11-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxcursor-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxinerama-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libgl1-mesa-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libglu1-mesa-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libasound2-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libpulse-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libudev-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxi-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxrandr-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libwayland-dev
+sudo<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>scons
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-10" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-10" name="0-10" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>zypper<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>scons<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pkgconfig<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libX11-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libXcursor-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libXrandr-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libXinerama-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libXi-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>wayland-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Mesa-libGL-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>alsa-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libpulse-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libudev-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>gcc-c++<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libGLU1
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-11" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-11" name="0-11" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>eopkg<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-c<span class="w"> </span>system.devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>scons<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxcursor-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxinerama-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxi-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxrandr-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>wayland-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mesalib-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libglu<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>alsa-lib-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pulseaudio-devel
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+<section id="compiling">
+<h2>Compiling<a class="headerlink" href="#compiling" title="Link to this heading"></a></h2>
+<p>Start a terminal, go to the root dir of the engine source code and type:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Prior to Godot 4.0, the Linux/*BSD target was called <code class="docutils literal notranslate"><span class="pre">x11</span></code> instead of
+<code class="docutils literal notranslate"><span class="pre">linuxbsd</span></code>. If you are looking to compile Godot 3.x, make sure to use the
+<a class="reference external" href="https://docs.godotengine.org/en/3.6/development/compiling/compiling_for_x11.html">3.x branch of this documentation</a>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you are compiling Godot to make changes or contribute to the engine,
+you may want to use the SCons options <code class="docutils literal notranslate"><span class="pre">dev_build=yes</span></code> or <code class="docutils literal notranslate"><span class="pre">dev_mode=yes</span></code>.
+See <a class="reference internal" href="introduction_to_the_buildsystem.html#doc-introduction-to-the-buildsystem-development-and-production-aliases"><span class="std std-ref">Development and production aliases</span></a>
+for more info.</p>
+</div>
+<p>If all goes well, the resulting binary executable will be placed in the
+&quot;bin&quot; subdirectory. This executable file contains the whole engine and
+runs without any dependencies. Executing it will bring up the Project
+Manager.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you wish to compile using Clang rather than GCC, use this command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd<span class="w"> </span><span class="nv">use_llvm</span><span class="o">=</span>yes
+</pre></div>
+</div>
+<p>Using Clang appears to be a requirement for OpenBSD, otherwise fonts
+would not build.
+For RISC-V architecture devices, use the Clang compiler instead of the GCC compiler.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Compiling on some platforms such as OpenBSD may require more memory than
+available by default.
+To increase the memory limit on OpenBSD within the maximum for the current user,
+run <code class="docutils literal notranslate"><span class="pre">ulimit</span> <span class="pre">-d</span> <span class="pre">{new</span> <span class="pre">amount</span> <span class="pre">in</span> <span class="pre">kB}</span></code>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you are compiling Godot for production use, you can
+make the final executable smaller and faster by adding the
+SCons option <code class="docutils literal notranslate"><span class="pre">production=yes</span></code>. This enables additional compiler
+optimizations and link-time optimization.</p>
+<p>LTO takes some time to run and requires about 7 GB of available RAM
+while compiling. If you're running out of memory with the above option,
+use <code class="docutils literal notranslate"><span class="pre">production=yes</span> <span class="pre">lto=none</span></code> or <code class="docutils literal notranslate"><span class="pre">production=yes</span> <span class="pre">lto=thin</span></code> for a
+lightweight but less effective form of LTO.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to use separate editor settings for your own Godot builds
+and official releases, you can enable
+<a class="reference internal" href="../../../tutorials/io/data_paths.html#doc-data-paths-self-contained-mode"><span class="std std-ref">Self-contained mode</span></a> by creating a file called
+<code class="docutils literal notranslate"><span class="pre">._sc_</span></code> or <code class="docutils literal notranslate"><span class="pre">_sc_</span></code> in the <code class="docutils literal notranslate"><span class="pre">bin/</span></code> folder.</p>
+</div>
+</section>
+<section id="compiling-with-accesskit-support">
+<h2>Compiling with AccessKit support<a class="headerlink" href="#compiling-with-accesskit-support" title="Link to this heading"></a></h2>
+<p>AccessKit provides support for screen readers.</p>
+<p>By default, Godot is built with AccessKit dynamically linked. You can use it by placing
+<code class="docutils literal notranslate"><span class="pre">accesskit.so</span></code> alongside the executable.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use dynamically linked AccessKit with export templates as well, rename
+the SO to <code class="docutils literal notranslate"><span class="pre">accesskit.{architecture}.so</span></code>
+and place them alongside the export template executables, and the libraries will
+be automatically copied during the export process.</p>
+</div>
+<p>To compile Godot with statically linked AccessKit:</p>
+<ul>
+<li><p>Download the pre-built static libraries from <a class="reference external" href="https://github.com/godotengine/godot-accesskit-c-static/releases">godot-accesskit-c-static library</a>, and unzip them.</p></li>
+<li><p>When building Godot, add <code class="docutils literal notranslate"><span class="pre">accesskit_sdk_path={path}</span></code> to tell SCons where to look for the AccessKit libraries:</p>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd<span class="w"> </span><span class="nv">accesskit_sdk_path</span><span class="o">=</span>&lt;...&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can optionally build the godot-angle-static libraries yourself with
+the following steps:</p>
+<ol class="arabic simple">
+<li><p>Clone the <a class="reference external" href="https://github.com/godotengine/godot-accesskit-c-static/">godot-accesskit-c-static</a>
+directory and navigate to it.</p></li>
+<li><p>Run the following command:</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>accesskit-c
+cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+cmake<span class="w"> </span>--build<span class="w"> </span>build
+cmake<span class="w"> </span>--install<span class="w"> </span>build
+</pre></div>
+</div>
+<p>The AccessKit static library should be built using the same compiler you are
+using for building Godot.</p>
+</div>
+</section>
+<section id="running-a-headless-server-build">
+<h2>Running a headless/server build<a class="headerlink" href="#running-a-headless-server-build" title="Link to this heading"></a></h2>
+<p>To run in <em>headless</em> mode which provides editor functionality to export
+projects in an automated manner, use the normal build:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd<span class="w"> </span><span class="nv">target</span><span class="o">=</span>editor
+</pre></div>
+</div>
+<p>And then use the <code class="docutils literal notranslate"><span class="pre">--headless</span></code> command line argument:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./bin/godot.linuxbsd.editor.x86_64<span class="w"> </span>--headless
+</pre></div>
+</div>
+<p>To compile a debug <em>server</em> build which can be used with
+<a class="reference internal" href="../../../tutorials/editor/command_line_tutorial.html#doc-command-line-tutorial"><span class="std std-ref">remote debugging tools</span></a>, use:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug
+</pre></div>
+</div>
+<p>To compile a <em>server</em> build which is optimized to run dedicated game servers, use:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">production</span><span class="o">=</span>yes
+</pre></div>
+</div>
+</section>
+<section id="building-export-templates">
+<h2>Building export templates<a class="headerlink" href="#building-export-templates" title="Link to this heading"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Linux binaries usually won't run on distributions that are
+older than the distribution they were built on. If you wish to
+distribute binaries that work on most distributions,
+you should build them on an old distribution such as Ubuntu 20.04.
+You can use a virtual machine or a container to set up a suitable
+build environment.</p>
+</div>
+<p>To build Linux or *BSD export templates, run the build system with the
+following parameters:</p>
+<ul class="simple">
+<li><p>(32 bits)</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_32
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_32
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>(64 bits)</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64
+</pre></div>
+</div>
+<p>Note that cross-compiling for the opposite bits (64/32) as your host
+platform is not always straight-forward and might need a chroot environment.</p>
+<p>To create standard export templates, the resulting files in the <code class="docutils literal notranslate"><span class="pre">bin/</span></code> folder
+must be copied to:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">$HOME</span>/.local/share/godot/export_templates/&lt;version&gt;/
+</pre></div>
+</div>
+<p>and named like this (even for *BSD which is seen as &quot;Linux/X11&quot; by Godot):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>linux_debug.arm32
+linux_debug.arm64
+linux_debug.x86_32
+linux_debug.x86_64
+linux_release.arm32
+linux_release.arm64
+linux_release.x86_32
+linux_release.x86_64
+</pre></div>
+</div>
+<p>However, if you are writing your custom modules or custom C++ code, you
+might instead want to configure your binaries as custom export templates
+in the project export menu. You must have <strong>Advanced Options</strong> enabled
+to set this.</p>
+<img alt="../../../_images/lintemplates.webp" src="../../../_images/lintemplates.webp" />
+<p>You don't even need to copy them, you can just reference the resulting
+files in the <code class="docutils literal notranslate"><span class="pre">bin/</span></code> directory of your Godot source folder, so the next
+time you build, you automatically have the custom templates referenced.</p>
+</section>
+<section id="cross-compiling-for-risc-v-devices">
+<h2>Cross-compiling for RISC-V devices<a class="headerlink" href="#cross-compiling-for-risc-v-devices" title="Link to this heading"></a></h2>
+<p>To cross-compile Godot for RISC-V devices, we need to setup the following items:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/riscv-collab/riscv-gnu-toolchain/releases">riscv-gnu-toolchain</a>.
+While we are not going to use this directly, it provides us with a sysroot, as well
+as header and libraries files that we will need. There are many versions to choose
+from, however, the older the toolchain, the more compatible our final binaries will be.
+If in doubt, <a class="reference external" href="https://github.com/riscv-collab/riscv-gnu-toolchain/releases/tag/2023.07.07">use this version</a>,
+and download <code class="docutils literal notranslate"><span class="pre">riscv64-glibc-ubuntu-20.04-gcc-nightly-2023.07.07-nightly.tar.gz</span></code>. Extract
+it somewhere and remember its path.</p></li>
+<li><p><a class="reference external" href="https://github.com/rui314/mold/releases">mold</a>. This fast linker,
+is the only one that correctly links the resulting binary. Download it, extract it,
+and make sure to add its <code class="docutils literal notranslate"><span class="pre">bin</span></code> folder to your PATH. Run
+<code class="docutils literal notranslate"><span class="pre">mold</span> <span class="pre">--help</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">support</span></code> to check if your version of Mold supports RISC-V.
+If you don't see RISC-V, your Mold may need to be updated.</p></li>
+</ul>
+<p>To make referencing our toolchain easier, we can set an environment
+variable like this:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">RISCV_TOOLCHAIN_PATH</span><span class="o">=</span><span class="s2">&quot;path to toolchain here&quot;</span>
+</pre></div>
+</div>
+<p>This way, we won't have to manually set the directory location
+each time we want to reference it.</p>
+<p>With all the above setup, we are now ready to build Godot.</p>
+<p>Go to the root of the source code, and execute the following build command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$RISCV_TOOLCHAIN_PATH</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+scons<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>rv64<span class="w"> </span><span class="nv">use_llvm</span><span class="o">=</span>yes<span class="w"> </span><span class="nv">linker</span><span class="o">=</span>mold<span class="w"> </span><span class="nv">lto</span><span class="o">=</span>none<span class="w"> </span><span class="nv">target</span><span class="o">=</span>editor<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">ccflags</span><span class="o">=</span><span class="s2">&quot;--sysroot=</span><span class="nv">$RISCV_TOOLCHAIN_PATH</span><span class="s2">/sysroot --gcc-toolchain=</span><span class="nv">$RISCV_TOOLCHAIN_PATH</span><span class="s2"> -target riscv64-unknown-linux-gnu&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">linkflags</span><span class="o">=</span><span class="s2">&quot;--sysroot=</span><span class="nv">$RISCV_TOOLCHAIN_PATH</span><span class="s2">/sysroot --gcc-toolchain=</span><span class="nv">$RISCV_TOOLCHAIN_PATH</span><span class="s2"> -target riscv64-unknown-linux-gnu&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>RISC-V GCC has <a class="reference external" href="https://github.com/riscv-collab/riscv-gcc/issues/15">bugs with its atomic operations</a>
+which prevent it from compiling Godot correctly. That's why Clang is used instead. Make sure that
+it <em>can</em> compile to RISC-V. You can verify by executing this command <code class="docutils literal notranslate"><span class="pre">clang</span> <span class="pre">-print-targets</span></code>,
+make sure you see <code class="docutils literal notranslate"><span class="pre">riscv64</span></code> on the list of targets.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The code above includes adding <code class="docutils literal notranslate"><span class="pre">$RISCV_TOOLCHAIN_PATH/bin</span></code> to the PATH,
+but only for the following <code class="docutils literal notranslate"><span class="pre">scons</span></code> command. Since riscv-gnu-toolchain uses
+its own Clang located in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> folder, adding <code class="docutils literal notranslate"><span class="pre">$RISCV_TOOLCHAIN_PATH/bin</span></code>
+to your user's PATH environment variable may block you from accessing another
+version of Clang if one is installed. For this reason it's not recommended to make
+adding the bin folder permanent. You can also omit the <code class="docutils literal notranslate"><span class="pre">PATH=&quot;$RISCV_TOOLCHAIN_PATH/bin:$PATH&quot;</span></code> line
+if you want to use scons with self-installed version of Clang, but it may have
+compatibility issues with riscv-gnu-toolchain.</p>
+</div>
+<p>The command is similar in nature, but with some key changes. <code class="docutils literal notranslate"><span class="pre">ccflags</span></code> and
+<code class="docutils literal notranslate"><span class="pre">linkflags</span></code> append additional flags to the build. <code class="docutils literal notranslate"><span class="pre">--sysroot</span></code> points to
+a folder simulating a Linux system, it contains all the headers, libraries,
+and <code class="docutils literal notranslate"><span class="pre">.so</span></code> files Clang will use. <code class="docutils literal notranslate"><span class="pre">--gcc-toolchain</span></code> tells Clang where
+the complete toolchain is, and <code class="docutils literal notranslate"><span class="pre">-target</span> <span class="pre">riscv64-unknown-linux-gnu</span></code>
+indicates to Clang the target architecture, and OS we want to build for.</p>
+<p>If all went well, you should now see a <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory, and within it,
+a binary similar to the following:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>godot.linuxbsd.editor.rv64.llvm
+</pre></div>
+</div>
+<p>You can now copy this executable to your favorite RISC-V device,
+then launch it there by double-clicking, which should bring up
+the project manager.</p>
+<p>If you later decide to compile the export templates, copy the above
+build command but change the value of <code class="docutils literal notranslate"><span class="pre">target</span></code> to <code class="docutils literal notranslate"><span class="pre">template_debug</span></code> for
+a debug build, or <code class="docutils literal notranslate"><span class="pre">template_release</span></code> for a release build.</p>
+</section>
+<section id="using-clang-and-lld-for-faster-development">
+<h2>Using Clang and LLD for faster development<a class="headerlink" href="#using-clang-and-lld-for-faster-development" title="Link to this heading"></a></h2>
+<p>You can also use Clang and LLD to build Godot. This has two upsides compared to
+the default GCC + GNU ld setup:</p>
+<ul class="simple">
+<li><p>LLD links Godot significantly faster compared to GNU ld or gold. This leads to
+faster iteration times.</p></li>
+<li><p>Clang tends to give more useful error messages compared to GCC.</p></li>
+</ul>
+<p>To do so, install Clang and the <code class="docutils literal notranslate"><span class="pre">lld</span></code> package from your distribution's package manager
+then use the following SCons command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd<span class="w"> </span><span class="nv">use_llvm</span><span class="o">=</span>yes<span class="w"> </span><span class="nv">linker</span><span class="o">=</span>lld
+</pre></div>
+</div>
+<p>After the build is completed, a new binary with a <code class="docutils literal notranslate"><span class="pre">.llvm</span></code> suffix will be
+created in the <code class="docutils literal notranslate"><span class="pre">bin/</span></code> folder.</p>
+<p>It's still recommended to use GCC for production builds as it's the compiler used
+for official builds and is more rigorously tested.</p>
+<p>If this error occurs:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/usr/bin/ld: cannot find -l:libatomic.a: No such file or directory
+</pre></div>
+</div>
+<p>There are two solutions:</p>
+<ul class="simple">
+<li><p>In your SCons command, add the parameter <code class="docutils literal notranslate"><span class="pre">use_static_cpp=no</span></code>.</p></li>
+<li><p>Follow <a class="reference external" href="https://github.com/ivmai/libatomic_ops#installation-and-usage">these instructions</a> to configure, build, and
+install <code class="docutils literal notranslate"><span class="pre">libatomic_ops</span></code>. Then, copy <code class="docutils literal notranslate"><span class="pre">/usr/lib/libatomic_ops.a</span></code> to <code class="docutils literal notranslate"><span class="pre">/usr/lib/libatomic.a</span></code>, or create a soft link
+to <code class="docutils literal notranslate"><span class="pre">libatomic_ops</span></code> by command <code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">/usr/lib/libatomic_ops.a</span> <span class="pre">/usr/lib/libatomic.a</span></code>. The soft link can ensure the
+latest <code class="docutils literal notranslate"><span class="pre">libatomic_ops</span></code> will be used without the need to copy it every time when it is updated.</p></li>
+</ul>
+</section>
+<section id="using-mold-for-faster-development">
+<h2>Using mold for faster development<a class="headerlink" href="#using-mold-for-faster-development" title="Link to this heading"></a></h2>
+<p>For even faster linking compared to LLD, you can use <a class="reference external" href="https://github.com/rui314/mold">mold</a>.
+mold can be used with either GCC or Clang.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">Debian/Ubuntu</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Fedora</button><button aria-controls="panel-1-1-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-2" name="1-2" role="tab" tabindex="-1">Arch Linux</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>mold
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>mold
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-1-2" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-2" name="1-2" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pacman<span class="w"> </span>-Sy<span class="w"> </span>--noconfirm<span class="w"> </span>--needed<span class="w"> </span>mold
+</pre></div>
+</div>
+</div></div>
+<p>Once mold is installed, use the following SCons command when compiling Godot:</p>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd<span class="w"> </span><span class="nv">linker</span><span class="o">=</span>mold
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="using-system-libraries-for-faster-development">
+<h2>Using system libraries for faster development<a class="headerlink" href="#using-system-libraries-for-faster-development" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://github.com/godotengine/godot/tree/master/thirdparty">Godot bundles the source code of various third-party libraries.</a>
+You can choose to use system versions of third-party libraries instead.
+This makes the Godot binary faster to link, as third-party libraries are
+dynamically linked. Therefore, they don't need to be statically linked
+every time you build the engine (even on small incremental changes).</p>
+<p>However, not all Linux distributions have packages for third-party libraries
+available (or they may not be up-to-date).</p>
+<p>Moving to system libraries can reduce linking times by several seconds on slow
+CPUs, but it requires manual testing depending on your Linux distribution. Also,
+you may not be able to use system libraries for everything due to bugs in the
+system library packages (or in the build system, as this feature is less
+tested).</p>
+<p>To compile Godot with system libraries, install these dependencies <strong>on top</strong> of the ones
+listed in the <a class="reference internal" href="#doc-compiling-for-linuxbsd-oneliners"><span class="std std-ref">Distro-specific one-liners</span></a>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">Debian/Ubuntu</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">Fedora</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libembree-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libenet-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libfreetype-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libpng-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>zlib1g-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libgraphite2-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libharfbuzz-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libogg-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libtheora-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libvorbis-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libwebp-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libmbedtls-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libminiupnpc-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libpcre2-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libsdl3-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libzstd-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libsquish-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libicu-dev
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>embree-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>enet-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>glslang-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>graphite2-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>harfbuzz-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libicu-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libsquish-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libtheora-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libvorbis-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libwebp-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libzstd-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mbedtls-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>miniupnpc-devel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>SDL3-devel
+</pre></div>
+</div>
+</div></div>
+<p>After installing all required packages, use the following command to build Godot:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>linuxbsd<span class="w"> </span><span class="nv">builtin_embree</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_enet</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_freetype</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_graphite</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_harfbuzz</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_libogg</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_libpng</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_libtheora</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_libvorbis</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_libwebp</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_mbedtls</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_miniupnpc</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_pcre2</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_sdl</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_zlib</span><span class="o">=</span>no<span class="w"> </span><span class="nv">builtin_zstd</span><span class="o">=</span>no
+</pre></div>
+</div>
+<p>On Debian stable, you will need to remove <cite>builtin_embree=no</cite> as the system-provided
+Embree version is too old to work with Godot's latest <cite>master</cite> branch
+(which requires Embree 4).</p>
+<p>You can view a list of all built-in libraries that have system alternatives by
+running <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">-h</span></code>, then looking for options starting with <code class="docutils literal notranslate"><span class="pre">builtin_</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When using system libraries, the resulting binary is <strong>not</strong> portable
+across Linux distributions anymore. Do not use this approach for creating
+binaries you intend to distribute to others, unless you're creating a
+package for a Linux distribution.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="compiling_for_windows.html" class="btn btn-neutral float-left" title="Compiling for Windows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="compiling_for_macos.html" class="btn btn-neutral float-right" title="Compiling for macOS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

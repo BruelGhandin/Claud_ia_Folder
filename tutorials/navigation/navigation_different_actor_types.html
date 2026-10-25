@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Support different actor types" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/navigation/navigation_different_actor_types.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="To support different actor types due to e.g. their sizes each type requires its own navigation map and navigation mesh baked with an appropriated agent radius and height. The same approach can be u..." />
+<meta name="description" content="To support different actor types due to e.g. their sizes each type requires its own navigation map and navigation mesh baked with an appropriated agent radius and height. The same approach can be u..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Support different actor types &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Support different actor locomotion" href="navigation_different_actor_locomotion.html" />
+    <link rel="prev" title="Connecting navigation meshes" href="navigation_connecting_navmesh.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/navigation/navigation_different_actor_types" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/navigation/navigation_different_actor_types.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Navigation</a></li>
+      <li class="breadcrumb-item active">Support different actor types</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/navigation/navigation_different_actor_types.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="support-different-actor-types">
+<span id="doc-navigation-different-actor-types"></span><h1>Support different actor types<a class="headerlink" href="#support-different-actor-types" title="Link to this heading"></a></h1>
+<img alt="../../_images/nav_actor_sizes.png" src="../../_images/nav_actor_sizes.png" />
+<p>To support different actor types due to e.g. their sizes each type requires its own
+navigation map and navigation mesh baked with an appropriated agent radius and height.
+The same approach can be used to distinguish between e.g. landwalking, swimming or flying agents.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Agents are exclusively defined by a radius and height value for baking navigation meshes, pathfinding and avoidance. More complex shapes are not supported.</p>
+</div>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a navigation mesh resource for each actor size.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">navigation_mesh_standard_size</span><span class="p">:</span><span class="w"> </span><span class="nb">NavigationMesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationMesh</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">navigation_mesh_small_size</span><span class="p">:</span><span class="w"> </span><span class="nb">NavigationMesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationMesh</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">navigation_mesh_huge_size</span><span class="p">:</span><span class="w"> </span><span class="nb">NavigationMesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationMesh</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+
+<span class="c1"># Set appropriated agent parameters.</span>
+<span class="n">navigation_mesh_standard_size</span><span class="o">.</span><span class="vi">agent_radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="n">navigation_mesh_standard_size</span><span class="o">.</span><span class="vi">agent_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.8</span>
+<span class="n">navigation_mesh_small_size</span><span class="o">.</span><span class="vi">agent_radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.25</span>
+<span class="n">navigation_mesh_small_size</span><span class="o">.</span><span class="vi">agent_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.7</span>
+<span class="n">navigation_mesh_huge_size</span><span class="o">.</span><span class="vi">agent_radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5</span>
+<span class="n">navigation_mesh_huge_size</span><span class="o">.</span><span class="vi">agent_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.5</span>
+
+<span class="c1"># Get the root node to parse geometry for the baking.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">root_node</span><span class="p">:</span><span class="w"> </span><span class="nb">Node3D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;NavigationMeshBakingRootNode&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create the source geometry resource that will hold the parsed geometry data.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">source_geometry_data</span><span class="p">:</span><span class="w"> </span><span class="nb">NavigationMeshSourceGeometryData3D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationMeshSourceGeometryData3D</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+
+<span class="c1"># Parse the source geometry from the scene tree on the main thread.</span>
+<span class="c1"># The navigation mesh is only required for the parse settings so any of the three will do.</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">parse_source_geometry_data</span><span class="p">(</span><span class="n">navigation_mesh_standard_size</span><span class="p">,</span><span class="w"> </span><span class="n">source_geometry_data</span><span class="p">,</span><span class="w"> </span><span class="n">root_node</span><span class="p">)</span>
+
+<span class="c1"># Bake the navigation geometry for each agent size from the same source geometry.</span>
+<span class="c1"># If required for performance this baking step could also be done on background threads.</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">bake_from_source_geometry_data</span><span class="p">(</span><span class="n">navigation_mesh_standard_size</span><span class="p">,</span><span class="w"> </span><span class="n">source_geometry_data</span><span class="p">)</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">bake_from_source_geometry_data</span><span class="p">(</span><span class="n">navigation_mesh_small_size</span><span class="p">,</span><span class="w"> </span><span class="n">source_geometry_data</span><span class="p">)</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">bake_from_source_geometry_data</span><span class="p">(</span><span class="n">navigation_mesh_huge_size</span><span class="p">,</span><span class="w"> </span><span class="n">source_geometry_data</span><span class="p">)</span>
+
+<span class="c1"># Create different navigation maps on the NavigationServer.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">navigation_map_standard</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_create</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">navigation_map_small</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_create</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">navigation_map_huge</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_create</span><span class="p">()</span>
+
+<span class="c1"># Set the new navigation maps as active.</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_set_active</span><span class="p">(</span><span class="n">navigation_map_standard</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_set_active</span><span class="p">(</span><span class="n">navigation_map_small</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_set_active</span><span class="p">(</span><span class="n">navigation_map_huge</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+
+<span class="c1"># Create a region for each map.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">navigation_region_standard</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">region_create</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">navigation_region_small</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">region_create</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">navigation_region_huge</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">region_create</span><span class="p">()</span>
+
+<span class="c1"># Add the regions to the maps.</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">region_set_map</span><span class="p">(</span><span class="n">navigation_region_standard</span><span class="p">,</span><span class="w"> </span><span class="n">navigation_map_standard</span><span class="p">)</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">region_set_map</span><span class="p">(</span><span class="n">navigation_region_small</span><span class="p">,</span><span class="w"> </span><span class="n">navigation_map_small</span><span class="p">)</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">region_set_map</span><span class="p">(</span><span class="n">navigation_region_huge</span><span class="p">,</span><span class="w"> </span><span class="n">navigation_map_huge</span><span class="p">)</span>
+
+<span class="c1"># Set navigation mesh for each region.</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">region_set_navigation_mesh</span><span class="p">(</span><span class="n">navigation_region_standard</span><span class="p">,</span><span class="w"> </span><span class="n">navigation_mesh_standard_size</span><span class="p">)</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">region_set_navigation_mesh</span><span class="p">(</span><span class="n">navigation_region_small</span><span class="p">,</span><span class="w"> </span><span class="n">navigation_mesh_small_size</span><span class="p">)</span>
+<span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">region_set_navigation_mesh</span><span class="p">(</span><span class="n">navigation_region_huge</span><span class="p">,</span><span class="w"> </span><span class="n">navigation_mesh_huge_size</span><span class="p">)</span>
+
+<span class="c1"># Create start and end position for the navigation path query.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">start_pos</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">end_pos</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">use_corridorfunnel</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+
+<span class="c1"># Query paths for each agent size.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">path_standard_agent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_get_path</span><span class="p">(</span><span class="n">navigation_map_standard</span><span class="p">,</span><span class="w"> </span><span class="n">start_pos</span><span class="p">,</span><span class="w"> </span><span class="n">end_pos</span><span class="p">,</span><span class="w"> </span><span class="n">use_corridorfunnel</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">path_small_agent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_get_path</span><span class="p">(</span><span class="n">navigation_map_small</span><span class="p">,</span><span class="w"> </span><span class="n">start_pos</span><span class="p">,</span><span class="w"> </span><span class="n">end_pos</span><span class="p">,</span><span class="w"> </span><span class="n">use_corridorfunnel</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">path_huge_agent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_get_path</span><span class="p">(</span><span class="n">navigation_map_huge</span><span class="p">,</span><span class="w"> </span><span class="n">start_pos</span><span class="p">,</span><span class="w"> </span><span class="n">end_pos</span><span class="p">,</span><span class="w"> </span><span class="n">use_corridorfunnel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a navigation mesh resource for each actor size.</span>
+<span class="n">NavigationMesh</span><span class="w"> </span><span class="n">navigationMeshStandardSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavigationMesh</span><span class="p">();</span>
+<span class="n">NavigationMesh</span><span class="w"> </span><span class="n">navigationMeshSmallSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavigationMesh</span><span class="p">();</span>
+<span class="n">NavigationMesh</span><span class="w"> </span><span class="n">navigationMeshHugeSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavigationMesh</span><span class="p">();</span>
+
+<span class="c1">// Set appropriated agent parameters.</span>
+<span class="n">navigationMeshStandardSize</span><span class="p">.</span><span class="n">AgentRadius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">;</span>
+<span class="n">navigationMeshStandardSize</span><span class="p">.</span><span class="n">AgentHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.8f</span><span class="p">;</span>
+<span class="n">navigationMeshSmallSize</span><span class="p">.</span><span class="n">AgentRadius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.25f</span><span class="p">;</span>
+<span class="n">navigationMeshSmallSize</span><span class="p">.</span><span class="n">AgentHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.7f</span><span class="p">;</span>
+<span class="n">navigationMeshHugeSize</span><span class="p">.</span><span class="n">AgentRadius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5f</span><span class="p">;</span>
+<span class="n">navigationMeshHugeSize</span><span class="p">.</span><span class="n">AgentHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.5f</span><span class="p">;</span>
+
+<span class="c1">// Get the root node to parse geometry for the baking.</span>
+<span class="n">Node3D</span><span class="w"> </span><span class="n">rootNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Node3D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;NavigationMeshBakingRootNode&quot;</span><span class="p">);</span>
+
+<span class="c1">// Create the source geometry resource that will hold the parsed geometry data.</span>
+<span class="n">NavigationMeshSourceGeometryData3D</span><span class="w"> </span><span class="n">sourceGeometryData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavigationMeshSourceGeometryData3D</span><span class="p">();</span>
+
+<span class="c1">// Parse the source geometry from the scene tree on the main thread.</span>
+<span class="c1">// The navigation mesh is only required for the parse settings so any of the three will do.</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">ParseSourceGeometryData</span><span class="p">(</span><span class="n">navigationMeshStandardSize</span><span class="p">,</span><span class="w"> </span><span class="n">sourceGeometryData</span><span class="p">,</span><span class="w"> </span><span class="n">rootNode</span><span class="p">);</span>
+
+<span class="c1">// Bake the navigation geometry for each agent size from the same source geometry.</span>
+<span class="c1">// If required for performance this baking step could also be done on background threads.</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">BakeFromSourceGeometryData</span><span class="p">(</span><span class="n">navigationMeshStandardSize</span><span class="p">,</span><span class="w"> </span><span class="n">sourceGeometryData</span><span class="p">);</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">BakeFromSourceGeometryData</span><span class="p">(</span><span class="n">navigationMeshSmallSize</span><span class="p">,</span><span class="w"> </span><span class="n">sourceGeometryData</span><span class="p">);</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">BakeFromSourceGeometryData</span><span class="p">(</span><span class="n">navigationMeshHugeSize</span><span class="p">,</span><span class="w"> </span><span class="n">sourceGeometryData</span><span class="p">);</span>
+
+<span class="c1">// Create different navigation maps on the NavigationServer.</span>
+<span class="n">Rid</span><span class="w"> </span><span class="n">navigationMapStandard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapCreate</span><span class="p">();</span>
+<span class="n">Rid</span><span class="w"> </span><span class="n">navigationMapSmall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapCreate</span><span class="p">();</span>
+<span class="n">Rid</span><span class="w"> </span><span class="n">navigationMapHuge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapCreate</span><span class="p">();</span>
+
+<span class="c1">// Set the new navigation maps as active.</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapSetActive</span><span class="p">(</span><span class="n">navigationMapStandard</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapSetActive</span><span class="p">(</span><span class="n">navigationMapSmall</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapSetActive</span><span class="p">(</span><span class="n">navigationMapHuge</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+
+<span class="c1">// Create a region for each map.</span>
+<span class="n">Rid</span><span class="w"> </span><span class="n">navigationRegionStandard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">RegionCreate</span><span class="p">();</span>
+<span class="n">Rid</span><span class="w"> </span><span class="n">navigationRegionSmall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">RegionCreate</span><span class="p">();</span>
+<span class="n">Rid</span><span class="w"> </span><span class="n">navigationRegionHuge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">RegionCreate</span><span class="p">();</span>
+
+<span class="c1">// Add the regions to the maps.</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">RegionSetMap</span><span class="p">(</span><span class="n">navigationRegionStandard</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMapStandard</span><span class="p">);</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">RegionSetMap</span><span class="p">(</span><span class="n">navigationRegionSmall</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMapSmall</span><span class="p">);</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">RegionSetMap</span><span class="p">(</span><span class="n">navigationRegionHuge</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMapHuge</span><span class="p">);</span>
+
+<span class="c1">// Set navigation mesh for each region.</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">RegionSetNavigationMesh</span><span class="p">(</span><span class="n">navigationRegionStandard</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshStandardSize</span><span class="p">);</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">RegionSetNavigationMesh</span><span class="p">(</span><span class="n">navigationRegionSmall</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshSmallSize</span><span class="p">);</span>
+<span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">RegionSetNavigationMesh</span><span class="p">(</span><span class="n">navigationRegionHuge</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshHugeSize</span><span class="p">);</span>
+
+<span class="c1">// Create start and end position for the navigation path query.</span>
+<span class="n">Vector3</span><span class="w"> </span><span class="n">startPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">);</span>
+<span class="n">Vector3</span><span class="w"> </span><span class="n">endPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mf">2.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">);</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">useCorridorFunnel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+
+<span class="c1">// Query paths for each agent size.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">pathStandardAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapGetPath</span><span class="p">(</span><span class="n">navigationMapStandard</span><span class="p">,</span><span class="w"> </span><span class="n">startPos</span><span class="p">,</span><span class="w"> </span><span class="n">endPos</span><span class="p">,</span><span class="w"> </span><span class="n">useCorridorFunnel</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">pathSmallAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapGetPath</span><span class="p">(</span><span class="n">navigationMapSmall</span><span class="p">,</span><span class="w"> </span><span class="n">startPos</span><span class="p">,</span><span class="w"> </span><span class="n">endPos</span><span class="p">,</span><span class="w"> </span><span class="n">useCorridorFunnel</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">pathHugeAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapGetPath</span><span class="p">(</span><span class="n">navigationMapHuge</span><span class="p">,</span><span class="w"> </span><span class="n">startPos</span><span class="p">,</span><span class="w"> </span><span class="n">endPos</span><span class="p">,</span><span class="w"> </span><span class="n">useCorridorFunnel</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="navigation_connecting_navmesh.html" class="btn btn-neutral float-left" title="Connecting navigation meshes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="navigation_different_actor_locomotion.html" class="btn btn-neutral float-right" title="Support different actor locomotion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

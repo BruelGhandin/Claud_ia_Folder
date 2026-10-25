@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Mesh level of detail (LOD)" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/mesh_lod.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Level of detail (LOD) is one of the most important ways to optimize rendering performance in a 3D project, along with Occlusion culling. On this page, you&#x27;ll learn: How mesh LOD can improve yo..." />
+<meta name="description" content="Level of detail (LOD) is one of the most important ways to optimize rendering performance in a 3D project, along with Occlusion culling. On this page, you&#x27;ll learn: How mesh LOD can improve yo..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Mesh level of detail (LOD) &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Visibility ranges (HLOD)" href="visibility_ranges.html" />
+    <link rel="prev" title="Using MultiMeshInstance3D" href="using_multi_mesh_instance.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/mesh_lod" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/3d/mesh_lod.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">3D</a></li>
+      <li class="breadcrumb-item active">Mesh level of detail (LOD)</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/mesh_lod.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="mesh-level-of-detail-lod">
+<span id="doc-mesh-lod"></span><h1>Mesh level of detail (LOD)<a class="headerlink" href="#mesh-level-of-detail-lod" title="Link to this heading"></a></h1>
+<p>Level of detail (LOD) is one of the most important ways to optimize rendering
+performance in a 3D project, along with <a class="reference internal" href="occlusion_culling.html#doc-occlusion-culling"><span class="std std-ref">Occlusion culling</span></a>.</p>
+<p>On this page, you'll learn:</p>
+<ul class="simple">
+<li><p>How mesh LOD can improve your 3D project's rendering performance.</p></li>
+<li><p>How to set up mesh LOD in Godot.</p></li>
+<li><p>How to measure mesh LOD's effectiveness in your project
+(and alternatives you can explore if it doesn't meet your expectations).</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>You can see how mesh LOD works in action using the
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/3d/occlusion_culling_mesh_lod">Occlusion Culling and Mesh LOD demo project</a>.</p>
+</div>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Historically, level of detail in 3D games involved manually authoring meshes
+with lower geometry density, then configuring the distance thresholds at which
+these lower-detailed meshes should be drawn. This approach is still used today
+when increased control is needed.</p>
+<p>However, in projects that have a large amount of detailed 3D assets, setting up
+LOD manually can be a very time-consuming process. As a result, automatic mesh
+decimation and LOD configuration is becoming increasingly popular.</p>
+<p>Godot provides a way to automatically generate less detailed meshes for LOD
+usage on import, then use those LOD meshes when needed automatically. This is
+completely transparent to the user.
+The <a class="reference external" href="https://meshoptimizer.org/">meshoptimizer</a> library is used for LOD mesh
+generation behind the scenes.</p>
+<p>Mesh LOD works with any node that draws 3D meshes. This includes MeshInstance3D,
+MultiMeshInstance3D, GPUParticles3D and CPUParticles3D.</p>
+</section>
+<section id="visual-comparison">
+<h2>Visual comparison<a class="headerlink" href="#visual-comparison" title="Link to this heading"></a></h2>
+<p>Here is an example of LOD meshes generated on import. Lower detailed meshes
+will be used when the camera is far away from the object:</p>
+<figure class="align-center" id="id1">
+<img alt="From most detailed (left) to least detailed (right), shaded view" src="../../_images/mesh_lod_comparison_shaded.png" />
+<figcaption>
+<p><span class="caption-text">From most detailed (left) to least detailed (right), shaded view</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Here's the same image with wireframe rendering to make the decimation easier to see:</p>
+<figure class="align-center" id="id2">
+<img alt="From most detailed (left) to least detailed (right), wireframe view" src="../../_images/mesh_lod_comparison_wireframe.png" />
+<figcaption>
+<p><span class="caption-text">From most detailed (left) to least detailed (right), wireframe view</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If you need to manually configure level of detail with artist-created meshes,
+use <a class="reference internal" href="visibility_ranges.html#doc-visibility-ranges"><span class="std std-ref">Visibility ranges (HLOD)</span></a> instead of automatic mesh LOD.</p>
+</div>
+</section>
+<section id="generating-mesh-lod">
+<h2>Generating mesh LOD<a class="headerlink" href="#generating-mesh-lod" title="Link to this heading"></a></h2>
+<p>By default, mesh LOD generation happens automatically for imported 3D scenes
+(glTF, .blend, Collada, FBX). Once LOD meshes are generated, they will
+automatically be used when rendering the scene. You don't need to configure
+anything manually.</p>
+<p>However, mesh LOD generation does <strong>not</strong> automatically happen for imported 3D
+meshes (OBJ). This is because OBJ files are not imported as full 3D scenes by
+default, but only as individual mesh resources to load into a MeshInstance3D
+node (or GPUParticles3D, CPUParticles3D, ...).</p>
+<p>To make an OBJ file have mesh LOD generated for it, select it in the FileSystem
+dock, go to the Import dock, change its <strong>Import As</strong> option to <strong>Scene</strong> then
+click <strong>Reimport</strong>:</p>
+<figure class="align-center" id="id3">
+<img alt="Changing the import type on an OBJ file in the Import dock" src="../../_images/mesh_lod_obj_import.png" />
+<figcaption>
+<p><span class="caption-text">Changing the import type on an OBJ file in the Import dock</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>This will require restarting the editor after clicking <strong>Reimport</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The mesh LOD generation process is not perfect, and may occasionally
+introduce rendering issues (especially in skinned meshes). Mesh LOD
+generation can also take a while on complex meshes.</p>
+<p>If mesh LOD causes a specific mesh to look broken, you can disable LOD
+generation for it in the Import dock. This will also speed up resource
+importing. This can be done globally in the 3D scene's import options, or on
+a per-mesh basis using the Advanced Import Settings dialog.</p>
+<p>See <a class="reference internal" href="../assets_pipeline/importing_3d_scenes/import_configuration.html#doc-importing-3d-scenes-using-the-import-dock"><span class="std std-ref">Importing 3D scenes</span></a>
+for more information.</p>
+</div>
+</section>
+<section id="comparing-mesh-lod-visuals-and-performance">
+<h2>Comparing mesh LOD visuals and performance<a class="headerlink" href="#comparing-mesh-lod-visuals-and-performance" title="Link to this heading"></a></h2>
+<p>To disable mesh LOD in the editor for comparison purposes, use the
+<strong>Disable Mesh LOD</strong> advanced debug draw mode. This can be done using the menu
+in the top-left corner of the 3D viewport (labeled <strong>Perspective</strong> or
+<strong>Orthogonal</strong> depending on camera mode):</p>
+<figure class="align-center" id="id4">
+<img alt="Disabling mesh LOD in the 3D viewport's top-left menu" src="../../_images/mesh_lod_disable_lod.png" />
+<figcaption>
+<p><span class="caption-text">Disabling mesh LOD in the 3D viewport's top-left menu</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Enable <strong>View Frame Time</strong> in the same menu to view FPS in the top-right corner.
+Also enable <strong>View Information</strong> in the same menu to view the number of primitives
+(vertices + indices) rendered in the bottom-right corner.</p>
+<p>If mesh LOD is working correctly in your scene and your camera is far away
+enough from the mesh, you should notice the number of drawn primitives
+decreasing and FPS increasing when mesh LOD is left enabled (unless you are
+CPU-bottlenecked).</p>
+<p>To see mesh LOD decimation in action, change the debug draw mode to
+<strong>Display Wireframe</strong> in the menu specified above, then adjust the
+<strong>Rendering &gt; Mesh LOD &gt; LOD Change &gt; Threshold Pixels</strong> project setting.</p>
+</section>
+<section id="configuring-mesh-lod-performance-and-quality">
+<h2>Configuring mesh LOD performance and quality<a class="headerlink" href="#configuring-mesh-lod-performance-and-quality" title="Link to this heading"></a></h2>
+<p>You can adjust how aggressive mesh LOD transitions should be in the root viewport
+by changing the <strong>Rendering &gt; Mesh LOD &gt; LOD Change &gt; Threshold Pixels</strong> project
+setting. To change this value at runtime, set <code class="docutils literal notranslate"><span class="pre">mesh_lod_threshold</span></code> on the
+root viewport as follows:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">root</span><span class="o">.</span><span class="vi">mesh_lod_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">GetTree</span><span class="p">().</span><span class="n">Root</span><span class="p">.</span><span class="n">MeshLodThreshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0f</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>Each viewport has its own <code class="docutils literal notranslate"><span class="pre">mesh_lod_threshold</span></code> property, which can be set
+independently from other viewports.</p>
+<p>The default mesh LOD threshold of 1 pixel is tuned to look <em>perceptually</em>
+lossless; it provides a significant performance gain with an unnoticeable loss
+in quality. Higher values will make LOD transitions happen sooner when the
+camera moves away, resulting in higher performance, but lower quality.</p>
+<p>If you need to perform per-object adjustments to mesh LOD, you can adjust how
+aggressive LOD transitions should be by adjusting the <strong>LOD Bias</strong> property on
+any node that inherits from GeometryInstance3D. Values <em>above</em> <code class="docutils literal notranslate"><span class="pre">1.0</span></code> will make
+LOD transitions happen later than usual (resulting in higher quality, but lower
+performance). Values <em>below</em> <code class="docutils literal notranslate"><span class="pre">1.0</span></code> will make LOD transitions happen sooner than
+usual (resulting in lower quality, but higher performance).</p>
+<p>Additionally, ReflectionProbe nodes have their own <strong>Mesh LOD Threshold</strong> property
+that can be adjusted to improve rendering performance when the reflection probe
+updates. This is especially important for ReflectionProbes that use the <strong>Always</strong>
+update mode.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When rendering the scene, mesh LOD selection uses a screen-space metric.
+This means it automatically takes camera field of view and viewport
+resolution into account. Higher camera FOV and lower viewport resolutions
+will make LOD selection more aggressive; the engine will display heavily
+decimated models earlier when the camera moves away.</p>
+<p>As a result, unlike <a class="reference internal" href="visibility_ranges.html#doc-visibility-ranges"><span class="std std-ref">Visibility ranges (HLOD)</span></a>, you don't need to do
+anything specific in your project to take camera FOV and viewport resolution
+into account.</p>
+</div>
+</section>
+<section id="using-mesh-lod-with-multimesh-and-particles">
+<h2>Using mesh LOD with MultiMesh and particles<a class="headerlink" href="#using-mesh-lod-with-multimesh-and-particles" title="Link to this heading"></a></h2>
+<p>For LOD selection, the point of the node's <abbr title="Axis-Aligned Bounding Box">AABB</abbr>
+that is the closest to the camera is used as a basis. This applies to any kind
+of mesh LOD (including for individual MeshInstance3D)s, but this has some implications
+for nodes that display multiple meshes at once, such as MultiMeshInstance3D,
+CPUParticles3D, and GPUParticles3D. Most importantly, this means that all
+instances will be drawn with the same LOD level at a given time.</p>
+<p>If you are noticing incorrect LOD selection with GPUParticles3D, make sure
+the node's visibility AABB is configured by selecting the GPUParticles3D
+node and using <strong>GPUParticles3D &gt; Generate AABB</strong> at the top of the 3D
+viewport.</p>
+<p>If you have instances in a MultiMesh that are far away from each other, they
+should be placed in a separate MultiMeshInstance3D node. Doing so will also
+improve rendering performance, as frustum and occlusion culling will be able to
+cull individual nodes (while they can't cull individual instances in a
+MultiMesh).</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="using_multi_mesh_instance.html" class="btn btn-neutral float-left" title="Using MultiMeshInstance3D" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="visibility_ranges.html" class="btn btn-neutral float-right" title="Visibility ranges (HLOD)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

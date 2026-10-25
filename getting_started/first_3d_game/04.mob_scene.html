@@ -1,0 +1,500 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Designing the mob scene" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="getting_started/first_3d_game/04.mob_scene.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="In this part, you&#x27;re going to code the monsters, which we&#x27;ll call mobs. In the next lesson, we&#x27;ll spawn them randomly around the playable area. Let&#x27;s design the monsters themsel..." />
+<meta name="description" content="In this part, you&#x27;re going to code the monsters, which we&#x27;ll call mobs. In the next lesson, we&#x27;ll spawn them randomly around the playable area. Let&#x27;s design the monsters themsel..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Designing the mob scene &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Spawning monsters" href="05.spawning_mobs.html" />
+    <link rel="prev" title="Moving the player with code" href="03.player_movement_code.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="getting_started/first_3d_game/04.mob_scene" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="getting_started/first_3d_game/04.mob_scene.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Your first 3D game</a></li>
+      <li class="breadcrumb-item active">Designing the mob scene</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/getting_started/first_3d_game/04.mob_scene.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="designing-the-mob-scene">
+<span id="doc-first-3d-game-designing-the-mob-scene"></span><h1>Designing the mob scene<a class="headerlink" href="#designing-the-mob-scene" title="Link to this heading"></a></h1>
+<p>In this part, you're going to code the monsters, which we'll call mobs. In the
+next lesson, we'll spawn them randomly around the playable area.</p>
+<p>Let's design the monsters themselves in a new scene. The node structure is going
+to be similar to the <code class="docutils literal notranslate"><span class="pre">player.tscn</span></code> scene.</p>
+<p>Create a scene with, once again, a <a class="reference internal" href="../../classes/class_characterbody3d.html#class-characterbody3d"><span class="std std-ref">CharacterBody3D</span></a> node as its root. Name it
+<code class="docutils literal notranslate"><span class="pre">Mob</span></code>. Add a child node <a class="reference internal" href="../../classes/class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a>, name it <code class="docutils literal notranslate"><span class="pre">Pivot</span></code>. And drag and drop
+the file <code class="docutils literal notranslate"><span class="pre">mob.glb</span></code> from the <em>FileSystem</em> dock onto the <code class="docutils literal notranslate"><span class="pre">Pivot</span></code> to add the
+monster's 3D model to the scene.</p>
+<img alt="../../_images/drag_drop_mob.webp" src="../../_images/drag_drop_mob.webp" />
+<p>You can rename the newly created <code class="docutils literal notranslate"><span class="pre">mob</span></code> node
+into <code class="docutils literal notranslate"><span class="pre">Character</span></code>.</p>
+<p><img alt="image0" src="../../_images/01.initial_three_nodes.webp" /></p>
+<p>We need a collision shape for our body to work. Right-click on the <code class="docutils literal notranslate"><span class="pre">Mob</span></code> node,
+the scene's root, and click <em>Add Child Node</em>.</p>
+<p><img alt="image1" src="../../_images/02.add_child_node.webp" /></p>
+<p>Add a <a class="reference internal" href="../../classes/class_collisionshape3d.html#class-collisionshape3d"><span class="std std-ref">CollisionShape3D</span></a>.</p>
+<p><img alt="image2" src="../../_images/03.scene_with_collision_shape.webp" /></p>
+<p>In the <em>Inspector</em>, assign a <em>BoxShape3D</em> to the <em>Shape</em> property.</p>
+<img alt="../../_images/08.create_box_shape3D.webp" src="../../_images/08.create_box_shape3D.webp" />
+<p>We should change its size to fit the 3D model better. You can do so
+interactively by clicking and dragging on the orange dots.</p>
+<p>The box should touch the floor and be a little thinner than the model. Physics
+engines work in such a way that if the player's sphere touches even the box's
+corner, a collision will occur. If the box is a little too big compared to the
+3D model, you may die at a distance from the monster, and the game will feel
+unfair to the players.</p>
+<p><img alt="image4" src="../../_images/05.box_final_size.png" /></p>
+<p>Notice that my box is taller than the monster. It is okay in this game because
+we're looking at the scene from above and using a fixed perspective. Collision
+shapes don't have to match the model exactly. It's the way the game feels when
+you test it that should dictate their form and size.</p>
+<section id="removing-monsters-off-screen">
+<h2>Removing monsters off-screen<a class="headerlink" href="#removing-monsters-off-screen" title="Link to this heading"></a></h2>
+<p>We're going to spawn monsters at regular time intervals in the game level. If
+we're not careful, their count could increase to infinity, and we don't want
+that. Each mob instance has both a memory and a processing cost, and we don't
+want to pay for it when the mob is outside the screen.</p>
+<p>Once a monster leaves the screen, we don't need it anymore, so we should delete it.
+Godot has a node that detects when objects leave the screen,
+<a class="reference internal" href="../../classes/class_visibleonscreennotifier3d.html#class-visibleonscreennotifier3d"><span class="std std-ref">VisibleOnScreenNotifier3D</span></a>, and we're going to use it to destroy our mobs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you keep instancing an object, there's a technique you can
+use to avoid the cost of creating and destroying instances all the time
+called pooling. It consists of pre-creating an array of objects and reusing
+them over and over.</p>
+<p>When working with GDScript, this usually isn't needed. The main
+reason to use pools is to avoid freezes with garbage-collected languages
+like C# or Lua. GDScript uses a different technique to manage memory,
+reference counting, which doesn't have that caveat. You can learn more
+about that here: <a class="reference internal" href="../../tutorials/scripting/gdscript/gdscript_basics.html#doc-gdscript-basics-memory-management"><span class="std std-ref">Memory management</span></a>.</p>
+</div>
+<p>Select the <code class="docutils literal notranslate"><span class="pre">Mob</span></code> node and add a child node <a class="reference internal" href="../../classes/class_visibleonscreennotifier3d.html#class-visibleonscreennotifier3d"><span class="std std-ref">VisibleOnScreenNotifier3D</span></a>. Another
+box, pink this time, appears. When this box completely leaves the screen, the
+node will emit a signal.</p>
+<p><img alt="image5" src="../../_images/06.visibility_notifier.webp" /></p>
+<p>Resize it using the orange dots until it covers the entire 3D model.</p>
+<p><img alt="image6" src="../../_images/07.visibility_notifier_bbox_resized.png" /></p>
+<section id="coding-the-mob-s-movement">
+<h3>Coding the mob's movement<a class="headerlink" href="#coding-the-mob-s-movement" title="Link to this heading"></a></h3>
+<p>Let's implement the monster's motion. We're going to do this in two steps.
+First, we'll write a script on the <code class="docutils literal notranslate"><span class="pre">Mob</span></code> that defines a function to initialize
+the monster. We'll then code the randomized spawn mechanism in the <code class="docutils literal notranslate"><span class="pre">main.tscn</span></code> scene
+and call the function from there.</p>
+<p>Attach a script to the <code class="docutils literal notranslate"><span class="pre">Mob</span></code>.</p>
+<p><img alt="image7" src="../../_images/08.mob_attach_script.webp" /></p>
+<p>Here's the movement code to start with. We define two properties, <code class="docutils literal notranslate"><span class="pre">min_speed</span></code>
+and <code class="docutils literal notranslate"><span class="pre">max_speed</span></code>, to define a random speed range, which we will later use to define <code class="docutils literal notranslate"><span class="pre">CharacterBody3D.velocity</span></code>.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">CharacterBody3D</span>
+
+<span class="c1"># Minimum speed of the mob in meters per second.</span>
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">min_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span>
+<span class="c1"># Maximum speed of the mob in meters per second.</span>
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">max_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">18.0</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">):</span>
+<span class="w">    </span><span class="nf">move_and_slide</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Mob</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CharacterBody3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Don&#39;t forget to rebuild the project so the editor knows about the new export variable.</span>
+
+<span class="w">    </span><span class="c1">// Minimum speed of the mob in meters per second</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">MinSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Maximum speed of the mob in meters per second</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">MaxSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">18.0f</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MoveAndSlide</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Similarly to the player, we move the mob every frame by calling the function
+<code class="docutils literal notranslate"><span class="pre">CharacterBody3D.move_and_slide()</span></code>. This time, we don't update
+the <code class="docutils literal notranslate"><span class="pre">velocity</span></code> every frame; we want the monster to move at a constant speed
+and leave the screen, even if it were to hit an obstacle.</p>
+<p>We need to define another function to calculate the <code class="docutils literal notranslate"><span class="pre">CharacterBody3D.velocity</span></code>. This
+function will turn the monster towards the player and randomize both its angle
+of motion and its velocity.</p>
+<p>The function will take a <code class="docutils literal notranslate"><span class="pre">start_position</span></code>,the mob's spawn position, and the
+<code class="docutils literal notranslate"><span class="pre">player_position</span></code> as its arguments.</p>
+<p>We position the mob at <code class="docutils literal notranslate"><span class="pre">start_position</span></code> and turn it towards the player using
+the <code class="docutils literal notranslate"><span class="pre">look_at_from_position()</span></code> method, and randomize the angle by rotating a
+random amount around the Y axis. Below, <code class="docutils literal notranslate"><span class="pre">randf_range()</span></code> outputs a random value
+between <code class="docutils literal notranslate"><span class="pre">-PI</span> <span class="pre">/</span> <span class="pre">4</span></code> radians and <code class="docutils literal notranslate"><span class="pre">PI</span> <span class="pre">/</span> <span class="pre">4</span></code> radians.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># This function will be called from the Main scene.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">initialize</span><span class="p">(</span><span class="n">start_position</span><span class="p">,</span><span class="w"> </span><span class="n">player_position</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># We position the mob by placing it at start_position</span>
+<span class="w">    </span><span class="c1"># and rotate it towards player_position, so it looks at the player.</span>
+<span class="w">    </span><span class="nf">look_at_from_position</span><span class="p">(</span><span class="n">start_position</span><span class="p">,</span><span class="w"> </span><span class="n">player_position</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">UP</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Rotate this mob randomly within range of -45 and +45 degrees,</span>
+<span class="w">    </span><span class="c1"># so that it doesn&#39;t move directly towards the player.</span>
+<span class="w">    </span><span class="nf">rotate_y</span><span class="p">(</span><span class="nb nb-Function">randf_range</span><span class="p">(</span><span class="o">-</span><span class="l">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="l">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This function will be called from the Main scene.</span>
+<span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Initialize</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">startPosition</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">playerPosition</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// We position the mob by placing it at startPosition</span>
+<span class="w">    </span><span class="c1">// and rotate it towards playerPosition, so it looks at the player.</span>
+<span class="w">    </span><span class="n">LookAtFromPosition</span><span class="p">(</span><span class="n">startPosition</span><span class="p">,</span><span class="w"> </span><span class="n">playerPosition</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Rotate this mob randomly within range of -45 and +45 degrees,</span>
+<span class="w">    </span><span class="c1">// so that it doesn&#39;t move directly towards the player.</span>
+<span class="w">    </span><span class="n">RotateY</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">GD</span><span class="p">.</span><span class="n">RandRange</span><span class="p">(</span><span class="o">-</span><span class="n">Mathf</span><span class="p">.</span><span class="n">Pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">4.0</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>We got a random position, now we need a <code class="docutils literal notranslate"><span class="pre">random_speed</span></code>. <code class="docutils literal notranslate"><span class="pre">randf_range()</span></code> will be useful as it gives random float values, and we will use <code class="docutils literal notranslate"><span class="pre">min_speed</span></code> and <code class="docutils literal notranslate"><span class="pre">max_speed</span></code>.
+<code class="docutils literal notranslate"><span class="pre">random_speed</span></code> is just an float, and we just use it to multiply our <code class="docutils literal notranslate"><span class="pre">CharacterBody3D.velocity</span></code>. After <code class="docutils literal notranslate"><span class="pre">random_speed</span></code> is applied, we rotate <code class="docutils literal notranslate"><span class="pre">CharacterBody3D.velocity</span></code> Vector3 towards the player.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">initialize</span><span class="p">(</span><span class="n">start_position</span><span class="p">,</span><span class="w"> </span><span class="n">player_position</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># ...</span>
+
+<span class="w">    </span><span class="c1"># We calculate a random speed (float)</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">random_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">randf_range</span><span class="p">(</span><span class="n">min_speed</span><span class="p">,</span><span class="w"> </span><span class="n">max_speed</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># We calculate a forward velocity that represents the speed.</span>
+<span class="w">    </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">FORWARD</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">random_speed</span>
+<span class="w">    </span><span class="c1"># We then rotate the velocity vector based on the mob&#39;s Y rotation</span>
+<span class="w">    </span><span class="c1"># in order to move in the direction the mob is looking.</span>
+<span class="w">    </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocity</span><span class="o">.</span><span class="nf">rotated</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">UP</span><span class="p">,</span><span class="w"> </span><span class="n">rotation</span><span class="o">.</span><span class="vi">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Initialize</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">startPosition</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">playerPosition</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+
+<span class="w">    </span><span class="c1">// We calculate a random speed (float).</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">randomSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">RandRange</span><span class="p">(</span><span class="n">MinSpeed</span><span class="p">,</span><span class="w"> </span><span class="n">MaxSpeed</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// We calculate a forward velocity that represents the speed.</span>
+<span class="w">    </span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Forward</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">randomSpeed</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// We then rotate the velocity vector based on the mob&#39;s Y rotation</span>
+<span class="w">    </span><span class="c1">// in order to move in the direction the mob is looking.</span>
+<span class="w">    </span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Velocity</span><span class="p">.</span><span class="n">Rotated</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation</span><span class="p">.</span><span class="n">Y</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="leaving-the-screen">
+<h3>Leaving the screen<a class="headerlink" href="#leaving-the-screen" title="Link to this heading"></a></h3>
+<p>We still have to destroy the mobs when they leave the screen. To do so, we'll
+connect our <a class="reference internal" href="../../classes/class_visibleonscreennotifier3d.html#class-visibleonscreennotifier3d"><span class="std std-ref">VisibleOnScreenNotifier3D</span></a> node's <code class="docutils literal notranslate"><span class="pre">screen_exited</span></code> signal to the <code class="docutils literal notranslate"><span class="pre">Mob</span></code>.</p>
+<p>Select the <a class="reference internal" href="../../classes/class_visibleonscreennotifier3d.html#class-visibleonscreennotifier3d"><span class="std std-ref">VisibleOnScreenNotifier3D</span></a> node and on the right side of the interface,
+navigate to the <em>Signals</em> dock. Double-click the <code class="docutils literal notranslate"><span class="pre">screen_exited()</span></code> signal.</p>
+<p><img alt="image9" src="../../_images/10.node_dock.webp" /></p>
+<p>Connect the signal to the <code class="docutils literal notranslate"><span class="pre">Mob</span></code></p>
+<p><img alt="image10" src="../../_images/11.connect_signal.webp" /></p>
+<p>This will add a new function for you in your mob script,
+<code class="docutils literal notranslate"><span class="pre">_on_visible_on_screen_notifier_3d_screen_exited()</span></code>. From it, call the <code class="docutils literal notranslate"><span class="pre">queue_free()</span></code>
+method. This function destroys the instance it's called on.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_visible_on_screen_notifier_3d_screen_exited</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">queue_free</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// We also specified this function name in PascalCase in the editor&#39;s connection window.</span>
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnVisibilityNotifierScreenExited</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">QueueFree</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Our monster is ready to enter the game! In the next part, you will spawn
+monsters in the game level.</p>
+<p>Here is the complete <code class="docutils literal notranslate"><span class="pre">mob.gd</span></code> script for reference.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">CharacterBody3D</span>
+
+<span class="c1"># Minimum speed of the mob in meters per second.</span>
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">min_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span>
+<span class="c1"># Maximum speed of the mob in meters per second.</span>
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">max_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">18.0</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">):</span>
+<span class="w">    </span><span class="nf">move_and_slide</span><span class="p">()</span>
+
+<span class="c1"># This function will be called from the Main scene.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">initialize</span><span class="p">(</span><span class="n">start_position</span><span class="p">,</span><span class="w"> </span><span class="n">player_position</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># We position the mob by placing it at start_position</span>
+<span class="w">    </span><span class="c1"># and rotate it towards player_position, so it looks at the player.</span>
+<span class="w">    </span><span class="nf">look_at_from_position</span><span class="p">(</span><span class="n">start_position</span><span class="p">,</span><span class="w"> </span><span class="n">player_position</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">UP</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Rotate this mob randomly within range of -45 and +45 degrees,</span>
+<span class="w">    </span><span class="c1"># so that it doesn&#39;t move directly towards the player.</span>
+<span class="w">    </span><span class="nf">rotate_y</span><span class="p">(</span><span class="nb nb-Function">randf_range</span><span class="p">(</span><span class="o">-</span><span class="l">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="l">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">4</span><span class="p">))</span>
+
+<span class="w">    </span><span class="c1"># We calculate a random speed (float)</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">random_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">randf_range</span><span class="p">(</span><span class="n">min_speed</span><span class="p">,</span><span class="w"> </span><span class="n">max_speed</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># We calculate a forward velocity that represents the speed.</span>
+<span class="w">    </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">FORWARD</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">random_speed</span>
+<span class="w">    </span><span class="c1"># We then rotate the velocity vector based on the mob&#39;s Y rotation</span>
+<span class="w">    </span><span class="c1"># in order to move in the direction the mob is looking.</span>
+<span class="w">    </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocity</span><span class="o">.</span><span class="nf">rotated</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">UP</span><span class="p">,</span><span class="w"> </span><span class="n">rotation</span><span class="o">.</span><span class="vi">y</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_visible_on_screen_notifier_3d_screen_exited</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">queue_free</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Mob</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CharacterBody3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Minimum speed of the mob in meters per second.</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">MinSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Maximum speed of the mob in meters per second.</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">MaxSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">18.0f</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MoveAndSlide</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// This function will be called from the Main scene.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Initialize</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">startPosition</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">playerPosition</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// We position the mob by placing it at startPosition</span>
+<span class="w">        </span><span class="c1">// and rotate it towards playerPosition, so it looks at the player.</span>
+<span class="w">        </span><span class="n">LookAtFromPosition</span><span class="p">(</span><span class="n">startPosition</span><span class="p">,</span><span class="w"> </span><span class="n">playerPosition</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Rotate this mob randomly within range of -45 and +45 degrees,</span>
+<span class="w">        </span><span class="c1">// so that it doesn&#39;t move directly towards the player.</span>
+<span class="w">        </span><span class="n">RotateY</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">GD</span><span class="p">.</span><span class="n">RandRange</span><span class="p">(</span><span class="o">-</span><span class="n">Mathf</span><span class="p">.</span><span class="n">Pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">4.0</span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// We calculate a random speed (float).</span>
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">randomSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">RandRange</span><span class="p">(</span><span class="n">MinSpeed</span><span class="p">,</span><span class="w"> </span><span class="n">MaxSpeed</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// We calculate a forward velocity that represents the speed.</span>
+<span class="w">        </span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Forward</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">randomSpeed</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// We then rotate the velocity vector based on the mob&#39;s Y rotation</span>
+<span class="w">        </span><span class="c1">// in order to move in the direction the mob is looking.</span>
+<span class="w">        </span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Velocity</span><span class="p">.</span><span class="n">Rotated</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation</span><span class="p">.</span><span class="n">Y</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// We also specified this function name in PascalCase in the editor&#39;s connection window.</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnVisibilityNotifierScreenExited</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">QueueFree</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="03.player_movement_code.html" class="btn btn-neutral float-left" title="Moving the player with code" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="05.spawning_mobs.html" class="btn btn-neutral float-right" title="Spawning monsters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

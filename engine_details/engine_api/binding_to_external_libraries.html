@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Binding to external libraries" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/engine_api/binding_to_external_libraries.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Modules: The Summator example in Custom modules in C++ is great for small, custom modules, but what if you want to use a larger, external library? Let&#x27;s look at an example using Festival, a sp..." />
+<meta name="description" content="Modules: The Summator example in Custom modules in C++ is great for small, custom modules, but what if you want to use a larger, external library? Let&#x27;s look at an example using Festival, a sp..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Binding to external libraries &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Custom resource format loaders" href="custom_resource_format_loaders.html" />
+    <link rel="prev" title="GDExtension C example" href="gdextension/gdextension_c_example.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/engine_api/binding_to_external_libraries" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="engine_details/engine_api/binding_to_external_libraries.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Engine extension APIs</a></li>
+      <li class="breadcrumb-item active">Binding to external libraries</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/engine_api/binding_to_external_libraries.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="binding-to-external-libraries">
+<span id="doc-binding-to-external-libraries"></span><h1>Binding to external libraries<a class="headerlink" href="#binding-to-external-libraries" title="Link to this heading"></a></h1>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h2>
+<p>The Summator example in <a class="reference internal" href="custom_modules_in_cpp.html#doc-custom-modules-in-cpp"><span class="std std-ref">Custom modules in C++</span></a> is great for small,
+custom modules, but what if you want to use a larger, external library?
+Let's look at an example using <a class="reference external" href="https://www.cstr.ed.ac.uk/projects/festival/">Festival</a>,
+a speech synthesis (text-to-speech) library written in C++.</p>
+<p>To bind to an external library, set up a module directory similar to the Summator example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>godot/modules/tts/
+</pre></div>
+</div>
+<p>Next, you will create a header file with a TTS class:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">godot/modules/tts/tts.h</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/object/ref_counted.h&quot;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TTS</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">RefCounted</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">TTS</span><span class="p">,</span><span class="w"> </span><span class="n">RefCounted</span><span class="p">);</span>
+
+<span class="k">protected</span><span class="o">:</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">_bind_methods</span><span class="p">();</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">say_text</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">p_txt</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">TTS</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<p>And then you'll add the cpp file.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">godot/modules/tts/tts.cpp</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tts.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;festival.h&gt;</span>
+
+<span class="kt">bool</span><span class="w"> </span><span class="nf">TTS::say_text</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">p_txt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">//convert Godot String to Godot CharString to C string</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">festival_say_text</span><span class="p">(</span><span class="n">p_txt</span><span class="p">.</span><span class="n">ascii</span><span class="p">().</span><span class="n">get_data</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">TTS::_bind_methods</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&quot;say_text&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;txt&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">TTS</span><span class="o">::</span><span class="n">say_text</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">TTS</span><span class="o">::</span><span class="n">TTS</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">festival_initialize</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="mi">210000</span><span class="p">);</span><span class="w"> </span><span class="c1">//not the best way to do it as this should only ever be called once.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Just as before, the new class needs to be registered somehow, so two more files
+need to be created:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>register_types.h
+register_types.cpp
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>These files must be in the top-level folder of your module (next to your
+<code class="docutils literal notranslate"><span class="pre">SCsub</span></code> and <code class="docutils literal notranslate"><span class="pre">config.py</span></code> files) for the module to be registered properly.</p>
+</div>
+<p>These files should contain the following:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">godot/modules/tts/register_types.h</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">initialize_tts_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span><span class="w"> </span><span class="n">p_level</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">uninitialize_tts_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span><span class="w"> </span><span class="n">p_level</span><span class="p">);</span>
+<span class="cm">/* yes, the word in the middle must be the same as the module folder name */</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">godot/modules/tts/register_types.cpp</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;register_types.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/object/class_db.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tts.h&quot;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">initialize_tts_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span><span class="w"> </span><span class="n">p_level</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p_level</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">MODULE_INITIALIZATION_LEVEL_SCENE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">register_class</span><span class="o">&lt;</span><span class="n">TTS</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">uninitialize_tts_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span><span class="w"> </span><span class="n">p_level</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Nothing to do here in this example.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Next, you need to create an <code class="docutils literal notranslate"><span class="pre">SCsub</span></code> file so the build system compiles
+this module:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">godot/modules/tts/SCsub</span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Import</span><span class="p">(</span><span class="s1">&#39;env&#39;</span><span class="p">)</span>
+
+<span class="n">env_tts</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">Clone</span><span class="p">()</span>
+<span class="n">env_tts</span><span class="o">.</span><span class="n">add_source_files</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">modules_sources</span><span class="p">,</span> <span class="s2">&quot;*.cpp&quot;</span><span class="p">)</span> <span class="c1"># Add all cpp files to the build</span>
+</pre></div>
+</div>
+</div>
+<p>You'll need to install the external library on your machine to get the .a library files. See the library's official
+documentation for specific instructions on how to do this for your operating system. We've included the
+installation commands for Linux below, for reference.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>festival<span class="w"> </span>festival-dev<span class="w">  </span><span class="c1"># Installs festival and speech_tools libraries</span>
+apt-cache<span class="w"> </span>search<span class="w"> </span>festvox-*<span class="w">  </span><span class="c1"># Displays list of voice packages</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>festvox-don<span class="w"> </span>festvox-rablpc16k<span class="w"> </span>festvox-kallpc16k<span class="w"> </span>festvox-kdlpc16k<span class="w">  </span><span class="c1"># Installs voices</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The voices that Festival uses (and any other potential external/3rd-party
+resource) all have varying licenses and terms of use; some (if not most) of them may be
+be problematic with Godot, even if the Festival Library itself is MIT License compatible.
+Please be sure to check the licenses and terms of use.</p>
+</div>
+<p>The external library will also need to be installed inside your module to make the source
+files accessible to the compiler, while also keeping the module code self-contained. The
+festival and speech_tools libraries can be installed from the modules/tts/ directory via
+git using the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/festvox/festival
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/festvox/speech_tools
+</pre></div>
+</div>
+<p>If you don't want the external repository source files committed to your repository, you
+can link to them instead by adding them as submodules (from within the modules/tts/ directory), as seen below:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>https://github.com/festvox/festival
+git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>https://github.com/festvox/speech_tools
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Please note that Git submodules are not used in the Godot repository. If
+you are developing a module to be merged into the main Godot repository, you should not
+use submodules. If your module doesn't get merged in, you can always try to implement
+the external library as a GDExtension.</p>
+</div>
+<p>To add include directories for the compiler to look at you can append it to the
+environment's paths:</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">godot/modules/tts/SCsub</span><a class="headerlink" href="#id6" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># These paths are relative to /modules/tts/</span>
+<span class="n">env_tts</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">CPPPATH</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;speech_tools/include&quot;</span><span class="p">,</span> <span class="s2">&quot;festival/src/include&quot;</span><span class="p">])</span>
+
+<span class="c1"># LIBPATH and LIBS need to be set on the real &quot;env&quot; (not the clone)</span>
+<span class="c1"># to link the specified libraries to the Godot executable.</span>
+
+<span class="c1"># This is an absolute path where your .a libraries reside.</span>
+<span class="c1"># If using a relative path, you must convert it to a</span>
+<span class="c1"># full path using a utility function, such as `Dir(&#39;...&#39;).abspath`.</span>
+<span class="n">env</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">LIBPATH</span><span class="o">=</span><span class="p">[</span><span class="n">Dir</span><span class="p">(</span><span class="s1">&#39;libpath&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">abspath</span><span class="p">])</span>
+
+<span class="c1"># Check with the documentation of the external library to see which library</span>
+<span class="c1"># files should be included/linked.</span>
+<span class="n">env</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">LIBS</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Festival&#39;</span><span class="p">,</span> <span class="s1">&#39;estools&#39;</span><span class="p">,</span> <span class="s1">&#39;estbase&#39;</span><span class="p">,</span> <span class="s1">&#39;eststring&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>If you want to add custom compiler flags when building your module, you need to clone
+<cite>env</cite> first, so it won't add those flags to whole Godot build (which can cause errors).
+Example <cite>SCsub</cite> with custom flags:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">godot/modules/tts/SCsub</span><a class="headerlink" href="#id7" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Import</span><span class="p">(</span><span class="s1">&#39;env&#39;</span><span class="p">)</span>
+
+<span class="n">env_tts</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">Clone</span><span class="p">()</span>
+<span class="n">env_tts</span><span class="o">.</span><span class="n">add_source_files</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">modules_sources</span><span class="p">,</span> <span class="s2">&quot;*.cpp&quot;</span><span class="p">)</span>
+<span class="c1"># Append CCFLAGS flags for both C and C++ code.</span>
+<span class="n">env_tts</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">CCFLAGS</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-O2&#39;</span><span class="p">])</span>
+<span class="c1"># If you need to, you can:</span>
+<span class="c1"># - Append CFLAGS for C code only.</span>
+<span class="c1"># - Append CXXFLAGS for C++ code only.</span>
+</pre></div>
+</div>
+</div>
+<p>The final module should look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>godot/modules/tts/festival/
+godot/modules/tts/libpath/libestbase.a
+godot/modules/tts/libpath/libestools.a
+godot/modules/tts/libpath/libeststring.a
+godot/modules/tts/libpath/libFestival.a
+godot/modules/tts/speech_tools/
+godot/modules/tts/config.py
+godot/modules/tts/tts.h
+godot/modules/tts/tts.cpp
+godot/modules/tts/register_types.h
+godot/modules/tts/register_types.cpp
+godot/modules/tts/SCsub
+</pre></div>
+</div>
+</section>
+<section id="using-the-module">
+<h2>Using the module<a class="headerlink" href="#using-the-module" title="Link to this heading"></a></h2>
+<p>You can now use your newly created module from any script:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TTS</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hello world. This is a test!&quot;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">is_spoken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="o">.</span><span class="nf">say_text</span><span class="p">(</span><span class="n">script</span><span class="p">)</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="s1">&#39;is_spoken: &#39;</span><span class="p">,</span><span class="w"> </span><span class="n">is_spoken</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And the output will be <code class="docutils literal notranslate"><span class="pre">is_spoken:</span> <span class="pre">True</span></code> if the text is spoken.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gdextension/gdextension_c_example.html" class="btn btn-neutral float-left" title="GDExtension C example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="custom_resource_format_loaders.html" class="btn btn-neutral float-right" title="Custom resource format loaders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,757 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Advanced vector math" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/math/vectors_advanced.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Planes: The dot product has another interesting property with unit vectors. Imagine that perpendicular to that vector (and through the origin) passes a plane. Planes divide the entire space into po..." />
+<meta name="description" content="Planes: The dot product has another interesting property with unit vectors. Imagine that perpendicular to that vector (and through the origin) passes a plane. Planes divide the entire space into po..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Advanced vector math &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Matrices and transforms" href="matrices_and_transforms.html" />
+    <link rel="prev" title="Vector math" href="vector_math.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/math/vectors_advanced" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/math/vectors_advanced.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Math</a></li>
+      <li class="breadcrumb-item active">Advanced vector math</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/math/vectors_advanced.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="advanced-vector-math">
+<span id="doc-vectors-advanced"></span><h1>Advanced vector math<a class="headerlink" href="#advanced-vector-math" title="Link to this heading"></a></h1>
+<section id="planes">
+<h2>Planes<a class="headerlink" href="#planes" title="Link to this heading"></a></h2>
+<p>The dot product has another interesting property with unit vectors.
+Imagine that perpendicular to that vector (and through the origin)
+passes a plane. Planes divide the entire space into positive
+(over the plane) and negative (under the plane), and (contrary to
+popular belief) you can also use their math in 2D:</p>
+<img alt="../../_images/tutovec10.png" src="../../_images/tutovec10.png" />
+<p>Unit vectors that are perpendicular to a surface (so, they describe the
+orientation of the surface) are called <strong>unit normal vectors</strong>. Though,
+usually they are just abbreviated as <em>normals</em>. Normals appear in
+planes, 3D geometry (to determine where each face or vertex is siding),
+etc. A <strong>normal</strong> <em>is</em> a <strong>unit vector</strong>, but it's called <em>normal</em>
+because of its usage. (Just like we call (0,0) the Origin!).</p>
+<p>The plane passes by the origin and the
+surface of it is perpendicular to the unit vector (or <em>normal</em>). The
+side the vector points to is the positive half-space, while the
+other side is the negative half-space. In 3D this is exactly the same,
+except that the plane is an infinite surface (imagine an infinite, flat
+sheet of paper that you can orient and is pinned to the origin) instead
+of a line.</p>
+<section id="distance-to-plane">
+<h3>Distance to plane<a class="headerlink" href="#distance-to-plane" title="Link to this heading"></a></h3>
+<p>Now that it's clear what a plane is, let's go back to the dot product.
+The dot product between a <strong>unit vector</strong> and any <strong>point in space</strong>
+(yes, this time we do dot product between vector and position), returns
+the <strong>distance from the point to the plane</strong>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span><span class="o">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">point</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>But not just the absolute distance, if the point is in the negative half
+space the distance will be negative, too:</p>
+<img alt="../../_images/tutovec11.png" src="../../_images/tutovec11.png" />
+<p>This allows us to tell which side of the plane a point is.</p>
+</section>
+<section id="away-from-the-origin">
+<h3>Away from the origin<a class="headerlink" href="#away-from-the-origin" title="Link to this heading"></a></h3>
+<p>I know what you are thinking! So far this is nice, but <em>real</em> planes are
+everywhere in space, not only passing through the origin. You want real
+<em>plane</em> action and you want it <em>now</em>.</p>
+<p>Remember that planes not only split space in two, but they also have
+<em>polarity</em>. This means that it is possible to have perfectly overlapping
+planes, but their negative and positive half-spaces are swapped.</p>
+<p>With this in mind, let's describe a full plane as a <strong>normal</strong> <em>N</em> and a
+<strong>distance from the origin</strong> scalar <em>D</em>. Thus, our plane is represented
+by N and D. For example:</p>
+<img alt="../../_images/tutovec12.png" src="../../_images/tutovec12.png" />
+<p>For 3D math, Godot provides a <a class="reference internal" href="../../classes/class_plane.html#class-plane"><span class="std std-ref">Plane</span></a>
+built-in type that handles this.</p>
+<p>Basically, N and D can represent any plane in space, be it for 2D or 3D
+(depending on the amount of dimensions of N) and the math is the same
+for both. It's the same as before, but D is the distance from the origin
+to the plane, travelling in N direction. As an example, imagine you want
+to reach a point in the plane, you will just do:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">point_in_plane</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="n">D</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">pointInPlane</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>This will stretch (resize) the normal vector and make it touch the
+plane. This math might seem confusing, but it's actually much simpler
+than it seems. If we want to tell, again, the distance from the point to
+the plane, we do the same but adjusting for distance:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="o">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">D</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>The same thing, using a built-in function:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plane</span><span class="o">.</span><span class="nf">distance_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plane</span><span class="p">.</span><span class="n">DistanceTo</span><span class="p">(</span><span class="n">point</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>This will, again, return either a positive or negative distance.</p>
+<p>Flipping the polarity of the plane can be done by negating both
+N and D. This will result in a plane in the same position, but with
+inverted negative and positive half spaces:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">N</span>
+<span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">D</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">N</span><span class="p">;</span>
+<span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">D</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>Godot also implements this operator in <a class="reference internal" href="../../classes/class_plane.html#class-plane"><span class="std std-ref">Plane</span></a>.
+So, using the format below will work as expected:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">inverted_plane</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">plane</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">invertedPlane</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">plane</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>So, remember, the plane's main practical use is that we can
+calculate the distance to it. So, when is it useful to calculate the
+distance from a point to a plane? Let's see some examples.</p>
+</section>
+<section id="constructing-a-plane-in-2d">
+<h3>Constructing a plane in 2D<a class="headerlink" href="#constructing-a-plane-in-2d" title="Link to this heading"></a></h3>
+<p>Planes clearly don't come out of nowhere, so they must be built.
+Constructing them in 2D is easy, this can be done from either a normal
+(unit vector) and a point, or from two points in space.</p>
+<p>In the case of a normal and a point, most of the work is done, as the
+normal is already computed, so calculate D from the dot product of
+the normal and the point.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-6-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-6-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-6-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span>
+<span class="k">var</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span><span class="o">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-6-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-6-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span><span class="p">;</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">point</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>For two points in space, there are actually two planes that pass through
+them, sharing the same space but with normal pointing to the opposite
+directions. To compute the normal from the two points, the direction
+vector must be obtained first, and then it needs to be rotated 90
+degrees to either side:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-7-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-7-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-7-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate vector from `a` to `b`.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">dvec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">point_a</span><span class="o">.</span><span class="nf">direction_to</span><span class="p">(</span><span class="n">point_b</span><span class="p">)</span>
+<span class="c1"># Rotate 90 degrees.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">normal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="n">dvec</span><span class="o">.</span><span class="vi">y</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">dvec</span><span class="o">.</span><span class="vi">x</span><span class="p">)</span>
+<span class="c1"># Alternatively (depending the desired side of the normal):</span>
+<span class="c1"># var normal = Vector2(-dvec.y, dvec.x)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-7-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-7-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Calculate vector from `a` to `b`.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">dvec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pointA</span><span class="p">.</span><span class="n">DirectionTo</span><span class="p">(</span><span class="n">pointB</span><span class="p">);</span>
+<span class="c1">// Rotate 90 degrees.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">normal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(</span><span class="n">dvec</span><span class="p">.</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">dvec</span><span class="p">.</span><span class="n">X</span><span class="p">);</span>
+<span class="c1">// Alternatively (depending the desired side of the normal):</span>
+<span class="c1">// var normal = new Vector2(-dvec.Y, dvec.X);</span>
+</pre></div>
+</div>
+</div></div>
+<p>The rest is the same as the previous example. Either point_a or
+point_b will work, as they are in the same plane:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-8-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-8-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-8-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-8-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span>
+<span class="k">var</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span><span class="o">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">point_a</span><span class="p">)</span>
+<span class="c1"># this works the same</span>
+<span class="c1"># var D = normal.dot(point_b)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-8-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-8-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span><span class="p">;</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">pointA</span><span class="p">);</span>
+<span class="c1">// this works the same</span>
+<span class="c1">// var D = normal.Dot(pointB);</span>
+</pre></div>
+</div>
+</div></div>
+<p>Doing the same in 3D is a little more complex and is explained
+further down.</p>
+</section>
+<section id="some-examples-of-planes">
+<h3>Some examples of planes<a class="headerlink" href="#some-examples-of-planes" title="Link to this heading"></a></h3>
+<p>Here is an example of what planes are useful for. Imagine you have
+a <a class="reference external" href="https://www.mathsisfun.com/definitions/convex.html">convex</a>
+polygon. For example, a rectangle, a trapezoid, a triangle, or just any
+polygon where no faces bend inwards.</p>
+<p>For every segment of the polygon, we compute the plane that passes by
+that segment. Once we have the list of planes, we can do neat things,
+for example checking if a point is inside the polygon.</p>
+<p>We go through all planes, if we can find a plane where the distance to
+the point is positive, then the point is outside the polygon. If we
+can't, then the point is inside.</p>
+<img alt="../../_images/tutovec13.png" src="../../_images/tutovec13.png" />
+<p>Code should be something like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-9-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-9-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-9-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-9-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-9-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-9-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">inside</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">planes</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># check if distance to plane is positive</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="nf">distance_to</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="n">inside</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">        </span><span class="k k-ControlFlow">break</span><span class="w"> </span><span class="c1"># with one that fails, it&#39;s enough</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-9-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-9-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">inside</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">planes</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// check if distance to plane is positive</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">DistanceTo</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">inside</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="c1">// with one that fails, it&#39;s enough</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Pretty cool, huh? But this gets much better! With a little more effort,
+similar logic will let us know when two convex polygons are overlapping
+too. This is called the Separating Axis Theorem (or SAT) and most
+physics engines use this to detect collision.</p>
+<p>With a point, just checking if a plane
+returns a positive distance is enough to tell if the point is outside.
+With another polygon, we must find a plane where <em>all</em> <em>the</em> <em>other</em>
+<em>polygon</em> <em>points</em> return a positive distance to it. This check is
+performed with the planes of A against the points of B, and then with
+the planes of B against the points of A:</p>
+<img alt="../../_images/tutovec14.png" src="../../_images/tutovec14.png" />
+<p>Code should be something like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-10-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-10-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-10-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-10-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-10-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-10-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+
+<span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">planes_of_A</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">all_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">points_of_B</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="nf">distance_to</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">):</span>
+<span class="w">            </span><span class="n">all_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">            </span><span class="k k-ControlFlow">break</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">all_out</span><span class="p">):</span>
+<span class="w">        </span><span class="c1"># a separating plane was found</span>
+<span class="w">        </span><span class="c1"># do not continue testing</span>
+<span class="w">        </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">        </span><span class="k k-ControlFlow">break</span>
+
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">overlapping</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># only do this check if no separating plane</span>
+<span class="w">    </span><span class="c1"># was found in planes of A</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">planes_of_B</span><span class="p">:</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">all_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="w">        </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">points_of_A</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="nf">distance_to</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">):</span>
+<span class="w">                </span><span class="n">all_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">                </span><span class="k k-ControlFlow">break</span>
+
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">all_out</span><span class="p">):</span>
+<span class="w">            </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">            </span><span class="k k-ControlFlow">break</span>
+
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">overlapping</span><span class="p">):</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Polygons Collided!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-10-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-10-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Plane</span><span class="w"> </span><span class="n">plane</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">planesOfA</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">allOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">pointsOfB</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">plane</span><span class="p">.</span><span class="n">DistanceTo</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">allOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">allOut</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// a separating plane was found</span>
+<span class="w">        </span><span class="c1">// do not continue testing</span>
+<span class="w">        </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">overlapping</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// only do this check if no separating plane</span>
+<span class="w">    </span><span class="c1">// was found in planes of A</span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Plane</span><span class="w"> </span><span class="n">plane</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">planesOfB</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">allOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">pointsOfA</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">plane</span><span class="p">.</span><span class="n">DistanceTo</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">allOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">allOut</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">overlapping</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Polygons Collided!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>As you can see, planes are quite useful, and this is the tip of the
+iceberg. You might be wondering what happens with non-convex polygons.
+This is usually just handled by splitting the concave polygon into
+smaller convex polygons, or using a technique such as BSP (which is not
+used much nowadays).</p>
+</section>
+</section>
+<section id="collision-detection-in-3d">
+<h2>Collision detection in 3D<a class="headerlink" href="#collision-detection-in-3d" title="Link to this heading"></a></h2>
+<p>This is another bonus bit, a reward for being patient and keeping up
+with this long tutorial. Here is another piece of wisdom. This might
+not be something with a direct use case (Godot already does collision
+detection pretty well) but it's used by almost all physics engines and collision
+detection libraries :)</p>
+<p>Remember that converting a convex shape in 2D to an array of 2D planes
+was useful for collision detection? You could detect if a point was
+inside any convex shape, or if two 2D convex shapes were overlapping.</p>
+<p>Well, this works in 3D too, if two 3D polyhedral shapes are colliding,
+you won't be able to find a separating plane. If a separating plane is
+found, then the shapes are definitely not colliding.</p>
+<p>To refresh a bit a separating plane means that all vertices of polygon A
+are in one side of the plane, and all vertices of polygon B are in the
+other side. This plane is always one of the face-planes of either
+polygon A or polygon B.</p>
+<p>In 3D though, there is a problem to this approach, because it is
+possible that, in some cases a separating plane can't be found. This is
+an example of such situation:</p>
+<img alt="../../_images/tutovec22.png" src="../../_images/tutovec22.png" />
+<p>To avoid it, some extra planes need to be tested as separators, these
+planes are the cross product between the edges of polygon A and the
+edges of polygon B</p>
+<img alt="../../_images/tutovec23.png" src="../../_images/tutovec23.png" />
+<p>So the final algorithm is something like:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-11-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-11-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-11-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-11-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-11-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-11-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+
+<span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">planes_of_A</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">all_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">points_of_B</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="nf">distance_to</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">):</span>
+<span class="w">            </span><span class="n">all_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">            </span><span class="k k-ControlFlow">break</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">all_out</span><span class="p">):</span>
+<span class="w">        </span><span class="c1"># a separating plane was found</span>
+<span class="w">        </span><span class="c1"># do not continue testing</span>
+<span class="w">        </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">        </span><span class="k k-ControlFlow">break</span>
+
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">overlapping</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># only do this check if no separating plane</span>
+<span class="w">    </span><span class="c1"># was found in planes of A</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">planes_of_B</span><span class="p">:</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">all_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="w">        </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">points_of_A</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="nf">distance_to</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">):</span>
+<span class="w">                </span><span class="n">all_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">                </span><span class="k k-ControlFlow">break</span>
+
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">all_out</span><span class="p">):</span>
+<span class="w">            </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">            </span><span class="k k-ControlFlow">break</span>
+
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">overlapping</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">ea</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">edges_of_A</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">eb</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">edges_of_B</span><span class="p">:</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ea</span><span class="o">.</span><span class="nf">cross</span><span class="p">(</span><span class="n">eb</span><span class="p">)</span>
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="nf">length</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">):</span>
+<span class="w">                </span><span class="k k-ControlFlow">continue</span>
+
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">max_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1e20</span><span class="w"> </span><span class="c1"># tiny number</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">min_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e20</span><span class="w"> </span><span class="c1"># huge number</span>
+
+<span class="w">            </span><span class="c1"># we are using the dot product directly</span>
+<span class="w">            </span><span class="c1"># so we can map a maximum and minimum range</span>
+<span class="w">            </span><span class="c1"># for each polygon, then check if they</span>
+<span class="w">            </span><span class="c1"># overlap.</span>
+
+<span class="w">            </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">points_of_A</span><span class="p">:</span>
+<span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="o">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="w">                </span><span class="n">max_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">max</span><span class="p">(</span><span class="n">max_A</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
+<span class="w">                </span><span class="n">min_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">min</span><span class="p">(</span><span class="n">min_A</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">max_B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1e20</span><span class="w"> </span><span class="c1"># tiny number</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">min_B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e20</span><span class="w"> </span><span class="c1"># huge number</span>
+
+<span class="w">            </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">points_of_B</span><span class="p">:</span>
+<span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="o">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="w">                </span><span class="n">max_B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">max</span><span class="p">(</span><span class="n">max_B</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
+<span class="w">                </span><span class="n">min_B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">min</span><span class="p">(</span><span class="n">min_B</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">min_A</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">max_B</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">min_B</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">max_A</span><span class="p">):</span>
+<span class="w">                </span><span class="c1"># not overlapping!</span>
+<span class="w">                </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">                </span><span class="k k-ControlFlow">break</span>
+
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="ow">not</span><span class="w"> </span><span class="n">overlapping</span><span class="p">):</span>
+<span class="w">            </span><span class="k k-ControlFlow">break</span>
+
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">overlapping</span><span class="p">):</span>
+<span class="w">   </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Polygons collided!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-11-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-11-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Plane</span><span class="w"> </span><span class="n">plane</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">planesOfA</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">allOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">pointsOfB</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">plane</span><span class="p">.</span><span class="n">DistanceTo</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">allOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">allOut</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// a separating plane was found</span>
+<span class="w">        </span><span class="c1">// do not continue testing</span>
+<span class="w">        </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">overlapping</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// only do this check if no separating plane</span>
+<span class="w">    </span><span class="c1">// was found in planes of A</span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Plane</span><span class="w"> </span><span class="n">plane</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">planesOfB</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">allOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">pointsOfA</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">plane</span><span class="p">.</span><span class="n">DistanceTo</span><span class="p">(</span><span class="n">point</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">allOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">allOut</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">overlapping</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">edgeA</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">edgesOfA</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">edgeB</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">edgesOfB</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">normal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edgeA</span><span class="p">.</span><span class="n">Cross</span><span class="p">(</span><span class="n">edgeB</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">normal</span><span class="p">.</span><span class="n">Length</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">maxA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">float</span><span class="p">.</span><span class="n">MinValue</span><span class="p">;</span><span class="w"> </span><span class="c1">// tiny number</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">minA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">float</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">;</span><span class="w"> </span><span class="c1">// huge number</span>
+
+<span class="w">            </span><span class="c1">// we are using the dot product directly</span>
+<span class="w">            </span><span class="c1">// so we can map a maximum and minimum range</span>
+<span class="w">            </span><span class="c1">// for each polygon, then check if they</span>
+<span class="w">            </span><span class="c1">// overlap.</span>
+
+<span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">pointsOfA</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="kt">var</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">point</span><span class="p">);</span>
+<span class="w">                </span><span class="n">maxA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Max</span><span class="p">(</span><span class="n">maxA</span><span class="p">,</span><span class="w"> </span><span class="n">distance</span><span class="p">);</span>
+<span class="w">                </span><span class="n">minA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Min</span><span class="p">(</span><span class="n">minA</span><span class="p">,</span><span class="w"> </span><span class="n">distance</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">maxB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">float</span><span class="p">.</span><span class="n">MinValue</span><span class="p">;</span><span class="w"> </span><span class="c1">// tiny number</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">minB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">float</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">;</span><span class="w"> </span><span class="c1">// huge number</span>
+
+<span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">pointsOfB</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="kt">var</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normal</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">point</span><span class="p">);</span>
+<span class="w">                </span><span class="n">maxB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Max</span><span class="p">(</span><span class="n">maxB</span><span class="p">,</span><span class="w"> </span><span class="n">distance</span><span class="p">);</span>
+<span class="w">                </span><span class="n">minB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Min</span><span class="p">(</span><span class="n">minB</span><span class="p">,</span><span class="w"> </span><span class="n">distance</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">minA</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">maxB</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">minB</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">maxA</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// not overlapping!</span>
+<span class="w">                </span><span class="n">overlapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">overlapping</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">overlapping</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Polygons Collided!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="more-information">
+<h2>More information<a class="headerlink" href="#more-information" title="Link to this heading"></a></h2>
+<p>For more information on using vector math in Godot, see the following article:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="matrices_and_transforms.html#doc-matrices-and-transforms"><span class="std std-ref">Matrices and transforms</span></a></p></li>
+</ul>
+<p>If you would like additional explanation, you should check out
+3Blue1Brown's excellent video series
+<a class="reference external" href="https://www.youtube.com/watch?v=fNk_zzaMoSs&amp;list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">Essence of Linear Algebra</a>.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vector_math.html" class="btn btn-neutral float-left" title="Vector math" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="matrices_and_transforms.html" class="btn btn-neutral float-right" title="Matrices and transforms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

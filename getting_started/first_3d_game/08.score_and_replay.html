@@ -1,0 +1,582 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Score and replay" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="getting_started/first_3d_game/08.score_and_replay.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="In this part, we&#x27;ll add the score, music playback, and the ability to restart the game. We have to keep track of the current score in a variable and display it on screen using a minimal interf..." />
+<meta name="description" content="In this part, we&#x27;ll add the score, music playback, and the ability to restart the game. We have to keep track of the current score in a variable and display it on screen using a minimal interf..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Score and replay &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Character animation" href="09.adding_animations.html" />
+    <link rel="prev" title="Killing the player" href="07.killing_player.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="getting_started/first_3d_game/08.score_and_replay" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="getting_started/first_3d_game/08.score_and_replay.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Your first 3D game</a></li>
+      <li class="breadcrumb-item active">Score and replay</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/getting_started/first_3d_game/08.score_and_replay.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="score-and-replay">
+<span id="doc-first-3d-game-score-and-replay"></span><h1>Score and replay<a class="headerlink" href="#score-and-replay" title="Link to this heading"></a></h1>
+<p>In this part, we'll add the score, music playback, and the ability to restart
+the game.</p>
+<p>We have to keep track of the current score in a variable and display it on
+screen using a minimal interface. We will use a text label to do that.</p>
+<p>In the main scene, add a new child node <a class="reference internal" href="../../classes/class_control.html#class-control"><span class="std std-ref">Control</span></a> to <code class="docutils literal notranslate"><span class="pre">Main</span></code> and name it
+<code class="docutils literal notranslate"><span class="pre">UserInterface</span></code>. Ensure you are on the 2D screen, where you can edit your User Interface (UI).</p>
+<p>Add a <a class="reference internal" href="../../classes/class_label.html#class-label"><span class="std std-ref">Label</span></a> node and name it <code class="docutils literal notranslate"><span class="pre">ScoreLabel</span></code></p>
+<p><img alt="image1" src="../../_images/01_label_node.webp" /></p>
+<p>In the <em>Inspector</em>, set the <em>Label</em>'s <em>Text</em> to a placeholder like &quot;Score: 0&quot;.</p>
+<p><img alt="image2" src="../../_images/02_score_placeholder.webp" /></p>
+<p>Also, the text is white by default, like our game's background. We need to
+change its color to see it at runtime.</p>
+<p>Scroll down to <em>Theme Overrides</em>, and expand <em>Colors</em>
+and enable <em>Font Color</em> in order to tint the text to black
+(which contrasts well with the white 3D scene)</p>
+<p><img alt="image3" src="../../_images/03_score_font_color.webp" /></p>
+<p>Finally, click and drag on the text in the viewport to move it away from the
+top-left corner.</p>
+<p><img alt="image4" src="../../_images/04_score_label_moved.webp" /></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">UserInterface</span></code> node allows us to group our UI in a branch of the scene tree
+and use a theme resource that will propagate to all its children. We'll use it
+to set our game's font.</p>
+<section id="creating-a-ui-theme">
+<h2>Creating a UI theme<a class="headerlink" href="#creating-a-ui-theme" title="Link to this heading"></a></h2>
+<p>Once again, select the <code class="docutils literal notranslate"><span class="pre">UserInterface</span></code> node. In the <em>Inspector</em>, create a new
+theme resource in <em>Theme -&gt; Theme</em>.</p>
+<p><img alt="image5" src="../../_images/05_creating_theme.webp" /></p>
+<p>Click on it to open the theme editor In the bottom panel. It gives you a preview
+of how all the built-in UI widgets will look with your theme resource.</p>
+<p><img alt="image6" src="../../_images/06_theme_preview.webp" /></p>
+<p>By default, a theme only has a few properties: <em>Default Base Scale</em>, <em>Default Font</em>
+and <em>Default Font Size</em>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>You can add more properties to the theme resource to design complex user
+interfaces, but that is beyond the scope of this series. To learn more about
+creating and editing themes, see <a class="reference internal" href="../../tutorials/ui/gui_skinning.html#doc-gui-skinning"><span class="std std-ref">Introduction to GUI skinning</span></a>.</p>
+</div>
+<p>The <em>Default Font</em> expects a font file like the ones you have on your computer.
+Two common font file formats are TrueType Font (TTF) and OpenType Font (OTF).</p>
+<p>In the <em>FileSystem</em> dock, expand the <code class="docutils literal notranslate"><span class="pre">fonts</span></code> directory and click and drag the
+<code class="docutils literal notranslate"><span class="pre">Montserrat-Medium.ttf</span></code> file we included in the project onto the <em>Default Font</em>.
+The text will reappear in the theme preview.</p>
+<p>The text is a bit small. Set the <em>Default Font Size</em> to <code class="docutils literal notranslate"><span class="pre">22</span></code> pixels to increase the text's size.</p>
+<p><img alt="image7" src="../../_images/07_font_size.webp" /></p>
+</section>
+<section id="keeping-track-of-the-score">
+<h2>Keeping track of the score<a class="headerlink" href="#keeping-track-of-the-score" title="Link to this heading"></a></h2>
+<p>Let's work on the score next. Attach a new script to the <code class="docutils literal notranslate"><span class="pre">ScoreLabel</span></code> and define
+the <code class="docutils literal notranslate"><span class="pre">score</span></code> variable.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Label</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ScoreLabel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Label</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>The score should increase by <code class="docutils literal notranslate"><span class="pre">1</span></code> every time we squash a monster. We can use
+their <code class="docutils literal notranslate"><span class="pre">squashed</span></code> signal to know when that happens. However, because we instantiate
+monsters from the code, we cannot connect the mob signal to the <code class="docutils literal notranslate"><span class="pre">ScoreLabel</span></code> via the editor.</p>
+<p>Instead, we have to make the connection from the code every time we spawn a
+monster.</p>
+<p>Open the script <code class="docutils literal notranslate"><span class="pre">main.gd</span></code>. If it's still open, you can click on its name in
+the script editor's left column.</p>
+<p><img alt="image8" src="../../_images/08_open_main_script.webp" /></p>
+<p>Alternatively, you can double-click the <code class="docutils literal notranslate"><span class="pre">main.gd</span></code> file in the <em>FileSystem</em>
+dock.</p>
+<p>At the bottom of the <code class="docutils literal notranslate"><span class="pre">_on_mob_timer_timeout()</span></code> function, add the following
+line:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_mob_timer_timeout</span><span class="p">():</span>
+<span class="w">    </span><span class="c1">#...</span>
+<span class="w">    </span><span class="c1"># We connect the mob to the score label to update the score upon squashing one.</span>
+<span class="w">    </span><span class="n">mob</span><span class="o">.</span><span class="vi">squashed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="sx">$UserInterface/ScoreLabel</span><span class="o">.</span><span class="vi">_on_mob_squashed</span><span class="o">.</span><span class="nf">bind</span><span class="p">())</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnMobTimerTimeout</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="c1">// We connect the mob to the score label to update the score upon squashing one.</span>
+<span class="w">    </span><span class="n">mob</span><span class="p">.</span><span class="n">Squashed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">ScoreLabel</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;UserInterface/ScoreLabel&quot;</span><span class="p">).</span><span class="n">OnMobSquashed</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>This line means that when the mob emits the <code class="docutils literal notranslate"><span class="pre">squashed</span></code> signal, the
+<code class="docutils literal notranslate"><span class="pre">ScoreLabel</span></code> node will receive it and call the function <code class="docutils literal notranslate"><span class="pre">_on_mob_squashed()</span></code>.</p>
+<p>Head back to the <code class="docutils literal notranslate"><span class="pre">score_label.gd</span></code> script to define the <code class="docutils literal notranslate"><span class="pre">_on_mob_squashed()</span></code>
+callback function.</p>
+<p>There, we increment the score and update the displayed text.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_mob_squashed</span><span class="p">():</span>
+<span class="w">    </span><span class="n">score</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Score: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">score</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnMobSquashed</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">_score</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$&quot;Score: {_score}&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>The second line uses the value of the <code class="docutils literal notranslate"><span class="pre">score</span></code> variable to replace the
+placeholder <code class="docutils literal notranslate"><span class="pre">%s</span></code>. When using this feature, Godot automatically converts values
+to string text, which is convenient when outputting text in labels or
+when using the <code class="docutils literal notranslate"><span class="pre">print()</span></code> function.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>You can learn more about string formatting here: <a class="reference internal" href="../../tutorials/scripting/gdscript/gdscript_format_string.html#doc-gdscript-printf"><span class="std std-ref">GDScript format strings</span></a>.
+In C#, consider using <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated">string interpolation with &quot;$&quot;</a>.</p>
+</div>
+<p>You can now play the game and squash a few enemies to see the score
+increase.</p>
+<p><img alt="image9" src="../../_images/09_score_in_game.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In a complex game, you may want to completely separate your user interface
+from the game world. In that case, you would not keep track of the score on
+the label. Instead, you may want to store it in a separate, dedicated
+object. But when prototyping or when your project is simple, it is fine to
+keep your code simple. Programming is always a balancing act.</p>
+</div>
+</section>
+<section id="retrying-the-game">
+<h2>Retrying the game<a class="headerlink" href="#retrying-the-game" title="Link to this heading"></a></h2>
+<p>We'll now add the ability to play again after dying. When the player dies, we'll
+display a message on the screen and wait for input.</p>
+<p>Head back to the <code class="docutils literal notranslate"><span class="pre">main.tscn</span></code> scene, select the <code class="docutils literal notranslate"><span class="pre">UserInterface</span></code> node, add a
+child node <a class="reference internal" href="../../classes/class_colorrect.html#class-colorrect"><span class="std std-ref">ColorRect</span></a>, and name it <code class="docutils literal notranslate"><span class="pre">Retry</span></code>. This node fills a
+rectangle with a uniform color and will serve as an overlay to darken the
+screen.</p>
+<p>To make it span over the whole viewport, you can use the <em>Anchor Preset</em> menu in the
+toolbar.</p>
+<p><img alt="image10" src="../../_images/10_anchor_preset.webp" /></p>
+<p>Open it and apply the <em>Full Rect</em> command.</p>
+<p><img alt="image11" src="../../_images/11_full_rect_option.webp" /></p>
+<p>Nothing happens. Well, almost nothing; only the four green pins move to the
+corners of the selection box.</p>
+<p><img alt="image12" src="../../_images/12_anchors_updated.webp" /></p>
+<p>This is because UI nodes (all the ones with a green icon) work with anchors and
+margins relative to their parent's bounding box. Here, the <code class="docutils literal notranslate"><span class="pre">UserInterface</span></code> node
+has a small size and the <code class="docutils literal notranslate"><span class="pre">Retry</span></code> one is limited by it.</p>
+<p>Select the <code class="docutils literal notranslate"><span class="pre">UserInterface</span></code> and apply <em>Anchor Preset -&gt; Full Rect</em> to it as well. The
+<code class="docutils literal notranslate"><span class="pre">Retry</span></code> node should now span the whole viewport.</p>
+<p>Let's change its color so it darkens the game area. Select <code class="docutils literal notranslate"><span class="pre">Retry</span></code> and in the
+<em>Inspector</em>, set its <em>Color</em> to something both dark and transparent. To do so,
+in the color picker, drag the <em>A</em> slider to the left. It controls the color's
+Alpha channel, that is to say, its opacity/transparency.</p>
+<p><img alt="image13" src="../../_images/13_retry_color_picker.webp" /></p>
+<p>Next, add a <a class="reference internal" href="../../classes/class_label.html#class-label"><span class="std std-ref">Label</span></a> as a child of <code class="docutils literal notranslate"><span class="pre">Retry</span></code> and give it the <em>Text</em>
+&quot;Press Enter to retry.&quot;
+To move it and anchor it in the center of the screen, apply <em>Anchor Preset -&gt; Center</em>
+to it.</p>
+<p><img alt="image14" src="../../_images/14_center_option.webp" /></p>
+<section id="coding-the-retry-option">
+<h3>Coding the retry option<a class="headerlink" href="#coding-the-retry-option" title="Link to this heading"></a></h3>
+<p>We can now head to the code to show and hide the <code class="docutils literal notranslate"><span class="pre">Retry</span></code> node when the player
+dies and plays again.</p>
+<p>Open the script <code class="docutils literal notranslate"><span class="pre">main.gd</span></code>. First, we want to hide the overlay at the start of
+the game. Add this line to the <code class="docutils literal notranslate"><span class="pre">_ready()</span></code> function.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="sx">$UserInterface/Retry</span><span class="o">.</span><span class="nf">hide</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Control</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;UserInterface/Retry&quot;</span><span class="p">).</span><span class="n">Hide</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Then, when the player gets hit, we show the overlay.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_player_hit</span><span class="p">():</span>
+<span class="w">    </span><span class="c1">#...</span>
+<span class="w">    </span><span class="sx">$UserInterface/Retry</span><span class="o">.</span><span class="nf">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnPlayerHit</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">//...</span>
+<span class="w">    </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Control</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;UserInterface/Retry&quot;</span><span class="p">).</span><span class="n">Show</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Finally, when the <code class="docutils literal notranslate"><span class="pre">Retry</span></code> node is visible, we need to listen to the player's
+input and restart the game if they press enter. To do this, we use the built-in
+<code class="docutils literal notranslate"><span class="pre">_unhandled_input()</span></code> callback, which is triggered on any input.</p>
+<p>If the player pressed the predefined <code class="docutils literal notranslate"><span class="pre">ui_accept</span></code> input action and <code class="docutils literal notranslate"><span class="pre">Retry</span></code> is
+visible, we reload the current scene.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_unhandled_input</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;ui_accept&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="sx">$UserInterface/Retry</span><span class="o">.</span><span class="vi">visible</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># This restarts the current scene.</span>
+<span class="w">        </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="nf">reload_current_scene</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_UnhandledInput</span><span class="p">(</span><span class="n">InputEvent</span><span class="w"> </span><span class="n">@event</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">@event</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_accept&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Control</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;UserInterface/Retry&quot;</span><span class="p">).</span><span class="n">Visible</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// This restarts the current scene.</span>
+<span class="w">        </span><span class="n">GetTree</span><span class="p">().</span><span class="n">ReloadCurrentScene</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">get_tree()</span></code> gives us access to the global <a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree"><span class="std std-ref">SceneTree</span></a> object, which allows us to reload and restart the current
+scene.</p>
+</section>
+</section>
+<section id="adding-music">
+<h2>Adding music<a class="headerlink" href="#adding-music" title="Link to this heading"></a></h2>
+<p>To add music that plays continuously in the background, we're going to use
+another feature in Godot: <a class="reference internal" href="../../tutorials/scripting/singletons_autoload.html#doc-singletons-autoload"><span class="std std-ref">autoloads</span></a>.</p>
+<p>To play audio, all you need to do is add an <a class="reference internal" href="../../classes/class_audiostreamplayer.html#class-audiostreamplayer"><span class="std std-ref">AudioStreamPlayer</span></a> node to your
+scene and attach an audio file to it. When you start the scene, it can play
+automatically. However, when you reload the scene, like we do to play again, the
+audio nodes are also reset, and the music starts back from the beginning.</p>
+<p>You can use the autoload feature to have Godot load a node or a scene
+automatically at the start of the game, outside the current scene. You can also
+use it to create globally accessible objects.</p>
+<p>Create a new scene by going to the <em>Scene</em> menu and clicking <em>New Scene</em>
+or by using the <em>+</em> icon next to your currently opened scene.</p>
+<p><img alt="image15" src="../../_images/15_new_scene.webp" /></p>
+<p>Click the <em>Other Node</em> button to create an <a class="reference internal" href="../../classes/class_audiostreamplayer.html#class-audiostreamplayer"><span class="std std-ref">AudioStreamPlayer</span></a> and rename it to
+<code class="docutils literal notranslate"><span class="pre">MusicPlayer</span></code>.</p>
+<p><img alt="image16" src="../../_images/16_music_player_node.webp" /></p>
+<p>We included a music soundtrack in the <code class="docutils literal notranslate"><span class="pre">art/</span></code> directory, <code class="docutils literal notranslate"><span class="pre">House</span> <span class="pre">In</span> <span class="pre">a</span> <span class="pre">Forest</span>
+<span class="pre">Loop.ogg</span></code>. Click and drag it onto the <em>Stream</em> property in the <em>Inspector</em>.
+Also, turn on <em>Autoplay</em> so the music plays automatically at the start of the
+game.</p>
+<p><img alt="image17" src="../../_images/17_music_node_properties.webp" /></p>
+<p>Save the scene as <code class="docutils literal notranslate"><span class="pre">music_player.tscn</span></code>.</p>
+<p>We have to register it as an autoload. Head to the <em>Project -&gt; Project
+Settings…</em> menu and click on the <em>Globals -&gt; Autoload</em> tab.</p>
+<p>In the <em>Path</em> field, you want to enter the path to your scene. Click the folder
+icon to open the file browser and double-click on <code class="docutils literal notranslate"><span class="pre">music_player.tscn</span></code>. Then,
+click the <em>Add</em> button on the right to register the node.</p>
+<p><img alt="image18" src="../../_images/18_register_autoload.webp" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">music_player.tscn</span></code> now loads into any scene you open or play.
+So if you run the game now, the music will play automatically in any scene.</p>
+<p>Before we wrap up this lesson, here's a quick look at how it works under the
+hood. When you run the game, your <em>Scene</em> dock changes to give you two tabs:
+<em>Remote</em> and <em>Local</em>.</p>
+<p><img alt="image19" src="../../_images/19_scene_dock_tabs.webp" /></p>
+<p>The <em>Remote</em> tab allows you to visualize the node tree of your running game.
+There, you will see the <em>Main</em> node and everything the scene contains and the
+instantiated mobs at the bottom.</p>
+<p><img alt="image20" src="../../_images/20_remote_scene_tree.webp" /></p>
+<p>At the top are the autoloaded <code class="docutils literal notranslate"><span class="pre">MusicPlayer</span></code> and a <em>root</em> node, which is your
+game's viewport.</p>
+<p>And that does it for this lesson. In the next part, we'll add an animation to
+make the game both look and feel much nicer.</p>
+<p>Here is the complete <code class="docutils literal notranslate"><span class="pre">main.gd</span></code> script for reference.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-6-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-6-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-6-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">mob_scene</span><span class="p">:</span><span class="w"> </span><span class="nb">PackedScene</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="sx">$UserInterface/Retry</span><span class="o">.</span><span class="nf">hide</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_mob_timer_timeout</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Create a new instance of the Mob scene.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">mob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mob_scene</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># Choose a random location on the SpawnPath.</span>
+<span class="w">    </span><span class="c1"># We store the reference to the SpawnLocation node.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">mob_spawn_location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;SpawnPath/SpawnLocation&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># And give it a random offset.</span>
+<span class="w">    </span><span class="n">mob_spawn_location</span><span class="o">.</span><span class="vi">progress_ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">randf</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">player_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Player</span><span class="o">.</span><span class="vi">position</span>
+<span class="w">    </span><span class="n">mob</span><span class="o">.</span><span class="nf">initialize</span><span class="p">(</span><span class="n">mob_spawn_location</span><span class="o">.</span><span class="vi">position</span><span class="p">,</span><span class="w"> </span><span class="n">player_position</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Spawn the mob by adding it to the Main scene.</span>
+<span class="w">    </span><span class="nf">add_child</span><span class="p">(</span><span class="n">mob</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># We connect the mob to the score label to update the score upon squashing one.</span>
+<span class="w">    </span><span class="n">mob</span><span class="o">.</span><span class="vi">squashed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="sx">$UserInterface/ScoreLabel</span><span class="o">.</span><span class="vi">_on_mob_squashed</span><span class="o">.</span><span class="nf">bind</span><span class="p">())</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_player_hit</span><span class="p">():</span>
+<span class="w">    </span><span class="sx">$MobTimer</span><span class="o">.</span><span class="nf">stop</span><span class="p">()</span>
+<span class="w">    </span><span class="sx">$UserInterface/Retry</span><span class="o">.</span><span class="nf">show</span><span class="p">()</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_unhandled_input</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;ui_accept&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="sx">$UserInterface/Retry</span><span class="o">.</span><span class="vi">visible</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># This restarts the current scene.</span>
+<span class="w">        </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="nf">reload_current_scene</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-6-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-6-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Main</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">PackedScene</span><span class="w"> </span><span class="n">MobScene</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Control</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;UserInterface/Retry&quot;</span><span class="p">).</span><span class="n">Hide</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_UnhandledInput</span><span class="p">(</span><span class="n">InputEvent</span><span class="w"> </span><span class="n">@event</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">@event</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_accept&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Control</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;UserInterface/Retry&quot;</span><span class="p">).</span><span class="n">Visible</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// This restarts the current scene.</span>
+<span class="w">            </span><span class="n">GetTree</span><span class="p">().</span><span class="n">ReloadCurrentScene</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnMobTimerTimeout</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Create a new instance of the Mob scene.</span>
+<span class="w">        </span><span class="n">Mob</span><span class="w"> </span><span class="n">mob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MobScene</span><span class="p">.</span><span class="n">Instantiate</span><span class="o">&lt;</span><span class="n">Mob</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Choose a random location on the SpawnPath.</span>
+<span class="w">        </span><span class="c1">// We store the reference to the SpawnLocation node.</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">mobSpawnLocation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">PathFollow3D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;SpawnPath/SpawnLocation&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// And give it a random offset.</span>
+<span class="w">        </span><span class="n">mobSpawnLocation</span><span class="p">.</span><span class="n">ProgressRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Randf</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">Vector3</span><span class="w"> </span><span class="n">playerPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Player&quot;</span><span class="p">).</span><span class="n">position</span><span class="p">;</span>
+<span class="w">        </span><span class="n">mob</span><span class="p">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">mobSpawnLocation</span><span class="p">.</span><span class="n">Position</span><span class="p">,</span><span class="w"> </span><span class="n">playerPosition</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Spawn the mob by adding it to the Main scene.</span>
+<span class="w">        </span><span class="n">AddChild</span><span class="p">(</span><span class="n">mob</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// We connect the mob to the score label to update the score upon squashing one.</span>
+<span class="w">        </span><span class="n">mob</span><span class="p">.</span><span class="n">Squashed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">ScoreLabel</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;UserInterface/ScoreLabel&quot;</span><span class="p">).</span><span class="n">OnMobSquashed</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnPlayerHit</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Timer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;MobTimer&quot;</span><span class="p">).</span><span class="n">Stop</span><span class="p">();</span>
+<span class="w">        </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Control</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;UserInterface/Retry&quot;</span><span class="p">).</span><span class="n">Show</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="07.killing_player.html" class="btn btn-neutral float-left" title="Killing the player" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="09.adding_animations.html" class="btn btn-neutral float-right" title="Character animation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

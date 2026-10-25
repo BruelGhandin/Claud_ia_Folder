@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="HTTP client class" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/networking/http_client_class.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="HTTPClient provides low-level access to HTTP communication. For a higher-level interface, you may want to take a look at HTTPRequest first, which has a tutorial available here. Here&#x27;s an examp..." />
+<meta name="description" content="HTTPClient provides low-level access to HTTP communication. For a higher-level interface, you may want to take a look at HTTPRequest first, which has a tutorial available here. Here&#x27;s an examp..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>HTTP client class &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="TLS/SSL certificates" href="ssl_certificates.html" />
+    <link rel="prev" title="Making HTTP requests" href="http_request_class.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/networking/http_client_class" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/networking/http_client_class.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Networking</a></li>
+      <li class="breadcrumb-item active">HTTP client class</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/networking/http_client_class.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+    <div class="admonition attention article-status">
+      <p class="first admonition-title">Work in progress</p>
+      <p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.7</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+    </div>
+    
+  </div>
+  
+
+  
+  <section id="http-client-class">
+<span id="doc-http-client-class"></span><h1>HTTP client class<a class="headerlink" href="#http-client-class" title="Link to this heading"></a></h1>
+<p><a class="reference internal" href="../../classes/class_httpclient.html#class-httpclient"><span class="std std-ref">HTTPClient</span></a> provides low-level access to HTTP communication.
+For a higher-level interface, you may want to take a look at <a class="reference internal" href="../../classes/class_httprequest.html#class-httprequest"><span class="std std-ref">HTTPRequest</span></a> first,
+which has a tutorial available <a class="reference internal" href="http_request_class.html#doc-http-request-class"><span class="std std-ref">here</span></a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When exporting to Android, make sure to enable the <code class="docutils literal notranslate"><span class="pre">INTERNET</span></code>
+permission in the Android export preset before exporting the project or
+using one-click deploy. Otherwise, network communication of any kind will be
+blocked by Android.</p>
+</div>
+<p>Here's an example of using the <a class="reference internal" href="../../classes/class_httpclient.html#class-httpclient"><span class="std std-ref">HTTPClient</span></a>
+class. It's just a script, so it can be run by executing:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">c:\godot&gt; godot -s http_test.gd</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">c:\godot&gt; godot -s HTTPTest.cs</span>
+</pre></div>
+</div>
+</div></div>
+<p>It will connect and fetch a website.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">SceneTree</span>
+
+<span class="c1"># HTTPClient demo</span>
+<span class="c1"># This simple class can do HTTP requests; it will not block, but it needs to be polled.</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_init</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">http</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">HTTPClient</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span><span class="w"> </span><span class="c1"># Create the Client.</span>
+
+<span class="w">    </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">connect_to_host</span><span class="p">(</span><span class="s2">&quot;www.php.net&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">)</span><span class="w"> </span><span class="c1"># Connect to host/port.</span>
+<span class="w">    </span><span class="nb nb-Function">assert</span><span class="p">(</span><span class="n">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">OK</span><span class="p">)</span><span class="w"> </span><span class="c1"># Make sure connection is OK.</span>
+
+<span class="w">    </span><span class="c1"># Wait until resolved and connected.</span>
+<span class="w">    </span><span class="k k-ControlFlow">while</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">get_status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">HTTPClient</span><span class="o">.</span><span class="vi">STATUS_CONNECTING</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">get_status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">HTTPClient</span><span class="o">.</span><span class="vi">STATUS_RESOLVING</span><span class="p">:</span>
+<span class="w">        </span><span class="n">http</span><span class="o">.</span><span class="nf">poll</span><span class="p">()</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Connecting...&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">process_frame</span>
+
+<span class="w">    </span><span class="nb nb-Function">assert</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="nf">get_status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">HTTPClient</span><span class="o">.</span><span class="vi">STATUS_CONNECTED</span><span class="p">)</span><span class="w"> </span><span class="c1"># Check if the connection was made successfully.</span>
+
+<span class="w">    </span><span class="c1"># Some headers</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;User-Agent: Pirulo/1.0 (Godot)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Accept: */*&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+
+<span class="w">    </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="nb">HTTPClient</span><span class="o">.</span><span class="vi">METHOD_GET</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/ChangeLog-5.php&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">)</span><span class="w"> </span><span class="c1"># Request a page from the site (this one was chunked..)</span>
+<span class="w">    </span><span class="nb nb-Function">assert</span><span class="p">(</span><span class="n">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">OK</span><span class="p">)</span><span class="w"> </span><span class="c1"># Make sure all is OK.</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">while</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">get_status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">HTTPClient</span><span class="o">.</span><span class="vi">STATUS_REQUESTING</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Keep polling for as long as the request is being processed.</span>
+<span class="w">        </span><span class="n">http</span><span class="o">.</span><span class="nf">poll</span><span class="p">()</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Requesting...&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">process_frame</span>
+
+<span class="w">    </span><span class="nb nb-Function">assert</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="nf">get_status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">HTTPClient</span><span class="o">.</span><span class="vi">STATUS_BODY</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">get_status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">HTTPClient</span><span class="o">.</span><span class="vi">STATUS_CONNECTED</span><span class="p">)</span><span class="w"> </span><span class="c1"># Make sure request finished well.</span>
+
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;response? &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">has_response</span><span class="p">())</span><span class="w"> </span><span class="c1"># Site might not have a response.</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">has_response</span><span class="p">():</span>
+<span class="w">        </span><span class="c1"># If there is a response...</span>
+
+<span class="w">        </span><span class="n">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">get_response_headers_as_dictionary</span><span class="p">()</span><span class="w"> </span><span class="c1"># Get response headers.</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;code: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">get_response_code</span><span class="p">())</span><span class="w"> </span><span class="c1"># Show response code.</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;**headers:</span><span class="se">\\</span><span class="s2">n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">)</span><span class="w"> </span><span class="c1"># Show headers.</span>
+
+<span class="w">        </span><span class="c1"># Getting the HTTP Body</span>
+
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">is_response_chunked</span><span class="p">():</span>
+<span class="w">            </span><span class="c1"># Does it use chunks?</span>
+<span class="w">            </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Response is Chunked!&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">            </span><span class="c1"># Or just plain Content-Length</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">bl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">get_response_body_length</span><span class="p">()</span>
+<span class="w">            </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Response Length: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">bl</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c1"># This method works for both anyway</span>
+
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">rb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedByteArray</span><span class="p">()</span><span class="w"> </span><span class="c1"># Array that will hold the data.</span>
+
+<span class="w">        </span><span class="k k-ControlFlow">while</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">get_status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">HTTPClient</span><span class="o">.</span><span class="vi">STATUS_BODY</span><span class="p">:</span>
+<span class="w">            </span><span class="c1"># While there is body left to be read</span>
+<span class="w">            </span><span class="n">http</span><span class="o">.</span><span class="nf">poll</span><span class="p">()</span>
+<span class="w">            </span><span class="c1"># Get a chunk.</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="o">.</span><span class="nf">read_response_body_chunk</span><span class="p">()</span>
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">chunk</span><span class="o">.</span><span class="nf">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">                </span><span class="k">await</span><span class="w"> </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">process_frame</span>
+<span class="w">            </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">                </span><span class="n">rb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rb</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">chunk</span><span class="w"> </span><span class="c1"># Append to read buffer.</span>
+<span class="w">        </span><span class="c1"># Done!</span>
+
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;bytes got: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rb</span><span class="o">.</span><span class="nf">size</span><span class="p">())</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rb</span><span class="o">.</span><span class="nf">get_string_from_ascii</span><span class="p">()</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Text: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nf">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">HTTPTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">SceneTree</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// HTTPClient demo.</span>
+<span class="w">    </span><span class="c1">// This simple class can make HTTP requests; it will not block, but it needs to be polled.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Initialize</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Error</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">        </span><span class="n">HTTPClient</span><span class="w"> </span><span class="n">http</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HTTPClient</span><span class="p">();</span><span class="w"> </span><span class="c1">// Create the client.</span>
+
+<span class="w">        </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="p">.</span><span class="n">ConnectToHost</span><span class="p">(</span><span class="s">&quot;www.php.net&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">);</span><span class="w"> </span><span class="c1">// Connect to host/port.</span>
+<span class="w">        </span><span class="n">Debug</span><span class="p">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Error</span><span class="p">.</span><span class="n">Ok</span><span class="p">);</span><span class="w"> </span><span class="c1">// Make sure the connection is OK.</span>
+
+<span class="w">        </span><span class="c1">// Wait until resolved and connected.</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">http</span><span class="p">.</span><span class="n">GetStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HTTPClient</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">Connecting</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">http</span><span class="p">.</span><span class="n">GetStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HTTPClient</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">Resolving</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">http</span><span class="p">.</span><span class="n">Poll</span><span class="p">();</span>
+<span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Connecting...&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">OS</span><span class="p">.</span><span class="n">DelayMsec</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Debug</span><span class="p">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">http</span><span class="p">.</span><span class="n">GetStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HTTPClient</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">Connected</span><span class="p">);</span><span class="w"> </span><span class="c1">// Check if the connection was made successfully.</span>
+
+<span class="w">        </span><span class="c1">// Some headers.</span>
+<span class="w">        </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">headers</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="na">[</span>
+<span class="na">            &quot;User-Agent: Pirulo/1.0 (Godot)&quot;,</span>
+<span class="na">            &quot;Accept: */*&quot;,</span>
+<span class="na">        ]</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="p">.</span><span class="n">Request</span><span class="p">(</span><span class="n">HTTPClient</span><span class="p">.</span><span class="n">Method</span><span class="p">.</span><span class="n">Get</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/ChangeLog-5.php&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">);</span><span class="w"> </span><span class="c1">// Request a page from the site.</span>
+<span class="w">        </span><span class="n">Debug</span><span class="p">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Error</span><span class="p">.</span><span class="n">Ok</span><span class="p">);</span><span class="w"> </span><span class="c1">// Make sure all is OK.</span>
+
+<span class="w">        </span><span class="c1">// Keep polling for as long as the request is being processed.</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">http</span><span class="p">.</span><span class="n">GetStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HTTPClient</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">Requesting</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">http</span><span class="p">.</span><span class="n">Poll</span><span class="p">();</span>
+<span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Requesting...&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">OS</span><span class="p">.</span><span class="n">HasFeature</span><span class="p">(</span><span class="s">&quot;web&quot;</span><span class="p">))</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Synchronous HTTP requests are not supported on the web,</span>
+<span class="w">                </span><span class="c1">// so wait for the next main loop iteration.</span>
+<span class="w">                </span><span class="k">await</span><span class="w"> </span><span class="nf">ToSignal</span><span class="p">(</span><span class="n">Engine</span><span class="p">.</span><span class="n">GetMainLoop</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;idle_frame&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">OS</span><span class="p">.</span><span class="n">DelayMsec</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Debug</span><span class="p">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">http</span><span class="p">.</span><span class="n">GetStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HTTPClient</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">Body</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">http</span><span class="p">.</span><span class="n">GetStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HTTPClient</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">Connected</span><span class="p">);</span><span class="w"> </span><span class="c1">// Make sure the request finished well.</span>
+
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Response? &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">http</span><span class="p">.</span><span class="n">HasResponse</span><span class="p">());</span><span class="w"> </span><span class="c1">// The site might not have a response.</span>
+
+<span class="w">        </span><span class="c1">// If there is a response...</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">http</span><span class="p">.</span><span class="n">HasResponse</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="p">.</span><span class="n">GetResponseHeaders</span><span class="p">();</span><span class="w"> </span><span class="c1">// Get response headers.</span>
+<span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Code: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">http</span><span class="p">.</span><span class="n">GetResponseCode</span><span class="p">());</span><span class="w"> </span><span class="c1">// Show response code.</span>
+<span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Headers:&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">headers</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Show headers.</span>
+<span class="w">                </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">header</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">http</span><span class="p">.</span><span class="n">IsResponseChunked</span><span class="p">())</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Does it use chunks?</span>
+<span class="w">                </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Response is Chunked!&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Or just Content-Length.</span>
+<span class="w">                </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Response Length: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">http</span><span class="p">.</span><span class="n">GetResponseBodyLength</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="c1">// This method works for both anyways.</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// List that will hold the data.</span>
+
+<span class="w">            </span><span class="c1">// While there is data left to be read...</span>
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">http</span><span class="p">.</span><span class="n">GetStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HTTPClient</span><span class="p">.</span><span class="n">Status</span><span class="p">.</span><span class="n">Body</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">http</span><span class="p">.</span><span class="n">Poll</span><span class="p">();</span>
+<span class="w">                </span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="p">.</span><span class="n">ReadResponseBodyChunk</span><span class="p">();</span><span class="w"> </span><span class="c1">// Read a chunk.</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">chunk</span><span class="p">.</span><span class="n">Length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// If nothing was read, wait for the buffer to fill.</span>
+<span class="w">                    </span><span class="n">OS</span><span class="p">.</span><span class="n">DelayMsec</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">else</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// Append the chunk to the read buffer.</span>
+<span class="w">                    </span><span class="n">rb</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="n">chunk</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="c1">// Done!</span>
+<span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Bytes Downloaded: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rb</span><span class="p">.</span><span class="n">Count</span><span class="p">);</span>
+<span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Encoding</span><span class="p">.</span><span class="n">ASCII</span><span class="p">.</span><span class="n">GetString</span><span class="p">(</span><span class="n">rb</span><span class="p">.</span><span class="n">ToArray</span><span class="p">());</span>
+<span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">Quit</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="http_request_class.html" class="btn btn-neutral float-left" title="Making HTTP requests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ssl_certificates.html" class="btn btn-neutral float-right" title="TLS/SSL certificates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

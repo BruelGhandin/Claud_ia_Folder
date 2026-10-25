@@ -1,0 +1,533 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="The C interface JSON file" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/engine_api/gdextension/gdextension_interface_json_file.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="The gdextension_interface.json file is the &quot;source of truth&quot; for the C API that Godot uses to communicate with GDExtensions. You can use the Godot executable to dump the file by using the..." />
+<meta name="description" content="The gdextension_interface.json file is the &quot;source of truth&quot; for the C API that Godot uses to communicate with GDExtensions. You can use the Godot executable to dump the file by using the..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>The C interface JSON file &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="GDExtension C example" href="gdextension_c_example.html" />
+    <link rel="prev" title="The .gdextension file" href="gdextension_file.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/engine_api/gdextension/gdextension_interface_json_file" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="engine_details/engine_api/gdextension/gdextension_interface_json_file.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Engine extension APIs</a></li>
+          <li class="breadcrumb-item"><a href="index.html">The GDExtension system</a></li>
+      <li class="breadcrumb-item active">The C interface JSON file</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/engine_api/gdextension/gdextension_interface_json_file.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="the-c-interface-json-file">
+<span id="doc-gdextension-interface-json-file"></span><h1>The C interface JSON file<a class="headerlink" href="#the-c-interface-json-file" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">gdextension_interface.json</span></code> file is the &quot;source of truth&quot; for the C API that
+Godot uses to communicate with GDExtensions.</p>
+<p>You can use the Godot executable to dump the file by using the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot<span class="w"> </span>--headless<span class="w"> </span>--dump-gdextension-interface-json
+</pre></div>
+</div>
+<p>This file is intended to be used by GDExtension language bindings to generate code for
+using this API in whatever form makes the most sense for that language.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is not to be confused with the <code class="docutils literal notranslate"><span class="pre">extension_api.json</span></code>, which is also used by
+GDExtension language bindings, and contains information about the classes and
+methods that are exposed by Godot. The <code class="docutils literal notranslate"><span class="pre">gdextension_interface.json</span></code> is more
+low-level, and is used to interact with those higher-level classes and methods.</p>
+</div>
+<p>For languages that can be extended via C, or provide tools for interacting with C code,
+it's also possible to use the Godot executable to dump a generated C header file:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot<span class="w"> </span>--headless<span class="w"> </span>--dump-gdextension-interface
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The header file is compatible with earlier versions of the header file that were included
+with Godot 4.5 and earlier, which means it preserves some typos in names in order to
+ensure compatibility.</p>
+</div>
+<p>The goal of this page is to explain the JSON format for the GDExtension language bindings that
+would like to do their own code generation from the JSON.</p>
+<section id="overall-structure">
+<h2>Overall structure<a class="headerlink" href="#overall-structure" title="Link to this heading"></a></h2>
+<p>The JSON file is broken up into 3 sections:</p>
+<ul class="simple">
+<li><p>The header, which includes some miscellaneous information at the top-level of the JSON file.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">types</span></code> key, which defines all the types used in the GDExtension interface.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">interface</span></code> key, which defines all the function pointers that can be loaded via the
+<code class="docutils literal notranslate"><span class="pre">GDExtensionInterfaceGetProcAddress</span></code> function pointer, which is passed to all GDExtensions
+when they are loaded.</p></li>
+</ul>
+<p>There is a complete <a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/extension/gdextension_interface.schema.json">JSON schema</a>
+included in Godot's source code.</p>
+<p>Even though we may add new types and interface functions with each minor release of Godot, we
+strive to <strong>never</strong> change them in a backwards incompatible way, or remove them. Every
+interface function is labeled with the version of Godot it was introduced in (the <code class="docutils literal notranslate"><span class="pre">since</span></code>
+key), so you can always use the latest version of the file, and simply refrain from using
+anything in versions of Godot that are newer than the version you are targeting.</p>
+</section>
+<section id="header">
+<h2>Header<a class="headerlink" href="#header" title="Link to this heading"></a></h2>
+<p>The &quot;header&quot; is made up of 3 miscellaneous keys at the top-level of the file:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_copyright</span></code>: The standard copyright and license text that Godot includes in all source
+code files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$schema</span></code>: Points to the JSON schema relative to this file. It can be useful to place
+the schema in the same directory, if you're viewing it with a code editor that understands
+JSON schema.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">format_version</span></code>: An integer for the version of the file format (meaning the schema).
+Right now, there is only one format version (<code class="docutils literal notranslate"><span class="pre">1</span></code>). If we ever change the file format in
+an incompatible way, we will increment this number. This <em>doesn't</em> reflect the version
+of the data in the file (so it won't change between Godot versions), only its format.
+Hopefully, we'll never have to use it, but it allows code generators to error early if they
+encounter an unexpected value here.</p></li>
+</ul>
+</section>
+<section id="types">
+<h2>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">types</span></code> section is an array of types that will be used by other types, and the interface
+functions that will be in the last section.</p>
+<p>The types should be evaluated in order. Later types may refer to earlier types, but earlier
+types will not refer to later types.</p>
+<p>There is a small set of built-in types which aren't explicitly listed in the JSON:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">void</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int8_t</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uint8_t</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int16_t</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uint16_t</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int32_t</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uint32_t</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uint64_t</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size_t</span></code> (<code class="docutils literal notranslate"><span class="pre">uint32_t</span></code> on 32-bit architectures, and <code class="docutils literal notranslate"><span class="pre">uint64_t</span></code> on 64-bit architectures)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">char</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">char16_t</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">char32_t</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wchar_t</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">double</span></code></p></li>
+</ul>
+<p>These correspond to their equivalent C types.</p>
+<p>Additionally, types can include modifiers such as:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">*</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">int8_t*</span></code>) to indicate a pointer to the type</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int8_t*</span></code>) to indicate a const type</p></li>
+</ul>
+<p>Each type defined in the JSON file falls into one of 5 &quot;kinds&quot;:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enum</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">handle</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alias</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">function</span></code></p></li>
+</ul>
+<p>Regardless of the &quot;kind&quot;, all types can have the following keys:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">kind</span></code> (required): The type's &quot;kind&quot;.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (required): The name of the type, which could be used as a valid C identifier.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: An array of strings documenting the type, where each string is a line of
+documentation (this format for <code class="docutils literal notranslate"><span class="pre">description</span></code> is used throughout the JSON file).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deprecated</span></code>: An object with its own keys for the Godot version the type was deprecated in
+(<code class="docutils literal notranslate"><span class="pre">since</span></code>), a message explaining the deprecation (<code class="docutils literal notranslate"><span class="pre">message</span></code>), and optionally a replacement
+to use instead (<code class="docutils literal notranslate"><span class="pre">replacement</span></code>).</p></li>
+</ul>
+<section id="enums">
+<h3>Enums<a class="headerlink" href="#enums" title="Link to this heading"></a></h3>
+<p>Enums are 32-bit integers with a fixed set of possible values. In C, they could be represented
+as an <code class="docutils literal notranslate"><span class="pre">enum</span></code>.</p>
+<p>They have the following keys:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">is_bitfield</span></code>: If true, this enum is a bitfield, where the enum values can be bitwise OR'd together.
+It is false by default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">values</span></code>: The array of fixed values for this enum, each with a <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">value</span></code>, and <code class="docutils literal notranslate"><span class="pre">description</span></code>.</p></li>
+</ul>
+<p>An enum should be represented as an <code class="docutils literal notranslate"><span class="pre">int32_t</span></code>, unless <code class="docutils literal notranslate"><span class="pre">is_bitfield</span></code> is true, in which case a <code class="docutils literal notranslate"><span class="pre">uint32_t</span></code>
+should be used.</p>
+<section id="example">
+<h4>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDExtensionInitializationLevel&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;enum&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDEXTENSION_INITIALIZATION_CORE&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDEXTENSION_INITIALIZATION_SERVERS&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDEXTENSION_INITIALIZATION_SCENE&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDEXTENSION_INITIALIZATION_EDITOR&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDEXTENSION_MAX_INITIALIZATION_LEVEL&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="handles">
+<h3>Handles<a class="headerlink" href="#handles" title="Link to this heading"></a></h3>
+<p>Handles are pointers to opaque structs. In C, they could be represented as <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code> or <code class="docutils literal notranslate"><span class="pre">struct{}</span> <span class="pre">*</span></code>.</p>
+<p>They have the following keys:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">is_const</span></code>: If true, this handle type is to be treated as a &quot;const pointer&quot;, meaning its internal
+data will not be changed. It is false by default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_uninitialized</span></code>: If true, this handle type is to be treated as pointing to uninitialized memory
+(which may be initialized using interface functions). It is false by default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parent</span></code>: The optional name of another handle type, if this handle type is the const or uninitialized
+version of the parent type. This only makes sense if either <code class="docutils literal notranslate"><span class="pre">is_const</span></code> or <code class="docutils literal notranslate"><span class="pre">is_uninitialized</span></code> is true.</p></li>
+</ul>
+<p>Handles are the size of pointers on the given architecture (so, 64-bit on x86_64 and 32-bit on x86_32,
+for example).</p>
+<section id="id1">
+<h4>Example<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDExtensionStringNamePtr&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;handle&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="aliases">
+<h3>Aliases<a class="headerlink" href="#aliases" title="Link to this heading"></a></h3>
+<p>Aliases are alternative names for a type. In C, they could be represented as a <code class="docutils literal notranslate"><span class="pre">typedef</span></code>.</p>
+<p>They have only one additional key:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: The type the alias is an alternative name for. It may include modifiers as described above.</p></li>
+</ul>
+<p>These should be represented using the same C type as the type they refer to.</p>
+<section id="id2">
+<h4>Example<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDExtensionInt&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alias&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;int64_t&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="structs">
+<h3>Structs<a class="headerlink" href="#structs" title="Link to this heading"></a></h3>
+<p>Structs represent C <code class="docutils literal notranslate"><span class="pre">struct</span></code>s (aka a block of memory made up of the given members in order), and should
+follow all the same layout and alignment rules as C structs.</p>
+<p>They have only one additional key:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">members</span></code>: An array of objects which have a <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">type</span></code> (which may include modifiers), and
+<code class="docutils literal notranslate"><span class="pre">description</span></code>.</p></li>
+</ul>
+<section id="id3">
+<h4>Example<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDExtensionCallError&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;struct&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;members&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDExtensionCallErrorType&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;argument&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;int32_t&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;expected&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;int32_t&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<p>Functions represent C function pointer types, with a list of arguments and a return type, and should
+follow the same size and alignment requirements as C function pointers.</p>
+<p>They have the following members:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">return_value</span></code>: An object which has a <code class="docutils literal notranslate"><span class="pre">type</span></code> (which may include modifiers) and <code class="docutils literal notranslate"><span class="pre">description</span></code>.
+If the function has no return value, this will be omitted.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arguments</span></code> (required): An array of function arguments which each has a <code class="docutils literal notranslate"><span class="pre">type</span></code> (which may include modifiers),
+<code class="docutils literal notranslate"><span class="pre">name</span></code>, and <code class="docutils literal notranslate"><span class="pre">description</span></code>.</p></li>
+</ul>
+<section id="id4">
+<h4>Example<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDExtensionPtrConstructor&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;function&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;arguments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;p_base&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDExtensionUninitializedTypePtr&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;p_args&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;const GDExtensionConstTypePtr*&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">interface</span></code> section of the JSON file is the list of interface functions, which can be loaded
+by <code class="docutils literal notranslate"><span class="pre">name</span></code> using the <code class="docutils literal notranslate"><span class="pre">GDExtensionInterfaceGetProcAddress</span></code> function pointer, which is
+passed to all GDExtensions when they are loaded.</p>
+<p>Interface functions have some of the same keys as types, including <code class="docutils literal notranslate"><span class="pre">name</span></code> (required),
+<code class="docutils literal notranslate"><span class="pre">deprecated</span></code>, and <code class="docutils literal notranslate"><span class="pre">description</span></code>.</p>
+<p>And they also have <code class="docutils literal notranslate"><span class="pre">return_value</span></code> and <code class="docutils literal notranslate"><span class="pre">arguments</span></code> (required) that have the same format
+as the equivalent keys on function types (as described in the previous section).</p>
+<p>There are only a handful of unique keys:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">since</span></code> (required): The Godot version that introduced this interface function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">see</span></code>: An array of strings describing external references with more information, for example,
+names of classes or functions in the Godot source code, or URLs pointing to documentation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">legacy_type_name</span></code>: The legacy name used for the function pointer type in the header generated
+by Godot, when the legacy name doesn't match the pattern used for these type names. This field
+only exists so that we can generate the header in a way that is backwards compatible with the
+header from Godot 4.5 or earlier, and it shouldn't be used unless you also need to maintain
+compatibility with the old header.</p></li>
+</ul>
+<section id="id5">
+<h3>Example<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get_godot_version&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;arguments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;r_godot_version&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GDExtensionGodotVersion*&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;A pointer to the structure to write the version information into.&quot;</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;Gets the Godot version that the GDExtension was loaded into.&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;since&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;deprecated&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;since&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.5&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;replace_with&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get_godot_version2&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gdextension_file.html" class="btn btn-neutral float-left" title="The .gdextension file" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gdextension_c_example.html" class="btn btn-neutral float-right" title="GDExtension C example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

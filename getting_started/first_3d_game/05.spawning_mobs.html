@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Spawning monsters" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="getting_started/first_3d_game/05.spawning_mobs.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="In this part, we&#x27;re going to spawn monsters along a path randomly. By the end, you will have monsters roaming the game board. image0 Double-click on main.tscn in the FileSystem dock to open th..." />
+<meta name="description" content="In this part, we&#x27;re going to spawn monsters along a path randomly. By the end, you will have monsters roaming the game board. image0 Double-click on main.tscn in the FileSystem dock to open th..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Spawning monsters &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Jumping and squashing monsters" href="06.jump_and_squash.html" />
+    <link rel="prev" title="Designing the mob scene" href="04.mob_scene.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="getting_started/first_3d_game/05.spawning_mobs" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="getting_started/first_3d_game/05.spawning_mobs.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Your first 3D game</a></li>
+      <li class="breadcrumb-item active">Spawning monsters</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/getting_started/first_3d_game/05.spawning_mobs.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="spawning-monsters">
+<span id="doc-first-3d-game-spawning-monsters"></span><h1>Spawning monsters<a class="headerlink" href="#spawning-monsters" title="Link to this heading"></a></h1>
+<p>In this part, we're going to spawn monsters along a path randomly. By the end,
+you will have monsters roaming the game board.</p>
+<p><img alt="image0" src="../../_images/01.monsters_path_preview.png" /></p>
+<p>Double-click on <code class="docutils literal notranslate"><span class="pre">main.tscn</span></code> in the <em>FileSystem</em> dock to open the <code class="docutils literal notranslate"><span class="pre">Main</span></code> scene.</p>
+<p>Before drawing the path, we're going to change the game resolution. Our game has
+a default window size of <code class="docutils literal notranslate"><span class="pre">1152x648</span></code>. We're going to set it to <code class="docutils literal notranslate"><span class="pre">720x540</span></code>, a
+nice little box.</p>
+<p>Go to <em>Project -&gt; Project Settings</em>.</p>
+<p><img alt="image1" src="../../_images/02.project_settings.webp" /></p>
+<p>If you still have <em>Input Map</em> open, switch to the <em>General</em> tab.</p>
+<p>In the left menu, navigate down to <em>Display -&gt; Window</em>. On the right, set the
+<em>Viewport Width</em> to <code class="docutils literal notranslate"><span class="pre">720</span></code> and the <em>Viewport Height</em> to <code class="docutils literal notranslate"><span class="pre">540</span></code>.</p>
+<p><img alt="image2" src="../../_images/03.window_settings.webp" /></p>
+<section id="creating-the-spawn-path">
+<h2>Creating the spawn path<a class="headerlink" href="#creating-the-spawn-path" title="Link to this heading"></a></h2>
+<p>Like you did in the 2D game tutorial, you're going to design a path and use a
+<a class="reference internal" href="../../classes/class_pathfollow3d.html#class-pathfollow3d"><span class="std std-ref">PathFollow3D</span></a> node to sample random locations on it.</p>
+<p>In 3D though, it's a bit more complicated to draw the path. We want it to be
+around the game view so monsters appear right outside the screen. But if we draw
+a path, we won't see it from the camera preview.</p>
+<p>To find the view's limits, we can use some placeholder meshes. Your viewport
+should still be split into two parts, with the camera preview at the bottom. If
+that isn't the case, press <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">2</kbd></kbd> (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">2</kbd></kbd> on macOS) to split the view into two.
+Select the <a class="reference internal" href="../../classes/class_camera3d.html#class-camera3d"><span class="std std-ref">Camera3D</span></a> node and click the <em>Preview</em> checkbox in the bottom
+viewport.</p>
+<p><img alt="image3" src="../../_images/04.camera_preview.png" /></p>
+<section id="adding-placeholder-cylinders">
+<h3>Adding placeholder cylinders<a class="headerlink" href="#adding-placeholder-cylinders" title="Link to this heading"></a></h3>
+<p>Let's add the placeholder meshes. Add a new <a class="reference internal" href="../../classes/class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> as a child of the
+<code class="docutils literal notranslate"><span class="pre">Main</span></code> node and name it <code class="docutils literal notranslate"><span class="pre">Cylinders</span></code>. We'll use it to group the cylinders. Select <code class="docutils literal notranslate"><span class="pre">Cylinders</span></code> and add a child node <a class="reference internal" href="../../classes/class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a></p>
+<p><img alt="image4" src="../../_images/05.cylinders_node.webp" /></p>
+<p>In the <em>Inspector</em>, assign a <em>CylinderMesh</em> to the <em>Mesh</em> property.</p>
+<p><img alt="image5" src="../../_images/06.cylinder_mesh.webp" /></p>
+<p>Set the top viewport to the top orthogonal view using the menu in the viewport's
+top-left corner. Alternatively, you can press the keypad's 7 key.</p>
+<p><img alt="image6" src="../../_images/07.top_view.webp" /></p>
+<p>The grid may be distracting. You can toggle it by going to the <em>View</em>
+menu in the toolbar and clicking <em>View Grid</em>.</p>
+<p><img alt="image7" src="../../_images/08.toggle_view_grid.webp" /></p>
+<p>You now want to move the cylinder along the ground plane, looking at the camera
+preview in the bottom viewport. I recommend using grid snap to do so. You can
+toggle it by clicking the magnet icon in the toolbar or pressing Y.</p>
+<p><img alt="image8" src="../../_images/09.toggle_grid_snap.webp" /></p>
+<p>Move the cylinder so it's right outside the camera's view in the top-left
+corner.</p>
+<p><img alt="image9" src="../../_images/10.place_first_cylinder.png" /></p>
+<p>We're going to create copies of the mesh and place them around the game area.
+Press <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd> (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd> on macOS) to duplicate the node. You can also right-click
+the node in the <em>Scene</em> dock and select <em>Duplicate</em>. Move the copy down along
+the blue Z axis until it's right outside the camera's preview.</p>
+<p>Select both cylinders by pressing the <kbd class="kbd docutils literal notranslate">Shift</kbd> key and clicking on the unselected
+one and duplicate them.</p>
+<p><img alt="image10" src="../../_images/11.both_cylinders_selected.png" /></p>
+<p>Move them to the right by dragging the red X axis.</p>
+<p><img alt="image11" src="../../_images/12.four_cylinders.png" /></p>
+<p>They're a bit hard to see in white, aren't they? Let's make them stand out by
+giving them a new material.</p>
+<p>In 3D, materials define a surface's visual properties like its color, how it
+reflects light, and more. We can use them to change the color of a mesh.</p>
+<p>We can update all four cylinders at once. Select all the mesh instances in the
+<em>Scene</em> dock. To do so, you can click on the first one and Shift click on the
+last one.</p>
+<p><img alt="image12" src="../../_images/13.selecting_all_cylinders.webp" /></p>
+<p>In the <em>Inspector</em>, expand the <em>Material</em> section and assign a <a class="reference internal" href="../../classes/class_standardmaterial3d.html#class-standardmaterial3d"><span class="std std-ref">StandardMaterial3D</span></a> to slot <em>0</em>.</p>
+<p><img alt="image13" src="../../_images/14.multi_material_selection.webp" /></p>
+<p>Click the sphere icon to open the material resource. You get a preview of the
+material and a long list of sections filled with properties. You can use these
+to create all sorts of surfaces, from metal to rock or water.</p>
+<p>Expand the <em>Albedo</em> section.</p>
+<img alt="../../_images/albedo_section.webp" src="../../_images/albedo_section.webp" />
+<p>Set the color to something that contrasts with
+the background, like a bright orange.</p>
+<p><img alt="image14" src="../../_images/15.bright-cylinders.webp" /></p>
+<p>We can now use the cylinders as guides. Fold them in the <em>Scene</em> dock by
+clicking the grey arrow next to them. Moving forward, you can also toggle their
+visibility by clicking the eye icon next to <em>Cylinders</em>.</p>
+<p><img alt="image15" src="../../_images/16.cylinders_fold.webp" /></p>
+<p>Add a child node <a class="reference internal" href="../../classes/class_path3d.html#class-path3d"><span class="std std-ref">Path3D</span></a> to <code class="docutils literal notranslate"><span class="pre">Main</span></code> node. In the toolbar, four icons appear. Click
+the <em>Add Point</em> tool, the icon with the green &quot;+&quot; sign.</p>
+<p><img alt="image16" src="../../_images/17.points_options.webp" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can hover any icon to see a tooltip describing the tool.</p>
+</div>
+<p>Click in the center of each cylinder to create a point. Then, click the <em>Close
+Curve</em> icon in the toolbar to close the path. If any point is a bit off, you can
+click and drag on it to reposition it.</p>
+<p><img alt="image17" src="../../_images/18.close_path.webp" /></p>
+<p>Your path should look like this.</p>
+<p><img alt="image18" src="../../_images/19.path_result.png" /></p>
+<p>To sample random positions on it, we need a <a class="reference internal" href="../../classes/class_pathfollow3d.html#class-pathfollow3d"><span class="std std-ref">PathFollow3D</span></a> node. Add a
+<a class="reference internal" href="../../classes/class_pathfollow3d.html#class-pathfollow3d"><span class="std std-ref">PathFollow3D</span></a> as a child of the <code class="docutils literal notranslate"><span class="pre">Path3D</span></code>. Rename the two nodes to <code class="docutils literal notranslate"><span class="pre">SpawnLocation</span></code> and
+<code class="docutils literal notranslate"><span class="pre">SpawnPath</span></code>, respectively. It's more descriptive of what we'll use them for.</p>
+<p><img alt="image19" src="../../_images/20.spawn_nodes.webp" /></p>
+<p>With that, we're ready to code the spawn mechanism.</p>
+</section>
+</section>
+<section id="spawning-monsters-randomly">
+<h2>Spawning monsters randomly<a class="headerlink" href="#spawning-monsters-randomly" title="Link to this heading"></a></h2>
+<p>Right-click on the <code class="docutils literal notranslate"><span class="pre">Main</span></code> node and attach a new script to it.</p>
+<p>We first export a variable to the <em>Inspector</em> so that we can assign <code class="docutils literal notranslate"><span class="pre">mob.tscn</span></code>
+or any other monster to it.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">mob_scene</span><span class="p">:</span><span class="w"> </span><span class="nb">PackedScene</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Main</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Don&#39;t forget to rebuild the project so the editor knows about the new export variable.</span>
+
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">PackedScene</span><span class="w"> </span><span class="n">MobScene</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>We want to spawn mobs at regular time intervals. To do this, we need to go back
+to the scene and add a timer. Before that, though, we need to assign the
+<code class="docutils literal notranslate"><span class="pre">mob.tscn</span></code> file to the <code class="docutils literal notranslate"><span class="pre">mob_scene</span></code> property above (otherwise it's null!)</p>
+<p>Head back to the 3D screen and select the <code class="docutils literal notranslate"><span class="pre">Main</span></code> node. Drag <code class="docutils literal notranslate"><span class="pre">mob.tscn</span></code> from
+the <em>FileSystem</em> dock to the <em>Mob Scene</em> slot in the <em>Inspector</em>.</p>
+<p><img alt="image20" src="../../_images/20.mob_scene_property.webp" /></p>
+<p>Add a new <a class="reference internal" href="../../classes/class_timer.html#class-timer"><span class="std std-ref">Timer</span></a> node as a child of <code class="docutils literal notranslate"><span class="pre">Main</span></code>. Name it <code class="docutils literal notranslate"><span class="pre">MobTimer</span></code>.</p>
+<p><img alt="image21" src="../../_images/21.mob_timer.webp" /></p>
+<p>In the <em>Inspector</em>, set its <em>Wait Time</em> to <code class="docutils literal notranslate"><span class="pre">0.5</span></code> seconds and turn on
+<em>Autostart</em> so it automatically starts when we run the game.</p>
+<p><img alt="image22" src="../../_images/22.mob_timer_properties.webp" /></p>
+<p>Timers emit a <code class="docutils literal notranslate"><span class="pre">timeout</span></code> signal every time they reach the end of their <em>Wait
+Time</em>. By default, they restart automatically, emitting the signal in a cycle.
+We can connect to this signal from the <em>Main</em> node to spawn monsters every
+<code class="docutils literal notranslate"><span class="pre">0.5</span></code> seconds.</p>
+<p>With the <em>MobTimer</em> still selected, head to the <em>Signals</em> dock on the right, and
+double-click the <code class="docutils literal notranslate"><span class="pre">timeout</span></code> signal.</p>
+<p><img alt="image23" src="../../_images/23.timeout_signal.webp" /></p>
+<p>Connect it to the <em>Main</em> node.</p>
+<p><img alt="image24" src="../../_images/24.connect_timer_to_main.webp" /></p>
+<p>This will take you back to the script, with a new empty
+<code class="docutils literal notranslate"><span class="pre">_on_mob_timer_timeout()</span></code> function.</p>
+<p>Let's code the mob spawning logic. We're going to:</p>
+<ol class="arabic simple">
+<li><p>Instantiate the mob scene.</p></li>
+<li><p>Sample a random position on the spawn path.</p></li>
+<li><p>Get the player's position.</p></li>
+<li><p>Call the mob's <code class="docutils literal notranslate"><span class="pre">initialize()</span></code> method, passing it the random position and
+the player's position.</p></li>
+<li><p>Add the mob as a child of the <em>Main</em> node.</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_mob_timer_timeout</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Create a new instance of the Mob scene.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">mob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mob_scene</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># Choose a random location on the SpawnPath.</span>
+<span class="w">    </span><span class="c1"># We store the reference to the SpawnLocation node.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">mob_spawn_location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;SpawnPath/SpawnLocation&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># And give it a random offset.</span>
+<span class="w">    </span><span class="n">mob_spawn_location</span><span class="o">.</span><span class="vi">progress_ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">randf</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">player_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Player</span><span class="o">.</span><span class="vi">position</span>
+<span class="w">    </span><span class="n">mob</span><span class="o">.</span><span class="nf">initialize</span><span class="p">(</span><span class="n">mob_spawn_location</span><span class="o">.</span><span class="vi">position</span><span class="p">,</span><span class="w"> </span><span class="n">player_position</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Spawn the mob by adding it to the Main scene.</span>
+<span class="w">    </span><span class="nf">add_child</span><span class="p">(</span><span class="n">mob</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// We also specified this function name in PascalCase in the editor&#39;s connection window.</span>
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnMobTimerTimeout</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Create a new instance of the Mob scene.</span>
+<span class="w">    </span><span class="n">Mob</span><span class="w"> </span><span class="n">mob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MobScene</span><span class="p">.</span><span class="n">Instantiate</span><span class="o">&lt;</span><span class="n">Mob</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Choose a random location on the SpawnPath.</span>
+<span class="w">    </span><span class="c1">// We store the reference to the SpawnLocation node.</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">mobSpawnLocation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">PathFollow3D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;SpawnPath/SpawnLocation&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// And give it a random offset.</span>
+<span class="w">    </span><span class="n">mobSpawnLocation</span><span class="p">.</span><span class="n">ProgressRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Randf</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">Vector3</span><span class="w"> </span><span class="n">playerPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Player&quot;</span><span class="p">).</span><span class="n">Position</span><span class="p">;</span>
+<span class="w">    </span><span class="n">mob</span><span class="p">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">mobSpawnLocation</span><span class="p">.</span><span class="n">Position</span><span class="p">,</span><span class="w"> </span><span class="n">playerPosition</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Spawn the mob by adding it to the Main scene.</span>
+<span class="w">    </span><span class="n">AddChild</span><span class="p">(</span><span class="n">mob</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Above, <code class="docutils literal notranslate"><span class="pre">randf()</span></code> produces a random value between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code>, which is
+what the <em>PathFollow</em> node's <code class="docutils literal notranslate"><span class="pre">progress_ratio</span></code> expects:
+0 is the start of the path, 1 is the end of the path.
+The path we have set is around the camera's viewport, so any random value between 0 and 1
+is a random position alongside the edges of the viewport!</p>
+<p>Note that if you remove the <code class="docutils literal notranslate"><span class="pre">Player</span></code> from the main scene, the following line</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">player_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Player</span><span class="o">.</span><span class="vi">position</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Vector3</span><span class="w"> </span><span class="n">playerPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Player&quot;</span><span class="p">).</span><span class="n">Position</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>gives an error because there is no $Player!</p>
+<p>Here is the complete <code class="docutils literal notranslate"><span class="pre">main.gd</span></code> script so far, for reference.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">mob_scene</span><span class="p">:</span><span class="w"> </span><span class="nb">PackedScene</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_mob_timer_timeout</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Create a new instance of the Mob scene.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">mob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mob_scene</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># Choose a random location on the SpawnPath.</span>
+<span class="w">    </span><span class="c1"># We store the reference to the SpawnLocation node.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">mob_spawn_location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;SpawnPath/SpawnLocation&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># And give it a random offset.</span>
+<span class="w">    </span><span class="n">mob_spawn_location</span><span class="o">.</span><span class="vi">progress_ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">randf</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">player_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Player</span><span class="o">.</span><span class="vi">position</span>
+<span class="w">    </span><span class="n">mob</span><span class="o">.</span><span class="nf">initialize</span><span class="p">(</span><span class="n">mob_spawn_location</span><span class="o">.</span><span class="vi">position</span><span class="p">,</span><span class="w"> </span><span class="n">player_position</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Spawn the mob by adding it to the Main scene.</span>
+<span class="w">    </span><span class="nf">add_child</span><span class="p">(</span><span class="n">mob</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Main</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">PackedScene</span><span class="w"> </span><span class="n">MobScene</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnMobTimerTimeout</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Create a new instance of the Mob scene.</span>
+<span class="w">        </span><span class="n">Mob</span><span class="w"> </span><span class="n">mob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MobScene</span><span class="p">.</span><span class="n">Instantiate</span><span class="o">&lt;</span><span class="n">Mob</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Choose a random location on the SpawnPath.</span>
+<span class="w">        </span><span class="c1">// We store the reference to the SpawnLocation node.</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">mobSpawnLocation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">PathFollow3D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;SpawnPath/SpawnLocation&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// And give it a random offset.</span>
+<span class="w">        </span><span class="n">mobSpawnLocation</span><span class="p">.</span><span class="n">ProgressRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Randf</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">Vector3</span><span class="w"> </span><span class="n">playerPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Player&quot;</span><span class="p">).</span><span class="n">Position</span><span class="p">;</span>
+<span class="w">        </span><span class="n">mob</span><span class="p">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">mobSpawnLocation</span><span class="p">.</span><span class="n">Position</span><span class="p">,</span><span class="w"> </span><span class="n">playerPosition</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Spawn the mob by adding it to the Main scene.</span>
+<span class="w">        </span><span class="n">AddChild</span><span class="p">(</span><span class="n">mob</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>You can test the scene by pressing <kbd class="kbd docutils literal notranslate">F6</kbd> (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd> on macOS). You should see
+the monsters spawn and move in a straight line.</p>
+<p><img alt="image25" src="../../_images/25.spawn_result.png" /></p>
+<p>For now, they bump and slide against one another when their paths cross. We'll
+address this in the next part.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="04.mob_scene.html" class="btn btn-neutral float-left" title="Designing the mob scene" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="06.jump_and_squash.html" class="btn btn-neutral float-right" title="Jumping and squashing monsters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

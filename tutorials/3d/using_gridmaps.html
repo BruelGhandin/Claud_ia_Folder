@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using GridMaps" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/using_gridmaps.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: Gridmaps are a tool for creating 3D game levels, similar to the way TileMap works in 2D. You start with a predefined collection of 3D meshes (a MeshLibrary) that can be placed on a gr..." />
+<meta name="description" content="Introduction: Gridmaps are a tool for creating 3D game levels, similar to the way TileMap works in 2D. You start with a predefined collection of 3D meshes (a MeshLibrary) that can be placed on a gr..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using GridMaps &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Third-person camera with spring arm" href="spring_arm.html" />
+    <link rel="prev" title="Prototyping levels with CSG" href="csg_tools.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/using_gridmaps" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/3d/using_gridmaps.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">3D</a></li>
+      <li class="breadcrumb-item active">Using GridMaps</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/using_gridmaps.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-gridmaps">
+<span id="doc-using-gridmaps"></span><h1>Using GridMaps<a class="headerlink" href="#using-gridmaps" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../../classes/class_gridmap.html#class-gridmap"><span class="std std-ref">Gridmaps</span></a> are a tool for creating 3D
+game levels, similar to the way <a class="reference internal" href="../2d/using_tilemaps.html#doc-using-tilemaps"><span class="std std-ref">TileMap</span></a>
+works in 2D. You start with a predefined collection of 3D meshes (a
+<a class="reference internal" href="../../classes/class_meshlibrary.html#class-meshlibrary"><span class="std std-ref">MeshLibrary</span></a>) that can be placed on a grid,
+as if you were building a level with an unlimited amount of Lego blocks.</p>
+<p>Collisions and navigation can also be added to the meshes, just like you
+would do with the tiles of a tilemap.</p>
+</section>
+<section id="example-project">
+<h2>Example project<a class="headerlink" href="#example-project" title="Link to this heading"></a></h2>
+<p>To learn how GridMaps work, start by downloading the sample project:
+<a class="reference external" href="https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/gridmap_starter.zip">gridmap_starter.zip</a>.</p>
+<p>Unzip this project and add it to the Project Manager using the &quot;Import&quot;
+button. You may get a popup saying that it needs to be converted to a newer Godot
+version, click <strong>Convert project.godot</strong>.</p>
+</section>
+<section id="creating-a-meshlibrary">
+<h2>Creating a MeshLibrary<a class="headerlink" href="#creating-a-meshlibrary" title="Link to this heading"></a></h2>
+<p>To begin, you need a <a class="reference internal" href="../../classes/class_meshlibrary.html#class-meshlibrary"><span class="std std-ref">MeshLibrary</span></a>, which is a collection
+of individual meshes that can be used in the gridmap. Open the &quot;mesh_library_source.tscn&quot;
+scene to see an example of how to set up the mesh library.</p>
+<img alt="../../_images/gridmap_meshlibrary1.webp" src="../../_images/gridmap_meshlibrary1.webp" />
+<p>As you can see, this scene has a <a class="reference internal" href="../../classes/class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> node as its root, and
+a number of <a class="reference internal" href="../../classes/class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a> node children.</p>
+<p>If you don't need any physics in your scene, then you're done. However, in most
+cases you'll want to assign collision bodies to the meshes.</p>
+</section>
+<section id="collisions">
+<h2>Collisions<a class="headerlink" href="#collisions" title="Link to this heading"></a></h2>
+<p>You can manually assign a <a class="reference internal" href="../../classes/class_staticbody3d.html#class-staticbody3d"><span class="std std-ref">StaticBody3D</span></a> and
+<a class="reference internal" href="../../classes/class_collisionshape3d.html#class-collisionshape3d"><span class="std std-ref">CollisionShape3D</span></a> to each mesh. Alternatively, you can use the &quot;Mesh&quot; menu
+to automatically create the collision body based on the mesh data.</p>
+<img alt="../../_images/gridmap_create_body.webp" src="../../_images/gridmap_create_body.webp" />
+<p>Note that a &quot;Convex&quot; collision body will work better for simple meshes. For more
+complex shapes, select &quot;Create Trimesh Static Body&quot;. Once each mesh has
+a physics body and collision shape assigned, your mesh library is ready to
+be used.</p>
+<img alt="../../_images/gridmap_mesh_scene.webp" src="../../_images/gridmap_mesh_scene.webp" />
+</section>
+<section id="materials">
+<h2>Materials<a class="headerlink" href="#materials" title="Link to this heading"></a></h2>
+<p>Only the materials from within the meshes are used when generating the mesh
+library. Materials set on the node will be ignored.</p>
+</section>
+<section id="navigationmeshes">
+<h2>NavigationMeshes<a class="headerlink" href="#navigationmeshes" title="Link to this heading"></a></h2>
+<p>Like all mesh instances, MeshLibrary items can be assigned a <a class="reference internal" href="../../classes/class_navigationmesh.html#class-navigationmesh"><span class="std std-ref">NavigationMesh</span></a>
+resource, which can be created manually, or baked as described below.</p>
+<p>To create the NavigationMesh from a MeshLibrary scene export, place a
+<a class="reference internal" href="../../classes/class_navigationregion3d.html#class-navigationregion3d"><span class="std std-ref">NavigationRegion3D</span></a> child node below the main MeshInstance3D for the GridMap
+item. Add a valid NavigationMesh resource to the NavigationRegion3D and some source
+geometry nodes below and bake the NavigationMesh.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>With small grid cells it is often necessary to reduce the NavigationMesh properties
+for agent radius and region minimum size.</p>
+</div>
+<img alt="../../_images/meshlibrary_scene.png" src="../../_images/meshlibrary_scene.png" />
+<p>Nodes below the NavigationRegion3D are ignored for the MeshLibrary scene export, so
+additional nodes can be added as source geometry just for baking the navmesh.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The baked cell size of the NavigationMesh must match the NavigationServer map cell
+size to properly merge the navigation meshes of different grid cells.</p>
+</div>
+</section>
+<section id="lightmaps">
+<h2>Lightmaps<a class="headerlink" href="#lightmaps" title="Link to this heading"></a></h2>
+<p>It is possible to bake lightmaps onto a GridMap. Lightmap UV2 data will be reused
+from meshes if already present. If UV2 data is not present, then it will be
+automatically generated on bake with a lightmap texel size of 0.1 units.
+To generate UV2 data with a different lightmap texel size, you can set the
+global illumination mode in the Import dock to <strong>Static Lightmaps</strong>
+and specify the texel size there. This option must be changed <em>before</em> the scene
+is converted to a MeshLibrary, as changing it later on will not affect
+the existing MeshLibrary data.</p>
+<p>Aside from this peculiarity, the lightmap baking process is the same as for any other 3D scene.
+See <a class="reference internal" href="global_illumination/using_lightmap_gi.html#doc-using-lightmap-gi"><span class="std std-ref">Using Lightmap global illumination</span></a> for more information about lightmap baking.</p>
+</section>
+<section id="meshlibrary-format">
+<h2>MeshLibrary format<a class="headerlink" href="#meshlibrary-format" title="Link to this heading"></a></h2>
+<p>To summarize the specific constraints of the MeshLibrary format, a MeshLibrary
+scene has a Node3D as the root node, and several child nodes which will become
+MeshLibrary items. Each child of the root node should:</p>
+<ul class="simple">
+<li><p>Be a <a class="reference internal" href="../../classes/class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a>, which will become the MeshLibrary item. Only
+this visual mesh will be exported.</p></li>
+<li><p>Have a material, in the mesh's material slot, <em>not</em> the MeshInstance3D's
+material slots.</p></li>
+<li><p>Have up to one <a class="reference internal" href="../../classes/class_staticbody3d.html#class-staticbody3d"><span class="std std-ref">StaticBody3D</span></a> child, for collision. The
+StaticBody3D should have one or more <a class="reference internal" href="../../classes/class_collisionshape3d.html#class-collisionshape3d"><span class="std std-ref">CollisionShape3D</span></a> children.</p></li>
+<li><p>Have up to one <a class="reference internal" href="../../classes/class_navigationregion3d.html#class-navigationregion3d"><span class="std std-ref">NavigationRegion3D</span></a> child, for navigation. The
+NavigationRegion3D can have one or more additional <a class="reference internal" href="../../classes/class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a>
+children, which can be baked for navigation, but won't be exported as a visual
+mesh.</p></li>
+</ul>
+<p>Only this specific format is recognized. Other node types placed as children
+will not be recognized and exported. GridMap is not a general-purpose system for
+placing <em>nodes</em> on a grid, but rather a specific, optimized system, designed to
+place <em>meshes</em> with collisions and navigation.</p>
+</section>
+<section id="exporting-the-meshlibrary">
+<h2>Exporting the MeshLibrary<a class="headerlink" href="#exporting-the-meshlibrary" title="Link to this heading"></a></h2>
+<p>To export the library, click on <strong>Scene &gt; Export As... &gt; MeshLibrary...</strong>, and save it
+as a resource.</p>
+<img alt="../../_images/gridmap_export.webp" src="../../_images/gridmap_export.webp" />
+<p>You can find an already exported MeshLibrary in the project named <code class="docutils literal notranslate"><span class="pre">MeshLibrary.tres</span></code>.</p>
+</section>
+<section id="using-gridmap">
+<h2>Using GridMap<a class="headerlink" href="#using-gridmap" title="Link to this heading"></a></h2>
+<p>Create a new scene and add a GridMap node. Add the mesh library by dragging
+the resource file from the FileSystem dock and dropping it in the <strong>Mesh Library</strong>
+property in the Inspector.</p>
+<img alt="../../_images/gridmap_mesh_library_inspector.webp" src="../../_images/gridmap_mesh_library_inspector.webp" />
+<section id="inspector-properties">
+<h3>Inspector properties<a class="headerlink" href="#inspector-properties" title="Link to this heading"></a></h3>
+<p>The <strong>Physics Material</strong> setting allows you to override the physics material for
+every mesh in the NavigationMesh.</p>
+<p>Under <strong>Cells</strong>, the <strong>Size</strong> property should be set to the size of your meshes. You
+can leave it at the default value for the demo. Uncheck the <strong>Center Y</strong> property.</p>
+<p>The <strong>Collision</strong> options allow you to set the collision layer, collision mask, and
+priority for the entire grid. For more information on how those work see the
+<a class="reference internal" href="../physics/index.html#doc-physics-index"><span class="std std-ref">Physics</span></a> section.</p>
+<p>Under <strong>Navigation</strong> is the &quot;Bake Navigation&quot; option. If enabled it creates a
+navigation region for each cell that uses a mesh library item with a navigation
+mesh.</p>
+<p>If you click on the MeshLibrary itself in the inspector you can adjust settings for
+individual meshes, such as their navigation mesh, navigation layers, or if the mesh
+casts shadows.</p>
+<img alt="../../_images/gridmap_mesh_library_settings.webp" src="../../_images/gridmap_mesh_library_settings.webp" />
+</section>
+<section id="gridmap-panel">
+<h3>GridMap panel<a class="headerlink" href="#gridmap-panel" title="Link to this heading"></a></h3>
+<p>At the bottom of the editor is the GridMap panel, which should have opened
+automatically when you added the GridMap node.</p>
+<img alt="../../_images/gridmap_panel.webp" src="../../_images/gridmap_panel.webp" />
+<p>From left to right in the toolbar:</p>
+<ul class="simple">
+<li><p><strong>Transform</strong>: Adds a gizmo to the scene that allows you to change the
+relative position and rotation of the gridmap in the scene.</p></li>
+<li><p><strong>Selection</strong>: While active you can select an area in the viewport, click and drag
+to select more than one space on the grid.</p></li>
+<li><p><strong>Erase</strong>: While active, click in the viewport and delete meshes.</p></li>
+<li><p><strong>Paint</strong>: While active, click in the viewport and add whatever mesh is currently
+selected in the GridMap panel to the scene.</p></li>
+<li><p><strong>Pick</strong>: While active, clicking on a gridmap mesh in the viewport will cause
+it to be selected in the GridMap panel.</p></li>
+<li><p><strong>Fill</strong>: Fill the area that has been selected in the viewport with whatever mesh
+is selected in the GridMap bottom panel.</p></li>
+<li><p><strong>Move</strong>: Move whatever mesh or meshes are currently selected in the viewport.</p></li>
+<li><p><strong>Duplicate</strong>: Create a copy of whatever the selected mesh or meshes in the
+GridMap are.</p></li>
+<li><p><strong>Delete</strong>: Similar to erase, but for the entire selected area.</p></li>
+<li><p><strong>Cursor Rotate X</strong>: While the paint tool is selected, this will rotate the mesh
+that will be painted on the X-axis. This will also rotate selected areas if they
+are being moved.</p></li>
+<li><p><strong>Cursor Rotate Y</strong>: While the paint tool is selected, this will rotate the mesh
+that will be painted on the Y-axis. This will also rotate selected areas if they
+are being moved.</p></li>
+<li><p><strong>Cursor Rotate Z</strong>: While the paint tool is selected, this will rotate the mesh
+that will be painted on the Z-axis. This will also rotate selected areas if they
+are being moved.</p></li>
+<li><p><strong>Change Grid Floor</strong>: Adjusts what floor is currently being worked on. Can be
+changed with the arrows, typing a value in the field, or <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Mouse</kbd> <kbd class="kbd docutils literal notranslate">wheel</kbd></kbd>.</p></li>
+<li><p><strong>Filter Meshes</strong>: Used to search for a specific mesh in the bottom panel.</p></li>
+<li><p><strong>Zoom</strong>: Controls the zoom level on meshes in the bottom panel.</p></li>
+<li><p><strong>Layout toggles</strong>: These two buttons toggle between different layouts for meshes
+in the bottom panel.</p></li>
+<li><p><strong>Tools dropdown</strong>: This button opens a dropdown menu with a few more options.</p></li>
+</ul>
+<img alt="../../_images/gridmap_dropdown.webp" src="../../_images/gridmap_dropdown.webp" />
+<p>Clicking on <strong>Settings</strong> in that dropdown brings up a window that allows you to
+change the <strong>Pick Distance</strong>, which is the maximum distance at which tiles can be placed
+on a GridMap, relative to the camera position (in meters).</p>
+</section>
+</section>
+<section id="using-gridmap-in-code">
+<h2>Using GridMap in code<a class="headerlink" href="#using-gridmap-in-code" title="Link to this heading"></a></h2>
+<p>See <a class="reference internal" href="../../classes/class_gridmap.html#class-gridmap"><span class="std std-ref">GridMap</span></a> for details on the node's methods and member variables.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="csg_tools.html" class="btn btn-neutral float-left" title="Prototyping levels with CSG" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="spring_arm.html" class="btn btn-neutral float-right" title="Third-person camera with spring arm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

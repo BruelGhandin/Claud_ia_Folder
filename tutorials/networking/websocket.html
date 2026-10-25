@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using WebSockets" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/networking/websocket.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="HTML5 and WebSocket: The WebSocket protocol was standardized in 2011 with the original goal of allowing browsers to create stable and bidirectional connections with a server. Before that, browsers ..." />
+<meta name="description" content="HTML5 and WebSocket: The WebSocket protocol was standardized in 2011 with the original goal of allowing browsers to create stable and bidirectional connections with a server. Before that, browsers ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using WebSockets &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="WebRTC" href="webrtc.html" />
+    <link rel="prev" title="TLS/SSL certificates" href="ssl_certificates.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/networking/websocket" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/networking/websocket.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Networking</a></li>
+      <li class="breadcrumb-item active">Using WebSockets</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/networking/websocket.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-websockets">
+<span id="doc-websocket"></span><h1>Using WebSockets<a class="headerlink" href="#using-websockets" title="Link to this heading"></a></h1>
+<section id="html5-and-websocket">
+<h2>HTML5 and WebSocket<a class="headerlink" href="#html5-and-websocket" title="Link to this heading"></a></h2>
+<p>The WebSocket protocol was standardized in 2011 with the original goal of allowing browsers to create stable and bidirectional connections with a server.
+Before that, browsers used to only support HTTP requests, which aren't well-suited for bidirectional communication.</p>
+<p>The protocol is message-based and a very powerful tool to send push notifications to browsers. It has been used to implement chats, turn-based games, and more. It still uses a TCP connection, which is good for reliability but not for latency, so it's not good for real-time applications like VoIP and fast-paced games (see <a class="reference internal" href="webrtc.html#doc-webrtc"><span class="std std-ref">WebRTC</span></a> for those use cases).</p>
+<p>Due to its simplicity, its wide compatibility, and being easier to use than a raw TCP connection, WebSocket started to spread outside the browsers, in native applications as a mean to communicate with network servers.</p>
+<p>Godot supports WebSocket in both native and web exports.</p>
+</section>
+<section id="using-websocket-in-godot">
+<h2>Using WebSocket in Godot<a class="headerlink" href="#using-websocket-in-godot" title="Link to this heading"></a></h2>
+<p>WebSocket is implemented in Godot via <a class="reference internal" href="../../classes/class_websocketpeer.html#class-websocketpeer"><span class="std std-ref">WebSocketPeer</span></a>.
+The WebSocket implementation is compatible with the High-Level Multiplayer. See
+section on <a class="reference internal" href="high_level_multiplayer.html#doc-high-level-multiplayer"><span class="std std-ref">high-level multiplayer</span></a> for more
+details.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When exporting to Android, make sure to enable the <code class="docutils literal notranslate"><span class="pre">INTERNET</span></code>
+permission in the Android export preset before exporting the project or
+using one-click deploy. Otherwise, network communication of any kind will be
+blocked by Android.</p>
+</div>
+<section id="minimal-client-example">
+<h3>Minimal client example<a class="headerlink" href="#minimal-client-example" title="Link to this heading"></a></h3>
+<p>This example will show you how to create a WebSocket connection to a remote server, and how to send and receive data.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="c1"># The URL we will connect to.</span>
+<span class="c1"># Use &quot;ws://localhost:9080&quot; if testing with the minimal server example below.</span>
+<span class="c1"># `wss://` is used for secure connections,</span>
+<span class="c1"># while `ws://` is used for plain text (insecure) connections.</span>
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">websocket_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;wss://echo.websocket.org&quot;</span>
+
+<span class="c1"># Our WebSocketClient instance.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">WebSocketPeer</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Initiate connection to the given URL.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socket</span><span class="o">.</span><span class="nf">connect_to_url</span><span class="p">(</span><span class="n">websocket_url</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">OK</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Connecting to </span><span class="si">%s</span><span class="s2">...&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">websocket_url</span><span class="p">)</span>
+<span class="w">        </span><span class="c1"># Wait for the socket to connect.</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="nf">create_timer</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="vi">timeout</span>
+
+<span class="w">        </span><span class="c1"># Send data.</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;&gt; Sending test packet.&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">socket</span><span class="o">.</span><span class="nf">send_text</span><span class="p">(</span><span class="s2">&quot;Test packet&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">push_error</span><span class="p">(</span><span class="s2">&quot;Unable to connect.&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nf">set_process</span><span class="p">(</span><span class="l">false</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Call this in `_process()` or `_physics_process()`.</span>
+<span class="w">    </span><span class="c1"># Data transfer and state updates will only happen when calling this function.</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">.</span><span class="nf">poll</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># get_ready_state() tells you what state the socket is in.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socket</span><span class="o">.</span><span class="nf">get_ready_state</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># `WebSocketPeer.STATE_OPEN` means the socket is connected and ready</span>
+<span class="w">    </span><span class="c1"># to send and receive data.</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">WebSocketPeer</span><span class="o">.</span><span class="vi">STATE_OPEN</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">while</span><span class="w"> </span><span class="n">socket</span><span class="o">.</span><span class="nf">get_available_packet_count</span><span class="p">():</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">packet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socket</span><span class="o">.</span><span class="nf">get_packet</span><span class="p">()</span>
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">socket</span><span class="o">.</span><span class="nf">was_string_packet</span><span class="p">():</span>
+<span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">packet_text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">packet</span><span class="o">.</span><span class="nf">get_string_from_utf8</span><span class="p">()</span>
+<span class="w">                </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;&lt; Got text data from server: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">packet_text</span><span class="p">)</span>
+<span class="w">            </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">                </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;&lt; Got binary data from server: </span><span class="si">%d</span><span class="s2"> bytes&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">packet</span><span class="o">.</span><span class="nf">size</span><span class="p">())</span>
+
+<span class="w">    </span><span class="c1"># `WebSocketPeer.STATE_CLOSING` means the socket is closing.</span>
+<span class="w">    </span><span class="c1"># It is important to keep polling for a clean close.</span>
+<span class="w">    </span><span class="k k-ControlFlow">elif</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">WebSocketPeer</span><span class="o">.</span><span class="vi">STATE_CLOSING</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">pass</span>
+
+<span class="w">    </span><span class="c1"># `WebSocketPeer.STATE_CLOSED` means the connection has fully closed.</span>
+<span class="w">    </span><span class="c1"># It is now safe to stop polling.</span>
+<span class="w">    </span><span class="k k-ControlFlow">elif</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">WebSocketPeer</span><span class="o">.</span><span class="vi">STATE_CLOSED</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># The code will be `-1` if the disconnection was not properly notified by the remote peer.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socket</span><span class="o">.</span><span class="nf">get_close_code</span><span class="p">()</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;WebSocket closed with code: </span><span class="si">%d</span><span class="s2">. Clean: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="w">        </span><span class="nf">set_process</span><span class="p">(</span><span class="l">false</span><span class="p">)</span><span class="w"> </span><span class="c1"># Stop processing.</span>
+</pre></div>
+</div>
+<p>This will print something similar to:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Connecting to wss://echo.websocket.org...
+&lt; Got text data from server: Request served by 7811941c69e658
+&gt; Sending test packet.
+&lt; Got text data from server: Test packet
+</pre></div>
+</div>
+</section>
+<section id="minimal-server-example">
+<h3>Minimal server example<a class="headerlink" href="#minimal-server-example" title="Link to this heading"></a></h3>
+<p>This example will show you how to create a WebSocket server that listens for remote connections, and how to send and receive data.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="c1"># The port we will listen to.</span>
+<span class="k">const</span><span class="w"> </span><span class="n">PORT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9080</span>
+
+<span class="c1"># Our TCP Server instance.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">_tcp_server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">TCPServer</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+
+<span class="c1"># Our connected peers list.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">_peers</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">[</span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="nb">WebSocketPeer</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">last_peer_id</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Start listening on the given port.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_tcp_server</span><span class="o">.</span><span class="nf">listen</span><span class="p">(</span><span class="n">PORT</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">OK</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Server started.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">push_error</span><span class="p">(</span><span class="s2">&quot;Unable to start server.&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nf">set_process</span><span class="p">(</span><span class="l">false</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">while</span><span class="w"> </span><span class="n">_tcp_server</span><span class="o">.</span><span class="nf">is_connection_available</span><span class="p">():</span>
+<span class="w">        </span><span class="n">last_peer_id</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;+ Peer </span><span class="si">%d</span><span class="s2"> connected.&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">last_peer_id</span><span class="p">)</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">ws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">WebSocketPeer</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">        </span><span class="n">ws</span><span class="o">.</span><span class="nf">accept_stream</span><span class="p">(</span><span class="n">_tcp_server</span><span class="o">.</span><span class="nf">take_connection</span><span class="p">())</span>
+<span class="w">        </span><span class="n">_peers</span><span class="p">[</span><span class="n">last_peer_id</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ws</span>
+
+<span class="w">    </span><span class="c1"># Iterate over all connected peers using &quot;keys()&quot; so we can erase in the loop</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">peer_id</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">_peers</span><span class="o">.</span><span class="nf">keys</span><span class="p">():</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">peer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_peers</span><span class="p">[</span><span class="n">peer_id</span><span class="p">]</span>
+
+<span class="w">        </span><span class="n">peer</span><span class="o">.</span><span class="nf">poll</span><span class="p">()</span>
+
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">peer_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">peer</span><span class="o">.</span><span class="nf">get_ready_state</span><span class="p">()</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">peer_state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">WebSocketPeer</span><span class="o">.</span><span class="vi">STATE_OPEN</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">while</span><span class="w"> </span><span class="n">peer</span><span class="o">.</span><span class="nf">get_available_packet_count</span><span class="p">():</span>
+<span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">packet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">peer</span><span class="o">.</span><span class="nf">get_packet</span><span class="p">()</span>
+<span class="w">                </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">peer</span><span class="o">.</span><span class="nf">was_string_packet</span><span class="p">():</span>
+<span class="w">                    </span><span class="k">var</span><span class="w"> </span><span class="n">packet_text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">packet</span><span class="o">.</span><span class="nf">get_string_from_utf8</span><span class="p">()</span>
+<span class="w">                    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;&lt; Got text data from peer </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2"> ... echoing&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">peer_id</span><span class="p">,</span><span class="w"> </span><span class="n">packet_text</span><span class="p">])</span>
+<span class="w">                    </span><span class="c1"># Echo the packet back.</span>
+<span class="w">                    </span><span class="n">peer</span><span class="o">.</span><span class="nf">send_text</span><span class="p">(</span><span class="n">packet_text</span><span class="p">)</span>
+<span class="w">                </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">                    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;&lt; Got binary data from peer </span><span class="si">%d</span><span class="s2">: </span><span class="si">%d</span><span class="s2"> ... echoing&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">peer_id</span><span class="p">,</span><span class="w"> </span><span class="n">packet</span><span class="o">.</span><span class="nf">size</span><span class="p">()])</span>
+<span class="w">                    </span><span class="c1"># Echo the packet back.</span>
+<span class="w">                    </span><span class="n">peer</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">packet</span><span class="p">)</span>
+<span class="w">        </span><span class="k k-ControlFlow">elif</span><span class="w"> </span><span class="n">peer_state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">WebSocketPeer</span><span class="o">.</span><span class="vi">STATE_CLOSED</span><span class="p">:</span>
+<span class="w">            </span><span class="c1"># Remove the disconnected peer.</span>
+<span class="w">            </span><span class="n">_peers</span><span class="o">.</span><span class="nf">erase</span><span class="p">(</span><span class="n">peer_id</span><span class="p">)</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">peer</span><span class="o">.</span><span class="nf">get_close_code</span><span class="p">()</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">peer</span><span class="o">.</span><span class="nf">get_close_reason</span><span class="p">()</span>
+<span class="w">            </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;- Peer </span><span class="si">%s</span><span class="s2"> closed with code: </span><span class="si">%d</span><span class="s2">, reason </span><span class="si">%s</span><span class="s2">. Clean: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">peer_id</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>When a client connects, this will print something similar to this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Server started.
++ Peer 2 connected.
+&lt; Got text data from peer 2: Test packet ... echoing
+</pre></div>
+</div>
+</section>
+<section id="advanced-chat-demo">
+<h3>Advanced chat demo<a class="headerlink" href="#advanced-chat-demo" title="Link to this heading"></a></h3>
+<p>A more advanced chat demo which optionally uses the multiplayer mid-level
+abstraction and a high-level multiplayer demo are available in the
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects">godot demo projects</a>
+under <cite>networking/websocket_chat</cite> and <cite>networking/websocket_multiplayer</cite>.</p>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ssl_certificates.html" class="btn btn-neutral float-left" title="TLS/SSL certificates" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="webrtc.html" class="btn btn-neutral float-right" title="WebRTC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

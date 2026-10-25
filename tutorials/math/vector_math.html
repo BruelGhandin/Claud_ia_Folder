@@ -1,0 +1,600 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Vector math" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/math/vector_math.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: This tutorial is a short and practical introduction to linear algebra as it applies to game development. Linear algebra is the study of vectors and their uses. Vectors have many appli..." />
+<meta name="description" content="Introduction: This tutorial is a short and practical introduction to linear algebra as it applies to game development. Linear algebra is the study of vectors and their uses. Vectors have many appli..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Vector math &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Advanced vector math" href="vectors_advanced.html" />
+    <link rel="prev" title="Math" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/math/vector_math" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/math/vector_math.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Math</a></li>
+      <li class="breadcrumb-item active">Vector math</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/math/vector_math.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="vector-math">
+<span id="doc-vector-math"></span><h1>Vector math<a class="headerlink" href="#vector-math" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This tutorial is a short and practical introduction to linear algebra as it
+applies to game development. Linear algebra is the study of vectors and their
+uses. Vectors have many applications in both 2D and 3D development and Godot
+uses them extensively. Developing a good understanding of vector math is
+essential to becoming a strong game developer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tutorial is <strong>not</strong> a formal textbook on linear algebra. We will
+only be looking at how it is applied to game development. For a
+broader look at the mathematics, see
+<a class="reference external" href="https://www.khanacademy.org/math/linear-algebra">https://www.khanacademy.org/math/linear-algebra</a></p>
+</div>
+</section>
+<section id="coordinate-systems-2d">
+<h2>Coordinate systems (2D)<a class="headerlink" href="#coordinate-systems-2d" title="Link to this heading"></a></h2>
+<p>In 2D space, coordinates are defined using a horizontal axis (<code class="docutils literal notranslate"><span class="pre">x</span></code>) and a
+vertical axis (<code class="docutils literal notranslate"><span class="pre">y</span></code>). A particular position in 2D space is written as a pair of
+values such as <code class="docutils literal notranslate"><span class="pre">(4,</span> <span class="pre">3)</span></code>.</p>
+<img alt="../../_images/vector_axis1.png" src="../../_images/vector_axis1.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you're new to computer graphics, it might seem odd that the
+positive <code class="docutils literal notranslate"><span class="pre">y</span></code> axis points <strong>downwards</strong> instead of upwards, as you
+probably learned in math class. However, this is common in most
+computer graphics applications.</p>
+</div>
+<p>Any position in the 2D plane can be identified by a pair of numbers in this way.
+However, we can also think of the position <code class="docutils literal notranslate"><span class="pre">(4,</span> <span class="pre">3)</span></code> as an <strong>offset</strong> from the
+<code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code> point, or <strong>origin</strong>. Draw an arrow pointing from the origin to the
+point:</p>
+<img alt="../../_images/vector_xy1.png" src="../../_images/vector_xy1.png" />
+<p>This is a <strong>vector</strong>. A vector represents a lot of useful information. As well
+as telling us that the point is at <code class="docutils literal notranslate"><span class="pre">(4,</span> <span class="pre">3)</span></code>, we can also think of it as an
+angle <code class="docutils literal notranslate"><span class="pre">θ</span></code> (theta) and a length (or magnitude) <code class="docutils literal notranslate"><span class="pre">m</span></code>. In this case, the arrow
+is a <strong>position vector</strong> - it denotes a position in space, relative to the
+origin.</p>
+<p>A very important point to consider about vectors is that they only represent
+<strong>relative</strong> direction and magnitude. There is no concept of a vector's
+position. The following two vectors are identical:</p>
+<img alt="../../_images/vector_xy2.png" src="../../_images/vector_xy2.png" />
+<p>Both vectors represent a point 4 units to the right and 3 units below some
+starting point. It does not matter where on the plane you draw the vector, it
+always represents a relative direction and magnitude.</p>
+</section>
+<section id="vector-operations">
+<h2>Vector operations<a class="headerlink" href="#vector-operations" title="Link to this heading"></a></h2>
+<p>You can use either method (x and y coordinates or angle and magnitude) to refer
+to a vector, but for convenience, programmers typically use the coordinate
+notation. For example, in Godot, the origin is the top-left corner of the
+screen, so to place a 2D node named <code class="docutils literal notranslate"><span class="pre">Node2D</span></code> 400 pixels to the right and 300
+pixels down, use the following code:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="sx">$Node2D</span><span class="o">.</span><span class="vi">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">node2D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Node2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Node2D&quot;</span><span class="p">);</span>
+<span class="n">node2D</span><span class="p">.</span><span class="n">Position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>Godot supports both <a class="reference internal" href="../../classes/class_vector2.html#class-vector2"><span class="std std-ref">Vector2</span></a> and <a class="reference internal" href="../../classes/class_vector3.html#class-vector3"><span class="std std-ref">Vector3</span></a> for 2D and 3D usage, respectively. The same mathematical rules
+discussed in this article apply to both types, and wherever we link to
+<code class="docutils literal notranslate"><span class="pre">Vector2</span></code> methods in the class reference, you can also check out their
+<code class="docutils literal notranslate"><span class="pre">Vector3</span></code> counterparts.</p>
+<section id="member-access">
+<h3>Member access<a class="headerlink" href="#member-access" title="Link to this heading"></a></h3>
+<p>The individual components of the vector can be accessed directly by name.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a vector with coordinates (2, 5).</span>
+<span class="k">var</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># Create a vector and assign x and y manually.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">()</span>
+<span class="n">b</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">b</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a vector with coordinates (2, 5).</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<span class="c1">// Create a vector and assign x and y manually.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">();</span>
+<span class="n">b</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="n">b</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="adding-vectors">
+<h3>Adding vectors<a class="headerlink" href="#adding-vectors" title="Link to this heading"></a></h3>
+<p>When adding or subtracting two vectors, the corresponding components are added:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w">  </span><span class="c1"># (2, 5) + (3, 1) = (5, 6)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">  </span><span class="c1">// (2, 5) + (3, 1) = (5, 6)</span>
+</pre></div>
+</div>
+</div></div>
+<p>We can also see this visually by adding the second vector at the end of
+the first:</p>
+<img alt="../../_images/vector_add1.png" src="../../_images/vector_add1.png" />
+<p>Note that adding <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code> gives the same result as <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">+</span> <span class="pre">a</span></code>.</p>
+</section>
+<section id="scalar-multiplication">
+<h3>Scalar multiplication<a class="headerlink" href="#scalar-multiplication" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Vectors represent both direction and magnitude. A value representing
+only magnitude is called a <strong>scalar</strong>. Scalars use the
+<a class="reference internal" href="../../classes/class_float.html#class-float"><span class="std std-ref">float</span></a> type in Godot.</p>
+</div>
+<p>A vector can be multiplied by a <strong>scalar</strong>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w">  </span><span class="c1"># (2, 5) * 2 = (4, 10)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="w">  </span><span class="c1"># (3, 6) / 3 = (1, 2)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="w"> </span><span class="c1"># (1, 2) * -2 = (-2, -4)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">  </span><span class="c1">// (2, 5) * 2 = (4, 10)</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">  </span><span class="c1">// (3, 6) / 3 = (1, 2)</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// (1, 2) * -2 = (-2, -4)</span>
+</pre></div>
+</div>
+</div></div>
+<img alt="../../_images/vector_mult1.png" src="../../_images/vector_mult1.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Multiplying a vector by a positive scalar does not change its direction, only
+its magnitude. Multiplying with a negative scalar results in a vector in the
+opposite direction. This is how you <strong>scale</strong> a vector.</p>
+</div>
+</section>
+</section>
+<section id="practical-applications">
+<h2>Practical applications<a class="headerlink" href="#practical-applications" title="Link to this heading"></a></h2>
+<p>Let's look at two common uses for vector addition and subtraction.</p>
+<section id="movement">
+<h3>Movement<a class="headerlink" href="#movement" title="Link to this heading"></a></h3>
+<p>A vector can represent <strong>any</strong> quantity with a magnitude and direction. Typical
+examples are: position, velocity, acceleration, and force. In this image, the
+spaceship at step 1 has a position vector of <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">3)</span></code> and a velocity vector of
+<code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">1)</span></code>. The velocity vector represents how far the ship moves each step. We
+can find the position for step 2 by adding the velocity to the current position.</p>
+<img alt="../../_images/vector_movement1.png" src="../../_images/vector_movement1.png" />
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Velocity measures the <strong>change</strong> in position per unit of time. The new
+position is found by adding the velocity multiplied by the elapsed time
+(here assumed to be one unit, e.g. 1 s) to the previous position.</p>
+<p>In a typical 2D game scenario, you would have a velocity in pixels per
+second, and multiply it by the <code class="docutils literal notranslate"><span class="pre">delta</span></code> parameter (time elapsed since
+the previous frame) from the <a class="reference internal" href="../../classes/class_node.html#class-node-private-method-process"><span class="std std-ref">_process()</span></a>
+or <a class="reference internal" href="../../classes/class_node.html#class-node-private-method-physics-process"><span class="std std-ref">_physics_process()</span></a>
+callbacks.</p>
+</div>
+</section>
+<section id="pointing-toward-a-target">
+<h3>Pointing toward a target<a class="headerlink" href="#pointing-toward-a-target" title="Link to this heading"></a></h3>
+<p>In this scenario, you have a tank that wishes to point its turret at a robot.
+Subtracting the tank's position from the robot's position gives the vector
+pointing from the tank to the robot.</p>
+<img alt="../../_images/vector_subtract2.webp" src="../../_images/vector_subtract2.webp" />
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To find a vector pointing from <code class="docutils literal notranslate"><span class="pre">A</span></code> to <code class="docutils literal notranslate"><span class="pre">B</span></code>, use <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">-</span> <span class="pre">A</span></code>.</p>
+</div>
+</section>
+</section>
+<section id="unit-vectors">
+<h2>Unit vectors<a class="headerlink" href="#unit-vectors" title="Link to this heading"></a></h2>
+<p>A vector with <strong>magnitude</strong> of <code class="docutils literal notranslate"><span class="pre">1</span></code> is called a <strong>unit vector</strong>. They are also
+sometimes referred to as <strong>direction vectors</strong> or <strong>normals</strong>. Unit vectors are
+helpful when you need to keep track of a direction.</p>
+<section id="normalization">
+<h3>Normalization<a class="headerlink" href="#normalization" title="Link to this heading"></a></h3>
+<p><strong>Normalizing</strong> a vector means reducing its length to <code class="docutils literal notranslate"><span class="pre">1</span></code> while preserving its
+direction. This is done by dividing each of its components by its magnitude.
+Because this is such a common operation, Godot provides a dedicated
+<a class="reference internal" href="../../classes/class_vector2.html#class-vector2-method-normalized"><span class="std std-ref">normalized()</span></a> method for this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="o">.</span><span class="nf">normalized</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">Normalized</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Because normalization involves dividing by the vector's length, you
+cannot normalize a vector of length <code class="docutils literal notranslate"><span class="pre">0</span></code>. Attempting to do so
+would normally result in an error. In GDScript though, trying to
+call the <code class="docutils literal notranslate"><span class="pre">normalized()</span></code> method on a vector of length 0 leaves the
+value untouched and avoids the error for you.</p>
+</div>
+</section>
+<section id="reflection">
+<h3>Reflection<a class="headerlink" href="#reflection" title="Link to this heading"></a></h3>
+<p>A common use of unit vectors is to indicate <strong>normals</strong>. Normal vectors are unit
+vectors aligned perpendicularly to a surface, defining its direction. They are
+commonly used for lighting, collisions, and other operations involving surfaces.</p>
+<p>For example, imagine we have a moving ball that we want to bounce off a wall or
+other object:</p>
+<img alt="../../_images/vector_reflect1.png" src="../../_images/vector_reflect1.png" />
+<p>The surface normal has a value of <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">-1)</span></code> because this is a horizontal
+surface. When the ball collides, we take its remaining motion (the amount left
+over when it hits the surface) and reflect it using the normal. In Godot, there
+is a <a class="reference internal" href="../../classes/class_vector2.html#class-vector2-method-bounce"><span class="std std-ref">bounce()</span></a> method to handle this.
+Here is a code example of the above diagram using a <a class="reference internal" href="../../classes/class_characterbody2d.html#class-characterbody2d"><span class="std std-ref">CharacterBody2D</span></a>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">collision</span><span class="p">:</span><span class="w"> </span><span class="nb">KinematicCollision2D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">move_and_collide</span><span class="p">(</span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">collision</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">reflect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collision</span><span class="o">.</span><span class="nf">get_remainder</span><span class="p">()</span><span class="o">.</span><span class="nf">bounce</span><span class="p">(</span><span class="n">collision</span><span class="o">.</span><span class="nf">get_normal</span><span class="p">())</span>
+<span class="w">    </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocity</span><span class="o">.</span><span class="nf">bounce</span><span class="p">(</span><span class="n">collision</span><span class="o">.</span><span class="nf">get_normal</span><span class="p">())</span>
+<span class="w">    </span><span class="nf">move_and_collide</span><span class="p">(</span><span class="n">reflect</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">KinematicCollision2D</span><span class="w"> </span><span class="n">collision</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MoveAndCollide</span><span class="p">(</span><span class="n">_velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">collision</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">reflect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collision</span><span class="p">.</span><span class="n">GetRemainder</span><span class="p">().</span><span class="n">Bounce</span><span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="n">GetNormal</span><span class="p">());</span>
+<span class="w">    </span><span class="n">_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_velocity</span><span class="p">.</span><span class="n">Bounce</span><span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="n">GetNormal</span><span class="p">());</span>
+<span class="w">    </span><span class="n">MoveAndCollide</span><span class="p">(</span><span class="n">reflect</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+<section id="dot-product">
+<h2>Dot product<a class="headerlink" href="#dot-product" title="Link to this heading"></a></h2>
+<p>The <strong>dot product</strong> is one of the most important concepts in vector math, but is
+often misunderstood. Dot product is an operation on two vectors that returns a
+<strong>scalar</strong>. Unlike a vector, which contains both magnitude and direction, a
+scalar value has only magnitude.</p>
+<p>The formula for dot product takes two common forms:</p>
+<img alt="../../_images/vector_dot1.png" src="../../_images/vector_dot1.png" />
+<p>and</p>
+<img alt="../../_images/vector_dot2.png" src="../../_images/vector_dot2.png" />
+<p>The mathematical notation <em>||A||</em> represents the magnitude of vector <code class="docutils literal notranslate"><span class="pre">A</span></code>, and
+<em>A</em><sub>x</sub> means the <code class="docutils literal notranslate"><span class="pre">x</span></code> component of vector <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p>
+<p>However, in most cases it is easiest to use the built-in <a class="reference internal" href="../../classes/class_vector2.html#class-vector2-method-dot"><span class="std std-ref">dot()</span></a> method. Note that the order of the two vectors does not matter:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-6-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-6-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-6-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="o">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="o">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w">  </span><span class="c1"># These are equivalent.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-6-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-6-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w">  </span><span class="c1">// These are equivalent.</span>
+</pre></div>
+</div>
+</div></div>
+<p>The dot product is most useful when used with unit vectors, making the first
+formula reduce to just <code class="docutils literal notranslate"><span class="pre">cos(θ)</span></code>. This means we can use the dot product to tell
+us something about the angle between two vectors:</p>
+<img alt="../../_images/vector_dot3.png" src="../../_images/vector_dot3.png" />
+<p>When using unit vectors, the result will always be between <code class="docutils literal notranslate"><span class="pre">-1</span></code> (180°) and
+<code class="docutils literal notranslate"><span class="pre">1</span></code> (0°).</p>
+<section id="facing">
+<h3>Facing<a class="headerlink" href="#facing" title="Link to this heading"></a></h3>
+<p>We can use this fact to detect whether an object is facing toward another
+object. In the diagram below, the player <code class="docutils literal notranslate"><span class="pre">P</span></code> is trying to avoid the zombies
+<code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>. Assuming a zombie's field of view is <strong>180°</strong>, can they see the
+player?</p>
+<img alt="../../_images/vector_facing2.png" src="../../_images/vector_facing2.png" />
+<p>The green arrows <code class="docutils literal notranslate"><span class="pre">fA</span></code> and <code class="docutils literal notranslate"><span class="pre">fB</span></code> are <strong>unit vectors</strong> representing the
+zombie's facing direction and the blue semicircle represents its field of view.
+For zombie <code class="docutils literal notranslate"><span class="pre">A</span></code>, we find the direction vector <code class="docutils literal notranslate"><span class="pre">AP</span></code> pointing to the player
+using <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">-</span> <span class="pre">A</span></code> and normalize it, however, Godot has a helper method to do this
+called <a class="reference internal" href="../../classes/class_vector2.html#class-vector2-method-direction-to"><span class="std std-ref">direction_to()</span></a>. If the angle
+between this vector and the facing vector is less than 90°, then the zombie can
+see the player.</p>
+<p>In code it would look like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-7-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-7-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-7-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">AP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">.</span><span class="nf">direction_to</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">AP</span><span class="o">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">fA</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;A sees P!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-7-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-7-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">AP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">DirectionTo</span><span class="p">(</span><span class="n">P</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">AP</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">fA</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;A sees P!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+<section id="cross-product">
+<h2>Cross product<a class="headerlink" href="#cross-product" title="Link to this heading"></a></h2>
+<p>Like the dot product, the <strong>cross product</strong> is an operation on two vectors.
+However, the result of the cross product is a vector with a direction that is
+perpendicular to both. Its magnitude depends on their relative angle. If two
+vectors are parallel, the result of their cross product will be a null vector.</p>
+<img alt="../../_images/vector_cross1.png" src="../../_images/vector_cross1.png" />
+<img alt="../../_images/vector_cross2.png" src="../../_images/vector_cross2.png" />
+<p>The cross product is calculated like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-8-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-8-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-8-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-8-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="o">.</span><span class="vi">z</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="vi">z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="o">.</span><span class="vi">y</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="vi">z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="o">.</span><span class="vi">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="o">.</span><span class="vi">z</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="vi">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="o">.</span><span class="vi">y</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="o">.</span><span class="vi">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-8-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-8-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">();</span>
+<span class="n">c</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">Z</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">Z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">Y</span><span class="p">);</span>
+<span class="n">c</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">Z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">Z</span><span class="p">);</span>
+<span class="n">c</span><span class="p">.</span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">X</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>With Godot, you can use the built-in <a class="reference internal" href="../../classes/class_vector3.html#class-vector3-method-cross"><span class="std std-ref">Vector3.cross()</span></a>
+method:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-9-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-9-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-9-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-9-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-9-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-9-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="o">.</span><span class="nf">cross</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-9-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-9-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">Cross</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>The cross product is not mathematically defined in 2D. The <a class="reference internal" href="../../classes/class_vector2.html#class-vector2-method-cross"><span class="std std-ref">Vector2.cross()</span></a> method is a commonly used analog of the 3D cross
+product for 2D vectors.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the cross product, order matters. <code class="docutils literal notranslate"><span class="pre">a.cross(b)</span></code> does not give the
+same result as <code class="docutils literal notranslate"><span class="pre">b.cross(a)</span></code>. The resulting vectors point in
+<strong>opposite</strong> directions.</p>
+</div>
+<section id="calculating-normals">
+<h3>Calculating normals<a class="headerlink" href="#calculating-normals" title="Link to this heading"></a></h3>
+<p>One common use of cross products is to find the surface normal of a plane or
+surface in 3D space. If we have the triangle <code class="docutils literal notranslate"><span class="pre">ABC</span></code> we can use vector
+subtraction to find two edges <code class="docutils literal notranslate"><span class="pre">AB</span></code> and <code class="docutils literal notranslate"><span class="pre">AC</span></code>. Using the cross product,
+<code class="docutils literal notranslate"><span class="pre">AB</span> <span class="pre">×</span> <span class="pre">AC</span></code> produces a vector perpendicular to both: the surface normal.</p>
+<p>Here is a function to calculate a triangle's normal:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-10-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-10-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-10-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-10-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-10-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-10-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">get_triangle_normal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Find the surface normal given 3 vertices.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">side1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">side2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">normal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">side1</span><span class="o">.</span><span class="nf">cross</span><span class="p">(</span><span class="n">side2</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">normal</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-10-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-10-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Vector3</span><span class="w"> </span><span class="nf">GetTriangleNormal</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Find the surface normal given 3 vertices.</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">side1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">side2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">normal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">side1</span><span class="p">.</span><span class="n">Cross</span><span class="p">(</span><span class="n">side2</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">normal</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="pointing-to-a-target">
+<h3>Pointing to a target<a class="headerlink" href="#pointing-to-a-target" title="Link to this heading"></a></h3>
+<p>In the dot product section above, we saw how it could be used to find the angle
+between two vectors. However, in 3D, this is not enough information. We also
+need to know what axis to rotate around. We can find that by calculating the
+cross product of the current facing direction and the target direction. The
+resulting perpendicular vector is the axis of rotation.</p>
+</section>
+</section>
+<section id="more-information">
+<h2>More information<a class="headerlink" href="#more-information" title="Link to this heading"></a></h2>
+<p>For more information on using vector math in Godot, see the following articles:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="vectors_advanced.html#doc-vectors-advanced"><span class="std std-ref">Advanced vector math</span></a></p></li>
+<li><p><a class="reference internal" href="matrices_and_transforms.html#doc-matrices-and-transforms"><span class="std std-ref">Matrices and transforms</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Math" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vectors_advanced.html" class="btn btn-neutral float-right" title="Advanced vector math" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

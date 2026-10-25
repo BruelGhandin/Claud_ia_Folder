@@ -1,0 +1,699 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="Signal" name="keywords" />
+<meta property="og:title" content="Using signals" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="getting_started/step_by_step/signals.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="In this lesson, we will look at signals. They are messages that nodes emit when something specific happens to them, like a button being pressed. Other nodes can connect to that signal and call a fu..." />
+<meta name="description" content="In this lesson, we will look at signals. They are messages that nodes emit when something specific happens to them, like a button being pressed. Other nodes can connect to that signal and call a fu..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using signals &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Your first 2D game" href="../first_2d_game/index.html" />
+    <link rel="prev" title="Listening to player input" href="scripting_player_input.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="getting_started/step_by_step/signals" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="getting_started/step_by_step/signals.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Step by step</a></li>
+      <li class="breadcrumb-item active">Using signals</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/getting_started/step_by_step/signals.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-signals">
+<span id="doc-signals"></span><h1>Using signals<a class="headerlink" href="#using-signals" title="Link to this heading"></a></h1>
+<p>In this lesson, we will look at signals. They are messages that nodes emit when
+something specific happens to them, like a button being pressed. Other nodes can
+connect to that signal and call a function when the event occurs.</p>
+<p>Signals are a delegation mechanism built into Godot that allows one game object to
+react to a change in another without them referencing one another. Using signals
+limits <a class="reference external" href="https://en.wikipedia.org/wiki/Coupling_(computer_programming)">coupling</a> and keeps your
+code flexible.</p>
+<p>For example, you might have a life bar on the screen that represents the
+player's health. When the player takes damage or uses a healing potion, you want
+the bar to reflect the change. To do so, in Godot, you would use signals.</p>
+<p>Like methods (<a class="reference internal" href="../../classes/class_callable.html#class-callable"><span class="std std-ref">Callable</span></a>), signals are a first-class type since Godot
+4.0. This means you can pass them around as method arguments directly without
+having to pass them as strings, which allows for better autocompletion and is
+less error-prone. See the <a class="reference internal" href="../../classes/class_signal.html#class-signal"><span class="std std-ref">Signal</span></a> class reference for a list of
+what you can do with the Signal type directly.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>As mentioned in the introduction, signals are Godot's version of the
+observer pattern. You can learn more about it in
+<a class="reference external" href="https://gameprogrammingpatterns.com/observer.html">Game Programming Patterns</a>.</p>
+</div>
+<p>We will now use a signal to make our Godot icon from the previous lesson
+(<a class="reference internal" href="scripting_player_input.html#doc-scripting-player-input"><span class="std std-ref">Listening to player input</span></a>) move and stop by pressing a button.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For this project, we will be following the Godot naming conventions.</p>
+<ul class="simple">
+<li><p><strong>GDScript</strong>: Classes (nodes) use PascalCase, variables and
+functions use snake_case, and constants use ALL_CAPS (See
+<a class="reference internal" href="../../tutorials/scripting/gdscript/gdscript_styleguide.html#doc-gdscript-styleguide"><span class="std std-ref">GDScript style guide</span></a>).</p></li>
+<li><p><strong>C#</strong>: Classes, export variables and methods use PascalCase,
+private fields use _camelCase, local variables and parameters use
+camelCase (See <a class="reference internal" href="../../tutorials/scripting/c_sharp/c_sharp_style_guide.html#doc-c-sharp-styleguide"><span class="std std-ref">C# style guide</span></a>). Be careful to type
+the method names precisely when connecting signals.</p></li>
+</ul>
+</div>
+<section id="scene-setup">
+<h2>Scene setup<a class="headerlink" href="#scene-setup" title="Link to this heading"></a></h2>
+<p>To add a button to our game, we will create a new scene which will include
+both a <a class="reference internal" href="../../classes/class_button.html#class-button"><span class="std std-ref">Button</span></a> and the <code class="docutils literal notranslate"><span class="pre">sprite_2d.tscn</span></code> scene we created in
+the <a class="reference internal" href="scripting_first_script.html#doc-scripting-first-script"><span class="std std-ref">Creating your first script</span></a> lesson.</p>
+<p>Create a new scene by going to the menu <span class="role-menu role-ui">Scene &gt; New Scene</span>.</p>
+<img alt="../../_images/signals_01_new_scene.webp" src="../../_images/signals_01_new_scene.webp" />
+<p>In the Scene dock, click the <span class="role-button role-ui">2D Scene</span> button. This will add
+a <a class="reference internal" href="../../classes/class_node2d.html#class-node2d"><span class="std std-ref">Node2D</span></a> as our root.</p>
+<img alt="../../_images/signals_02_2d_scene.webp" src="../../_images/signals_02_2d_scene.webp" />
+<p>In the FileSystem dock, click and drag the <code class="docutils literal notranslate"><span class="pre">sprite_2d.tscn</span></code> file you saved
+previously onto the Node2D to instantiate it.</p>
+<img alt="../../_images/signals_03_dragging_scene.webp" src="../../_images/signals_03_dragging_scene.webp" />
+<p>We want to add another node as a sibling of the Sprite2D. To do so, right-click
+on Node2D and select <span class="role-button role-ui">Add Child Node</span>.</p>
+<img alt="../../_images/signals_04_add_child_node.webp" src="../../_images/signals_04_add_child_node.webp" />
+<p>Search for the <a class="reference internal" href="../../classes/class_button.html#class-button"><span class="std std-ref">Button</span></a> node and add it.</p>
+<img alt="../../_images/signals_05_add_button.webp" src="../../_images/signals_05_add_button.webp" />
+<p>The node is small by default. Click and drag on the bottom-right handle of the
+Button in the viewport to resize it.</p>
+<img alt="../../_images/signals_06_drag_button.png" src="../../_images/signals_06_drag_button.png" />
+<p>If you don't see the handles, ensure the select tool is active in the toolbar.</p>
+<img alt="../../_images/signals_07_select_tool.webp" src="../../_images/signals_07_select_tool.webp" />
+<p>Click and drag on the button itself to move it closer to the sprite.</p>
+<p>You can also write a label on the Button by editing its <span class="role-ui">Text</span> property
+in the <span class="role-ui">Inspector</span>. Enter <code class="docutils literal notranslate"><span class="pre">Toggle</span> <span class="pre">motion</span></code>.</p>
+<img alt="../../_images/signals_08_toggle_motion_text.webp" src="../../_images/signals_08_toggle_motion_text.webp" />
+<p>Your scene tree and viewport should look like this.</p>
+<img alt="../../_images/signals_09_scene_setup.webp" src="../../_images/signals_09_scene_setup.webp" />
+<p>Save your newly created scene as <code class="docutils literal notranslate"><span class="pre">node_2d.tscn</span></code>, if you haven't already.
+You can then run it with <kbd class="kbd docutils literal notranslate">F6</kbd> (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd> on macOS).
+At the moment, the button will be visible, but nothing will happen if you
+press it.</p>
+</section>
+<section id="connecting-a-signal-in-the-editor">
+<h2>Connecting a signal in the editor<a class="headerlink" href="#connecting-a-signal-in-the-editor" title="Link to this heading"></a></h2>
+<p>Here, we want to connect the Button's &quot;pressed&quot; signal to our Sprite2D, and we
+want to call a new function that will toggle its motion on and off. We need to
+have a script attached to the Sprite2D node, which we do from the previous
+lesson.</p>
+<p>You can connect signals in the <span class="role-ui">Signals</span> dock. Select the Button node and, on the
+right side of the editor, click on the tab named <span class="role-ui">Signals</span> next to the
+<span class="role-ui">Inspector</span>.</p>
+<img alt="../../_images/signals_10_node_dock.webp" src="../../_images/signals_10_node_dock.webp" />
+<p>The dock displays a list of signals available on the selected node.</p>
+<img alt="../../_images/signals_11_pressed_signals.webp" src="../../_images/signals_11_pressed_signals.webp" />
+<p>Double-click the &quot;pressed&quot; signal to open the node connection window.</p>
+<img alt="../../_images/signals_12_node_connection.webp" src="../../_images/signals_12_node_connection.webp" />
+<p>There, you can connect the signal to the Sprite2D node. The node needs a
+receiver method, a function that Godot will call when the Button emits the
+signal. The editor generates one for you. By convention, we name these callback
+methods &quot;_on_node_name_signal_name&quot;. Here, it'll be &quot;_on_button_pressed&quot;.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When connecting signals via the editor's Signals dock, you can use two
+modes. The simple one only allows you to connect to nodes that have a
+script attached to them and creates a new callback function on them.</p>
+<img alt="../../_images/signals_advanced_connection_window.webp" src="../../_images/signals_advanced_connection_window.webp" />
+<p>The advanced view lets you connect to any node and any built-in
+function, add arguments to the callback, and set options. You can
+toggle the mode in the window's bottom-left by clicking the <span class="role-button role-ui">Advanced</span>
+button.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using an external editor (such as VS Code), this
+automatic code generation might not work. In this case, you need to connect
+the signal via code as explained in the next section.</p>
+</div>
+<p>Click the <span class="role-button role-ui">Connect</span> button to complete the signal connection and jump to the
+<span class="role-ui">Script</span> workspace. You should see the new method with a connection icon in the
+left margin.</p>
+<img alt="../../_images/signals_13_signals_connection_icon.webp" src="../../_images/signals_13_signals_connection_icon.webp" />
+<p>If you click the icon, a window pops up and displays information about the
+connection. This feature is only available when connecting nodes in the editor.</p>
+<img alt="../../_images/signals_14_signals_connection_info.webp" src="../../_images/signals_14_signals_connection_info.webp" />
+<p>Let's replace the line with the <code class="docutils literal notranslate"><span class="pre">pass</span></code> keyword with code that'll toggle the
+node's motion.</p>
+<p>Our Sprite2D moves thanks to code in the <code class="docutils literal notranslate"><span class="pre">_process()</span></code> function. Godot provides
+a method to toggle processing on and off: <a class="reference internal" href="../../classes/class_node.html#class-node-method-set-process"><span class="std std-ref">Node.set_process()</span></a>. Another method of the Node class,
+<code class="docutils literal notranslate"><span class="pre">is_processing()</span></code>, returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if idle processing is active. We can use
+the <code class="docutils literal notranslate"><span class="pre">not</span></code> keyword to invert the value.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_button_pressed</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">set_process</span><span class="p">(</span><span class="ow">not</span><span class="w"> </span><span class="nf">is_processing</span><span class="p">())</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// We also specified this function name in PascalCase in the editor&#39;s connection window.</span>
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnButtonPressed</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">SetProcess</span><span class="p">(</span><span class="o">!</span><span class="n">IsProcessing</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>This function will toggle processing and, in turn, the icon's motion on and off
+upon pressing the button.</p>
+<p>Before trying the game, we need to simplify our <code class="docutils literal notranslate"><span class="pre">_process()</span></code> function to move
+the node automatically and not wait for user input. Replace it with the
+following code, which we saw two lessons ago:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="n">rotation</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">angular_speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="o">.</span><span class="vi">UP</span><span class="o">.</span><span class="nf">rotated</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">speed</span>
+<span class="w">    </span><span class="n">position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Process</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Rotation</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">_angularSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector2</span><span class="p">.</span><span class="n">Up</span><span class="p">.</span><span class="n">Rotated</span><span class="p">(</span><span class="n">Rotation</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_speed</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Your complete <code class="docutils literal notranslate"><span class="pre">sprite_2d.gd</span></code> code should look like the following.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Sprite2D</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">400</span>
+<span class="k">var</span><span class="w"> </span><span class="n">angular_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">PI</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="n">rotation</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">angular_speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="o">.</span><span class="vi">UP</span><span class="o">.</span><span class="nf">rotated</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">speed</span>
+<span class="w">    </span><span class="n">position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_button_pressed</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">set_process</span><span class="p">(</span><span class="ow">not</span><span class="w"> </span><span class="nf">is_processing</span><span class="p">())</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MySprite2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sprite2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">400</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_angularSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Pi</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Process</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Rotation</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">_angularSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector2</span><span class="p">.</span><span class="n">Up</span><span class="p">.</span><span class="n">Rotated</span><span class="p">(</span><span class="n">Rotation</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_speed</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// We also specified this function name in PascalCase in the editor&#39;s connection window.</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnButtonPressed</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SetProcess</span><span class="p">(</span><span class="o">!</span><span class="n">IsProcessing</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Run the current scene by pressing <kbd class="kbd docutils literal notranslate">F6</kbd> (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd> on macOS),
+and click the button to see the sprite start and stop.</p>
+</section>
+<section id="connecting-a-signal-via-code">
+<h2>Connecting a signal via code<a class="headerlink" href="#connecting-a-signal-via-code" title="Link to this heading"></a></h2>
+<p>You can connect signals via code instead of using the editor. This is necessary
+when you create nodes or instantiate scenes inside of a script.</p>
+<p>Let's use a different node here. Godot has a <a class="reference internal" href="../../classes/class_timer.html#class-timer"><span class="std std-ref">Timer</span></a> node
+that's useful to implement skill cooldown times, weapon reloading, and more.</p>
+<p>Head back to the 2D workspace. You can either click the &quot;2D&quot; text at the top of
+the window or press <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F1</kbd></kbd> (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">1</kbd></kbd> on macOS).</p>
+<p>In the Scene dock, right-click on the Sprite2D node and add a new child node.
+Search for Timer and add the corresponding node. Your scene should now look like
+this.</p>
+<img alt="../../_images/signals_15_scene_tree.webp" src="../../_images/signals_15_scene_tree.webp" />
+<p>With the Timer node selected, go to the <span class="role-ui">Inspector</span> and enable the <span class="role-ui">Autostart</span>
+property.</p>
+<img alt="../../_images/signals_18_timer_autostart.webp" src="../../_images/signals_18_timer_autostart.webp" />
+<p>Click the script icon next to Sprite2D to jump back to the scripting workspace.</p>
+<img alt="../../_images/signals_16_click_script.webp" src="../../_images/signals_16_click_script.webp" />
+<p>We need to do two operations to connect the nodes via code:</p>
+<ol class="arabic simple">
+<li><p>Get a reference to the Timer from the Sprite2D.</p></li>
+<li><p>Call the <code class="docutils literal notranslate"><span class="pre">connect()</span></code> method on the Timer's &quot;timeout&quot; signal.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To connect to a signal via code, you need to call the <code class="docutils literal notranslate"><span class="pre">connect()</span></code>
+method of the signal you want to listen to. In this case, we want to
+listen to the Timer's &quot;timeout&quot; signal.</p>
+</div>
+<p>We want to connect the signal when the scene is instantiated, and we can do that
+using the <a class="reference internal" href="../../classes/class_node.html#class-node-private-method-ready"><span class="std std-ref">Node._ready()</span></a> built-in function,
+which is called automatically by the engine when a node is fully instantiated.</p>
+<p>To get a reference to a node relative to the current one, we use the method
+<a class="reference internal" href="../../classes/class_node.html#class-node-method-get-node"><span class="std std-ref">Node.get_node()</span></a>. We can store the reference
+in a variable.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;Timer&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Timer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Timer&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">get_node()</span></code> looks at the Sprite2D's children and gets nodes by
+their name. For example, if you renamed the Timer node to &quot;BlinkingTimer&quot; in the
+editor, you would have to change the call to <code class="docutils literal notranslate"><span class="pre">get_node(&quot;BlinkingTimer&quot;)</span></code>.</p>
+<p>We can now connect the Timer to the Sprite2D in the <code class="docutils literal notranslate"><span class="pre">_ready()</span></code> function.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;Timer&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">timer</span><span class="o">.</span><span class="vi">timeout</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_timer_timeout</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Timer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Timer&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">timer</span><span class="p">.</span><span class="n">Timeout</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnTimerTimeout</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>The line reads like so: we connect the Timer's &quot;timeout&quot; signal to the node to
+which the script is attached. When the Timer emits <code class="docutils literal notranslate"><span class="pre">timeout</span></code>, we want to call
+the function <code class="docutils literal notranslate"><span class="pre">_on_timer_timeout()</span></code>, that we need to define. Let's add it at the
+bottom of our script and use it to toggle our sprite's visibility.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By convention, we name these callback methods in GDScript as
+&quot;_on_node_name_signal_name&quot; and in C# as &quot;OnNodeNameSignalName&quot;.
+Here, it'll be &quot;_on_timer_timeout&quot; for GDScript and OnTimerTimeout() for C#.</p>
+</div>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_timer_timeout</span><span class="p">():</span>
+<span class="w">    </span><span class="n">visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">visible</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnTimerTimeout</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">Visible</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">visible</span></code> property is a boolean that controls the visibility of our node.
+The line <code class="docutils literal notranslate"><span class="pre">visible</span> <span class="pre">=</span> <span class="pre">not</span> <span class="pre">visible</span></code> toggles the value. If <code class="docutils literal notranslate"><span class="pre">visible</span></code> is
+<code class="docutils literal notranslate"><span class="pre">true</span></code>, it becomes <code class="docutils literal notranslate"><span class="pre">false</span></code>, and vice-versa.</p>
+<p>If you run the Node2D scene now, you will see that the sprite blinks on and off, at one
+second intervals.</p>
+</section>
+<section id="complete-script">
+<h2>Complete script<a class="headerlink" href="#complete-script" title="Link to this heading"></a></h2>
+<p>That's it for our little moving and blinking Godot icon demo!
+Here is the complete <code class="docutils literal notranslate"><span class="pre">sprite_2d.gd</span></code> file for reference.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-6-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-6-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-6-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Sprite2D</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">400</span>
+<span class="k">var</span><span class="w"> </span><span class="n">angular_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">PI</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;Timer&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">timer</span><span class="o">.</span><span class="vi">timeout</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_timer_timeout</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="n">rotation</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">angular_speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="o">.</span><span class="vi">UP</span><span class="o">.</span><span class="nf">rotated</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">speed</span>
+<span class="w">    </span><span class="n">position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_button_pressed</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">set_process</span><span class="p">(</span><span class="ow">not</span><span class="w"> </span><span class="nf">is_processing</span><span class="p">())</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_timer_timeout</span><span class="p">():</span>
+<span class="w">    </span><span class="n">visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">visible</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-6-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-6-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MySprite2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sprite2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">400</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_angularSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Pi</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Timer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Timer&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">timer</span><span class="p">.</span><span class="n">Timeout</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnTimerTimeout</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Process</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Rotation</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">_angularSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector2</span><span class="p">.</span><span class="n">Up</span><span class="p">.</span><span class="n">Rotated</span><span class="p">(</span><span class="n">Rotation</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_speed</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// We also specified this function name in PascalCase in the editor&#39;s connection window.</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnButtonPressed</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SetProcess</span><span class="p">(</span><span class="o">!</span><span class="n">IsProcessing</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnTimerTimeout</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">Visible</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="custom-signals">
+<h2>Custom signals<a class="headerlink" href="#custom-signals" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section is a reference on how to define and use your own signals,
+and does not build upon the project created in previous lessons.</p>
+</div>
+<p>You can define custom signals in a script. Say, for example, that you want to
+show a game over screen when the player's health reaches zero. To do so, you
+could define a signal named &quot;died&quot; or &quot;health_depleted&quot; when their health
+reaches 0.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-7-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-7-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-7-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node2D</span>
+
+<span class="k">signal</span><span class="w"> </span><span class="n">health_depleted</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-7-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-7-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Signal]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">HealthDepletedEventHandler</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_health</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As signals represent events that just occurred, we generally use an
+action verb in the past tense in their names.</p>
+</div>
+<p>Your signals work the same way as built-in ones: they appear in the <span class="role-ui">Signals</span> tab and
+you can connect to them like any other.</p>
+<img alt="../../_images/signals_17_custom_signal.webp" src="../../_images/signals_17_custom_signal.webp" />
+<p>To emit a signal in your scripts, call <code class="docutils literal notranslate"><span class="pre">emit()</span></code> on the signal.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-8-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-8-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-8-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-8-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">take_damage</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+<span class="w">    </span><span class="n">health</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">amount</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">        </span><span class="n">health_depleted</span><span class="o">.</span><span class="nf">emit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-8-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-8-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">TakeDamage</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">_health</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">amount</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_health</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">EmitSignal</span><span class="p">(</span><span class="n">SignalName</span><span class="p">.</span><span class="n">HealthDepleted</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>A signal can optionally declare one or more arguments. Specify the argument
+names between parentheses:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-9-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-9-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-9-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-9-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-9-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-9-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node2D</span>
+
+<span class="k">signal</span><span class="w"> </span><span class="nf">health_changed</span><span class="p">(</span><span class="n">old_value</span><span class="p">,</span><span class="w"> </span><span class="n">new_value</span><span class="p">)</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-9-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-9-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Signal]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">HealthChangedEventHandler</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">oldValue</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">newValue</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_health</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The signal arguments show up in the editor's Signals dock, and Godot can use
+them to generate callback functions for you. However, you can still emit any
+number of arguments when you emit signals. So it's up to you to emit the
+correct values.</p>
+</div>
+<p>To emit values along with the signal, add them as extra arguments to the
+<code class="docutils literal notranslate"><span class="pre">emit()</span></code> function:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-10-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-10-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-10-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-10-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-10-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-10-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">take_damage</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">old_health</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">health</span>
+<span class="w">    </span><span class="n">health</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">amount</span>
+<span class="w">    </span><span class="n">health_changed</span><span class="o">.</span><span class="nf">emit</span><span class="p">(</span><span class="n">old_health</span><span class="p">,</span><span class="w"> </span><span class="n">health</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-10-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-10-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">TakeDamage</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">oldHealth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_health</span><span class="p">;</span>
+<span class="w">    </span><span class="n">_health</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">amount</span><span class="p">;</span>
+<span class="w">    </span><span class="n">EmitSignal</span><span class="p">(</span><span class="n">SignalName</span><span class="p">.</span><span class="n">HealthChanged</span><span class="p">,</span><span class="w"> </span><span class="n">oldHealth</span><span class="p">,</span><span class="w"> </span><span class="n">_health</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>Any node in Godot emits signals when something specific happens to them, like a
+button being pressed. Other nodes can connect to individual signals and react to
+selected events.</p>
+<p>Signals have many uses. With them, you can react to a node entering or exiting
+the game world, to a collision, to a character entering or leaving an area, to
+an element of the interface changing size, and much more.</p>
+<p>For example, an <a class="reference internal" href="../../classes/class_area2d.html#class-area2d"><span class="std std-ref">Area2D</span></a> representing a coin emits a
+<code class="docutils literal notranslate"><span class="pre">body_entered</span></code> signal whenever the player's physics body enters its collision
+shape, allowing you to know when the player collected it.</p>
+<p>In the next section, <a class="reference internal" href="../first_2d_game/index.html#doc-your-first-2d-game"><span class="std std-ref">Your first 2D game</span></a>, you'll create a complete 2D
+game and put everything you learned so far into practice.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scripting_player_input.html" class="btn btn-neutral float-left" title="Listening to player input" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../first_2d_game/index.html" class="btn btn-neutral float-right" title="Your first 2D game" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

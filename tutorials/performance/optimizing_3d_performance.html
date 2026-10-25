@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="optimization" name="keywords" />
+<meta property="og:title" content="Optimizing 3D performance" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/performance/optimizing_3d_performance.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Culling: Godot will automatically perform view frustum culling in order to prevent rendering objects that are outside the viewport. This works well for games that take place in a small area, howeve..." />
+<meta name="description" content="Culling: Godot will automatically perform view frustum culling in order to prevent rendering objects that are outside the viewport. This works well for games that take place in a small area, howeve..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Optimizing 3D performance &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Animating thousands of objects" href="vertex_animation/index.html" />
+    <link rel="prev" title="Reducing stutter from shader (pipeline) compilations" href="pipeline_compilations.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/performance/optimizing_3d_performance" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/performance/optimizing_3d_performance.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Performance</a></li>
+      <li class="breadcrumb-item active">Optimizing 3D performance</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/performance/optimizing_3d_performance.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="optimizing-3d-performance">
+<span id="doc-optimizing-3d-performance"></span><h1>Optimizing 3D performance<a class="headerlink" href="#optimizing-3d-performance" title="Link to this heading"></a></h1>
+<section id="culling">
+<h2>Culling<a class="headerlink" href="#culling" title="Link to this heading"></a></h2>
+<p>Godot will automatically perform view frustum culling in order to prevent
+rendering objects that are outside the viewport. This works well for games that
+take place in a small area, however things can quickly become problematic in
+larger levels.</p>
+<section id="occlusion-culling">
+<h3>Occlusion culling<a class="headerlink" href="#occlusion-culling" title="Link to this heading"></a></h3>
+<p>Walking around a town for example, you may only be able to see a few buildings
+in the street you are in, as well as the sky and a few birds flying overhead. As
+far as a naive renderer is concerned however, you can still see the entire town.
+It won't just render the buildings in front of you, it will render the street
+behind that, with the people on that street, the buildings behind that. You
+quickly end up in situations where you are attempting to render 10× or 100× more
+than what is visible.</p>
+<p>Things aren't quite as bad as they seem, because the Z-buffer usually allows the
+GPU to only fully shade the objects that are at the front. This is called <em>depth
+prepass</em> and is enabled by default in Godot when using the Forward+ or
+Compatibility rendering methods. However, unneeded objects are still reducing
+performance.</p>
+<p>One way we can potentially reduce the amount to be rendered is to <strong>take advantage
+of occlusion</strong>. Godot offers an approach to occlusion culling
+using occluder nodes. See <a class="reference internal" href="../3d/occlusion_culling.html#doc-occlusion-culling"><span class="std std-ref">Occlusion culling</span></a> for instructions on
+setting up occlusion culling in your scene.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In some cases, you may have to adapt your level design to add more occlusion
+opportunities. For example, you may have to add more walls to prevent the player
+from seeing too far away, which would decrease performance due to the lost
+opportunities for occlusion culling.</p>
+</div>
+</section>
+</section>
+<section id="transparent-objects">
+<h2>Transparent objects<a class="headerlink" href="#transparent-objects" title="Link to this heading"></a></h2>
+<p>Godot sorts objects by <a class="reference internal" href="../../classes/class_material.html#class-material"><span class="std std-ref">Material</span></a> and <a class="reference internal" href="../../classes/class_shader.html#class-shader"><span class="std std-ref">Shader</span></a> to improve performance. This, however, can not be done with
+transparent objects. Transparent objects are rendered from back to front to make
+blending with what is behind work. As a result,
+<strong>try to use as few transparent objects as possible</strong>. If an object has a
+small section with transparency, try to make that section a separate surface
+with its own material.</p>
+<p>For more information, see the <a class="reference internal" href="gpu_optimization.html#doc-gpu-optimization"><span class="std std-ref">GPU optimizations</span></a>
+doc.</p>
+</section>
+<section id="level-of-detail-lod">
+<h2>Level of detail (LOD)<a class="headerlink" href="#level-of-detail-lod" title="Link to this heading"></a></h2>
+<p>In some situations, particularly at a distance, it can be a good idea to
+<strong>replace complex geometry with simpler versions</strong>. The end user will probably
+not be able to see much difference. Consider looking at a large number of trees
+in the far distance. There are several strategies for replacing models at
+varying distance. You could use lower poly models, or use transparency to
+simulate more complex geometry.</p>
+<p>Godot 4 offers several ways to control level of detail:</p>
+<ul class="simple">
+<li><p>An automatic approach on mesh import using <a class="reference internal" href="../3d/mesh_lod.html#doc-mesh-lod"><span class="std std-ref">Mesh level of detail (LOD)</span></a>.</p></li>
+<li><p>A manual approach configured in the 3D node using <a class="reference internal" href="../3d/visibility_ranges.html#doc-visibility-ranges"><span class="std std-ref">Visibility ranges (HLOD)</span></a>.</p></li>
+<li><p><a class="reference internal" href="../3d/using_decals.html#doc-using-decals"><span class="std std-ref">Decals</span></a> and <a class="reference internal" href="../3d/lights_and_shadows.html#doc-lights-and-shadows"><span class="std std-ref">lights</span></a>
+can also benefit from level of detail using their respective
+<strong>Distance Fade</strong> properties.</p></li>
+</ul>
+<p>While they can be used independently, these approaches are most effective when
+used together. For example, you can set up visibility ranges to hide particle
+effects that are too far away from the player to notice. At the same time, you
+can rely on mesh LOD to make the particle effect's meshes rendered with less
+detail at a distance.</p>
+<p>Visibility ranges are also a good way to set up <em>impostors</em> for distant geometry
+(see below).</p>
+<section id="billboards-and-imposters">
+<h3>Billboards and imposters<a class="headerlink" href="#billboards-and-imposters" title="Link to this heading"></a></h3>
+<p>The simplest version of using transparency to deal with LOD is billboards. For
+example, you can use a single transparent quad to represent a tree at distance.
+This can be very cheap to render, unless of course, there are many trees in
+front of each other. In this case, transparency may start eating into fill rate
+(for more information on fill rate, see <a class="reference internal" href="gpu_optimization.html#doc-gpu-optimization"><span class="std std-ref">GPU optimization</span></a>).</p>
+<p>An alternative is to render not just one tree, but a number of trees together as
+a group. This can be especially effective if you can see an area but cannot
+physically approach it in a game.</p>
+<p>You can make imposters by pre-rendering views of an object at different angles.
+Or you can even go one step further, and periodically re-render a view of an
+object onto a texture to be used as an imposter. At a distance, you need to move
+the viewer a considerable distance for the angle of view to change
+significantly. This can be complex to get working, but may be worth it depending
+on the type of project you are making.</p>
+</section>
+<section id="use-automatic-instancing">
+<h3>Use automatic instancing<a class="headerlink" href="#use-automatic-instancing" title="Link to this heading"></a></h3>
+<p><em>This is only implemented in the Forward+ renderer, not Mobile or Compatibility.</em></p>
+<p>If you have many identical objects in your scene, you can use automatic
+instancing to reduce the number of draw calls. This automatically happens for
+MeshInstance3D nodes that use the same mesh and material: no manual setup is required.</p>
+<p>For automatic instancing to be effective, the material must be opaque or
+alpha-tested (alpha scissor or alpha hash). Alpha-blended or depth pre-pass
+materials are never instanced this way. Instead, you must use MultiMesh as
+described below.</p>
+</section>
+<section id="use-manual-instancing-multimesh">
+<h3>Use manual instancing (MultiMesh)<a class="headerlink" href="#use-manual-instancing-multimesh" title="Link to this heading"></a></h3>
+<p>If several identical objects have to be drawn in the same place or nearby, try
+using <a class="reference internal" href="../../classes/class_multimesh.html#class-multimesh"><span class="std std-ref">MultiMesh</span></a> instead. MultiMesh allows the drawing
+of many thousands of objects at very little performance cost, making it ideal
+for flocks, grass, particles, and anything else where you have thousands of
+identical objects.</p>
+<p>See also the <a class="reference internal" href="using_multimesh.html#doc-using-multimesh"><span class="std std-ref">Using MultiMesh</span></a> documentation.</p>
+</section>
+</section>
+<section id="bake-lighting">
+<h2>Bake lighting<a class="headerlink" href="#bake-lighting" title="Link to this heading"></a></h2>
+<p>Lighting objects is one of the most costly rendering operations. Realtime
+lighting, shadows (especially multiple lights), and
+<a class="reference internal" href="../3d/global_illumination/introduction_to_global_illumination.html#doc-introduction-to-global-illumination"><span class="std std-ref">global illumination</span></a> are especially
+expensive. They may simply be too much for lower power mobile devices to handle.</p>
+<p><strong>Consider using baked lighting</strong>, especially for mobile. This can look fantastic,
+but has the downside that it will not be dynamic. Sometimes, this is a tradeoff
+worth making.</p>
+<p>See <a class="reference internal" href="../3d/global_illumination/using_lightmap_gi.html#doc-using-lightmap-gi"><span class="std std-ref">Using Lightmap global illumination</span></a> for instructions on using baked lightmaps. For
+best performance, you should set lights' bake mode to <strong>Static</strong> as opposed to
+the default <strong>Dynamic</strong>, as this will skip real-time lighting on meshes that
+have baked lighting.</p>
+<p>The downside of lights with the <strong>Static</strong> bake mode is that they can't cast
+shadows onto meshes with baked lighting. This can make scenes with outdoor
+environments and dynamic objects look flat. A good balance between performance
+and quality is to keep <strong>Dynamic</strong> for the <a class="reference internal" href="../../classes/class_directionallight3d.html#class-directionallight3d"><span class="std std-ref">DirectionalLight3D</span></a> node,
+and use <strong>Static</strong> for most (if not all) omni and spot lights.</p>
+</section>
+<section id="animation-and-skinning">
+<h2>Animation and skinning<a class="headerlink" href="#animation-and-skinning" title="Link to this heading"></a></h2>
+<p>Animation and vertex animation such as skinning and morphing can be very
+expensive on some platforms. You may need to lower the polycount considerably
+for animated models, or limit the number of them on screen at any given time.
+You can also reduce the animation rate for distant or occluded meshes, or pause
+the animation entirely if the player is unlikely to notice the animation being
+stopped.</p>
+<p>The <a class="reference internal" href="../../classes/class_visibleonscreenenabler3d.html#class-visibleonscreenenabler3d"><span class="std std-ref">VisibleOnScreenEnabler3D</span></a> and <a class="reference internal" href="../../classes/class_visibleonscreennotifier3d.html#class-visibleonscreennotifier3d"><span class="std std-ref">VisibleOnScreenNotifier3D</span></a>
+nodes can be useful for this purpose.</p>
+</section>
+<section id="large-worlds">
+<h2>Large worlds<a class="headerlink" href="#large-worlds" title="Link to this heading"></a></h2>
+<p>If you are making large worlds, there are different considerations than what you
+may be familiar with from smaller games.</p>
+<p>Large worlds may need to be built in tiles that can be loaded on demand as you
+move around the world. This can prevent memory use from getting out of hand, and
+also limit the processing needed to the local area.</p>
+<p>There may also be rendering and physics glitches due to floating point error in
+large worlds. This can be resolved using <a class="reference internal" href="../physics/large_world_coordinates.html#doc-large-world-coordinates"><span class="std std-ref">Large world coordinates</span></a>.
+If using large world coordinates is not an option, you may be able to use techniques
+such as orienting the world around the player (rather than the other way
+around), or shifting the origin periodically to keep things centred around
+<code class="docutils literal notranslate"><span class="pre">Vector3(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pipeline_compilations.html" class="btn btn-neutral float-left" title="Reducing stutter from shader (pipeline) compilations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vertex_animation/index.html" class="btn btn-neutral float-right" title="Animating thousands of objects" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

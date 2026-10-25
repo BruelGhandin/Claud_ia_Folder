@@ -1,0 +1,1095 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Environment and post-processing" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/environment_and_post_processing.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Godot 4 provides a redesigned Environment resource, as well as a new post-processing system with many available effects right out of the box. Environment: The Environment resource stores all the in..." />
+<meta name="description" content="Godot 4 provides a redesigned Environment resource, as well as a new post-processing system with many available effects right out of the box. Environment: The Environment resource stores all the in..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Environment and post-processing &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Volumetric fog and fog volumes" href="volumetric_fog.html" />
+    <link rel="prev" title="Faking global illumination" href="global_illumination/faking_global_illumination.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/environment_and_post_processing" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/3d/environment_and_post_processing.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">3D</a></li>
+      <li class="breadcrumb-item active">Environment and post-processing</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/environment_and_post_processing.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="environment-and-post-processing">
+<span id="doc-environment-and-post-processing"></span><h1>Environment and post-processing<a class="headerlink" href="#environment-and-post-processing" title="Link to this heading"></a></h1>
+<p>Godot 4 provides a redesigned Environment resource, as well as a new
+post-processing system with many available effects right out of the box.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As of Godot 4, Environment <em>performance/quality</em> settings are defined in the
+project settings instead of in the Environment resource. This makes global
+adjustments easier, as you no longer have to tweak Environment resources
+individually to suit various hardware configurations.</p>
+<p>Note that most Environment performance/quality settings are only visible
+after enabling the <strong>Advanced</strong> toggle in the Project Settings.</p>
+</div>
+<section id="environment">
+<h2>Environment<a class="headerlink" href="#environment" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="../../classes/class_environment.html#class-environment"><span class="std std-ref">Environment</span></a> resource stores all the information required for
+controlling the 2D and 3D rendering environment. This includes the sky, ambient
+lighting, tone mapping, effects, and adjustments. By itself, it does nothing,
+but you can enable it by using it in one of the following locations, in order
+of priority:</p>
+<section id="camera3d-node-high-priority">
+<h3>Camera3D node (high priority)<a class="headerlink" href="#camera3d-node-high-priority" title="Link to this heading"></a></h3>
+<p>An Environment can be set to a Camera3D node. It will have priority over any
+other setting.</p>
+<img alt="../../_images/environment_camera.webp" src="../../_images/environment_camera.webp" />
+<p>This is mostly useful when you want to override an existing environment,
+but in general it's a better idea to use the option below.</p>
+</section>
+<section id="worldenvironment-node-medium-priority-recommended">
+<h3>WorldEnvironment node (medium priority, recommended)<a class="headerlink" href="#worldenvironment-node-medium-priority-recommended" title="Link to this heading"></a></h3>
+<p>The WorldEnvironment node can be added to any scene, but only one can exist per
+active scene tree. Adding more than one will result in a warning.</p>
+<img alt="../../_images/environment_world.webp" src="../../_images/environment_world.webp" />
+<p>Any Environment added has higher priority than the default Environment
+(explained below). This means it can be overridden on a per-scene basis,
+which makes it quite useful.</p>
+</section>
+<section id="preview-environment-and-sun-low-priority">
+<h3>Preview environment and sun (low priority)<a class="headerlink" href="#preview-environment-and-sun-low-priority" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since Godot 4, the preview environment and sun system replace the
+<code class="docutils literal notranslate"><span class="pre">default_env.tres</span></code> file that was used in Godot 3 projects.</p>
+</div>
+<p>If no WorldEnvironment node or DirectionalLight3D node is present in the current
+scene, the editor will display a preview environment and sun instead. This can
+be disabled using the buttons at the top of the 3D editor:</p>
+<img alt="../../_images/environment_preview_sun_sky_toggle.webp" src="../../_images/environment_preview_sun_sky_toggle.webp" />
+<p>Clicking on the 3 vertical dots on the right will display a dialog which allows
+you to customize the appearance of the preview environment:</p>
+<img alt="../../_images/environment_preview_sun_sky_dialog.webp" src="../../_images/environment_preview_sun_sky_dialog.webp" />
+<p><strong>The preview sun and sky is only visible in the editor, not in the running
+project.</strong> Using the buttons at the bottom of the dialog, you can add the
+preview sun and sky into the scene as nodes.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you hold <kbd class="kbd docutils literal notranslate">Shift</kbd> while clicking <strong>Add Sun to Scene</strong> or <strong>Add
+Environment to Scene</strong> in the preview environment editor, this will add both
+a preview sun and environment to the current scene (as if you clicked both
+buttons separately). Use this to speed up project setup and prototyping.</p>
+</div>
+</section>
+</section>
+<section id="camera-attributes">
+<h2>Camera attributes<a class="headerlink" href="#camera-attributes" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Godot 4, exposure and depth of field information was split from the
+Environment resource into a separate CameraAttributes resource. This allows
+adjusting those properties independently of other Environment settings more
+easily.</p>
+</div>
+<p>The <a class="reference internal" href="../../classes/class_cameraattributes.html#class-cameraattributes"><span class="std std-ref">CameraAttributes</span></a> resource stores exposure and depth of field
+information. It also allows enabling automatic exposure adjustments depending on
+scene brightness.</p>
+<p>There are two kinds of CameraAttribute resources available:</p>
+<ul class="simple">
+<li><p><strong>CameraAttributesPractical:</strong> Features are exposed using arbitrary units,
+which are easier to reason about for most game use cases.</p></li>
+<li><p><strong>CameraAttributesPhysical:</strong> Features are exposed using real world units,
+similar to a digital camera. For example, field of view is set using a focal
+length in millimeters instead of a value in degrees. Recommended when physical
+accuracy is important, such as for photorealistic rendering.</p></li>
+</ul>
+<p>Both CameraAttribute resource types allow you to use the same features, but they
+are configured differently. If you don't know which one to choose, use
+<strong>CameraAttributesPractical</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using a <a class="reference internal" href="../../classes/class_cameraattributesphysical.html#class-cameraattributesphysical"><span class="std std-ref">CameraAttributesPhysical</span></a> on a Camera3D node will lock
+out FOV and aspect adjustments in that Camera3D, as field of view is
+adjusted in the CameraAttributesPhysical resource instead. If used in a
+WorldEnvironment, the CameraAttributesPhysical will not override any
+Camera3D in the scene.</p>
+</div>
+<p>A CameraAttributes resource can be added to a Camera3D or a WorldEnvironment
+node. When the current camera has a CameraAttributes set, it will <em>override</em> the
+one set in WorldEnvironment (if any).</p>
+<p>In most situations, setting the CameraAttributes resource on the Camera3D node
+instead of the WorldEnvironment is recommended. Unlike WorldEnvironment,
+assigning the CameraAttributes resource to the Camera3D node prevents depth of
+field from displaying in the 3D editor viewport, unless the camera is being
+previewed.</p>
+</section>
+<section id="environment-options">
+<h2>Environment options<a class="headerlink" href="#environment-options" title="Link to this heading"></a></h2>
+<p>The following is a detailed description of all environment options and how
+they are intended to be used.</p>
+<section id="background">
+<h3>Background<a class="headerlink" href="#background" title="Link to this heading"></a></h3>
+<p>The Background section contains settings on how to fill the background (parts of
+the screen where objects were not drawn). The background not only serves the
+purpose of displaying an image or color. By default, it also affects how objects
+are affected by ambient and reflected light. This is called image-based lighting
+(IBL).</p>
+<p>As a result, the background sky may greatly impact your scene's overall
+appearance, even if the sky is never directly visible on screen. This should be
+taken into account when tweaking lighting in your scene.</p>
+<img alt="../../_images/environment_background1.webp" src="../../_images/environment_background1.webp" />
+<p>There are several background modes available:</p>
+<ul class="simple">
+<li><p><strong>Clear Color</strong> uses the default clear color defined in the project settings.
+The background will be a constant color.</p></li>
+<li><p><strong>Custom Color</strong> is like Clear Color, but with a custom color value.</p></li>
+<li><p><strong>Sky</strong> lets you define a background sky material (see below). By default,
+objects in the scene will reflect this sky material and absorb ambient light
+from it.</p></li>
+<li><p><strong>Canvas</strong> displays the 2D scene as a background to the 3D scene. This can be used
+to make environment effects visible on 2D rendering, such as
+<a class="reference internal" href="#doc-environment-and-post-processing-using-glow-in-2d"><span class="std std-ref">glow in 2D</span></a>.</p></li>
+<li><p><strong>Keep</strong> does not draw any sky, keeping what was present on previous frames
+instead. This improves performance in purely indoor scenes, but creates a
+&quot;hall of mirrors&quot; visual glitch if the sky is visible at any time.</p></li>
+<li><p><strong>Camera Feed</strong> displays a <a class="reference internal" href="../../classes/class_camerafeed.html#class-camerafeed"><span class="std std-ref">CameraFeed</span></a> from a physical camera as the
+background, useful for AR games on mobile devices.</p></li>
+</ul>
+</section>
+<section id="sky-materials">
+<h3>Sky materials<a class="headerlink" href="#sky-materials" title="Link to this heading"></a></h3>
+<p>When using the <strong>Sky</strong> background mode (or the ambient/reflected light mode is
+set to <strong>Sky</strong>), a Sky subresource becomes available to edit in the Environment
+resource. Editing this subresource allows you to create a SkyMaterial resource
+within the Sky.</p>
+<p>There are 3 built-in sky materials to choose from:</p>
+<ul class="simple">
+<li><p><strong>PanoramaSkyMaterial:</strong> Use a 360 degree panorama sky image (2:1 aspect ratio
+recommended). To benefit from high dynamic range, the panorama image must be
+in an HDR-compatible format such as <code class="docutils literal notranslate"><span class="pre">.hdr</span></code> or <code class="docutils literal notranslate"><span class="pre">.exr</span></code> rather than a
+standard dynamic range format like <code class="docutils literal notranslate"><span class="pre">.png</span></code> or <code class="docutils literal notranslate"><span class="pre">.jpg</span></code>.</p></li>
+<li><p><strong>ProceduralSkyMaterial:</strong> Use a procedurally generated sky with adjustable
+ground, sun, sky and horizon colors. This is the type of sky used in the
+editor preview. The sun's position is automatically derived from the first 4
+DirectionalLight3D nodes present in the scene. There can be up to 4 suns at a
+given time.</p></li>
+<li><p><strong>PhysicalSkyMaterial:</strong> Use a physically-based procedural sky with adjustable
+scattering parameters. The sun's position is automatically derived from the
+first DirectionalLight3D node present in the scene. PhysicalSkyMaterial is
+slightly more expensive to render compared to ProceduralSkyMaterial. There can
+be up to 1 sun at a given time.</p></li>
+</ul>
+<p>Panorama sky images are sometimes called HDRIs (High Dynamic Range Images).
+You can find freely licensed HDRIs on <a class="reference external" href="https://polyhaven.com/hdris">Poly Haven</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>HDR PanoramaSkyMaterial textures with very bright spots (such as real life
+photos with the sun visible) may result in visible sparkles on ambient and
+specular reflections. This is caused by the texture's peak exposure being
+too high.</p>
+<p>To resolve this, select the panorama texture in the FileSystem dock, go to
+the Import dock, enable <strong>HDR Clamp Exposure</strong> then click <strong>Reimport</strong>.</p>
+</div>
+<p>If you need a custom sky material (e.g. for procedural clouds), you can
+create a custom <a class="reference internal" href="../shaders/shader_reference/sky_shader.html#doc-sky-shader"><span class="std std-ref">sky shader</span></a>.</p>
+</section>
+<section id="ambient-light">
+<h3>Ambient light<a class="headerlink" href="#ambient-light" title="Link to this heading"></a></h3>
+<p>Ambient light (as defined here) is a type of light that affects every piece of
+geometry with the same intensity. It is global and independent of lights that
+might be added to the scene. Ambient light is one of the two components of
+image-based lighting. Unlike reflected light, ambient light does not vary
+depending on the camera's position and viewing angle.</p>
+<p>There are several types of ambient light to choose from:</p>
+<ul class="simple">
+<li><p><strong>Background:</strong> Source ambient light from the background, such as the sky,
+custom color or clear color (default). Ambient light intensity will vary
+depending on the sky image's contents, which can result in more visually
+appealing ambient lighting. A sky must be set as background for this mode to
+be visible.</p></li>
+<li><p><strong>Disabled:</strong> Do not use any ambient light. Useful for purely indoor scenes.</p></li>
+<li><p><strong>Color:</strong> Use a constant color for ambient light, ignoring the background
+sky. Ambient light intensity will be the same on all sides, which may result
+in the scene's lighting looking more flat. Useful for indoor scenes where
+pitch black shadows may be too dark, or to maximize performance on low-end
+devices.</p></li>
+<li><p><strong>Sky:</strong> Source ambient light from a specified sky, even if the background is
+set to a mode other than <strong>Sky</strong>. If the background mode is already <strong>Sky</strong>,
+this mode behaves identically to <strong>Background</strong>.</p></li>
+</ul>
+<p>When the ambient light mode is set to Sky or Background (and background is set
+to Sky), it's possible to blend between the ambient color and sky using the
+<strong>Sky Contribution</strong> property. This value is set to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> by default, which
+means that only the ambient sky is used. The ambient color is ignored unless
+<strong>Sky Contribution</strong> is decreased below <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p>
+<p>Here is a comparison of how different ambient light affects a scene:</p>
+<img alt="../../_images/environment_ambient2.webp" src="../../_images/environment_ambient2.webp" />
+<p>Finally, there is an <strong>Energy</strong> setting which is a multiplier. It's useful when
+working with HDR.</p>
+<p>In general, you should only rely on ambient light alone for simple scenes or
+large exteriors. You may also do so to boost performance. Ambient light is fast
+to render, but it doesn't provide the best lighting quality. It's better to
+generate ambient light from <a class="reference internal" href="global_illumination/reflection_probes.html#doc-reflection-probes"><span class="std std-ref">ReflectionProbe</span></a>,
+<a class="reference internal" href="global_illumination/using_voxel_gi.html#doc-using-voxel-gi"><span class="std std-ref">VoxelGI</span></a> or <a class="reference internal" href="global_illumination/using_sdfgi.html#doc-using-sdfgi"><span class="std std-ref">SDFGI</span></a>, as these
+will simulate how indirect light propagates more accurately. Below is a comparison,
+in terms of quality, between using a flat ambient color and a VoxelGI:</p>
+<img alt="../../_images/environment_ambient_comparison.webp" src="../../_images/environment_ambient_comparison.webp" />
+<p>Using one of the methods described above will replace constant ambient
+lighting with ambient lighting from the probes.</p>
+</section>
+<section id="reflected-light">
+<h3>Reflected light<a class="headerlink" href="#reflected-light" title="Link to this heading"></a></h3>
+<p>Reflected light (also called specular light) is the other of the two components
+of image-based lighting.</p>
+<p>Reflected light can be set to one of 3 modes:</p>
+<ul class="simple">
+<li><p><strong>Background:</strong> Reflect from the background, such as the sky, custom color or
+clear color (default).</p></li>
+<li><p><strong>Disabled:</strong> Do not reflect any light from the environment. Useful for purely
+indoor scenes, or to maximize performance on low-end devices.</p></li>
+<li><p><strong>Sky:</strong> Reflect from the background sky, even if the background is set to a
+mode other than <strong>Sky</strong>. If the background mode is already <strong>Sky</strong>, this mode
+behaves identically to <strong>Background</strong>.</p></li>
+</ul>
+</section>
+<section id="tonemap">
+<h3>Tonemap<a class="headerlink" href="#tonemap" title="Link to this heading"></a></h3>
+<p>Tonemap selects the tonemapping algorithm that will be applied to the scene, from a
+list of standard algorithms used in the film and game industries. Tonemapping modes
+other than <strong>Linear</strong> are used to make light and dark areas more homogeneous,
+while also avoiding clipping of bright highlights. Each algorithm has a different
+performance characteristic that should be considered when choosing your tonemapper.</p>
+<p>The tone mapping options are:</p>
+<ul class="simple">
+<li><p><strong>Mode:</strong> The tonemapping mode to use.</p>
+<ul>
+<li><p><strong>Linear:</strong> Does not modify color data, resulting in a linear tonemapping
+curve which unnaturally clips bright values, causing bright lighting to
+look blown out. The simplest and fastest tonemapper.</p></li>
+<li><p><strong>Reinhard:</strong> A simple tonemapping curve that rolls off bright values to
+prevent clipping. This results in an image that can appear dull and low
+contrast. Slower than Linear. When <strong>White</strong> is left at the default
+value of <code class="docutils literal notranslate"><span class="pre">1.0</span></code>, Reinhard produces an identical image to Linear.</p></li>
+<li><p><strong>Filmic:</strong> Uses a film-like tonemapping curve to prevent clipping of
+bright values and provide better contrast than Reinhard. Slightly slower
+than Reinhard.</p></li>
+<li><p><strong>ACES:</strong> Uses a high-contrast film-like tonemapping curve and desaturates
+bright values for a more realistic appearance. Slightly slower than Filmic.</p></li>
+<li><p><strong>AgX:</strong> Uses a film-like tonemapping curve and desaturates bright values
+for a more realistic appearance. Better than other tonemappers at
+maintaining the hue of colors as they become brighter. The slowest
+tonemapping option.</p></li>
+</ul>
+</li>
+<li><p><strong>Exposure:</strong> Adjusts the brightness of values before they are provided to
+the tonemapper. Higher <strong>Exposure</strong> values result in a brighter image.
+Values provided to the tonemapper will also be multiplied by <code class="docutils literal notranslate"><span class="pre">2.0</span></code>
+and <code class="docutils literal notranslate"><span class="pre">1.8</span></code> for <strong>Filmic</strong> and <strong>ACES</strong> respectively to produce a similar
+apparent brightness as Linear.</p></li>
+<li><p><strong>White:</strong> The white reference value for tonemapping, which indicates where
+bright white is located in the scale of values provided to the tonemapper.
+For photorealistic lighting, recommended values are between <code class="docutils literal notranslate"><span class="pre">6.0</span></code> and
+<code class="docutils literal notranslate"><span class="pre">8.0</span></code>. Higher values result in less blown out highlights, but may make the
+scene appear lower contrast. <strong>White</strong> is not available when using
+<strong>Linear</strong>. If you're using AgX, the mobile renderer, and HDR 2D is disabled,
+then the value set here will be ignored, and a value of <code class="docutils literal notranslate"><span class="pre">2.0</span></code> will be used
+instead.</p></li>
+<li><p><strong>AGX Contrast:</strong> Only available when using AgX. Increasing this makes dark values
+darker, and bright values brighter. It creates better results than the contrast
+option in the adjustment section at no additional performance cost.</p></li>
+</ul>
+</section>
+</section>
+<section id="mid-and-post-processing-effects">
+<h2>Mid- and post-processing effects<a class="headerlink" href="#mid-and-post-processing-effects" title="Link to this heading"></a></h2>
+<p>The Environment resource supports many popular mid- and post-processing effects.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Screen-space effects such as <abbr title="Screen-Space Reflections">SSR</abbr>,
+<abbr title="Screen-Space Ambient Occlusion">SSAO</abbr>,
+<abbr title="Screen-Space Indirect Lighting">SSIL</abbr> and glow do not operate on
+geometry that is located outside the camera view or is occluded by other
+opaque geometry. Consider this when tweaking their settings to avoid
+distracting changes during gameplay.</p>
+</div>
+<section id="screen-space-reflections-ssr">
+<h3>Screen-Space Reflections (SSR)<a class="headerlink" href="#screen-space-reflections-ssr" title="Link to this heading"></a></h3>
+<p><em>This feature is only available when using the Forward+ renderer, not
+Mobile or Compatibility.</em></p>
+<p>While Godot supports several sources of reflection data such as
+<a class="reference internal" href="global_illumination/reflection_probes.html#doc-reflection-probes"><span class="std std-ref">Reflection probes</span></a>, they may not provide enough detail for all
+situations. Scenarios where screen-space reflections make the most sense are
+when objects are in contact with each other (object over floor, over a table,
+floating on water, etc).</p>
+<img alt="../../_images/environment_ssr.webp" src="../../_images/environment_ssr.webp" />
+<p>On top of providing more detail, screen-space reflections also work in real-time
+(while other types of reflections are usually precomputed). This can be used to
+make characters, cars, etc. reflect on surrounding surfaces when moving around.</p>
+<p>Screen-space reflections can be used at the same time as other reflection
+sources to benefit from detailed reflections when possible, while having a
+fallback when screen-space reflections cannot be used (for example, to reflect
+off-screen objects).</p>
+<p>A few user-controlled parameters are available to better tweak the technique:</p>
+<ul class="simple">
+<li><p><strong>Max Steps:</strong> Determines the maximum length of the reflection. The bigger this
+number, the more costly it is to compute.</p></li>
+<li><p><strong>Fade In:</strong> Allows adjusting the fade-in curve, which is useful to make the
+contact area softer.</p></li>
+<li><p><strong>Fade Out:</strong> Allows adjusting the fade-out curve, so the step limit fades out
+softly.</p></li>
+<li><p><strong>Depth Tolerance:</strong> Can be used to allow screen-space rays to pass behind
+objects. The rays will treat each object as if it has this depth in
+determining if it can pass behind the object. Higher values will make
+screen-space reflections exhibit fewer &quot;breakups&quot;, at the cost of some objects
+creating physically incorrect reflections.</p></li>
+</ul>
+<p>Additionally, you can adjust the quality of SSR in the project settings
+by toggling <strong>Rendering &gt; Environment &gt; Screen Space Reflection &gt; Half Size</strong>.
+By default, screen-space reflections are rendered at half resolution for
+performance reasons. Disabling this setting will make the effect render at
+full resolution, which improves quality at the cost of increased GPU utilization.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Keep in mind that screen-space reflections only work for reflecting opaque
+geometry. Transparent materials won't be reflected, as they don't write to the depth buffer.
+This also applies to shaders that use <code class="docutils literal notranslate"><span class="pre">hint_screen_texture</span></code> or <code class="docutils literal notranslate"><span class="pre">hint_depth_texture</span></code>
+uniforms.</p>
+</div>
+</section>
+<section id="screen-space-ambient-occlusion-ssao">
+<h3>Screen-Space Ambient Occlusion (SSAO)<a class="headerlink" href="#screen-space-ambient-occlusion-ssao" title="Link to this heading"></a></h3>
+<p><em>This feature is only available when using the Forward+ and Compatibility renderers,
+not Mobile.</em></p>
+<p>As mentioned in the <strong>Ambient</strong> section, areas where light from light nodes
+does not reach (either because it's outside the radius or shadowed) are lit
+with ambient light. Godot can simulate this using VoxelGI, ReflectionProbe,
+the Sky, or a constant ambient color. The problem, however, is that all the
+methods proposed previously act more on a larger scale (large regions) than at the
+smaller geometry level.</p>
+<p>Constant ambient color and Sky are the same everywhere, while GI and
+Reflection probes have more local detail, but not enough to simulate situations
+where light is not able to fill inside hollow or concave features.</p>
+<p>This can be simulated with Screen Space Ambient Occlusion. As you can see in the
+image below, its purpose is to make sure concave areas are darker, simulating
+a narrower path for the light to enter:</p>
+<img alt="../../_images/environment_ssao.webp" src="../../_images/environment_ssao.webp" />
+<p>It is a common mistake to enable this effect, turn on a light, and not be able to
+appreciate it. This is because <abbr title="Screen-Space Ambient Occlusion">SSAO</abbr>
+only acts on <em>ambient</em> light. It does not affect direct light.</p>
+<p>This is why, in the image above, the effect is less noticeable under the direct
+light (on the left). If you want to force
+<abbr title="Screen-Space Ambient Occlusion">SSAO</abbr> to work with direct light too,
+use the <strong>Light Affect</strong> parameter. Even though this is not physically correct,
+some artists like how it looks.</p>
+<p><abbr title="Screen-Space Ambient Occlusion">SSAO</abbr> looks best when combined with a
+real source of indirect light, like VoxelGI:</p>
+<img alt="../../_images/environment_ssao2.webp" src="../../_images/environment_ssao2.webp" />
+<p>Tweaking <abbr title="Screen-Space Ambient Occlusion">SSAO</abbr> is possible with several
+parameters:</p>
+<img alt="../../_images/environment_ssao_parameters.webp" src="../../_images/environment_ssao_parameters.webp" />
+<ul class="simple">
+<li><p><strong>Radius:</strong> The distance at which objects can occlude each other when
+calculating screen-space ambient occlusion. Higher values will result in
+occlusion over a greater distance at the cost of performance and quality.</p></li>
+<li><p><strong>Intensity:</strong> The primary screen-space ambient occlusion intensity. Acts as a
+multiplier for the screen-space ambient occlusion effect. A higher value
+results in darker occlusion.
+Since <abbr title="Screen-Space Ambient Occlusion">SSAO</abbr> is a screen-space effect,
+it's recommended to remain conservative with this value.
+<abbr title="Screen-Space Ambient Occlusion">SSAO</abbr> that is too strong can be
+distracting during gameplay.</p></li>
+<li><p><strong>Power:</strong> The distribution of occlusion. A higher value results in darker
+occlusion, similar to <strong>Intensity</strong>, but with a sharper falloff.</p></li>
+<li><p><strong>Detail:</strong> Sets the strength of the additional level of detail for the
+screen-space ambient occlusion effect. A high value makes the detail pass more
+prominent, but it may contribute to aliasing in your final image.</p></li>
+<li><p><strong>Horizon:</strong> The threshold for considering whether a given point on a surface
+is occluded or not represented as an angle from the horizon mapped into the
+0.0-1.0 range. A value of 1.0 results in no occlusion.</p></li>
+<li><p><strong>Sharpness:</strong> The amount that the screen-space ambient occlusion effect is
+allowed to blur over the edges of objects. Setting too high will result in
+aliasing around the edges of objects. Setting too low will make object edges
+appear blurry.</p></li>
+<li><p><strong>Light Affect:</strong> The screen-space ambient occlusion intensity in direct
+light. In real life, ambient occlusion only applies to indirect light, which
+means its effects can't be seen in direct light. Values higher than 0 will
+make the <abbr title="Screen-Space Ambient Occlusion">SSAO</abbr> effect visible in
+direct light. Values above <code class="docutils literal notranslate"><span class="pre">0.0</span></code> are not physically accurate, but some
+artists prefer this effect.</p></li>
+<li><p><strong>AO Channel Affect</strong> The screen-space ambient occlusion intensity on
+materials that have an AO texture defined. Values higher than <code class="docutils literal notranslate"><span class="pre">0.0</span></code> will
+make the SSAO effect visible in areas darkened by AO textures.</p></li>
+</ul>
+<p>Additionally, you can adjust the quality of SSAO in the project settings'
+<strong>Rendering &gt; Environment &gt; SSAO</strong> section:</p>
+<ul class="simple">
+<li><p><strong>Quality:</strong> Sets the quality of the screen-space ambient occlusion effect.
+Higher values take more samples and so will result in better quality, at the
+cost of performance. Setting this to Ultra will use the <strong>Adaptive Target</strong> setting
+(see below).</p></li>
+<li><p><strong>Half Size:</strong> If <code class="docutils literal notranslate"><span class="pre">true</span></code>, screen-space ambient occlusion will be rendered at
+half size and then upscaled before being added to the scene. This is
+significantly faster but may miss small details. If <code class="docutils literal notranslate"><span class="pre">false</span></code>, screen-space
+ambient occlusion will be rendered at full size.</p></li>
+<li><p><strong>Adaptive Target:</strong> Quality target to use when <strong>Quality</strong> is set to
+<strong>Ultra</strong>. A value of <code class="docutils literal notranslate"><span class="pre">0.0</span></code> provides a quality and speed similar to Medium
+while a value of <code class="docutils literal notranslate"><span class="pre">1.0</span></code> provides much higher quality than any of the other
+settings at the cost of performance.</p></li>
+<li><p><strong>Blur Passes:</strong> Number of blur passes to use when computing screen-space
+ambient occlusion. A higher number will result in a smoother look, but will be
+slower to compute and will have less high-frequency detail.</p></li>
+<li><p><strong>Fadeout From:</strong> Distance at which the screen-space ambient occlusion effect
+starts to fade out. Use this hide ambient occlusion from far away.</p></li>
+<li><p><strong>Fadeout To:</strong> Distance at which the screen-space ambient occlusion is fully
+faded out. Use this hide ambient occlusion from far away.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since Godot 4.6, a simplified version of SSAO is available in the Compatibility
+renderer. This implementation has a different look, but should perform
+significantly better on low-end devices compared to SSAO in Forward+.</p>
+<p>When using the Compatibility renderer, only the <strong>Radius</strong> and <strong>Intensity</strong>
+parameters can be adjusted.</p>
+</div>
+</section>
+<section id="screen-space-indirect-lighting-ssil">
+<span id="doc-environment-and-post-processing-ssil"></span><h3>Screen-Space Indirect Lighting (SSIL)<a class="headerlink" href="#screen-space-indirect-lighting-ssil" title="Link to this heading"></a></h3>
+<p><em>This feature is only available when using the Forward+ renderer, not
+Mobile or Compatibility.</em></p>
+<p><abbr title="Screen-Space Indirect Lighting">SSIL</abbr> provides indirect lighting for
+small details or dynamic geometry that other global illumination techniques
+cannot cover. This applies to bounced diffuse lighting, but also emissive
+materials. When <abbr title="Screen-Space Indirect Lighting">SSIL</abbr> is enabled on its
+own, the effect may not be that noticeable, which is intended.</p>
+<p>Instead, <abbr title="Screen-Space Indirect Lighting">SSIL</abbr> is meant to be used as a
+<em>complement</em> to other global illumination techniques such as VoxelGI, SDFGI and
+LightmapGI. <abbr title="Screen-Space Indirect Lighting">SSIL</abbr> also provides
+a subtle ambient occlusion effect, similar to SSAO, but with less detail.</p>
+<p>This feature only provides indirect lighting. It is not a full global illumination
+solution. This makes it different from screen-space global illumination (SSGI)
+offered by other 3D engines. <abbr title="Screen-Space Indirect Lighting">SSIL</abbr>
+can be combined with <abbr title="Screen-Space Reflections">SSR</abbr> and/or
+<abbr title="Screen-Space Ambient Occlusion">SSAO</abbr> for greater visual quality
+(at the cost of performance).</p>
+<p>Tweaking <abbr title="Screen-Space Indirect Lighting">SSIL</abbr> is possible with several parameters:</p>
+<ul class="simple">
+<li><p><strong>Radius:</strong> The distance that bounced lighting can travel when using the
+screen space indirect lighting effect. A larger value will result in light
+bouncing further in a scene, but may result in under-sampling artifacts which
+look like long spikes surrounding light sources.</p></li>
+<li><p><strong>Intensity:</strong> The brightness multiplier for the screen-space indirect
+lighting effect. A higher value will result in brighter light.</p></li>
+<li><p><strong>Sharpness:</strong> The amount that the screen-space indirect lighting effect is
+allowed to blur over the edges of objects. Setting too high will result in
+aliasing around the edges of objects. Setting too low will make object edges
+appear blurry.</p></li>
+<li><p><strong>Normal Rejection:</strong> Amount of normal rejection used when calculating
+screen-space indirect lighting. Normal rejection uses the normal of a given
+sample point to reject samples that are facing away from the current pixel.
+Normal rejection is necessary to avoid light leaking when only one side of an
+object is illuminated. However, normal rejection can be disabled if light
+leaking is desirable, such as when the scene mostly contains emissive objects
+that emit light from faces that cannot be seen from the camera.</p></li>
+</ul>
+<p>Additionally, you can adjust the quality of SSIL in the project settings'
+<strong>Rendering &gt; Environment &gt; SSIL</strong> section:</p>
+<ul class="simple">
+<li><p><strong>Quality:</strong> Sets the quality of the screen-space indirect lighting effect.
+Higher values take more samples and so will result in better quality, at the
+cost of performance. Setting this to Ultra will use the <strong>Adaptive Target</strong> setting
+(see below).</p></li>
+<li><p><strong>Half Size:</strong> If <code class="docutils literal notranslate"><span class="pre">true</span></code>, screen-space indirect lighting will be rendered at
+half size and then upscaled before being added to the scene. This is
+significantly faster but may miss small details. If <code class="docutils literal notranslate"><span class="pre">false</span></code>, screen-space
+indirect lighting will be rendered at full size.</p></li>
+<li><p><strong>Adaptive Target:</strong> Quality target to use when <strong>Quality</strong> is set to
+<strong>Ultra</strong>. A value of <code class="docutils literal notranslate"><span class="pre">0.0</span></code> provides a quality and speed similar to Medium
+while a value of <code class="docutils literal notranslate"><span class="pre">1.0</span></code> provides much higher quality than any of the other
+settings at the cost of performance. When using the adaptive target, the
+performance cost scales with the complexity of the scene.</p></li>
+<li><p><strong>Blur Passes:</strong> Number of blur passes to use when computing screen-space
+indirect lighting. A higher number will result in a smoother look, but will be
+slower to compute and will have less high-frequency detail.</p></li>
+<li><p><strong>Fadeout From:</strong> Distance at which the screen-space indirect lighting effect
+starts to fade out. Use this to hide screen-space indirect lighting from far
+away.</p></li>
+<li><p><strong>Fadeout To:</strong> Distance at which the screen-space indirect lighting is fully
+faded out. Use this to hide screen-space indirect lighting from far away.</p></li>
+</ul>
+<img alt="../../_images/environment_ssil.webp" src="../../_images/environment_ssil.webp" />
+</section>
+<section id="signed-distance-field-global-illumination-sdfgi">
+<h3>Signed Distance Field Global Illumination (SDFGI)<a class="headerlink" href="#signed-distance-field-global-illumination-sdfgi" title="Link to this heading"></a></h3>
+<p><em>This feature is only available when using the Forward+ renderer, not
+Mobile or Compatibility.</em></p>
+<p>Signed distance field global illumination (SDFGI) is a form of real-time global
+illumination. It is not a screen-space effect, which means it can provide global
+illumination for off-screen elements (unlike <abbr title="Screen-Space Indirect Lighting">SSIL</abbr>).</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="global_illumination/using_sdfgi.html#doc-using-sdfgi"><span class="std std-ref">Signed distance field global illumination (SDFGI)</span></a> for instructions on setting up this global
+illumination technique.</p>
+</div>
+<img alt="../../_images/environment_sdfgi.webp" src="../../_images/environment_sdfgi.webp" />
+</section>
+<section id="glow">
+<span id="doc-environment-and-post-processing-glow"></span><h3>Glow<a class="headerlink" href="#glow" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using the Compatibility rendering method, glow uses a different
+implementation with some properties being unavailable and hidden from the
+inspector: <strong>Levels</strong>, <strong>Normalized</strong>, <strong>Strength</strong>, <strong>Blend Mode</strong>,
+<strong>Mix</strong>, <strong>Map</strong>, and <strong>Map Strength</strong>.</p>
+<p>This implementation is optimized to run on low-end devices and is less
+flexible as a result.</p>
+</div>
+<p>In photography and film, when light amount exceeds the maximum <em>luminance</em>
+(brightness) supported by the media, it generally bleeds outwards to darker
+regions of the image. This is simulated in Godot with the <strong>Glow</strong> effect.</p>
+<img alt="../../_images/environment_glow1.webp" src="../../_images/environment_glow1.webp" />
+<p>By default, even if the effect is enabled, it will be weak or invisible. One of
+two conditions need to happen for it to actually show:</p>
+<ul class="simple">
+<li><ol class="arabic simple">
+<li><p>The light in a pixel surpasses the <strong>HDR Threshold</strong> (where 0 is all light
+surpasses it, and 1.0 is light over the tonemapper <strong>White</strong> value).
+Normally, this value is expected to be at 1.0, but it can be lowered to
+allow more light to bleed. There is also an extra parameter, <strong>HDR Scale</strong>,
+that allows scaling (making brighter or darker) the light surpassing the
+threshold.</p></li>
+</ol>
+</li>
+</ul>
+<img alt="../../_images/environment_glow_threshold.webp" src="../../_images/environment_glow_threshold.webp" />
+<ul class="simple">
+<li><ol class="arabic simple" start="2">
+<li><p>The <strong>Bloom</strong> property has a value greater than <code class="docutils literal notranslate"><span class="pre">0.0</span></code>. As it increases,
+it sends the whole screen to the glow processor at higher amounts.</p></li>
+</ol>
+</li>
+</ul>
+<img alt="../../_images/environment_glow_bloom.webp" src="../../_images/environment_glow_bloom.webp" />
+<p>Both will cause the light to start bleeding out of the brighter areas.</p>
+<p>Once glow is visible, it can be controlled with a few extra parameters:</p>
+<ul class="simple">
+<li><p><strong>Intensity</strong> is an overall scale for the effect, it can be made stronger or
+weaker (<code class="docutils literal notranslate"><span class="pre">0.0</span></code> removes it).</p></li>
+<li><p><strong>Strength</strong> is how strong the gaussian filter kernel is processed. Greater
+values make the filter saturate and expand outwards. In general, changing this
+is not needed, as the size can be adjusted more efficiently with the <strong>Levels</strong>.</p></li>
+</ul>
+<p>The <strong>Blend Mode</strong> of the effect can also be changed:</p>
+<ul class="simple">
+<li><p><strong>Additive</strong> is the strongest one, as it only adds the glow effect over the
+image with no blending involved. In general, it's too strong to be used, but
+can look good with low-intensity <strong>Bloom</strong> (produces a dream-like effect).</p></li>
+<li><p><strong>Screen</strong> ensures glow never brightens more than itself and it works great as
+an all around.</p></li>
+<li><p><strong>Softlight</strong> is the default and weakest one, producing only a subtle color
+disturbance around the objects. This mode works best on dark scenes.</p></li>
+<li><p><strong>Replace</strong> can be used to
+<a class="reference internal" href="#doc-environment-and-post-processing-using-glow-to-blur-the-screen"><span class="std std-ref">blur the whole screen</span></a>
+or debug the effect. It only shows the glow effect without the image below.</p></li>
+<li><p><strong>Mix</strong> mixes the glow effect with the main image. This can be used for
+greater artistic control. The mix factor is controlled by the <strong>Mix</strong> property
+which appears above the blend mode (only when the blend mode is set to Mix).
+High mix factor values will appear to darken the image unless <strong>Bloom</strong> is
+increased.</p></li>
+</ul>
+<p>To change the glow effect size and shape, Godot provides <strong>Levels</strong>. Smaller
+levels are strong glows that appear around objects, while large levels are hazy
+glows covering the whole screen:</p>
+<img alt="../../_images/environment_glow_layers.webp" src="../../_images/environment_glow_layers.webp" />
+<p>The real strength of this system, though, is to combine levels to create more
+interesting glow patterns:</p>
+<img alt="../../_images/environment_glow_layers2.webp" src="../../_images/environment_glow_layers2.webp" />
+<p>Finally, the glow effect can be controlled using a <em>glow map</em>, which is a
+texture that determines how bright glow should be on each part of the screen.
+This texture can optionally be colored to tint the glow effect to the glow map's
+color. The texture is stretched to fit the viewport, so using an aspect ratio
+that matches your viewport's most common aspect ratio (such as 16:9) is recommended
+to avoid visible distortion.</p>
+<p>There are 2 main use cases for a glow map texture:</p>
+<ul class="simple">
+<li><p>Create a &quot;lens dirt&quot; effect using a dirt pattern texture.</p></li>
+<li><p>Make glow less strong on specific parts of the screen by using a gradient texture.</p></li>
+</ul>
+<img alt="../../_images/environment_glow_map.webp" src="../../_images/environment_glow_map.webp" />
+<p>By default, glow uses a bicubic scaling filter on desktop platforms and a
+bilinear scaling filter on mobile platforms. The bicubic scaling filter results
+in higher quality with a less blocky appearance, but it has a performance cost
+on the GPU which can be significant on integrated graphics.
+The scale mode can be controlled using the
+<strong>Rendering &gt; Environment &gt; Glow &gt; Upscale Mode</strong> project setting.
+This setting is only effective when using the Forward+ or Mobile renderers,
+as Compatibility uses a different glow implementation.</p>
+<img alt="../../_images/environment_and_post_processing_glow_scale_mode.webp" src="../../_images/environment_and_post_processing_glow_scale_mode.webp" />
+</section>
+<section id="using-glow-in-2d">
+<span id="doc-environment-and-post-processing-using-glow-in-2d"></span><h3>Using glow in 2D<a class="headerlink" href="#using-glow-in-2d" title="Link to this heading"></a></h3>
+<p>There are 2 ways to use glow in 2D:</p>
+<ul class="simple">
+<li><p>Since Godot 4.2, you can enable HDR for 2D rendering when using the Forward+
+and Mobile rendering methods. This has a performance cost, but it allows for a
+greater dynamic range. This also allows you to control which objects glow
+using their individual <strong>Modulate</strong> or <strong>Self Modulate</strong> properties (use the
+Intensity slider in the color picker). Enabling HDR can also reduce banding in the 2D
+rendering output.</p>
+<ul>
+<li><p>To enable HDR in 2D, open the Project Settings, enable
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-rendering-viewport-hdr-2d"><span class="std std-ref">Rendering &gt; Viewport &gt; HDR 2D</span></a>
+then restart the editor.</p></li>
+</ul>
+</li>
+<li><p>If you want to maximize performance, you can leave HDR disabled for 2D
+rendering. However, you will have less control on which objects glow.</p>
+<ul>
+<li><p>Enable glow, set the environment background mode to <strong>Canvas</strong> then decrease
+<strong>Glow HDR Threshold</strong> so that pixels that are not overbright will still
+glow. To prevent UI elements from glowing, make them children of a
+<a class="reference internal" href="../../classes/class_canvaslayer.html#class-canvaslayer"><span class="std std-ref">CanvasLayer</span></a> node. You can control which layers are affected by
+glow using the <strong>Background &gt; Canvas Max Layer</strong> property of the Environment
+resource.</p></li>
+</ul>
+</li>
+</ul>
+<figure class="align-center" id="id1">
+<img alt="Example of using glow in a 2D scene" src="../../_images/environment_and_post_processing_glow_in_2d.webp" />
+<figcaption>
+<p><span class="caption-text">Example of using glow in a 2D scene. HDR 2D is enabled, while coins and the
+bullet have their <strong>Modulate</strong> property increased to overbright values using the
+Intensity slider in the color picker.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The 2D renderer renders in linear color space if the
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-rendering-viewport-hdr-2d"><span class="std std-ref">Rendering &gt; Viewport &gt; HDR 2D</span></a>
+project setting is enabled, so the <code class="docutils literal notranslate"><span class="pre">source_color</span></code> hint must also be used
+for uniform samplers that are used as color input in <code class="docutils literal notranslate"><span class="pre">canvas_item</span></code> shaders.
+If this is not done, the texture will appear washed out.</p>
+<p>If 2D HDR is disabled, <code class="docutils literal notranslate"><span class="pre">source_color</span></code> will keep working correctly in
+<code class="docutils literal notranslate"><span class="pre">canvas_item</span></code> shaders, so it's recommend to use it when relevant either
+way.</p>
+<p>Using linear color space also means that alpha blending will change. Sprites
+with low opacity values generally become more visible, and font rendering will
+look bolder due to the low-opacity pixels from the font antialiasing becoming
+more visible. This also affects the editor's own rendering.</p>
+</div>
+</section>
+<section id="using-glow-to-blur-the-screen">
+<span id="doc-environment-and-post-processing-using-glow-to-blur-the-screen"></span><h3>Using glow to blur the screen<a class="headerlink" href="#using-glow-to-blur-the-screen" title="Link to this heading"></a></h3>
+<p>Glow can be used to blur the whole viewport, which is useful for background blur
+when a menu is open. Only 3D rendering will be affected unless the environment's
+background mode is set to <strong>Canvas</strong>. To prevent UI elements from being blurred
+when using the Canvas background mode, make them children of a <a class="reference internal" href="../../classes/class_canvaslayer.html#class-canvaslayer"><span class="std std-ref">CanvasLayer</span></a>
+node. You can control which layers are affected by this blurring effect using the
+<strong>Background &gt; Canvas Max Layer</strong> property of the Environment resource.</p>
+<p>To use glow as a blurring solution:</p>
+<ul class="simple">
+<li><p>Enable <strong>Normalized</strong> and adjust levels according to preference. Increasing
+higher level indices will result in a more blurred image. It's recommended to
+leave a single glow level at <code class="docutils literal notranslate"><span class="pre">1.0</span></code> and leave all other glow levels at
+<code class="docutils literal notranslate"><span class="pre">0.0</span></code>, but this is not required. Note that the final appearance will vary
+depending on viewport resolution.</p></li>
+<li><p>Set <strong>Intensity</strong> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> and <strong>Bloom</strong> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
+<li><p>Set the blend mode to <strong>Replace</strong> and <strong>HDR Luminance Cap</strong> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
+</ul>
+<figure class="align-center" id="id2">
+<img alt="Example of using glow to blur the 2D rendering in the menu's background" src="../../_images/environment_and_post_processing_glow_blur.webp" />
+<figcaption>
+<p><span class="caption-text">Example of using glow to blur the 2D rendering in the menu's background</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="fog">
+<h3>Fog<a class="headerlink" href="#fog" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section refers to non-volumetric fog only.
+It is possible to use both non-volumetric fog and <a class="reference internal" href="volumetric_fog.html#doc-volumetric-fog"><span class="std std-ref">Volumetric fog and fog volumes</span></a>
+at the same time.</p>
+</div>
+<p>Fog, as in real life, makes distant objects fade away into a uniform color.
+There are two kinds of fog in Godot:</p>
+<ul class="simple">
+<li><p><strong>Depth Fog:</strong> This one is applied based on the distance from the camera.</p></li>
+<li><p><strong>Height Fog:</strong> This one is applied to any objects below (or above) a certain
+height, regardless of the distance from the camera.</p></li>
+</ul>
+<img alt="../../_images/environment_fog_depth_height.webp" src="../../_images/environment_fog_depth_height.webp" />
+<p>Both of these fog types can have their curves tweaked, making their transition more or less sharp.</p>
+<p>Two properties can be tweaked to make the fog effect more interesting:</p>
+<p>The first is <strong>Sun Scatter</strong>, which makes use of the DirectionalLight3D's color
+and energy in the current scene. When looking toward the directional light
+(usually a sun), the fog will be tinted according to the light's color to
+simulate the sunlight passing through the fog.</p>
+<p>The second is <strong>Aerial Perspective</strong>, which tints the fog color according to the
+sky color to better blend the sky with the background. Higher values will result
+in more tinting, with <code class="docutils literal notranslate"><span class="pre">1.0</span></code> fully replacing the regular fog color with aerial
+perspective. This can be used in large open world levels to provide a better
+sense of depth, or to avoid color discontinuities between the sky and fog colors.</p>
+<p>If both <strong>Sun Scatter</strong> and <strong>Aerial Perspective</strong> are greater than <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, sun
+scattering is applied on top of aerial perspective.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Fog can cause banding to appear on the viewport, especially at
+higher density levels. See <a class="reference internal" href="3d_rendering_limitations.html#doc-3d-rendering-limitations-color-banding"><span class="std std-ref">Color banding</span></a>
+for guidance on reducing banding.</p>
+</div>
+</section>
+<section id="volumetric-fog">
+<h3>Volumetric Fog<a class="headerlink" href="#volumetric-fog" title="Link to this heading"></a></h3>
+<p>Volumetric fog provides a realistic fog effect to the scene, with fog color
+being affected by the lights that traverse the fog.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="volumetric_fog.html#doc-volumetric-fog"><span class="std std-ref">Volumetric fog and fog volumes</span></a> for documentation on setting up volumetric fog.</p>
+</div>
+</section>
+<section id="adjustments">
+<h3>Adjustments<a class="headerlink" href="#adjustments" title="Link to this heading"></a></h3>
+<p>At the end of processing, Godot offers the possibility to do some standard
+image adjustments.</p>
+<img alt="../../_images/environment_adjustments.webp" src="../../_images/environment_adjustments.webp" />
+<p><strong>Basic BCS adjustments</strong></p>
+<p>The first adjustment is being able to change the typical <strong>Brightness</strong>, <strong>Contrast</strong>,
+and <strong>Saturation</strong> properties:</p>
+<img alt="../../_images/environment_adjustments_bcs.webp" src="../../_images/environment_adjustments_bcs.webp" />
+<p><strong>Color correction using a 1D gradient</strong></p>
+<p>The second adjustment is by supplying a color correction gradient. This can be
+done by assigning a GradientTexture1D resource to the <strong>Color Correction</strong>
+property, or by loading a texture containing a horizontal gradient. The leftmost
+part of the gradient represents black in the source image, whereas the rightmost
+part of the gradient represents white in the source image.</p>
+<p>A linear black-to-white gradient like the following one will produce no effect:</p>
+<img alt="../../_images/environment_adjustments_default_gradient.webp" src="../../_images/environment_adjustments_default_gradient.webp" />
+<p>But creating custom ones will allow to map each channel to a different color:</p>
+<img alt="../../_images/environment_adjustments_custom_gradient.webp" src="../../_images/environment_adjustments_custom_gradient.webp" />
+<p><strong>Color correction using a 3D LUT</strong></p>
+<p>A 3D look-up-texture (LUT) can also be used for color correction. This is a
+special texture used to modify each color channel separately from one another
+(red, green, blue). This image can be of any resolution, but since color
+correction is low-frequency data, sticking to low resolutions is recommended for
+performance reasons. A LUT texture's resolution is typically 17×17×17, 33×33×33,
+51×51×51 or 65×65×65 (the odd size allows for better interpolation).</p>
+<p>For this to work, the look-up texture's import mode must be set to Texture3D
+in the Import dock (instead of being imported as a regular Texture2D):</p>
+<img alt="../../_images/environment_adjustments_3d_lut_import.webp" src="../../_images/environment_adjustments_3d_lut_import.webp" />
+<p>Make sure to configure the number of horizontal and vertical slices to import as
+well. If you don't do this, the LUT texture will not affect the viewport
+correctly when used. You can preview how the 3D texture was imported by
+double-clicking it, in the FileSystem dock, then going to the inspector to flip
+through the texture's layers.</p>
+<p>You can use this neutral 33×33×33 LUT template as a base (right-click and choose
+<strong>Save as…</strong>):</p>
+<img alt="../../_images/environment_adjustments_3d_lut_template.webp" src="../../_images/environment_adjustments_3d_lut_template.webp" />
+<p>With the above LUT template, after changing its import mode to <strong>Texture3D</strong>,
+set its number of <strong>Horizontal</strong> slices to <code class="docutils literal notranslate"><span class="pre">33</span></code> in the Import dock then click
+<strong>Reimport</strong>. If you load this LUT into the <strong>Color Correction</strong> property, you
+won't see any visible difference for now since this texture is designed to be a
+neutral starting point.</p>
+<p>This LUT template can be modified in an image editor to provide a different
+mood to the image. A common workflow is to place the LUT image next to a
+screenshot of the project's 3D viewport, then use an image editor to modify both
+the LUT image and the screenshot at the same time. The LUT can then be saved and
+applied to the game engine to perform the same color correction in real-time.</p>
+<p>For example, modifying the LUT template in an image editor to give it a
+&quot;sepia&quot; look results in the image on the right:</p>
+<img alt="../../_images/environment_adjustments_3d_lut_comparison.webp" src="../../_images/environment_adjustments_3d_lut_comparison.webp" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Adjustments and color correction are applied <em>after</em> tonemapping.
+This means the tonemapping properties defined above still have an effect
+when adjustments are enabled.</p>
+</div>
+</section>
+</section>
+<section id="camera-attribute-options">
+<h2>Camera attribute options<a class="headerlink" href="#camera-attribute-options" title="Link to this heading"></a></h2>
+<p>Godot has two kinds of camera attributes, physical and practical. When using
+CameraAttributesPhysical instead of CameraAttributesPractical, depth of field is
+automatically computed from the camera attributes' focus distance, focal length, and
+aperture. In addition, Frustum options are available.</p>
+<section id="depth-of-field-far-blur">
+<h3>Depth of Field / Far Blur<a class="headerlink" href="#depth-of-field-far-blur" title="Link to this heading"></a></h3>
+<p>This effect simulates focal distance on cameras. It blurs objects behind
+a given range. It has an initial <strong>Distance</strong> with a <strong>Transition</strong> region
+(in world units):</p>
+<img alt="../../_images/environment_dof_far.webp" src="../../_images/environment_dof_far.webp" />
+<p>The <strong>Amount</strong> parameter controls the amount of blur. For larger blurs, tweaking
+the depth of field quality in the advanced project settings may be needed to
+avoid artifacts.</p>
+</section>
+<section id="depth-of-field-near-blur">
+<h3>Depth of Field / Near Blur<a class="headerlink" href="#depth-of-field-near-blur" title="Link to this heading"></a></h3>
+<p>This effect simulates focal distance on cameras. It blurs objects close
+to the camera (acts in the opposite direction as far blur).
+It has an initial <strong>Distance</strong> with a <strong>Transition</strong> region (in world units):</p>
+<img alt="../../_images/environment_dof_near.webp" src="../../_images/environment_dof_near.webp" />
+<p>The <strong>Amount</strong> parameter controls the amount of blur. For larger blurs, tweaking
+the depth of field quality in the advanced project settings may be needed to
+avoid artifacts.</p>
+<p>It is common to use both blurs together to focus the viewer's attention on a
+given object, or create a so-called
+<a class="reference external" href="https://en.wikipedia.org/wiki/Miniature_faking">&quot;tilt shift&quot; effect</a>.</p>
+<img alt="../../_images/environment_mixed_blur.webp" src="../../_images/environment_mixed_blur.webp" />
+</section>
+<section id="exposure">
+<h3>Exposure<a class="headerlink" href="#exposure" title="Link to this heading"></a></h3>
+<p>This multiplies the overall scene brightness visible from the camera. Higher
+values result in a visually brighter scene.</p>
+</section>
+<section id="auto-exposure">
+<h3>Auto Exposure<a class="headerlink" href="#auto-exposure" title="Link to this heading"></a></h3>
+<p><em>This feature is only available when using the Forward+ renderer, not
+Mobile or Compatibility.</em></p>
+<p>Even though, in most cases, lighting and texturing are heavily artist controlled,
+Godot supports a basic high dynamic range implementation with the auto exposure
+mechanism. This is generally used to add realism when combining interior areas
+with low light and bright outdoor areas. Auto exposure simulates the camera
+(or eye) in an effort to adapt between light and dark locations and their
+different amounts of light.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Auto exposure needs to evaluate the scene's brightness every frame, which
+has a moderate performance cost. Therefore, it's recommended to leave Auto
+Exposure disabled if it doesn't make much of a difference in your scene.</p>
+</div>
+<img alt="../../_images/environment_hdr_autoexp.webp" src="../../_images/environment_hdr_autoexp.webp" />
+<p>The simplest way to use auto exposure is to make sure outdoor lights (or other
+strong lights) have energy beyond 1.0. This is done by tweaking their <strong>Energy</strong>
+multiplier (on the Light itself). To make it consistent, the <strong>Sky</strong> usually
+needs to use the energy multiplier too, to match with the directional light.
+Normally, values between 3.0 and 6.0 are enough to simulate indoor-outdoor conditions.</p>
+<p>By combining Auto Exposure with <a class="reference internal" href="#doc-environment-and-post-processing-glow"><span class="std std-ref">Glow</span></a>
+post-processing, pixels that go over the tonemap <strong>White</strong> will bleed to the
+glow buffer, creating the typical bloom effect in photography.</p>
+<img alt="../../_images/environment_hdr_bloom.webp" src="../../_images/environment_hdr_bloom.webp" />
+<p>The user-controllable values in the Auto Exposure section come with sensible
+defaults, but you can still tweak them:</p>
+<img alt="../../_images/environment_hdr.webp" src="../../_images/environment_hdr.webp" />
+<ul class="simple">
+<li><p><strong>Scale:</strong> Value to scale the lighting. Higher values produce brighter
+images, and lower values produce darker ones.</p></li>
+<li><p><strong>Min Sensitivity / Min Exposure Value:</strong> Minimum luminance that auto exposure
+will aim to adjust for (in ISO when using CameraAttributesPractical, or in
+EV100 when using CameraAttributesPhysical). Luminance is the average of the
+light in all the pixels of the screen.</p></li>
+<li><p><strong>Max Sensitivity / Max Exposure Value:</strong> Maximum luminance that auto exposure
+will aim to adjust for (in ISO when using CameraAttributesPractical, or in
+EV100 when using CameraAttributesPhysical).</p></li>
+<li><p><strong>Speed:</strong> Speed at which luminance corrects itself. The higher the value, the
+faster luminance correction happens. High values may be more suited to
+fast-paced games, but can be distracting in some scenarios.</p></li>
+</ul>
+<p>When using CameraAttributesPractical, exposure is set using <em>sensitivity</em>
+defined in ISO instead of an exposure value in EV100. Typical ISO values are
+between 50 and 3200, with higher values resulting in higher final exposure. In
+real life, daytime photography generally uses ISO values between 100 and 800.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="physical_light_and_camera_units.html#doc-physical-light-and-camera-units"><span class="std std-ref">Physical light and camera units</span></a> if you wish to use real world
+units to configure your camera's exposure, field of view and depth of field.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="global_illumination/faking_global_illumination.html" class="btn btn-neutral float-left" title="Faking global illumination" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="volumetric_fog.html" class="btn btn-neutral float-right" title="Volumetric fog and fog volumes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

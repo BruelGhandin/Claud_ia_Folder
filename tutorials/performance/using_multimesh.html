@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Optimization using MultiMeshes" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/performance/using_multimesh.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="For large amount of instances (in the thousands), that need to be constantly processed (and certain amount of control needs to be retained), using servers directly is the recommended optimization. ..." />
+<meta name="description" content="For large amount of instances (in the thousands), that need to be constantly processed (and certain amount of control needs to be retained), using servers directly is the recommended optimization. ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Optimization using MultiMeshes &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Reducing stutter from shader (pipeline) compilations" href="pipeline_compilations.html" />
+    <link rel="prev" title="GPU optimization" href="gpu_optimization.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/performance/using_multimesh" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/performance/using_multimesh.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Performance</a></li>
+      <li class="breadcrumb-item active">Optimization using MultiMeshes</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/performance/using_multimesh.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+    <div class="admonition attention article-status">
+      <p class="first admonition-title">Work in progress</p>
+      <p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.7</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+    </div>
+    
+  </div>
+  
+
+  
+  <section id="optimization-using-multimeshes">
+<span id="doc-using-multimesh"></span><h1>Optimization using MultiMeshes<a class="headerlink" href="#optimization-using-multimeshes" title="Link to this heading"></a></h1>
+<p>For large amount of instances (in the thousands), that need to be constantly processed
+(and certain amount of control needs to be retained),
+<a class="reference internal" href="using_servers.html#doc-using-servers"><span class="std std-ref">using servers directly</span></a> is the recommended optimization.</p>
+<p>When the amount of objects reach the hundreds of thousands or millions,
+none of these approaches are efficient anymore. Still, depending on the requirements, there
+is one more optimization possible.</p>
+<section id="multimeshes">
+<h2>MultiMeshes<a class="headerlink" href="#multimeshes" title="Link to this heading"></a></h2>
+<p>A <a class="reference internal" href="../../classes/class_multimesh.html#class-multimesh"><span class="std std-ref">MultiMesh</span></a> is a single draw primitive that can draw up to millions
+of objects in one go. It's extremely efficient because it uses the GPU hardware to do this.</p>
+<p>The only drawback is that there is no <em>screen</em> or <em>frustum</em> culling possible for individual instances.
+This means, that millions of objects will be <em>always</em> or <em>never</em> drawn, depending on the visibility
+of the whole MultiMesh. It is possible to provide a custom visibility rect for them, but it will always
+be <em>all-or-none</em> visibility.</p>
+<p>If the objects are simple enough (just a couple of vertices), this is generally not much of a problem
+as most modern GPUs are optimized for this use case. A workaround is to create several MultiMeshes
+for different areas of the world.</p>
+<p>It is also possible to execute some logic inside the vertex shader (using the <code class="docutils literal notranslate"><span class="pre">INSTANCE_ID</span></code> or
+<code class="docutils literal notranslate"><span class="pre">INSTANCE_CUSTOM</span></code> built-in constants). For an example of animating thousands of objects in a MultiMesh,
+see the <a class="reference internal" href="vertex_animation/animating_thousands_of_fish.html#doc-animating-thousands-of-fish"><span class="std std-ref">Animating thousands of fish</span></a> tutorial. Information
+to the shader can be provided via textures (there are floating-point <a class="reference internal" href="../../classes/class_image.html#class-image"><span class="std std-ref">Image</span></a> formats
+which are ideal for this).</p>
+<p>Another alternative is to use a GDExtension and C++, which should be extremely efficient (it's possible
+to set the entire state for all objects using linear memory via the
+<a class="reference internal" href="../../classes/class_renderingserver.html#class-renderingserver-method-multimesh-set-buffer"><span class="std std-ref">RenderingServer.multimesh_set_buffer()</span></a>
+function). This way, the array can be created with multiple threads, then set in one call, providing
+high cache efficiency.</p>
+<p>Finally, it's not required to have all MultiMesh instances visible. The amount of visible ones can be
+controlled with the <a class="reference internal" href="../../classes/class_multimesh.html#class-multimesh-property-visible-instance-count"><span class="std std-ref">MultiMesh.visible_instance_count</span></a>
+property. The typical workflow is to allocate the maximum amount of instances that will be used,
+then change the amount visible depending on how many are currently needed.</p>
+</section>
+<section id="multimesh-example">
+<h2>Multimesh example<a class="headerlink" href="#multimesh-example" title="Link to this heading"></a></h2>
+<p>Here is an example of using a MultiMesh from code. Languages other than GDScript may be more
+efficient for millions of objects, but for a few thousands, GDScript should be fine.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">MultiMeshInstance3D</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Create the multimesh.</span>
+<span class="w">    </span><span class="n">multimesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">MultiMesh</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Set the format first.</span>
+<span class="w">    </span><span class="n">multimesh</span><span class="o">.</span><span class="vi">transform_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">MultiMesh</span><span class="o">.</span><span class="vi">TRANSFORM_3D</span>
+<span class="w">    </span><span class="c1"># Set the mesh that will be duplicated.</span>
+<span class="w">    </span><span class="n">multimesh</span><span class="o">.</span><span class="vi">mesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">BoxMesh</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Then resize (otherwise, changing the format is not allowed).</span>
+<span class="w">    </span><span class="n">multimesh</span><span class="o">.</span><span class="vi">instance_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000</span>
+<span class="w">    </span><span class="c1"># Maybe not all of them should be visible at first.</span>
+<span class="w">    </span><span class="n">multimesh</span><span class="o">.</span><span class="vi">visible_instance_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
+
+<span class="w">    </span><span class="c1"># Set the transform of the instances.</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">multimesh</span><span class="o">.</span><span class="vi">visible_instance_count</span><span class="p">:</span>
+<span class="w">        </span><span class="n">multimesh</span><span class="o">.</span><span class="nf">set_instance_transform</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Transform3D</span><span class="p">(</span><span class="nb nb-Type">Basis</span><span class="p">(),</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyMultiMeshInstance3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MultiMeshInstance3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Create the multimesh.</span>
+<span class="w">        </span><span class="n">Multimesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MultiMesh</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Set the format first.</span>
+<span class="w">        </span><span class="n">Multimesh</span><span class="p">.</span><span class="n">TransformFormat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MultiMesh</span><span class="p">.</span><span class="n">TransformFormatEnum</span><span class="p">.</span><span class="n">Transform3D</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// Then resize (otherwise, changing the format is not allowed)</span>
+<span class="w">        </span><span class="n">Multimesh</span><span class="p">.</span><span class="n">InstanceCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// Maybe not all of them should be visible at first.</span>
+<span class="w">        </span><span class="n">Multimesh</span><span class="p">.</span><span class="n">VisibleInstanceCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Set the transform of the instances.</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">Multimesh</span><span class="p">.</span><span class="n">VisibleInstanceCount</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Multimesh</span><span class="p">.</span><span class="n">SetInstanceTransform</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Transform3D</span><span class="p">(</span><span class="n">Basis</span><span class="p">.</span><span class="n">Identity</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gpu_optimization.html" class="btn btn-neutral float-left" title="GPU optimization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pipeline_compilations.html" class="btn btn-neutral float-right" title="Reducing stutter from shader (pipeline) compilations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

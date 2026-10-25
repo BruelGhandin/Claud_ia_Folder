@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Compiling for Android" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/development/compiling/compiling_for_android.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Note: In most cases, using the built-in deployer and export templates is good enough. Compiling the Android APK manually is mostly useful for custom builds or custom packages for the deployer. Also..." />
+<meta name="description" content="Note: In most cases, using the built-in deployer and export templates is good enough. Compiling the Android APK manually is mostly useful for custom builds or custom packages for the deployer. Also..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Compiling for Android &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Compiling for iOS" href="compiling_for_ios.html" />
+    <link rel="prev" title="Compiling for macOS" href="compiling_for_macos.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/development/compiling/compiling_for_android" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="engine_details/development/compiling/compiling_for_android.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Engine development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Building from source</a></li>
+      <li class="breadcrumb-item active">Compiling for Android</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/development/compiling/compiling_for_android.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="compiling-for-android">
+<span id="doc-compiling-for-android"></span><h1>Compiling for Android<a class="headerlink" href="#compiling-for-android" title="Link to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>This page describes how to compile Android export template binaries from source.
+If you're looking to export your project to Android instead, read <a class="reference internal" href="../../../tutorials/export/exporting_for_android.html#doc-exporting-for-android"><span class="std std-ref">Exporting for Android</span></a>.</p>
+</div>
+<section id="note">
+<h2>Note<a class="headerlink" href="#note" title="Link to this heading"></a></h2>
+<p>In most cases, using the built-in deployer and export templates is good
+enough. Compiling the Android APK manually is mostly useful for custom
+builds or custom packages for the deployer.</p>
+<p>Also, you still need to follow the steps mentioned in the
+<a class="reference internal" href="../../../tutorials/export/exporting_for_android.html#doc-exporting-for-android"><span class="std std-ref">Exporting for Android</span></a> tutorial before attempting to build
+a custom export template.</p>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p>For compiling under Windows, Linux or macOS, the following is required:</p>
+<ul>
+<li><p><a class="reference external" href="https://www.python.org/downloads/">Python 3.9+</a>.</p></li>
+<li><p><a class="reference external" href="https://scons.org/pages/download.html">SCons 4.4+</a> build system.</p></li>
+<li><p>Android SDK</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>To install the Android SDK, follow the steps <a class="reference external" href="https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_android.html">here</a>.</p></li>
+<li><p>On Linux, <strong>do not use an Android SDK provided by your distribution's repositories</strong> as it will often be outdated.</p></li>
+<li><p>On macOS, <strong>do not use an Android SDK provided by Homebrew</strong> as it will not be installed in a unified location.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Gradle (will be downloaded and installed automatically if missing).</p></li>
+<li><p>JDK 17 (either OpenJDK or Oracle JDK).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>You can download a build from <a class="reference external" href="https://adoptium.net/temurin/releases?variant=openjdk17&amp;version=17&amp;os=any&amp;arch=any">Adoptium</a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To get the Godot source code for compiling, see
+<a class="reference internal" href="getting_source.html#doc-getting-source"><span class="std std-ref">Getting the source</span></a>.</p>
+<p>For a general overview of SCons usage for Godot, see
+<a class="reference internal" href="introduction_to_the_buildsystem.html#doc-introduction-to-the-buildsystem"><span class="std std-ref">Introduction to the buildsystem</span></a>.</p>
+</div>
+</section>
+<section id="setting-up-the-buildsystem">
+<span id="doc-android-setting-up-the-buildsystem"></span><h2>Setting up the buildsystem<a class="headerlink" href="#setting-up-the-buildsystem" title="Link to this heading"></a></h2>
+<ul>
+<li><p>Set the environment variable <code class="docutils literal notranslate"><span class="pre">ANDROID_HOME</span></code> to point to the Android
+SDK. If you downloaded the Android command-line tools, this would be
+the folder where you extracted the contents of the ZIP archive.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Windows: Press <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Windows</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd>, type &quot;control system&quot;,
+then click on <strong>Advanced system settings</strong> in the left pane,
+then click on <strong>Environment variables</strong> on the window that appears.</p></li>
+<li><p>Linux or macOS: Add the text <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">ANDROID_HOME=&quot;/path/to/android-sdk&quot;</span></code>
+to your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> or <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> where <code class="docutils literal notranslate"><span class="pre">/path/to/android-sdk</span></code> points to
+the root of the SDK directories.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>After setting up the SDK and environment variables, be sure to
+<strong>restart your terminal</strong> to apply the changes. If you are using
+an IDE with an integrated terminal, you need to restart the IDE.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">platform=android</span></code>. If this fails, go back and check the steps.
+If you completed the setup correctly, the NDK will begin downloading.
+If you are trying to compile GDExtension, you need to first compile
+the engine to download the NDK, then you can compile GDExtension.</p></li>
+</ul>
+</section>
+<section id="building-the-export-templates">
+<h2>Building the export templates<a class="headerlink" href="#building-the-export-templates" title="Link to this heading"></a></h2>
+<p>Godot needs three export templates for Android: the optimized &quot;release&quot;
+template (<code class="docutils literal notranslate"><span class="pre">android_release.apk</span></code>), the debug template (<code class="docutils literal notranslate"><span class="pre">android_debug.apk</span></code>),
+and the Gradle build template (<code class="docutils literal notranslate"><span class="pre">android_source.zip</span></code>).
+As Google requires all APKs to include ARMv8 (64-bit) libraries since August 2019,
+the commands below build templates containing both ARMv7 and ARMv8 libraries.</p>
+<p>Compiling the standard export templates is done by calling SCons from the Godot
+root directory with the following arguments:</p>
+<ul class="simple">
+<li><p>Release template (used when exporting with <strong>Debugging Enabled</strong> unchecked)</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm32
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm64<span class="w"> </span><span class="nv">generate_android_binaries</span><span class="o">=</span>yes
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Debug template (used when exporting with <strong>Debugging Enabled</strong> checked)</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm32
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm64<span class="w"> </span><span class="nv">generate_android_binaries</span><span class="o">=</span>yes
+</pre></div>
+</div>
+<p>The resulting templates will be located under the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">bin/android_release.apk</span></code> for the release template</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bin/android_debug.apk</span></code> for the debug template</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bin/android_source.zip</span></code> for the Gradle build template</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><p>If you are changing the list of architectures you're building, remember to add <code class="docutils literal notranslate"><span class="pre">generate_android_binaries=yes</span></code> to the <em>last</em> architecture you're building, so that the template files are generated after the build.</p></li>
+<li><p>To enable dev build (for use when troubleshooting) in the generated templates, add the <code class="docutils literal notranslate"><span class="pre">dev_build=yes</span></code> parameters to the SCons command.</p></li>
+<li><p>To include debug symbols in the generated templates, add the <code class="docutils literal notranslate"><span class="pre">debug_symbols=yes</span></code> parameters to the SCons command.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Note that you can include <code class="docutils literal notranslate"><span class="pre">separate_debug_symbols=yes</span></code> to generate the debug symbols in a separate <code class="docutils literal notranslate"><span class="pre">*-native-debug-symbols.zip</span></code> file.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If you want to enable Vulkan validation layers, see
+<a class="reference internal" href="../debugging/vulkan/vulkan_validation_layers.html#doc-vulkan-validation-layers-android"><span class="std std-ref">Vulkan validation layers on Android</span></a>.</p>
+</div>
+<section id="adding-support-for-x86-devices">
+<h3>Adding support for x86 devices<a class="headerlink" href="#adding-support-for-x86-devices" title="Link to this heading"></a></h3>
+<p>If you also want to include support for x86 and x86_64 devices, run the SCons
+command a third and fourth time with the <code class="docutils literal notranslate"><span class="pre">arch=x86_32</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">arch=x86_64</span></code> arguments before building the APK with Gradle. For
+example, for the release template:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm32
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm64
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_32
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64<span class="w"> </span><span class="nv">generate_android_binaries</span><span class="o">=</span>yes
+</pre></div>
+</div>
+<p>This will create template binaries that works on all platforms.
+The final binary size of exported projects will depend on the platforms you choose
+to support when exporting; in other words, unused platforms will be removed from
+the binary.</p>
+</section>
+<section id="cleaning-the-generated-export-templates">
+<h3>Cleaning the generated export templates<a class="headerlink" href="#cleaning-the-generated-export-templates" title="Link to this heading"></a></h3>
+<p>You can use the following commands to remove the generated export templates:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>platform/android/java
+<span class="c1"># On Windows</span>
+.<span class="se">\g</span>radlew<span class="w"> </span>clean
+<span class="c1"># On Linux and macOS</span>
+./gradlew<span class="w"> </span>clean
+</pre></div>
+</div>
+</section>
+</section>
+<section id="using-the-export-templates">
+<h2>Using the export templates<a class="headerlink" href="#using-the-export-templates" title="Link to this heading"></a></h2>
+<p>Godot needs release and debug binaries that were compiled against the same
+version/commit as the editor. If you are using official binaries
+for the editor, make sure to install the matching export templates,
+or build your own from the same version.</p>
+<p>When exporting your game, Godot uses the templates as a base, and updates their content as needed.</p>
+<section id="installing-the-templates">
+<h3>Installing the templates<a class="headerlink" href="#installing-the-templates" title="Link to this heading"></a></h3>
+<p>The newly-compiled templates (<code class="docutils literal notranslate"><span class="pre">android_debug.apk</span></code>
+, <code class="docutils literal notranslate"><span class="pre">android_release.apk</span></code>, and <code class="docutils literal notranslate"><span class="pre">android_source.zip</span></code>) must be copied to Godot's templates folder
+with their respective names. The templates folder can be located in:</p>
+<ul class="simple">
+<li><p>Windows: <code class="docutils literal notranslate"><span class="pre">%APPDATA%\Godot\export_templates\&lt;version&gt;\</span></code></p></li>
+<li><p>Linux: <code class="docutils literal notranslate"><span class="pre">$HOME/.local/share/godot/export_templates/&lt;version&gt;/</span></code></p></li>
+<li><p>macOS: <code class="docutils literal notranslate"><span class="pre">$HOME/Library/Application</span> <span class="pre">Support/Godot/export_templates/&lt;version&gt;/</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> is of the form <code class="docutils literal notranslate"><span class="pre">major.minor[.patch].status</span></code> using values from
+<code class="docutils literal notranslate"><span class="pre">version.py</span></code> in your Godot source repository (e.g. <code class="docutils literal notranslate"><span class="pre">4.1.3.stable</span></code> or <code class="docutils literal notranslate"><span class="pre">4.2.dev</span></code>).
+You also need to write this same version string to a <code class="docutils literal notranslate"><span class="pre">version.txt</span></code> file located
+next to your export templates.</p>
+<p>However, if you are writing your custom modules or custom C++ code, you
+might instead want to configure your template binaries as custom export templates
+in the project export menu. You must have <strong>Advanced Options</strong> enabled to set this.</p>
+<img alt="../../../_images/andtemplates.webp" src="../../../_images/andtemplates.webp" />
+<p>You don't even need to copy them, you can just reference the resulting
+file in the <code class="docutils literal notranslate"><span class="pre">bin\</span></code> directory of your Godot source folder, so that the
+next time you build you will automatically have the custom templates
+referenced.</p>
+</section>
+</section>
+<section id="building-the-godot-editor">
+<h2>Building the Godot editor<a class="headerlink" href="#building-the-godot-editor" title="Link to this heading"></a></h2>
+<p>Compiling the editor is done by calling SCons from the Godot
+root directory with the following arguments:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm32<span class="w"> </span><span class="nv">production</span><span class="o">=</span>yes<span class="w"> </span><span class="nv">target</span><span class="o">=</span>editor
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm64<span class="w"> </span><span class="nv">production</span><span class="o">=</span>yes<span class="w"> </span><span class="nv">target</span><span class="o">=</span>editor
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_32<span class="w"> </span><span class="nv">production</span><span class="o">=</span>yes<span class="w"> </span><span class="nv">target</span><span class="o">=</span>editor
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>x86_64<span class="w"> </span><span class="nv">production</span><span class="o">=</span>yes<span class="w"> </span><span class="nv">target</span><span class="o">=</span>editor<span class="w"> </span><span class="nv">generate_android_binaries</span><span class="o">=</span>yes
+</pre></div>
+</div>
+<ul>
+<li><p>You can add the <code class="docutils literal notranslate"><span class="pre">dev_build=yes</span></code> parameter to generate a dev build of the Godot editor.</p></li>
+<li><p>You can add the <code class="docutils literal notranslate"><span class="pre">debug_symbols=yes</span></code> parameters to include the debug symbols in the generated build.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Note that you can include <code class="docutils literal notranslate"><span class="pre">separate_debug_symbols=yes</span></code> to the <em>last</em> architecture you're building, to generate the debug symbols in a separate <code class="docutils literal notranslate"><span class="pre">*-native-debug-symbols.zip</span></code> file.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>You can skip certain architectures depending on your target device to speed up compilation.</p></li>
+</ul>
+<p>Remember to add <code class="docutils literal notranslate"><span class="pre">generate_android_binaries=yes</span></code> to the <em>last</em> architecture you're building, so that binaries are generated after the build.</p>
+<p>The resulting binaries will be located under <code class="docutils literal notranslate"><span class="pre">bin/android_editor_builds/</span></code>.</p>
+</section>
+<section id="removing-the-editor-binaries">
+<h2>Removing the Editor binaries<a class="headerlink" href="#removing-the-editor-binaries" title="Link to this heading"></a></h2>
+<p>You can use the following commands to remove the generated editor binaries:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>platform/android/java
+<span class="w"> </span><span class="c1"># On Windows</span>
+.<span class="se">\g</span>radlew<span class="w"> </span>clean
+<span class="c1"># On Linux and macOS</span>
+./gradlew<span class="w"> </span>clean
+</pre></div>
+</div>
+</section>
+<section id="installing-the-godot-editor-apk">
+<h2>Installing the Godot editor APK<a class="headerlink" href="#installing-the-godot-editor-apk" title="Link to this heading"></a></h2>
+<p>With an Android device with Developer Options enabled, connect the Android device to your computer via its charging cable to a USB/USB-C port.
+Open up a Terminal/Command Prompt and run the following commands from the root directory with the following arguments:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>adb<span class="w"> </span>install<span class="w"> </span>./bin/android_editor_builds/android_editor-android-debug.apk
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="platform-doesn-t-appear-in-scons">
+<h3>Platform doesn't appear in SCons<a class="headerlink" href="#platform-doesn-t-appear-in-scons" title="Link to this heading"></a></h3>
+<p>Double-check that you've set the <code class="docutils literal notranslate"><span class="pre">ANDROID_HOME</span></code>
+environment variable. This is required for the platform to appear in SCons'
+list of detected platforms.
+See <a class="reference internal" href="#doc-android-setting-up-the-buildsystem"><span class="std std-ref">Setting up the buildsystem</span></a>
+for more information.</p>
+</section>
+<section id="application-not-installed">
+<h3>Application not installed<a class="headerlink" href="#application-not-installed" title="Link to this heading"></a></h3>
+<p>Android might complain the application is not correctly installed.
+If so:</p>
+<ul class="simple">
+<li><p>Check that the debug keystore is properly generated.</p></li>
+<li><p>Check that the jarsigner executable is from JDK 8.</p></li>
+</ul>
+<p>If it still fails, open a command line and run <a class="reference external" href="https://developer.android.com/studio/command-line/logcat">logcat</a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>adb<span class="w"> </span>logcat
+</pre></div>
+</div>
+<p>Then check the output while the application is installed;
+the error message should be presented there.
+Seek assistance if you can't figure it out.</p>
+</section>
+<section id="application-exits-immediately">
+<h3>Application exits immediately<a class="headerlink" href="#application-exits-immediately" title="Link to this heading"></a></h3>
+<p>If the application runs but exits immediately, this might be due to
+one of the following reasons:</p>
+<ul class="simple">
+<li><p>Make sure to use export templates that match your editor version; if
+you use a new Godot version, you <em>have</em> to update the templates too.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">libgodot_android.so</span></code> is not in <code class="docutils literal notranslate"><span class="pre">libs/&lt;arch&gt;/</span></code>
+where <code class="docutils literal notranslate"><span class="pre">&lt;arch&gt;</span></code> is the device's architecture.</p></li>
+<li><p>The device's architecture does not match the exported one(s).
+Make sure your templates were built for that device's architecture,
+and that the export settings included support for that architecture.</p></li>
+</ul>
+<p>In any case, <code class="docutils literal notranslate"><span class="pre">adb</span> <span class="pre">logcat</span></code> should also show the cause of the error.</p>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="compiling_for_macos.html" class="btn btn-neutral float-left" title="Compiling for macOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="compiling_for_ios.html" class="btn btn-neutral float-right" title="Compiling for iOS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

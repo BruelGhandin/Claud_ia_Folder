@@ -1,0 +1,578 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Saving games" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/io/saving_games.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: Save games can be complicated. For example, it may be desirable to store information from multiple objects across multiple levels. Advanced save game systems should allow for addition..." />
+<meta name="description" content="Introduction: Save games can be complicated. For example, it may be desirable to store information from multiple objects across multiple levels. Advanced save game systems should allow for addition..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Saving games &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Runtime file loading and saving" href="runtime_file_loading_and_saving.html" />
+    <link rel="prev" title="File paths in Godot projects" href="data_paths.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/io/saving_games" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/io/saving_games.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">File and data I/O</a></li>
+      <li class="breadcrumb-item active">Saving games</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/io/saving_games.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="saving-games">
+<span id="doc-saving-games"></span><h1>Saving games<a class="headerlink" href="#saving-games" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Save games can be complicated. For example, it may be desirable
+to store information from multiple objects across multiple levels.
+Advanced save game systems should allow for additional information about
+an arbitrary number of objects. This will allow the save function to
+scale as the game grows more complex.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you're looking to save user configuration, you can use the
+<a class="reference internal" href="../../classes/class_configfile.html#class-configfile"><span class="std std-ref">ConfigFile</span></a> class for this purpose.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>You can see how saving and loading works in action using the
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects/blob/master/loading/serialization">Saving and Loading (Serialization) demo project</a>.</p>
+</div>
+</section>
+<section id="identify-persistent-objects">
+<h2>Identify persistent objects<a class="headerlink" href="#identify-persistent-objects" title="Link to this heading"></a></h2>
+<p>Firstly, we should identify what objects we want to keep between game
+sessions and what information we want to keep from those objects. For
+this tutorial, we will use groups to mark and handle objects to be saved,
+but other methods are certainly possible.</p>
+<p>We will start by adding objects we wish to save to the &quot;Persist&quot; group. We can
+do this through either the GUI or script. Let's add the relevant nodes using the
+GUI:</p>
+<img alt="../../_images/groups.webp" src="../../_images/groups.webp" />
+<p>Once this is done, when we need to save the game, we can get all objects
+to save them and then tell them all to save with this script:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">save_nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="nf">get_nodes_in_group</span><span class="p">(</span><span class="s2">&quot;Persist&quot;</span><span class="p">)</span>
+<span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">save_nodes</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Now, we can call our save function on each node.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">saveNodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetTree</span><span class="p">().</span><span class="n">GetNodesInGroup</span><span class="p">(</span><span class="s">&quot;Persist&quot;</span><span class="p">);</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">saveNode</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">saveNodes</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Now, we can call our save function on each node.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="serializing">
+<h2>Serializing<a class="headerlink" href="#serializing" title="Link to this heading"></a></h2>
+<p>The next step is to serialize the data. This makes it much easier to
+read from and store to disk. In this case, we're assuming each member of
+group Persist is an instanced node and thus has a path. GDScript
+has the helper class <a class="reference internal" href="../../classes/class_json.html#class-json"><span class="std std-ref">JSON</span></a> to convert between dictionary and string.
+Our node needs to contain a save function that returns this data.
+The save function will look like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">save</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">save_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;filename&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nf">get_scene_file_path</span><span class="p">(),</span>
+<span class="w">        </span><span class="s2">&quot;parent&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nf">get_parent</span><span class="p">()</span><span class="o">.</span><span class="nf">get_path</span><span class="p">(),</span>
+<span class="w">        </span><span class="s2">&quot;pos_x&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">position</span><span class="o">.</span><span class="vi">x</span><span class="p">,</span><span class="w"> </span><span class="c1"># Vector2 is not supported by JSON</span>
+<span class="w">        </span><span class="s2">&quot;pos_y&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">position</span><span class="o">.</span><span class="vi">y</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;attack&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">attack</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;defense&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">defense</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;current_health&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">current_health</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;max_health&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">max_health</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;damage&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">damage</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;regen&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">regen</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;experience&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">experience</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;tnl&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">tnl</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;level&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">level</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;attack_growth&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">attack_growth</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;defense_growth&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">defense_growth</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;health_growth&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">health_growth</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;is_alive&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">is_alive</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;last_attack&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">last_attack</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">save_dict</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">Variant</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Save</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">Variant</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Filename&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">SceneFilePath</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Parent&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">GetParent</span><span class="p">().</span><span class="n">GetPath</span><span class="p">()</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;PosX&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Position</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="c1">// Vector2 is not supported by JSON</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;PosY&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Position</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Attack&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Attack</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Defense&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Defense</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;CurrentHealth&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CurrentHealth</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;MaxHealth&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MaxHealth</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Damage&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Damage</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Regen&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Regen</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Experience&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Experience</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Tnl&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Tnl</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Level&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Level</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;AttackGrowth&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">AttackGrowth</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;DefenseGrowth&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">DefenseGrowth</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;HealthGrowth&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">HealthGrowth</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;IsAlive&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">IsAlive</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;LastAttack&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">LastAttack</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>This gives us a dictionary with the style
+<code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">&quot;variable_name&quot;:value_of_variable</span> <span class="pre">}</span></code>, which will be useful when
+loading.</p>
+</section>
+<section id="saving-and-reading-data">
+<h2>Saving and reading data<a class="headerlink" href="#saving-and-reading-data" title="Link to this heading"></a></h2>
+<p>As covered in the <a class="reference internal" href="../scripting/filesystem.html#doc-filesystem"><span class="std std-ref">File system</span></a> tutorial, we'll need to open a file
+so we can write to it or read from it. Now that we have a way to
+call our groups and get their relevant data, let's use the class <a class="reference internal" href="../../classes/class_json.html#class-json"><span class="std std-ref">JSON</span></a> to
+convert it into an easily stored string and store them in a file. Doing
+it this way ensures that each line is its own object, so we have an easy
+way to pull the data out of the file as well.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: This can be called from anywhere inside the tree. This function is</span>
+<span class="c1"># path independent.</span>
+<span class="c1"># Go through everything in the persist category and ask them to return a</span>
+<span class="c1"># dict of relevant variables.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">save_game</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">save_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">FileAccess</span><span class="o">.</span><span class="nf">open</span><span class="p">(</span><span class="s2">&quot;user://savegame.save&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">FileAccess</span><span class="o">.</span><span class="vi">WRITE</span><span class="p">)</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">save_nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="nf">get_nodes_in_group</span><span class="p">(</span><span class="s2">&quot;Persist&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">save_nodes</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Check the node is an instanced scene so it can be instanced again during load.</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">node</span><span class="o">.</span><span class="vi">scene_file_path</span><span class="o">.</span><span class="nf">is_empty</span><span class="p">():</span>
+<span class="w">            </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;persistent node &#39;</span><span class="si">%s</span><span class="s2">&#39; is not an instanced scene, skipped&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">node</span><span class="o">.</span><span class="vi">name</span><span class="p">)</span>
+<span class="w">            </span><span class="k k-ControlFlow">continue</span>
+
+<span class="w">        </span><span class="c1"># Check the node has a save function.</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="o">!</span><span class="n">node</span><span class="o">.</span><span class="nf">has_method</span><span class="p">(</span><span class="s2">&quot;save&quot;</span><span class="p">):</span>
+<span class="w">            </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;persistent node &#39;</span><span class="si">%s</span><span class="s2">&#39; is missing a save() function, skipped&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">node</span><span class="o">.</span><span class="vi">name</span><span class="p">)</span>
+<span class="w">            </span><span class="k k-ControlFlow">continue</span>
+
+<span class="w">        </span><span class="c1"># Call the node&#39;s save function.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">node_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s2">&quot;save&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c1"># JSON provides a static method to serialized JSON string.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">json_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="o">.</span><span class="nf">stringify</span><span class="p">(</span><span class="n">node_data</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c1"># Store the save dictionary as a new line in the save file.</span>
+<span class="w">        </span><span class="n">save_file</span><span class="o">.</span><span class="nf">store_line</span><span class="p">(</span><span class="n">json_string</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Note: This can be called from anywhere inside the tree. This function is</span>
+<span class="c1">// path independent.</span>
+<span class="c1">// Go through everything in the persist category and ask them to return a</span>
+<span class="c1">// dict of relevant variables.</span>
+<span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SaveGame</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">saveFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileAccess</span><span class="p">.</span><span class="n">Open</span><span class="p">(</span><span class="s">&quot;user://savegame.save&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FileAccess</span><span class="p">.</span><span class="n">ModeFlags</span><span class="p">.</span><span class="n">Write</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">saveNodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetTree</span><span class="p">().</span><span class="n">GetNodesInGroup</span><span class="p">(</span><span class="s">&quot;Persist&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">saveNode</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">saveNodes</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Check the node is an instanced scene so it can be instanced again during load.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">saveNode</span><span class="p">.</span><span class="n">SceneFilePath</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">$&quot;persistent node &#39;{saveNode.Name}&#39; is not an instanced scene, skipped&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Check the node has a save function.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">saveNode</span><span class="p">.</span><span class="n">HasMethod</span><span class="p">(</span><span class="s">&quot;Save&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">$&quot;persistent node &#39;{saveNode.Name}&#39; is missing a Save() function, skipped&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Call the node&#39;s save function.</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">nodeData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">saveNode</span><span class="p">.</span><span class="n">Call</span><span class="p">(</span><span class="s">&quot;Save&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Json provides a static method to serialized JSON string.</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">jsonString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Json</span><span class="p">.</span><span class="n">Stringify</span><span class="p">(</span><span class="n">nodeData</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Store the save dictionary as a new line in the save file.</span>
+<span class="w">        </span><span class="n">saveFile</span><span class="p">.</span><span class="n">StoreLine</span><span class="p">(</span><span class="n">jsonString</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Game saved! Now, to load, we'll read each
+line. Use the <a class="reference internal" href="../../classes/class_json.html#class-json-method-parse"><span class="std std-ref">parse</span></a> method to read the
+JSON string back to a dictionary, and then iterate over
+the dict to read our values. But we'll need to first create the object
+and we can use the filename and parent values to achieve that. Here is our
+load function:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: This can be called from anywhere inside the tree. This function</span>
+<span class="c1"># is path independent.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">load_game</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nb">FileAccess</span><span class="o">.</span><span class="nf">file_exists</span><span class="p">(</span><span class="s2">&quot;user://savegame.save&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="c1"># Error! We don&#39;t have a save to load.</span>
+
+<span class="w">    </span><span class="c1"># We need to revert the game state so we&#39;re not cloning objects</span>
+<span class="w">    </span><span class="c1"># during loading. This will vary wildly depending on the needs of a</span>
+<span class="w">    </span><span class="c1"># project, so take care with this step.</span>
+<span class="w">    </span><span class="c1"># For our example, we will accomplish this by deleting saveable objects.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">save_nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="nf">get_nodes_in_group</span><span class="p">(</span><span class="s2">&quot;Persist&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">save_nodes</span><span class="p">:</span>
+<span class="w">        </span><span class="n">i</span><span class="o">.</span><span class="nf">queue_free</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># Load the file line by line and process that dictionary to restore</span>
+<span class="w">    </span><span class="c1"># the object it represents.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">save_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">FileAccess</span><span class="o">.</span><span class="nf">open</span><span class="p">(</span><span class="s2">&quot;user://savegame.save&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">FileAccess</span><span class="o">.</span><span class="vi">READ</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">while</span><span class="w"> </span><span class="n">save_file</span><span class="o">.</span><span class="nf">get_position</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">save_file</span><span class="o">.</span><span class="nf">get_length</span><span class="p">():</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">json_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">save_file</span><span class="o">.</span><span class="nf">get_line</span><span class="p">()</span>
+
+<span class="w">        </span><span class="c1"># Creates the helper class to interact with JSON.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+
+<span class="w">        </span><span class="c1"># Check if there is any error while parsing the JSON string, skip in case of failure.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">parse_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">json_string</span><span class="p">)</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">parse_result</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">OK</span><span class="p">:</span>
+<span class="w">            </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;JSON Parse Error: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="nf">get_error_message</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; in &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">json_string</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; at line &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="nf">get_error_line</span><span class="p">())</span>
+<span class="w">            </span><span class="k k-ControlFlow">continue</span>
+
+<span class="w">        </span><span class="c1"># Get the data from the JSON object.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">node_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="vi">data</span>
+
+<span class="w">        </span><span class="c1"># Firstly, we need to create the object and add it to the tree and set its position.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">new_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">load</span><span class="p">(</span><span class="n">node_data</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">])</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+<span class="w">        </span><span class="nf">get_node</span><span class="p">(</span><span class="n">node_data</span><span class="p">[</span><span class="s2">&quot;parent&quot;</span><span class="p">])</span><span class="o">.</span><span class="nf">add_child</span><span class="p">(</span><span class="n">new_object</span><span class="p">)</span>
+<span class="w">        </span><span class="n">new_object</span><span class="o">.</span><span class="vi">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="n">node_data</span><span class="p">[</span><span class="s2">&quot;pos_x&quot;</span><span class="p">],</span><span class="w"> </span><span class="n">node_data</span><span class="p">[</span><span class="s2">&quot;pos_y&quot;</span><span class="p">])</span>
+
+<span class="w">        </span><span class="c1"># Now we set the remaining variables.</span>
+<span class="w">        </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">node_data</span><span class="o">.</span><span class="nf">keys</span><span class="p">():</span>
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;filename&quot;</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;parent&quot;</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;pos_x&quot;</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;pos_y&quot;</span><span class="p">:</span>
+<span class="w">                </span><span class="k k-ControlFlow">continue</span>
+<span class="w">            </span><span class="n">new_object</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">node_data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Note: This can be called from anywhere inside the tree. This function is</span>
+<span class="c1">// path independent.</span>
+<span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">LoadGame</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">FileAccess</span><span class="p">.</span><span class="n">FileExists</span><span class="p">(</span><span class="s">&quot;user://savegame.save&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">// Error! We don&#39;t have a save to load.</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// We need to revert the game state so we&#39;re not cloning objects during loading.</span>
+<span class="w">    </span><span class="c1">// This will vary wildly depending on the needs of a project, so take care with</span>
+<span class="w">    </span><span class="c1">// this step.</span>
+<span class="w">    </span><span class="c1">// For our example, we will accomplish this by deleting saveable objects.</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">saveNodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetTree</span><span class="p">().</span><span class="n">GetNodesInGroup</span><span class="p">(</span><span class="s">&quot;Persist&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">saveNode</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">saveNodes</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">saveNode</span><span class="p">.</span><span class="n">QueueFree</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Load the file line by line and process that dictionary to restore the object</span>
+<span class="w">    </span><span class="c1">// it represents.</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">saveFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileAccess</span><span class="p">.</span><span class="n">Open</span><span class="p">(</span><span class="s">&quot;user://savegame.save&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FileAccess</span><span class="p">.</span><span class="n">ModeFlags</span><span class="p">.</span><span class="n">Read</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">saveFile</span><span class="p">.</span><span class="n">GetPosition</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">saveFile</span><span class="p">.</span><span class="n">GetLength</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">jsonString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">saveFile</span><span class="p">.</span><span class="n">GetLine</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Creates the helper class to interact with JSON.</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Json</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">parseResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">json</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">jsonString</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">parseResult</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Error</span><span class="p">.</span><span class="n">Ok</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">$&quot;JSON Parse Error: {json.GetErrorMessage()} in {jsonString} at line {json.GetErrorLine()}&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Get the data from the JSON object.</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">nodeData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">Variant</span><span class="o">&gt;</span><span class="p">((</span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="p">)</span><span class="n">json</span><span class="p">.</span><span class="n">Data</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Firstly, we need to create the object and add it to the tree and set its position.</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">newObjectScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">PackedScene</span><span class="o">&gt;</span><span class="p">(</span><span class="n">nodeData</span><span class="p">[</span><span class="s">&quot;Filename&quot;</span><span class="p">].</span><span class="n">ToString</span><span class="p">());</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">newObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newObjectScene</span><span class="p">.</span><span class="n">Instantiate</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">GetNode</span><span class="p">(</span><span class="n">nodeData</span><span class="p">[</span><span class="s">&quot;Parent&quot;</span><span class="p">].</span><span class="n">ToString</span><span class="p">()).</span><span class="n">AddChild</span><span class="p">(</span><span class="n">newObject</span><span class="p">);</span>
+<span class="w">        </span><span class="n">newObject</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">Node2D</span><span class="p">.</span><span class="n">PropertyName</span><span class="p">.</span><span class="n">Position</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">nodeData</span><span class="p">[</span><span class="s">&quot;PosX&quot;</span><span class="p">],</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">nodeData</span><span class="p">[</span><span class="s">&quot;PosY&quot;</span><span class="p">]));</span>
+
+<span class="w">        </span><span class="c1">// Now we set the remaining variables.</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">nodeData</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Filename&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Parent&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;PosX&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;PosY&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">newObject</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Now we can save and load an arbitrary number of objects laid out
+almost anywhere across the scene tree! Each object can store different
+data depending on what it needs to save.</p>
+</section>
+<section id="some-notes">
+<h2>Some notes<a class="headerlink" href="#some-notes" title="Link to this heading"></a></h2>
+<p>We have glossed over setting up the game state for loading. It's ultimately up
+to the project creator where much of this logic goes.
+This is often complicated and will need to be heavily
+customized based on the needs of the individual project.</p>
+<p>Additionally, our implementation assumes no Persist objects are children of other
+Persist objects. Otherwise, invalid paths would be created. To
+accommodate nested Persist objects, consider saving objects in stages.
+Load parent objects first so they are available for the <a class="reference internal" href="../../classes/class_node.html#class-node-method-add-child"><span class="std std-ref">add_child()</span></a>
+call when child objects are loaded. You will also need a way to link
+children to parents as the <a class="reference internal" href="../../classes/class_nodepath.html#class-nodepath"><span class="std std-ref">NodePath</span></a> will likely be invalid.</p>
+</section>
+<section id="json-vs-binary-serialization">
+<h2>JSON vs binary serialization<a class="headerlink" href="#json-vs-binary-serialization" title="Link to this heading"></a></h2>
+<p>For simple game state, JSON may work and it generates human-readable files that are easy to debug.</p>
+<p>But JSON has many limitations. If you need to store more complex game state or
+a lot of it, <a class="reference internal" href="binary_serialization_api.html#doc-binary-serialization-api"><span class="std std-ref">binary serialization</span></a>
+may be a better approach.</p>
+<section id="json-limitations">
+<h3>JSON limitations<a class="headerlink" href="#json-limitations" title="Link to this heading"></a></h3>
+<p>Here are some important gotchas to know about when using JSON.</p>
+<ul class="simple">
+<li><p><strong>Filesize:</strong>
+JSON stores data in text format, which is much larger than binary formats.</p></li>
+<li><p><strong>Data types:</strong>
+JSON only offers a limited set of data types. If you have data types
+that JSON doesn't have, you will need to translate your data to and
+from types that JSON can handle. For example, some important types that JSON
+can't parse are: <code class="docutils literal notranslate"><span class="pre">Vector2</span></code>, <code class="docutils literal notranslate"><span class="pre">Vector3</span></code>, <code class="docutils literal notranslate"><span class="pre">Color</span></code>, <code class="docutils literal notranslate"><span class="pre">Rect2</span></code>, and <code class="docutils literal notranslate"><span class="pre">Quaternion</span></code>.</p></li>
+<li><p><strong>Custom logic needed for encoding/decoding:</strong>
+If you have any custom classes that you want to store with JSON, you will
+need to write your own logic for encoding and decoding those classes.</p></li>
+</ul>
+</section>
+<section id="binary-serialization">
+<h3>Binary serialization<a class="headerlink" href="#binary-serialization" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="binary_serialization_api.html#doc-binary-serialization-api"><span class="std std-ref">Binary serialization</span></a> is an alternative
+approach for storing game state, and you can use it with the functions
+<code class="docutils literal notranslate"><span class="pre">get_var</span></code> and <code class="docutils literal notranslate"><span class="pre">store_var</span></code> of <a class="reference internal" href="../../classes/class_fileaccess.html#class-fileaccess"><span class="std std-ref">FileAccess</span></a>.</p>
+<ul class="simple">
+<li><p>Binary serialization should produce smaller files than JSON.</p></li>
+<li><p>Binary serialization can handle most common data types.</p></li>
+<li><p>Binary serialization requires less custom logic for encoding and decoding
+custom classes.</p></li>
+</ul>
+<p>Note that not all properties are included. Only properties that are configured
+with the <a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-constant-property-usage-storage"><span class="std std-ref">PROPERTY_USAGE_STORAGE</span></a>
+flag set will be serialized. You can add a new usage flag to a property by overriding the
+<a class="reference internal" href="../../classes/class_object.html#class-object-private-method-get-property-list"><span class="std std-ref">_get_property_list</span></a>
+method in your class. You can also check how property usage is configured by
+calling <code class="docutils literal notranslate"><span class="pre">Object._get_property_list</span></code>.
+See <a class="reference internal" href="../../classes/class_%40globalscope.html#enum-globalscope-propertyusageflags"><span class="std std-ref">PropertyUsageFlags</span></a> for the
+possible usage flags.</p>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="data_paths.html" class="btn btn-neutral float-left" title="File paths in Godot projects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="runtime_file_loading_and_saving.html" class="btn btn-neutral float-right" title="Runtime file loading and saving" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

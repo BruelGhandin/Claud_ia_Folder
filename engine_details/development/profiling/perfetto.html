@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Perfetto" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/development/profiling/perfetto.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Perfetto is the default tracing system for Android. In fact, its system tracing service has been built into the platform since Android 9. Using official Perfetto templates: Starting with Godot 4.7,..." />
+<meta name="description" content="Perfetto is the default tracing system for Android. In fact, its system tracing service has been built into the platform since Android 9. Using official Perfetto templates: Starting with Godot 4.7,..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Perfetto &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Tracy" href="tracy.html" />
+    <link rel="prev" title="Instruments" href="instruments.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/development/profiling/perfetto" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="engine_details/development/profiling/perfetto.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Engine development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Using C++ profilers</a></li>
+      <li class="breadcrumb-item active">Perfetto</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/development/profiling/perfetto.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="perfetto">
+<span id="doc-profiler-perfetto"></span><h1>Perfetto<a class="headerlink" href="#perfetto" title="Link to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Please see the <a class="reference internal" href="index.html#doc-tracing-profilers"><span class="std std-ref">tracing profiler instructions</span></a> for more information.</p>
+</div>
+<p><a class="reference external" href="https://perfetto.dev">Perfetto</a> is the default tracing system for Android. In fact, its system tracing
+service has been built into the platform since Android 9.</p>
+<section id="using-official-perfetto-templates">
+<h2>Using official Perfetto templates<a class="headerlink" href="#using-official-perfetto-templates" title="Link to this heading"></a></h2>
+<p>Starting with Godot 4.7, Perfetto export templates are provided for every stable Godot release and can be
+downloaded from the <a class="reference external" href="https://github.com/godotengine/godot/releases/">GitHub Releases page</a>.</p>
+<section id="using-the-gradle-build-template">
+<h3>Using the Gradle build template<a class="headerlink" href="#using-the-gradle-build-template" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Navigate to the release page and download the <code class="docutils literal notranslate"><span class="pre">Godot_v&lt;godot_version&gt;_android_source.perfetto.zip</span></code>
+release artifact where <code class="docutils literal notranslate"><span class="pre">godot_version</span></code> corresponds to the version of the engine being used.</p></li>
+<li><p>In the <strong>Project &gt; Export</strong> dialog, <strong>Advanced Options</strong> and <strong>Use Gradle Build</strong> must be enabled.</p></li>
+<li><p>Point <strong>Android Source Template</strong> to the downloaded export template.</p></li>
+</ul>
+<img alt="../../../_images/cpp_profiler_perfetto_gradle_build_config.webp" src="../../../_images/cpp_profiler_perfetto_gradle_build_config.webp" />
+<p>Follow the instructions in the <a class="reference internal" href="#doc-profiler-perfetto-configuration"><span class="std std-ref">Configuration section</span></a> to
+learn how to configure and create a trace.</p>
+</section>
+<section id="using-non-gradle-build-templates">
+<h3>Using non-gradle build templates<a class="headerlink" href="#using-non-gradle-build-templates" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Navigate to the release page and download the following release artifacts
+where <code class="docutils literal notranslate"><span class="pre">godot_version</span></code> corresponds to the version of the engine being used:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Godot_v&lt;godot_version&gt;_android_debug.perfetto.apk</span></code> (for debug builds)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Godot_v&lt;godot_version&gt;_android_release.perfetto.apk</span></code> (for release builds)</p></li>
+</ul>
+</li>
+<li><p>In the <strong>Project &gt; Export</strong> dialog:</p>
+<ul>
+<li><p><strong>Advanced Options</strong> must be enabled</p></li>
+<li><p><strong>Use Gradle Build</strong> must be disabled</p></li>
+</ul>
+</li>
+<li><p>Point <strong>Custom Template</strong> to the downloaded export templates.</p></li>
+</ul>
+<img alt="../../../_images/cpp_profiler_perfetto_non_gradle_build_config.webp" src="../../../_images/cpp_profiler_perfetto_non_gradle_build_config.webp" />
+<p>Follow the instructions in the <a class="reference internal" href="#doc-profiler-perfetto-configuration"><span class="std std-ref">Configuration section</span></a> to
+learn how to configure and create a trace.</p>
+</section>
+</section>
+<section id="custom-godot-builds-with-perfetto-support">
+<h2>Custom Godot builds with Perfetto support<a class="headerlink" href="#custom-godot-builds-with-perfetto-support" title="Link to this heading"></a></h2>
+<p>From the <code class="docutils literal notranslate"><span class="pre">godot</span></code> root directory, run the following python script to install
+the latest version of the Perfetto SDK under <code class="docutils literal notranslate"><span class="pre">thirdparty/perfetto</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>misc/scripts/install_perfetto.py
+</pre></div>
+</div>
+<p>Next, build the Android debug or release templates for your architecture using
+<code class="docutils literal notranslate"><span class="pre">scons</span></code> (per <a class="reference internal" href="../compiling/compiling_for_android.html#doc-compiling-for-android"><span class="std std-ref">Compiling for Android</span></a>), but
+adding the <code class="docutils literal notranslate"><span class="pre">profiler=perfetto</span></code> argument.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It's generally recommended to profile release templates, because that is
+the version your players will use, and it will perform differently than
+other types of builds. However, in the case of Android, it can sometimes
+be useful to use debug templates, because Godot can only do remote
+debugging of games exported from debug templates.</p>
+</div>
+<p>For example, to build the release templates for arm64:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>android<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm64<span class="w"> </span><span class="nv">generate_android_binaries</span><span class="o">=</span>yes<span class="w"> </span><span class="nv">profiler</span><span class="o">=</span>perfetto
+</pre></div>
+</div>
+</section>
+<section id="configuration">
+<span id="doc-profiler-perfetto-configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<p>Perfetto requires a configuration file to tell it which events to track.</p>
+<p>Create a file called <code class="docutils literal notranslate"><span class="pre">godot.config</span></code> with this content:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Trace for 10 seconds.
+duration_ms: 10000
+
+buffers {
+    size_kb: 32768
+    fill_policy: RING_BUFFER
+}
+
+# Write to file once every second to prevent overflowing the buffer.
+write_into_file: true
+file_write_period_ms: 1000
+
+# Track events in the &quot;godot&quot; category.
+data_sources {
+    config {
+        name: &quot;track_event&quot;
+        track_event_config {
+            enabled_categories: &quot;godot&quot;
+        }
+    }
+}
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Godot records two categories of track events:</p>
+<ul class="simple">
+<li><p><strong>godot</strong>: Used to record Godot engine events. This is used for performance analysis.
+Event tracing overhead should not significantly impact performance.
+This should be the typical tracing mode for most developers.</p></li>
+<li><p><strong>godot_scripting</strong>: Used to record Godot scripting events.
+This is a slow category as it profiles the entire game scripting logic.
+This is used for code understanding / debugging / finding what caused a frame hitch.
+Performance is much slower, but it helps to find that one problematic function call that was otherwise hidden.</p></li>
+</ul>
+</div>
+</section>
+<section id="record-a-trace">
+<h2>Record a trace<a class="headerlink" href="#record-a-trace" title="Link to this heading"></a></h2>
+<p>Finally, launch your game on an Android device using the export templates you
+built earlier.</p>
+<p>When you're ready to record a trace (for example, when you've hit the part of
+your game that is exhibiting performance issues), you can
+use <a class="reference external" href="https://github.com/google/perfetto/blob/main/tools/record_android_trace">this script from the Perfetto GitHub repository</a>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./record_android_trace<span class="w"> </span>-c<span class="w"> </span>/path/to/godot.config
+</pre></div>
+</div>
+<p>This will record for 10 seconds (per the configuration), or until you press
+<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd>.</p>
+</section>
+<section id="examining-the-trace">
+<h2>Examining the trace<a class="headerlink" href="#examining-the-trace" title="Link to this heading"></a></h2>
+<p>As soon as that script exits, it will launch the Perfetto UI in a web browser.</p>
+<p>To see the Godot events, expand the row for your application by clicking on its
+Android <em>Unique Name</em> / <em>Package Name</em> / <em>App ID</em> (Perfetto will also include some events from system
+services in the trace).</p>
+<img alt="../../../_images/cpp_profiler_perfetto.webp" src="../../../_images/cpp_profiler_perfetto.webp" />
+<p>Then you can use the <code class="docutils literal notranslate"><span class="pre">WASD</span></code> keys to navigate the graph:</p>
+<ul class="simple">
+<li><p>Press <kbd class="kbd docutils literal notranslate">A</kbd> or <kbd class="kbd docutils literal notranslate">D</kbd> to navigate forward or backward along the timeline</p></li>
+<li><p>Press <kbd class="kbd docutils literal notranslate">W</kbd> or <kbd class="kbd docutils literal notranslate">S</kbd> to zoom in or out</p></li>
+</ul>
+<p>You'll probably need to zoom a bit before you're able to see the individual
+events from Godot.</p>
+<p>To learn more, see the
+<a class="reference external" href="https://perfetto.dev/docs/visualization/perfetto-ui">Perfetto UI documentation</a>.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="instruments.html" class="btn btn-neutral float-left" title="Instruments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tracy.html" class="btn btn-neutral float-right" title="Tracy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,595 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Data preferences" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/best_practices/data_preferences.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Ever wondered whether one should approach problem X with data structure Y or Z? This article covers a variety of topics related to these dilemmas. Array vs. Dictionary vs. Object: Godot stores all ..." />
+<meta name="description" content="Ever wondered whether one should approach problem X with data structure Y or Z? This article covers a variety of topics related to these dilemmas. Array vs. Dictionary vs. Object: Godot stores all ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Data preferences &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Logic preferences" href="logic_preferences.html" />
+    <link rel="prev" title="Godot notifications" href="godot_notifications.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/best_practices/data_preferences" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/best_practices/data_preferences.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Best practices</a></li>
+      <li class="breadcrumb-item active">Data preferences</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/best_practices/data_preferences.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+    <div class="admonition attention article-status">
+      <p class="first admonition-title">Work in progress</p>
+      <p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.7</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+    </div>
+    
+  </div>
+  
+
+  
+  <section id="data-preferences">
+<span id="doc-data-preferences"></span><h1>Data preferences<a class="headerlink" href="#data-preferences" title="Link to this heading"></a></h1>
+<p>Ever wondered whether one should approach problem X with data structure
+Y or Z? This article covers a variety of topics related to these dilemmas.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This article makes references to &quot;[something]-time&quot; operations. This
+terminology comes from algorithm analysis'
+<a class="reference external" href="https://rob-bell.net/2009/06/a-beginners-guide-to-big-o-notation/">Big O Notation</a>.</p>
+<p>Long-story short, it describes the worst-case scenario of runtime length.
+In laymen's terms:</p>
+<p>&quot;As the size of a problem domain increases, the runtime length of the
+algorithm...&quot;</p>
+<ul class="simple">
+<li><p>Constant-time, <code class="docutils literal notranslate"><span class="pre">O(1)</span></code>: &quot;...does not increase.&quot;</p></li>
+<li><p>Logarithmic-time, <code class="docutils literal notranslate"><span class="pre">O(log</span> <span class="pre">n)</span></code>: &quot;...increases at a slow rate.&quot;</p></li>
+<li><p>Linear-time, <code class="docutils literal notranslate"><span class="pre">O(n)</span></code>: &quot;...increases at the same rate.&quot;</p></li>
+<li><p>Etc.</p></li>
+</ul>
+<p>Imagine if one had to process 3 million data points within a single frame. It
+would be impossible to craft the feature with a linear-time algorithm since
+the sheer size of the data would increase the runtime far beyond the time allotted.
+In comparison, using a constant-time algorithm could handle the operation without
+issue.</p>
+<p>By and large, developers want to avoid engaging in linear-time operations as
+much as possible. But, if one keeps the scale of a linear-time operation
+small, and if one does not need to perform the operation often, then it may
+be acceptable. Balancing these requirements and choosing the right
+algorithm / data structure for the job is part of what makes programmers'
+skills valuable.</p>
+</div>
+<section id="array-vs-dictionary-vs-object">
+<h2>Array vs. Dictionary vs. Object<a class="headerlink" href="#array-vs-dictionary-vs-object" title="Link to this heading"></a></h2>
+<p>Godot stores all variables in the scripting API in the
+<a class="reference internal" href="../../engine_details/architecture/variant_class.html#doc-variant-class"><span class="std std-ref">Variant</span></a> class.
+Variants can store Variant-compatible data structures such as
+<a class="reference internal" href="../../classes/class_array.html#class-array"><span class="std std-ref">Array</span></a> and <a class="reference internal" href="../../classes/class_dictionary.html#class-dictionary"><span class="std std-ref">Dictionary</span></a> as well
+as <a class="reference internal" href="../../classes/class_object.html#class-object"><span class="std std-ref">Objects</span></a>.</p>
+<p>Godot implements Array as a <code class="docutils literal notranslate"><span class="pre">Vector&lt;Variant&gt;</span></code>. The engine stores the Array
+contents in a contiguous section of memory, i.e. they are in a row adjacent
+to each other.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For those unfamiliar with C++, a Vector is the name of the
+array object in traditional C++ libraries. It is a &quot;templated&quot;
+type, meaning that its records can only contain a particular type (denoted
+by angled brackets). So, for example, a
+<a class="reference internal" href="../../classes/class_packedstringarray.html#class-packedstringarray"><span class="std std-ref">PackedStringArray</span></a> would be something like
+a <code class="docutils literal notranslate"><span class="pre">Vector&lt;String&gt;</span></code>.</p>
+</div>
+<p>Contiguous memory stores imply the following operation performance:</p>
+<ul>
+<li><p><strong>Iterate:</strong> Fastest. Great for loops.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Op: All it does is increment a counter to get to the next record.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Insert, Erase, Move:</strong> Position-dependent. Generally slow.</p>
+<blockquote>
+<div><ul>
+<li><p>Op: Adding/removing/moving content involves moving the adjacent records
+over (to make room / fill space).</p></li>
+<li><p>Fast add/remove <em>from the end</em>.</p></li>
+<li><p>Slow add/remove <em>from an arbitrary position</em>.</p></li>
+<li><p>Slowest add/remove <em>from the front</em>.</p></li>
+<li><p>If doing many inserts/removals <em>from the front</em>, then...</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>invert the array.</p></li>
+<li><p>do a loop which executes the Array changes <em>at the end</em>.</p></li>
+<li><p>re-invert the array.</p></li>
+</ol>
+</div></blockquote>
+<p>This makes only 2 copies of the array (still constant time, but slow)
+versus copying roughly 1/2 of the array, on average, N times (linear time).</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Get, Set:</strong> Fastest <em>by position</em>. E.g. can request 0th, 2nd, 10th record, etc.
+but cannot specify which record you want.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Op: 1 addition operation from array start position up to desired index.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Find:</strong> Slowest. Identifies the index/position of a value.</p>
+<blockquote>
+<div><ul>
+<li><p>Op: Must iterate through array and compare values until one finds a match.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Performance is also dependent on whether one needs an exhaustive
+search.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>If kept ordered, custom search operations can bring it to logarithmic
+time (relatively fast). Laymen users won't be comfortable with this
+though. Done by re-sorting the Array after every edit and writing an
+ordered-aware search algorithm.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Godot implements Dictionary as a <code class="docutils literal notranslate"><span class="pre">HashMap&lt;Variant,</span> <span class="pre">Variant,</span> <span class="pre">VariantHasher,</span> <span class="pre">StringLikeVariantComparator&gt;</span></code>. The engine
+stores a small array (initialized to 2^3 or 8 records) of key-value pairs. When
+one attempts to access a value, they provide it a key. It then <em>hashes</em> the
+key, i.e. converts it into a number. The &quot;hash&quot; is used to calculate the index
+into the array. As an array, the HM then has a quick lookup within the &quot;table&quot;
+of keys mapped to values. When the HashMap becomes too full, it increases to
+the next power of 2 (so, 16 records, then 32, etc.) and rebuilds the structure.</p>
+<p>Hashes are to reduce the chance of a key collision. If one occurs, the table
+must recalculate another index for the value that takes the previous position
+into account. In all, this results in constant-time access to all records at
+the expense of memory and some minor operational efficiency.</p>
+<ol class="arabic">
+<li><p>Hashing every key an arbitrary number of times.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Hash operations are constant-time, so even if an algorithm must do more
+than one, as long as the number of hash calculations doesn't become
+too dependent on the density of the table, things will stay fast.
+Which leads to...</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Maintaining an ever-growing size for the table.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>HashMaps maintain gaps of unused memory interspersed in the table
+on purpose to reduce hash collisions and maintain the speed of
+accesses. This is why it constantly increases in size exponentially by
+powers of 2.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p>As one might be able to tell, Dictionaries specialize in tasks that Arrays
+do not. An overview of their operational details is as follows:</p>
+<ul>
+<li><p><strong>Iterate:</strong> Fast.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Op: Iterate over the map's internal vector of hashes. Return each key.
+Afterwards, users then use the key to jump to and return the desired
+value.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Insert, Erase, Move:</strong> Fastest.</p>
+<blockquote>
+<div><ul>
+<li><p>Op: Hash the given key. Do 1 addition operation to look up the
+appropriate value (array start + offset). Move is two of these
+(one insert, one erase). The map must do some maintenance to preserve
+its capabilities:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>update ordered List of records.</p></li>
+<li><p>determine if table density mandates a need to expand table capacity.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>The Dictionary remembers in what
+order users inserted its keys. This enables it to execute reliable iterations.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Get, Set:</strong> Fastest. Same as a lookup <em>by key</em>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Op: Same as insert/erase/move.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Find:</strong> Slowest. Identifies the key of a value.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Op: Must iterate through records and compare the value until a match is
+found.</p></li>
+<li><p>Note that Godot does not provide this feature out-of-the-box (because
+they aren't meant for this task).</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Godot implements Objects as stupid, but dynamic containers of data content.
+Objects query data sources when posed questions. For example, to answer
+the question, &quot;do you have a property called, 'position'?&quot;, it might ask
+its <a class="reference internal" href="../../classes/class_script.html#class-script"><span class="std std-ref">script</span></a> or the <a class="reference internal" href="../../classes/class_classdb.html#class-classdb"><span class="std std-ref">ClassDB</span></a>.
+One can find more information about what objects are and how they work in
+the <a class="reference internal" href="what_are_godot_classes.html#doc-what-are-godot-classes"><span class="std std-ref">Applying object-oriented principles in Godot</span></a> article.</p>
+<p>The important detail here is the complexity of the Object's task. Every time
+it performs one of these multi-source queries, it runs through <em>several</em>
+iteration loops and HashMap lookups. What's more, the queries are linear-time
+operations dependent on the Object's inheritance hierarchy size. If the class
+the Object queries (its current class) doesn't find anything, the request
+defers to the next base class, all the way up until the original Object class.
+While these are each fast operations in isolation, the fact that it must make
+so many checks is what makes them slower than both of the alternatives for
+looking up data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When developers mention how slow the scripting API is, it is this chain
+of queries they refer to. Compared to compiled C++ code where the
+application knows exactly where to go to find anything, it is inevitable
+that scripting API operations will take much longer. They must locate the
+source of any relevant data before they can attempt to access it.</p>
+<p>The reason GDScript is slow is because every operation it performs passes
+through this system.</p>
+<p>C# can process some content at higher speeds via more optimized bytecode.
+But, if the C# script calls into an engine class'
+content or if the script tries to access something external to it, it will
+go through this pipeline.</p>
+<p>NativeScript C++ goes even further and keeps everything internal by default.
+Calls into external structures will go through the scripting API. In
+NativeScript C++, registering methods to expose them to the scripting API is
+a manual task. It is at this point that external, non-C++ classes will use
+the API to locate them.</p>
+</div>
+<p>So, assuming one extends from Reference to create a data structure, like
+an Array or Dictionary, why choose an Object over the other two options?</p>
+<ol class="arabic simple">
+<li><p><strong>Control:</strong> With objects comes the ability to create more sophisticated
+structures. One can layer abstractions over the data to ensure the external
+API doesn't change in response to internal data structure changes. What's
+more, Objects can have signals, allowing for reactive behavior.</p></li>
+<li><p><strong>Clarity:</strong> Objects are a reliable data source when it comes to the data
+that scripts and engine classes define for them. Properties may not hold the
+values one expects, but one doesn't need to worry about whether the property
+exists in the first place.</p></li>
+<li><p><strong>Convenience:</strong> If one already has a similar data structure in mind, then
+extending from an existing class makes the task of building the data
+structure much easier. In comparison, Arrays and Dictionaries don't
+fulfill all use cases one might have.</p></li>
+</ol>
+<p>Objects also give users the opportunity to create even more specialized data
+structures. With it, one can design their own List, Binary Search Tree, Heap,
+Splay Tree, Graph, Disjoint Set, and any host of other options.</p>
+<p>&quot;Why not use Node for tree structures?&quot; one might ask. Well, the Node
+class contains things that won't be relevant to one's custom data structure.
+As such, it can be helpful to construct one's own node type when building
+tree structures.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">class_name</span><span class="w"> </span><span class="nc">TreeNode</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb nb-Type">Object</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">_parent</span><span class="p">:</span><span class="w"> </span><span class="nc">TreeNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">null</span>
+<span class="k">var</span><span class="w"> </span><span class="n">_children</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_notification</span><span class="p">(</span><span class="n">p_what</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">match</span><span class="w"> </span><span class="n">p_what</span><span class="p">:</span>
+<span class="w">        </span><span class="n">NOTIFICATION_PREDELETE</span><span class="p">:</span>
+<span class="w">            </span><span class="c1"># Destructor.</span>
+<span class="w">            </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">a_child</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">_children</span><span class="p">:</span>
+<span class="w">                </span><span class="n">a_child</span><span class="o">.</span><span class="nf">free</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span>
+
+<span class="c1">// Can decide whether to expose getters/setters for properties later</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">TreeNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GodotObject</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">TreeNode</span><span class="w"> </span><span class="n">_parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Notification</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">what</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">what</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">NotificationPredelete</span><span class="p">:</span>
+<span class="w">                </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">TreeNode</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">_children</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">node</span><span class="p">.</span><span class="n">Free</span><span class="p">();</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>From here, one can then create their own structures with specific features,
+limited only by their imagination.</p>
+</section>
+<section id="enumerations-int-vs-string">
+<h2>Enumerations: int vs. string<a class="headerlink" href="#enumerations-int-vs-string" title="Link to this heading"></a></h2>
+<p>Most languages offer an enumeration type option. GDScript is no different, but
+unlike most other languages, it allows one to use either integers or strings for
+the enum values (the latter only when using the <code class="docutils literal notranslate"><span class="pre">&#64;export_enum</span></code> annotation in GDScript).
+The question then arises, &quot;which should one use?&quot;</p>
+<p>The short answer is, &quot;whichever you are more comfortable with.&quot; This
+is a feature specific to GDScript and not Godot scripting in general;
+The languages prioritizes usability over performance.</p>
+<p>On a technical level, integer comparisons (constant-time) will happen
+faster than string comparisons (linear-time). If one wants to keep
+up other languages' conventions though, then one should use integers.</p>
+<p>The primary issue with using integers comes up when one wants to <em>print</em>
+an enum value. As integers, attempting to print <code class="docutils literal notranslate"><span class="pre">MY_ENUM</span></code> will print
+<code class="docutils literal notranslate"><span class="pre">5</span></code> or what-have-you, rather than something like <code class="docutils literal notranslate"><span class="pre">&quot;MyEnum&quot;</span></code>. To
+print an integer enum, one would have to write a Dictionary that maps the
+corresponding string value for each enum.</p>
+<p>If the primary purpose of using an enum is for printing values and one wishes
+to group them together as related concepts, then it makes sense to use them as
+strings. That way, a separate data structure to execute on the printing is
+unnecessary.</p>
+</section>
+<section id="animatedtexture-vs-animatedsprite2d-vs-animationplayer-vs-animationtree">
+<h2>AnimatedTexture vs. AnimatedSprite2D vs. AnimationPlayer vs. AnimationTree<a class="headerlink" href="#animatedtexture-vs-animatedsprite2d-vs-animationplayer-vs-animationtree" title="Link to this heading"></a></h2>
+<p>Under what circumstances should one use each of Godot's animation classes?
+The answer may not be immediately clear to new Godot users.</p>
+<p><a class="reference internal" href="../../classes/class_animatedtexture.html#class-animatedtexture"><span class="std std-ref">AnimatedTexture</span></a> is a texture that
+the engine draws as an animated loop rather than a static image.
+Users can manipulate...</p>
+<ol class="arabic simple">
+<li><p>the rate at which it moves across each section of the texture (FPS).</p></li>
+<li><p>the number of regions contained within the texture (frames).</p></li>
+</ol>
+<p>Godot's <a class="reference internal" href="../../classes/class_renderingserver.html#class-renderingserver"><span class="std std-ref">RenderingServer</span></a> then draws
+the regions in sequence at the prescribed rate. The good news is that this
+involves no extra logic on the part of the engine. The bad news is
+that users have very little control.</p>
+<p>Also note that AnimatedTexture is a <a class="reference internal" href="../../classes/class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> unlike
+the other <a class="reference internal" href="../../classes/class_node.html#class-node"><span class="std std-ref">Node</span></a> objects discussed here. One might create
+a <a class="reference internal" href="../../classes/class_sprite2d.html#class-sprite2d"><span class="std std-ref">Sprite2D</span></a> node that uses AnimatedTexture as its texture.
+Or (something the others can't do) one could add AnimatedTextures as tiles
+in a <a class="reference internal" href="../../classes/class_tileset.html#class-tileset"><span class="std std-ref">TileSet</span></a> and integrate it with a
+<a class="reference internal" href="../../classes/class_tilemaplayer.html#class-tilemaplayer"><span class="std std-ref">TileMapLayer</span></a> for many auto-animating backgrounds that
+all render in a single batched draw call.</p>
+<p>The <a class="reference internal" href="../../classes/class_animatedsprite2d.html#class-animatedsprite2d"><span class="std std-ref">AnimatedSprite2D</span></a> node, in combination with the
+<a class="reference internal" href="../../classes/class_spriteframes.html#class-spriteframes"><span class="std std-ref">SpriteFrames</span></a> resource, allows one to create a
+variety of animation sequences through spritesheets, flip between animations,
+and control their speed, regional offset, and orientation. This makes them
+well-suited to controlling 2D frame-based animations.</p>
+<p>If one needs to trigger other effects in relation to animation changes (for
+example, create particle effects, call functions, or manipulate other
+peripheral elements besides the frame-based animation), then one will need to use
+an <a class="reference internal" href="../../classes/class_animationplayer.html#class-animationplayer"><span class="std std-ref">AnimationPlayer</span></a> node in conjunction with
+the AnimatedSprite2D.</p>
+<p>AnimationPlayers are also the tool one will need to use if they wish to design
+more complex 2D animation systems, such as...</p>
+<ol class="arabic simple">
+<li><p><strong>Cut-out animations:</strong> editing sprites' transforms at runtime.</p></li>
+<li><p><strong>2D Mesh animations:</strong> defining a region for the sprite's texture and
+rigging a skeleton to it. Then one animates the bones which
+stretch and bend the texture in proportion to the bones' relationships to
+each other.</p></li>
+<li><p>A mix of the above.</p></li>
+</ol>
+<p>While one needs an AnimationPlayer to design each of the individual
+animation sequences for a game, it can also be useful to combine animations
+for blending, i.e. enabling smooth transitions between these animations. There
+may also be a hierarchical structure between animations that one plans out for
+their object. These are the cases where the <a class="reference internal" href="../../classes/class_animationtree.html#class-animationtree"><span class="std std-ref">AnimationTree</span></a>
+shines. See the <a class="reference internal" href="../animation/animation_tree.html#doc-animation-tree"><span class="std std-ref">in-depth guide on using the AnimationTree</span></a>
+for more details.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="godot_notifications.html" class="btn btn-neutral float-left" title="Godot notifications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="logic_preferences.html" class="btn btn-neutral float-right" title="Logic preferences" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

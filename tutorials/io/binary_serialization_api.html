@@ -1,0 +1,1406 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Binary serialization API" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/io/binary_serialization_api.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: Godot has a serialization API based on Variant. It&#x27;s used for converting data types to an array of bytes efficiently. This API is exposed via the global bytes_to_var() and var_to..." />
+<meta name="description" content="Introduction: Godot has a serialization API based on Variant. It&#x27;s used for converting data types to an array of bytes efficiently. This API is exposed via the global bytes_to_var() and var_to..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Binary serialization API &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Internationalization" href="../i18n/index.html" />
+    <link rel="prev" title="Runtime file loading and saving" href="runtime_file_loading_and_saving.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/io/binary_serialization_api" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/io/binary_serialization_api.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">File and data I/O</a></li>
+      <li class="breadcrumb-item active">Binary serialization API</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/io/binary_serialization_api.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+    <div class="admonition attention article-status">
+      <p class="first admonition-title">Work in progress</p>
+      <p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.7</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+    </div>
+    
+  </div>
+  
+
+  
+  <section id="binary-serialization-api">
+<span id="doc-binary-serialization-api"></span><h1>Binary serialization API<a class="headerlink" href="#binary-serialization-api" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Godot has a serialization API based on Variant. It's used for
+converting data types to an array of bytes efficiently. This API is exposed
+via the global <a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-method-bytes-to-var"><span class="std std-ref">bytes_to_var()</span></a>
+and <a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-method-var-to-bytes"><span class="std std-ref">var_to_bytes()</span></a> functions,
+but it is also used in the <code class="docutils literal notranslate"><span class="pre">get_var</span></code> and <code class="docutils literal notranslate"><span class="pre">store_var</span></code> methods of
+<a class="reference internal" href="../../classes/class_fileaccess.html#class-fileaccess"><span class="std std-ref">FileAccess</span></a> as well as the packet APIs for <a class="reference internal" href="../../classes/class_packetpeer.html#class-packetpeer"><span class="std std-ref">PacketPeer</span></a>.
+This format is <em>not</em> used for binary scenes and resources.</p>
+</section>
+<section id="full-objects-vs-object-instance-ids">
+<h2>Full Objects vs Object instance IDs<a class="headerlink" href="#full-objects-vs-object-instance-ids" title="Link to this heading"></a></h2>
+<p>If a variable is serialized with <code class="docutils literal notranslate"><span class="pre">full_objects</span> <span class="pre">=</span> <span class="pre">true</span></code>, then any Objects
+contained in the variable will be serialized and included in the result. This
+is recursive.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">full_objects</span> <span class="pre">=</span> <span class="pre">false</span></code>, then only the instance IDs will be serialized for
+any Objects contained in the variable.</p>
+</section>
+<section id="packet-specification">
+<h2>Packet specification<a class="headerlink" href="#packet-specification" title="Link to this heading"></a></h2>
+<p>The packet is designed to be always padded to 4 bytes. All values are
+little-endian-encoded. All packets have a 4-byte header representing an
+integer, specifying the type of data.</p>
+<p>The lowest value two bytes are used to determine the type, while the highest value
+two bytes contain flags:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">base_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFFFF</span><span class="p">;</span>
+<span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>null</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>bool</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>integer</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>float</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>string</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>vector2</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>rect2</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>vector3</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>transform2d</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>plane</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>quaternion</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>aabb</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>basis</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>transform3d</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>color</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>node path</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>rid</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>object</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>dictionary</p></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>array</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>raw array</p></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>int32 array</p></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>int64 array</p></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>float32 array</p></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>float64 array</p></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>string array</p></td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>vector2 array</p></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>vector3 array</p></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>color array</p></td>
+</tr>
+<tr class="row-odd"><td><p>29</p></td>
+<td><p>max</p></td>
+</tr>
+</tbody>
+</table>
+<p>Following this is the actual packet contents, which varies for each type of
+packet. Note that this assumes Godot is compiled with single-precision floats,
+which is the default. If Godot was compiled with double-precision floats, the
+length of &quot;Float&quot; fields within data structures should be 8, and the offset
+should be <code class="docutils literal notranslate"><span class="pre">(offset</span> <span class="pre">-</span> <span class="pre">4)</span> <span class="pre">*</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">4</span></code>. The &quot;float&quot; type itself always uses double
+precision.</p>
+<section id="null">
+<h3>0: null<a class="headerlink" href="#null" title="Link to this heading"></a></h3>
+</section>
+<section id="bool">
+<h3>1: <a class="reference internal" href="../../classes/class_bool.html#class-bool"><span class="std std-ref">bool</span></a><a class="headerlink" href="#bool" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>0 for False, 1 for True</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="int">
+<h3>2: <a class="reference internal" href="../../classes/class_int.html#class-int"><span class="std std-ref">int</span></a><a class="headerlink" href="#int" title="Link to this heading"></a></h3>
+<p>If no flags are set (flags == 0), the integer is sent as a 32 bit integer:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>32-bit signed integer</p></td>
+</tr>
+</tbody>
+</table>
+<p>If flag <code class="docutils literal notranslate"><span class="pre">ENCODE_FLAG_64</span></code> is set (<code class="docutils literal notranslate"><span class="pre">flags</span> <span class="pre">&amp;</span> <span class="pre">1</span> <span class="pre">==</span> <span class="pre">1</span></code>), the integer is sent as
+a 64-bit integer:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>8</p></td>
+<td><p>Integer</p></td>
+<td><p>64-bit signed integer</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="float">
+<h3>3: <a class="reference internal" href="../../classes/class_float.html#class-float"><span class="std std-ref">float</span></a><a class="headerlink" href="#float" title="Link to this heading"></a></h3>
+<p>If no flags are set (flags == 0), the float is sent as a 32 bit single precision:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>IEEE 754 single-precision float</p></td>
+</tr>
+</tbody>
+</table>
+<p>If flag <code class="docutils literal notranslate"><span class="pre">ENCODE_FLAG_64</span></code> is set (<code class="docutils literal notranslate"><span class="pre">flags</span> <span class="pre">&amp;</span> <span class="pre">1</span> <span class="pre">==</span> <span class="pre">1</span></code>), the float is sent as
+a 64-bit double precision number:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>8</p></td>
+<td><p>Float</p></td>
+<td><p>IEEE 754 double-precision float</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="string">
+<h3>4: <a class="reference internal" href="../../classes/class_string.html#class-string"><span class="std std-ref">String</span></a><a class="headerlink" href="#string" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>String length (in bytes)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>X</p></td>
+<td><p>Bytes</p></td>
+<td><p>UTF-8 encoded string</p></td>
+</tr>
+</tbody>
+</table>
+<p>This field is padded to 4 bytes.</p>
+</section>
+<section id="vector2">
+<h3>5: <a class="reference internal" href="../../classes/class_vector2.html#class-vector2"><span class="std std-ref">Vector2</span></a><a class="headerlink" href="#vector2" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>X coordinate</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Y coordinate</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rect2">
+<h3>6: <a class="reference internal" href="../../classes/class_rect2.html#class-rect2"><span class="std std-ref">Rect2</span></a><a class="headerlink" href="#rect2" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>X coordinate</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Y coordinate</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>X size</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Y size</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="vector3">
+<h3>7: <a class="reference internal" href="../../classes/class_vector3.html#class-vector3"><span class="std std-ref">Vector3</span></a><a class="headerlink" href="#vector3" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>X coordinate</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Y coordinate</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Z coordinate</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="transform2d">
+<h3>8: <a class="reference internal" href="../../classes/class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a><a class="headerlink" href="#transform2d" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The X component of the X column vector, accessed via [0][0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Y component of the X column vector, accessed via [0][1]</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The X component of the Y column vector, accessed via [1][0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Y component of the Y column vector, accessed via [1][1]</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The X component of the origin vector, accessed via [2][0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Y component of the origin vector, accessed via [2][1]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="plane">
+<h3>9: <a class="reference internal" href="../../classes/class_plane.html#class-plane"><span class="std std-ref">Plane</span></a><a class="headerlink" href="#plane" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Normal X</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Normal Y</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Normal Z</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Distance</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="quaternion">
+<h3>10: <a class="reference internal" href="../../classes/class_quaternion.html#class-quaternion"><span class="std std-ref">Quaternion</span></a><a class="headerlink" href="#quaternion" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Imaginary X</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Imaginary Y</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Imaginary Z</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Real W</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="aabb">
+<h3>11: <a class="reference internal" href="../../classes/class_aabb.html#class-aabb"><span class="std std-ref">AABB</span></a><a class="headerlink" href="#aabb" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>X coordinate</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Y coordinate</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Z coordinate</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>X size</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Y size</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Z size</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="basis">
+<h3>12: <a class="reference internal" href="../../classes/class_basis.html#class-basis"><span class="std std-ref">Basis</span></a><a class="headerlink" href="#basis" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The X component of the X column vector, accessed via [0][0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Y component of the X column vector, accessed via [0][1]</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Z component of the X column vector, accessed via [0][2]</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The X component of the Y column vector, accessed via [1][0]</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Y component of the Y column vector, accessed via [1][1]</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Z component of the Y column vector, accessed via [1][2]</p></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The X component of the Z column vector, accessed via [2][0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>32</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Y component of the Z column vector, accessed via [2][1]</p></td>
+</tr>
+<tr class="row-even"><td><p>36</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Z component of the Z column vector, accessed via [2][2]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="transform3d">
+<h3>13: <a class="reference internal" href="../../classes/class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a><a class="headerlink" href="#transform3d" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The X component of the X column vector, accessed via [0][0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Y component of the X column vector, accessed via [0][1]</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Z component of the X column vector, accessed via [0][2]</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The X component of the Y column vector, accessed via [1][0]</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Y component of the Y column vector, accessed via [1][1]</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Z component of the Y column vector, accessed via [1][2]</p></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The X component of the Z column vector, accessed via [2][0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>32</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Y component of the Z column vector, accessed via [2][1]</p></td>
+</tr>
+<tr class="row-even"><td><p>36</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Z component of the Z column vector, accessed via [2][2]</p></td>
+</tr>
+<tr class="row-odd"><td><p>40</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The X component of the origin vector, accessed via [3][0]</p></td>
+</tr>
+<tr class="row-even"><td><p>44</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Y component of the origin vector, accessed via [3][1]</p></td>
+</tr>
+<tr class="row-odd"><td><p>48</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>The Z component of the origin vector, accessed via [3][2]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="color">
+<h3>14: <a class="reference internal" href="../../classes/class_color.html#class-color"><span class="std std-ref">Color</span></a><a class="headerlink" href="#color" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Red (typically 0..1, can be above 1 for overbright colors)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Green (typically 0..1, can be above 1 for overbright colors)</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Blue (typically 0..1, can be above 1 for overbright colors)</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Alpha (0..1)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nodepath">
+<h3>15: <a class="reference internal" href="../../classes/class_nodepath.html#class-nodepath"><span class="std std-ref">NodePath</span></a><a class="headerlink" href="#nodepath" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>String length, or new format (val&amp;0x80000000!=0 and NameCount=val&amp;0x7FFFFFFF)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="for-old-format">
+<h3>For old format:<a class="headerlink" href="#for-old-format" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>X</p></td>
+<td><p>Bytes</p></td>
+<td><p>UTF-8 encoded string</p></td>
+</tr>
+</tbody>
+</table>
+<p>Padded to 4 bytes.</p>
+</section>
+<section id="for-new-format">
+<h3>For new format:<a class="headerlink" href="#for-new-format" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Sub-name count</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Flags (absolute: val&amp;1 != 0 )</p></td>
+</tr>
+</tbody>
+</table>
+<p>For each Name and Sub-Name</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>X+0</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>String length</p></td>
+</tr>
+<tr class="row-odd"><td><p>X+4</p></td>
+<td><p>X</p></td>
+<td><p>Bytes</p></td>
+<td><p>UTF-8 encoded string</p></td>
+</tr>
+</tbody>
+</table>
+<p>Every name string is padded to 4 bytes.</p>
+</section>
+<section id="rid-unsupported">
+<h3>16: <a class="reference internal" href="../../classes/class_rid.html#class-rid"><span class="std std-ref">RID</span></a> (unsupported)<a class="headerlink" href="#rid-unsupported" title="Link to this heading"></a></h3>
+</section>
+<section id="object">
+<h3>17: <a class="reference internal" href="../../classes/class_object.html#class-object"><span class="std std-ref">Object</span></a><a class="headerlink" href="#object" title="Link to this heading"></a></h3>
+<p>An Object could be serialized in three different ways: as a null value, with
+<code class="docutils literal notranslate"><span class="pre">full_objects</span> <span class="pre">=</span> <span class="pre">false</span></code>, or with <code class="docutils literal notranslate"><span class="pre">full_objects</span> <span class="pre">=</span> <span class="pre">true</span></code>.</p>
+<section id="a-null-value">
+<h4>A null value<a class="headerlink" href="#a-null-value" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Zero (32-bit signed integer)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="full-objects-disabled">
+<h4><code class="docutils literal notranslate"><span class="pre">full_objects</span></code> disabled<a class="headerlink" href="#full-objects-disabled" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>8</p></td>
+<td><p>Integer</p></td>
+<td><p>The Object instance ID (64-bit signed integer)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="full-objects-enabled">
+<h4><code class="docutils literal notranslate"><span class="pre">full_objects</span></code> enabled<a class="headerlink" href="#full-objects-enabled" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Class name (String length)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>X</p></td>
+<td><p>Bytes</p></td>
+<td><p>Class name (UTF-8 encoded string)</p></td>
+</tr>
+<tr class="row-even"><td><p>X+8</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>The number of properties that are serialized</p></td>
+</tr>
+</tbody>
+</table>
+<p>For each property:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Property name (String length)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y+4</p></td>
+<td><p>Z</p></td>
+<td><p>Bytes</p></td>
+<td><p>Property name (UTF-8 encoded string)</p></td>
+</tr>
+<tr class="row-even"><td><p>Y+4+Z</p></td>
+<td><p>W</p></td>
+<td><p>&lt;variable&gt;</p></td>
+<td><p>Property value, using this same format</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Not all properties are included. Only properties that are configured with the
+<a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope-constant-property-usage-storage"><span class="std std-ref">PROPERTY_USAGE_STORAGE</span></a>
+flag set will be serialized. You can add a new usage flag to a property by overriding the
+<a class="reference internal" href="../../classes/class_object.html#class-object-private-method-get-property-list"><span class="std std-ref">_get_property_list</span></a>
+method in your class. You can also check how property usage is configured by
+calling <code class="docutils literal notranslate"><span class="pre">Object._get_property_list</span></code> See
+<a class="reference internal" href="../../classes/class_%40globalscope.html#enum-globalscope-propertyusageflags"><span class="std std-ref">PropertyUsageFlags</span></a> for the
+possible usage flags.</p>
+</div>
+</section>
+</section>
+<section id="dictionary">
+<h3>18: <a class="reference internal" href="../../classes/class_dictionary.html#class-dictionary"><span class="std std-ref">Dictionary</span></a><a class="headerlink" href="#dictionary" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>val&amp;0x7FFFFFFF = elements, val&amp;0x80000000 = shared (bool)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Then what follows is, for amount of &quot;elements&quot;, pairs of key and value,
+one after the other, using this same format.</p>
+</section>
+<section id="array">
+<h3>19: <a class="reference internal" href="../../classes/class_array.html#class-array"><span class="std std-ref">Array</span></a><a class="headerlink" href="#array" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>val&amp;0x7FFFFFFF = elements, val&amp;0x80000000 = shared (bool)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Then what follows is, for amount of &quot;elements&quot;, values one after the
+other, using this same format.</p>
+</section>
+<section id="packedbytearray">
+<h3>20: <a class="reference internal" href="../../classes/class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a><a class="headerlink" href="#packedbytearray" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Array length (Bytes)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8..8+length</p></td>
+<td><p>1</p></td>
+<td><p>Byte</p></td>
+<td><p>Byte (0..255)</p></td>
+</tr>
+</tbody>
+</table>
+<p>The array data is padded to 4 bytes.</p>
+</section>
+<section id="packedint32array">
+<h3>21: <a class="reference internal" href="../../classes/class_packedint32array.html#class-packedint32array"><span class="std std-ref">PackedInt32Array</span></a><a class="headerlink" href="#packedint32array" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Array length (Integers)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8..8+length*4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>32-bit signed integer</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="packedint64array">
+<h3>22: <a class="reference internal" href="../../classes/class_packedint64array.html#class-packedint64array"><span class="std std-ref">PackedInt64Array</span></a><a class="headerlink" href="#packedint64array" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>8</p></td>
+<td><p>Integer</p></td>
+<td><p>Array length (Integers)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8..8+length*8</p></td>
+<td><p>8</p></td>
+<td><p>Integer</p></td>
+<td><p>64-bit signed integer</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="packedfloat32array">
+<h3>23: <a class="reference internal" href="../../classes/class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a><a class="headerlink" href="#packedfloat32array" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Array length (Floats)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8..8+length*4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>32-bit IEEE 754 single-precision float</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="packedfloat64array">
+<h3>24: <a class="reference internal" href="../../classes/class_packedfloat64array.html#class-packedfloat64array"><span class="std std-ref">PackedFloat64Array</span></a><a class="headerlink" href="#packedfloat64array" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Array length (Floats)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8..8+length*8</p></td>
+<td><p>8</p></td>
+<td><p>Integer</p></td>
+<td><p>64-bit IEEE 754 double-precision float</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="packedstringarray">
+<h3>25: <a class="reference internal" href="../../classes/class_packedstringarray.html#class-packedstringarray"><span class="std std-ref">PackedStringArray</span></a><a class="headerlink" href="#packedstringarray" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Array length (Strings)</p></td>
+</tr>
+</tbody>
+</table>
+<p>For each String:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>X+0</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>String length</p></td>
+</tr>
+<tr class="row-odd"><td><p>X+4</p></td>
+<td><p>X</p></td>
+<td><p>Bytes</p></td>
+<td><p>UTF-8 encoded string</p></td>
+</tr>
+</tbody>
+</table>
+<p>Every string is padded to 4 bytes.</p>
+</section>
+<section id="packedvector2array">
+<h3>26: <a class="reference internal" href="../../classes/class_packedvector2array.html#class-packedvector2array"><span class="std std-ref">PackedVector2Array</span></a><a class="headerlink" href="#packedvector2array" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Array length</p></td>
+</tr>
+<tr class="row-odd"><td><p>8..8+length*8</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>X coordinate</p></td>
+</tr>
+<tr class="row-even"><td><p>8..12+length*8</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Y coordinate</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="packedvector3array">
+<h3>27: <a class="reference internal" href="../../classes/class_packedvector3array.html#class-packedvector3array"><span class="std std-ref">PackedVector3Array</span></a><a class="headerlink" href="#packedvector3array" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Array length</p></td>
+</tr>
+<tr class="row-odd"><td><p>8..8+length*12</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>X coordinate</p></td>
+</tr>
+<tr class="row-even"><td><p>8..12+length*12</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Y coordinate</p></td>
+</tr>
+<tr class="row-odd"><td><p>8..16+length*12</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Z coordinate</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="packedcolorarray">
+<h3>28: <a class="reference internal" href="../../classes/class_packedcolorarray.html#class-packedcolorarray"><span class="std std-ref">PackedColorArray</span></a><a class="headerlink" href="#packedcolorarray" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Len</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>Integer</p></td>
+<td><p>Array length</p></td>
+</tr>
+<tr class="row-odd"><td><p>8..8+length*16</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Red (typically 0..1, can be above 1 for overbright colors)</p></td>
+</tr>
+<tr class="row-even"><td><p>8..12+length*16</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Green (typically 0..1, can be above 1 for overbright colors)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8..16+length*16</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Blue (typically 0..1, can be above 1 for overbright colors)</p></td>
+</tr>
+<tr class="row-even"><td><p>8..20+length*16</p></td>
+<td><p>4</p></td>
+<td><p>Float</p></td>
+<td><p>Alpha (0..1)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="runtime_file_loading_and_saving.html" class="btn btn-neutral float-left" title="Runtime file loading and saving" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../i18n/index.html" class="btn btn-neutral float-right" title="Internationalization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

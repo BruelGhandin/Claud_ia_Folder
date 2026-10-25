@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Handling compatibility breakages" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/development/handling_compatibility_breakages.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="So you&#x27;ve added a new parameter to a method, changed the return type, changed the type of a parameter, or changed its default value, and now the automated testing is complaining about compatib..." />
+<meta name="description" content="So you&#x27;ve added a new parameter to a method, changed the return type, changed the type of a parameter, or changed its default value, and now the automated testing is complaining about compatib..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Handling compatibility breakages &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Editor development" href="../editor/index.html" />
+    <link rel="prev" title="VerySleepy" href="profiling/very_sleepy.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/development/handling_compatibility_breakages" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="engine_details/development/handling_compatibility_breakages.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Engine development</a></li>
+      <li class="breadcrumb-item active">Handling compatibility breakages</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/development/handling_compatibility_breakages.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="handling-compatibility-breakages">
+<span id="doc-handling-compatibility-breakages"></span><h1>Handling compatibility breakages<a class="headerlink" href="#handling-compatibility-breakages" title="Link to this heading"></a></h1>
+<p>So you've added a new parameter to a method, changed the return type,
+changed the type of a parameter, or changed its default value,
+and now the automated testing is complaining about compatibility breakages?</p>
+<p>Breaking compatibility should be avoided, but when necessary there are systems in place
+to handle this in a way that makes the transition as smooth as possible.</p>
+<section id="a-practical-example">
+<h2>A practical example<a class="headerlink" href="#a-practical-example" title="Link to this heading"></a></h2>
+<p>These changes are taken from <a class="reference external" href="https://github.com/godotengine/godot/pull/88047">pull request #88047</a>, which added
+new pathing options to <code class="docutils literal notranslate"><span class="pre">AStarGrid2D</span></code> and other AStar classes.
+Among other changes, these methods were modified in <code class="docutils literal notranslate"><span class="pre">core/math/a_star_grid_2d.h</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">Vector2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">get_point_path</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to</span><span class="p">);</span>
+<span class="n">TypedArray</span><span class="o">&lt;</span><span class="n">Vector2i</span><span class="o">&gt;</span><span class="w"> </span><span class="n">get_id_path</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">Vector2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">get_point_path</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">p_allow_partial_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="n">TypedArray</span><span class="o">&lt;</span><span class="n">Vector2i</span><span class="o">&gt;</span><span class="w"> </span><span class="n">get_id_path</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">p_allow_partial_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This meant adding new compatibility method bindings to the file, which should be in the <code class="docutils literal notranslate"><span class="pre">protected</span></code> section of
+the code, usually placed next to <code class="docutils literal notranslate"><span class="pre">_bind_methods()</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef DISABLE_DEPRECATED</span>
+<span class="w">    </span><span class="n">TypedArray</span><span class="o">&lt;</span><span class="n">Vector2i</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_get_id_path_bind_compat_88047</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">Vector2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_get_point_path_bind_compat_88047</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to</span><span class="p">);</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">_bind_compatibility_methods</span><span class="p">();</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>They should start with an <code class="docutils literal notranslate"><span class="pre">_</span></code> to indicate that they are internal, and end with <code class="docutils literal notranslate"><span class="pre">_bind_compat_</span></code> followed by the PR number
+that introduced the change (<code class="docutils literal notranslate"><span class="pre">88047</span></code> in this example). These compatibility methods need to be implemented in a dedicated file,
+like <code class="docutils literal notranslate"><span class="pre">core/math/a_star_grid_2d.compat.inc</span></code> in this case:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">core/math/a_star_grid_2d.compat.inc</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**************************************************************************/</span>
+<span class="cm">/*  a_star_grid_2d.compat.inc                                             */</span>
+<span class="cm">/**************************************************************************/</span>
+<span class="cm">/*                         This file is part of:                          */</span>
+<span class="cm">/*                             GODOT ENGINE                               */</span>
+<span class="cm">/*                        https://godotengine.org                         */</span>
+<span class="cm">/**************************************************************************/</span>
+<span class="cm">/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */</span>
+<span class="cm">/* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */</span>
+<span class="cm">/*                                                                        */</span>
+<span class="cm">/* Permission is hereby granted, free of charge, to any person obtaining  */</span>
+<span class="cm">/* a copy of this software and associated documentation files (the        */</span>
+<span class="cm">/* &quot;Software&quot;), to deal in the Software without restriction, including    */</span>
+<span class="cm">/* without limitation the rights to use, copy, modify, merge, publish,    */</span>
+<span class="cm">/* distribute, sublicense, and/or sell copies of the Software, and to     */</span>
+<span class="cm">/* permit persons to whom the Software is furnished to do so, subject to  */</span>
+<span class="cm">/* the following conditions:                                              */</span>
+<span class="cm">/*                                                                        */</span>
+<span class="cm">/* The above copyright notice and this permission notice shall be         */</span>
+<span class="cm">/* included in all copies or substantial portions of the Software.        */</span>
+<span class="cm">/*                                                                        */</span>
+<span class="cm">/* THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,        */</span>
+<span class="cm">/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF     */</span>
+<span class="cm">/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. */</span>
+<span class="cm">/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY   */</span>
+<span class="cm">/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,   */</span>
+<span class="cm">/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE      */</span>
+<span class="cm">/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */</span>
+<span class="cm">/**************************************************************************/</span>
+
+<span class="cp">#ifndef DISABLE_DEPRECATED</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/variant/typed_array.h&quot;</span>
+
+<span class="n">TypedArray</span><span class="o">&lt;</span><span class="n">Vector2i</span><span class="o">&gt;</span><span class="w"> </span><span class="n">AStarGrid2D</span><span class="o">::</span><span class="n">_get_id_path_bind_compat_88047</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from_id</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">get_id_path</span><span class="p">(</span><span class="n">p_from_id</span><span class="p">,</span><span class="w"> </span><span class="n">p_to_id</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Vector</span><span class="o">&lt;</span><span class="n">Vector2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">AStarGrid2D</span><span class="o">::</span><span class="n">_get_point_path_bind_compat_88047</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from_id</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">get_point_path</span><span class="p">(</span><span class="n">p_from_id</span><span class="p">,</span><span class="w"> </span><span class="n">p_to_id</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">AStarGrid2D</span><span class="o">::</span><span class="n">_bind_compatibility_methods</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_compatibility_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&quot;get_id_path&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;from_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;to_id&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">AStarGrid2D</span><span class="o">::</span><span class="n">_get_id_path_bind_compat_88047</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_compatibility_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&quot;get_point_path&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;from_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;to_id&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">AStarGrid2D</span><span class="o">::</span><span class="n">_get_point_path_bind_compat_88047</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cp">#endif </span><span class="c1">// DISABLE_DEPRECATED</span>
+</pre></div>
+</div>
+</div>
+<p>Unless the change in compatibility is complex, the compatibility method should call the modified method directly,
+instead of duplicating that method. Make sure to match the default arguments for that method (in the example above this would be <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
+<p>This file should always be placed next to the original file, and have <code class="docutils literal notranslate"><span class="pre">.compat.inc</span></code> at the end instead of <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> or <code class="docutils literal notranslate"><span class="pre">.h</span></code>.
+Next, this should be included in the <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file we're adding compatibility methods to, so <code class="docutils literal notranslate"><span class="pre">core/math/a_star_grid_2d.cpp</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">core/math/a_star_grid_2d.cpp</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;a_star_grid_2d.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;a_star_grid_2d.compat.inc&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/variant/typed_array.h&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Finally, the GDExtension API changes need to be recorded. To do this, first compile Godot on the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch, and
+then run it with the <code class="docutils literal notranslate"><span class="pre">--dump-extension-api</span></code> flag:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>master
+scons
+godot<span class="w"> </span>--dump-extension-api
+</pre></div>
+</div>
+<p>This will create a file named <code class="docutils literal notranslate"><span class="pre">extension_api.json</span></code> in your current directory. Switch to your feature branch, recompile Godot,
+and then run it with the <code class="docutils literal notranslate"><span class="pre">--validate-extension-api</span></code> flag followed by the path to the <code class="docutils literal notranslate"><span class="pre">extension_api.json</span></code> file you just generated:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>my-feature-branch
+scons
+godot<span class="w"> </span>--validate-extension-api<span class="w"> </span>/path/to/extension_api.json
+</pre></div>
+</div>
+<p>This will generate some lines starting with <code class="docutils literal notranslate"><span class="pre">Validate</span> <span class="pre">extension</span> <span class="pre">JSON</span></code> like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Validate extension JSON: Error: Field &#39;classes/AStar2D/methods/get_id_path/arguments&#39;: size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field &#39;classes/AStar2D/methods/get_point_path/arguments&#39;: size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field &#39;classes/AStar3D/methods/get_id_path/arguments&#39;: size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field &#39;classes/AStar3D/methods/get_point_path/arguments&#39;: size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field &#39;classes/AStarGrid2D/methods/get_id_path/arguments&#39;: size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field &#39;classes/AStarGrid2D/methods/get_point_path/arguments&#39;: size changed value in new API, from 2 to 3.
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>If you get a <code class="docutils literal notranslate"><span class="pre">Hash</span> <span class="pre">changed</span></code> error for a method, it means that the compatibility binding is missing or incorrect.
+Such lines shouldn't be added to the validation file, but fixed by binding the proper compatibility method.
+Make sure to double-check the following:</p>
+<ul class="simple">
+<li><p>For the compatibility method (the one whose name ends with the PR number), the argument types, names, and default
+values must be identical to the version of the method from before your changes.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">_bind_compatibility_methods()</span></code>, argument names provided to the <code class="docutils literal notranslate"><span class="pre">D_METHOD()</span></code> macro in <code class="docutils literal notranslate"><span class="pre">ClassDB::bind_compatibility_method()</span></code>
+must be identical to those from the <code class="docutils literal notranslate"><span class="pre">ClassDB::bind_method()</span></code> call for the original method.</p></li>
+</ul>
+</div>
+<p>Add these lines, followed by a comment explaining what the API change was and the actions taken to prevent breakage,
+to a validation file named after the GitHub pull request ID and placed in the folder of the Godot version it would have broken compatibility for.</p>
+<p>Since this example was for PR #88047, its file name would be <code class="docutils literal notranslate"><span class="pre">GH-88047.txt</span></code>, and because this was done during
+the development of 4.3 (thus changing from 4.2), the file would be in the <code class="docutils literal notranslate"><span class="pre">misc/extension_api_validation/4.2-stable/</span></code> folder.</p>
+<p>See below for a complete example of such a file for this PR:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">misc/extension_api_validation/4.2-stable/GH-88047.txt</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>GH-88047
+--------
+Validate extension JSON: Error: Field &#39;classes/AStar2D/methods/get_id_path/arguments&#39;: size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field &#39;classes/AStar2D/methods/get_point_path/arguments&#39;: size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field &#39;classes/AStar3D/methods/get_id_path/arguments&#39;: size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field &#39;classes/AStar3D/methods/get_point_path/arguments&#39;: size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field &#39;classes/AStarGrid2D/methods/get_id_path/arguments&#39;: size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field &#39;classes/AStarGrid2D/methods/get_point_path/arguments&#39;: size changed value in new API, from 2 to 3.
+
+Added optional &quot;allow_partial_path&quot; argument to get_id_path and get_point_path methods in AStar classes.
+Compatibility methods registered.
+</pre></div>
+</div>
+</div>
+<p>And that's it! You might run into a bit more complicated cases, like rearranging arguments,
+changing return types, etc., but this covers the basics on how to use this system.</p>
+<p>For more information, see <a class="reference external" href="https://github.com/godotengine/godot/pull/76446">pull request #76446</a>.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="profiling/very_sleepy.html" class="btn btn-neutral float-left" title="VerySleepy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../editor/index.html" class="btn btn-neutral float-right" title="Editor development" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

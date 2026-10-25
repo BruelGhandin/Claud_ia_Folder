@@ -1,0 +1,778 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Custom modules in C++" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/engine_api/custom_modules_in_cpp.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Modules: Godot allows extending the engine in a modular way. New modules can be created and then enabled/disabled. This allows for adding new engine functionality at every level without modifying t..." />
+<meta name="description" content="Modules: Godot allows extending the engine in a modular way. New modules can be created and then enabled/disabled. This allows for adding new engine functionality at every level without modifying t..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Custom modules in C++ &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Vendor Runtime Module" href="vendor_runtime_module.html" />
+    <link rel="prev" title="Engine extension APIs" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/engine_api/custom_modules_in_cpp" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="engine_details/engine_api/custom_modules_in_cpp.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Engine extension APIs</a></li>
+      <li class="breadcrumb-item active">Custom modules in C++</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/engine_api/custom_modules_in_cpp.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="custom-modules-in-c">
+<span id="doc-custom-modules-in-cpp"></span><h1>Custom modules in C++<a class="headerlink" href="#custom-modules-in-c" title="Link to this heading"></a></h1>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h2>
+<p>Godot allows extending the engine in a modular way. New modules can be
+created and then enabled/disabled. This allows for adding new engine
+functionality at every level without modifying the core, which can be
+split for use and reuse in different modules.</p>
+<p>Modules are located in the <code class="docutils literal notranslate"><span class="pre">modules/</span></code> subdirectory of the build system.
+By default, dozens of modules are enabled, such as GDScript (which, yes,
+is not part of the base engine), GridMap support, a regular expressions
+module, and others. As many new modules as desired can be
+created and combined. The SCons build system will take care of it
+transparently.</p>
+</section>
+<section id="what-for">
+<h2>What for?<a class="headerlink" href="#what-for" title="Link to this heading"></a></h2>
+<p>While it's recommended that most of a game be written in scripting (as
+it is an enormous time saver), it's perfectly possible to use C++
+instead. Adding C++ modules can be useful in the following scenarios:</p>
+<ul class="simple">
+<li><p>Binding an external library to Godot (like PhysX, FMOD, etc).</p></li>
+<li><p>Optimize critical parts of a game.</p></li>
+<li><p>Adding new functionality to the engine and/or editor.</p></li>
+<li><p>Porting an existing game to Godot.</p></li>
+<li><p>Write a whole, new game in C++ because you can't live without C++.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While it is possible to use modules for custom game logic,
+<a class="reference internal" href="gdextension/index.html#doc-gdextension"><span class="std std-ref">GDExtension</span></a> is generally more suited as it doesn't
+require recompiling the engine after every code change.</p>
+<p>C++ modules are mainly needed when GDExtension doesn't suffice and deeper engine
+integration is required.</p>
+</div>
+</section>
+<section id="creating-a-new-module">
+<span id="doc-creating-custom-modules-in-cpp"></span><h2>Creating a new module<a class="headerlink" href="#creating-a-new-module" title="Link to this heading"></a></h2>
+<p>Before creating a module, make sure to <a class="reference internal" href="../development/compiling/index.html#toc-devel-compiling"><span class="std std-ref">download the source code of Godot
+and compile it</span></a>.</p>
+<p>To create a new module, the first step is creating a directory inside
+<code class="docutils literal notranslate"><span class="pre">modules/</span></code>. If you want to maintain the module separately, you can checkout
+a different VCS into modules and use it.</p>
+<p>The example module will be called &quot;summator&quot; (<code class="docutils literal notranslate"><span class="pre">godot/modules/summator</span></code>).
+Inside we will create a summator class:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">godot/modules/summator/summator.h</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/object/ref_counted.h&quot;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Summator</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">RefCounted</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">Summator</span><span class="p">,</span><span class="w"> </span><span class="n">RefCounted</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+
+<span class="k">protected</span><span class="o">:</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">_bind_methods</span><span class="p">();</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">p_value</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">reset</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">get_total</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Summator</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<p>And then the cpp file.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">godot/modules/summator/summator.cpp</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;summator.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/object/class_db.h&quot;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">Summator::add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">p_value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">count</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">p_value</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">Summator::reset</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">Summator::get_total</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">Summator::_bind_methods</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&quot;add&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;value&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Summator</span><span class="o">::</span><span class="n">add</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&quot;reset&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Summator</span><span class="o">::</span><span class="n">reset</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&quot;get_total&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Summator</span><span class="o">::</span><span class="n">get_total</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Summator</span><span class="o">::</span><span class="n">Summator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Then, the new class needs to be registered somehow, so two more files
+need to be created:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>register_types.h
+register_types.cpp
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>These files must be in the top-level folder of your module (next to your
+<code class="docutils literal notranslate"><span class="pre">SCsub</span></code> and <code class="docutils literal notranslate"><span class="pre">config.py</span></code> files) for the module to be registered properly.</p>
+</div>
+<p>These files should contain the following:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">godot/modules/summator/register_types.h</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;modules/register_module_types.h&quot;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">initialize_summator_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span><span class="w"> </span><span class="n">p_level</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">uninitialize_summator_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span><span class="w"> </span><span class="n">p_level</span><span class="p">);</span>
+<span class="cm">/* yes, the word in the middle must be the same as the module folder name */</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">godot/modules/summator/register_types.cpp</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;register_types.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/object/class_db.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;summator.h&quot;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">initialize_summator_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span><span class="w"> </span><span class="n">p_level</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p_level</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">MODULE_INITIALIZATION_LEVEL_SCENE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">register_class</span><span class="o">&lt;</span><span class="n">Summator</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">uninitialize_summator_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span><span class="w"> </span><span class="n">p_level</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p_level</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">MODULE_INITIALIZATION_LEVEL_SCENE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">   </span><span class="c1">// Nothing to do here in this example.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Next, we need to create an <code class="docutils literal notranslate"><span class="pre">SCsub</span></code> file so the build system compiles
+this module:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">godot/modules/summator/SCsub</span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># SCsub</span>
+
+<span class="n">Import</span><span class="p">(</span><span class="s1">&#39;env&#39;</span><span class="p">)</span>
+
+<span class="n">env</span><span class="o">.</span><span class="n">add_source_files</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">modules_sources</span><span class="p">,</span> <span class="s2">&quot;*.cpp&quot;</span><span class="p">)</span> <span class="c1"># Add all cpp files to the build</span>
+</pre></div>
+</div>
+</div>
+<p>With multiple sources, you can also add each file individually to a Python
+string list:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">src_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;summator.cpp&quot;</span><span class="p">,</span> <span class="s2">&quot;other.cpp&quot;</span><span class="p">,</span> <span class="s2">&quot;etc.cpp&quot;</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">add_source_files</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">modules_sources</span><span class="p">,</span> <span class="n">src_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This allows for powerful possibilities using Python to construct the file list
+using loops and logic statements. Look at some modules that ship with Godot by
+default for examples.</p>
+<p>To add include directories for the compiler to look at you can append it to the
+environment's paths:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">CPPPATH</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mylib/include&quot;</span><span class="p">])</span> <span class="c1"># this is a relative path</span>
+<span class="n">env</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">CPPPATH</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#myotherlib/include&quot;</span><span class="p">])</span> <span class="c1"># this is an &#39;absolute&#39; path</span>
+</pre></div>
+</div>
+<p>If you want to add custom compiler flags when building your module, you need to clone
+<code class="docutils literal notranslate"><span class="pre">env</span></code> first, so it won't add those flags to whole Godot build (which can cause errors).
+Example <code class="docutils literal notranslate"><span class="pre">SCsub</span></code> with custom flags:</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">godot/modules/summator/SCsub</span><a class="headerlink" href="#id6" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Import</span><span class="p">(</span><span class="s1">&#39;env&#39;</span><span class="p">)</span>
+
+<span class="n">module_env</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">Clone</span><span class="p">()</span>
+<span class="n">module_env</span><span class="o">.</span><span class="n">add_source_files</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">modules_sources</span><span class="p">,</span> <span class="s2">&quot;*.cpp&quot;</span><span class="p">)</span>
+<span class="c1"># Append CCFLAGS flags for both C and C++ code.</span>
+<span class="n">module_env</span><span class="o">.</span><span class="n">Append</span><span class="p">(</span><span class="n">CCFLAGS</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-O2&#39;</span><span class="p">])</span>
+<span class="c1"># If you need to, you can:</span>
+<span class="c1"># - Append CFLAGS for C code only.</span>
+<span class="c1"># - Append CXXFLAGS for C++ code only.</span>
+</pre></div>
+</div>
+</div>
+<p>And finally, the configuration file for the module, this is a
+Python script that must be named <code class="docutils literal notranslate"><span class="pre">config.py</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">godot/modules/summator/config.py</span><a class="headerlink" href="#id7" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">can_build</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">configure</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<p>The module is asked if it's OK to build for the specific platform (in
+this case, <code class="docutils literal notranslate"><span class="pre">True</span></code> means it will build for every platform).</p>
+<p>And that's it. Hope it was not too complex! Your module should look like
+this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>godot/modules/summator/config.py
+godot/modules/summator/summator.h
+godot/modules/summator/summator.cpp
+godot/modules/summator/register_types.h
+godot/modules/summator/register_types.cpp
+godot/modules/summator/SCsub
+</pre></div>
+</div>
+<p>You can then zip it and share the module with everyone else. When
+building for every platform (instructions in the previous sections),
+your module will be included.</p>
+</section>
+<section id="using-the-module">
+<h2>Using the module<a class="headerlink" href="#using-the-module" title="Link to this heading"></a></h2>
+<p>You can now use your newly created module from any script:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Summator</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="nf">get_total</span><span class="p">())</span>
+<span class="n">s</span><span class="o">.</span><span class="nf">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></div>
+<p>The output will be <code class="docutils literal notranslate"><span class="pre">60</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The previous Summator example is great for small, custom modules,
+but what if you want to use a larger, external library? Refer to
+<a class="reference internal" href="binding_to_external_libraries.html#doc-binding-to-external-libraries"><span class="std std-ref">Binding to external libraries</span></a> for details about binding to
+external libraries.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If your module is meant to be accessed from the running project
+(not just from the editor), you must also recompile every export
+template you plan to use, then specify the path to the custom
+template in each export preset. Otherwise, you'll get errors when
+running the project as the module isn't compiled in the export
+template. See the <a class="reference internal" href="../development/compiling/index.html#toc-devel-compiling"><span class="std std-ref">Compiling</span></a> pages
+for more information.</p>
+</div>
+</section>
+<section id="compiling-a-module-externally">
+<h2>Compiling a module externally<a class="headerlink" href="#compiling-a-module-externally" title="Link to this heading"></a></h2>
+<p>Compiling a module involves moving the module's sources directly under the
+engine's <code class="docutils literal notranslate"><span class="pre">modules/</span></code> directory. While this is the most straightforward way to
+compile a module, there are a couple of reasons as to why this might not be a
+practical thing to do:</p>
+<ol class="arabic simple">
+<li><p>Having to manually copy modules sources every time you want to compile the
+engine with or without the module, or taking additional steps needed to
+manually disable a module during compilation with a build option similar to
+<code class="docutils literal notranslate"><span class="pre">module_summator_enabled=no</span></code>. Creating symbolic links may also be a solution,
+but you may additionally need to overcome OS restrictions like needing the
+symbolic link privilege if doing this via script.</p></li>
+<li><p>Depending on whether you have to work with the engine's source code, the
+module files added directly to <code class="docutils literal notranslate"><span class="pre">modules/</span></code> changes the working tree to the
+point where using a VCS (like <code class="docutils literal notranslate"><span class="pre">git</span></code>) proves to be cumbersome as you need to
+make sure that only the engine-related code is committed by filtering
+changes.</p></li>
+</ol>
+<p>So if you feel like the independent structure of custom modules is needed, lets
+take our &quot;summator&quot; module and move it to the engine's parent directory:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>../modules
+mv<span class="w"> </span>modules/summator<span class="w"> </span>../modules
+</pre></div>
+</div>
+<p>Compile the engine with our module by providing <code class="docutils literal notranslate"><span class="pre">custom_modules</span></code> build option
+which accepts a comma-separated list of directory paths containing custom C++
+modules, similar to the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">custom_modules</span><span class="o">=</span>../modules
+</pre></div>
+</div>
+<p>The build system shall detect all modules under the <code class="docutils literal notranslate"><span class="pre">../modules</span></code> directory
+and compile them accordingly, including our &quot;summator&quot; module.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Any path passed to <code class="docutils literal notranslate"><span class="pre">custom_modules</span></code> will be converted to an absolute path
+internally as a way to distinguish between custom and built-in modules. It
+means that things like generating module documentation may rely on a
+specific path structure on your machine.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../development/compiling/introduction_to_the_buildsystem.html#doc-buildsystem-custom-modules"><span class="std std-ref">Introduction to the buildsystem - Custom modules build option</span></a>.</p>
+</div>
+</section>
+<section id="customizing-module-types-initialization">
+<h2>Customizing module types initialization<a class="headerlink" href="#customizing-module-types-initialization" title="Link to this heading"></a></h2>
+<p>Modules can interact with other built-in engine classes during runtime and even
+affect the way core types are initialized. So far, we've been using
+<code class="docutils literal notranslate"><span class="pre">register_summator_types</span></code> as a way to bring in module classes to be available
+within the engine.</p>
+<p>A crude order of the engine setup can be summarized as a list of the following
+type registration methods:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">preregister_module_types</span><span class="p">();</span>
+<span class="n">preregister_server_types</span><span class="p">();</span>
+<span class="n">register_core_singletons</span><span class="p">();</span>
+<span class="n">register_server_types</span><span class="p">();</span>
+<span class="n">register_scene_types</span><span class="p">();</span>
+<span class="n">EditorNode</span><span class="o">::</span><span class="n">register_editor_types</span><span class="p">();</span>
+<span class="n">register_platform_apis</span><span class="p">();</span>
+<span class="n">register_module_types</span><span class="p">();</span>
+<span class="n">initialize_physics</span><span class="p">();</span>
+<span class="n">initialize_navigation_server</span><span class="p">();</span>
+<span class="n">register_server_singletons</span><span class="p">();</span>
+<span class="n">register_driver_types</span><span class="p">();</span>
+<span class="n">ScriptServer</span><span class="o">::</span><span class="n">init_languages</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Our <code class="docutils literal notranslate"><span class="pre">Summator</span></code> class is initialized during the <code class="docutils literal notranslate"><span class="pre">register_module_types()</span></code>
+call. Imagine that we need to satisfy some common module runtime dependency
+(like singletons), or allow us to override existing engine method callbacks
+before they can be assigned by the engine itself. In that case, we want to
+ensure that our module classes are registered <em>before</em> any other built-in type.</p>
+<p>This is where we can define an optional <code class="docutils literal notranslate"><span class="pre">preregister_summator_types()</span></code>
+method which will be called before anything else during the
+<code class="docutils literal notranslate"><span class="pre">preregister_module_types()</span></code> engine setup stage.</p>
+<p>We now need to add this method to <code class="docutils literal notranslate"><span class="pre">register_types</span></code> header and source files:</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">godot/modules/summator/register_types.h</span><a class="headerlink" href="#id8" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define MODULE_SUMMATOR_HAS_PREREGISTER</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">preregister_summator_types</span><span class="p">();</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">register_summator_types</span><span class="p">();</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">unregister_summator_types</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unlike other register methods, we have to explicitly define
+<code class="docutils literal notranslate"><span class="pre">MODULE_SUMMATOR_HAS_PREREGISTER</span></code> to let the build system know what
+relevant method calls to include at compile time. The module's name
+has to be converted to uppercase as well.</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">godot/modules/summator/register_types.cpp</span><a class="headerlink" href="#id9" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;register_types.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;core/object/class_db.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;summator.h&quot;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">preregister_summator_types</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Called before any other core types are registered.</span>
+<span class="w">    </span><span class="c1">// Nothing to do here in this example.</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">register_summator_types</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">register_class</span><span class="o">&lt;</span><span class="n">Summator</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">unregister_summator_types</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="c1">// Nothing to do here in this example.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="writing-custom-documentation">
+<h2>Writing custom documentation<a class="headerlink" href="#writing-custom-documentation" title="Link to this heading"></a></h2>
+<p>Writing documentation may seem like a boring task, but it is highly recommended
+to document your newly created module to make it easier for users to benefit
+from it. Not to mention that the code you've written one year ago may become
+indistinguishable from the code that was written by someone else, so be kind to
+your future self!</p>
+<p>There are several steps in order to setup custom docs for the module:</p>
+<ol class="arabic">
+<li><p>Make a new directory in the root of the module. The directory name can be
+anything, but we'll be using the <code class="docutils literal notranslate"><span class="pre">doc_classes</span></code> name throughout this section.</p></li>
+<li><p>Now, we need to edit <code class="docutils literal notranslate"><span class="pre">config.py</span></code>, add the following snippet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_doc_path</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s2">&quot;doc_classes&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_doc_classes</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="s2">&quot;Summator&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">get_doc_path()</span></code> function is used by the build system to determine
+the location of the docs. In this case, they will be located in the
+<code class="docutils literal notranslate"><span class="pre">modules/summator/doc_classes</span></code> directory. If you don't define this,
+the doc path for your module will fall back to the main <code class="docutils literal notranslate"><span class="pre">doc/classes</span></code>
+directory.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">get_doc_classes()</span></code> method is necessary for the build system to
+know which registered classes belong to the module. You need to list all of your
+classes here. The classes that you don't list will end up in the
+main <code class="docutils literal notranslate"><span class="pre">doc/classes</span></code> directory.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can use Git to check if you have missed some of your classes by checking the
+untracked files with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>. For example:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">git</span><span class="w"> </span><span class="n">status</span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nc">Untracked</span><span class="w"> </span><span class="n">files</span><span class="p">:</span>
+<span class="w">    </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="s2">&quot;git add &lt;file&gt;...&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">include</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">committed</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">doc</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">MyClass2D</span><span class="o">.</span><span class="vi">xml</span>
+<span class="w">    </span><span class="n">doc</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">MyClass4D</span><span class="o">.</span><span class="vi">xml</span>
+<span class="w">    </span><span class="n">doc</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">MyClass5D</span><span class="o">.</span><span class="vi">xml</span>
+<span class="w">    </span><span class="n">doc</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">MyClass6D</span><span class="o">.</span><span class="vi">xml</span>
+<span class="w">    </span><span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Now we can generate the documentation:</p></li>
+</ol>
+<p>We can do this via running Godot's doctool i.e. <code class="docutils literal notranslate"><span class="pre">godot</span> <span class="pre">--doctool</span> <span class="pre">&lt;path&gt;</span></code>,
+which will dump the engine API reference to the given <code class="docutils literal notranslate"><span class="pre">&lt;path&gt;</span></code> in XML format.</p>
+<p>In our case we'll point it to the root of the cloned repository. You can point it
+to an another folder, and just copy over the files that you need.</p>
+<p>Run command:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">bin</span><span class="o">/&lt;</span><span class="n">godot_binary</span><span class="o">&gt;</span><span class="w"> </span><span class="o">--</span><span class="n">doctool</span><span class="w"> </span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Now if you go to the <code class="docutils literal notranslate"><span class="pre">godot/modules/summator/doc_classes</span></code> folder, you will see
+that it contains a <code class="docutils literal notranslate"><span class="pre">Summator.xml</span></code> file, or any other classes, that you referenced
+in your <code class="docutils literal notranslate"><span class="pre">get_doc_classes</span></code> function.</p>
+<p>Edit the file(s) following the <a class="reference external" href="https://docs.godotengine.org/en/latest/engine_details/class_reference/index.html">class reference primer</a> and recompile the engine.</p>
+<p>Once the compilation process is finished, the docs will become accessible within
+the engine's built-in documentation system.</p>
+<p>In order to keep documentation up-to-date, all you'll have to do is simply modify
+one of the XML files and recompile the engine from now on.</p>
+<p>If you change your module's API, you can also re-extract the docs, they will contain
+the things that you previously added. Of course if you point it to your godot
+folder, make sure you don't lose work by extracting older docs from an older engine build
+on top of the newer ones.</p>
+<p>Note that if you don't have write access rights to your supplied <code class="docutils literal notranslate"><span class="pre">&lt;path&gt;</span></code>,
+you might encounter an error similar to the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ERROR: Can&#39;t write doc file: docs/doc/classes/@GDScript.xml</span>
+<span class="go">   At: editor/doc/doc_data.cpp:956</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-custom-unit-tests">
+<span id="doc-custom-module-unit-tests"></span><h2>Writing custom unit tests<a class="headerlink" href="#writing-custom-unit-tests" title="Link to this heading"></a></h2>
+<p>It's possible to write self-contained unit tests as part of a C++ module. If you
+are not familiar with the unit testing process in Godot yet, please refer to
+<a class="reference internal" href="../architecture/unit_testing.html#doc-unit-testing"><span class="std std-ref">Unit testing</span></a>.</p>
+<p>The procedure is the following:</p>
+<ol class="arabic simple">
+<li><p>Create a new directory named <code class="docutils literal notranslate"><span class="pre">tests/</span></code> under your module's root:</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd modules/summator</span>
+<span class="go">mkdir tests</span>
+<span class="go">cd tests</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Create a new test suite: <code class="docutils literal notranslate"><span class="pre">test_summator.h</span></code>. The header must be prefixed
+with <code class="docutils literal notranslate"><span class="pre">test_</span></code> so that the build system can collect it and include it as part
+of the <code class="docutils literal notranslate"><span class="pre">tests/test_main.cpp</span></code> where the tests are run.</p></li>
+<li><p>Write some test cases. Here's an example:</p></li>
+</ol>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">godot/modules/summator/tests/test_summator.h</span><a class="headerlink" href="#id10" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tests/test_macros.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;modules/summator/summator.h&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">TestSummator</span><span class="w"> </span><span class="p">{</span>
+
+<span class="n">TEST_CASE</span><span class="p">(</span><span class="s">&quot;[Modules][Summator] Adding numbers&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">Summator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memnew</span><span class="p">(</span><span class="n">Summator</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CHECK</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">get_total</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">s</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CHECK</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">get_total</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">s</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CHECK</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">get_total</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">s</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CHECK</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">get_total</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">60</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">s</span><span class="o">-&gt;</span><span class="n">reset</span><span class="p">();</span>
+<span class="w">    </span><span class="n">CHECK</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">get_total</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace TestSummator</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Compile the engine with <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">tests=yes</span></code>, and run the tests with the
+following command:</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./bin/&lt;godot_binary&gt; --test --source-file=&quot;*test_summator*&quot; --success</span>
+</pre></div>
+</div>
+<p>You should see the passing assertions now.</p>
+</section>
+<section id="adding-custom-editor-icons">
+<span id="doc-custom-module-icons"></span><h2>Adding custom editor icons<a class="headerlink" href="#adding-custom-editor-icons" title="Link to this heading"></a></h2>
+<p>Similarly to how you can write self-contained documentation within a module,
+you can also create your own custom icons for classes to appear in the editor.</p>
+<p>For the actual process of creating editor icons to be integrated within the engine,
+please refer to <a class="reference internal" href="../editor/creating_icons.html#doc-editor-icons"><span class="std std-ref">Editor icons</span></a> first.</p>
+<p>Once you've created your icon(s), proceed with the following steps:</p>
+<ol class="arabic simple">
+<li><p>Make a new directory in the root of the module named <code class="docutils literal notranslate"><span class="pre">icons</span></code>. This is the
+default path for the engine to look for module's editor icons.</p></li>
+<li><p>Move your newly created <code class="docutils literal notranslate"><span class="pre">svg</span></code> icons (optimized or not) into that folder.</p></li>
+<li><p>Recompile the engine and run the editor. Now the icon(s) will appear in
+editor's interface where appropriate.</p></li>
+</ol>
+<p>If you'd like to store your icons somewhere else within your module,
+add the following code snippet to <code class="docutils literal notranslate"><span class="pre">config.py</span></code> to override the default path:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_icons_path</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s2">&quot;path/to/icons&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="summing-up">
+<h2>Summing up<a class="headerlink" href="#summing-up" title="Link to this heading"></a></h2>
+<p>Remember to:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">GDCLASS</span></code> macro for inheritance, so Godot can wrap it.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">_bind_methods</span></code> to bind your functions to scripting, and to
+allow them to work as callbacks for signals.</p></li>
+<li><p><strong>Avoid multiple inheritance for classes exposed to Godot</strong>, as <code class="docutils literal notranslate"><span class="pre">GDCLASS</span></code>
+doesn't support this. You can still use multiple inheritance in your own
+classes as long as they're not exposed to Godot's scripting API.</p></li>
+</ul>
+<p>But this is not all, depending what you do, you will be greeted with
+some (hopefully positive) surprises.</p>
+<ul class="simple">
+<li><p>If you inherit from <a class="reference internal" href="../../classes/class_node.html#class-node"><span class="std std-ref">Node</span></a> (or any derived node type, such as
+Sprite2D), your new class will appear in the editor, in the inheritance
+tree in the &quot;Add Node&quot; dialog.</p></li>
+<li><p>If you inherit from <a class="reference internal" href="../../classes/class_resource.html#class-resource"><span class="std std-ref">Resource</span></a>, it will appear in the resource
+list, and all the exposed properties can be serialized when
+saved/loaded.</p></li>
+<li><p>By this same logic, you can extend the Editor and almost any area of
+the engine.</p></li>
+</ul>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Engine extension APIs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vendor_runtime_module.html" class="btn btn-neutral float-right" title="Vendor Runtime Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

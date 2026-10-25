@@ -1,0 +1,755 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="3D lights and shadows" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/lights_and_shadows.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: Light sources emit light that mixes with the materials and produces a visible result. Light can come from several types of sources in a scene: From the material itself, in the form of..." />
+<meta name="description" content="Introduction: Light sources emit light that mixes with the materials and produces a visible result. Light can come from several types of sources in a scene: From the material itself, in the form of..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>3D lights and shadows &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using decals" href="using_decals.html" />
+    <link rel="prev" title="Standard Material 3D and ORM Material 3D" href="standard_material_3d.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/lights_and_shadows" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/3d/lights_and_shadows.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">3D</a></li>
+      <li class="breadcrumb-item active">3D lights and shadows</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/lights_and_shadows.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="d-lights-and-shadows">
+<span id="doc-lights-and-shadows"></span><h1>3D lights and shadows<a class="headerlink" href="#d-lights-and-shadows" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Light sources emit light that mixes with the materials and produces a visible
+result. Light can come from several types of sources in a scene:</p>
+<ul class="simple">
+<li><p>From the material itself, in the form of the emission color (though it does
+not affect nearby objects unless baked or screen-space indirect lighting is enabled).</p></li>
+<li><p>Light nodes: DirectionalLight3D, OmniLight3D, SpotLight3D, and AreaLight3D.</p></li>
+<li><p>Ambient light in the <a class="reference internal" href="../../classes/class_environment.html#class-environment"><span class="std std-ref">Environment</span></a> or
+<a class="reference internal" href="global_illumination/reflection_probes.html#doc-reflection-probes"><span class="std std-ref">Reflection probes</span></a>.</p></li>
+<li><p>Global illumination (<a class="reference internal" href="global_illumination/using_lightmap_gi.html#doc-using-lightmap-gi"><span class="std std-ref">LightmapGI</span></a>,
+<a class="reference internal" href="global_illumination/using_voxel_gi.html#doc-using-voxel-gi"><span class="std std-ref">VoxelGI</span></a> or <a class="reference internal" href="global_illumination/using_sdfgi.html#doc-using-sdfgi"><span class="std std-ref">SDFGI</span></a>).</p></li>
+</ul>
+<p>The emission color is a material property. You can read more about it
+in the <a class="reference internal" href="standard_material_3d.html#doc-standard-material-3d"><span class="std std-ref">Standard Material 3D and ORM Material 3D</span></a> tutorial.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>You can compare various types of lights in action using the
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/3d/lights_and_shadows">3D Lights and Shadows demo project</a>.</p>
+</div>
+</section>
+<section id="light-nodes">
+<h2>Light nodes<a class="headerlink" href="#light-nodes" title="Link to this heading"></a></h2>
+<p>There are four types of light nodes: <a class="reference internal" href="../../classes/class_directionallight3d.html#class-directionallight3d"><span class="std std-ref">DirectionalLight3D</span></a>,
+<a class="reference internal" href="../../classes/class_omnilight3d.html#class-omnilight3d"><span class="std std-ref">OmniLight3D</span></a>, <a class="reference internal" href="../../classes/class_spotlight3d.html#class-spotlight3d"><span class="std std-ref">SpotLight3D</span></a>, and <a class="reference internal" href="../../classes/class_arealight3d.html#class-arealight3d"><span class="std std-ref">AreaLight3D</span></a>. Let's take a look at the common
+parameters for lights:</p>
+<img alt="../../_images/light_params.png" src="../../_images/light_params.png" />
+<p>Each property has a specific function:</p>
+<ul class="simple">
+<li><p><strong>Color:</strong> Base color for emitted light.</p></li>
+<li><p><strong>Energy:</strong> Energy multiplier. This is useful for saturating lights or working with <a class="reference internal" href="high_dynamic_range.html#doc-high-dynamic-range"><span class="std std-ref">High dynamic range lighting</span></a>.</p></li>
+<li><p><strong>Indirect Energy:</strong> Secondary multiplier used with indirect light (light bounces). This works with <a class="reference internal" href="global_illumination/using_lightmap_gi.html#doc-using-lightmap-gi"><span class="std std-ref">Using Lightmap global illumination</span></a>, VoxelGI or SDFGI.</p></li>
+<li><p><strong>Volumetric Fog Energy:</strong> Secondary multiplier used with volumetric fog. This only has an effect when volumetric fog is enabled.</p></li>
+<li><p><strong>Negative:</strong> Light becomes subtractive instead of additive. It's sometimes useful to manually compensate some dark corners.</p></li>
+<li><p><strong>Specular:</strong> Affects the intensity of the specular blob in objects affected by this light. At zero, this light becomes a pure diffuse light.</p></li>
+<li><p><strong>Bake Mode:</strong> Sets the bake mode for the light. See <a class="reference internal" href="global_illumination/using_lightmap_gi.html#doc-using-lightmap-gi"><span class="std std-ref">Using Lightmap global illumination</span></a>.</p></li>
+<li><p><strong>Cull Mask:</strong> Objects that are in the selected layers below will be affected by this light.
+Note that objects disabled via this cull mask will still cast shadows.
+If you don't want disabled objects to cast shadows, adjust the <strong>Cast Shadow</strong>
+property on the GeometryInstance3D to the desired value.</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="physical_light_and_camera_units.html#doc-physical-light-and-camera-units"><span class="std std-ref">Physical light and camera units</span></a> if you wish to use real world
+units to configure your lights' intensity and color temperature.</p>
+</div>
+</section>
+<section id="light-number-limits">
+<h2>Light number limits<a class="headerlink" href="#light-number-limits" title="Link to this heading"></a></h2>
+<p>When using the Forward+ renderer, Godot uses a <em>clustering</em> approach for
+real-time lighting. As many lights as desired can be added (as long as
+performance allows). However, there's still a default limit of 512 <em>clustered
+elements</em> that can be present in the current camera view. A clustered element is
+an omni light, a spot light, an area light, a <a class="reference internal" href="using_decals.html#doc-using-decals"><span class="std std-ref">decal</span></a>, or a
+<a class="reference internal" href="global_illumination/reflection_probes.html#doc-reflection-probes"><span class="std std-ref">reflection probe</span></a>. This limit can be increased by adjusting
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-rendering-limits-cluster-builder-max-clustered-elements"><span class="std std-ref">Max Clustered Elements</span></a>
+in <strong>Project Settings &gt; Rendering &gt; Limits &gt; Cluster Builder</strong>.</p>
+<p>When using the Mobile renderer, there is a limitation of 8 OmniLights + 8 SpotLights
+per mesh resource. There is also a limit of 256 OmniLights + 256 SpotLights that
+can be rendered in the current camera view. These limits currently cannot be changed.</p>
+<p>When using the Compatibility renderer, up to 8 OmniLights + 8 SpotLights can be
+rendered per mesh resource. This limit can be increased in the advanced Project
+Settings by adjusting
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-rendering-limits-opengl-max-renderable-elements"><span class="std std-ref">Max Renderable Elements</span></a>
+and/or <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-rendering-limits-opengl-max-lights-per-object"><span class="std std-ref">Max Lights per Object</span></a>
+in <strong>Rendering &gt; Limits &gt; OpenGL</strong>, at the cost of performance and longer shader
+compilation times. The limit can also be decreased to reduce shader compilation
+times and improve performance slightly.</p>
+<p>With all rendering methods, up to 8 DirectionalLights can be visible at a time.
+However, each additional DirectionalLight with shadows enabled will reduce the
+effective shadow resolution of each DirectionalLight. This is because
+directional shadow atlas is shared between all lights.</p>
+<p>If the rendering limit is exceeded, lights will start popping in and out during
+camera movement, which can be distracting. Enabling <strong>Distance Fade</strong> on light
+nodes can help reduce this issue while also improving performance. Splitting
+your meshes into smaller portions can also help, especially for level geometry
+(which also improves culling efficiency).</p>
+<p>If you need to render more lights than possible in a given renderer,
+consider using <a class="reference internal" href="global_illumination/using_lightmap_gi.html#doc-using-lightmap-gi"><span class="std std-ref">baked lightmaps</span></a> with lights' bake
+mode set to <strong>Static</strong>. This allows lights to be fully baked, which also makes
+them much faster to render. You can also use emissive materials with any
+<a class="reference internal" href="global_illumination/introduction_to_global_illumination.html#doc-introduction-to-global-illumination"><span class="std std-ref">global illumination</span></a> technique
+as a replacement for light nodes that emit light over a large area.</p>
+</section>
+<section id="shadow-mapping">
+<h2>Shadow mapping<a class="headerlink" href="#shadow-mapping" title="Link to this heading"></a></h2>
+<p>Lights can optionally cast shadows. This gives them greater realism (light does
+not reach occluded areas), but it can incur a bigger performance cost.
+There is a list of generic shadow parameters, each also has a specific function:</p>
+<ul class="simple">
+<li><p><strong>Enabled:</strong> Check to enable shadow mapping in this light.</p></li>
+<li><p><strong>Opacity:</strong> Areas occluded are darkened by this opacity factor. Shadows are
+fully opaque by default, but this can be changed to make shadows translucent
+for a given light.</p></li>
+<li><p><strong>Bias:</strong> When this parameter is too low, self-shadowing occurs. When too
+high, shadows separate from the casters. Tweak to what works best for you.</p></li>
+<li><p><strong>Normal Bias:</strong> When this parameter is too low, self-shadowing occurs. When too
+high, shadows appear misaligned from the casters. Tweak to what works best for you.</p></li>
+<li><p><strong>Transmittance Bias:</strong> When this parameter is too low, self-shadowing
+occurs on materials that have transmittance enabled. When too high, shadows
+will not affect materials that have transmittance enabled consistently. Tweak
+to what works best for you.</p></li>
+<li><p><strong>Reverse Cull Face:</strong> Some scenes work better when shadow mapping is rendered
+with face-culling inverted.</p></li>
+<li><p><strong>Blur:</strong> Multiplies the shadow blur radius for this light. This works with
+both traditional shadow mapping and contact-hardening shadows (lights with
+<strong>Angular Distance</strong> or <strong>Size</strong> greater than <code class="docutils literal notranslate"><span class="pre">0.0</span></code>). Higher values result
+in softer shadows, which will also appear to be more temporally stable for
+moving objects. The downside of increasing shadow blur is that it will make
+the grainy pattern used for filtering more noticeable.
+See also <a class="reference internal" href="#doc-lights-and-shadows-shadow-filter-mode"><span class="std std-ref">Shadow filter mode</span></a>.</p></li>
+<li><p><strong>Caster Mask:</strong> Shadows are only cast by objects in these layers. Note that
+this mask does not affect which objects shadows are cast <em>onto</em>.</p></li>
+</ul>
+<img alt="../../_images/lights_and_shadows_blur.webp" src="../../_images/lights_and_shadows_blur.webp" />
+<section id="tweaking-shadow-bias">
+<h3>Tweaking shadow bias<a class="headerlink" href="#tweaking-shadow-bias" title="Link to this heading"></a></h3>
+<p>Below is an image of what tweaking bias looks like. Default values work for most
+cases, but in general, it depends on the size and complexity of geometry.</p>
+<p>If the <strong>Shadow Bias</strong> or <strong>Shadow Normal Bias</strong> is set too low for a given light,
+the shadow will be &quot;smeared&quot; onto the objects. This will cause the light's
+intended appearance to darken, and is called <em>shadow acne</em>:</p>
+<img alt="../../_images/lights_and_shadows_acne.webp" src="../../_images/lights_and_shadows_acne.webp" />
+<p>On the other hand, if the <strong>Shadow Bias</strong> or <strong>Shadow Normal Bias</strong> is set too
+high for a given light, the shadow may appear to be disconnected from the
+object. This is called <em>peter-panning</em>:</p>
+<img alt="../../_images/lights_and_shadows_peter_panning.webp" src="../../_images/lights_and_shadows_peter_panning.webp" />
+<p>In general, increasing <strong>Shadow Normal Bias</strong> is preferred over increasing
+<strong>Shadow Bias</strong>. Increasing <strong>Shadow Normal Bias</strong> does not cause as much
+peter-panning as increasing <strong>Shadow Bias</strong>, but it can still resolve
+most shadow acne issues efficiently. The downside of increasing <strong>Shadow Normal
+Bias</strong> is that it can make shadows appear thinner for certain objects.</p>
+<p>Any sort of bias issues can be fixed by
+<a class="reference internal" href="#doc-lights-and-shadows-balancing-performance-and-quality"><span class="std std-ref">increasing the shadow map resolution</span></a>,
+at the cost of decreased performance.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Tweaking shadow mapping settings is an art – there are no &quot;one size fits
+all&quot; settings. To achieve the best visuals, you may need to use different
+shadow bias values on a per-light basis.</p>
+</div>
+<p><strong>Note on Appearance Changes</strong>: When enabling shadows on a light, be aware that the light's
+appearance might change compared to when it's rendered without shadows in the compatibility
+renderer. Due to limitations with older mobile devices, shadows are implemented using a multi-pass
+rendering approach so lights with shadows are rendered in sRGB space instead of linear space.
+This change in rendering space can sometimes drastically alter the light's appearance. To achieve a similar
+appearance to an unshadowed light, you may need to adjust the light's energy setting.</p>
+</section>
+</section>
+<section id="directional-light">
+<span id="doc-lights-and-shadows-directional-light"></span><h2>Directional light<a class="headerlink" href="#directional-light" title="Link to this heading"></a></h2>
+<p>This is the most common type of light and represents a light source very far
+away (such as the sun). It is also the cheapest light to compute and should be
+used whenever possible (although it's not the cheapest shadow-map to compute,
+but more on that later).</p>
+<p>Directional light models an infinite number of parallel light rays
+covering the whole scene. The directional light node is represented by a big arrow which
+indicates the direction of the light rays. However, the position of the node
+does not affect the lighting at all and can be anywhere.</p>
+<img alt="../../_images/light_directional.png" src="../../_images/light_directional.png" />
+<p>Every face whose front-side is hit by the light rays is lit, while the others
+stay dark. Unlike most other light types, directional lights don't have specific
+parameters.</p>
+<p>The directional light also offers an <strong>Angular Distance</strong> property, which
+determines the light's angular size in degrees. Increasing this above <code class="docutils literal notranslate"><span class="pre">0.0</span></code>
+will make shadows softer at greater distances from the caster, while also
+affecting the sun's appearance in procedural sky materials. This is called a
+<em>contact-hardening</em> shadow (also known as PCSS).</p>
+<p>For reference, the angular distance of the Sun viewed from the Earth is
+approximately <code class="docutils literal notranslate"><span class="pre">0.5</span></code>. This kind of shadow is expensive, so check the
+recommendations in <a class="reference internal" href="#doc-lights-and-shadows-pcss-recommendations"><span class="std std-ref">PCSS recommendations</span></a> if setting
+this value above <code class="docutils literal notranslate"><span class="pre">0.0</span></code> on lights with shadows enabled.</p>
+<section id="directional-shadow-mapping">
+<h3>Directional shadow mapping<a class="headerlink" href="#directional-shadow-mapping" title="Link to this heading"></a></h3>
+<p>To compute shadow maps, the scene is rendered (only depth) from an orthogonal
+point of view that covers the whole scene (or up to the max distance). There is,
+however, a problem with this approach because objects closer to the camera
+receive low-resolution shadows that may appear blocky.</p>
+<p>To fix this, a technique named <em>Parallel Split Shadow Maps</em> (PSSM) is used.
+This splits the view frustum in 2 or 4 areas. Each area gets its own shadow map.
+This allows small areas close to the viewer to have the same shadow resolution
+as a huge, far-away area. When shadows are enabled for DirectionalLight3D, the
+default shadow mode is PSSM with 4 splits. In scenarios where an object is large
+enough to appear in all four splits, it results in increased draw calls. Specifically,
+such an object will be rendered five times in total: once for each of the four shadow
+splits and once for the final scene rendering. This can impact performance, understanding
+this behavior is important for optimizing your scene and managing performance expectations.</p>
+<img alt="../../_images/lights_and_shadows_pssm_explained.webp" src="../../_images/lights_and_shadows_pssm_explained.webp" />
+<p>With this, shadows become more detailed:</p>
+<img alt="../../_images/lights_and_shadows_directional_mode.webp" src="../../_images/lights_and_shadows_directional_mode.webp" />
+<p>To control PSSM, a number of parameters are exposed:</p>
+<img alt="../../_images/lights_and_shadows_directional_shadow_params.webp" src="../../_images/lights_and_shadows_directional_shadow_params.webp" />
+<p>Each split distance is controlled relative to the camera far (or shadow
+<strong>Max Distance</strong> if greater than <code class="docutils literal notranslate"><span class="pre">0.0</span></code>). <code class="docutils literal notranslate"><span class="pre">0.0</span></code> is the eye position and
+<code class="docutils literal notranslate"><span class="pre">1.0</span></code> is where the shadow ends at a distance. Splits are in-between.
+Default values generally work well, but tweaking the first split a bit is common
+to give more detail to close objects (like a character in a third-person game).</p>
+<p>Always make sure to set a shadow <strong>Max Distance</strong> according to what the scene
+needs. A lower maximum distance will result in better-looking shadows and better
+performance, as fewer objects will need to be included in shadow rendering. You
+can also adjust <strong>Fade Start</strong> to control how aggressive the shadow fade-out
+should be at a distance. For scenes where the <strong>Max Distance</strong> fully covers the
+scene at any given camera position, you can increase <strong>Fade Start</strong> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>
+to prevent the shadow from fading at a distance. This should not be done in
+scenes where <strong>Max Distance</strong> doesn't fully cover the scene, as the shadow will
+appear to be suddenly cut off at a distance.</p>
+<p>Sometimes, the transition between a split and the next can look bad. To fix
+this, the <strong>Blend Splits</strong> option can be turned on, which sacrifices detail and
+performance in exchange for smoother transitions:</p>
+<img alt="../../_images/blend_splits.png" src="../../_images/blend_splits.png" />
+<p>The <strong>Shadow &gt; Normal Bias</strong> parameter can be used to fix special cases of
+self-shadowing when objects are perpendicular to the light. The only downside is
+that it makes the shadow a bit thinner. Consider increasing <strong>Shadow &gt; Normal
+Bias</strong> before increasing <strong>Shadow &gt; Bias</strong> in most situations.</p>
+<p>Lastly, <strong>Pancake Size</strong> is a property that can be adjusted to fix missing
+shadows when using large objects with unsubdivided meshes. Only change this
+value if you notice missing shadows that are not related to shadow biasing
+issues.</p>
+</section>
+</section>
+<section id="omni-light">
+<span id="doc-lights-and-shadows-omni-light"></span><h2>Omni light<a class="headerlink" href="#omni-light" title="Link to this heading"></a></h2>
+<p>Omni light is a point source that emits light spherically in all directions up to a given
+radius.</p>
+<img alt="../../_images/light_omni.png" src="../../_images/light_omni.png" />
+<p>In real life, light attenuation is an inverse function, which means omni lights don't have a radius.
+This is a problem because it means computing several omni lights would become demanding.</p>
+<p>To solve this, a <strong>Range</strong> parameter is introduced together with an attenuation function.</p>
+<img alt="../../_images/light_omni_params.png" src="../../_images/light_omni_params.png" />
+<p>These two parameters allow tweaking how this works visually in order to find aesthetically pleasing results.</p>
+<img alt="../../_images/light_attenuation.png" src="../../_images/light_attenuation.png" />
+<p>A <strong>Size</strong> parameter is also available in OmniLight3D. Increasing this value
+will make the light fade out slower and shadows appear blurrier when far away
+from the caster. This can be used to simulate area lights to an extent. This is
+called a <em>contact-hardening</em> shadow (also known as PCSS). This kind of shadow is
+expensive, so check the recommendations in
+<a class="reference internal" href="#doc-lights-and-shadows-pcss-recommendations"><span class="std std-ref">PCSS recommendations</span></a> if setting this value above
+<code class="docutils literal notranslate"><span class="pre">0.0</span></code> on lights with shadows enabled.</p>
+<img alt="../../_images/lights_and_shadows_pcss.webp" src="../../_images/lights_and_shadows_pcss.webp" />
+<section id="omni-shadow-mapping">
+<h3>Omni shadow mapping<a class="headerlink" href="#omni-shadow-mapping" title="Link to this heading"></a></h3>
+<p>Omni light shadow mapping is relatively straightforward. The main issue that
+needs to be considered is the algorithm used to render it.</p>
+<p>Omni Shadows can be rendered as either <strong>Dual Paraboloid</strong> or <strong>Cube</strong> mapped.
+<strong>Dual Paraboloid</strong> renders quickly, but can cause deformations, while <strong>Cube</strong>
+is more correct, but slower. The default is <strong>Cube</strong>, but consider changing it
+to <strong>Dual Paraboloid</strong> for lights where it doesn't make much of a visual
+difference.</p>
+<img alt="../../_images/lights_and_shadows_dual_parabolid_vs_cubemap.webp" src="../../_images/lights_and_shadows_dual_parabolid_vs_cubemap.webp" />
+<p>If the objects being rendered are mostly irregular and subdivided, Dual
+Paraboloid is usually enough. In any case, as these shadows are cached in a
+shadow atlas (more on that at the end), it may not make a difference in
+performance for most scenes.</p>
+<p>Omni lights with shadows enabled can make use of projectors. The projector
+texture will <em>multiply</em> the light's color by the color at a given point on the
+texture. As a result, lights will usually appear to be darker once a projector
+texture is assigned; you can increase <strong>Energy</strong> to compensate for this.</p>
+<p>Omni light projector textures require a special 360° panorama mapping, similar
+to <a class="reference internal" href="../../classes/class_panoramaskymaterial.html#class-panoramaskymaterial"><span class="std std-ref">PanoramaSkyMaterial</span></a> textures.</p>
+<p>With the projector texture below, the following result is obtained:</p>
+<img alt="../../_images/lights_and_shadows_omni_projector_example.webp" src="../../_images/lights_and_shadows_omni_projector_example.webp" />
+<img alt="../../_images/lights_and_shadows_omni_projector.webp" src="../../_images/lights_and_shadows_omni_projector.webp" />
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you've acquired omni projectors in the form of cubemap images, you can use
+<a class="reference external" href="https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html">this web-based conversion tool</a>
+to convert them to a single panorama image.</p>
+</div>
+</section>
+</section>
+<section id="spot-light">
+<span id="doc-lights-and-shadows-spot-light"></span><h2>Spot light<a class="headerlink" href="#spot-light" title="Link to this heading"></a></h2>
+<p>Spot lights are similar to omni lights, except they emit light only into a cone
+(or &quot;cutoff&quot;). They are useful to simulate flashlights,
+car lights, reflectors, spots, etc. This type of light is also attenuated towards the
+opposite direction it points to.</p>
+<p>Spot lights share the same <strong>Range</strong>, <strong>Attenuation</strong> and <strong>Size</strong> as OmniLight3D,
+and add two extra parameters:</p>
+<ul class="simple">
+<li><p><strong>Angle:</strong> The aperture angle of the light.</p></li>
+<li><p><strong>Angle Attenuation:</strong> The cone attenuation, which helps soften the cone borders.</p></li>
+</ul>
+<section id="spot-shadow-mapping">
+<h3>Spot shadow mapping<a class="headerlink" href="#spot-shadow-mapping" title="Link to this heading"></a></h3>
+<p>Spots feature the same parameters as omni lights for shadow mapping. Rendering
+spot shadow maps is significantly faster compared to omni lights, as only one
+shadow texture needs to be rendered (instead of rendering 6 faces, or 2 in dual
+paraboloid mode).</p>
+<p>Spot lights with shadows enabled can make use of projectors. The projector
+texture will <em>multiply</em> the light's color by the color at a given point on the
+texture. As a result, lights will usually appear to be darker once a projector
+texture is assigned; you can increase <strong>Energy</strong> to compensate for this.</p>
+<p>Unlike omni light projectors, a spot light projector texture doesn't need to
+follow a special format to look correct. It will be mapped in a way similar to a
+<a class="reference internal" href="using_decals.html#doc-using-decals"><span class="std std-ref">decal</span></a>.</p>
+<p>With the projector texture below, the following result is obtained:</p>
+<img alt="../../_images/lights_and_shadows_spot_projector_example.webp" src="../../_images/lights_and_shadows_spot_projector_example.webp" />
+<img alt="../../_images/lights_and_shadows_spot_projector.webp" src="../../_images/lights_and_shadows_spot_projector.webp" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Spot lights with wide angles will have lower-quality shadows than spot
+lights with narrow angles, as the shadow map is spread over a larger
+surface. At angles wider than 89 degrees, spot light shadows will stop
+working entirely. If you need shadows for wider lights, use an omni light
+instead.</p>
+</div>
+</section>
+</section>
+<section id="area-light">
+<span id="doc-lights-and-shadows-area-light"></span><h2>Area light<a class="headerlink" href="#area-light" title="Link to this heading"></a></h2>
+<p>Sometimes, you want lighting to come from a large area instead of a single
+point. Area lights are useful for simulating soft, diffuse lighting, such as
+light coming from a window or a lit billboard.</p>
+<p>Godot provides the <a class="reference internal" href="../../classes/class_arealight3d.html#class-arealight3d"><span class="std std-ref">AreaLight3D</span></a> node for this purpose, which emits
+light from a rectangular area. The node only emits light and has no other visual
+representation in the scene. The screenshots below use a <a class="reference internal" href="../../classes/class_sprite3d.html#class-sprite3d"><span class="std std-ref">Sprite3D</span></a>
+node as a child of the area light for visualization purposes.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This type of light is the most expensive to render in real-time. It should
+be used sparingly, especially when shadows are enabled.
+Consider using them only for cinematics or when targeting high-end devices.</p>
+<p>In Forward+, as soon as one area light is visible in the view frustum, it
+incurs an additional performance cost on <strong>all</strong> rendered objects in the
+scene, even those that are not reached by an area light. This tradeoff
+allows for a greater number of area lights to be rendered (clustered
+lighting).</p>
+<p>In Mobile and Compatibility, only objects that are reached by an area light
+incur an additional performance cost.</p>
+</div>
+<p>Area lights can also cast shadows, with variable penumbra simulated using
+<a class="reference internal" href="#doc-lights-and-shadows-pcss-recommendations"><span class="std std-ref">PCSS</span></a> by default. The size
+of this penumbra can be controlled with the Light3D <strong>Size</strong> property. This
+effect can be quite demanding, so it can be turned off by setting <strong>Size</strong> to
+<code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Shadows cast by an area light may look incorrect if the object casting shadows
+doesn't have enough subdivisions and it's very close to the area light.
+This is the same limitation as Dual Paraboloid shadow mode on an omni light.</p>
+</div>
+<img alt="../../_images/lights_and_shadows_area_example.webp" src="../../_images/lights_and_shadows_area_example.webp" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since area lights are difficult to simulate in a real-time rasterized
+renderer, they come with a number of limitations.</p>
+<p>For small light sources, you will likely get better results when using point
+lights. Shadows from area lights are crude approximations, as they are
+calculated as if they were point lights, and may appear to be distorted at
+the edges. To get a better result, make sure the meshes in the light's range
+are sufficiently subdivided.</p>
+<p>Area lights suffer from light leaking on the backside of geometry closely in
+front of them at grazing angles, so be careful with where you place them.</p>
+<p>Lastly, not all material features are fully supported; area lights are
+practically limited to Lambertian diffuse and GGX specular shading, while
+anisotropic materials will appear as if isotropic. Vertex shading is also
+not implemented for area lights.</p>
+</div>
+<p>Area lights emit light in a rectangular area defined by the <strong>Area &gt; Size</strong>
+property (not to be confused with the generic Light3D <strong>Size</strong> property). To get
+a physically accurate result, you should resize this area to match the size of
+the real-life light source you are trying to simulate. For example, if you are
+simulating a 1-meter neon tube that is 10 centimeters wide, set the area
+size to <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">0.1)</span></code> and adjust the energy accordingly.</p>
+<p>By default, the light's energy is normalized: the larger the area, the weaker
+the light. This allows you to change the area size without needing to adjust the
+energy to compensate, which is useful for animation. You can disable this
+behavior by unchecking <strong>Area &gt; Normalize Energy</strong> if you want the energy to be
+independent of the area size.</p>
+<p>The rectangular area can optionally be textured. This can be effectively used to
+change the light's shape into any 2D shape, or tint it in different colors. The
+texture's alpha channel is treated as black (no light coming through). The area
+light's texture will be visible in reflections according to the surface's
+roughness. This behavior is different from omni/spot projectors, as it does not
+project the texture directly onto all diffuse lighting.</p>
+<p>When using a textures that are transparent or black toward the edges, you might
+want to leave a gap of a few pixels to make sure the texture is blurred
+smoothly.</p>
+<img alt="../../_images/lights_and_shadows_area_texture.webp" src="../../_images/lights_and_shadows_area_texture.webp" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Changing the area light's texture at runtime can be expensive, especially if
+the texture is large.</p>
+<p>To reduce the performance impact of switching textures at runtime, make sure
+each dimension of an area texture is either a multiple of 128 pixels, or a
+power of two. This removes the need for a scaling pass, which slows down
+texture changes. The textures don't necessarily have to be square to be
+optimal. Examples of optimal texture sizes include 32×64, 128×128, and
+256×384.</p>
+<p>Textured area lights are not supported in the Compatibility renderer.</p>
+</div>
+</section>
+<section id="shadow-atlas">
+<span id="doc-lights-and-shadows-shadow-atlas"></span><h2>Shadow atlas<a class="headerlink" href="#shadow-atlas" title="Link to this heading"></a></h2>
+<p>Unlike Directional lights, which have their own shadow texture, omni, spot, and area
+lights are assigned to slots of a shadow atlas. This atlas can be configured in
+the advanced Project Settings (<strong>Rendering &gt; Lights And Shadows &gt; Positional Shadow</strong>).</p>
+<p>The resolution applies to the whole shadow atlas. This atlas is divided into four quadrants:</p>
+<img alt="../../_images/lights_and_shadows_shadow_quadrants.webp" src="../../_images/lights_and_shadows_shadow_quadrants.webp" />
+<p>Each quadrant can be subdivided to allocate any number of shadow maps; the following is the default subdivision:</p>
+<img alt="../../_images/lights_and_shadows_shadow_quadrants2.webp" src="../../_images/lights_and_shadows_shadow_quadrants2.webp" />
+<p>The shadow atlas allocates space as follows:</p>
+<ul class="simple">
+<li><p>The biggest shadow map size (when no subdivision is used) represents a light the size of the screen (or bigger).</p></li>
+<li><p>Subdivisions (smaller maps) represent shadows for lights that are further away from view and proportionally smaller.</p></li>
+</ul>
+<p>Every frame, the following procedure is performed for all lights:</p>
+<ol class="arabic simple">
+<li><p>Check if the light is on a slot of the right size. If not, re-render it and move it to a larger/smaller slot.</p></li>
+<li><p>Check if any object affecting the shadow map has changed. If it did, re-render the light.</p></li>
+<li><p>If neither of the above has happened, nothing is done, and the shadow is left untouched.</p></li>
+</ol>
+<p>If the slots in a quadrant are full, lights are pushed back to smaller slots,
+depending on size and distance. If all slots in all quadrants are full, some
+lights will not be able to render shadows even if shadows are enabled on them.</p>
+<p>The default shadow allocation strategy allows rendering up to 88 lights with
+shadows enabled in the camera frustum (4 + 4 + 16 + 64):</p>
+<ol class="arabic simple">
+<li><p>The first and most detailed quadrant can store 4 shadows.</p></li>
+<li><p>The second quadrant can store 4 other shadows.</p></li>
+<li><p>The third quadrant can store 16 shadows, with less detail.</p></li>
+<li><p>The fourth and least detailed quadrant can store 64 shadows, with even less detail.</p></li>
+</ol>
+<p>Using a higher number of shadows per quadrant allows supporting a greater amount
+of total lights with shadows enabled, while also improving performance (as
+shadows will be rendered at a lower resolution for each light). However,
+increasing the number of shadows per quadrant comes at the cost of lower shadow
+quality.</p>
+<p>In some cases, you may want to use a different allocation strategy. For example,
+in a top-down game where all lights are around the same size, you may want to
+set all quadrants to have the same subdivision so that all lights have shadows
+of similar quality level.</p>
+</section>
+<section id="balancing-performance-and-quality">
+<span id="doc-lights-and-shadows-balancing-performance-and-quality"></span><h2>Balancing performance and quality<a class="headerlink" href="#balancing-performance-and-quality" title="Link to this heading"></a></h2>
+<p>Shadow rendering is a critical topic in 3D rendering performance. It's important
+to make the right choices here to avoid creating bottlenecks.</p>
+<p>Directional shadow quality settings can be changed at runtime by calling the
+appropriate <a class="reference internal" href="../../classes/class_renderingserver.html#class-renderingserver"><span class="std std-ref">RenderingServer</span></a> methods.</p>
+<p>Positional (omni/spot/area) shadow quality settings can be changed at runtime on the
+root <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a>.</p>
+<section id="shadow-map-size">
+<h3>Shadow map size<a class="headerlink" href="#shadow-map-size" title="Link to this heading"></a></h3>
+<p>High shadow resolutions result in sharper shadows, but at a significant
+performance cost. It should also be noted that <em>sharper shadows are not always
+more realistic</em>. In most cases, this should be kept at its default value of
+<code class="docutils literal notranslate"><span class="pre">4096</span></code> or decreased to <code class="docutils literal notranslate"><span class="pre">2048</span></code> for low-end GPUs.</p>
+<p>If positional shadows become too blurry after decreasing the shadow map size,
+you can counteract this by adjusting the
+<a class="reference internal" href="#doc-lights-and-shadows-shadow-atlas"><span class="std std-ref">shadow atlas</span></a> quadrants to contain
+fewer shadows. This will allow each shadow to be rendered at a higher resolution.</p>
+</section>
+<section id="shadow-filter-mode">
+<span id="doc-lights-and-shadows-shadow-filter-mode"></span><h3>Shadow filter mode<a class="headerlink" href="#shadow-filter-mode" title="Link to this heading"></a></h3>
+<p>Several shadow map quality settings can be chosen here. The default <strong>Soft Low</strong>
+is a good balance between performance and quality for scenes with detailed
+textures, as the texture detail will help make the dithering pattern less noticeable.</p>
+<p>However, in projects with less detailed textures, the shadow dithering pattern
+may be more visible. To hide this pattern, you can either enable
+<a class="reference internal" href="3d_antialiasing.html#doc-3d-antialiasing-taa"><span class="std std-ref">Temporal antialiasing (TAA)</span></a>, <a class="reference internal" href="3d_antialiasing.html#doc-3d-antialiasing-fsr2"><span class="std std-ref">AMD FidelityFX Super Resolution 2.2 (FSR2)</span></a>,
+<a class="reference internal" href="3d_antialiasing.html#doc-3d-antialiasing-fxaa"><span class="std std-ref">Fast approximate antialiasing (FXAA)</span></a>, or increase the shadow filter quality to
+<strong>Soft Medium</strong> or higher.</p>
+<p>The <strong>Soft Very Low</strong> setting will automatically decrease shadow blur to make
+artifacts from the low sample count less visible. Conversely, the <strong>Soft High</strong>
+and <strong>Soft Ultra</strong> settings will automatically increase shadow blur to better
+make use of the increased sample count.</p>
+<img alt="../../_images/lights_and_shadows_filter_quality.webp" src="../../_images/lights_and_shadows_filter_quality.webp" />
+</section>
+<section id="bits-versus-32-bit">
+<h3>16-bits versus 32-bit<a class="headerlink" href="#bits-versus-32-bit" title="Link to this heading"></a></h3>
+<p>By default, Godot uses 16-bit depth textures for shadow map rendering. This is
+recommended in most cases as it performs better without a noticeable difference
+in quality.</p>
+<p>If <strong>16 Bits</strong> is disabled, 32-bit depth textures will be used instead. This
+can result in less artifacting in large scenes and large lights with shadows
+enabled. However, the difference is often barely visible, yet this can have a
+significant performance cost.</p>
+</section>
+<section id="light-shadow-distance-fade">
+<h3>Light/shadow distance fade<a class="headerlink" href="#light-shadow-distance-fade" title="Link to this heading"></a></h3>
+<p>OmniLight3D, SpotLight3D, and AreaLight3D offer several properties to hide distant lights.
+This can improve performance significantly in large scenes with dozens of lights
+or more.</p>
+<ul class="simple">
+<li><p><strong>Enabled:</strong> Controls whether distance fade (a form of <abbr title="Level of Detail">LOD</abbr>)
+is enabled. The light will fade out over <strong>Begin + Length</strong>, after which it
+will be culled and not sent to the shader at all. Use this to reduce the number
+of active lights in a scene and thus improve performance.</p></li>
+<li><p><strong>Begin:</strong> The distance from the camera at which the light begins to fade away
+(in 3D units).</p></li>
+<li><p><strong>Shadow:</strong> The distance from the camera at which the shadow begins to fade away
+(in 3D units). This can be used to fade out shadows sooner compared to the light,
+further improving performance. Only available if shadows are enabled for the light.</p></li>
+<li><p><strong>Length:</strong> The distance over which the light and shadow fades (in 3D units).
+The light becomes slowly more transparent over this distance and is completely
+invisible at the end. Higher values result in a smoother fade-out transition,
+which is more suited when the camera moves fast.</p></li>
+</ul>
+</section>
+<section id="pcss-recommendations">
+<span id="doc-lights-and-shadows-pcss-recommendations"></span><h3>PCSS recommendations<a class="headerlink" href="#pcss-recommendations" title="Link to this heading"></a></h3>
+<p>Percentage-closer soft shadows (PCSS) provide a more realistic shadow mapping
+appearance, with the penumbra size varying depending on the distance between the
+caster and the surface receiving the shadow. This comes at a high performance
+cost, especially for directional lights.</p>
+<p>To avoid performance issues, it's recommended to:</p>
+<ul class="simple">
+<li><p>Only use a handful of lights with PCSS shadows enabled at a given time. The
+effect is generally most visible on large, bright lights. Secondary light
+sources that are more faint usually don't benefit much from using PCSS
+shadows.</p></li>
+<li><p>Provide a setting for users to disable PCSS shadows. On directional lights,
+this can be done by setting the DirectionalLight3D's
+<code class="docutils literal notranslate"><span class="pre">light_angular_distance</span></code> property to <code class="docutils literal notranslate"><span class="pre">0.0</span></code> in a script. On positional
+lights, this can be done by setting the OmniLight3D or SpotLight3D's
+<code class="docutils literal notranslate"><span class="pre">light_size</span></code> property to <code class="docutils literal notranslate"><span class="pre">0.0</span></code> in a script.</p></li>
+</ul>
+</section>
+<section id="projector-filter-mode">
+<h3>Projector filter mode<a class="headerlink" href="#projector-filter-mode" title="Link to this heading"></a></h3>
+<p>The way projectors are rendered also has an impact on performance. The
+<strong>Rendering &gt; Textures &gt; Light Projectors &gt; Filter</strong> advanced project setting
+lets you control how projector textures should be filtered. <strong>Nearest/Linear</strong> do
+not use mipmaps, which makes them faster to render. However, projectors will
+look grainy at distance. <strong>Nearest/Linear Mipmaps</strong> will look smoother at a
+distance, but projectors will look blurry when viewed from oblique angles. This
+can be resolved by using <strong>Nearest/Linear Mipmaps Anisotropic</strong>, which is the
+highest-quality mode, but also the most expensive.</p>
+<p>If your project has a pixel art style, consider setting the filter to one of the
+<strong>Nearest</strong> values so that projectors use nearest-neighbor filtering. Otherwise,
+stick to <strong>Linear</strong>.</p>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="standard_material_3d.html" class="btn btn-neutral float-left" title="Standard Material 3D and ORM Material 3D" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="using_decals.html" class="btn btn-neutral float-right" title="Using decals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

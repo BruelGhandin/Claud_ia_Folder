@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="When and how to avoid using nodes for everything" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/best_practices/node_alternatives.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Nodes are cheap to produce, but even they have their limits. A project may have tens of thousands of nodes all doing things. The more complex their behavior though, the larger the strain each one a..." />
+<meta name="description" content="Nodes are cheap to produce, but even they have their limits. A project may have tens of thousands of nodes all doing things. The more complex their behavior though, the larger the strain each one a..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>When and how to avoid using nodes for everything &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Godot interfaces" href="godot_interfaces.html" />
+    <link rel="prev" title="Autoloads versus regular nodes" href="autoloads_versus_regular_nodes.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/best_practices/node_alternatives" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/best_practices/node_alternatives.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Best practices</a></li>
+      <li class="breadcrumb-item active">When and how to avoid using nodes for everything</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/best_practices/node_alternatives.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="when-and-how-to-avoid-using-nodes-for-everything">
+<span id="doc-node-alternatives"></span><h1>When and how to avoid using nodes for everything<a class="headerlink" href="#when-and-how-to-avoid-using-nodes-for-everything" title="Link to this heading"></a></h1>
+<p>Nodes are cheap to produce, but even they have their limits. A project may
+have tens of thousands of nodes all doing things. The more complex their
+behavior though, the larger the strain each one adds to a project's
+performance.</p>
+<p>Godot provides more lightweight objects for creating APIs which nodes use.
+Be sure to keep these in mind as options when designing how you wish to build
+your project's features.</p>
+<ol class="arabic">
+<li><p><a class="reference internal" href="../../classes/class_object.html#class-object"><span class="std std-ref">Object</span></a>: The ultimate lightweight object, the original
+Object must use manual memory management. With that said, it isn't too
+difficult to create one's own custom data structures, even node structures,
+that are also lighter than the <a class="reference internal" href="../../classes/class_node.html#class-node"><span class="std std-ref">Node</span></a> class.</p>
+<ul class="simple">
+<li><p><strong>Example:</strong> See the <a class="reference internal" href="../../classes/class_tree.html#class-tree"><span class="std std-ref">Tree</span></a> node. It supports a high level
+of customization for a table of content with an arbitrary number of
+rows and columns. The data that it uses to generate its visualization
+though is actually a tree of <a class="reference internal" href="../../classes/class_treeitem.html#class-treeitem"><span class="std std-ref">TreeItem</span></a> Objects.</p></li>
+<li><p><strong>Advantages:</strong> Simplifying one's API to smaller scoped objects helps improve
+its accessibility and improve iteration time. Rather than working with the
+entire Node library, one creates an abbreviated set of Objects from which
+a node can generate and manage the appropriate sub-nodes.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One should be careful when handling them. One can store an Object
+into a variable, but these references can become invalid without warning.
+For example, if the object's creator decides to delete it out of nowhere,
+this would trigger an error state when one next accesses it.</p>
+</div>
+</li>
+<li><p><a class="reference internal" href="../../classes/class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a>: Only a little more complex than Object.
+They track references to themselves, only deleting loaded memory when no
+further references to themselves exist. These are useful in the majority of
+cases where one needs data in a custom class.</p>
+<ul class="simple">
+<li><p><strong>Example:</strong> See the <a class="reference internal" href="../../classes/class_fileaccess.html#class-fileaccess"><span class="std std-ref">FileAccess</span></a> object. It functions
+just like a regular Object except that one need not delete it themselves.</p></li>
+<li><p><strong>Advantages:</strong> same as the Object.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../../classes/class_resource.html#class-resource"><span class="std std-ref">Resource</span></a>: Only slightly more complex than RefCounted.
+They have the innate ability to serialize/deserialize (i.e. save and load)
+their object properties to/from Godot resource files.</p>
+<ul class="simple">
+<li><p><strong>Example:</strong> Scripts, PackedScene (for scene files), and other types like
+each of the <a class="reference internal" href="../../classes/class_audioeffect.html#class-audioeffect"><span class="std std-ref">AudioEffect</span></a> classes. Each of these
+can be saved and loaded, therefore they extend from Resource.</p></li>
+<li><p><strong>Advantages:</strong> Much has
+<a class="reference internal" href="../scripting/resources.html#doc-resources"><span class="std std-ref">already been said</span></a>
+on <a class="reference internal" href="../../classes/class_resource.html#class-resource"><span class="std std-ref">Resource</span></a>'s advantages over traditional data
+storage methods. In the context of using Resources over Nodes though,
+their main advantage is in Inspector-compatibility. While nearly as
+lightweight as Object/RefCounted, they can still display and export
+properties in the Inspector. This allows them to fulfill a purpose much
+like sub-Nodes on the usability front, but also improve performance if
+one plans to have many such Resources/Nodes in their scenes.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="autoloads_versus_regular_nodes.html" class="btn btn-neutral float-left" title="Autoloads versus regular nodes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="godot_interfaces.html" class="btn btn-neutral float-right" title="Godot interfaces" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

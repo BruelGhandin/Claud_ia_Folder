@@ -1,0 +1,671 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Creating movies" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/animation/creating_movies.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Godot can record non-real-time video and audio from any 2D or 3D project. This kind of recording is also called offline rendering. There are many scenarios where this is useful: Recording game trai..." />
+<meta name="description" content="Godot can record non-real-time video and audio from any 2D or 3D project. This kind of recording is also called offline rendering. There are many scenarios where this is useful: Recording game trai..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Creating movies &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Assets pipeline" href="../assets_pipeline/index.html" />
+    <link rel="prev" title="Playing videos" href="playing_videos.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/animation/creating_movies" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/animation/creating_movies.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Animation</a></li>
+      <li class="breadcrumb-item active">Creating movies</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/animation/creating_movies.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="creating-movies">
+<span id="doc-creating-movies"></span><h1>Creating movies<a class="headerlink" href="#creating-movies" title="Link to this heading"></a></h1>
+<p>Godot can record <strong>non-real-time</strong> video and audio from any 2D or 3D project.
+This kind of recording is also called <em>offline rendering</em>.
+There are many scenarios where this is useful:</p>
+<ul class="simple">
+<li><p>Recording game trailers for promotional use.</p></li>
+<li><p>Recording cutscenes that will be <a class="reference internal" href="playing_videos.html#doc-playing-videos"><span class="std std-ref">displayed as pre-recorded videos</span></a>
+in the final game. This allows for using higher quality settings
+(at the cost of file size), regardless of the player's hardware.</p></li>
+<li><p>Recording procedurally generated animations or motion design. User interaction
+remains possible during video recording, and audio can be included as well
+(although you won't be able to hear it while the video is recording).</p></li>
+<li><p>Comparing the visual output of graphics settings, shaders, or rendering techniques
+in an animated scene.</p></li>
+</ul>
+<p>With Godot's animation features such as the AnimationPlayer node, Tweeners,
+particles and shaders, it can effectively be used to create any kind of 2D and
+3D animations (and still images).</p>
+<p>If you are already used to Godot's workflow, you may find yourself more
+productive by using Godot for video rendering compared to Blender. That said,
+renderers designed for non-real-time usage such as Cycles and Eevee can result
+in better visuals (at the cost of longer rendering times).</p>
+<p>Compared to real-time video recording, some advantages of non-real-time recording include:</p>
+<ul class="simple">
+<li><p>Use any graphics settings (including extremely demanding settings) regardless
+of your hardware's capabilities. The output video will <em>always</em> have perfect
+frame pacing; it will never exhibit dropped frames or stuttering.
+Faster hardware will allow you to render a given animation in less time, but
+the visual output remains identical.</p></li>
+<li><p>Render at a higher resolution than the screen resolution, without having to
+rely on driver-specific tools such as NVIDIA's Dynamic Super Resolution or
+AMD's Virtual Super Resolution.</p></li>
+<li><p>Render at a higher framerate than the video's target framerate, then
+<a class="reference internal" href="#doc-creating-movies-motion-blur"><span class="std std-ref">post-process to generate high-quality motion blur</span></a>.
+This also makes effects that converge over several frames (such as temporal antialiasing,
+SDFGI and volumetric fog) look better.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>This feature is not designed for capturing real-time footage during gameplay.</strong></p>
+<p>Players should use something like <a class="reference external" href="https://obsproject.com/">OBS Studio</a> or
+<a class="reference external" href="https://www.maartenbaert.be/simplescreenrecorder/">SimpleScreenRecorder</a>
+to record gameplay videos, as they do a much better job at intercepting the
+compositor than Godot can do using Vulkan or OpenGL natively.</p>
+<p>That said, if your game runs at near-real-time speeds when capturing,
+you can still use this feature (but it will lack audible sound playback,
+as sound is saved directly to the video file).</p>
+</div>
+<section id="enabling-movie-maker-mode">
+<h2>Enabling Movie Maker mode<a class="headerlink" href="#enabling-movie-maker-mode" title="Link to this heading"></a></h2>
+<p>To enable Movie Maker mode, click the &quot;movie reel&quot; button in the top-right
+corner of the editor <em>before</em> running the project:</p>
+<figure class="align-center" id="id1">
+<img alt="Movie Maker mode is disabled, click the &quot;movie reel&quot; icon to enable" src="../../_images/creating_movies_enable_movie_maker_mode.webp" />
+<figcaption>
+<p><span class="caption-text">Movie Maker mode is disabled, click the &quot;movie reel&quot; icon to enable</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>A menu will be displayed with options to enable Movie Maker mode and to go to
+the settings. The icon gets a background matching the accent color when Movie
+Maker mode is enabled:</p>
+<figure class="align-center" id="id2">
+<img alt="Movie Maker mode is enabled, click the &quot;movie reel&quot; icon again to disable" src="../../_images/creating_movies_disable_movie_maker_mode.webp" />
+<figcaption>
+<p><span class="caption-text">Movie Maker mode is enabled, click the &quot;movie reel&quot; icon again to disable</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Movie Maker status is <strong>not</strong> persisted when the editor quits, so you must
+re-enable Movie Maker mode again after restarting the editor if needed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Toggling Movie Maker mode while running the project will not have any
+effect until the project is restarted.</p>
+</div>
+<p>Before you can record video by running the project, you still need to configure
+the output file path. This path can be set for all scenes in the Project Settings:</p>
+<figure class="align-center" id="id3">
+<img alt="Movie Maker project settings (with Advanced toggle enabled)" src="../../_images/creating_movies_project_settings.webp" />
+<figcaption>
+<p><span class="caption-text">Movie Maker project settings (with Advanced toggle enabled)</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Alternatively, you can set the output file path on a per-scene basis by adding a
+String metadata with the name <code class="docutils literal notranslate"><span class="pre">movie_file</span></code> to the scene's <strong>root node</strong>. This
+is only used when the main scene is set to the scene in question, or when
+running the scene directly by pressing <kbd class="kbd docutils literal notranslate">F6</kbd> (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd> on macOS).</p>
+<figure class="align-center" id="id4">
+<img alt="Inspector view after creating a ``movie_file`` metadata of type String" src="../../_images/creating_movies_set_per_scene_metadata.webp" />
+<figcaption>
+<p><span class="caption-text">Inspector view after creating a <code class="docutils literal notranslate"><span class="pre">movie_file</span></code> metadata of type String</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The path specified in the project settings or metadata can be either absolute,
+or relative to the project root.</p>
+<p>Once you've configured and enabled Movie Maker mode, it will be automatically used
+when running the project from the editor.</p>
+<section id="command-line-usage">
+<h3>Command line usage<a class="headerlink" href="#command-line-usage" title="Link to this heading"></a></h3>
+<p>Movie Maker can also be enabled from the <a class="reference internal" href="../editor/command_line_tutorial.html#doc-command-line-tutorial"><span class="std std-ref">command line</span></a>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">godot</span><span class="w"> </span><span class="o">--</span><span class="n">path</span><span class="w"> </span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your_project</span><span class="w"> </span><span class="o">--</span><span class="n">write</span><span class="o">-</span><span class="n">movie</span><span class="w"> </span><span class="n">output</span><span class="o">.</span><span class="vi">avi</span>
+</pre></div>
+</div>
+<p>If the output path is relative, then it is <strong>relative to the project folder</strong>,
+not the current working directory. In the above example, the file will be
+written to <code class="docutils literal notranslate"><span class="pre">/path/to/your_project/output.avi</span></code>. This behavior is similar to the
+<code class="docutils literal notranslate"><span class="pre">--export-release</span></code> command line argument.</p>
+<p>Since Movie Maker's output resolution is set by the viewport size, you can
+adjust the window size on startup to override it if the project uses the
+<code class="docutils literal notranslate"><span class="pre">disabled</span></code> or <code class="docutils literal notranslate"><span class="pre">canvas_items</span></code> <a class="reference internal" href="../rendering/multiple_resolutions.html#doc-multiple-resolutions"><span class="std std-ref">stretch mode</span></a>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">godot</span><span class="w"> </span><span class="o">--</span><span class="n">path</span><span class="w"> </span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your_project</span><span class="w"> </span><span class="o">--</span><span class="n">write</span><span class="o">-</span><span class="n">movie</span><span class="w"> </span><span class="n">output</span><span class="o">.</span><span class="vi">avi</span><span class="w"> </span><span class="o">--</span><span class="n">resolution</span><span class="w"> </span><span class="mi">1280</span><span class="n">x720</span>
+</pre></div>
+</div>
+<p>Note that the window size is clamped by your display's resolution. See
+<a class="reference internal" href="#doc-creating-movies-recording-at-higher-resolution"><span class="std std-ref">Rendering at a higher resolution than the screen resolution</span></a> if you need to record
+a video at a higher resolution than the screen resolution.</p>
+<p>The recording FPS can also be overridden on the command line,
+without having to edit the Project Settings:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">godot</span><span class="w"> </span><span class="o">--</span><span class="n">path</span><span class="w"> </span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your_project</span><span class="w"> </span><span class="o">--</span><span class="n">write</span><span class="o">-</span><span class="n">movie</span><span class="w"> </span><span class="n">output</span><span class="o">.</span><span class="vi">avi</span><span class="w"> </span><span class="o">--</span><span class="n">fixed</span><span class="o">-</span><span class="n">fps</span><span class="w"> </span><span class="mi">30</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--write-movie</span></code> and <code class="docutils literal notranslate"><span class="pre">--fixed-fps</span></code> command line arguments are both available
+in exported projects. Movie Maker mode cannot be toggled while the project is running,
+but you can use the <a class="reference internal" href="../../classes/class_os.html#class-os-method-execute"><span class="std std-ref">OS.execute()</span></a> method to
+run a second instance of the exported project that will record a video file.</p>
+</div>
+</section>
+</section>
+<section id="choosing-an-output-format">
+<h2>Choosing an output format<a class="headerlink" href="#choosing-an-output-format" title="Link to this heading"></a></h2>
+<p>Output formats are provided by the <a class="reference internal" href="../../classes/class_moviewriter.html#class-moviewriter"><span class="std std-ref">MovieWriter</span></a> class.
+Godot has 3 built-in <a class="reference internal" href="../../classes/class_moviewriter.html#class-moviewriter"><span class="std std-ref">MovieWriters</span></a>, and more can be
+implemented by extensions:</p>
+<section id="ogv-recommended">
+<h3>OGV (recommended)<a class="headerlink" href="#ogv-recommended" title="Link to this heading"></a></h3>
+<p>OGV container with Theora for video and Vorbis for audio. Features lossy video
+and audio compression with a good balance of file size and encoding speed, with
+a better image quality than MJPEG. It has 4 speed levels that can be adjusted
+by changing <strong>Editor &gt; Movie Writer &gt; Encoding Speed</strong> with the fastest one
+being around as fast as AVI with better compression. At slower speed levels, it
+can compress even better while keeping the same image quality. The lossy
+compression quality can be adjusted by changing <strong>Editor &gt; Movie Writer &gt; Video
+Quality</strong> for video and <strong>Editor &gt; Movie Writer &gt; Audio Quality</strong> for audio.</p>
+<p>The Keyframe Interval can be adjusted by changing <strong>Editor &gt; Movie Writer &gt;
+Keyframe Interval</strong>. In some cases, increasing this setting can improve
+compression efficiency without downsides.</p>
+<p>The resulting file can be viewed in Godot with <a class="reference internal" href="../../classes/class_videostreamplayer.html#class-videostreamplayer"><span class="std std-ref">VideoStreamPlayer</span></a> and most video players but not web browsers. OGV
+does not support transparency.</p>
+<p>To use OGV, specify a path to a <code class="docutils literal notranslate"><span class="pre">.ogv</span></code> file to be created in the <strong>Editor &gt;
+Movie Writer &gt; Movie File</strong> project setting.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>OGV can only be recorded in editor builds.
+On the other hand, <a class="reference internal" href="playing_videos.html#doc-playing-videos"><span class="std std-ref">OGV playback</span></a>
+is possible in both editor and export template builds.</p>
+</div>
+</section>
+<section id="avi">
+<h3>AVI<a class="headerlink" href="#avi" title="Link to this heading"></a></h3>
+<p>AVI container with MJPEG for video and uncompressed audio. Features lossy video
+compression, resulting in medium file sizes and fast encoding. The lossy
+compression quality can be adjusted by changing
+<strong>Editor &gt; Movie Writer &gt; Video Quality</strong>.</p>
+<p>The resulting file can be viewed in most video players, but it must be converted
+to another format for viewing on the web or by Godot with the VideoStreamPlayer
+node. MJPEG does not support transparency. AVI output is currently limited to a
+file of 4 GB in size at most.</p>
+<p>To use AVI, specify a path to a <code class="docutils literal notranslate"><span class="pre">.avi</span></code> file to be created in the
+<strong>Editor &gt; Movie Writer &gt; Movie File</strong> project setting.</p>
+</section>
+<section id="png">
+<h3>PNG<a class="headerlink" href="#png" title="Link to this heading"></a></h3>
+<p>PNG image sequence for video and WAV for audio. Features lossless video
+compression, at the cost of large file sizes and slow encoding. This is designed
+to be
+<a class="reference internal" href="#doc-creating-movies-converting-avi"><span class="std std-ref">encoded to a video file with an external tool after recording</span></a>.</p>
+<p>Transparency is supported, but the root viewport <strong>must</strong> have its
+<code class="docutils literal notranslate"><span class="pre">transparent_bg</span></code> property set to <code class="docutils literal notranslate"><span class="pre">true</span></code> for transparency to be visible on
+the output image. This can be achieved by enabling the <strong>Rendering &gt; Transparent
+Background</strong> advanced project setting. <strong>Display &gt; Window &gt; Size &gt; Transparent</strong>
+and <strong>Display &gt; Window &gt; Per Pixel Transparency &gt; Enabled</strong> can optionally be
+enabled to allow transparency to be previewed while recording the video, but
+they do not have to be enabled for the output image to contain transparency.</p>
+<p>To use PNG, specify a <code class="docutils literal notranslate"><span class="pre">.png</span></code> file to be created in the
+<strong>Editor &gt; Movie Writer &gt; Movie File</strong> project setting. The generated <code class="docutils literal notranslate"><span class="pre">.wav</span></code>
+file will have the same name as the <code class="docutils literal notranslate"><span class="pre">.png</span></code> file (minus the extension).</p>
+</section>
+<section id="custom">
+<h3>Custom<a class="headerlink" href="#custom" title="Link to this heading"></a></h3>
+<p>If you need to encode directly to a different format or pipe a stream through
+third-party software, you can extend the MovieWriter class to create your own
+movie writers. This should typically be done using GDExtension for performance
+reasons.</p>
+</section>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<p>In the <strong>Editor &gt; Movie Writer</strong> section of the Project Settings, there are
+several options you can configure. Some of them are only visible after enabling
+the <strong>Advanced</strong> toggle in the top-right corner of the Project Settings dialog.</p>
+<ul class="simple">
+<li><p><strong>Mix Rate Hz:</strong> The audio mix rate to use in the recorded audio when writing
+a movie. This can be different from the project's mix rate, but this
+value must be divisible by the recorded FPS to prevent audio from
+desynchronizing over time.</p></li>
+<li><p><strong>Speaker Mode:</strong> The speaker mode to use in the recorded audio when writing
+a movie (stereo, 5.1 surround or 7.1 surround).</p></li>
+<li><p><strong>Video Quality:</strong> The image quality to use when writing a video to an OGV or
+AVI file, between <code class="docutils literal notranslate"><span class="pre">0.01</span></code> and <code class="docutils literal notranslate"><span class="pre">1.0</span></code> (inclusive). Higher quality values result
+in better-looking output at the cost of larger file sizes. Recommended quality
+values are between <code class="docutils literal notranslate"><span class="pre">0.75</span></code> and <code class="docutils literal notranslate"><span class="pre">0.9</span></code>. Even at quality <code class="docutils literal notranslate"><span class="pre">1.0</span></code>, compression
+remains lossy. This setting does not affect audio quality and is ignored when
+writing to a PNG image sequence.</p></li>
+<li><p><strong>Movie File:</strong> The output path for the movie. This can be absolute or
+relative to the project root.</p></li>
+<li><p><strong>Disable V-Sync:</strong> If enabled, requests V-Sync to be disabled when writing a
+movie. This can speed up video writing if the hardware is fast enough to
+render, encode and save the video at a framerate higher than the monitor's
+refresh rate. This setting has no effect if the operating system or graphics
+driver forces V-Sync with no way for applications to disable it.</p></li>
+<li><p><strong>FPS:</strong> The rendered frames per second in the output movie. Higher values
+result in smoother animation, at the cost of longer rendering times and larger
+output file sizes. Most video hosting platforms do not support FPS values
+higher than 60, but you can use a higher value and use that to generate motion
+blur.</p></li>
+<li><p><strong>Audio Quality:</strong> The audio quality to use when writing a video to an OGV
+file, between <code class="docutils literal notranslate"><span class="pre">-0.1</span></code> and <code class="docutils literal notranslate"><span class="pre">1.0</span></code> (inclusive). Higher quality values result
+in better audio quality at the cost of very slightly larger file sizes.
+Recommended quality values are between <code class="docutils literal notranslate"><span class="pre">0.3</span></code> and <code class="docutils literal notranslate"><span class="pre">0.5</span></code>. Even at quality
+<code class="docutils literal notranslate"><span class="pre">1.0</span></code>, compression remains lossy.</p></li>
+<li><p><strong>Encoding Speed:</strong> The speed level to use when writing a video to an OGV
+file. Faster speed levels have less compression efficiency. The image quality
+stays barely the same.</p></li>
+<li><p><strong>Keyframe Interval:</strong> Also known as GOP (Group Of Pictures), the maximum
+number of inter-frames to use when writing to an OGV file. Higher values can
+improve compression efficiency without quality loss but at the cost of slower
+video seeks.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">disabled</span></code> or <code class="docutils literal notranslate"><span class="pre">2d</span></code> <a class="reference internal" href="../rendering/multiple_resolutions.html#doc-multiple-resolutions"><span class="std std-ref">stretch modes</span></a>,
+the output file's resolution is set by the window size. Make sure to resize
+the window <em>before</em> the splash screen has ended. For this purpose, it's
+recommended to adjust the
+<strong>Display &gt; Window &gt; Size &gt; Window Width Override</strong> and
+<strong>Window Height Override</strong> advanced project settings.</p>
+<p>See also <a class="reference internal" href="#doc-creating-movies-recording-at-higher-resolution"><span class="std std-ref">Rendering at a higher resolution than the screen resolution</span></a>.</p>
+</div>
+</section>
+<section id="quitting-movie-maker-mode">
+<h2>Quitting Movie Maker mode<a class="headerlink" href="#quitting-movie-maker-mode" title="Link to this heading"></a></h2>
+<p>To safely quit a project that is using Movie Maker mode, use the X button at the
+top of the window, or call <code class="docutils literal notranslate"><span class="pre">get_tree().quit()</span></code> in a script. You can also use
+the <code class="docutils literal notranslate"><span class="pre">--quit-after</span> <span class="pre">N</span></code> command line argument where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the number of frames
+to render before quitting.</p>
+<p>Pressing <kbd class="kbd docutils literal notranslate">F8</kbd> (<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">.</kbd></kbd> on macOS) or pressing <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd> on the
+terminal running Godot is <strong>not recommended</strong>, as it will result in an
+improperly formatted AVI file with no duration information. For PNG image
+sequences, PNG images will not be negatively altered, but the associated WAV
+file will still lack duration information. OGV files might end up with slightly
+different duration video and audio tracks but still valid.</p>
+<p>Some video players may still be able to play the AVI or WAV file with working
+video and audio. However, software that makes use of the AVI or WAV file such as
+video editors may not be able to open the file.
+<a class="reference internal" href="#doc-creating-movies-converting-avi"><span class="std std-ref">Using a video converter program</span></a>
+can help in those cases.</p>
+<p>If you're using an AnimationPlayer to control a &quot;main action&quot; in the scene (such
+as camera movement), you can enable the <strong>Movie Quit On Finish</strong> property on the
+AnimationPlayer node in question. When enabled, this property will make Godot
+quit on its own when an animation is done playing <em>and</em> the engine is running in
+Movie Maker mode. Note that <em>this property has no effect on looping animations</em>.
+Therefore, you need to make sure that the animation is set as non-looping.</p>
+</section>
+<section id="using-high-quality-graphics-settings">
+<h2>Using high-quality graphics settings<a class="headerlink" href="#using-high-quality-graphics-settings" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">movie</span></code> <a class="reference internal" href="../export/feature_tags.html#doc-feature-tags"><span class="std std-ref">feature tag</span></a> can be used to override
+specific project settings. This is useful to enable high-quality graphics settings
+that wouldn't be fast enough to run in real-time speeds on your hardware.
+Remember that putting every setting to its maximum value can still slow down
+movie saving speed, especially when recording at higher resolutions. Therefore,
+it's still recommended to only increase graphics settings if they make a meaningful
+difference in the output image.</p>
+<p>This feature tag can also be queried in a script to increase quality settings
+that are set in the Environment resource. For example, to further improve SDFGI
+detail and reduce light leaking:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node3D</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">OS</span><span class="o">.</span><span class="nf">has_feature</span><span class="p">(</span><span class="s2">&quot;movie&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="c1"># When recording a movie, improve SDFGI cell density</span>
+<span class="w">        </span><span class="c1"># without decreasing its maximum distance.</span>
+<span class="w">        </span><span class="nf">get_viewport</span><span class="p">()</span><span class="o">.</span><span class="vi">world_3d</span><span class="o">.</span><span class="vi">environment</span><span class="o">.</span><span class="vi">sdfgi_min_cell_size</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">0.25</span>
+<span class="w">        </span><span class="nf">get_viewport</span><span class="p">()</span><span class="o">.</span><span class="vi">world_3d</span><span class="o">.</span><span class="vi">environment</span><span class="o">.</span><span class="vi">sdfgi_cascades</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">OS</span><span class="p">.</span><span class="n">HasFeature</span><span class="p">(</span><span class="s">&quot;movie&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// When recording a movie, improve SDFGI cell density</span>
+<span class="w">            </span><span class="c1">// without decreasing its maximum distance.</span>
+<span class="w">            </span><span class="n">GetViewport</span><span class="p">().</span><span class="n">World3D</span><span class="p">.</span><span class="n">Environment</span><span class="p">.</span><span class="n">SdfgiMinCellSize</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">0.25f</span><span class="p">;</span>
+<span class="w">            </span><span class="n">GetViewport</span><span class="p">().</span><span class="n">World3D</span><span class="p">.</span><span class="n">Environment</span><span class="p">.</span><span class="n">SdfgiCascades</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="rendering-at-a-higher-resolution-than-the-screen-resolution">
+<span id="doc-creating-movies-recording-at-higher-resolution"></span><h2>Rendering at a higher resolution than the screen resolution<a class="headerlink" href="#rendering-at-a-higher-resolution-than-the-screen-resolution" title="Link to this heading"></a></h2>
+<p>The overall rendering quality can be improved significantly by rendering at high
+resolutions such as 4K or 8K.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For 3D rendering, Godot provides a <strong>Rendering &gt; Scaling 3D &gt; Scale</strong>
+advanced project setting, which can be set above <code class="docutils literal notranslate"><span class="pre">1.0</span></code> to obtain
+<em>supersample antialiasing</em>. The 3D rendering is then <em>downsampled</em> when it's
+drawn on the viewport. This provides an expensive but high-quality form of
+antialiasing, without increasing the final output resolution.</p>
+<p>Consider using this project setting first, as it avoids slowing down movie
+writing speeds and increasing output file size compared to actually
+increasing the output resolution.</p>
+</div>
+<p>If you wish to render 2D at a higher resolution, or if you actually need the
+higher raw pixel output for 3D rendering, you can increase the resolution above
+what the screen allows.</p>
+<p>By default, Godot uses the <code class="docutils literal notranslate"><span class="pre">disabled</span></code> <a class="reference internal" href="../rendering/multiple_resolutions.html#doc-multiple-resolutions"><span class="std std-ref">stretch modes</span></a>
+in projects. If using <code class="docutils literal notranslate"><span class="pre">disabled</span></code> or <code class="docutils literal notranslate"><span class="pre">canvas_items</span></code> stretch mode,
+the window size dictates the output video resolution.</p>
+<p>On the other hand, if the project is configured to use the <code class="docutils literal notranslate"><span class="pre">viewport</span></code> stretch
+mode, the viewport resolution dictates the output video resolution. The viewport
+resolution is set using the <strong>Display &gt; Window &gt; Size &gt; Viewport Width</strong> and
+<strong>Viewport Height</strong> project settings. This can be used to render a video at a
+higher resolution than the screen resolution.</p>
+<p>To make the window smaller during recording without affecting the output video
+resolution, you can set the <strong>Display &gt; Window &gt; Size &gt; Window Width Override</strong>
+and <strong>Window Height Override</strong> advanced project settings to values greater than
+<code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p>To apply a resolution override only when recording a movie, you can override
+those settings with the <code class="docutils literal notranslate"><span class="pre">movie</span></code> <a class="reference internal" href="../export/feature_tags.html#doc-feature-tags"><span class="std std-ref">feature tag</span></a>.</p>
+</section>
+<section id="post-processing-steps">
+<h2>Post-processing steps<a class="headerlink" href="#post-processing-steps" title="Link to this heading"></a></h2>
+<p>Some common post-processing steps are listed below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using several post-processing steps, try to perform all of them in a
+single FFmpeg command. This will save encoding time and improve quality by
+avoiding multiple lossy encoding steps.</p>
+</div>
+<section id="converting-ogv-avi-video-to-mp4">
+<span id="doc-creating-movies-converting-avi"></span><h3>Converting OGV/AVI video to MP4<a class="headerlink" href="#converting-ogv-avi-video-to-mp4" title="Link to this heading"></a></h3>
+<p>While some platforms such as YouTube support uploading the AVI file directly, many
+others will require a conversion step beforehand. <a class="reference external" href="https://handbrake.fr/">HandBrake</a>
+(GUI) and <a class="reference external" href="https://ffmpeg.org/">FFmpeg</a> (CLI) are popular open source tools
+for this purpose. FFmpeg has a steeper learning curve, but it's more powerful.</p>
+<p>The command below converts an OGV/AVI video to an MP4 (H.264) video with a
+Constant Rate Factor (CRF) of 15. This results in a relatively large file, but
+is well-suited for platforms that will re-encode your videos to reduce their
+size (such as most video sharing websites):</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">ffmpeg</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="n">input</span><span class="o">.</span><span class="vi">avi</span><span class="w"> </span><span class="o">-</span><span class="n">crf</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="n">output</span><span class="o">.</span><span class="vi">mp4</span>
+</pre></div>
+</div>
+<p>To get a smaller file at the cost of quality, <em>increase</em> the CRF value in the
+above command.</p>
+<p>To get a file with a better size/quality ratio (at the cost of slower encoding
+times), add <code class="docutils literal notranslate"><span class="pre">-preset</span> <span class="pre">veryslow</span></code> before <code class="docutils literal notranslate"><span class="pre">-crf</span> <span class="pre">15</span></code> in the above command. On the
+contrary, <code class="docutils literal notranslate"><span class="pre">-preset</span> <span class="pre">veryfast</span></code> can be used to achieve faster encoding at the
+cost of a worse size/quality ratio.</p>
+</section>
+<section id="converting-png-image-sequence-wav-audio-to-a-video">
+<span id="doc-creating-movies-converting-image-sequence"></span><h3>Converting PNG image sequence + WAV audio to a video<a class="headerlink" href="#converting-png-image-sequence-wav-audio-to-a-video" title="Link to this heading"></a></h3>
+<p>If you chose to record a PNG image sequence with a WAV file beside it,
+you need to convert it to a video before you can use it elsewhere.</p>
+<p>The filename for the PNG image sequence generated by Godot always contains 8
+digits, starting at 0 with zero-padded numbers. If you specify an output
+path <code class="docutils literal notranslate"><span class="pre">folder/example.png</span></code>, Godot will write <code class="docutils literal notranslate"><span class="pre">folder/example00000000.png</span></code>,
+<code class="docutils literal notranslate"><span class="pre">folder/example00000001.png</span></code>, and so on in that folder. The audio will be saved
+at <code class="docutils literal notranslate"><span class="pre">folder/example.wav</span></code>.</p>
+<p>The FPS is specified using the <code class="docutils literal notranslate"><span class="pre">-r</span></code> argument. It should match the FPS
+specified during recording. Otherwise, the video will appear to be slowed down
+or sped up, and audio will be out of sync with the video.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">ffmpeg</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="n">input</span><span class="o">%</span><span class="mi">08</span><span class="n">d</span><span class="o">.</span><span class="vi">png</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="n">input</span><span class="o">.</span><span class="vi">wav</span><span class="w"> </span><span class="o">-</span><span class="n">crf</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="n">output</span><span class="o">.</span><span class="vi">mp4</span>
+</pre></div>
+</div>
+<p>If you recorded a PNG image sequence with transparency enabled, you need to use
+a video format that supports storing transparency. MP4/H.264 doesn't support
+storing transparency, so you can use WebM/VP9 as an alternative:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">ffmpeg</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="n">input</span><span class="o">%</span><span class="mi">08</span><span class="n">d</span><span class="o">.</span><span class="vi">png</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="n">input</span><span class="o">.</span><span class="vi">wav</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="p">:</span><span class="n">v</span><span class="w"> </span><span class="n">libvpx</span><span class="o">-</span><span class="n">vp9</span><span class="w"> </span><span class="o">-</span><span class="n">crf</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="o">-</span><span class="n">pix_fmt</span><span class="w"> </span><span class="n">yuva420p</span><span class="w"> </span><span class="n">output</span><span class="o">.</span><span class="vi">webm</span>
+</pre></div>
+</div>
+</section>
+<section id="cutting-video">
+<span id="doc-creating-movies-motion-blur"></span><h3>Cutting video<a class="headerlink" href="#cutting-video" title="Link to this heading"></a></h3>
+<p>You can trim parts of the video you don't want to keep after the video is
+recorded. For example, to discard everything before 12.1 seconds and keep
+only 5.2 seconds of video after that point:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">ffmpeg</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="n">input</span><span class="o">.</span><span class="vi">avi</span><span class="w"> </span><span class="o">-</span><span class="n">ss</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">12.10</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">05.20</span><span class="w"> </span><span class="o">-</span><span class="n">crf</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="n">output</span><span class="o">.</span><span class="vi">mp4</span>
+</pre></div>
+</div>
+<p>Cutting videos can also be done with the GUI tool
+<a class="reference external" href="https://losslesscut.app/">LosslessCut</a>.</p>
+</section>
+<section id="resizing-video">
+<h3>Resizing video<a class="headerlink" href="#resizing-video" title="Link to this heading"></a></h3>
+<p>The following command resizes a video to be 1080 pixels tall (1080p),
+while preserving its existing aspect ratio:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">ffmpeg</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="n">input</span><span class="o">.</span><span class="vi">avi</span><span class="w"> </span><span class="o">-</span><span class="n">vf</span><span class="w"> </span><span class="s2">&quot;scale=-1:1080&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">crf</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="n">output</span><span class="o">.</span><span class="vi">mp4</span>
+</pre></div>
+</div>
+</section>
+<section id="reducing-framerate">
+<span id="doc-creating-movies-reducing-framerate"></span><h3>Reducing framerate<a class="headerlink" href="#reducing-framerate" title="Link to this heading"></a></h3>
+<p>The following command changes a video's framerate to 30 FPS, dropping some of
+the original frames if there are more in the input video:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">ffmpeg</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="n">input</span><span class="o">.</span><span class="vi">avi</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">-</span><span class="n">crf</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="n">output</span><span class="o">.</span><span class="vi">mp4</span>
+</pre></div>
+</div>
+</section>
+<section id="generating-accumulation-motion-blur-with-ffmpeg">
+<h3>Generating accumulation motion blur with FFmpeg<a class="headerlink" href="#generating-accumulation-motion-blur-with-ffmpeg" title="Link to this heading"></a></h3>
+<p>Godot does not have built-in support for motion blur, but it can still be
+created in recorded videos.</p>
+<p>If you record the video at a multiple of the original framerate, you can blend
+the frames together then reduce the framerate to produce a video with
+<em>accumulation motion blur</em>. This motion blur can look very good, but it can take
+a long time to generate since you have to render many more frames per second (on
+top of the time spent on post-processing).</p>
+<p>Example with a 240 FPS source video, generating 4× motion blur and decreasing
+its output framerate to 60 FPS:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">ffmpeg</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="n">input</span><span class="o">.</span><span class="vi">avi</span><span class="w"> </span><span class="o">-</span><span class="n">vf</span><span class="w"> </span><span class="s2">&quot;tmix=frames=4, fps=60&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">crf</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="n">output</span><span class="o">.</span><span class="vi">mp4</span>
+</pre></div>
+</div>
+<p>This also makes effects that converge over several frames (such as temporal
+antialiasing, SDFGI and volumetric fog) converge faster and therefore look
+better, since they'll be able to work with more data at a given time.
+See <a class="reference internal" href="#doc-creating-movies-reducing-framerate"><span class="std std-ref">Reducing framerate</span></a> if you want to get this benefit
+without adding motion blur.</p>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="playing_videos.html" class="btn btn-neutral float-left" title="Playing videos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../assets_pipeline/index.html" class="btn btn-neutral float-right" title="Assets pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

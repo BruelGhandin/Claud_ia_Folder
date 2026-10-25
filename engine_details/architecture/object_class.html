@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Object class" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/architecture/object_class.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="General definition: Object is the base class for almost everything. Most classes in Godot inherit directly or indirectly from it. Declaring them is a matter of using a single macro like this: Objec..." />
+<meta name="description" content="General definition: Object is the base class for almost everything. Most classes in Godot inherit directly or indirectly from it. Declaring them is a matter of using a single macro like this: Objec..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Object class &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Inheritance class tree" href="inheritance_class_tree.html" />
+    <link rel="prev" title="Variant class" href="variant_class.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/architecture/object_class" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="engine_details/architecture/object_class.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Engine architecture</a></li>
+      <li class="breadcrumb-item active">Object class</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/architecture/object_class.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="object-class">
+<span id="doc-object-class"></span><h1>Object class<a class="headerlink" href="#object-class" title="Link to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>This page describes the C++ implementation of objects in Godot.
+Looking for the Object class reference? <a class="reference internal" href="../../classes/class_object.html#class-object"><span class="std std-ref">Have a look here.</span></a></p>
+</div>
+<section id="general-definition">
+<h2>General definition<a class="headerlink" href="#general-definition" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../../classes/class_object.html#class-object"><span class="std std-ref">Object</span></a> is the base class for almost everything. Most classes in Godot
+inherit directly or indirectly from it. Declaring them is a matter of using a single
+macro like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CustomObject</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">CustomObject</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="p">);</span><span class="w"> </span><span class="c1">// This is required to inherit from Object.</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Objects come with a lot of built-in functionality, like reflection and editable properties:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CustomObject</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memnew</span><span class="p">(</span><span class="n">CustomObject</span><span class="p">);</span>
+<span class="n">print_line</span><span class="p">(</span><span class="s">&quot;Object class: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">get_class</span><span class="p">());</span><span class="w"> </span><span class="c1">// print object class</span>
+
+<span class="n">OtherClass</span><span class="w"> </span><span class="o">*</span><span class="n">obj2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Object</span><span class="o">::</span><span class="n">cast_to</span><span class="o">&lt;</span><span class="n">OtherClass</span><span class="o">&gt;</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span><span class="w"> </span><span class="c1">// Converting between classes, similar to dynamic_cast</span>
+</pre></div>
+</div>
+<section id="references">
+<h3>References:<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/object/object.h">core/object/object.h</a></p></li>
+</ul>
+</section>
+</section>
+<section id="registering-object-classes">
+<h2>Registering Object classes<a class="headerlink" href="#registering-object-classes" title="Link to this heading"></a></h2>
+<p>Most <code class="docutils literal notranslate"><span class="pre">Object</span></code> subclasses are registered by calling <code class="docutils literal notranslate"><span class="pre">GDREGISTER_CLASS</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">GDREGISTER_CLASS</span><span class="p">(</span><span class="n">MyCustomClass</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will register it as a named, public class in the <code class="docutils literal notranslate"><span class="pre">ClassDB</span></code>, which will allow the class to be instantiated by
+scripts, code, or by deserialization. Note that classes registered as <code class="docutils literal notranslate"><span class="pre">GDREGISTER_CLASS</span></code> should expect to be
+instantiated or freed automatically, for example by the editor or the documentation system.</p>
+<p>Besides <code class="docutils literal notranslate"><span class="pre">GDREGISTER_CLASS</span></code>, there are a few other modes of privateness:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Registers the class publicly, but prevents automatic instantiation through ClassDB.</span>
+<span class="n">GDREGISTER_VIRTUAL_CLASS</span><span class="p">(</span><span class="n">MyCustomClass</span><span class="p">);</span>
+
+<span class="c1">// Registers the class publicly, but prevents all instantiation through ClassDB.</span>
+<span class="n">GDREGISTER_ABSTRACT_CLASS</span><span class="p">(</span><span class="n">MyCustomClass</span><span class="p">);</span>
+
+<span class="c1">// Registers the class in ClassDB, but marks it as private,</span>
+<span class="c1">// such that it is not visible to scripts or extensions.</span>
+<span class="c1">// This is the same as not registering the class explicitly at all</span>
+<span class="c1">// - in this case, the class is registered as internal automatically</span>
+<span class="c1">// when it is first constructed.</span>
+<span class="n">GDREGISTER_INTERNAL_CLASS</span><span class="p">(</span><span class="n">MyCustomClass</span><span class="p">);</span>
+
+<span class="c1">// Registers the class such that it is only available at runtime (but not in the editor).</span>
+<span class="n">GDREGISTER_RUNTIME_CLASS</span><span class="p">(</span><span class="n">MyCustomClass</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>It is also possible to use <code class="docutils literal notranslate"><span class="pre">GDSOFTCLASS(MyCustomClass,</span> <span class="pre">SuperClass)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">GDCLASS(MyCustomClass,</span> <span class="pre">SuperClass)</span></code>.
+Classes defined this way are not registered in the <code class="docutils literal notranslate"><span class="pre">ClassDB</span></code> at all. This is sometimes used for platform-specific
+subclasses.</p>
+<section id="registering-bindings">
+<h3>Registering bindings<a class="headerlink" href="#registering-bindings" title="Link to this heading"></a></h3>
+<p>Object-derived classes can override the static function
+<code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">void</span> <span class="pre">_bind_methods()</span></code>. When the class is registered, this
+static function is called to register all the object methods,
+properties, constants, etc. It's only called once.</p>
+<p>Inside <code class="docutils literal notranslate"><span class="pre">_bind_methods</span></code>, there are a couple of things that can be done.
+Registering functions is one:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&quot;methodname&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;arg1name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;arg2name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;arg3name&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">MyCustomType</span><span class="o">::</span><span class="n">method</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Default values for arguments can be passed as parameters at the end:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&quot;methodname&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;arg1name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;arg2name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;arg3name&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">MyCustomType</span><span class="o">::</span><span class="n">method</span><span class="p">,</span><span class="w"> </span><span class="n">DEFVAL</span><span class="p">(</span><span class="mi">-1</span><span class="p">),</span><span class="w"> </span><span class="n">DEFVAL</span><span class="p">(</span><span class="mi">-2</span><span class="p">));</span><span class="w"> </span><span class="c1">// Default values for arg2name (-1) and arg3name (-2).</span>
+</pre></div>
+</div>
+<p>Default values must be provided in the same order as they are declared,
+skipping required arguments and then providing default values for the optional ones.
+This matches the syntax for declaring methods in C++.</p>
+<p><code class="docutils literal notranslate"><span class="pre">D_METHOD</span></code> is a macro that converts &quot;methodname&quot; to a StringName for more
+efficiency. Argument names are used for introspection, but when
+compiling on release, the macro ignores them, so the strings are unused
+and optimized away.</p>
+<p>Check <code class="docutils literal notranslate"><span class="pre">_bind_methods</span></code> of Control or Object for more examples.</p>
+<p>If just adding modules and functionality that is not expected to be
+documented as thoroughly, the <code class="docutils literal notranslate"><span class="pre">D_METHOD()</span></code> macro can safely be ignored and a
+string passing the name can be passed for brevity.</p>
+<section id="id1">
+<h4>References:<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/object/class_db.h">core/object/class_db.h</a></p></li>
+</ul>
+</section>
+</section>
+<section id="constants">
+<h3>Constants<a class="headerlink" href="#constants" title="Link to this heading"></a></h3>
+<p>Classes often have enums such as:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="nc">SomeMode</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">MODE_FIRST</span><span class="p">,</span>
+<span class="w">   </span><span class="n">MODE_SECOND</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>For these to work when binding to methods, the enum must be declared
+convertible to int. A macro is provided to help with this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">VARIANT_ENUM_CAST</span><span class="p">(</span><span class="n">MyClass</span><span class="o">::</span><span class="n">SomeMode</span><span class="p">);</span><span class="w"> </span><span class="c1">// now functions that take SomeMode can be bound.</span>
+</pre></div>
+</div>
+<p>The constants can also be bound inside <code class="docutils literal notranslate"><span class="pre">_bind_methods</span></code>, by using:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">BIND_CONSTANT</span><span class="p">(</span><span class="n">MODE_FIRST</span><span class="p">);</span>
+<span class="n">BIND_CONSTANT</span><span class="p">(</span><span class="n">MODE_SECOND</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="properties-set-get">
+<h3>Properties (set/get)<a class="headerlink" href="#properties-set-get" title="Link to this heading"></a></h3>
+<p>Objects export properties, properties are useful for the following:</p>
+<ul class="simple">
+<li><p>Serializing and deserializing the object.</p></li>
+<li><p>Creating a list of editable values for the Object derived class.</p></li>
+</ul>
+<p>Properties are usually defined by the PropertyInfo() class and
+constructed as:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">hint</span><span class="p">,</span><span class="w"> </span><span class="n">hint_string</span><span class="p">,</span><span class="w"> </span><span class="n">usage_flags</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;amount&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">PROPERTY_HINT_RANGE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0,49,1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">PROPERTY_USAGE_EDITOR</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is an integer property named &quot;amount&quot;. The hint is a range, and the range
+goes from 0 to 49 in steps of 1 (integers). It is only usable for the editor
+(editing the value visually) but won't be serialized.</p>
+<p>Another example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">STRING</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;modes&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">PROPERTY_HINT_ENUM</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Enabled,Disabled,Turbo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is a string property, can take any string but the editor will only
+allow the defined hint ones. Since no usage flags were specified, the
+default ones are PROPERTY_USAGE_STORAGE and PROPERTY_USAGE_EDITOR.</p>
+<p>There are plenty of hints and usage flags available in object.h, give them a
+check.</p>
+<p>Properties can also work like C# properties and be accessed from script
+using indexing, but this usage is generally discouraged, as using
+functions is preferred for legibility. Many properties are also bound
+with categories, such as &quot;animation/frame&quot; which also make indexing
+impossible unless using operator [].</p>
+<p>From <code class="docutils literal notranslate"><span class="pre">_bind_methods()</span></code>, properties can be created and bound as long as
+set/get functions exist. Example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;amount&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;set_amount&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;get_amount&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This creates the property using the setter and the getter.</p>
+</section>
+<section id="binding-properties-using-set-get-get-property-list">
+<span id="doc-binding-properties-using-set-get-property-list"></span><h3>Binding properties using <code class="docutils literal notranslate"><span class="pre">_set</span></code>/<code class="docutils literal notranslate"><span class="pre">_get</span></code>/<code class="docutils literal notranslate"><span class="pre">_get_property_list</span></code><a class="headerlink" href="#binding-properties-using-set-get-get-property-list" title="Link to this heading"></a></h3>
+<p>An additional method of creating properties exists when more flexibility
+is desired (i.e. adding or removing properties on context).</p>
+<p>The following functions can be overridden in an Object derived class,
+they are NOT virtual, DO NOT make them virtual, they are called for
+every override and the previous ones are not invalidated (multilevel
+call).</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">protected</span><span class="o">:</span>
+<span class="w">     </span><span class="kt">void</span><span class="w"> </span><span class="n">_get_property_list</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">PropertyInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">r_props</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w">      </span><span class="c1">// return list of properties</span>
+<span class="w">     </span><span class="kt">bool</span><span class="w"> </span><span class="nf">_get</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StringName</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_property</span><span class="p">,</span><span class="w"> </span><span class="n">Variant</span><span class="w"> </span><span class="o">&amp;</span><span class="n">r_value</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="c1">// return true if property was found</span>
+<span class="w">     </span><span class="kt">bool</span><span class="w"> </span><span class="nf">_set</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">StringName</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_property</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Variant</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_value</span><span class="p">);</span><span class="w"> </span><span class="c1">// return true if property was found</span>
+</pre></div>
+</div>
+<p>This is also a little less efficient since <code class="docutils literal notranslate"><span class="pre">p_property</span></code> must be
+compared against the desired names in serial order.</p>
+</section>
+<section id="signals">
+<h3>Signals<a class="headerlink" href="#signals" title="Link to this heading"></a></h3>
+<p>Objects can have a set of signals defined (similar to Delegates in other
+languages). This example shows how to connect to them:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This is the function signature:</span>
+<span class="c1">//</span>
+<span class="c1">// Error connect(const StringName &amp;p_signal, const Callable &amp;p_callable, uint32_t p_flags = 0)</span>
+<span class="c1">//</span>
+<span class="c1">// For example:</span>
+<span class="n">obj</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;signal_name_here&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">MyCustomType</span><span class="o">::</span><span class="n">method</span><span class="p">),</span><span class="w"> </span><span class="n">CONNECT_DEFERRED</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">callable_mp</span></code> is a macro to create a custom callable function pointer to member functions.
+For the values of <code class="docutils literal notranslate"><span class="pre">p_flags</span></code>, see <a class="reference internal" href="../../classes/class_object.html#enum-object-connectflags"><span class="std std-ref">ConnectFlags</span></a>.</p>
+<p>Adding signals to a class is done in <code class="docutils literal notranslate"><span class="pre">_bind_methods</span></code>, using the
+<code class="docutils literal notranslate"><span class="pre">ADD_SIGNAL</span></code> macro, for example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ADD_SIGNAL</span><span class="p">(</span><span class="n">MethodInfo</span><span class="p">(</span><span class="s">&quot;been_killed&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="object-ownership-and-casting">
+<h2>Object ownership and casting<a class="headerlink" href="#object-ownership-and-casting" title="Link to this heading"></a></h2>
+<p>Objects are allocated on the heap. There are two different ownership models:</p>
+<ul class="simple">
+<li><p>Objects derived from <code class="docutils literal notranslate"><span class="pre">RefCounted</span></code> are reference counted.</p></li>
+<li><p>All other objects are manually memory managed.</p></li>
+</ul>
+<p>The ownership models are fundamentally different. Refer to the section for each respectively to learn how to
+create, store, and free the object.</p>
+<p>When you do not know whether an object passed to you (via <code class="docutils literal notranslate"><span class="pre">Object</span> <span class="pre">*</span></code>) is <code class="docutils literal notranslate"><span class="pre">RefCounted</span></code>, and you need to store it,
+you should store its <code class="docutils literal notranslate"><span class="pre">ObjectID</span></code> rather than a pointer (as explained below, in the manual memory management section).</p>
+<p>When an object is passed to you via <a class="reference internal" href="../../classes/class_variant.html#class-variant"><span class="std std-ref">Variant</span></a>, especially when using deferred callbacks, it is
+possible that the contained <code class="docutils literal notranslate"><span class="pre">Object</span> <span class="pre">*</span></code> was already freed by the time your function runs.
+Instead of converting directly to <code class="docutils literal notranslate"><span class="pre">Object</span> <span class="pre">*</span></code>, you should use <code class="docutils literal notranslate"><span class="pre">get_validated_object</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">do_something</span><span class="p">(</span><span class="n">Variant</span><span class="w"> </span><span class="n">p_variant</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Object</span><span class="w"> </span><span class="o">*</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_variant</span><span class="p">.</span><span class="n">get_validated_object</span><span class="p">();</span>
+<span class="w">    </span><span class="n">ERR_FAIL_NULL</span><span class="p">(</span><span class="n">object</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="manual-memory-management">
+<h3>Manual memory management<a class="headerlink" href="#manual-memory-management" title="Link to this heading"></a></h3>
+<p>Manually memory managed objects are created using <code class="docutils literal notranslate"><span class="pre">memnew</span></code> and freed using <code class="docutils literal notranslate"><span class="pre">memdelete</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memnew</span><span class="p">(</span><span class="n">Node</span><span class="p">);</span>
+<span class="c1">// ...</span>
+<span class="n">memdelete</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+<span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>When you are not the sole owner of an object, storing a pointer to it is dangerous: The object may at any point be
+freed through other references to it, causing your pointer to become a dangling pointer, which will eventually result in
+a crash.</p>
+<p>When storing objects you are not the only owner of, you should store its <code class="docutils literal notranslate"><span class="pre">ObjectID</span></code> rather than a pointer:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memnew</span><span class="p">(</span><span class="n">Node</span><span class="p">);</span>
+<span class="n">ObjectID</span><span class="w"> </span><span class="n">node_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="n">get_instance_id</span><span class="p">();</span>
+<span class="c1">// ...</span>
+<span class="n">Object</span><span class="w"> </span><span class="o">*</span><span class="n">maybe_node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ObjectDB</span><span class="o">::</span><span class="n">get_instance</span><span class="p">(</span><span class="n">node_id</span><span class="p">);</span>
+<span class="n">ERR_FAIL_NULL</span><span class="p">(</span><span class="n">maybe_node</span><span class="p">);</span><span class="w"> </span><span class="c1">// The node may have been freed between calls.</span>
+</pre></div>
+</div>
+</section>
+<section id="refcounted-memory-management">
+<h3><code class="docutils literal notranslate"><span class="pre">RefCounted</span></code> memory management<a class="headerlink" href="#refcounted-memory-management" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="../../classes/class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> subclasses are memory managed with
+<a class="reference external" href="https://en.wikipedia.org/wiki/Reference_counting">reference counting semantics</a>.</p>
+<p>They are constructed using <code class="docutils literal notranslate"><span class="pre">memnew</span></code>, and should be stored in <code class="docutils literal notranslate"><span class="pre">Ref</span></code> instances. When the last <code class="docutils literal notranslate"><span class="pre">Ref</span></code> instance is
+dropped, the object automatically self-destructs.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyRefCounted</span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">RefCounted</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GDCLASS</span><span class="p">(</span><span class="n">MyRefCounted</span><span class="p">,</span><span class="w"> </span><span class="n">RefCounted</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="n">Ref</span><span class="o">&lt;</span><span class="n">MyRefCounted</span><span class="o">&gt;</span><span class="w"> </span><span class="n">my_ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memnew</span><span class="p">(</span><span class="n">MyRefCounted</span><span class="p">);</span>
+<span class="c1">// ...</span>
+<span class="c1">// Ref holds shared ownership over the object, so the object</span>
+<span class="c1">// will not be freed. As long as you have a valid, non-null</span>
+<span class="c1">// Ref, it can be safely assumed the object is still valid.</span>
+<span class="n">my_ref</span><span class="o">-&gt;</span><span class="n">get_class_name</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>You should never call <code class="docutils literal notranslate"><span class="pre">memdelete</span></code> for <code class="docutils literal notranslate"><span class="pre">RefCounted</span></code> subclasses, because there may be other owners of it.</p>
+<p>You should also never store <code class="docutils literal notranslate"><span class="pre">RefCounted</span></code> subclasses using raw pointers, for example
+<code class="docutils literal notranslate"><span class="pre">RefCounted</span> <span class="pre">*object</span> <span class="pre">=</span> <span class="pre">memnew(RefCounted)</span></code>. This is unsafe because other owners may destruct the object, leaving you
+with a dangling pointer, which will eventually result in a crash.</p>
+<section id="id2">
+<h4>References:<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/object/ref_counted.h">core/object/ref_counted.h</a></p></li>
+</ul>
+</section>
+</section>
+<section id="dynamic-casting">
+<h3>Dynamic casting<a class="headerlink" href="#dynamic-casting" title="Link to this heading"></a></h3>
+<p>Godot provides dynamic casting between Object-derived classes, for example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">some_func</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="o">*</span><span class="n">p_object</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">Button</span><span class="w"> </span><span class="o">*</span><span class="n">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Object</span><span class="o">::</span><span class="n">cast_to</span><span class="o">&lt;</span><span class="n">Button</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p_object</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the cast fails, <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> is returned. This works the same as <code class="docutils literal notranslate"><span class="pre">dynamic_cast</span></code>, but does not use
+<a class="reference external" href="https://en.wikipedia.org/wiki/Run-time_type_information">C++ RTTI</a>.</p>
+</section>
+</section>
+<section id="notifications">
+<h2>Notifications<a class="headerlink" href="#notifications" title="Link to this heading"></a></h2>
+<p>All objects in Godot have a <a class="reference internal" href="../../classes/class_object.html#class-object-private-method-notification"><span class="std std-ref">_notification</span></a>
+method that allows them to respond to engine-level callbacks that may relate to it.
+More information can be found on the <a class="reference internal" href="../../tutorials/best_practices/godot_notifications.html#doc-godot-notifications"><span class="std std-ref">Godot notifications</span></a> page.</p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../../classes/class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> inherits from RefCounted, so all resources
+are reference counted. Resources can optionally contain a path, which
+reference a file on disk. This can be set with <code class="docutils literal notranslate"><span class="pre">resource.set_path(path)</span></code>,
+though this is normally done by the resource loader. No two different
+resources can have the same path; attempting to do so will result in an error.</p>
+<p>Resources without a path are fine too.</p>
+<section id="id3">
+<h3>References:<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/io/resource.h">core/io/resource.h</a></p></li>
+</ul>
+</section>
+<section id="resource-loading">
+<h3>Resource loading<a class="headerlink" href="#resource-loading" title="Link to this heading"></a></h3>
+<p>Resources can be loaded with the ResourceLoader API, like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">Resource</span><span class="o">&gt;</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResourceLoader</span><span class="o">::</span><span class="n">load</span><span class="p">(</span><span class="s">&quot;res://someresource.res&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If a reference to that resource has been loaded previously and is in
+memory, the <a class="reference internal" href="../../classes/class_resourceloader.html#class-resourceloader"><span class="std std-ref">ResourceLoader</span></a> will return that reference. This means that
+there can be only one resource loaded from a file referenced on disk at
+the same time.</p>
+<section id="id4">
+<h4>References:<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/io/resource_loader.h">core/io/resource_loader.h</a></p></li>
+</ul>
+</section>
+</section>
+<section id="resource-saving">
+<h3>Resource saving<a class="headerlink" href="#resource-saving" title="Link to this heading"></a></h3>
+<p>Saving a resource can be done with the resource saver API:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ResourceSaver</span><span class="o">::</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;res://someresource.res&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The instance will be saved, and sub resources that have a path to a file will
+be saved as a reference to that resource. Sub resources without a path will
+be bundled with the saved resource and assigned sub-IDs, like
+<code class="docutils literal notranslate"><span class="pre">res://someresource.res::1</span></code>. This also helps to cache them when loaded.</p>
+<section id="id5">
+<h4>References:<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/io/resource_saver.h">core/io/resource_saver.h</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="variant_class.html" class="btn btn-neutral float-left" title="Variant class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="inheritance_class_tree.html" class="btn btn-neutral float-right" title="Inheritance class tree" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

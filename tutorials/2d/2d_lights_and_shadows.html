@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="2D lights and shadows" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/2d/2d_lights_and_shadows.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: By default, 2D scenes in Godot are unshaded, with no lights and shadows visible. While this is fast to render, unshaded scenes can look bland. Godot provides the ability to use real-t..." />
+<meta name="description" content="Introduction: By default, 2D scenes in Godot are unshaded, with no lights and shadows visible. While this is fast to render, unshaded scenes can look bland. Godot provides the ability to use real-t..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>2D lights and shadows &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2D meshes" href="2d_meshes.html" />
+    <link rel="prev" title="Viewport and canvas transforms" href="2d_transforms.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/2d/2d_lights_and_shadows" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/2d/2d_lights_and_shadows.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">2D</a></li>
+      <li class="breadcrumb-item active">2D lights and shadows</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/2d/2d_lights_and_shadows.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="d-lights-and-shadows">
+<span id="doc-2d-lights-and-shadows"></span><h1>2D lights and shadows<a class="headerlink" href="#d-lights-and-shadows" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>By default, 2D scenes in Godot are unshaded, with no lights and shadows visible.
+While this is fast to render, unshaded scenes can look bland. Godot provides the
+ability to use real-time 2D lighting and shadows, which can greatly enhance the
+sense of depth in your project.</p>
+<figure class="align-center" id="id1">
+<img alt="No 2D lights or shadows, scene is unshaded" src="../../_images/2d_lights_and_shadows_disabled.webp" />
+<figcaption>
+<p><span class="caption-text">No 2D lights or shadows, scene is unshaded</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id2">
+<img alt="2D lights enabled (without shadows)" src="../../_images/2d_lights_and_shadows_enabled_no_shadows.webp" />
+<figcaption>
+<p><span class="caption-text">2D lights enabled (without shadows)</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id3">
+<img alt="2D lights and shadows enabled" src="../../_images/2d_lights_and_shadows_enabled.webp" />
+<figcaption>
+<p><span class="caption-text">2D lights and shadows enabled</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="nodes">
+<h2>Nodes<a class="headerlink" href="#nodes" title="Link to this heading"></a></h2>
+<p>There are several nodes involved in a complete 2D lighting setup:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../classes/class_canvasmodulate.html#class-canvasmodulate"><span class="std std-ref">CanvasModulate</span></a> (to darken the rest of the scene)</p></li>
+<li><p><a class="reference internal" href="../../classes/class_pointlight2d.html#class-pointlight2d"><span class="std std-ref">PointLight2D</span></a> (for omnidirectional or spot lights)</p></li>
+<li><p><a class="reference internal" href="../../classes/class_directionallight2d.html#class-directionallight2d"><span class="std std-ref">DirectionalLight2D</span></a> (for sunlight or moonlight)</p></li>
+<li><p><a class="reference internal" href="../../classes/class_lightoccluder2d.html#class-lightoccluder2d"><span class="std std-ref">LightOccluder2D</span></a> (for light shadow casters)</p></li>
+<li><p>Other 2D nodes that receive lighting, such as Sprite2D or TileMapLayer.</p></li>
+</ul>
+<p><a class="reference internal" href="../../classes/class_canvasmodulate.html#class-canvasmodulate"><span class="std std-ref">CanvasModulate</span></a> is used to darken the scene by
+specifying a color that will act as the base &quot;ambient&quot; color. This is the final
+lighting color in areas that are <em>not</em> reached by any 2D light. Without a
+CanvasModulate node, the final scene would look too bright as 2D lights would
+only brighten the existing unshaded appearance (which appears fully lit).</p>
+<p><a class="reference internal" href="../../classes/class_sprite2d.html#class-sprite2d"><span class="std std-ref">Sprite2Ds</span></a> are used to display the textures for the light
+blobs, the background, and for the shadow casters.</p>
+<p><a class="reference internal" href="../../classes/class_pointlight2d.html#class-pointlight2d"><span class="std std-ref">PointLight2Ds</span></a> are used to light the scene. The way a
+light typically works is by adding a selected texture over the rest of the scene
+to simulate lighting.</p>
+<p><a class="reference internal" href="../../classes/class_lightoccluder2d.html#class-lightoccluder2d"><span class="std std-ref">LightOccluder2Ds</span></a> are used to tell the shader
+which parts of the scene cast shadows. These occluders can be placed as
+independent nodes or can be part of a TileMapLayer node.</p>
+<p>The shadows appear only on areas covered by the <a class="reference internal" href="../../classes/class_pointlight2d.html#class-pointlight2d"><span class="std std-ref">PointLight2D</span></a> and their direction is based on the center of the
+<a class="reference internal" href="../../classes/class_pointlight2d.html#class-pointlight2d"><span class="std std-ref">Light</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The background color does <strong>not</strong> receive any lighting. If you want light to
+be cast on the background, you need to add a visual representation for the
+background, such as a Sprite2D.</p>
+<p>The Sprite2D's <strong>Region</strong> properties can be helpful to quickly create a
+repeating background texture, but remember to also set <strong>Texture &gt; Repeat</strong> to
+<strong>Enabled</strong> in the Sprite2D's properties.</p>
+</div>
+</section>
+<section id="point-lights">
+<h2>Point lights<a class="headerlink" href="#point-lights" title="Link to this heading"></a></h2>
+<p>Point lights (also called positional lights) are the most common element in 2D
+lighting. Point lights can be used to represent light from torches, fire,
+projectiles, etc.</p>
+<p>PointLight2D offers the following properties to tweak in the inspector:</p>
+<ul class="simple">
+<li><p><strong>Texture:</strong> The texture to use as a light source. The texture's size
+determines the size of the light. The texture may have an alpha channel, which
+is useful when using Light2D's <strong>Mix</strong> blend mode, but it is not required if
+using the <strong>Add</strong> (default) or <strong>Subtract</strong> blend modes.</p></li>
+<li><p><strong>Offset:</strong> The offset for the light texture. Unlike when you move the light
+node, changing the offset does <em>not</em> cause shadows to move.</p></li>
+<li><p><strong>Texture Scale:</strong> The multiplier for the light's size. Higher values will
+make the light extend out further. Larger lights have a higher performance
+cost as they affect more pixels on screen, so consider this before increasing
+a light's size.</p></li>
+<li><p><strong>Height:</strong> The light's virtual height with regards to normal mapping. By
+default, the light is very close to surfaces receiving lights. This will make
+lighting hardly visible if normal mapping is used, so consider increasing this
+value. Adjusting the light's height only makes a visible difference on
+surfaces that use normal mapping.</p></li>
+</ul>
+<p>If you don't have a pre-made texture to use in a light, you can use this &quot;neutral&quot;
+point light texture (right-click &gt; <strong>Save Image As…</strong>):</p>
+<figure class="align-center" id="id4">
+<img alt="Neutral point light texture" src="../../_images/2d_lights_and_shadows_neutral_point_light.webp" />
+<figcaption>
+<p><span class="caption-text">Neutral point light texture</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>If you need different falloff, you can procedurally create a texture by assigning
+a <strong>New GradientTexture2D</strong> on the light's <strong>Texture</strong> property. After creating
+the resource, expand its <strong>Fill</strong> section and set the fill mode to <strong>Radial</strong>.
+You will then have to adjust the gradient itself to start from opaque white to
+transparent white, and move its starting location to be in the center.</p>
+</section>
+<section id="directional-light">
+<h2>Directional light<a class="headerlink" href="#directional-light" title="Link to this heading"></a></h2>
+<p>Directional lighting is used to represent sunlight or moonlight. Light rays are
+casted parallel to each other, as if the sun or moon was infinitely far away
+from the surface that is receiving the light.</p>
+<p>DirectionalLight2D offers the following properties:</p>
+<ul class="simple">
+<li><p><strong>Height:</strong> The light's virtual height with regards to normal mapping (<code class="docutils literal notranslate"><span class="pre">0.0</span></code>
+= parallel to surfaces, <code class="docutils literal notranslate"><span class="pre">1.0</span></code> = perpendicular to surfaces). By default, the
+light is fully parallel with the surfaces receiving lights. This will make
+lighting hardly visible if normal mapping is used, so consider increasing this
+value. Adjusting the light's height only makes a visual difference on surfaces
+that use normal mapping. <strong>Height</strong> does not affect shadows' appearance.</p></li>
+<li><p><strong>Max Distance:</strong> The maximum distance from the camera center objects can be
+before their shadows are culled (in pixels). Decreasing this value can prevent
+objects located outside the camera from casting shadows (while also improving
+performance). Camera2D zoom is not taken into account by <strong>Max Distance</strong>,
+which means that at higher zoom values, shadows will appear to fade out sooner
+when zooming onto a given point.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Directional shadows will always appear to be infinitely long, regardless
+of the value of the <strong>Height</strong> property. This is a limitation of the shadow
+rendering method used for 2D lights in Godot.</p>
+<p>To have directional shadows that are not infinitely long, you should disable
+shadows in the DirectionalLight2D and use a custom shader that reads from
+the 2D signed distance field instead. This distance field is automatically
+generated from LightOccluder2D nodes present in the scene.</p>
+</div>
+</section>
+<section id="common-light-properties">
+<h2>Common light properties<a class="headerlink" href="#common-light-properties" title="Link to this heading"></a></h2>
+<p>Both PointLight2D and DirectionalLight2D offer common properties, which are part
+of the Light2D base class:</p>
+<ul class="simple">
+<li><p><strong>Enabled:</strong> Allows toggling the light's visibility. Unlike hiding the light
+node, disabling this property will not hide the light's children.</p></li>
+<li><p><strong>Editor Only:</strong> If enabled, the light is only visible within the editor. It
+will be automatically disabled in the running project.</p></li>
+<li><p><strong>Color:</strong> The light's color.</p></li>
+<li><p><strong>Energy:</strong> The light's intensity multiplier. Higher values result in a brighter light.</p></li>
+<li><p><strong>Blend Mode:</strong> The blending formula used for light computations. The default
+<strong>Add</strong> is suited for most use cases. <strong>Subtract</strong> can be used for negative
+lights, which are not physically accurate but can be used for special effects.
+The <strong>Mix</strong> blend mode mixes the value of pixels corresponding to the light's
+texture with the values of pixels under it by linear interpolation.</p></li>
+<li><p><strong>Range &gt; Z Min:</strong> The lowest Z index affected by the light.</p></li>
+<li><p><strong>Range &gt; Z Max:</strong> The highest Z index affected by the light.</p></li>
+<li><p><strong>Range &gt; Layer Min:</strong> The lowest visual layer affected by the light.</p></li>
+<li><p><strong>Range &gt; Layer Max:</strong> The highest visual layer affected by the light.</p></li>
+<li><p><strong>Range &gt; Item Cull Mask:</strong> Controls which nodes receive light from this node,
+depending on the other nodes' enabled visual layers <strong>Occluder Light Mask</strong>.
+This can be used to prevent certain objects from receiving light.</p></li>
+</ul>
+</section>
+<section id="setting-up-shadows">
+<span id="doc-2d-lights-and-shadows-setting-up-shadows"></span><h2>Setting up shadows<a class="headerlink" href="#setting-up-shadows" title="Link to this heading"></a></h2>
+<p>After enabling the <strong>Shadow &gt; Enabled</strong> property on a PointLight2D or
+DirectionalLight2D node, you will not see any visual difference initially. This
+is because no nodes in your scene have any <em>occluders</em> yet, which are used as a
+basis for shadow casting.</p>
+<p>For shadows to appear in the scene, LightOccluder2D nodes must be added to the
+scene. These nodes must also have occluder polygons that are designed to match
+the sprite's outline.</p>
+<p>Along with their polygon resource (which must be set to have any visual effect),
+LightOccluder2D nodes have 2 properties:</p>
+<ul class="simple">
+<li><p><strong>SDF Collision:</strong> If enabled, the occluder will be part of a real-time
+generated <em>signed distance field</em> that can be used in custom shaders. When not
+using custom shaders that read from this SDF, enabling this makes no visual
+difference and has no performance cost, so this is enabled by default for
+convenience.</p></li>
+<li><p><strong>Occluder Light Mask:</strong> This is used in tandem with PointLight2D and
+DirectionalLight2D's <strong>Shadow &gt; Item Cull Mask</strong> property to control which
+objects cast shadows for each light. This can be used to prevent specific
+objects from casting shadows.</p></li>
+</ul>
+<p>There are two ways to create light occluders:</p>
+<section id="automatically-generating-a-light-occluder">
+<h3>Automatically generating a light occluder<a class="headerlink" href="#automatically-generating-a-light-occluder" title="Link to this heading"></a></h3>
+<p>Occluders can be created automatically from Sprite2D nodes by selecting the
+node, clicking the <strong>Sprite2D</strong> menu at the top of the 2D editor then choosing
+<strong>Create LightOccluder2D Sibling</strong>.</p>
+<p>In the dialog that appears, an outline will surround your sprite's edges. If the
+outline matches the sprite's edges closely, you can click <strong>OK</strong>. If the outline
+is too far away from the sprite's edges (or is &quot;eating&quot; into the sprite's
+edges), adjust <strong>Grow (pixels)</strong> and <strong>Shrink (pixels)</strong>, then click <strong>Update
+Preview</strong>. Repeat this operation until you get satisfactory results.</p>
+</section>
+<section id="manually-drawing-a-light-occluder">
+<h3>Manually drawing a light occluder<a class="headerlink" href="#manually-drawing-a-light-occluder" title="Link to this heading"></a></h3>
+<p>Create a LightOccluder2D node, then select the node and click the &quot;+&quot; button at
+the top of the 2D editor. When asked to create a polygon resource, answer
+<strong>Yes</strong>. You can then start drawing an occluder polygon by clicking to create
+new points. You can remove existing points by right-clicking them, and you can
+create new points from the existing line by clicking on the line then dragging.</p>
+<p>The following properties can be adjusted on 2D lights that have shadows enabled:</p>
+<ul class="simple">
+<li><p><strong>Color:</strong> The color of shaded areas. By default, shaded areas are fully
+black, but this can be changed for artistic purposes. The color's alpha
+channel controls how much the shadow is tinted by the specified color.</p></li>
+<li><p><strong>Filter:</strong> The filter mode to use for shadows. The default <strong>None</strong> is the
+fastest to render, and is well suited for games with a pixel art aesthetic
+(due to its &quot;blocky&quot; visuals). If you want a soft shadow, use <strong>PCF5</strong>
+instead. <strong>PCF13</strong> is even softer, but is the most demanding to render. PCF13
+should only be used for a few lights at once due to its high rendering cost.</p></li>
+<li><p><strong>Filter Smooth:</strong> Controls how much softening is applied to shadows when
+<strong>Filter</strong> is set to <strong>PCF5</strong> or <strong>PCF13</strong>. Higher values result in a softer
+shadow, but may cause banding artifacts to be visible (especially with PCF5).</p></li>
+<li><p><strong>Item Cull Mask:</strong> Controls which LightOccluder2D nodes cast shadows,
+depending on their respective <strong>Occluder Light Mask</strong> properties.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Lighting and shadow resolution in pixel-art games</strong></p>
+<p>The engine computes 2D lighting and shadows at the <strong>Viewport's pixel resolution</strong>,
+not at the source texture's texel resolution. The appearance of lights and shadows
+depends on your window or Viewport resolution, not on the resolution of individual
+sprite textures.</p>
+<p>If you create a pixel-art game and want pixelated or blocky lighting and shadows
+that match your art style, <strong>Nearest</strong> texture filtering will <strong>not</strong> achieve
+this effect. Nearest filtering affects only how the engine samples textures — it
+does not change how the engine renders lighting and shadows.</p>
+<p>To achieve pixelated lighting and shadows, use a custom shader to modify
+<code class="docutils literal notranslate"><span class="pre">LIGHT_VERTEX</span></code> and <code class="docutils literal notranslate"><span class="pre">SHADOW_VERTEX</span></code> to snap light sampling to a pixel grid.
+The following shader snaps lighting to a grid using the <code class="docutils literal notranslate"><span class="pre">floor()</span></code> function:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">canvas_item</span><span class="p">;</span>
+
+<span class="k">uniform</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">pixel_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Snap lighting and shadows to pixel grid.</span>
+<span class="w">    </span><span class="n">LIGHT_VERTEX</span><span class="p">.</span><span class="n">xy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">floor</span><span class="p">(</span><span class="n">LIGHT_VERTEX</span><span class="p">.</span><span class="n">xy</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pixel_size</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pixel_size</span><span class="p">;</span>
+<span class="w">    </span><span class="n">SHADOW_VERTEX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">floor</span><span class="p">(</span><span class="n">SHADOW_VERTEX</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pixel_size</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pixel_size</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Normal rendering.</span>
+<span class="w">    </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">TEXTURE</span><span class="p">,</span><span class="w"> </span><span class="n">UV</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This works by dividing the position by <code class="docutils literal notranslate"><span class="pre">pixel_size</span></code> to convert to grid space,
+using <code class="docutils literal notranslate"><span class="pre">floor()</span></code> to round down to the nearest grid point, then multiplying back
+to convert to screen space. The result forces the engine to sample lighting from
+discrete grid positions, which creates the pixelated effect.</p>
+<p>For more information on canvas item shaders, see <a class="reference internal" href="../shaders/shader_reference/canvas_item_shader.html#doc-canvas-item-shader"><span class="std std-ref">CanvasItem shaders</span></a>.</p>
+</div>
+<figure class="align-center" id="id5">
+<img alt="Hard shadows" src="../../_images/2d_lights_and_shadows_hard_shadow.webp" />
+<figcaption>
+<p><span class="caption-text">Hard shadows</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id6">
+<img alt="Soft shadows (PCF13, Filter Smooth 1.5)" src="../../_images/2d_lights_and_shadows_soft_shadow.webp" />
+<figcaption>
+<p><span class="caption-text">Soft shadows (PCF13, Filter Smooth 1.5)</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id7">
+<img alt="Soft shadows with streaking artifacts due to Filter Smooth being too high (PCF5, Filter Smooth 4)" src="../../_images/2d_lights_and_shadows_soft_shadow_streaks.webp" />
+<figcaption>
+<p><span class="caption-text">Soft shadows with streaking artifacts due to Filter Smooth being too high (PCF5, Filter Smooth 4)</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="normal-and-specular-maps">
+<h2>Normal and specular maps<a class="headerlink" href="#normal-and-specular-maps" title="Link to this heading"></a></h2>
+<p>Normal maps and specular maps can greatly enhance the sense of depth of your 2D
+lighting. Similar to how these work in 3D rendering, normal maps can help make
+lighting look less flat by varying its intensity depending on the direction of
+the surface receiving light (on a per-pixel basis). Specular maps further help
+improve visuals by making some of the light reflect back to the viewer.</p>
+<p>Both PointLight2D and DirectionalLight2D support normal mapping and specular
+mapping. Normal and specular maps can be assigned to any 2D element,
+including nodes that inherit from Node2D or Control.</p>
+<p>A normal map represents the direction in which each pixel is &quot;pointing&quot; towards.
+This information is then used by the engine to correctly apply lighting to 2D
+surfaces in a physically plausible way. Normal maps are typically created from
+hand-painted height maps, but they can also be automatically generated from
+other textures.</p>
+<p>A specular map defines how much each pixel should reflect light (and in which
+color, if the specular map contains color). Brighter values will result in a
+brighter reflection at that given spot on the texture. Specular maps are
+typically created with manual editing, using the diffuse texture as a base.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you don't have normal or specular maps for your sprites, you can generate
+them using the free and open source <a class="reference external" href="https://azagaya.itch.io/laigter">Laigter</a>
+tool.</p>
+</div>
+<p>To set up normal maps and/or specular maps on a 2D node, create a new
+CanvasTexture resource for the property that draws the node's texture. For
+example, on a Sprite2D:</p>
+<figure class="align-center" id="id8">
+<img alt="Creating a CanvasTexture resource for a Sprite2D node" src="../../_images/2d_lights_and_shadows_create_canvastexture.webp" />
+<figcaption>
+<p><span class="caption-text">Creating a CanvasTexture resource for a Sprite2D node</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Expand the newly created resource. You can find several properties you will need
+to adjust:</p>
+<ul class="simple">
+<li><p><strong>Diffuse &gt; Texture:</strong> The base color texture. In this property, load the
+texture you're using for the sprite itself.</p></li>
+<li><p><strong>Normal Map &gt; Texture:</strong> The normal map texture. In this property, load a
+normal map texture you've generated from a height map (see the tip above).</p></li>
+<li><p><strong>Specular &gt; Texture:</strong> The specular map texture, which controls the specular
+intensity of each pixel on the diffuse texture. The specular map is usually
+grayscale, but it can also contain color to multiply the color of reflections
+accordingly. In this property, load a specular map texture you've created (see
+the tip above).</p></li>
+<li><p><strong>Specular &gt; Color:</strong> The color multiplier for specular reflections.</p></li>
+<li><p><strong>Specular &gt; Shininess:</strong> The specular exponent to use for reflections. Lower
+values will increase the brightness of reflections and make them more diffuse,
+while higher values will make reflections more localized. High values are more
+suited for wet-looking surfaces.</p></li>
+<li><p><strong>Texture &gt; Filter:</strong> Can be set to override the texture filtering mode,
+regardless of what the node's property is set to (or the
+<strong>Rendering &gt; Textures &gt; Canvas Textures &gt; Default Texture Filter</strong> project
+setting).</p></li>
+<li><p><strong>Texture &gt; Repeat:</strong> Can be set to override the texture filtering mode,
+regardless of what the node's property is set to (or the
+<strong>Rendering &gt; Textures &gt; Canvas Textures &gt; Default Texture Repeat</strong> project
+setting).</p></li>
+</ul>
+<p>After enabling normal mapping, you may notice that your lights appear to be
+weaker. To resolve this, increase the <strong>Height</strong> property on your PointLight2D
+and DirectionalLight2D nodes. You may also want to increase the lights's
+<strong>Energy</strong> property slightly to get closer to how your lighting's intensity
+looked prior to enabling normal mapping.</p>
+</section>
+<section id="using-additive-sprites-as-a-faster-alternative-to-2d-lights">
+<h2>Using additive sprites as a faster alternative to 2D lights<a class="headerlink" href="#using-additive-sprites-as-a-faster-alternative-to-2d-lights" title="Link to this heading"></a></h2>
+<p>If you run into performance issues when using 2D lights, it may be worth
+replacing some of them with Sprite2D nodes that use additive blending. This is
+particularly suited for short-lived dynamic effects, such as bullets or explosions.</p>
+<p>Additive sprites are much faster to render, since they don't need to go through
+a separate rendering pipeline. Additionally, it is possible to use this approach
+with AnimatedSprite2D (or Sprite2D + AnimationPlayer), which allows for animated
+2D &quot;lights&quot; to be created.</p>
+<p>However, additive sprites have a few downsides compared to 2D lights:</p>
+<ul class="simple">
+<li><p>The blending formula is inaccurate compared to &quot;actual&quot; 2D lighting. This is
+usually not a problem in sufficiently lit areas, but this prevents additive
+sprites from correctly lighting up areas that are fully dark.</p></li>
+<li><p>Additive sprites cannot cast shadows, since they are not lights.</p></li>
+<li><p>Additive sprites ignore normal and specular maps used on other sprites.</p></li>
+</ul>
+<p>To display a sprite with additive blending, create a Sprite2D node and assign a
+texture to it. In the inspector, scroll down to the <strong>CanvasItem &gt; Material</strong>
+section, unfold it and click the dropdown next to the <strong>Material</strong> property.
+Choose <strong>New CanvasItemMaterial</strong>, click the newly created material to edit it,
+then set <strong>Blend Mode</strong> to <strong>Add</strong>.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2d_transforms.html" class="btn btn-neutral float-left" title="Viewport and canvas transforms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2d_meshes.html" class="btn btn-neutral float-right" title="2D meshes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

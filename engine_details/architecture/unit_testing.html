@@ -1,0 +1,654 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Unit testing" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/architecture/unit_testing.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Godot Engine allows to write unit tests directly in C++. The engine integrates the doctest unit testing framework which gives ability to write test suites and test cases next to production code, bu..." />
+<meta name="description" content="Godot Engine allows to write unit tests directly in C++. The engine integrates the doctest unit testing framework which gives ability to write test suites and test cases next to production code, bu..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Unit testing &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Engine extension APIs" href="../engine_api/index.html" />
+    <link rel="prev" title="2D coordinate systems and 2D transforms" href="2d_coordinate_systems.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/architecture/unit_testing" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="engine_details/architecture/unit_testing.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Engine architecture</a></li>
+      <li class="breadcrumb-item active">Unit testing</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/architecture/unit_testing.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="unit-testing">
+<span id="doc-unit-testing"></span><h1>Unit testing<a class="headerlink" href="#unit-testing" title="Link to this heading"></a></h1>
+<p>Godot Engine allows to write unit tests directly in C++. The engine integrates
+the <a class="reference external" href="https://github.com/doctest/doctest">doctest</a> unit testing framework which
+gives ability to write test suites and test cases next to production code, but
+since the tests in Godot go through a different <code class="docutils literal notranslate"><span class="pre">main</span></code> entry point, the tests
+reside in a dedicated <code class="docutils literal notranslate"><span class="pre">tests/</span></code> directory instead, which is located at the root
+of the engine source code.</p>
+<section id="platform-and-target-support">
+<h2>Platform and target support<a class="headerlink" href="#platform-and-target-support" title="Link to this heading"></a></h2>
+<p>C++ unit tests can be run on Linux, macOS, and Windows operating systems.</p>
+<p>Tests can only be run with editor <code class="docutils literal notranslate"><span class="pre">tools</span></code> enabled, which means that export
+templates cannot be tested currently.</p>
+</section>
+<section id="running-tests">
+<h2>Running tests<a class="headerlink" href="#running-tests" title="Link to this heading"></a></h2>
+<p>Before tests can be actually run, the engine must be compiled with the <code class="docutils literal notranslate"><span class="pre">tests</span></code>
+build option enabled (and any other build option you typically use), as the
+tests are not compiled as part of the engine by default:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">tests</span><span class="o">=</span>yes
+</pre></div>
+</div>
+<p>Once the build is done, run the tests with a <code class="docutils literal notranslate"><span class="pre">--test</span></code> command-line option:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./bin/&lt;godot_binary&gt;<span class="w"> </span>--test
+</pre></div>
+</div>
+<p>The test run can be configured with the various doctest-specific command-line
+options. To retrieve the full list of supported options, run the <code class="docutils literal notranslate"><span class="pre">--test</span></code>
+command with the <code class="docutils literal notranslate"><span class="pre">--help</span></code> option:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./bin/&lt;godot_binary&gt;<span class="w"> </span>--test<span class="w"> </span>--help
+</pre></div>
+</div>
+<p>Any other options and arguments after the <code class="docutils literal notranslate"><span class="pre">--test</span></code> command are treated as
+arguments for doctest.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Tests are compiled automatically if you use the <code class="docutils literal notranslate"><span class="pre">dev_mode=yes</span></code> SCons option.
+<code class="docutils literal notranslate"><span class="pre">dev_mode=yes</span></code> is recommended if you plan on contributing to the engine
+development as it will automatically treat compilation warnings as errors.
+The continuous integration system will fail if any compilation warnings are
+detected, so you should strive to fix all warnings before opening a pull
+request.</p>
+</div>
+<section id="filtering-tests">
+<h3>Filtering tests<a class="headerlink" href="#filtering-tests" title="Link to this heading"></a></h3>
+<p>By default, all tests are run if you don't supply any extra arguments after the
+<code class="docutils literal notranslate"><span class="pre">--test</span></code> command. But if you're writing new tests or would like to see the
+successful assertions output coming from those tests for debugging purposes, you
+can run the tests of interest with the various filtering options provided by
+doctest.</p>
+<p>The wildcard syntax <code class="docutils literal notranslate"><span class="pre">*</span></code> is supported for matching any number of characters in
+test suites, test cases, and source file names:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Filter options</strong></p></td>
+<td><p><strong>Shorthand</strong></p></td>
+<td><p><strong>Examples</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--test-suite</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-ts</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-ts=&quot;*[GDScript]*&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--test-case</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-tc</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-tc=&quot;*[String]*&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--source-file</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-sf</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-sf=&quot;*test_color*&quot;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>For instance, to run only the <code class="docutils literal notranslate"><span class="pre">String</span></code> unit tests, run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./bin/&lt;godot_binary&gt;<span class="w"> </span>--test<span class="w"> </span>--test-case<span class="o">=</span><span class="s2">&quot;*[String]*&quot;</span>
+</pre></div>
+</div>
+<p>Successful assertions output can be enabled with the <code class="docutils literal notranslate"><span class="pre">--success</span></code> (<code class="docutils literal notranslate"><span class="pre">-s</span></code>)
+option, and can be combined with any combination of filtering options above,
+for instance:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./bin/&lt;godot_binary&gt;<span class="w"> </span>--test<span class="w"> </span>--source-file<span class="o">=</span><span class="s2">&quot;*test_color*&quot;</span><span class="w"> </span>--success
+</pre></div>
+</div>
+<p>Specific tests can be skipped with corresponding <code class="docutils literal notranslate"><span class="pre">-exclude</span></code> options. As of
+now, some tests include random stress tests which take a while to execute. In
+order to skip those kinds of tests, run the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./bin/&lt;godot_binary&gt;<span class="w"> </span>--test<span class="w"> </span>--test-case-exclude<span class="o">=</span><span class="s2">&quot;*[Stress]*&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="writing-tests">
+<h2>Writing tests<a class="headerlink" href="#writing-tests" title="Link to this heading"></a></h2>
+<p>Test suites represent C++ implementation files which must include the <code class="docutils literal notranslate"><span class="pre">TEST_FORCE_LINK()</span></code> macro.
+Most test suites are located directly under <code class="docutils literal notranslate"><span class="pre">tests/</span></code> directory.</p>
+<p>All test files are prefixed with <code class="docutils literal notranslate"><span class="pre">test_</span></code>, and this is a naming convention
+which the Godot build system relies on to detect tests throughout the engine.</p>
+<p>Here's a minimal working test suite with a single test case written:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tests/test_macros.h&quot;</span>
+
+<span class="n">TEST_FORCE_LINK</span><span class="p">(</span><span class="n">test_string</span><span class="p">)</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">TestString</span><span class="w"> </span><span class="p">{</span>
+
+<span class="n">TEST_CASE</span><span class="p">(</span><span class="s">&quot;[String] Hello World!&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">CHECK</span><span class="p">(</span><span class="n">hello</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace TestString</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can quickly generate new tests using the <code class="docutils literal notranslate"><span class="pre">create_test.py</span></code> script found in the <code class="docutils literal notranslate"><span class="pre">tests/</span></code> directory.
+This script automatically creates a new test file with the required boilerplate code in the appropriate location.
+To view usage instructions, run the script with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> flag.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">tests/test_macros.h</span></code> header encapsulates everything which is needed for
+writing C++ unit tests in Godot. It includes doctest assertion and logging
+macros such as <code class="docutils literal notranslate"><span class="pre">CHECK</span></code> as seen above, and of course the definitions for
+writing test cases themselves.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/tests/test_macros.h">tests/test_macros.h</a>
+source code for currently implemented macros and aliases for them.</p>
+</div>
+<p>Test cases are created using <code class="docutils literal notranslate"><span class="pre">TEST_CASE</span></code> function-like macro. Each test case
+must have a brief description written in parentheses, optionally including
+custom tags which allow to filter the tests at runtime, such as <code class="docutils literal notranslate"><span class="pre">[String]</span></code>,
+<code class="docutils literal notranslate"><span class="pre">[Stress]</span></code> etc.</p>
+<p>Test cases are written in a dedicated namespace. This is not required, but
+allows to prevent naming collisions for when other static helper functions are
+written to accommodate the repeating testing procedures such as populating
+common test data for each test, or writing parameterized tests.</p>
+<p>Godot supports writing tests per C++ module. For instructions on how to write
+module tests, refer to <a class="reference internal" href="../engine_api/custom_modules_in_cpp.html#doc-custom-module-unit-tests"><span class="std std-ref">Writing custom unit tests</span></a>.</p>
+<section id="subcases">
+<h3>Subcases<a class="headerlink" href="#subcases" title="Link to this heading"></a></h3>
+<p>In situations where you have a common setup for several test cases with only slight variations, subcases can be very helpful. Here's an example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_CASE</span><span class="p">(</span><span class="s">&quot;[SceneTree][Node] Testing node operations with a very simple scene tree&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ... common setup (e.g. creating a scene tree with a few nodes)</span>
+<span class="w">    </span><span class="n">SUBCASE</span><span class="p">(</span><span class="s">&quot;Move node to specific index&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ... setup and checks for moving a node</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">SUBCASE</span><span class="p">(</span><span class="s">&quot;Remove node at specific index&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ... setup and checks for removing a node</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">SUBCASE</span></code> causes the <code class="docutils literal notranslate"><span class="pre">TEST_CASE</span></code> to be executed from the beginning.
+Subcases can be nested to an arbitrary depth, but it is advised to limit nesting to no more than one level deep.</p>
+</section>
+<section id="assertions">
+<h3>Assertions<a class="headerlink" href="#assertions" title="Link to this heading"></a></h3>
+<p>A list of all commonly used assertions used throughout the Godot tests, sorted
+by severity.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Assertion</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">REQUIRE</span></code></p></td>
+<td><p>Test if condition holds true. Fails the entire test immediately if the condition does not hold true.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">REQUIRE_FALSE</span></code></p></td>
+<td><p>Test if condition does not hold true. Fails the entire test immediately if the condition holds true.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CHECK</span></code></p></td>
+<td><p>Test if condition holds true. Marks the test run as failing, but allow to run other assertions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CHECK_FALSE</span></code></p></td>
+<td><p>Test if condition does not hold true. Marks the test run as failing, but allow to run other assertions.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WARN</span></code></p></td>
+<td><p>Test if condition holds true. Does not fail the test under any circumstance, but logs a warning if something does not hold true.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WARN_FALSE</span></code></p></td>
+<td><p>Test if condition does not hold true. Does not fail the test under any circumstance, but logs a warning if something holds true.</p></td>
+</tr>
+</tbody>
+</table>
+<p>All of the above assertions have corresponding <code class="docutils literal notranslate"><span class="pre">*_MESSAGE</span></code> macros, which allow
+to print optional message with rationale of what should happen.</p>
+<p>Prefer to use <code class="docutils literal notranslate"><span class="pre">CHECK</span></code> for self-explanatory assertions and <code class="docutils literal notranslate"><span class="pre">CHECK_MESSAGE</span></code>
+for more complex ones if you think that it deserves a better explanation.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://github.com/doctest/doctest/blob/master/doc/markdown/assertions.md">doctest: Assertion macros</a>.</p>
+</div>
+</section>
+<section id="logging">
+<h3>Logging<a class="headerlink" href="#logging" title="Link to this heading"></a></h3>
+<p>The test output is handled by doctest itself, and does not rely on Godot
+printing or logging functionality at all, so it's recommended to use dedicated
+macros which allow to log test output in a format written by doctest.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Macro</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MESSAGE</span></code></p></td>
+<td><p>Prints a message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FAIL_CHECK</span></code></p></td>
+<td><p>Marks the test as failing, but continue the execution. Can be wrapped in conditionals for complex checks.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FAIL</span></code></p></td>
+<td><p>Fails the test immediately. Can be wrapped in conditionals for complex checks.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Different reporters can be chosen at runtime. For instance, here's how the
+output can be redirected to an XML file:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./bin/&lt;godot_binary&gt;<span class="w"> </span>--test<span class="w"> </span>--source-file<span class="o">=</span><span class="s2">&quot;*test_validate*&quot;</span><span class="w"> </span>--success<span class="w"> </span>--reporters<span class="o">=</span>xml<span class="w"> </span>--out<span class="o">=</span>doctest.txt
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://github.com/doctest/doctest/blob/master/doc/markdown/logging.md">doctest: Logging macros</a>.</p>
+</div>
+</section>
+<section id="testing-failure-paths">
+<h3>Testing failure paths<a class="headerlink" href="#testing-failure-paths" title="Link to this heading"></a></h3>
+<p>Sometimes, it's not always feasible to test for an <em>expected</em> result. With the
+Godot development philosophy of that the engine should not crash and should
+gracefully recover whenever a non-fatal error occurs, it's important to check
+that those failure paths are indeed safe to execute without crashing the engine.</p>
+<p><em>Unexpected</em> behavior can be tested in the same way as anything else. The only
+problem this creates is that the error printing shall unnecessarily pollute the
+test output with errors coming from the engine itself (even if the end result is
+successful).</p>
+<p>To alleviate this problem, use <code class="docutils literal notranslate"><span class="pre">ERR_PRINT_OFF</span></code> and <code class="docutils literal notranslate"><span class="pre">ERR_PRINT_ON</span></code> macros
+directly within test cases to temporarily disable the error output coming from
+the engine, for instance:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_CASE</span><span class="p">(</span><span class="s">&quot;[Color] Constructor methods&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ERR_PRINT_OFF</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Color</span><span class="w"> </span><span class="n">html_invalid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="o">::</span><span class="n">html</span><span class="p">(</span><span class="s">&quot;invalid&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ERR_PRINT_ON</span><span class="p">;</span><span class="w"> </span><span class="c1">// Don&#39;t forget to re-enable!</span>
+
+<span class="w">    </span><span class="n">CHECK_MESSAGE</span><span class="p">(</span><span class="n">html_invalid</span><span class="p">.</span><span class="n">is_equal_approx</span><span class="p">(</span><span class="n">Color</span><span class="p">()),</span>
+<span class="w">        </span><span class="s">&quot;Invalid HTML notation should result in a Color with the default values.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="special-tags-in-test-case-names">
+<h3>Special tags in test case names<a class="headerlink" href="#special-tags-in-test-case-names" title="Link to this heading"></a></h3>
+<p>These tags can be added to the test case name to modify or extend the test environment:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Tag</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[SceneTree]</span></code></p></td>
+<td><p>Required for test cases that rely on a scene tree with MessageQueue to be available. It also enables a mock rendering server and <a class="reference internal" href="../../classes/class_themedb.html#class-themedb"><span class="std std-ref">ThemeDB</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[Editor]</span></code></p></td>
+<td><p>Like <code class="docutils literal notranslate"><span class="pre">[SceneTree]</span></code>, but with additional editor-related infrastructure available, such as <a class="reference internal" href="../../classes/class_editorsettings.html#class-editorsettings"><span class="std std-ref">EditorSettings</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[Audio]</span></code></p></td>
+<td><p>Initializes the <a class="reference internal" href="../../classes/class_audioserver.html#class-audioserver"><span class="std std-ref">AudioServer</span></a> using a mock audio driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[Navigation2D]</span></code></p></td>
+<td><p>Creates the default 2D navigation server and makes it available for testing.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[Navigation3D]</span></code></p></td>
+<td><p>Creates the default 3D navigation server and makes it available for testing.</p></td>
+</tr>
+</tbody>
+</table>
+<p>You can use them together to combine multiple test environment extensions.</p>
+</section>
+<section id="testing-signals">
+<h3>Testing signals<a class="headerlink" href="#testing-signals" title="Link to this heading"></a></h3>
+<p>The following macros can be use to test signals:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Macro</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SIGNAL_WATCH(object,</span> <span class="pre">&quot;signal_name&quot;)</span></code></p></td>
+<td><p>Starts watching the specified signal on the given object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SIGNAL_UNWATCH(object,</span> <span class="pre">&quot;signal_name&quot;)</span></code></p></td>
+<td><p>Stops watching the specified signal on the given object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SIGNAL_CHECK(&quot;signal_name&quot;,</span> <span class="pre">Vector&lt;Vector&lt;Variant&gt;&gt;)</span></code></p></td>
+<td><p>Checks the arguments of all fired signals. The outer vector contains each fired signal, while the inner vector contains the list of arguments for that signal. The order of signals is significant.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SIGNAL_CHECK_FALSE(&quot;signal_name&quot;)</span></code></p></td>
+<td><p>Checks if the specified signal was not fired.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SIGNAL_DISCARD(&quot;signal_name&quot;)</span></code></p></td>
+<td><p>Discards all records of the specified signal.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Below is an example demonstrating the use of these macros:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//...</span>
+<span class="n">SUBCASE</span><span class="p">(</span><span class="s">&quot;[Timer] Timer process timeout signal must be emitted&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">SIGNAL_WATCH</span><span class="p">(</span><span class="n">test_timer</span><span class="p">,</span><span class="w"> </span><span class="n">SNAME</span><span class="p">(</span><span class="s">&quot;timeout&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="n">test_timer</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">(</span><span class="mf">0.1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">SceneTree</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">process</span><span class="p">(</span><span class="mf">0.2</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">Array</span><span class="w"> </span><span class="n">signal_args</span><span class="p">;</span>
+<span class="w">    </span><span class="n">signal_args</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Array</span><span class="p">());</span>
+
+<span class="w">    </span><span class="n">SIGNAL_CHECK</span><span class="p">(</span><span class="n">SNAME</span><span class="p">(</span><span class="s">&quot;timeout&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">signal_args</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">SIGNAL_UNWATCH</span><span class="p">(</span><span class="n">test_timer</span><span class="p">,</span><span class="w"> </span><span class="n">SNAME</span><span class="p">(</span><span class="s">&quot;timeout&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="c1">//...</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="test-tools">
+<h2>Test tools<a class="headerlink" href="#test-tools" title="Link to this heading"></a></h2>
+<p>Test tools are advanced methods which allow you to run arbitrary procedures to
+facilitate the process of manual testing and debugging the engine internals.</p>
+<p>These tools can be run by supplying the name of a tool after the <code class="docutils literal notranslate"><span class="pre">--test</span></code>
+command-line option. For instance, the GDScript module implements and registers
+several tools to help the debugging of the tokenizer, parser, and compiler:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./bin/&lt;godot_binary&gt;<span class="w"> </span>--test<span class="w"> </span>gdscript-tokenizer<span class="w"> </span>test.gd
+./bin/&lt;godot_binary&gt;<span class="w"> </span>--test<span class="w"> </span>gdscript-parser<span class="w"> </span>test.gd
+./bin/&lt;godot_binary&gt;<span class="w"> </span>--test<span class="w"> </span>gdscript-compiler<span class="w"> </span>test.gd
+</pre></div>
+</div>
+<p>If any such tool is detected, then the rest of the unit tests are skipped.</p>
+<p>Test tools can be registered anywhere throughout the engine as the registering
+mechanism closely resembles of what doctest provides while registering test
+cases using dynamic initialization technique, but usually these can be
+registered at corresponding <code class="docutils literal notranslate"><span class="pre">register_types.cpp</span></code> sources (per module or core).</p>
+<p>Here's an example of how GDScript registers test tools in
+<code class="docutils literal notranslate"><span class="pre">modules/gdscript/register_types.cpp</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifdef TESTS_ENABLED</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">test_tokenizer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">TestGDScript</span><span class="o">::</span><span class="n">test</span><span class="p">(</span><span class="n">TestGDScript</span><span class="o">::</span><span class="n">TestType</span><span class="o">::</span><span class="n">TEST_TOKENIZER</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">test_parser</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">TestGDScript</span><span class="o">::</span><span class="n">test</span><span class="p">(</span><span class="n">TestGDScript</span><span class="o">::</span><span class="n">TestType</span><span class="o">::</span><span class="n">TEST_PARSER</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">test_compiler</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">TestGDScript</span><span class="o">::</span><span class="n">test</span><span class="p">(</span><span class="n">TestGDScript</span><span class="o">::</span><span class="n">TestType</span><span class="o">::</span><span class="n">TEST_COMPILER</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">REGISTER_TEST_COMMAND</span><span class="p">(</span><span class="s">&quot;gdscript-tokenizer&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">test_tokenizer</span><span class="p">);</span>
+<span class="n">REGISTER_TEST_COMMAND</span><span class="p">(</span><span class="s">&quot;gdscript-parser&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">test_parser</span><span class="p">);</span>
+<span class="n">REGISTER_TEST_COMMAND</span><span class="p">(</span><span class="s">&quot;gdscript-compiler&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">test_compiler</span><span class="p">);</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>The custom command-line parsing can be performed by a test tool itself with the
+help of OS <a class="reference internal" href="../../classes/class_os.html#class-os-method-get-cmdline-args"><span class="std std-ref">get_cmdline_args</span></a> method.</p>
+</section>
+<section id="integration-tests-for-gdscript">
+<h2>Integration tests for GDScript<a class="headerlink" href="#integration-tests-for-gdscript" title="Link to this heading"></a></h2>
+<p>Godot uses doctest to prevent regressions in GDScript during development. There
+are several types of test scripts which can be written:</p>
+<ul class="simple">
+<li><p>tests for expected errors;</p></li>
+<li><p>tests for warnings;</p></li>
+<li><p>tests for features.</p></li>
+</ul>
+<p>Therefore, the process of writing integration tests for GDScript is the following:</p>
+<ol class="arabic">
+<li><p>Pick a type of a test script you'd like to write, and create a new GDScript
+file under the <code class="docutils literal notranslate"><span class="pre">modules/gdscript/tests/scripts</span></code> directory within
+corresponding sub-directory.</p></li>
+<li><p>Write GDScript code. The test script must have a function called <code class="docutils literal notranslate"><span class="pre">test()</span></code>
+which takes no arguments. Such function will be called by the test runner.
+The test should not have any dependency unless it's part of the test too.
+Global classes (using <code class="docutils literal notranslate"><span class="pre">class_name</span></code>) are registered before the runner
+starts, so those should work if needed.</p>
+<p>Here's an example test script:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">test</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="l">true</span><span class="w"> </span><span class="c1"># Missing colon here.</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Change directory to the Godot source repository root.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>godot
+</pre></div>
+</div>
+</li>
+<li><p>Generate <code class="docutils literal notranslate"><span class="pre">*.out</span></code> files to update the expected results from the output:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bin/&lt;godot_binary&gt;<span class="w"> </span>--gdscript-generate-tests<span class="w"> </span>modules/gdscript/tests/scripts
+</pre></div>
+</div>
+</li>
+</ol>
+<p>You may add the <code class="docutils literal notranslate"><span class="pre">--print-filenames</span></code> option to see filenames as their test
+outputs are generated. If you are working on a new feature that is causing
+hard crashes, you can use this option to quickly find which test file causes
+the crash and debug from there.</p>
+<ol class="arabic" start="5">
+<li><p>Run GDScript tests with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./bin/&lt;godot_binary&gt;<span class="w"> </span>--test<span class="w"> </span>--test-suite<span class="o">=</span><span class="s2">&quot;*GDScript*&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>This also accepts the <code class="docutils literal notranslate"><span class="pre">--print-filenames</span></code> option (see above).</p>
+<p>If no errors are printed and everything goes well, you're done!</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure the output does have the expected values before submitting a pull
+request. If <code class="docutils literal notranslate"><span class="pre">--gdscript-generate-tests</span></code> produces <code class="docutils literal notranslate"><span class="pre">*.out</span></code> files which are
+unrelated to newly added tests, you should revert those files back and
+only commit <code class="docutils literal notranslate"><span class="pre">*.out</span></code> files for new tests.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The GDScript test runner is meant for testing the GDScript implementation,
+not for testing user scripts nor testing the engine using scripts. We
+recommend writing new tests for already resolved
+<a class="reference external" href="https://github.com/godotengine/godot/issues?q=is%3Aissue+label%3Atopic%3Agdscript+is%3Aclosed">issues related to GDScript at GitHub</a>,
+or writing tests for currently working features.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your test case requires that there is no <code class="docutils literal notranslate"><span class="pre">test()</span></code>
+function present inside the script file,
+you can disable the runtime section of the test by naming the script file so that it matches the pattern <code class="docutils literal notranslate"><span class="pre">*.notest.gd</span></code>.
+For example, &quot;test_empty_file.notest.gd&quot;.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2d_coordinate_systems.html" class="btn btn-neutral float-left" title="2D coordinate systems and 2D transforms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../engine_api/index.html" class="btn btn-neutral float-right" title="Engine extension APIs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,406 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Reflection probes" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/global_illumination/reflection_probes.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="As stated in the Standard Material 3D and ORM Material 3D, objects can show reflected and/or diffuse light. Reflection probes are used as a source of reflected and ambient light for objects inside ..." />
+<meta name="description" content="As stated in the Standard Material 3D and ORM Material 3D, objects can show reflected and/or diffuse light. Reflection probes are used as a source of reflected and ambient light for objects inside ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Reflection probes &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Faking global illumination" href="faking_global_illumination.html" />
+    <link rel="prev" title="Using Lightmap global illumination" href="using_lightmap_gi.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/global_illumination/reflection_probes" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/3d/global_illumination/reflection_probes.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">3D</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Global illumination</a></li>
+      <li class="breadcrumb-item active">Reflection probes</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/global_illumination/reflection_probes.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="reflection-probes">
+<span id="doc-reflection-probes"></span><h1>Reflection probes<a class="headerlink" href="#reflection-probes" title="Link to this heading"></a></h1>
+<p>As stated in the <a class="reference internal" href="../standard_material_3d.html#doc-standard-material-3d"><span class="std std-ref">Standard Material 3D and ORM Material 3D</span></a>, objects can show reflected and/or
+diffuse light. Reflection probes are used as a source of reflected <em>and</em> ambient
+light for objects inside their area of influence. They can be used to provide
+more accurate reflections than <a class="reference internal" href="using_voxel_gi.html#doc-using-voxel-gi"><span class="std std-ref">VoxelGI</span></a> and
+<a class="reference internal" href="using_sdfgi.html#doc-using-sdfgi"><span class="std std-ref">SDFGI</span></a> while being fairly cheap on system resources.</p>
+<p>Since reflection probes can also store ambient light, they can be used as a
+low-end alternative to VoxelGI and SDFGI when <a class="reference internal" href="using_lightmap_gi.html#doc-using-lightmap-gi"><span class="std std-ref">baked lightmaps</span></a> aren't viable (e.g. in procedurally generated levels).</p>
+<p>Reflection probes can also be used at the same time as screen-space reflections
+to provide reflections for off-screen objects. In this case, Godot will blend
+together the screen-space reflections and reflections from reflection probes.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Not sure if ReflectionProbe is suited to your needs?
+See <a class="reference internal" href="introduction_to_global_illumination.html#doc-introduction-to-global-illumination-comparison"><span class="std std-ref">Which global illumination technique should I use?</span></a>
+for a comparison of GI techniques available in Godot 4.</p>
+</div>
+<section id="visual-comparison">
+<h2>Visual comparison<a class="headerlink" href="#visual-comparison" title="Link to this heading"></a></h2>
+<figure class="align-center" id="id1">
+<img alt="Reflection probe disabled. Environment sky is used as a fallback." src="../../../_images/gi_none.webp" />
+<figcaption>
+<p><span class="caption-text">Reflection probe disabled. Environment sky is used as a fallback.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id2">
+<img alt="Reflection probe enabled." src="../../../_images/gi_none_reflection_probe.webp" />
+<figcaption>
+<p><span class="caption-text">Reflection probe enabled.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id3">
+<img alt="Reflection probe enabled." src="../../../_images/gi_lightmap_gi_indirect_only_reflection_probe.webp" />
+<figcaption>
+<p><span class="caption-text">Reflection probe enabled with LightmapGI used at the same time. The lightmap appears in the reflection.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>By combining reflection probes with screen-space reflections, you can get the
+best of both worlds: high-quality reflections for general room structure (that
+remain present when off-screen), while also having real-time reflections for
+small details.</p>
+<figure class="align-center" id="id4">
+<img alt="Reflections in a room using ReflectionProbe only." src="../../../_images/reflection_probes_reflection_probe.webp" />
+<figcaption>
+<p><span class="caption-text">Reflections in a room using ReflectionProbe only. Notice how small details
+don't have any reflections.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id5">
+<img alt="Reflections in a room using screen-space reflections only." src="../../../_images/reflection_probes_ssr.webp" />
+<figcaption>
+<p><span class="caption-text">Reflections in a room using screen-space reflections only. Notice how the
+reflection on the sides of the room's walls is partly missing due to being
+off-screen.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id6">
+<img alt="Reflections in a room using ReflectionProbe and screen-space reflections together." src="../../../_images/reflection_probes_reflection_probe_ssr.webp" />
+<figcaption>
+<p><span class="caption-text">Reflections in a room using ReflectionProbe and screen-space reflections together.
+The screen-space reflections are blended with the reflection probe,
+acting as a fallback in situations where the reflection probe fails to display
+any reflection.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="setting-up-a-reflectionprobe">
+<h2>Setting up a ReflectionProbe<a class="headerlink" href="#setting-up-a-reflectionprobe" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add a <a class="reference internal" href="../../../classes/class_reflectionprobe.html#class-reflectionprobe"><span class="std std-ref">ReflectionProbe</span></a> node.</p></li>
+<li><p>Configure the ReflectionProbe's extents in the inspector to fit your scene. To
+get reasonably accurate reflections, you should generally have one
+ReflectionProbe node per room (sometimes more for large rooms).</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remember that ReflectionProbe extents don't have to be square, and you can
+even rotate the ReflectionProbe node to fit rooms that aren't aligned with
+the X/Z grid. Use this to your advantage to better cover rooms without
+having to place too many ReflectionProbe nodes.</p>
+</div>
+</section>
+<section id="reflectionprobe-properties">
+<h2>ReflectionProbe properties<a class="headerlink" href="#reflectionprobe-properties" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Update Mode:</strong> Controls when the reflection probe updates.
+<strong>Once</strong> only renders the scene once every time the ReflectionProbe is moved.
+This makes it much faster to render compared to the <strong>Always</strong> update mode,
+which forces the probe to re-render everything around it every frame.
+Leave this property on <strong>Once</strong> (default) unless you need the reflection probe
+to update every frame.</p></li>
+<li><p><strong>Intensity:</strong> The brightness of the reflections and ambient lighting. This
+usually doesn't need to be changed from its default value of <code class="docutils literal notranslate"><span class="pre">1.0</span></code>, but you
+can decrease it <code class="docutils literal notranslate"><span class="pre">1.0</span></code> if you find that reflections look too strong.</p></li>
+<li><p><strong>Max Distance:</strong> Controls the maximum distance used by the ReflectionProbe's
+internal camera. The distance is always at least equal to the <strong>Extents</strong>, but
+this can be increased to make objects located outside the extents visible in
+reflections. <em>This property does not affect the maximum distance at which the
+ReflectionProbe itself is visible.</em></p></li>
+<li><p><strong>Extents:</strong> The area that will be affected by the ReflectionProbe's lighting
+and reflections.</p></li>
+<li><p><strong>Origin Offset:</strong> The origin to use for the internal camera used for
+reflection probe rendering. This must always be constrained within the
+<strong>Extents</strong>. If needed, adjust this to prevent the reflection from being
+obstructed by a solid object located exactly at the center of the
+ReflectionProbe.</p></li>
+<li><p><strong>Box Projection:</strong> Controls whether parallax correction should be used when
+rendering the reflection probe. This adjusts the reflection's appearance
+depending on the camera's position (relative to the reflection probe). This
+has a small performance cost, but the quality increase is often worth it in
+box-shaped rooms. Note that this effect doesn't work quite as well in rooms
+with less regular shapes (such as ellipse-shaped rooms).</p></li>
+<li><p><strong>Interior:</strong> If enabled, ambient lighting will not be sourced from the
+environment sky, and the background sky won't be rendered onto the reflection
+probe.</p></li>
+<li><p><strong>Enable Shadows:</strong> Controls whether real-time light shadows should be
+rendered within the reflection probe. Enable this to improve reflection
+quality at the cost of performance. This should be left disabled for
+reflection probes with the <strong>Always</strong> mode, as it's very expensive to render
+reflections with shadows every frame. Fully <a class="reference internal" href="using_lightmap_gi.html#doc-using-lightmap-gi"><span class="std std-ref">baked light</span></a>
+shadows are not affected by this setting and will be rendered in the
+reflection probe regardless.</p></li>
+<li><p><strong>Cull Mask:</strong> Controls which objects are visible in the reflection. This can
+be used to improve performance by excluding small objects from the reflection.
+This can also be used to prevent an object from having self-reflection
+artifacts in situations where <strong>Origin Offset</strong> can't be used.</p></li>
+<li><p><strong>Mesh LOD Threshold:</strong> The automatic level of detail threshold to use for
+rendering meshes within the reflection. This only affects meshes that have
+automatic LODs generated for them. Higher values can improve performance by
+using less detailed geometry, especially for objects that are far away from
+the reflection's origin. The visual difference of using less detailed objects
+is usually not very noticeable during gameplay, especially in rough
+reflections.</p></li>
+</ul>
+<p>The Ambient category features several properties to adjust ambient lighting
+rendered by the ReflectionProbe:</p>
+<ul class="simple">
+<li><p><strong>Mode:</strong> If set to <strong>Disabled</strong>, no ambient light is added by the probe. If
+set to <strong>Environment</strong>, the ambient light color is automatically sampled from
+the environment sky (if <strong>Interior</strong> is disabled) and the reflection's average
+color. If set to <strong>Constant Color</strong>, the color specified in the <strong>Color</strong>
+property is used instead. The <strong>Constant Color</strong> mode can be used as an
+approximation of area lighting.</p></li>
+<li><p><strong>Color:</strong> The color to use when the ambient light mode is set to <strong>Constant Mode</strong>.</p></li>
+<li><p><strong>Color Energy:</strong> The multiplier to use for the ambient light custom
+<strong>Color</strong>. This only has an effect when the ambient light mode is <strong>Custom
+Color</strong>.</p></li>
+</ul>
+</section>
+<section id="reflectionprobe-blending">
+<h2>ReflectionProbe blending<a class="headerlink" href="#reflectionprobe-blending" title="Link to this heading"></a></h2>
+<p>To make transitions between reflection sources smoother, Godot supports automatic
+probe blending:</p>
+<ul class="simple">
+<li><p>Up to 4 ReflectionProbes can be blended together at a given location.
+A ReflectionProbe will also fade out smoothly back to environment lighting
+when it isn't touching any other ReflectionProbe node.</p></li>
+<li><p>SDFGI and VoxelGI will blend in smoothly with ReflectionProbes if used.
+This allows placing ReflectionProbes strategically to get more accurate (or fully real-time)
+reflections where needed, while still having rough reflections available in the
+VoxelGI or SDFGI's area of influence.</p></li>
+</ul>
+<p>To make several ReflectionProbes blend with each other, you need to have part of
+each ReflectionProbe overlap each other's area. The extents should only overlap
+as little possible with other reflection probes to improve rendering performance
+(typically a few units in 3D space).</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<p>When using the Forward+ renderer, Godot uses a <em>clustering</em> approach for
+reflection probe rendering. As many reflection probes as desired can be added (as long as
+performance allows). However, there's still a default limit of 512 <em>clustered
+elements</em> that can be present in the current camera view. A clustered element is
+an omni light, a spot light, an area light, a <a class="reference internal" href="../using_decals.html#doc-using-decals"><span class="std std-ref">decal</span></a>, or a
+<a class="reference internal" href="#doc-reflection-probes"><span class="std std-ref">reflection probe</span></a>. This limit can be increased by adjusting
+<a class="reference internal" href="../../../classes/class_projectsettings.html#class-projectsettings-property-rendering-limits-cluster-builder-max-clustered-elements"><span class="std std-ref">Max Clustered Elements</span></a>
+in <strong>Project Settings &gt; Rendering &gt; Limits &gt; Cluster Builder</strong>.</p>
+<p>When using the Mobile renderer, only 8 reflection probes can be applied on each
+individual Mesh <em>resource</em>. If there are more reflection probes affecting a single mesh,
+not all of them will be rendered on the mesh.</p>
+<p>Similarly, when using the Compatibility renderer, up to 2 reflection probes can
+be applied per mesh. If more than 2 reflection probes affect a single mesh,
+additional probes will not be rendered.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="using_lightmap_gi.html" class="btn btn-neutral float-left" title="Using Lightmap global illumination" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="faking_global_illumination.html" class="btn btn-neutral float-right" title="Faking global illumination" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

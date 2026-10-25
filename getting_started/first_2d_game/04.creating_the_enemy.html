@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Creating the enemy" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="getting_started/first_2d_game/04.creating_the_enemy.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Now it&#x27;s time to make the enemies our player will have to dodge. Their behavior will not be very complex: mobs will spawn randomly at the edges of the screen, choose a random direction, and mo..." />
+<meta name="description" content="Now it&#x27;s time to make the enemies our player will have to dodge. Their behavior will not be very complex: mobs will spawn randomly at the edges of the screen, choose a random direction, and mo..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Creating the enemy &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The main game scene" href="05.the_main_game_scene.html" />
+    <link rel="prev" title="Coding the player" href="03.coding_the_player.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="getting_started/first_2d_game/04.creating_the_enemy" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="getting_started/first_2d_game/04.creating_the_enemy.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Your first 2D game</a></li>
+      <li class="breadcrumb-item active">Creating the enemy</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/getting_started/first_2d_game/04.creating_the_enemy.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="creating-the-enemy">
+<span id="doc-your-first-2d-game-creating-the-enemy"></span><h1>Creating the enemy<a class="headerlink" href="#creating-the-enemy" title="Link to this heading"></a></h1>
+<p>Now it's time to make the enemies our player will have to dodge. Their behavior
+will not be very complex: mobs will spawn randomly at the edges of the screen,
+choose a random direction, and move in a straight line.</p>
+<p>We'll create a <code class="docutils literal notranslate"><span class="pre">Mob</span></code> scene, which we can then <em>instance</em> to create any number
+of independent mobs in the game.</p>
+<section id="node-setup">
+<h2>Node setup<a class="headerlink" href="#node-setup" title="Link to this heading"></a></h2>
+<p>Click Scene -&gt; New Scene from the top menu and add the following nodes:</p>
+<ul>
+<li><p><a class="reference internal" href="../../classes/class_rigidbody2d.html#class-rigidbody2d"><span class="std std-ref">RigidBody2D</span></a> (named <code class="docutils literal notranslate"><span class="pre">Mob</span></code>)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="../../classes/class_animatedsprite2d.html#class-animatedsprite2d"><span class="std std-ref">AnimatedSprite2D</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_collisionshape2d.html#class-collisionshape2d"><span class="std std-ref">CollisionShape2D</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_visibleonscreennotifier2d.html#class-visibleonscreennotifier2d"><span class="std std-ref">VisibleOnScreenNotifier2D</span></a></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Don't forget to set the children so they can't be selected, like you did with
+the Player scene. This is done by selecting the parent node (<code class="docutils literal notranslate"><span class="pre">RigidBody2D</span></code>) in the
+Scene tree dock, then using the <span class="role-button role-ui">Group</span> button at the top of the 2D editor
+(<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">G</kbd></kbd> or <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">G</kbd></kbd> on macOS).</p>
+<p>Select the <code class="docutils literal notranslate"><span class="pre">Mob</span></code> node and set its <code class="docutils literal notranslate"><span class="pre">Gravity</span> <span class="pre">Scale</span></code>
+property in the <a class="reference internal" href="../../classes/class_rigidbody2d.html#class-rigidbody2d"><span class="std std-ref">RigidBody2D</span></a>
+section of the inspector to <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+This will prevent the mob from falling downwards.</p>
+<p>In addition, in the <code class="docutils literal notranslate"><span class="pre">Mob</span></code> node inspector,
+under the <a class="reference internal" href="../../classes/class_collisionobject2d.html#class-collisionobject2d"><span class="std std-ref">CollisionObject2D</span></a>
+section, expand the <strong>Collision</strong> group and
+uncheck the <code class="docutils literal notranslate"><span class="pre">1</span></code> inside the <code class="docutils literal notranslate"><span class="pre">Mask</span></code> property.
+This will ensure the mobs do not collide with each other.</p>
+<img alt="../../_images/set_collision_mask.webp" src="../../_images/set_collision_mask.webp" />
+<p>Set up the <a class="reference internal" href="../../classes/class_animatedsprite2d.html#class-animatedsprite2d"><span class="std std-ref">AnimatedSprite2D</span></a> like you did for the
+player. This time, we have 3 animations: <code class="docutils literal notranslate"><span class="pre">fly</span></code>, <code class="docutils literal notranslate"><span class="pre">swim</span></code>, and <code class="docutils literal notranslate"><span class="pre">walk</span></code>. There
+are two images for each animation in the art folder.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Animation</span> <span class="pre">Speed</span></code> property has to be set for each individual animation. Adjust it to <code class="docutils literal notranslate"><span class="pre">3</span></code> for all 3 animations.</p>
+<img alt="../../_images/mob_animations.webp" src="../../_images/mob_animations.webp" />
+<p>You can use the &quot;Play Animation&quot; buttons on the right of the <code class="docutils literal notranslate"><span class="pre">Animation</span> <span class="pre">Speed</span></code> input field to preview your animations.</p>
+<p>We'll select one of these animations randomly so that the mobs will have some
+variety.</p>
+<p>Like the player images, these mob images need to be scaled down. Set the
+<code class="docutils literal notranslate"><span class="pre">AnimatedSprite2D</span></code>'s <code class="docutils literal notranslate"><span class="pre">Scale</span></code> property to <code class="docutils literal notranslate"><span class="pre">(0.75,</span> <span class="pre">0.75)</span></code>.</p>
+<p>As in the <code class="docutils literal notranslate"><span class="pre">Player</span></code> scene, add a <code class="docutils literal notranslate"><span class="pre">CapsuleShape2D</span></code> for the collision. To align
+the shape with the image, you'll need to set the <code class="docutils literal notranslate"><span class="pre">Rotation</span></code> property
+to <code class="docutils literal notranslate"><span class="pre">90</span></code> (under &quot;Transform&quot; in the Inspector).</p>
+<p>Save the scene.</p>
+</section>
+<section id="enemy-script">
+<h2>Enemy script<a class="headerlink" href="#enemy-script" title="Link to this heading"></a></h2>
+<p>Add a script to the <code class="docutils literal notranslate"><span class="pre">Mob</span></code> like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">RigidBody2D</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Mob</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RigidBody2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Don&#39;t forget to rebuild the project.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Now let's look at the rest of the script. In <code class="docutils literal notranslate"><span class="pre">_ready()</span></code> we play the animation
+and randomly choose one of the three animation types:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">mob_types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">(</span><span class="sx">$AnimatedSprite2D</span><span class="o">.</span><span class="vi">sprite_frames</span><span class="o">.</span><span class="nf">get_animation_names</span><span class="p">())</span>
+<span class="w">    </span><span class="sx">$AnimatedSprite2D</span><span class="o">.</span><span class="vi">animation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mob_types</span><span class="o">.</span><span class="nf">pick_random</span><span class="p">()</span>
+<span class="w">    </span><span class="sx">$AnimatedSprite2D</span><span class="o">.</span><span class="nf">play</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">animatedSprite2D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">AnimatedSprite2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;AnimatedSprite2D&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">mobTypes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">animatedSprite2D</span><span class="p">.</span><span class="n">SpriteFrames</span><span class="p">.</span><span class="n">GetAnimationNames</span><span class="p">();</span>
+<span class="w">    </span><span class="n">animatedSprite2D</span><span class="p">.</span><span class="n">Play</span><span class="p">(</span><span class="n">mobTypes</span><span class="p">[</span><span class="n">GD</span><span class="p">.</span><span class="n">Randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">mobTypes</span><span class="p">.</span><span class="n">Length</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>First, we get the list of animation names from the AnimatedSprite2D's <code class="docutils literal notranslate"><span class="pre">sprite_frames</span></code>
+property. This returns an Array containing all three animation names: <code class="docutils literal notranslate"><span class="pre">[&quot;walk&quot;,</span>
+<span class="pre">&quot;swim&quot;,</span> <span class="pre">&quot;fly&quot;]</span></code>.</p>
+<p>In the GDScript code, we use the <a class="reference internal" href="../../classes/class_array.html#class-array-method-pick-random"><span class="std std-ref">Array.pick_random</span></a> method
+to select one of these animation names at random. Meanwhile, in the C# code, we pick a random number
+between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code> to select one of these names from the list (array indices start at <code class="docutils literal notranslate"><span class="pre">0</span></code>). The
+expression <code class="docutils literal notranslate"><span class="pre">GD.Randi()</span> <span class="pre">%</span> <span class="pre">n</span></code> selects a random integer between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">n-1</span></code>.</p>
+<p>Finally, we call <code class="docutils literal notranslate"><span class="pre">play()</span></code> to start playing the chosen animation.</p>
+<p>The last piece is to make the mobs delete themselves when they leave the screen.
+Connect the <code class="docutils literal notranslate"><span class="pre">screen_exited()</span></code> signal of the <code class="docutils literal notranslate"><span class="pre">VisibleOnScreenNotifier2D</span></code> node
+to the <code class="docutils literal notranslate"><span class="pre">Mob</span></code> and add this code:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_visible_on_screen_notifier_2d_screen_exited</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">queue_free</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// We also specified this function name in PascalCase in the editor&#39;s connection window.</span>
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnVisibleOnScreenNotifier2DScreenExited</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">QueueFree</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p><code class="docutils literal notranslate"><span class="pre">queue_free()</span></code> is a function that essentially 'frees', or deletes, the node at the end of the frame.</p>
+<p>This completes the <cite>Mob</cite> scene.</p>
+<p>With the player and enemies ready, in the next part, we'll bring them together
+in a new scene. We'll make enemies spawn randomly around the game board and move
+forward, turning our project into a playable game.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="03.coding_the_player.html" class="btn btn-neutral float-left" title="Coding the player" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="05.the_main_game_scene.html" class="btn btn-neutral float-right" title="The main game scene" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

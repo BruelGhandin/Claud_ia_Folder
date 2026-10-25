@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using NavigationPaths" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/navigation/navigation_using_navigationpaths.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Obtaining a NavigationPath: Navigation paths can be directly queried from the NavigationServer and do not require any additional nodes or objects as long as the navigation map has a navigation mesh..." />
+<meta name="description" content="Obtaining a NavigationPath: Navigation paths can be directly queried from the NavigationServer and do not require any additional nodes or objects as long as the navigation map has a navigation mesh..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using NavigationPaths &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using NavigationPathQueryObjects" href="navigation_using_navigationpathqueryobjects.html" />
+    <link rel="prev" title="Using navigation meshes" href="navigation_using_navigationmeshes.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/navigation/navigation_using_navigationpaths" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/navigation/navigation_using_navigationpaths.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Navigation</a></li>
+      <li class="breadcrumb-item active">Using NavigationPaths</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/navigation/navigation_using_navigationpaths.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-navigationpaths">
+<span id="doc-navigation-using-navigationpaths"></span><h1>Using NavigationPaths<a class="headerlink" href="#using-navigationpaths" title="Link to this heading"></a></h1>
+<section id="obtaining-a-navigationpath">
+<h2>Obtaining a NavigationPath<a class="headerlink" href="#obtaining-a-navigationpath" title="Link to this heading"></a></h2>
+<p>Navigation paths can be directly queried from the NavigationServer and do not require any
+additional nodes or objects as long as the navigation map has a navigation mesh to work with.</p>
+<p>To obtain a 2D path, use <code class="docutils literal notranslate"><span class="pre">NavigationServer2D.map_get_path(map,</span> <span class="pre">from,</span> <span class="pre">to,</span> <span class="pre">optimize,</span> <span class="pre">navigation_layers)</span></code>.</p>
+<p>To obtain a 3D path, use <code class="docutils literal notranslate"><span class="pre">NavigationServer3D.map_get_path(map,</span> <span class="pre">from,</span> <span class="pre">to,</span> <span class="pre">optimize,</span> <span class="pre">navigation_layers)</span></code>.</p>
+<p>For more customizable navigation path queries that require additional setup see <a class="reference internal" href="navigation_using_navigationpathqueryobjects.html#doc-navigation-using-navigationpathqueryobjects"><span class="std std-ref">Using NavigationPathQueryObjects</span></a>.</p>
+<p>One of the required parameters for the query is the RID of the navigation map.
+Each game world has a default navigation map automatically created.
+The default navigation maps can be retrieved with <code class="docutils literal notranslate"><span class="pre">get_world_2d().get_navigation_map()</span></code> from
+any Node2D inheriting node or <code class="docutils literal notranslate"><span class="pre">get_world_3d().get_navigation_map()</span></code> from any Node3D inheriting node.
+The second and third parameters are the starting position and the target position as Vector2 for 2D or Vector3 for 3D.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">optimized</span></code> parameter is <code class="docutils literal notranslate"><span class="pre">true</span></code>, path positions will be shortened along polygon
+corners with an additional funnel algorithm pass. This works well for free movement
+on navigation meshes with unequally sized polygons as the path will hug around corners
+along the polygon corridor found by the A* algorithm. With small cells the A* algorithm
+creates a very narrow funnel corridor that can create ugly corner paths when used with grids.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">optimized</span></code> parameter is <code class="docutils literal notranslate"><span class="pre">false</span></code>, path positions will be placed at the center of each polygon edge.
+This works well for pure grid movement on navigation meshes with equally sized polygons as the path will go through the center of the grid cells.
+Outside of grids due to polygons often covering large open areas with a single, long edge this can create paths with unnecessary long detours.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-MkQgR0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tab" tabindex="0">2D GDScript</button><button aria-controls="panel-0-MkQgQyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-MkQgQyM=" name="MkQgQyM=" role="tab" tabindex="-1">2D C#</button><button aria-controls="panel-0-M0QgR0RTY3JpcHQ=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tab" tabindex="-1">3D GDScript</button><button aria-controls="panel-0-M0QgQyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-M0QgQyM=" name="M0QgQyM=" role="tab" tabindex="-1">3D C#</button></div><div aria-labelledby="tab-0-MkQgR0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node2D</span>
+
+<span class="c1"># Basic query for a navigation path using the default navigation map.</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">get_navigation_path</span><span class="p">(</span><span class="n">p_start_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">,</span><span class="w"> </span><span class="n">p_target_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">PackedVector2Array</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nf">is_inside_tree</span><span class="p">():</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb nb-Type">PackedVector2Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">default_map_rid</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_world_2d</span><span class="p">()</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">path</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">PackedVector2Array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">map_get_path</span><span class="p">(</span>
+<span class="w">        </span><span class="n">default_map_rid</span><span class="p">,</span>
+<span class="w">        </span><span class="n">p_start_position</span><span class="p">,</span>
+<span class="w">        </span><span class="n">p_target_position</span><span class="p">,</span>
+<span class="w">        </span><span class="l">true</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">path</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-MkQgQyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-MkQgQyM=" name="MkQgQyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Basic query for a navigation path using the default navigation map.</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Vector2</span><span class="p">[]</span><span class="w"> </span><span class="nf">GetNavigationPath</span><span class="p">(</span><span class="n">Vector2</span><span class="w"> </span><span class="n">startPosition</span><span class="p">,</span><span class="w"> </span><span class="n">Vector2</span><span class="w"> </span><span class="n">targetPosition</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">IsInsideTree</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">Empty</span><span class="o">&lt;</span><span class="n">Vector2</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Rid</span><span class="w"> </span><span class="n">defaultMapRid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetWorld2D</span><span class="p">().</span><span class="n">NavigationMap</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Vector2</span><span class="p">[]</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer2D</span><span class="p">.</span><span class="n">MapGetPath</span><span class="p">(</span>
+<span class="w">            </span><span class="n">defaultMapRid</span><span class="p">,</span>
+<span class="w">            </span><span class="n">startPosition</span><span class="p">,</span>
+<span class="w">            </span><span class="n">targetPosition</span><span class="p">,</span>
+<span class="w">            </span><span class="k">true</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">path</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-M0QgR0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node3D</span>
+
+<span class="c1"># Basic query for a navigation path using the default navigation map.</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">get_navigation_path</span><span class="p">(</span><span class="n">p_start_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">,</span><span class="w"> </span><span class="n">p_target_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nf">is_inside_tree</span><span class="p">():</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">default_map_rid</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_world_3d</span><span class="p">()</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">path</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_get_path</span><span class="p">(</span>
+<span class="w">        </span><span class="n">default_map_rid</span><span class="p">,</span>
+<span class="w">        </span><span class="n">p_start_position</span><span class="p">,</span>
+<span class="w">        </span><span class="n">p_target_position</span><span class="p">,</span>
+<span class="w">        </span><span class="l">true</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">path</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-M0QgQyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-M0QgQyM=" name="M0QgQyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Basic query for a navigation path using the default navigation map.</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Vector3</span><span class="p">[]</span><span class="w"> </span><span class="nf">GetNavigationPath</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">startPosition</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">targetPosition</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">IsInsideTree</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">Empty</span><span class="o">&lt;</span><span class="n">Vector3</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Rid</span><span class="w"> </span><span class="n">defaultMapRid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetWorld3D</span><span class="p">().</span><span class="n">NavigationMap</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Vector3</span><span class="p">[]</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapGetPath</span><span class="p">(</span>
+<span class="w">            </span><span class="n">defaultMapRid</span><span class="p">,</span>
+<span class="w">            </span><span class="n">startPosition</span><span class="p">,</span>
+<span class="w">            </span><span class="n">targetPosition</span><span class="p">,</span>
+<span class="w">            </span><span class="k">true</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">path</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>A returned <code class="docutils literal notranslate"><span class="pre">path</span></code> by the NavigationServer will be a <code class="docutils literal notranslate"><span class="pre">PackedVector2Array</span></code> for 2D or a <code class="docutils literal notranslate"><span class="pre">PackedVector3Array</span></code> for 3D.
+These are just a memory-optimized <code class="docutils literal notranslate"><span class="pre">Array</span></code> of vector positions.
+All position vectors inside the array are guaranteed to be inside a NavigationPolygon or NavigationMesh.
+The path array, if not empty, has the navigation mesh position closest to the starting position at the first index <code class="docutils literal notranslate"><span class="pre">path[0]</span></code> position.
+The closest available navigation mesh position to the target position is the last index <code class="docutils literal notranslate"><span class="pre">path[path.size()-1]</span></code> position.
+All indexes between are the path points that an actor should follow to reach the target without leaving the navigation mesh.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the target position is on a different navigation mesh that is not merged or connected
+the navigation path will lead to the closest possible position on the starting position navigation mesh.</p>
+</div>
+<p>The following script moves a Node3D inheriting node along a navigation path using
+the default navigation map by setting the target position with <code class="docutils literal notranslate"><span class="pre">set_movement_target()</span></code>.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">default_3d_map_rid</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_world_3d</span><span class="p">()</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">()</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">movement_speed</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span>
+<span class="k">var</span><span class="w"> </span><span class="n">movement_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span>
+<span class="k">var</span><span class="w"> </span><span class="n">path_point_margin</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">current_path_index</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="k">var</span><span class="w"> </span><span class="n">current_path_point</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span>
+<span class="k">var</span><span class="w"> </span><span class="n">current_path</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">set_movement_target</span><span class="p">(</span><span class="n">target_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">):</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">start_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_transform</span><span class="o">.</span><span class="vi">origin</span>
+
+<span class="w">    </span><span class="n">current_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_get_path</span><span class="p">(</span>
+<span class="w">        </span><span class="n">default_3d_map_rid</span><span class="p">,</span>
+<span class="w">        </span><span class="n">start_position</span><span class="p">,</span>
+<span class="w">        </span><span class="n">target_position</span><span class="p">,</span>
+<span class="w">        </span><span class="l">true</span>
+<span class="w">    </span><span class="p">)</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">current_path</span><span class="o">.</span><span class="nf">is_empty</span><span class="p">():</span>
+<span class="w">        </span><span class="n">current_path_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">current_path_point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">current_path</span><span class="o">.</span><span class="nf">is_empty</span><span class="p">():</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="n">movement_delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">movement_speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">global_transform</span><span class="o">.</span><span class="vi">origin</span><span class="o">.</span><span class="nf">distance_to</span><span class="p">(</span><span class="n">current_path_point</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">path_point_margin</span><span class="p">:</span>
+<span class="w">        </span><span class="n">current_path_index</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">current_path_index</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">current_path</span><span class="o">.</span><span class="nf">size</span><span class="p">():</span>
+<span class="w">            </span><span class="n">current_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">            </span><span class="n">current_path_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">            </span><span class="n">current_path_point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_transform</span><span class="o">.</span><span class="vi">origin</span>
+<span class="w">            </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="n">current_path_point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_path</span><span class="p">[</span><span class="n">current_path_index</span><span class="p">]</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">new_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_transform</span><span class="o">.</span><span class="vi">origin</span><span class="o">.</span><span class="nf">direction_to</span><span class="p">(</span><span class="n">current_path_point</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">movement_delta</span>
+
+<span class="w">    </span><span class="n">global_transform</span><span class="o">.</span><span class="vi">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_transform</span><span class="o">.</span><span class="vi">origin</span><span class="o">.</span><span class="nf">move_toward</span><span class="p">(</span><span class="n">global_transform</span><span class="o">.</span><span class="vi">origin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">new_velocity</span><span class="p">,</span><span class="w"> </span><span class="n">movement_delta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Rid</span><span class="w"> </span><span class="n">_default3DMapRid</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_movementSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_movementDelta</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_pathPointMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_currentPathIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">_currentPathPoint</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Vector3</span><span class="p">[]</span><span class="w"> </span><span class="n">_currentPath</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_default3DMapRid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetWorld3D</span><span class="p">().</span><span class="n">NavigationMap</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetMovementTarget</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">targetPosition</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Vector3</span><span class="w"> </span><span class="n">startPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GlobalTransform</span><span class="p">.</span><span class="n">Origin</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">_currentPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapGetPath</span><span class="p">(</span><span class="n">_default3DMapRid</span><span class="p">,</span><span class="w"> </span><span class="n">startPosition</span><span class="p">,</span><span class="w"> </span><span class="n">targetPosition</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">_currentPath</span><span class="p">.</span><span class="n">IsEmpty</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_currentPathIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">_currentPathPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_currentPath</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_currentPath</span><span class="p">.</span><span class="n">IsEmpty</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">_movementDelta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_movementSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">GlobalTransform</span><span class="p">.</span><span class="n">Origin</span><span class="p">.</span><span class="n">DistanceTo</span><span class="p">(</span><span class="n">_currentPathPoint</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">_pathPointMargin</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_currentPathIndex</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_currentPathIndex</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">_currentPath</span><span class="p">.</span><span class="n">Length</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">_currentPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">Empty</span><span class="o">&lt;</span><span class="n">Vector3</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">                </span><span class="n">_currentPathIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">                </span><span class="n">_currentPathPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GlobalTransform</span><span class="p">.</span><span class="n">Origin</span><span class="p">;</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">_currentPathPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_currentPath</span><span class="p">[</span><span class="n">_currentPathIndex</span><span class="p">];</span>
+
+<span class="w">        </span><span class="n">Vector3</span><span class="w"> </span><span class="n">newVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GlobalTransform</span><span class="p">.</span><span class="n">Origin</span><span class="p">.</span><span class="n">DirectionTo</span><span class="p">(</span><span class="n">_currentPathPoint</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_movementDelta</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">globalTransform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GlobalTransform</span><span class="p">;</span>
+<span class="w">        </span><span class="n">globalTransform</span><span class="p">.</span><span class="n">Origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">globalTransform</span><span class="p">.</span><span class="n">Origin</span><span class="p">.</span><span class="n">MoveToward</span><span class="p">(</span><span class="n">globalTransform</span><span class="p">.</span><span class="n">Origin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">newVelocity</span><span class="p">,</span><span class="w"> </span><span class="n">_movementDelta</span><span class="p">);</span>
+<span class="w">        </span><span class="n">GlobalTransform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">globalTransform</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="navigation_using_navigationmeshes.html" class="btn btn-neutral float-left" title="Using navigation meshes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="navigation_using_navigationpathqueryobjects.html" class="btn btn-neutral float-right" title="Using NavigationPathQueryObjects" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

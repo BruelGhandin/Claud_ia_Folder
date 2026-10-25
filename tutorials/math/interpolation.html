@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Interpolation" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/math/interpolation.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Interpolation is a common operation in graphics programming, which is used to blend or transition between two values. Interpolation can also be used to smooth movement, rotation, etc. It&#x27;s goo..." />
+<meta name="description" content="Interpolation is a common operation in graphics programming, which is used to blend or transition between two values. Interpolation can also be used to smooth movement, rotation, etc. It&#x27;s goo..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Interpolation &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Beziers, curves and paths" href="beziers_and_curves.html" />
+    <link rel="prev" title="Matrices and transforms" href="matrices_and_transforms.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/math/interpolation" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/math/interpolation.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Math</a></li>
+      <li class="breadcrumb-item active">Interpolation</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/math/interpolation.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="interpolation">
+<span id="doc-interpolation"></span><h1>Interpolation<a class="headerlink" href="#interpolation" title="Link to this heading"></a></h1>
+<p>Interpolation is a common operation in graphics programming, which is used to
+blend or transition between two values. Interpolation can also be used to smooth
+movement, rotation, etc. It's good to become familiar with it in order to expand
+your horizons as a game developer.</p>
+<p>The basic idea is that you want to transition from A to B. A value <code class="docutils literal notranslate"><span class="pre">t</span></code>, represents the states in-between.</p>
+<p>For example, if <code class="docutils literal notranslate"><span class="pre">t</span></code> is 0, then the state is A. If <code class="docutils literal notranslate"><span class="pre">t</span></code> is 1, then the state is B. Anything in-between is an <em>interpolation</em>.</p>
+<p>Between two real (floating-point) numbers, an interpolation can be described as:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">interpolation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span>
+</pre></div>
+</div>
+<p>And often simplified to:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">interpolation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">B</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span>
+</pre></div>
+</div>
+<p>The name of this type of interpolation, which transforms a value into another at <em>constant speed</em> is <em>&quot;linear&quot;</em>. So, when you hear about <em>Linear Interpolation</em>, you know they are referring to this formula.</p>
+<p>There are other types of interpolations, which will not be covered here. A recommended read afterwards is the <a class="reference internal" href="beziers_and_curves.html#doc-beziers-and-curves"><span class="std std-ref">Bezier</span></a> page.</p>
+<section id="vector-interpolation">
+<h2>Vector interpolation<a class="headerlink" href="#vector-interpolation" title="Link to this heading"></a></h2>
+<p>Vector types (<a class="reference internal" href="../../classes/class_vector2.html#class-vector2"><span class="std std-ref">Vector2</span></a> and <a class="reference internal" href="../../classes/class_vector3.html#class-vector3"><span class="std std-ref">Vector3</span></a>) can also be interpolated, they come with handy functions to do it
+<a class="reference internal" href="../../classes/class_vector2.html#class-vector2-method-lerp"><span class="std std-ref">Vector2.lerp()</span></a> and <a class="reference internal" href="../../classes/class_vector3.html#class-vector3-method-lerp"><span class="std std-ref">Vector3.lerp()</span></a>.</p>
+<p>For cubic interpolation, there are also <a class="reference internal" href="../../classes/class_vector2.html#class-vector2-method-cubic-interpolate"><span class="std std-ref">Vector2.cubic_interpolate()</span></a> and <a class="reference internal" href="../../classes/class_vector3.html#class-vector3-method-cubic-interpolate"><span class="std std-ref">Vector3.cubic_interpolate()</span></a>, which do a <a class="reference internal" href="beziers_and_curves.html#doc-beziers-and-curves"><span class="std std-ref">Bezier</span></a> style interpolation.</p>
+<p>Here is example pseudo-code for going from point A to B using interpolation:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">delta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.4</span>
+
+<span class="w">    </span><span class="sx">$Sprite2D</span><span class="o">.</span><span class="vi">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$A</span><span class="o">.</span><span class="vi">position</span><span class="o">.</span><span class="nf">lerp</span><span class="p">(</span><span class="sx">$B</span><span class="o">.</span><span class="vi">position</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">_t</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.4f</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Marker2D</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Marker2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Marker2D</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Marker2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Sprite2D</span><span class="w"> </span><span class="n">sprite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Sprite2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Sprite2D&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sprite</span><span class="p">.</span><span class="n">Position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">Lerp</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">Position</span><span class="p">,</span><span class="w"> </span><span class="n">_t</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>It will produce the following motion:</p>
+<img alt="../../_images/interpolation_vector.gif" src="../../_images/interpolation_vector.gif" />
+</section>
+<section id="transform-interpolation">
+<h2>Transform interpolation<a class="headerlink" href="#transform-interpolation" title="Link to this heading"></a></h2>
+<p>It is also possible to interpolate whole transforms (make sure they have either uniform scale or, at least, the same non-uniform scale).
+For this, the function <a class="reference internal" href="../../classes/class_transform3d.html#class-transform3d-method-interpolate-with"><span class="std std-ref">Transform3D.interpolate_with()</span></a> can be used.</p>
+<p>Here is an example of transforming a monkey from Position1 to Position2:</p>
+<img alt="../../_images/interpolation_positions.png" src="../../_images/interpolation_positions.png" />
+<p>Using the following pseudocode:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">delta</span>
+
+<span class="w">    </span><span class="sx">$Monkey</span><span class="o">.</span><span class="vi">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Position1</span><span class="o">.</span><span class="vi">transform</span><span class="o">.</span><span class="nf">interpolate_with</span><span class="p">(</span><span class="sx">$Position2</span><span class="o">.</span><span class="vi">transform</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">_t</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Marker3D</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Marker3D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Position1&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Marker3D</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Marker3D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Position2&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CSGMesh3D</span><span class="w"> </span><span class="n">monkey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">CSGMesh3D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Monkey&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">monkey</span><span class="p">.</span><span class="n">Transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">Transform</span><span class="p">.</span><span class="n">InterpolateWith</span><span class="p">(</span><span class="n">p2</span><span class="p">.</span><span class="n">Transform</span><span class="p">,</span><span class="w"> </span><span class="n">_t</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>And again, it will produce the following motion:</p>
+<img alt="../../_images/interpolation_monkey.gif" src="../../_images/interpolation_monkey.gif" />
+</section>
+<section id="smoothing-motion">
+<h2>Smoothing motion<a class="headerlink" href="#smoothing-motion" title="Link to this heading"></a></h2>
+<p>Interpolation can be used to smoothly follow a moving target value, such as a
+position or a rotation. Each frame, <code class="docutils literal notranslate"><span class="pre">lerp()</span></code> moves the current value towards
+the target value by a fixed percentage of the remaining difference between the values.
+The current value will smoothly move towards the target, slowing down as it gets
+closer. Here is an example of a circle following the mouse using interpolation smoothing:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">FOLLOW_SPEED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">mouse_pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_local_mouse_position</span><span class="p">()</span>
+
+<span class="w">    </span><span class="sx">$Sprite2D</span><span class="o">.</span><span class="vi">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Sprite2D</span><span class="o">.</span><span class="vi">position</span><span class="o">.</span><span class="nf">lerp</span><span class="p">(</span><span class="n">mouse_pos</span><span class="p">,</span><span class="w"> </span><span class="n">delta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">FOLLOW_SPEED</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">FollowSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0f</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Vector2</span><span class="w"> </span><span class="n">mousePos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetLocalMousePosition</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">Sprite2D</span><span class="w"> </span><span class="n">sprite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Sprite2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Sprite2D&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sprite</span><span class="p">.</span><span class="n">Position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sprite</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">Lerp</span><span class="p">(</span><span class="n">mousePos</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">FollowSpeed</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Here is how it looks:</p>
+<img alt="../../_images/interpolation_follow.gif" src="../../_images/interpolation_follow.gif" />
+<p>This is useful for smoothing camera movement, for allies following the player
+(ensuring they stay within a certain range), and for many other common game patterns.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Despite using <code class="docutils literal notranslate"><span class="pre">delta</span></code>, the formula used above is framerate-dependent, because
+the <code class="docutils literal notranslate"><span class="pre">weight</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">lerp()</span></code> represents a <em>percentage</em> of the remaining
+difference in values, not an <em>absolute amount to change</em>. In <code class="docutils literal notranslate"><span class="pre">_physics_process()</span></code>,
+this is usually fine because physics is expected to maintain a constant framerate,
+and therefore <code class="docutils literal notranslate"><span class="pre">delta</span></code> is expected to remain constant.</p>
+<p>For a framerate-independent version of interpolation smoothing that can also
+be used in <code class="docutils literal notranslate"><span class="pre">process()</span></code>, use the following formula instead:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">FOLLOW_SPEED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">mouse_pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_local_mouse_position</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb nb-Function">exp</span><span class="p">(</span><span class="o">-</span><span class="n">FOLLOW_SPEED</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="sx">$Sprite2D</span><span class="o">.</span><span class="vi">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Sprite2D</span><span class="o">.</span><span class="vi">position</span><span class="o">.</span><span class="nf">lerp</span><span class="p">(</span><span class="n">mouse_pos</span><span class="p">,</span><span class="w"> </span><span class="n">weight</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">FollowSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0f</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Process</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Vector2</span><span class="w"> </span><span class="n">mousePos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetLocalMousePosition</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">Sprite2D</span><span class="w"> </span><span class="n">sprite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Sprite2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Sprite2D&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Exp</span><span class="p">(</span><span class="o">-</span><span class="n">FollowSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sprite</span><span class="p">.</span><span class="n">Position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sprite</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">Lerp</span><span class="p">(</span><span class="n">mousePos</span><span class="p">,</span><span class="w"> </span><span class="n">weight</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Deriving this formula is beyond the scope of this page. For an explanation,
+see <a class="reference external" href="https://www.gamedeveloper.com/programming/improved-lerp-smoothing-">Improved Lerp Smoothing</a>
+or watch <a class="reference external" href="https://www.youtube.com/watch?v=LSNQuFEDOyQ">Lerp smoothing is broken</a>.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="matrices_and_transforms.html" class="btn btn-neutral float-left" title="Matrices and transforms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="beziers_and_curves.html" class="btn btn-neutral float-right" title="Beziers, curves and paths" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

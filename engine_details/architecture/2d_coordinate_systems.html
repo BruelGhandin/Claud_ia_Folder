@@ -1,0 +1,386 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="2D coordinate systems and 2D transforms" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/architecture/2d_coordinate_systems.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: This is a detailed overview of the available 2D coordinate systems and 2D transforms that are built in. The basic concepts are covered in Viewport and canvas transforms. Transform2D a..." />
+<meta name="description" content="Introduction: This is a detailed overview of the available 2D coordinate systems and 2D transforms that are built in. The basic concepts are covered in Viewport and canvas transforms. Transform2D a..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>2D coordinate systems and 2D transforms &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unit testing" href="unit_testing.html" />
+    <link rel="prev" title="Internal rendering architecture" href="internal_rendering_architecture.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/architecture/2d_coordinate_systems" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="engine_details/architecture/2d_coordinate_systems.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Engine architecture</a></li>
+      <li class="breadcrumb-item active">2D coordinate systems and 2D transforms</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/architecture/2d_coordinate_systems.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="d-coordinate-systems-and-2d-transforms">
+<span id="doc-2d-coordinate-systems"></span><h1>2D coordinate systems and 2D transforms<a class="headerlink" href="#d-coordinate-systems-and-2d-transforms" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This is a detailed overview of the available 2D coordinate systems and 2D transforms that are
+built in. The basic concepts are covered in <a class="reference internal" href="../../tutorials/2d/2d_transforms.html#doc-viewport-and-canvas-transforms"><span class="std std-ref">Viewport and canvas transforms</span></a>.</p>
+<p><a class="reference internal" href="../../classes/class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a> are matrices that convert coordinates from one coordinate
+system to another. In order to use them, it is beneficial to know which coordinate systems are
+available in Godot. For a deeper understanding, the <a class="reference internal" href="../../tutorials/math/matrices_and_transforms.html#doc-matrices-and-transforms"><span class="std std-ref">Matrices and transforms</span></a> tutorial
+offers insights to the underlying functionality.</p>
+</section>
+<section id="godot-2d-coordinate-systems">
+<h2>Godot 2D coordinate systems<a class="headerlink" href="#godot-2d-coordinate-systems" title="Link to this heading"></a></h2>
+<p>The following graphic gives an overview of Godot 2D coordinate systems and the available
+node-transforms, transform-functions and coordinate-system related functions. At the left
+is the OS Window Manager screen, at the right are the <a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem"><span class="std std-ref">CanvasItems</span></a>. For
+simplicity reasons this graphic doesn't include <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewport</span></a>,
+<a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer"><span class="std std-ref">SubViewportContainer</span></a>, <a class="reference internal" href="../../classes/class_parallaxlayer.html#class-parallaxlayer"><span class="std std-ref">ParallaxLayer</span></a>
+and <a class="reference internal" href="../../classes/class_parallaxbackground.html#class-parallaxbackground"><span class="std std-ref">ParallaxBackground</span></a> all of which also influence transforms.</p>
+<p>The graphic is based on a node tree of the following form: <code class="docutils literal notranslate"><span class="pre">Root</span> <span class="pre">Window</span> <span class="pre">(embed</span> <span class="pre">Windows)</span></code> ⇒
+<code class="docutils literal notranslate"><span class="pre">Window</span> <span class="pre">(don't</span> <span class="pre">embed</span> <span class="pre">Windows)</span></code> ⇒ <code class="docutils literal notranslate"><span class="pre">CanvasLayer</span></code> ⇒ <code class="docutils literal notranslate"><span class="pre">CanvasItem</span></code> ⇒ <code class="docutils literal notranslate"><span class="pre">CanvasItem</span></code> ⇒
+<code class="docutils literal notranslate"><span class="pre">CanvasItem</span></code>. There are more complex combinations possible, like deeply nested Window and
+SubViewports, however this example intends to provide an overview of the methodology in general.</p>
+<a class="reference external image-reference" href="../../_images/transforms_overview.webp"><img alt="../../_images/transforms_overview.webp" src="../../_images/transforms_overview.webp" />
+</a>
+<p>Click graphic to enlarge.</p>
+<ul>
+<li><dl class="simple">
+<dt><strong>Item Coordinates</strong></dt><dd><p>This is the local coordinate system of a <a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem"><span class="std std-ref">CanvasItem</span></a>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Parent Item Coordinates</strong></dt><dd><p>This is the local coordinate system of the parent's <em>CanvasItem</em>. When positioning
+<em>CanvasItems</em> in the <em>Canvas</em>, they usually inherit the transformations of their parent
+<em>CanvasItems</em>. An exceptions is
+<a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem-property-top-level"><span class="std std-ref">CanvasItems.top_level</span></a>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Canvas Coordinates</strong></dt><dd><p>As mentioned in the previous tutorial <a class="reference internal" href="../../tutorials/2d/canvas_layers.html#doc-canvas-layers"><span class="std std-ref">Canvas layers</span></a>, there are two types of canvases
+(<em>Viewport</em> canvas and <em>CanvasLayer</em> canvas) and both have a canvas coordinate system. These
+are also called world coordinates. A <em>Viewport</em> can contain multiple <em>Canvases</em> with different
+coordinate systems.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Viewport Coordinates</strong></dt><dd><p>This is the coordinate system of the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Camera Coordinates</strong></dt><dd><p>This is only used internally for functionality like 3D-camera ray projections.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Embedder Coordinates / Screen Coordinates</strong></dt><dd><p>Every <em>Viewport</em> (<em>Window</em> or <em>SubViewport</em>) in the scene tree is embedded either in a
+different node or in the OS Window Manager. This coordinate system's origin is identical to the
+top-left corner of the <em>Window</em> or <em>SubViewport</em> and its scale is the one of the embedder or
+the OS Window Manager.</p>
+<p>If the embedder is the OS Window Manager, then they are also called Screen Coordinates.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Absolute Embedder Coordinates / Absolute Screen Coordinates</strong></dt><dd><p>The origin of this coordinate system is the top-left corner of the embedding node or the OS
+Window Manager screen. Its scale is the one of the embedder or the OS Window Manager.</p>
+<p>If the embedder is the OS Window Manager, then they are also called Absolute Screen
+Coordinates.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="node-transforms">
+<h2>Node transforms<a class="headerlink" href="#node-transforms" title="Link to this heading"></a></h2>
+<p>Each of the mentioned nodes have one or more transforms associated with them and the combination of
+these nodes infer the transforms between the different coordinate systems. With a few exceptions,
+the transforms are <a class="reference internal" href="../../classes/class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a> and the following list shows details and
+effects of each of them.</p>
+<ul>
+<li><dl>
+<dt><strong>CanvasItem transform</strong></dt><dd><p><em>CanvasItems</em> are either <em>Control</em>-nodes or <em>Node2D</em>-nodes.</p>
+<p>For <em>Control</em> nodes this transform consists of a <a class="reference internal" href="../../classes/class_control.html#class-control-property-position"><span class="std std-ref">position</span></a>
+relative to the parent's origin and a <a class="reference internal" href="../../classes/class_control.html#class-control-property-scale"><span class="std std-ref">scale</span></a> and
+<a class="reference internal" href="../../classes/class_control.html#class-control-property-rotation"><span class="std std-ref">rotation</span></a> around a
+<a class="reference internal" href="../../classes/class_control.html#class-control-property-pivot-offset"><span class="std std-ref">pivot point</span></a>.</p>
+<p>For <em>Node2D</em> nodes <a class="reference internal" href="../../classes/class_node2d.html#class-node2d-property-transform"><span class="std std-ref">transform</span></a> consists of
+<a class="reference internal" href="../../classes/class_node2d.html#class-node2d-property-position"><span class="std std-ref">position</span></a>, <a class="reference internal" href="../../classes/class_node2d.html#class-node2d-property-rotation"><span class="std std-ref">rotation</span></a>,
+<a class="reference internal" href="../../classes/class_node2d.html#class-node2d-property-scale"><span class="std std-ref">scale</span></a> and <a class="reference internal" href="../../classes/class_node2d.html#class-node2d-property-skew"><span class="std std-ref">skew</span></a>.</p>
+<p>The transform affects the item itself and usually also child-<em>CanvasItems</em> and in the case of a
+<em>SubViewportContainer</em> it affects the contained <em>SubViewport</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>CanvasLayer transform</strong></dt><dd><p>The <em>CanvasLayer's</em> <a class="reference internal" href="../../classes/class_canvaslayer.html#class-canvaslayer-property-transform"><span class="std std-ref">transform</span></a> affects all
+<em>CanvasItems</em> within the <em>CanvasLayer</em>. It doesn't affect other <em>CanvasLayers</em> or <em>Windows</em> in
+its <em>Viewport</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>CanvasLayer follow viewport transform</strong></dt><dd><p>The <em>follow viewport transform</em> is an automatically calculated transform, that is based on the
+<em>Viewport's</em> <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-canvas-transform"><span class="std std-ref">canvas transform</span></a> and the
+<em>CanvasLayer's</em> <a class="reference internal" href="../../classes/class_canvaslayer.html#class-canvaslayer-property-follow-viewport-scale"><span class="std std-ref">follow viewport scale</span></a>
+and can be used, if <a class="reference internal" href="../../classes/class_canvaslayer.html#class-canvaslayer-property-follow-viewport-enabled"><span class="std std-ref">enabled</span></a>, to
+achieve a pseudo-3D effect. It affects the same child nodes as the <em>CanvasLayer transform</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Viewport canvas transform</strong></dt><dd><p>The <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-canvas-transform"><span class="std std-ref">canvas transform</span></a> affects all
+<em>CanvasItems</em> in the <em>Viewport's</em> default canvas. It also affects <em>CanvasLayers</em>, that have
+follow viewport transform enabled. The <em>Viewport's</em> active <a class="reference internal" href="../../classes/class_camera2d.html#class-camera2d"><span class="std std-ref">Camera2D</span></a>
+works by changing this transform. It doesn't affect this <em>Viewport's</em> embedded <em>Windows</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Viewport global canvas transform</strong></dt><dd><p><em>Viewports</em> also have a <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-global-canvas-transform"><span class="std std-ref">global canvas transform</span></a>.
+This is the master transform and affects all individual <em>Canvas Layer</em> and embedded <em>Window</em>
+transforms. This is primarily used in Godot's CanvasItem Editor.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Viewport stretch transform</strong></dt><dd><p>Finally, <em>Viewports</em> have a <em>stretch transform</em>, which is used when resizing or stretching the
+viewport. This transform is used for <a class="reference internal" href="../../classes/class_window.html#class-window"><span class="std std-ref">Windows</span></a> as described in
+<a class="reference internal" href="../../tutorials/rendering/multiple_resolutions.html#doc-multiple-resolutions"><span class="std std-ref">Multiple resolutions</span></a>, but can also be manually set on <em>SubViewports</em> by means of
+<a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport-property-size"><span class="std std-ref">size</span></a> and
+<a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport-property-size-2d-override"><span class="std std-ref">size_2d_override</span></a>. Its
+<a class="reference internal" href="../../classes/class_transform2d.html#class-transform2d-method-get-origin"><span class="std std-ref">translation</span></a>,
+<a class="reference internal" href="../../classes/class_transform2d.html#class-transform2d-method-get-rotation"><span class="std std-ref">rotation</span></a> and
+<a class="reference internal" href="../../classes/class_transform2d.html#class-transform2d-method-get-skew"><span class="std std-ref">skew</span></a> are the default values and it can only have
+non-default <a class="reference internal" href="../../classes/class_transform2d.html#class-transform2d-method-get-scale"><span class="std std-ref">scale</span></a>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Window transform</strong></dt><dd><p>In order to scale and position the <em>Window's</em> content as described in
+<a class="reference internal" href="../../tutorials/rendering/multiple_resolutions.html#doc-multiple-resolutions"><span class="std std-ref">Multiple resolutions</span></a>, each <a class="reference internal" href="../../classes/class_window.html#class-window"><span class="std std-ref">Window</span></a> contains a
+<em>window transform</em>. It is for example responsible for the black bars at the <em>Window's</em> sides so
+that the <em>Viewport</em> is displayed with a fixed aspect ratio.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Window position</strong></dt><dd><p>Every <em>Window</em> also has a <a class="reference internal" href="../../classes/class_window.html#class-window-property-position"><span class="std std-ref">position</span></a> to describe its
+position within its embedder. The embedder can be another <em>Viewport</em> or the OS Window Manager.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>SubViewportContainer shrink transform</strong></dt><dd><p><a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer-property-stretch"><span class="std std-ref">stretch</span></a> together with
+<a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer-property-stretch-shrink"><span class="std std-ref">stretch_shrink</span></a> declare for a
+<em>SubViewportContainer</em> if and by what integer factor the contained <em>SubViewport</em> should be
+scaled in comparison to the container's size.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="internal_rendering_architecture.html" class="btn btn-neutral float-left" title="Internal rendering architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="unit_testing.html" class="btn btn-neutral float-right" title="Unit testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

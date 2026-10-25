@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Volumetric fog and fog volumes" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/volumetric_fog.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="As described in Environment and post-processing, Godot supports various visual effects including two types of fog: traditional (non-volumetric) fog and volumetric fog. Traditional fog affects the e..." />
+<meta name="description" content="As described in Environment and post-processing, Godot supports various visual effects including two types of fog: traditional (non-volumetric) fog and volumetric fog. Traditional fog affects the e..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Volumetric fog and fog volumes &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3D antialiasing" href="3d_antialiasing.html" />
+    <link rel="prev" title="Environment and post-processing" href="environment_and_post_processing.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/volumetric_fog" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/3d/volumetric_fog.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">3D</a></li>
+      <li class="breadcrumb-item active">Volumetric fog and fog volumes</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/volumetric_fog.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="volumetric-fog-and-fog-volumes">
+<span id="doc-volumetric-fog"></span><h1>Volumetric fog and fog volumes<a class="headerlink" href="#volumetric-fog-and-fog-volumes" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Volumetric fog is only supported in the Forward+ renderer, not the Mobile or
+Compatibility renderers.</p>
+</div>
+<p>As described in <a class="reference internal" href="environment_and_post_processing.html#doc-environment-and-post-processing"><span class="std std-ref">Environment and post-processing</span></a>, Godot supports
+various visual effects including two types of fog: traditional (non-volumetric)
+fog and volumetric fog. Traditional fog affects the entire scene at once and
+cannot be customized with <a class="reference internal" href="../shaders/shader_reference/fog_shader.html#doc-fog-shader"><span class="std std-ref">Fog shaders</span></a>.</p>
+<p>Volumetric fog can be used at the same time as non-volumetric fog if desired.</p>
+<p>On this page, you'll learn:</p>
+<ul class="simple">
+<li><p>How to set up volumetric fog in Godot.</p></li>
+<li><p>What fog volumes are and how they differ from &quot;global&quot; volumetric fog.</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>You can see how volumetric fog works in action using the
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/3d/volumetric_fog">Volumetric Fog demo project</a>.</p>
+</div>
+<p>Here is a comparison between traditional fog (which does not interact with lighting)
+and volumetric fog, which is able to interact with lighting:</p>
+<img alt="../../_images/volumetric_fog_comparison.png" src="../../_images/volumetric_fog_comparison.png" />
+<section id="volumetric-fog-properties">
+<h2>Volumetric fog properties<a class="headerlink" href="#volumetric-fog-properties" title="Link to this heading"></a></h2>
+<p>After enabling volumetric fog in the WorldEnvironment node's Environment
+resource, you can edit the following properties:</p>
+<ul class="simple">
+<li><p><strong>Density:</strong> The base <em>exponential</em> density of the volumetric fog. Set this to
+the lowest density you want to have globally. FogVolumes can be used to add to
+or subtract from this density in specific areas. A value of <code class="docutils literal notranslate"><span class="pre">0.0</span></code> disables
+global volumetric fog while allowing FogVolumes to display volumetric fog in
+specific areas. Fog rendering is exponential as in real life.</p></li>
+<li><p><strong>Albedo:</strong> The Color of the volumetric fog when interacting with lights. Mist
+and fog have an albedo close to white (<code class="docutils literal notranslate"><span class="pre">Color(1,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">1)</span></code>) while smoke
+has a darker albedo.</p></li>
+<li><p><strong>Emission:</strong> The emitted light from the volumetric fog. Even with emission,
+volumetric fog will not cast light onto other surfaces. Emission is useful to
+establish an ambient color. As the volumetric fog effect uses
+single-scattering only, fog tends to need a little bit of emission to soften
+the harsh shadows.</p></li>
+<li><p><strong>Emission Energy:</strong> The brightness of the emitted light from the volumetric
+fog.</p></li>
+<li><p><strong>GI Inject:</strong> Scales the strength of Global Illumination used in the
+volumetric fog's albedo color. A value of <code class="docutils literal notranslate"><span class="pre">0.0</span></code> means that Global
+Illumination will not impact the volumetric fog. This has a small performance
+cost when set above <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p></li>
+<li><p><strong>Anisotropy:</strong> The direction of scattered light as it goes through the
+volumetric fog. A value close to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> means almost all light is scattered
+forward. A value close to <code class="docutils literal notranslate"><span class="pre">0.0</span></code> means light is scattered equally in all
+directions. A value close to <code class="docutils literal notranslate"><span class="pre">-1.0</span></code> means light is scattered mostly
+backward. Fog and mist scatter light slightly forward, while smoke scatters
+light equally in all directions.</p></li>
+<li><p><strong>Length:</strong> The distance over which the volumetric fog is computed. Increase
+to compute fog over a greater range, decrease to add more detail when a long
+range is not needed. For best quality fog, keep this as low as possible.</p></li>
+<li><p><strong>Detail Spread:</strong> The distribution of size down the length of the froxel
+buffer. A higher value compresses the froxels closer to the camera and places
+more detail closer to the camera.</p></li>
+<li><p><strong>Ambient Inject:</strong> Scales the strength of ambient light used in the
+volumetric fog. A value of <code class="docutils literal notranslate"><span class="pre">0.0</span></code> means that ambient light will not impact
+the volumetric fog. This has a small performance cost when set above <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p></li>
+<li><p><strong>Sky Affect:</strong> Controls how much volumetric fog should be drawn onto the
+background sky. If set to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, volumetric fog won't affect sky rendering
+at all (including FogVolumes).</p></li>
+</ul>
+<p>Two additional properties are offered in the <strong>Temporal Reprojection</strong> section:</p>
+<ul class="simple">
+<li><p><strong>Temporal Reprojection &gt; Enabled:</strong> Enables temporal reprojection in the
+volumetric fog. Temporal reprojection blends the current frame's volumetric
+fog with the last frame's volumetric fog to smooth out jagged edges. The
+performance cost is minimal, however it does lead to moving FogVolumes and
+Light3Ds &quot;ghosting&quot; and leaving a trail behind them. When temporal
+reprojection is enabled, try to avoid moving FogVolumes or Light3Ds too fast.
+Short-lived dynamic lighting effects should have <strong>Volumetric Fog Energy</strong> set
+to <code class="docutils literal notranslate"><span class="pre">0.0</span></code> to avoid ghosting.</p></li>
+<li><p><strong>Temporal Reprojection &gt; Amount:</strong> The amount by which to blend the last
+frame with the current frame. A higher number results in smoother volumetric
+fog, but makes &quot;ghosting&quot; much worse. A lower value reduces ghosting but can
+result in the per-frame temporal jitter becoming visible.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unlike non-volumetric fog, volumetric fog has a <em>finite</em> range. This means
+volumetric fog cannot entirely cover a large world, as it will eventually
+stop being rendered in the distance.</p>
+<p>If you wish to hide distant areas from the player, it's recommended to
+enable both non-volumetric fog and volumetric fog at the same time, and
+adjust their density accordingly.</p>
+</div>
+</section>
+<section id="light-interaction-with-volumetric-fog">
+<h2>Light interaction with volumetric fog<a class="headerlink" href="#light-interaction-with-volumetric-fog" title="Link to this heading"></a></h2>
+<p>To simulate fog light scattering behavior in real life, all light types will
+interact with volumetric fog. How much each light will affect volumetric fog can
+be adjusted using the <strong>Volumetric Fog Energy</strong> property on each light. Enabling
+shadows on a light will also make those shadows visible on volumetric fog.</p>
+<p>If fog light interaction is not desired for artistic reasons, this can be
+globally disabled by setting <strong>Volumetric Fog &gt; Albedo</strong> to a pure black color
+in the Environment resource. Fog light interaction can also be disabled for
+specific lights by setting its <strong>Volumetric Fog Energy</strong> to <code class="docutils literal notranslate"><span class="pre">0</span></code>. Doing so will
+also improve performance slightly by excluding the light from volumetric fog
+computations.</p>
+</section>
+<section id="using-volumetric-fog-as-a-volumetric-lighting-solution">
+<h2>Using volumetric fog as a volumetric lighting solution<a class="headerlink" href="#using-volumetric-fog-as-a-volumetric-lighting-solution" title="Link to this heading"></a></h2>
+<p>While not physically accurate, it is possible to tune volumetric fog's settings
+to work as volumetric <em>lighting</em> solution. This means that unlit parts of the
+environment will not be darkened anymore by fog, but light will still be able to
+make fog brighter in specific areas.</p>
+<p>This can be done by setting volumetric fog density to the lowest permitted value
+<em>greater than zero</em> (<code class="docutils literal notranslate"><span class="pre">0.0001</span></code>), then increasing the <strong>Volumetric Fog Energy</strong>
+property on lights to much higher values than the default to compensate. Values
+between <code class="docutils literal notranslate"><span class="pre">200.0</span></code> and <code class="docutils literal notranslate"><span class="pre">5000.0</span></code> usually work well for this.</p>
+<img alt="../../_images/volumetric_fog_lighting.png" src="../../_images/volumetric_fog_lighting.png" />
+</section>
+<section id="balancing-performance-and-quality">
+<h2>Balancing performance and quality<a class="headerlink" href="#balancing-performance-and-quality" title="Link to this heading"></a></h2>
+<p>There are a few project settings available to adjust volumetric fog performance
+and quality:</p>
+<ul class="simple">
+<li><p><strong>Rendering &gt; Environment &gt; Volumetric Fog &gt; Volume Size:</strong> Base size used to
+determine size of froxel buffer in the camera X-axis and Y-axis. The final
+size is scaled by the aspect ratio of the screen, so actual values may differ
+from what is set. Set a larger size for more detailed fog, set a smaller size
+for better performance.</p></li>
+<li><p><strong>Rendering &gt; Environment &gt; Volumetric Fog &gt; Volume Depth:</strong> Number of slices
+to use along the depth of the froxel buffer for volumetric fog. A lower number
+will be more efficient, but may result in artifacts appearing during camera
+movement.</p></li>
+<li><p><strong>Rendering &gt; Environment &gt; Volumetric Fog &gt; Use Filter:</strong> Enables filtering
+of the volumetric fog effect prior to integration. This substantially blurs
+the fog which reduces fine details, but also smooths out harsh edges and
+aliasing artifacts. Disable when more detail is required.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Volumetric fog can cause banding to appear on the viewport, especially at
+higher density levels. See <a class="reference internal" href="3d_rendering_limitations.html#doc-3d-rendering-limitations-color-banding"><span class="std std-ref">Color banding</span></a>
+for guidance on reducing banding.</p>
+</div>
+</section>
+<section id="using-fog-volumes-for-local-volumetric-fog">
+<h2>Using fog volumes for local volumetric fog<a class="headerlink" href="#using-fog-volumes-for-local-volumetric-fog" title="Link to this heading"></a></h2>
+<p>Sometimes, you want fog to be constrained to specific areas. Conversely, you may
+want to have global volumetric fog, but fog should be excluded from certain
+areas. Both approaches can be followed using FogVolume nodes.</p>
+<p>Here's a quick start guide to using FogVolumes:</p>
+<ul class="simple">
+<li><p>Make sure <strong>Volumetric Fog</strong> is enabled in the Environment properties. If
+global volumetric fog is undesired, set its <strong>Density</strong> to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p></li>
+<li><p>Create a FogVolume node.</p></li>
+<li><p>Assign a new FogMaterial to the FogVolume node's <strong>Material</strong> property.</p></li>
+<li><p>In the FogMaterial, set <strong>Density</strong> to a positive value to increase density
+within the FogVolume, or a negative value to subtract the density from global
+volumetric fog.</p></li>
+<li><p>Configure the FogVolume's extents and shape as needed.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Thin fog volumes may appear to flicker when the camera moves or rotates.
+This can be alleviated by increasing the
+<strong>Rendering &gt; Environment &gt; Volumetric Fog &gt; Volume Depth</strong> project setting
+(at a performance cost) or by decreasing <strong>Length</strong> in the Environment
+volumetric fog properties (at no performance cost, but at the cost of lower
+fog range). Alternatively, the FogVolume can be made thicker and use a lower
+density in the <strong>Material</strong>.</p>
+</div>
+</section>
+<section id="fogvolume-properties">
+<h2>FogVolume properties<a class="headerlink" href="#fogvolume-properties" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Extents:</strong> The size of the FogVolume when <strong>Shape</strong> is <strong>Ellipsoid</strong>,
+<strong>Cone</strong>, <strong>Cylinder</strong> or <strong>Box</strong>. If <strong>Shape</strong> is <strong>Cone</strong> or <strong>Cylinder</strong>,
+the cone/cylinder will be adjusted to fit within the extents. Non-uniform
+scaling of cone/cylinder shapes via the <strong>Extents</strong> property is not supported,
+but you can scale the FogVolume node instead.</p></li>
+<li><p><strong>Shape:</strong> The shape of the FogVolume. This can be set to <strong>Ellipsoid</strong>,
+<strong>Cone</strong>, <strong>Cylinder</strong>, <strong>Box</strong> or <strong>World</strong> (acts as global volumetric fog).</p></li>
+<li><p><strong>Material:</strong> The material used by the FogVolume. Can be either a
+built-in FogMaterial or a custom ShaderMaterial (<a class="reference internal" href="../shaders/shader_reference/fog_shader.html#doc-fog-shader"><span class="std std-ref">Fog shaders</span></a>).</p></li>
+</ul>
+<p>After choosing <strong>New FogMaterial</strong> in the <strong>Material</strong> property, you can adjust
+the following properties in FogMaterial:</p>
+<ul class="simple">
+<li><p><strong>Density:</strong> The density of the FogVolume. Denser objects are more opaque, but
+may suffer from under-sampling artifacts that look like stripes. Negative
+values can be used to subtract fog from other FogVolumes or global volumetric
+fog.</p></li>
+<li><p><strong>Albedo:</strong> The single-scattering Color of the FogVolume. Internally, member
+albedo is converted into single-scattering, which is additively blended with
+other FogVolumes and global volumetric fog's <strong>Albedo</strong>.</p></li>
+<li><p><strong>Emission:</strong> The Color of the light emitted by the FogVolume. Emitted light
+will not cast light or shadows on other objects, but can be useful for
+modulating the Color of the FogVolume independently from light sources.</p></li>
+<li><p><strong>Height Falloff:</strong> The rate by which the height-based fog decreases in
+density as height increases in world space. A high falloff will result in a
+sharp transition, while a low falloff will result in a smoother transition.
+A value of <code class="docutils literal notranslate"><span class="pre">0.0</span></code> results in uniform-density fog. The height threshold is
+determined by the height of the associated FogVolume.</p></li>
+<li><p><strong>Edge Fade:</strong> The hardness of the edges of the FogVolume. A higher value will
+result in softer edges, while a lower value will result in harder edges.</p></li>
+<li><p><strong>Density Texture:</strong> The 3D texture that is used to scale the member density
+of the FogVolume. This can be used to vary fog density within the FogVolume
+with any kind of static pattern. For animated effects, consider using a custom
+<a class="reference internal" href="../shaders/shader_reference/fog_shader.html#doc-fog-shader"><span class="std std-ref">fog shader</span></a>.
+You can import any image as a 3D texture by
+<a class="reference internal" href="../assets_pipeline/importing_images.html#doc-importing-images-changing-import-type"><span class="std std-ref">changing its import type in the Import dock</span></a>.</p></li>
+</ul>
+<section id="using-3d-noise-density-textures">
+<h3>Using 3D noise density textures<a class="headerlink" href="#using-3d-noise-density-textures" title="Link to this heading"></a></h3>
+<p>Since Godot 4.1, there is a NoiseTexture3D resource that can be used to
+procedurally generate 3D noise. This is well-suited to FogMaterial density
+textures, which can result in more detailed fog effects:</p>
+<figure class="align-default" id="id1">
+<img alt="FogMaterial comparison (without and with density texture)" src="../../_images/volumetric_fog_fog_material_density_texture.webp" />
+<figcaption>
+<p><span class="caption-text">Screenshot taken with <strong>Volume Size</strong> project setting set to 192 to make
+high-frequency detail more visible in the fog.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>To do so, select the <strong>Density Texture</strong> property and choose <strong>New NoiseTexture3D</strong>.
+Edit this NoiseTexture3D by clicking it, then click <strong>Noise</strong> at the bottom of the
+NoiseTexture3D properties and choose <strong>New FastNoiseLite</strong>. Adjust the noise texture's
+width, height and depth according to your fog volume's dimensions.</p>
+<p>To improve performance, it's recommended to use low texture sizes (64×64×64 or lower),
+as high-frequency detail is difficult to notice in a FogVolume. If you wish to represent
+more detailed density variations, you will need to increase
+<strong>Rendering &gt; Environment &gt; Volumetric Fog &gt; Volume Size</strong> in the project settings,
+which has a performance cost.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>NoiseTexture3D's <strong>Color Ramp</strong> affects FogMaterial density textures, but
+since only the texture's red channel is sampled, only the color ramp's red
+channel will affect the resulting density.</p>
+<p>However, using a color ramp will <em>not</em> tint the fog volume according to the
+texture. You would need to use a custom shader that reads a Texture3D to
+achieve this.</p>
+</div>
+</section>
+</section>
+<section id="custom-fogvolume-shaders">
+<h2>Custom FogVolume shaders<a class="headerlink" href="#custom-fogvolume-shaders" title="Link to this heading"></a></h2>
+<p>This page only covers the built-in settings offered by FogMaterial. If you need
+to customize fog behavior within a FogVolume node (such as creating animated fog),
+FogVolume nodes' appearance can be customized using <a class="reference internal" href="../shaders/shader_reference/fog_shader.html#doc-fog-shader"><span class="std std-ref">Fog shaders</span></a>.</p>
+</section>
+<section id="faking-volumetric-fog-using-quads">
+<h2>Faking volumetric fog using quads<a class="headerlink" href="#faking-volumetric-fog-using-quads" title="Link to this heading"></a></h2>
+<p>In some cases, it may be better to use specially configured QuadMeshes as an
+alternative to volumetric fog:</p>
+<ul class="simple">
+<li><p>Quads work with any rendering method, including Mobile and Compatibility.</p></li>
+<li><p>Quads do not require temporal reprojection to look smooth, which makes
+them suited to fast-moving dynamic effects such as lasers. They can also
+represent small details which volumetric fog cannot do efficiently.</p></li>
+<li><p>Quads generally have a lower performance cost than volumetric fog.</p></li>
+</ul>
+<p>This approach has a few downsides though:</p>
+<ul class="simple">
+<li><p>The fog effect has less realistic falloff, especially if the camera enters the fog.</p></li>
+<li><p>Transparency sorting issues may occur when sprites overlap.</p></li>
+<li><p>Performance will not necessarily be better than volumetric fog if there are
+lots of sprites close to the camera.</p></li>
+</ul>
+<p>To create a QuadMesh-based fog sprite:</p>
+<ol class="arabic">
+<li><p>Create a MeshInstance3D node with a QuadMesh resource in the <strong>Mesh</strong>
+property. Set the size as desired.</p></li>
+<li><p>Create a new StandardMaterial3D in the mesh's <strong>Material</strong> property.</p></li>
+<li><p>In the StandardMaterial3D, set <strong>Shading &gt; Shading Mode</strong> to <strong>Unshaded</strong>,
+<strong>Billboard &gt; Mode</strong> to <strong>Enabled</strong>, enable <strong>Proximity Fade</strong> and set
+<strong>Distance Fade</strong> to <strong>Pixel Alpha</strong>.</p></li>
+<li><p>Set the <strong>Albedo &gt; Texture</strong> to the texture below (right-click and choose <strong>Save as…</strong>):</p>
+<img alt="../../_images/volumetric_fog_quad_mesh_texture.webp" src="../../_images/volumetric_fog_quad_mesh_texture.webp" />
+</li>
+<li><p><em>After</em> setting the albedo texture, go to the Import dock, select the texture
+and change its compression mode to <strong>Lossless</strong> to improve quality.</p></li>
+</ol>
+<p>The fog's color is set using the <strong>Albedo &gt; Color</strong> property; its density is set
+using the color's alpha channel. For best results, you will have to adjust
+<strong>Proximity Fade &gt; Distance</strong> and <strong>Distance Fade &gt; Max Distance</strong> depending on
+the size of your QuadMesh.</p>
+<p>Optionally, billboarding may be left disabled if you place the quad in a way
+where all of its corners are in solid geometry. This can be useful for fogging
+large planes that the camera cannot enter, such as bottomless pits.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="environment_and_post_processing.html" class="btn btn-neutral float-left" title="Environment and post-processing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3d_antialiasing.html" class="btn btn-neutral float-right" title="3D antialiasing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

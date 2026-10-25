@@ -1,0 +1,337 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Compiling for the Web" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/development/compiling/compiling_for_web.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Requirements: To compile export templates for the Web, the following is required: Emscripten 4.0.0+., Python 3.9+., SCons 4.4+ build system.. Building export templates: Before starting, confirm tha..." />
+<meta name="description" content="Requirements: To compile export templates for the Web, the following is required: Emscripten 4.0.0+., Python 3.9+., SCons 4.4+ build system.. Building export templates: Before starting, confirm tha..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Compiling for the Web &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Cross-compiling for iOS on Linux" href="cross-compiling_for_ios_on_linux.html" />
+    <link rel="prev" title="Compiling for visionOS" href="compiling_for_visionos.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/development/compiling/compiling_for_web" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="engine_details/development/compiling/compiling_for_web.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Engine development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Building from source</a></li>
+      <li class="breadcrumb-item active">Compiling for the Web</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/development/compiling/compiling_for_web.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="compiling-for-the-web">
+<span id="doc-compiling-for-web"></span><h1>Compiling for the Web<a class="headerlink" href="#compiling-for-the-web" title="Link to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>This page describes how to compile HTML5 editor and export template binaries from source.
+If you're looking to export your project to HTML5 instead, read <a class="reference internal" href="../../../tutorials/export/exporting_for_web.html#doc-exporting-for-web"><span class="std std-ref">Exporting for the Web</span></a>.</p>
+</div>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p>To compile export templates for the Web, the following is required:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://emscripten.org">Emscripten 4.0.0+</a>.</p></li>
+<li><p><a class="reference external" href="https://www.python.org/">Python 3.9+</a>.</p></li>
+<li><p><a class="reference external" href="https://scons.org/pages/download.html">SCons 4.4+</a> build system.</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To get the Godot source code for compiling, see
+<a class="reference internal" href="getting_source.html#doc-getting-source"><span class="std std-ref">Getting the source</span></a>.</p>
+<p>For a general overview of SCons usage for Godot, see
+<a class="reference internal" href="introduction_to_the_buildsystem.html#doc-introduction-to-the-buildsystem"><span class="std std-ref">Introduction to the buildsystem</span></a>.</p>
+</div>
+</section>
+<section id="building-export-templates">
+<h2>Building export templates<a class="headerlink" href="#building-export-templates" title="Link to this heading"></a></h2>
+<p>Before starting, confirm that <code class="docutils literal notranslate"><span class="pre">emcc</span></code> is available in your PATH. This is
+usually configured by the Emscripten SDK, e.g. when invoking <code class="docutils literal notranslate"><span class="pre">emsdk</span> <span class="pre">activate</span></code>
+and <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">./emsdk_env.sh</span></code>/<code class="docutils literal notranslate"><span class="pre">emsdk_env.bat</span></code>.</p>
+<p>Open a terminal and navigate to the root directory of the engine source code.
+Then instruct SCons to build the Web platform. Specify <code class="docutils literal notranslate"><span class="pre">target</span></code> as
+either <code class="docutils literal notranslate"><span class="pre">template_release</span></code> for a release build or <code class="docutils literal notranslate"><span class="pre">template_debug</span></code> for a debug build:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>web<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>web<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug
+</pre></div>
+</div>
+<p>By default, the <a class="reference internal" href="../../../tutorials/platform/web/javascript_bridge.html#doc-web-javascript-bridge"><span class="std std-ref">JavaScriptBridge singleton</span></a> will be built
+into the engine. Official export templates also have the JavaScript singleton
+enabled. Since <code class="docutils literal notranslate"><span class="pre">eval()</span></code> calls can be a security concern, the
+<code class="docutils literal notranslate"><span class="pre">javascript_eval</span></code> option can be used to build without the singleton:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>web<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">javascript_eval</span><span class="o">=</span>no
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>web<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w"> </span><span class="nv">javascript_eval</span><span class="o">=</span>no
+</pre></div>
+</div>
+<p>By default, WebWorker threads support is enabled. To disable it and only use a single thread,
+the <code class="docutils literal notranslate"><span class="pre">threads</span></code> option can be used to build the web template without threads support:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>web<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">threads</span><span class="o">=</span>no
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>web<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug<span class="w"> </span><span class="nv">threads</span><span class="o">=</span>no
+</pre></div>
+</div>
+<p>The engine will now be compiled to WebAssembly by Emscripten. Once finished,
+the resulting file will be placed in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> subdirectory. Its name is
+<code class="docutils literal notranslate"><span class="pre">godot.web.template_release.wasm32.zip</span></code> for release or <code class="docutils literal notranslate"><span class="pre">godot.web.template_debug.wasm32.zip</span></code>
+for debug.</p>
+<p>Finally, rename the zip archive to <code class="docutils literal notranslate"><span class="pre">web_release.zip</span></code> for the
+release template:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mv<span class="w"> </span>bin/godot.web.template_release.wasm32.zip<span class="w"> </span>bin/web_release.zip
+</pre></div>
+</div>
+<p>And <code class="docutils literal notranslate"><span class="pre">web_debug.zip</span></code> for the debug template:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mv<span class="w"> </span>bin/godot.web.template_debug.wasm32.zip<span class="w"> </span>bin/web_debug.zip
+</pre></div>
+</div>
+</section>
+<section id="gdextension">
+<h2>GDExtension<a class="headerlink" href="#gdextension" title="Link to this heading"></a></h2>
+<p>The default export templates do not include GDExtension support for
+performance and compatibility reasons. See the
+<a class="reference internal" href="../../../tutorials/export/exporting_for_web.html#doc-javascript-export-options"><span class="std std-ref">export page</span></a> for more info.</p>
+<p>You can build the export templates using the option <code class="docutils literal notranslate"><span class="pre">dlink_enabled=yes</span></code>
+to enable GDExtension support:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>web<span class="w"> </span><span class="nv">dlink_enabled</span><span class="o">=</span>yes<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release
+scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>web<span class="w"> </span><span class="nv">dlink_enabled</span><span class="o">=</span>yes<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_debug
+</pre></div>
+</div>
+<p>Once finished, the resulting file will be placed in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> subdirectory.
+Its name will have <code class="docutils literal notranslate"><span class="pre">_dlink</span></code> added.</p>
+<p>Finally, rename the zip archives to <code class="docutils literal notranslate"><span class="pre">web_dlink_release.zip</span></code> and
+<code class="docutils literal notranslate"><span class="pre">web_dlink_release.zip</span></code> for the release template:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mv<span class="w"> </span>bin/godot.web.template_release.wasm32.dlink.zip<span class="w"> </span>bin/web_dlink_release.zip
+mv<span class="w"> </span>bin/godot.web.template_debug.wasm32.dlink.zip<span class="w"> </span>bin/web_dlink_debug.zip
+</pre></div>
+</div>
+</section>
+<section id="building-the-editor">
+<h2>Building the editor<a class="headerlink" href="#building-the-editor" title="Link to this heading"></a></h2>
+<p>It is also possible to build a version of the Godot editor that can run in the
+browser. The editor version is not recommended
+over the native build. You can build the editor with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>web<span class="w"> </span><span class="nv">target</span><span class="o">=</span>editor
+</pre></div>
+</div>
+<p>Once finished, the resulting file will be placed in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> subdirectory.
+Its name will be <code class="docutils literal notranslate"><span class="pre">godot.web.editor.wasm32.zip</span></code>. You can upload the
+zip content to your web server and visit it with your browser to use the editor.</p>
+<p>Refer to the <a class="reference internal" href="../../../tutorials/export/exporting_for_web.html#doc-javascript-export-options"><span class="std std-ref">export page</span></a> for the web
+server requirements.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The Godot repository includes a
+<a class="reference external" href="https://raw.githubusercontent.com/godotengine/godot/master/platform/web/serve.py">Python script to host a local web server</a>.
+This can be used to test the web editor locally.</p>
+<p>After compiling the editor, extract the ZIP archive that was created in the
+<code class="docutils literal notranslate"><span class="pre">bin/</span></code> folder, then run the following command in the Godot repository
+root:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># You may need to replace `python` with `python3` on some platforms.</span>
+python<span class="w"> </span>platform/web/serve.py
+</pre></div>
+</div>
+<p>This will serve the contents of the <code class="docutils literal notranslate"><span class="pre">bin/</span></code> folder and open the default web
+browser automatically. In the page that opens, access <code class="docutils literal notranslate"><span class="pre">godot.editor.html</span></code>
+and you should be able to test the web editor this way.</p>
+<p>Note that for production use cases, this Python-based web server should not
+be used. Instead, you should use an established web server such as Apache or
+nginx.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="compiling_for_visionos.html" class="btn btn-neutral float-left" title="Compiling for visionOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cross-compiling_for_ios_on_linux.html" class="btn btn-neutral float-right" title="Cross-compiling for iOS on Linux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

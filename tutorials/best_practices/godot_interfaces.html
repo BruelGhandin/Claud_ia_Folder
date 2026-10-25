@@ -1,0 +1,737 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Godot interfaces" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/best_practices/godot_interfaces.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Often one needs scripts that rely on other objects for features. There are 2 parts to this process: Acquiring a reference to the object that presumably has the features., Accessing the data or logi..." />
+<meta name="description" content="Often one needs scripts that rely on other objects for features. There are 2 parts to this process: Acquiring a reference to the object that presumably has the features., Accessing the data or logi..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Godot interfaces &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Godot notifications" href="godot_notifications.html" />
+    <link rel="prev" title="When and how to avoid using nodes for everything" href="node_alternatives.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/best_practices/godot_interfaces" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/best_practices/godot_interfaces.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Best practices</a></li>
+      <li class="breadcrumb-item active">Godot interfaces</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/best_practices/godot_interfaces.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="godot-interfaces">
+<span id="doc-godot-interfaces"></span><h1>Godot interfaces<a class="headerlink" href="#godot-interfaces" title="Link to this heading"></a></h1>
+<p>Often one needs scripts that rely on other objects for features. There
+are 2 parts to this process:</p>
+<ol class="arabic simple">
+<li><p>Acquiring a reference to the object that presumably has the features.</p></li>
+<li><p>Accessing the data or logic from the object.</p></li>
+</ol>
+<p>The rest of this tutorial outlines the various ways of doing all this.</p>
+<section id="acquiring-object-references">
+<h2>Acquiring object references<a class="headerlink" href="#acquiring-object-references" title="Link to this heading"></a></h2>
+<p>For all <a class="reference internal" href="../../classes/class_object.html#class-object"><span class="std std-ref">Object</span></a>s, the most basic way of referencing them
+is to get a reference to an existing object from another acquired instance.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="o">.</span><span class="vi">object</span><span class="w"> </span><span class="c1"># Property access.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="o">.</span><span class="nf">get_object</span><span class="p">()</span><span class="w"> </span><span class="c1"># Method access.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">GodotObject</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="n">Object</span><span class="p">;</span><span class="w"> </span><span class="c1">// Property access.</span>
+<span class="n">GodotObject</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="n">GetObject</span><span class="p">();</span><span class="w"> </span><span class="c1">// Method access.</span>
+</pre></div>
+</div>
+</div></div>
+<p>The same principle applies for <a class="reference internal" href="../../classes/class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> objects.
+While users often access <a class="reference internal" href="../../classes/class_node.html#class-node"><span class="std std-ref">Node</span></a> and
+<a class="reference internal" href="../../classes/class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> this way, alternative measures are available.</p>
+<p>Instead of property or method access, one can get Resources by load
+access.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># If you need an &quot;export const var&quot; (which doesn&#39;t exist), use a conditional</span>
+<span class="c1"># setter for a tool script that checks if it&#39;s executing in the editor.</span>
+<span class="c1"># The `@tool` annotation must be placed at the top of the script.</span>
+<span class="nd">@tool</span>
+
+<span class="c1"># Load resource during scene load.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">preres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="c1"># Load resource when program reaches statement.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="c1"># Note that users load scenes and scripts, by convention, with PascalCase</span>
+<span class="c1"># names (like typenames), often into constants.</span>
+<span class="k">const</span><span class="w"> </span><span class="nc">MyScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;my_scene.tscn&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1"># Static load</span>
+<span class="k">const</span><span class="w"> </span><span class="nc">MyScript</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;my_script.gd&quot;</span><span class="p">)</span>
+
+<span class="c1"># This type&#39;s value varies, i.e. it is a variable, so it uses snake_case.</span>
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">script_type</span><span class="p">:</span><span class="w"> </span><span class="nb">Script</span>
+
+<span class="c1"># Must configure from the editor, defaults to null.</span>
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">const_script</span><span class="p">:</span><span class="w"> </span><span class="nb">Script</span><span class="p">:</span>
+<span class="w">    </span><span class="nf">set</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">is_editor_hint</span><span class="p">():</span>
+<span class="w">            </span><span class="n">const_script</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span>
+
+<span class="c1"># Warn users if the value hasn&#39;t been set.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_configuration_warnings</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">const_script</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Must initialize property &#39;const_script&#39;.&quot;</span><span class="p">]</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="p">[]</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Tool script added for the sake of the &quot;const [Export]&quot; example.</span>
+<span class="na">[Tool]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">MyType</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Property initializations load during Script instancing, i.e. .new().</span>
+<span class="w">    </span><span class="c1">// No &quot;preload&quot; loads during scene load exists in C#.</span>
+
+<span class="w">    </span><span class="c1">// Initialize with a value. Editable at runtime.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">MyScript</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">Script</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://Path/To/MyScript.cs&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Initialize with same value. Value cannot be changed.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">MyConstScript</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">Script</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://Path/To/MyScript.cs&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Like &#39;readonly&#39; due to inaccessible setter.</span>
+<span class="w">    </span><span class="c1">// But, value can be set during constructor, i.e. MyType().</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">MyNoSetScript</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">Script</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://Path/To/MyScript.cs&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// If need a &quot;const [Export]&quot; (which doesn&#39;t exist), use a</span>
+<span class="w">    </span><span class="c1">// conditional setter for a tool script that checks if it&#39;s executing</span>
+<span class="w">    </span><span class="c1">// in the editor.</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">PackedScene</span><span class="w"> </span><span class="n">_enemyScn</span><span class="p">;</span>
+
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">PackedScene</span><span class="w"> </span><span class="n">EnemyScn</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">_enemyScn</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="k">set</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Engine</span><span class="p">.</span><span class="n">IsEditorHint</span><span class="p">())</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">_enemyScn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// Warn users if the value hasn&#39;t been set.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="nf">_GetConfigurationWarnings</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">EnemyScn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Must initialize property &#39;EnemyScn&#39;.&quot;</span><span class="p">];</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Note the following:</p>
+<ol class="arabic simple">
+<li><p>There are many ways in which a language can load such resources.</p></li>
+<li><p>When designing how objects will access data, don't forget
+that one can pass resources around as references as well.</p></li>
+<li><p>Keep in mind that loading a resource fetches the cached resource
+instance maintained by the engine. To get a new object, one must
+<a class="reference internal" href="../../classes/class_resource.html#class-resource-method-duplicate"><span class="std std-ref">duplicate</span></a> an existing reference
+or instantiate one from scratch with <code class="docutils literal notranslate"><span class="pre">new()</span></code>.</p></li>
+</ol>
+<p>Nodes likewise have an alternative access point: the SceneTree.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="c1"># Slow.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">dynamic_lookup_with_dynamic_nodepath</span><span class="p">():</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;Child&quot;</span><span class="p">))</span>
+
+<span class="c1"># Faster. GDScript only.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">dynamic_lookup_with_cached_nodepath</span><span class="p">():</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="sx">$Child</span><span class="p">)</span>
+
+<span class="c1"># Fastest. Doesn&#39;t break if node moves later.</span>
+<span class="c1"># Note that `@onready` annotation is GDScript-only.</span>
+<span class="c1"># Other languages must do...</span>
+<span class="c1">#     var child</span>
+<span class="c1">#     func _ready():</span>
+<span class="c1">#         child = get_node(&quot;Child&quot;)</span>
+<span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Child</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">lookup_and_cache_for_future_access</span><span class="p">():</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+<span class="c1"># Fastest. Doesn&#39;t break if node is moved in the Scene tree dock.</span>
+<span class="c1"># Node must be selected in the inspector as it&#39;s an exported property.</span>
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">child</span><span class="p">:</span><span class="w"> </span><span class="nb">Node</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">lookup_and_cache_for_future_access</span><span class="p">():</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+<span class="c1"># Delegate reference assignment to an external source.</span>
+<span class="c1"># Con: need to perform a validation check.</span>
+<span class="c1"># Pro: node makes no requirements of its external structure.</span>
+<span class="c1">#      &#39;prop&#39; can come from anywhere.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">prop</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">call_me_after_prop_is_initialized_by_parent</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Validate prop in one of three ways.</span>
+
+<span class="w">    </span><span class="c1"># Fail with no notification.</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">prop</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="c1"># Fail with an error message.</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">prop</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">printerr</span><span class="p">(</span><span class="s2">&quot;&#39;prop&#39; wasn&#39;t initialized&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="c1"># Fail and terminate.</span>
+<span class="w">    </span><span class="c1"># NOTE: Scripts run from a release export template don&#39;t run `assert`s.</span>
+<span class="w">    </span><span class="nb nb-Function">assert</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&#39;prop&#39; wasn&#39;t initialized&quot;</span><span class="p">)</span>
+
+<span class="c1"># Use an autoload.</span>
+<span class="c1"># Dangerous for typical nodes, but useful for true singleton nodes</span>
+<span class="c1"># that manage their own data and don&#39;t interfere with other objects.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">reference_a_global_autoloaded_variable</span><span class="p">():</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">globals</span><span class="p">)</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">globals</span><span class="o">.</span><span class="vi">prop</span><span class="p">)</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">globals</span><span class="o">.</span><span class="nf">my_getter</span><span class="p">())</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">System.Diagnostics</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Slow</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">DynamicLookupWithDynamicNodePath</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">GetNode</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Fastest. Lookup node and cache for future access.</span>
+<span class="w">    </span><span class="c1">// Doesn&#39;t break if node moves later.</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">_child</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">LookupAndCacheForFutureAccess</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">_child</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Delegate reference assignment to an external source.</span>
+<span class="w">    </span><span class="c1">// Con: need to perform a validation check.</span>
+<span class="w">    </span><span class="c1">// Pro: node makes no requirements of its external structure.</span>
+<span class="w">    </span><span class="c1">//      &#39;prop&#39; can come from anywhere.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">object</span><span class="w"> </span><span class="n">Prop</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">CallMeAfterPropIsInitializedByParent</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Validate prop in one of three ways.</span>
+
+<span class="w">        </span><span class="c1">// Fail with no notification.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">prop</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Fail with an error message.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">prop</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">PrintErr</span><span class="p">(</span><span class="s">&quot;&#39;Prop&#39; wasn&#39;t initialized&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Fail with an exception.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">prop</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">InvalidOperationException</span><span class="p">(</span><span class="s">&quot;&#39;Prop&#39; wasn&#39;t initialized.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Fail and terminate.</span>
+<span class="w">        </span><span class="c1">// Note: Scripts run from a release export template don&#39;t run `Debug.Assert`s.</span>
+<span class="w">        </span><span class="n">Debug</span><span class="p">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">Prop</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&#39;Prop&#39; wasn&#39;t initialized&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Use an autoload.</span>
+<span class="w">    </span><span class="c1">// Dangerous for typical nodes, but useful for true singleton nodes</span>
+<span class="w">    </span><span class="c1">// that manage their own data and don&#39;t interfere with other objects.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ReferenceAGlobalAutoloadedVariable</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MyNode</span><span class="w"> </span><span class="n">globals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">MyNode</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;/root/Globals&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">globals</span><span class="p">);</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">globals</span><span class="p">.</span><span class="n">Prop</span><span class="p">);</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">globals</span><span class="p">.</span><span class="n">MyGetter</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="accessing-data-or-logic-from-an-object">
+<span id="doc-accessing-data-or-logic-from-object"></span><h2>Accessing data or logic from an object<a class="headerlink" href="#accessing-data-or-logic-from-an-object" title="Link to this heading"></a></h2>
+<p>Godot's scripting API is duck-typed. This means that if a script executes an
+operation, Godot doesn't validate that it supports the operation by <strong>type</strong>.
+It instead checks that the object <strong>implements</strong> the individual method.</p>
+<p>For example, the <a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem"><span class="std std-ref">CanvasItem</span></a> class has a <code class="docutils literal notranslate"><span class="pre">visible</span></code>
+property. All properties exposed to the scripting API are in fact a setter and
+getter pair bound to a name. If one tried to access
+<a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem-property-visible"><span class="std std-ref">CanvasItem.visible</span></a>, then Godot would do the
+following checks, in order:</p>
+<ul class="simple">
+<li><p>If the object has a script attached, it will attempt to set the property
+through the script. This leaves open the opportunity for scripts to override
+a property defined on a base object by overriding the setter method for the
+property.</p></li>
+<li><p>If the script does not have the property, it performs a HashMap lookup in
+the ClassDB for the &quot;visible&quot; property against the CanvasItem class and all
+of its inherited types. If found, it will call the bound setter or getter.
+For more information about HashMaps, see the
+<a class="reference internal" href="data_preferences.html#doc-data-preferences"><span class="std std-ref">data preferences</span></a> docs.</p></li>
+<li><p>If not found, it does an explicit check to see if the user wants to access
+the &quot;script&quot; or &quot;meta&quot; properties.</p></li>
+<li><p>If not, it checks for a <code class="docutils literal notranslate"><span class="pre">_set</span></code>/<code class="docutils literal notranslate"><span class="pre">_get</span></code> implementation (depending on type
+of access) in the CanvasItem and its inherited types. These methods can
+execute logic that gives the impression that the Object has a property. This
+is also the case with the <code class="docutils literal notranslate"><span class="pre">_get_property_list</span></code> method.</p>
+<ul>
+<li><p>Note that this happens even for non-legal symbol names, such as names
+starting with a digit or containing a slash.</p></li>
+</ul>
+</li>
+</ul>
+<p>As a result, this duck-typed system can locate a property either in the script,
+the object's class, or any class that object inherits, but only for things
+which extend Object.</p>
+<p>Godot provides a variety of options for performing runtime checks on these
+accesses:</p>
+<ul>
+<li><p>A duck-typed property access. These will be property checks (as described above).
+If the operation isn't supported by the object, execution will halt.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># All Objects have duck-typed get, set, and call wrapper methods.</span>
+<span class="nf">get_parent</span><span class="p">()</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="s2">&quot;visible&quot;</span><span class="p">,</span><span class="w"> </span><span class="l">false</span><span class="p">)</span>
+
+<span class="c1"># Using a symbol accessor, rather than a string in the method call,</span>
+<span class="c1"># will implicitly call the `set` method which, in turn, calls the</span>
+<span class="c1"># setter method bound to the property through the property lookup</span>
+<span class="c1"># sequence.</span>
+<span class="nf">get_parent</span><span class="p">()</span><span class="o">.</span><span class="vi">visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+
+<span class="c1"># Note that if one defines a _set and _get that describe a property&#39;s</span>
+<span class="c1"># existence, but the property isn&#39;t recognized in any _get_property_list</span>
+<span class="c1"># method, then the set() and get() methods will work, but the symbol</span>
+<span class="c1"># access will claim it can&#39;t find the property.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// All Objects have duck-typed Get, Set, and Call wrapper methods.</span>
+<span class="n">GetParent</span><span class="p">().</span><span class="n">Set</span><span class="p">(</span><span class="s">&quot;visible&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">);</span>
+
+<span class="c1">// C# is a static language, so it has no dynamic symbol access, e.g.</span>
+<span class="c1">// `GetParent().Visible = false` won&#39;t work.</span>
+</pre></div>
+</div>
+</div></div>
+</li>
+<li><p>A method check. In the case of
+<a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem-property-visible"><span class="std std-ref">CanvasItem.visible</span></a>, one can
+access the methods, <code class="docutils literal notranslate"><span class="pre">set_visible</span></code> and <code class="docutils literal notranslate"><span class="pre">is_visible</span></code> like any other method.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Dynamic lookup.</span>
+<span class="n">child</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="s2">&quot;set_visible&quot;</span><span class="p">,</span><span class="w"> </span><span class="l">false</span><span class="p">)</span>
+
+<span class="c1"># Symbol-based dynamic lookup.</span>
+<span class="c1"># GDScript aliases this into a &#39;call&#39; method behind the scenes.</span>
+<span class="n">child</span><span class="o">.</span><span class="nf">set_visible</span><span class="p">(</span><span class="l">false</span><span class="p">)</span>
+
+<span class="c1"># Dynamic lookup, checks for method existence first.</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">child</span><span class="o">.</span><span class="nf">has_method</span><span class="p">(</span><span class="s2">&quot;set_visible&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="n">child</span><span class="o">.</span><span class="nf">set_visible</span><span class="p">(</span><span class="l">false</span><span class="p">)</span>
+
+<span class="c1"># Cast check, followed by dynamic lookup.</span>
+<span class="c1"># Useful when you make multiple &quot;safe&quot; calls knowing that the class</span>
+<span class="c1"># implements them all. No need for repeated checks.</span>
+<span class="c1"># Tricky if one executes a cast check for a user-defined type as it</span>
+<span class="c1"># forces more dependencies.</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nb">CanvasItem</span><span class="p">:</span>
+<span class="w">    </span><span class="n">child</span><span class="o">.</span><span class="nf">set_visible</span><span class="p">(</span><span class="l">false</span><span class="p">)</span>
+<span class="w">    </span><span class="n">child</span><span class="o">.</span><span class="vi">show_on_top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+
+<span class="c1"># If one does not wish to fail these checks without notifying users,</span>
+<span class="c1"># one can use an assert instead. These will trigger runtime errors</span>
+<span class="c1"># immediately if not true.</span>
+<span class="nb nb-Function">assert</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="nf">has_method</span><span class="p">(</span><span class="s2">&quot;set_visible&quot;</span><span class="p">))</span>
+<span class="nb nb-Function">assert</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="nf">is_in_group</span><span class="p">(</span><span class="s2">&quot;offer&quot;</span><span class="p">))</span>
+<span class="nb nb-Function">assert</span><span class="p">(</span><span class="n">child</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nb">CanvasItem</span><span class="p">)</span>
+
+<span class="c1"># Can also use object labels to imply an interface, i.e. assume it</span>
+<span class="c1"># implements certain methods.</span>
+<span class="c1"># There are two types, both of which only exist for Nodes: Names and</span>
+<span class="c1"># Groups.</span>
+
+<span class="c1"># Assuming...</span>
+<span class="c1"># A &quot;Quest&quot; object exists and 1) that it can &quot;complete&quot; or &quot;fail&quot; and</span>
+<span class="c1"># that it will have text available before and after each state...</span>
+
+<span class="c1"># 1. Use a name.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">quest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Quest</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">quest</span><span class="o">.</span><span class="vi">text</span><span class="p">)</span>
+<span class="n">quest</span><span class="o">.</span><span class="nf">complete</span><span class="p">()</span><span class="w"> </span><span class="c1"># or quest.fail()</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">quest</span><span class="o">.</span><span class="vi">text</span><span class="p">)</span><span class="w"> </span><span class="c1"># implied new text content</span>
+
+<span class="c1"># 2. Use a group.</span>
+<span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">a_child</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nf">get_children</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">a_child</span><span class="o">.</span><span class="nf">is_in_group</span><span class="p">(</span><span class="s2">&quot;quest&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">quest</span><span class="o">.</span><span class="vi">text</span><span class="p">)</span>
+<span class="w">        </span><span class="n">quest</span><span class="o">.</span><span class="nf">complete</span><span class="p">()</span><span class="w"> </span><span class="c1"># or quest.fail()</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">quest</span><span class="o">.</span><span class="vi">text</span><span class="p">)</span><span class="w"> </span><span class="c1"># implied new text content</span>
+
+<span class="c1"># Note that these interfaces are project-specific conventions the team</span>
+<span class="c1"># defines (which means documentation! But maybe worth it?).</span>
+<span class="c1"># Any script that conforms to the documented &quot;interface&quot; of the name or</span>
+<span class="c1"># group can fill in for it.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Node</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetChild</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// Dynamic lookup.</span>
+<span class="n">child</span><span class="p">.</span><span class="n">Call</span><span class="p">(</span><span class="s">&quot;SetVisible&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">);</span>
+
+<span class="c1">// Dynamic lookup, checks for method existence first.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">child</span><span class="p">.</span><span class="n">HasMethod</span><span class="p">(</span><span class="s">&quot;SetVisible&quot;</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">child</span><span class="p">.</span><span class="n">Call</span><span class="p">(</span><span class="s">&quot;SetVisible&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Use a group as if it were an &quot;interface&quot;, i.e. assume it implements</span>
+<span class="c1">// certain methods.</span>
+<span class="c1">// Requires good documentation for the project to keep it reliable</span>
+<span class="c1">// (unless you make editor tools to enforce it at editor time).</span>
+<span class="c1">// Note, this is generally not as good as using an actual interface in</span>
+<span class="c1">// C#, but you can&#39;t set C# interfaces from the editor since they are</span>
+<span class="c1">// language-level features.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">child</span><span class="p">.</span><span class="n">IsInGroup</span><span class="p">(</span><span class="s">&quot;Offer&quot;</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">child</span><span class="p">.</span><span class="n">Call</span><span class="p">(</span><span class="s">&quot;Accept&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">child</span><span class="p">.</span><span class="n">Call</span><span class="p">(</span><span class="s">&quot;Reject&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Cast check, followed by static lookup.</span>
+<span class="n">CanvasItem</span><span class="w"> </span><span class="n">ci</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetParent</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">CanvasItem</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ci</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ci</span><span class="p">.</span><span class="n">SetVisible</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// useful when you need to make multiple safe calls to the class</span>
+<span class="w">    </span><span class="n">ci</span><span class="p">.</span><span class="n">ShowOnTop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// If one does not wish to fail these checks without notifying users,</span>
+<span class="c1">// one can use an assert instead. These will trigger runtime errors</span>
+<span class="c1">// immediately if not true.</span>
+<span class="n">Debug</span><span class="p">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">child</span><span class="p">.</span><span class="n">HasMethod</span><span class="p">(</span><span class="s">&quot;set_visible&quot;</span><span class="p">));</span>
+<span class="n">Debug</span><span class="p">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">child</span><span class="p">.</span><span class="n">IsInGroup</span><span class="p">(</span><span class="s">&quot;offer&quot;</span><span class="p">));</span>
+<span class="n">Debug</span><span class="p">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">CanvasItem</span><span class="p">.</span><span class="n">InstanceHas</span><span class="p">(</span><span class="n">child</span><span class="p">));</span>
+
+<span class="c1">// Can also use object labels to imply an interface, i.e. assume it</span>
+<span class="c1">// implements certain methods.</span>
+<span class="c1">// There are two types, both of which only exist for Nodes: Names and</span>
+<span class="c1">// Groups.</span>
+
+<span class="c1">// Assuming...</span>
+<span class="c1">// A &quot;Quest&quot; object exists and 1) that it can &quot;Complete&quot; or &quot;Fail&quot; and</span>
+<span class="c1">// that it will have Text available before and after each state...</span>
+
+<span class="c1">// 1. Use a name.</span>
+<span class="n">Node</span><span class="w"> </span><span class="n">quest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="p">(</span><span class="s">&quot;Quest&quot;</span><span class="p">);</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">quest</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="s">&quot;Text&quot;</span><span class="p">));</span>
+<span class="n">quest</span><span class="p">.</span><span class="n">Call</span><span class="p">(</span><span class="s">&quot;Complete&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// or &quot;Fail&quot;.</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">quest</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="s">&quot;Text&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// Implied new text content.</span>
+
+<span class="c1">// 2. Use a group.</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">AChild</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">GetChildren</span><span class="p">())</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">AChild</span><span class="p">.</span><span class="n">IsInGroup</span><span class="p">(</span><span class="s">&quot;quest&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">quest</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="s">&quot;Text&quot;</span><span class="p">));</span>
+<span class="w">      </span><span class="n">quest</span><span class="p">.</span><span class="n">Call</span><span class="p">(</span><span class="s">&quot;Complete&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// or &quot;Fail&quot;.</span>
+<span class="w">      </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">quest</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="s">&quot;Text&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// Implied new text content.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Note that these interfaces are project-specific conventions the team</span>
+<span class="c1">// defines (which means documentation! But maybe worth it?).</span>
+<span class="c1">// Any script that conforms to the documented &quot;interface&quot; of the</span>
+<span class="c1">// name or group can fill in for it. Also note that in C#, these methods</span>
+<span class="c1">// will be slower than static accesses with traditional interfaces.</span>
+</pre></div>
+</div>
+</div></div>
+</li>
+<li><p>Outsource the access to a <a class="reference internal" href="../../classes/class_callable.html#class-callable"><span class="std std-ref">Callable</span></a>. These may be useful
+in cases where one needs the max level of freedom from dependencies. In
+this case, one relies on an external context to setup the method.</p></li>
+</ul>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># child.gd</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+<span class="k">var</span><span class="w"> </span><span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">null</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">my_method</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">fn</span><span class="p">:</span>
+<span class="w">        </span><span class="n">fn</span><span class="o">.</span><span class="nf">call</span><span class="p">()</span>
+
+<span class="c1"># parent.gd</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Child</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="n">child</span><span class="o">.</span><span class="vi">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">print_me</span>
+<span class="w">    </span><span class="n">child</span><span class="o">.</span><span class="nf">my_method</span><span class="p">()</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">print_me</span><span class="p">():</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Child.cs</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Callable</span><span class="o">?</span><span class="w"> </span><span class="n">Callable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MyMethod</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Callable</span><span class="o">?.</span><span class="n">Call</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Parent.cs</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Parent</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Child</span><span class="w"> </span><span class="n">_child</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Child</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_child</span><span class="p">.</span><span class="n">Callable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Callable</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">PrintMe</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_child</span><span class="p">.</span><span class="n">MyMethod</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PrintMe</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">Name</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>These strategies contribute to Godot's flexible design. Between them, users
+have a breadth of tools to meet their specific needs.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="node_alternatives.html" class="btn btn-neutral float-left" title="When and how to avoid using nodes for everything" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="godot_notifications.html" class="btn btn-neutral float-right" title="Godot notifications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Listening to player input" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="getting_started/step_by_step/scripting_player_input.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Building upon the previous lesson, Creating your first script, let&#x27;s look at another important feature of any game: giving control to the player. To add this, we need to modify our sprite_2d.g..." />
+<meta name="description" content="Building upon the previous lesson, Creating your first script, let&#x27;s look at another important feature of any game: giving control to the player. To add this, we need to modify our sprite_2d.g..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Listening to player input &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using signals" href="signals.html" />
+    <link rel="prev" title="Creating your first script" href="scripting_first_script.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="getting_started/step_by_step/scripting_player_input" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="getting_started/step_by_step/scripting_player_input.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Step by step</a></li>
+      <li class="breadcrumb-item active">Listening to player input</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/getting_started/step_by_step/scripting_player_input.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="listening-to-player-input">
+<span id="doc-scripting-player-input"></span><h1>Listening to player input<a class="headerlink" href="#listening-to-player-input" title="Link to this heading"></a></h1>
+<p>Building upon the previous lesson, <a class="reference internal" href="scripting_first_script.html#doc-scripting-first-script"><span class="std std-ref">Creating your first script</span></a>, let's look
+at another important feature of any game: giving control to the player.
+To add this, we need to modify our <code class="docutils literal notranslate"><span class="pre">sprite_2d.gd</span></code> code.</p>
+<img alt="../../_images/scripting_first_script_moving_with_input.gif" src="../../_images/scripting_first_script_moving_with_input.gif" />
+<p>You have two main tools to process the player's input in Godot:</p>
+<ol class="arabic simple">
+<li><p>The built-in input callbacks, mainly <code class="docutils literal notranslate"><span class="pre">_unhandled_input()</span></code>. Like
+<code class="docutils literal notranslate"><span class="pre">_process()</span></code>, it's a built-in virtual function that Godot calls every time
+the player presses a key. It's the tool you want to use to react to events
+that don't happen every frame, like pressing <kbd class="kbd docutils literal notranslate">Space</kbd> to jump. To learn
+more about input callbacks, see <a class="reference internal" href="../../tutorials/inputs/inputevent.html#doc-inputevent"><span class="std std-ref">Using InputEvent</span></a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Input</span></code> singleton. A singleton is a globally accessible object. Godot
+provides access to several in scripts. It's the right tool to check for input
+every frame.</p></li>
+</ol>
+<p>We're going to use the <code class="docutils literal notranslate"><span class="pre">Input</span></code> singleton here as we need to know if the player
+wants to turn or move every frame.</p>
+<p>For turning, we should use a new variable: <code class="docutils literal notranslate"><span class="pre">direction</span></code>. In our <code class="docutils literal notranslate"><span class="pre">_process()</span></code>
+function, replace the <code class="docutils literal notranslate"><span class="pre">rotation</span> <span class="pre">+=</span> <span class="pre">angular_speed</span> <span class="pre">*</span> <span class="pre">delta</span></code> line with the
+code below.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;ui_left&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;ui_right&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="n">rotation</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">angular_speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_left&quot;</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_right&quot;</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Rotation</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">_angularSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>Our <code class="docutils literal notranslate"><span class="pre">direction</span></code> local variable is a multiplier representing the direction in
+which the player wants to turn. A value of <code class="docutils literal notranslate"><span class="pre">0</span></code> means the player isn't pressing
+the left or the right arrow key. A value of <code class="docutils literal notranslate"><span class="pre">1</span></code> means the player wants to turn
+right, and <code class="docutils literal notranslate"><span class="pre">-1</span></code> means they want to turn left.</p>
+<p>To produce these values, we introduce conditional statements and the use of <code class="docutils literal notranslate"><span class="pre">Input</span></code>.
+A conditional statement starts with the <code class="docutils literal notranslate"><span class="pre">if</span></code> keyword in GDScript and ends with a colon. The
+condition is specifically the expression between the keyword and the colon at
+the end of the line.</p>
+<p>To check if a key was pressed this frame, we call <code class="docutils literal notranslate"><span class="pre">Input.is_action_pressed()</span></code>.
+The method takes a text string representing an input action and returns <code class="docutils literal notranslate"><span class="pre">true</span></code>
+if the action is pressed, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p>
+<p>The two actions we use above, &quot;ui_left&quot; and &quot;ui_right&quot;, are predefined in every
+Godot project. They respectively trigger when the player presses the left and
+right arrows on the keyboard or left and right on a gamepad's D-pad.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can see and edit input actions in your project by going to
+<span class="role-menu role-ui">Project &gt; Project Settings</span> and clicking on the <span class="role-ui">Input Map</span> tab.</p>
+</div>
+<p>Finally, we use the <code class="docutils literal notranslate"><span class="pre">direction</span></code> as a multiplier when we update the node's
+<code class="docutils literal notranslate"><span class="pre">rotation</span></code>: <code class="docutils literal notranslate"><span class="pre">rotation</span> <span class="pre">+=</span> <span class="pre">angular_speed</span> <span class="pre">*</span> <span class="pre">direction</span> <span class="pre">*</span> <span class="pre">delta</span></code>.</p>
+<p>Comment out the lines <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">velocity</span> <span class="pre">=</span> <span class="pre">Vector2.UP.rotated(rotation)</span> <span class="pre">*</span> <span class="pre">speed</span></code> and <code class="docutils literal notranslate"><span class="pre">position</span> <span class="pre">+=</span> <span class="pre">velocity</span> <span class="pre">*</span> <span class="pre">delta</span></code> like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1">#var velocity = Vector2.UP.rotated(rotation) * speed</span>
+
+<span class="c1">#position += velocity * delta</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">//var velocity = Vector2.Up.Rotated(Rotation) * _speed;</span>
+
+<span class="c1">//Position += velocity * (float)delta;</span>
+</pre></div>
+</div>
+</div></div>
+<p>This will ignore the code that moved the icon's position in a circle without user input from the previous exercise.</p>
+<p>If you run the scene with this code, the icon should rotate when you press
+<kbd class="kbd docutils literal notranslate">Left</kbd> and <kbd class="kbd docutils literal notranslate">Right</kbd>.</p>
+<section id="moving-when-pressing-up">
+<h2>Moving when pressing &quot;up&quot;<a class="headerlink" href="#moving-when-pressing-up" title="Link to this heading"></a></h2>
+<p>To only move when pressing a key, we need to modify the code that calculates the
+velocity. Uncomment the code and replace the line starting with <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">velocity</span></code> with the code below.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="o">.</span><span class="vi">ZERO</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;ui_up&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="o">.</span><span class="vi">UP</span><span class="o">.</span><span class="nf">rotated</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">speed</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector2</span><span class="p">.</span><span class="n">Zero</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_up&quot;</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector2</span><span class="p">.</span><span class="n">Up</span><span class="p">.</span><span class="n">Rotated</span><span class="p">(</span><span class="n">Rotation</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_speed</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>We initialize the <code class="docutils literal notranslate"><span class="pre">velocity</span></code> with a value of <code class="docutils literal notranslate"><span class="pre">Vector2.ZERO</span></code>, another
+constant of the built-in <code class="docutils literal notranslate"><span class="pre">Vector</span></code> type representing a 2D vector of length 0.</p>
+<p>If the player presses the &quot;ui_up&quot; action, we then update the velocity's value,
+causing the sprite to move forward.</p>
+</section>
+<section id="complete-script">
+<h2>Complete script<a class="headerlink" href="#complete-script" title="Link to this heading"></a></h2>
+<p>Here is the complete <code class="docutils literal notranslate"><span class="pre">sprite_2d.gd</span></code> file for reference.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Sprite2D</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">400</span>
+<span class="k">var</span><span class="w"> </span><span class="n">angular_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">PI</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;ui_left&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;ui_right&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="w">    </span><span class="n">rotation</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">angular_speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="o">.</span><span class="vi">ZERO</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;ui_up&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="o">.</span><span class="vi">UP</span><span class="o">.</span><span class="nf">rotated</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">speed</span>
+
+<span class="w">    </span><span class="n">position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MySprite2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sprite2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">400</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_angularSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Pi</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Process</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_left&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_right&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Rotation</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">_angularSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector2</span><span class="p">.</span><span class="n">Zero</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_up&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector2</span><span class="p">.</span><span class="n">Up</span><span class="p">.</span><span class="n">Rotated</span><span class="p">(</span><span class="n">Rotation</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_speed</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>If you run the scene, you should now be able to rotate with the left and right
+arrow keys and move forward by pressing <kbd class="kbd docutils literal notranslate">Up</kbd>.</p>
+<img alt="../../_images/scripting_first_script_moving_with_input.gif" src="../../_images/scripting_first_script_moving_with_input.gif" />
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>In summary, every script in Godot represents a class and extends one of the
+engine's built-in classes. The node types your classes inherit from give you
+access to properties, such as <code class="docutils literal notranslate"><span class="pre">rotation</span></code> and <code class="docutils literal notranslate"><span class="pre">position</span></code> in our sprite's case.
+You also inherit many functions, which we didn't get to use in this example.</p>
+<p>In GDScript, the variables you put at the top of the file are your class's
+properties, also called member variables. Besides variables, you can define
+functions, which, for the most part, will be your classes' methods.</p>
+<p>Godot provides several virtual functions you can define to connect your class
+with the engine. These include <code class="docutils literal notranslate"><span class="pre">_process()</span></code>, to apply changes to the node
+every frame, and <code class="docutils literal notranslate"><span class="pre">_unhandled_input()</span></code>, to receive input events like key and
+button presses from the users. There are quite a few more.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Input</span></code> singleton allows you to react to the player's input anywhere in
+your code. In particular, you'll get to use it in the <code class="docutils literal notranslate"><span class="pre">_process()</span></code> loop.</p>
+<p>In the next lesson, <a class="reference internal" href="signals.html#doc-signals"><span class="std std-ref">Using signals</span></a>, we'll build upon the relationship between
+scripts and nodes by having our nodes trigger code in scripts.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scripting_first_script.html" class="btn btn-neutral float-left" title="Creating your first script" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="signals.html" class="btn btn-neutral float-right" title="Using signals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

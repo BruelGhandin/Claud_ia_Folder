@@ -1,0 +1,966 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Standard Material 3D and ORM Material 3D" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/standard_material_3d.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: StandardMaterial3D and ORMMaterial3D(Occlusion, Roughness, Metallic) are default 3D materials that aim to provide most of the features artists look for in a material, without the need..." />
+<meta name="description" content="Introduction: StandardMaterial3D and ORMMaterial3D(Occlusion, Roughness, Metallic) are default 3D materials that aim to provide most of the features artists look for in a material, without the need..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Standard Material 3D and ORM Material 3D &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3D lights and shadows" href="lights_and_shadows.html" />
+    <link rel="prev" title="3D rendering limitations" href="3d_rendering_limitations.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/standard_material_3d" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/3d/standard_material_3d.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">3D</a></li>
+      <li class="breadcrumb-item active">Standard Material 3D and ORM Material 3D</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/standard_material_3d.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="standard-material-3d-and-orm-material-3d">
+<span id="doc-standard-material-3d"></span><h1>Standard Material 3D and ORM Material 3D<a class="headerlink" href="#standard-material-3d-and-orm-material-3d" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">StandardMaterial3D</span></code> and <code class="docutils literal notranslate"><span class="pre">ORMMaterial3D</span></code> (Occlusion, Roughness, Metallic)
+are default 3D materials that aim to provide most of the features artists look
+for in a material, without the need for writing shader code. However, they can
+be converted to shader code if additional functionality is needed.</p>
+<p>This tutorial explains the parameters present in both materials.</p>
+<p>There are 4 ways to add these materials to an object. A material can be added in
+the <em>Material</em> property of the mesh. It can be added in the <em>Material</em> property of
+the node using the mesh (such as a MeshInstance3D node), the <em>Material Override</em> property
+of the node using the mesh, and the <em>Material Overlay</em>.</p>
+<img alt="../../_images/add_material.webp" src="../../_images/add_material.webp" />
+<p>If you add a material to the mesh itself, every time that mesh is used it will have that
+material. If you add a material to the node using the mesh, the material will only be used
+by that node, it will also override the material property of the mesh. If a material is
+added in the <em>Material Override</em> property of the node, it will only be used by that node.
+It will also override the regular material property of the node and the material property of
+the mesh.</p>
+<p>The <em>Material Overlay</em> property will render a material <strong>over</strong> the current one being used by
+the mesh. As an example, this can be used to put a transparent shield effect on a mesh.</p>
+</section>
+<section id="basematerial-3d-settings">
+<h2>BaseMaterial 3D settings<a class="headerlink" href="#basematerial-3d-settings" title="Link to this heading"></a></h2>
+<p>StandardMaterial3D has many settings that determine the look of a material. All of these are
+under the BaseMaterial3D category</p>
+<img alt="../../_images/spatial_material1.webp" src="../../_images/spatial_material1.webp" />
+<p>ORM materials are almost exactly the same with one difference. Instead of separate settings
+and textures for occlusion, roughness, and metallic, there is a single ORM texture. The different
+color channels of that texture are used for each parameter. Programs such as Substance Painter
+and Armor Paint will give you the option to export in this format, for these two programs it's
+with the export preset for unreal engine, which also uses ORM textures.</p>
+</section>
+<section id="transparency">
+<h2>Transparency<a class="headerlink" href="#transparency" title="Link to this heading"></a></h2>
+<p>By default, materials in Godot are opaque. This is fast to render, but it means
+the material can't be seen through even if you use a transparent texture in the
+<strong>Albedo &gt; Texture</strong> property (or set <strong>Albedo &gt; Color</strong> to a transparent color).</p>
+<p>To be able to see through a material, the material needs to be made <em>transparent</em>.
+Godot offers several transparency modes:</p>
+<ul class="simple">
+<li><p><strong>Disabled:</strong> Material is opaque. This is the fastest to render, with all
+rendering features supported.</p></li>
+<li><p><strong>Alpha:</strong> Material is transparent. Semi-transparent areas are drawn with
+blending. This is slow to render, but it allows for partial transparency (also
+known as translucency). Materials using alpha blending also can't cast
+shadows, and are not visible in screen-space reflections.</p>
+<ul>
+<li><p><strong>Alpha</strong> is a good fit for particle effects and VFX.</p></li>
+</ul>
+</li>
+<li><p><strong>Alpha Scissor:</strong> Material is transparent. Semi-transparent areas whose
+opacity is below <strong>Alpha Scissor Threshold</strong> are not drawn (above this
+opacity, these are drawn as opaque). This is faster to render than Alpha and
+doesn't exhibit transparency sorting issues. The downside is that this results
+in &quot;all or nothing&quot; transparency, with no intermediate values possible.
+Materials using alpha scissor can cast shadows.</p>
+<ul>
+<li><p><strong>Alpha Scissor</strong> is ideal for foliage and fences, since these have hard
+edges and require correct sorting to look good.</p></li>
+</ul>
+</li>
+<li><p><strong>Alpha Hash:</strong> Material is transparent. Semi-transparent areas are drawn
+using dithering. This is also &quot;all or nothing&quot; transparency, but dithering
+helps represent partially opaque areas with limited precision depending on
+viewport resolution. Materials using alpha hash can cast shadows.</p>
+<ul>
+<li><p><strong>Alpha Hash</strong> is suited for realistic-looking hair, although stylized hair
+may work better with alpha scissor.</p></li>
+</ul>
+</li>
+<li><p><strong>Depth Pre-Pass:</strong> This renders the object's fully opaque pixels via the
+opaque pipeline first, then renders the rest with alpha blending. This allows
+transparency sorting to be <em>mostly</em> correct (albeit not fully so, as partially
+transparent regions may still exhibit incorrect sorting). Materials using
+depth prepass can cast shadows.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Godot will automatically force the material to be transparent with alpha
+blending if <em>any</em> of these conditions is met:</p>
+<ul class="simple">
+<li><p>Setting the transparency mode to <strong>Alpha</strong> (as described here).</p></li>
+<li><p>Setting a blend mode other than the default <strong>Mix</strong></p></li>
+<li><p>Enabling <strong>Refraction</strong>, <strong>Proximity Fade</strong>, or <strong>Distance Fade</strong>.</p></li>
+</ul>
+</div>
+<p>Comparison between alpha blending (left) and alpha scissor (right) transparency:</p>
+<img alt="../../_images/spatial_material12.png" src="../../_images/spatial_material12.png" />
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Alpha-blended transparency has several
+<a class="reference internal" href="3d_rendering_limitations.html#doc-3d-rendering-limitations-transparency-sorting"><span class="std std-ref">limitations</span></a>:</p>
+<ul class="simple">
+<li><p>Alpha-blended materials are significantly slower to render, especially if
+they overlap.</p></li>
+<li><p>Alpha-blended materials may exhibit sorting issues when transparent
+surfaces overlap each other. This means that surfaces may render in the
+incorrect order, with surfaces in the back appearing to be in front of
+those which are actually closer to the camera.</p></li>
+<li><p>Alpha-blended materials don't cast shadows, although they can receive shadows.</p></li>
+<li><p>Alpha-blended materials don't appear in any reflections (other than
+reflection probes).</p></li>
+<li><p>Screen-space reflections and sharp SDFGI reflections don't appear on
+alpha-blended materials. When SDFGI is enabled, rough reflections are used
+as a fallback regardless of material roughness.</p></li>
+</ul>
+<p>Before using the <strong>Alpha</strong> transparency mode, always consider whether
+another transparency mode is more suited for your needs.</p>
+</div>
+<section id="alpha-antialiasing">
+<span id="doc-standard-material-3d-alpha-antialiasing"></span><h3>Alpha Antialiasing<a class="headerlink" href="#alpha-antialiasing" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This property is only visible when the transparency mode is
+<strong>Alpha Scissor</strong> or <strong>Alpha Hash</strong>.</p>
+</div>
+<p>While alpha scissor and alpha hash materials are faster to render than
+alpha-blended materials, they exhibit hard edges between opaque and transparent
+regions. While it's possible to use post-processing-based <a class="reference internal" href="3d_antialiasing.html#doc-3d-antialiasing"><span class="std std-ref">antialiasing
+techniques</span></a> such as FXAA and TAA, this is not always
+desired as these techniques tend to make the final result look blurrier or
+exhibit ghosting artifacts.</p>
+<p>There are 3 alpha antialiasing modes available:</p>
+<ul class="simple">
+<li><p><strong>Disabled:</strong> No alpha antialiasing. Edges of transparent materials will
+appear aliased unless a post-processing-based antialiasing solution is used.</p></li>
+<li><p><strong>Alpha Edge Blend:</strong> Results in a smooth transition between opaque and
+transparent areas. Also known as &quot;alpha to coverage&quot;.</p></li>
+<li><p><strong>Alpha Edge Clip:</strong> Results in a sharp, but still antialiased transition
+between opaque and transparent areas. Also known as &quot;alpha to coverage + alpha
+to one&quot;.</p></li>
+</ul>
+<p>When the alpha antialiasing mode is set to <strong>Alpha Edge Blend</strong> or <strong>Alpha Edge
+Clip</strong>, a new <strong>Alpha Antialiasing Edge</strong> property becomes visible below in the
+inspector. This property controls the threshold below which pixels should be
+made transparent. While you've already defined an alpha scissor threshold (when
+using <strong>Alpha Scissor</strong> only), this additional threshold is used to smoothly
+transition between opaque and transparent pixels. <strong>Alpha Antialiasing Edge</strong>
+must <em>always</em> be set to a value that is strictly below the alpha scissor
+threshold. The default of <code class="docutils literal notranslate"><span class="pre">0.3</span></code> is a sensible value with an alpha scissor of
+threshold of <code class="docutils literal notranslate"><span class="pre">0.5</span></code>, but remember to adjust this alpha antialiasing edge when
+modifying the alpha scissor threshold.</p>
+<p>If you find the antialiasing effect not effective enough, try increasing <strong>Alpha
+Antialiasing Edge</strong> while making sure it's below <strong>Alpha Scissor Threshold</strong> (if
+the material uses alpha scissor). On the other hand, if you notice the texture's
+appearance visibly changing as the camera moves closer to the material, try
+decreasing <strong>Alpha Antialiasing Edge</strong>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>For best results, MSAA 3D should be set to at least 2× in the Project
+Settings when using alpha antialiasing. This is because this feature relies
+on alpha to coverage, which is a feature provided by MSAA.</p>
+<p>Without MSAA, a fixed dithering pattern is applied on the material's edges,
+which isn't very effective at smoothing out edges (although it can still
+help a little).</p>
+</div>
+</section>
+<section id="blend-mode">
+<h3>Blend Mode<a class="headerlink" href="#blend-mode" title="Link to this heading"></a></h3>
+<p>Controls the blend mode for the material. Keep in mind that any mode
+other than <em>Mix</em> forces the object to go through the transparent pipeline.</p>
+<ul class="simple">
+<li><p><strong>Mix:</strong> Default blend mode, alpha controls how much the object is visible.</p></li>
+<li><p><strong>Add:</strong> The final color of the object is added to the color of the screen,
+nice for flares or some fire-like effects.</p></li>
+<li><p><strong>Subtract:</strong> The final color of the object is subtracted from the color of the
+screen.</p></li>
+<li><p><strong>Multiply:</strong> The final color of the object is multiplied with the color of the
+screen.</p></li>
+<li><p><strong>Premultiplied Alpha:</strong> The color of the object is expected to have already been
+multiplied by the alpha. This behaves like <strong>Add</strong> when the alpha is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>
+(fully transparent) and like <strong>Mix</strong> when the alpha is <code class="docutils literal notranslate"><span class="pre">1.0</span></code> (opaque).</p></li>
+</ul>
+<img alt="../../_images/spatial_material8.png" src="../../_images/spatial_material8.png" />
+</section>
+<section id="cull-mode">
+<h3>Cull Mode<a class="headerlink" href="#cull-mode" title="Link to this heading"></a></h3>
+<p>Determines which side of the object is not drawn when backfaces are rendered:</p>
+<ul class="simple">
+<li><p><strong>Back:</strong> The back of the object is culled when not visible (default).</p></li>
+<li><p><strong>Front:</strong> The front of the object is culled when not visible.</p></li>
+<li><p><strong>Disabled:</strong> Used for objects that are double-sided (no culling is performed).</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, Blender has backface culling disabled on materials and will
+export materials to match how they render in Blender. This means that
+materials in Godot will have their cull mode set to <strong>Disabled</strong>. This can
+decrease performance since backfaces will be rendered, even when they are
+being culled by other faces. To resolve this, enable <strong>Backface Culling</strong> in
+Blender's Materials tab, then export the scene to glTF again.</p>
+</div>
+</section>
+<section id="depth-draw-mode">
+<h3>Depth Draw Mode<a class="headerlink" href="#depth-draw-mode" title="Link to this heading"></a></h3>
+<p>Specifies when depth rendering must take place.</p>
+<ul class="simple">
+<li><p><strong>Opaque Only (default):</strong> Depth is only drawn for opaque objects.</p></li>
+<li><p><strong>Always:</strong> Depth draw is drawn for both opaque and transparent objects.</p></li>
+<li><p><strong>Never:</strong> No depth draw takes place
+(do not confuse this with the No Depth Test option below).</p></li>
+<li><p><strong>Depth Pre-Pass:</strong> For transparent objects, an opaque pass is made first
+with the opaque parts, then transparency is drawn above.
+Use this option with transparent grass or tree foliage.</p></li>
+</ul>
+<img alt="../../_images/material_depth_draw.png" src="../../_images/material_depth_draw.png" />
+</section>
+<section id="no-depth-test">
+<h3>No Depth Test<a class="headerlink" href="#no-depth-test" title="Link to this heading"></a></h3>
+<p>In order for close objects to appear over far away objects, depth testing
+is performed. Disabling it has the result of objects appearing over
+(or under) everything else.</p>
+<p>Disabling this makes the most sense for drawing indicators in world space,
+and works very well with the <em>Render Priority</em> property of Material
+(see the bottom of this page).</p>
+<img alt="../../_images/spatial_material3.png" src="../../_images/spatial_material3.png" />
+</section>
+<section id="depth-test">
+<h3>Depth Test<a class="headerlink" href="#depth-test" title="Link to this heading"></a></h3>
+<p>This can be used to invert the standard depth test. When set to <strong>Inverted</strong>,
+the object will only appear when occluded, and will be hidden otherwise.</p>
+<p>This has no effect if <strong>No Depth Test</strong> is enabled.</p>
+<img alt="../../_images/material_depth_test.webp" src="../../_images/material_depth_test.webp" />
+</section>
+</section>
+<section id="shading">
+<h2>Shading<a class="headerlink" href="#shading" title="Link to this heading"></a></h2>
+<section id="shading-mode">
+<h3>Shading mode<a class="headerlink" href="#shading-mode" title="Link to this heading"></a></h3>
+<p>Materials support three shading modes: <strong>Per-Pixel</strong>, <strong>Per-Vertex</strong>, and
+<strong>Unshaded</strong>.</p>
+<figure class="align-center">
+<img alt="Three spheres showing the Per-Pixel, Per-Vertex, and Unshaded modes." src="../../_images/standard_material_shading_modes.webp" />
+</figure>
+<p>The <strong>Per-Pixel</strong> shading mode calculates lighting for each pixel, and is a good
+fit for most use cases. However, in some cases you may want to increase
+performance by using another shading mode.</p>
+<p>The <strong>Per-Vertex</strong> shading mode, often called &quot;vertex shading&quot; or &quot;vertex lighting&quot;,
+instead calculates lighting once for each vertex, and interpolates the result
+between each pixel.</p>
+<p>On low-end or mobile devices, using per-vertex lighting can considerably increase
+rendering performance. When rendering several layers of transparency,
+such as when using particle systems, using per-vertex shading can improve
+performance, especially when the camera is close to particles.</p>
+<p>You can also use per-vertex lighting to achieve a retro look.</p>
+<figure class="align-center" id="id1">
+<img alt="Two cubes with a brick texture, one shaded and one unshaded." src="../../_images/standard_material_shading_modes_textured.webp" />
+<figcaption>
+<p><span class="caption-text">Texture from <a class="reference external" href="https://ambientcg.com/view?id=Bricks051">AmbientCG</a></span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The <strong>Unshaded</strong> shading mode does not calculate lighting at all. Instead, the
+<strong>Albedo</strong> color is output directly. Lights will not affect the material at all,
+and unshaded materials will tend to appear considerably brighter than shaded
+materials.</p>
+<p>Rendering unshaded is useful for some specific visual effects. If maximum
+performance is needed, it can also be used for particles, or low-end or
+mobile devices.</p>
+</section>
+<section id="diffuse-mode">
+<h3>Diffuse Mode<a class="headerlink" href="#diffuse-mode" title="Link to this heading"></a></h3>
+<p>Specifies the algorithm used by diffuse scattering of light when hitting
+the object. The default is <strong>Burley</strong>. Other modes are also available:</p>
+<ul class="simple">
+<li><p><strong>Burley:</strong> Default mode, the original Disney Principled PBS diffuse algorithm.</p></li>
+<li><p><strong>Lambert:</strong> Is not affected by roughness.</p></li>
+<li><p><strong>Lambert Wrap:</strong> Extends Lambert to cover more than 90 degrees when
+roughness increases. Works great for hair and simulating cheap
+subsurface scattering. This implementation is energy conserving.</p></li>
+<li><p><strong>Toon:</strong> Provides a hard cut for lighting, with smoothing affected by roughness.
+It is recommended you disable sky contribution from your environment's
+ambient light settings or disable ambient light in the StandardMaterial3D
+to achieve a better effect.</p></li>
+</ul>
+<img alt="../../_images/spatial_material6.webp" src="../../_images/spatial_material6.webp" />
+</section>
+<section id="specular-mode">
+<h3>Specular Mode<a class="headerlink" href="#specular-mode" title="Link to this heading"></a></h3>
+<p>Specifies how the specular blob will be rendered. The specular blob
+represents the shape of a light source reflected in the object.</p>
+<ul class="simple">
+<li><p><strong>SchlickGGX:</strong> The most common blob used by PBR 3D engines nowadays.</p></li>
+<li><p><strong>Toon:</strong> Creates a toon blob, which changes size depending on roughness.</p></li>
+<li><p><strong>Disabled:</strong> Sometimes the blob gets in the way. Begone!</p></li>
+</ul>
+<img alt="../../_images/spatial_material7.webp" src="../../_images/spatial_material7.webp" />
+</section>
+<section id="disable-ambient-light">
+<h3>Disable Ambient Light<a class="headerlink" href="#disable-ambient-light" title="Link to this heading"></a></h3>
+<p>Makes the object not receive any kind of ambient lighting that would
+otherwise light it.</p>
+</section>
+<section id="disable-fog">
+<h3>Disable Fog<a class="headerlink" href="#disable-fog" title="Link to this heading"></a></h3>
+<p>Makes the object unaffected by depth-based or volumetric fog. This is useful for particles or other additively blended materials that would otherwise show the shape of the mesh (even in places where it would be invisible without the fog).</p>
+</section>
+<section id="disable-specular-occlusion">
+<h3>Disable Specular Occlusion<a class="headerlink" href="#disable-specular-occlusion" title="Link to this heading"></a></h3>
+<p>Makes the object not have its reflections reduced where they would usually be occluded.</p>
+</section>
+</section>
+<section id="vertex-color">
+<h2>Vertex Color<a class="headerlink" href="#vertex-color" title="Link to this heading"></a></h2>
+<p>This setting allows choosing what is done by default to vertex colors that come
+from your 3D modeling application. By default, they are ignored.</p>
+<section id="use-as-albedo">
+<h3>Use as Albedo<a class="headerlink" href="#use-as-albedo" title="Link to this heading"></a></h3>
+<p>Choosing this option means vertex color is used as albedo color.</p>
+</section>
+<section id="is-srgb">
+<h3>Is sRGB<a class="headerlink" href="#is-srgb" title="Link to this heading"></a></h3>
+<p>Most 3D modeling software will likely export vertex colors as sRGB, so toggling
+this option on will help them look correct.</p>
+</section>
+</section>
+<section id="albedo">
+<h2>Albedo<a class="headerlink" href="#albedo" title="Link to this heading"></a></h2>
+<p><em>Albedo</em> is the base color for the material, on which all the other settings
+operate. When set to <em>Unshaded</em>, this is the only color that is visible. In
+previous versions of Godot, this channel was named <em>Diffuse</em>. The change
+of name mainly happened because, in PBR (Physically Based Rendering), this color affects many
+more calculations than just the diffuse lighting path.</p>
+<p>Albedo color and texture can be used together as they are multiplied.</p>
+<p><em>Alpha channel</em> in albedo color and texture is also used for the
+object transparency. If you use a color or texture with <em>alpha channel</em>,
+make sure to either enable transparency or <em>alpha scissoring</em> for it to work.</p>
+</section>
+<section id="metallic">
+<h2>Metallic<a class="headerlink" href="#metallic" title="Link to this heading"></a></h2>
+<p>Godot uses a metallic model over competing models due to its simplicity.
+This parameter defines how reflective the material is. The more reflective, the
+less diffuse/ambient light affects the material and the more light is reflected.
+This model is called &quot;energy-conserving&quot;.</p>
+<p>The <em>Specular</em> parameter is a general amount for the reflectivity (unlike
+<em>Metallic</em>, this is not energy-conserving, so leave it at <code class="docutils literal notranslate"><span class="pre">0.5</span></code> and don't touch
+it unless you need to).</p>
+<p>The minimum internal reflectivity is <code class="docutils literal notranslate"><span class="pre">0.04</span></code>, so it's impossible to make a
+material completely unreflective, just like in real life.</p>
+<img alt="../../_images/spatial_material13.png" src="../../_images/spatial_material13.png" />
+</section>
+<section id="roughness">
+<h2>Roughness<a class="headerlink" href="#roughness" title="Link to this heading"></a></h2>
+<p><em>Roughness</em> affects the way reflection happens. A value of <code class="docutils literal notranslate"><span class="pre">0</span></code> makes it a
+perfect mirror while a value of <code class="docutils literal notranslate"><span class="pre">1</span></code> completely blurs the reflection (simulating
+natural microsurfacing). Most common types of materials can be achieved with
+the right combination of <em>Metallic</em> and <em>Roughness</em>.</p>
+<img alt="../../_images/spatial_material14.png" src="../../_images/spatial_material14.png" />
+</section>
+<section id="emission">
+<h2>Emission<a class="headerlink" href="#emission" title="Link to this heading"></a></h2>
+<p><em>Emission</em> specifies how much light is emitted by the material (keep in mind this
+does not include light surrounding geometry unless <a class="reference internal" href="global_illumination/using_voxel_gi.html#doc-using-voxel-gi"><span class="std std-ref">VoxelGI</span></a>
+or <a class="reference internal" href="global_illumination/using_sdfgi.html#doc-using-sdfgi"><span class="std std-ref">SDFGI</span></a> are used). This value is added to the resulting
+final image and is not affected by other lighting in the scene.</p>
+<img alt="../../_images/spatial_material15.png" src="../../_images/spatial_material15.png" />
+</section>
+<section id="normal-map">
+<h2>Normal map<a class="headerlink" href="#normal-map" title="Link to this heading"></a></h2>
+<p>Normal mapping allows you to set a texture that represents finer shape detail.
+This does not modify geometry, only the incident angle for light. In Godot,
+only the red and green channels of normal maps are used for better compression
+and wider compatibility.</p>
+<img alt="../../_images/spatial_material16.png" src="../../_images/spatial_material16.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Godot requires the normal map to use the X+, Y+ and Z+ coordinates, this is
+known as OpenGL style. If you've imported a material made to be used with
+another engine it may be DirectX style, in which case the normal map needs to
+be converted so its Y axis is flipped.</p>
+<p>More information about normal maps (including a coordinate order table for
+popular engines) can be found
+<a class="reference external" href="http://wiki.polycount.com/wiki/Normal_Map_Technical_Details">here</a>.</p>
+</div>
+</section>
+<section id="bent-normal-map">
+<span id="doc-standard-material-3d-bent-normal-map"></span><h2>Bent normal map<a class="headerlink" href="#bent-normal-map" title="Link to this heading"></a></h2>
+<p>A bent normal map describes the average direction of ambient lighting. Unlike a
+regular normal map, this is used to improve how a material reacts to lighting
+rather than add surface detail.</p>
+<p>This is achieved in two ways:</p>
+<ul class="simple">
+<li><p>Indirect diffuse lighting is made to match global illumination more closely.</p></li>
+<li><p>If specular occlusion is enabled, it is calculated using the bent normals and
+ambient occlusion instead of just from ambient light.
+This includes screen-space ambient occlusion (SSAO) and other sources of
+ambient occlusion.</p></li>
+</ul>
+<img alt="../../_images/spatial_material_bentnormals.webp" src="../../_images/spatial_material_bentnormals.webp" />
+<p>Godot only uses the red and green channels of a bent normal map for better
+compression and wider compatibility.</p>
+<p>When creating a bent normal map, there are three things required for it to
+work correctly in Godot:</p>
+<ul class="simple">
+<li><p>A <strong>cosine distribution</strong> of rays has to be used when baking.</p></li>
+<li><p>The texture must be created in <strong>tangent space</strong>.</p></li>
+<li><p>The bent normal map needs to use the X+, Y+, and Z+ coordinates, this is
+known as OpenGL style. If you've imported a material made to be used with
+another engine it may be DirectX style, in which case the bent normal map
+needs to be converted so its Y axis is flipped. This can be achieved by
+setting the green channel under the <strong>Channel Remap</strong> section to
+<strong>Inverted Green</strong> in the import dock.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A bent normal map is different from a regular normal map. The two are not
+interchangeable.</p>
+</div>
+</section>
+<section id="rim">
+<h2>Rim<a class="headerlink" href="#rim" title="Link to this heading"></a></h2>
+<p>Some fabrics have small micro-fur that causes light to scatter around it. Godot
+emulates this with the <em>Rim</em> parameter. Unlike other rim lighting implementations,
+which just use the emission channel, this one actually takes light into account
+(no light means no rim). This makes the effect considerably more believable.</p>
+<img alt="../../_images/spatial_material17.png" src="../../_images/spatial_material17.png" />
+<p>Rim size depends on roughness, and there is a special parameter to specify how
+it must be colored. If <em>Tint</em> is <code class="docutils literal notranslate"><span class="pre">0</span></code>, the color of the light is used for the
+rim. If <em>Tint</em> is <code class="docutils literal notranslate"><span class="pre">1</span></code>, then the albedo of the material is used. Using
+intermediate values generally works best.</p>
+</section>
+<section id="clearcoat">
+<h2>Clearcoat<a class="headerlink" href="#clearcoat" title="Link to this heading"></a></h2>
+<p>The <em>Clearcoat</em> parameter is used to add a secondary pass of transparent coat
+to the material. This is common in car paint and toys. In practice, it's a
+smaller specular blob added on top of the existing material.</p>
+<img alt="../../_images/clearcoat_comparison.png" src="../../_images/clearcoat_comparison.png" />
+</section>
+<section id="anisotropy">
+<h2>Anisotropy<a class="headerlink" href="#anisotropy" title="Link to this heading"></a></h2>
+<p>This changes the shape of the specular blob and aligns it to tangent space.
+Anisotropy is commonly used with hair, or to make materials such as brushed
+aluminum more realistic. It works especially well when combined with flowmaps.</p>
+<img alt="../../_images/spatial_material18.png" src="../../_images/spatial_material18.png" />
+</section>
+<section id="ambient-occlusion">
+<h2>Ambient Occlusion<a class="headerlink" href="#ambient-occlusion" title="Link to this heading"></a></h2>
+<p>It is possible to specify a baked ambient occlusion map. This map affects how
+much ambient light reaches each surface of the object (it does not affect direct
+light by default). While it is possible to use Screen-Space Ambient Occlusion
+(SSAO) to generate ambient occlusion, nothing beats the quality of a well-baked
+AO map. It is recommended to bake ambient occlusion whenever possible.</p>
+<img alt="../../_images/spatial_material19.png" src="../../_images/spatial_material19.png" />
+</section>
+<section id="height">
+<h2>Height<a class="headerlink" href="#height" title="Link to this heading"></a></h2>
+<p>Setting a height map on a material produces a ray-marched search to emulate the
+proper displacement of cavities along the view direction. This only creates an
+illusion of depth, and does not add real geometry — for a height map shape used
+for physics collision (such as terrain), see <a class="reference internal" href="../../classes/class_heightmapshape3d.html#class-heightmapshape3d"><span class="std std-ref">HeightMapShape3D</span></a>. It
+may not work for complex objects, but it produces a realistic depth effect for
+textures. For best results, <em>Height</em> should be used together with normal
+mapping.</p>
+<img alt="../../_images/spatial_material20.png" src="../../_images/spatial_material20.png" />
+</section>
+<section id="subsurface-scattering">
+<h2>Subsurface Scattering<a class="headerlink" href="#subsurface-scattering" title="Link to this heading"></a></h2>
+<p><em>This is only available in the Forward+ renderer, not the Mobile or Compatibility
+renderers.</em></p>
+<p>This effect emulates light that penetrates an object's surface, is scattered,
+and then comes out. It is useful to create realistic skin, marble, colored
+liquids, etc.</p>
+<img alt="../../_images/spatial_material21.png" src="../../_images/spatial_material21.png" />
+</section>
+<section id="back-lighting">
+<h2>Back Lighting<a class="headerlink" href="#back-lighting" title="Link to this heading"></a></h2>
+<p>This controls how much light from the lit side (visible to light) is transferred
+to the dark side (opposite from the light). This works well for thin objects
+such as plant leaves, grass, human ears, etc.</p>
+<img alt="../../_images/spatial_material22.png" src="../../_images/spatial_material22.png" />
+</section>
+<section id="refraction">
+<h2>Refraction<a class="headerlink" href="#refraction" title="Link to this heading"></a></h2>
+<p>When refraction is enabled, Godot attempts to fetch information from behind the
+object being rendered. This allows distorting the transparency in a way similar
+to refraction in real life.</p>
+<p>Remember to use a transparent albedo texture (or reduce the albedo color's alpha
+channel) to make refraction visible, as refraction relies on transparency to
+have a visible effect.</p>
+<p>Refraction also takes the material roughness into account. Higher roughness
+values will make the objects behind the refraction look blurrier, which
+simulates real life behavior. If you can't see behind the object when refraction
+is enabled and albedo transparency is reduced, decrease the material's
+<strong>Roughness</strong> value.</p>
+<p>A normal map can optionally be specified in the <strong>Refraction Texture</strong> property
+to allow distorting the refraction's direction on a per-pixel basis.</p>
+<img alt="../../_images/spatial_material23.png" src="../../_images/spatial_material23.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Refraction is implemented as a screen-space effect and forces the material
+to be transparent. This makes the effect relatively fast, but this results
+in some limitations:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="3d_rendering_limitations.html#doc-3d-rendering-limitations-transparency-sorting"><span class="std std-ref">Transparency sorting</span></a>
+issues may occur.</p></li>
+<li><p>The refractive material cannot refract onto itself, or onto other
+transparent materials. A refractive material behind another transparent
+material will be invisible.</p></li>
+<li><p>Off-screen objects cannot appear in the refraction. This is most
+noticeable with high refraction strength values.</p></li>
+<li><p>Opaque materials in front of the refractive material will appear to have
+&quot;refracted&quot; edges, even though they shouldn't.</p></li>
+</ul>
+</div>
+</section>
+<section id="detail">
+<h2>Detail<a class="headerlink" href="#detail" title="Link to this heading"></a></h2>
+<p>Godot allows using secondary albedo and normal maps to generate a detail
+texture, which can be blended in many ways. By combining this with secondary
+UV or triplanar modes, many interesting textures can be achieved.</p>
+<img alt="../../_images/spatial_material24.png" src="../../_images/spatial_material24.png" />
+<p>There are several settings that control how detail is used.</p>
+<p>Mask: The detail mask is a black and white image used to control where the
+blending takes place on a texture. White is for the detail textures, Black
+is for the regular material textures, different shades of gray are for
+partial blending of the material textures and detail textures.</p>
+<p>Blend Mode: These four modes control how the textures are blended together.</p>
+<ul class="simple">
+<li><p>Mix: Combines pixel values of both textures. At black, only show the material texture,
+at white, only show the detail texture. Values of gray create a smooth blend between
+the two.</p></li>
+<li><p>Add: Adds pixel values of one Texture with the other. Unlike mix mode
+both textures are completely mixed at white parts of a mask and not at gray
+parts. The original texture is mostly unchanged at black</p></li>
+<li><p>Sub: Subtracts pixel values of one texture with the other. The second
+texture is completely subtracted at white parts of a mask with only a little
+subtraction in black parts, gray parts being different levels of subtraction
+based on the exact texture.</p></li>
+<li><p>Mul: Multiplies the RGB channel numbers for each pixel from the top texture
+with the values for the corresponding pixel from the bottom texture.</p></li>
+</ul>
+<p>Albedo: This is where you put an albedo texture you want to blend. If nothing
+is in this slot it will be interpreted as white by default.</p>
+<p>Normal: This is where you put a normal texture you want to blend. If nothing is
+in this slot it will be interpreted as a flat normal map. This can still be used
+even if the material does not have normal map enabled.</p>
+</section>
+<section id="uv1-and-uv2">
+<h2>UV1 and UV2<a class="headerlink" href="#uv1-and-uv2" title="Link to this heading"></a></h2>
+<p>Godot supports two UV channels per material. Secondary UV is often useful for
+ambient occlusion or emission (baked light). UVs can be scaled and offset,
+which is useful when using repeating textures.</p>
+<section id="triplanar-mapping">
+<span id="doc-standard-material-3d-triplanar-mapping"></span><h3>Triplanar Mapping<a class="headerlink" href="#triplanar-mapping" title="Link to this heading"></a></h3>
+<p>Triplanar mapping is supported for both UV1 and UV2. This is an alternative way
+to obtain texture coordinates, sometimes called &quot;Autotexture&quot;. Textures are
+sampled in X, Y and Z and blended by the normal. Triplanar mapping can be
+performed in either world space or object space.</p>
+<p>In the image below, you can see how all primitives share the same material with
+world triplanar, so the brick texture continues smoothly between them.</p>
+<img alt="../../_images/spatial_material25.png" src="../../_images/spatial_material25.png" />
+</section>
+<section id="world-triplanar">
+<h3>World Triplanar<a class="headerlink" href="#world-triplanar" title="Link to this heading"></a></h3>
+<p>When using triplanar mapping, it is computed in object local space. This
+option makes it use world space instead.</p>
+</section>
+</section>
+<section id="sampling">
+<span id="doc-standard-material-3d-sampling"></span><h2>Sampling<a class="headerlink" href="#sampling" title="Link to this heading"></a></h2>
+<section id="filter">
+<h3>Filter<a class="headerlink" href="#filter" title="Link to this heading"></a></h3>
+<p>The filtering method for the textures used by the material. See <a class="reference internal" href="../../classes/class_basematerial3d.html#class-basematerial3d-property-texture-filter"><span class="std std-ref">this page</span></a>
+for a full list of options and their description.</p>
+</section>
+<section id="repeat">
+<h3>Repeat<a class="headerlink" href="#repeat" title="Link to this heading"></a></h3>
+<p>if the textures used by the material repeat, and how they repeat. See <a class="reference internal" href="../../classes/class_basematerial3d.html#class-basematerial3d-property-texture-repeat"><span class="std std-ref">this page</span></a>
+for a full list of options and their description.</p>
+</section>
+</section>
+<section id="shadows">
+<h2>Shadows<a class="headerlink" href="#shadows" title="Link to this heading"></a></h2>
+<section id="disable-receive-shadows">
+<h3>Disable Receive Shadows<a class="headerlink" href="#disable-receive-shadows" title="Link to this heading"></a></h3>
+<p>Makes the object not receive any kind of shadow that would otherwise
+be cast onto it.</p>
+</section>
+<section id="shadow-to-opacity">
+<h3>Shadow to Opacity<a class="headerlink" href="#shadow-to-opacity" title="Link to this heading"></a></h3>
+<p>Lighting modifies the alpha so shadowed areas are opaque and non-shadowed
+areas are transparent. Useful for overlaying shadows onto a camera feed in AR.</p>
+</section>
+</section>
+<section id="billboard">
+<h2>Billboard<a class="headerlink" href="#billboard" title="Link to this heading"></a></h2>
+<section id="billboard-mode">
+<h3>Billboard Mode<a class="headerlink" href="#billboard-mode" title="Link to this heading"></a></h3>
+<p>Enables billboard mode for drawing materials. This controls how the object
+faces the camera:</p>
+<ul class="simple">
+<li><p><strong>Disabled:</strong> Billboard mode is disabled.</p></li>
+<li><p><strong>Enabled:</strong> Billboard mode is enabled. The object's -Z axis will always
+face the camera's viewing plane.</p></li>
+<li><p><strong>Y-Billboard:</strong> The object's X axis will always be aligned with the camera's viewing plane.</p></li>
+<li><p><strong>Particle Billboard:</strong> Most suited for particle systems, because it allows
+specifying <a class="reference internal" href="particles/process_material_properties.html#doc-process-material-properties-animation"><span class="std std-ref">flipbook animation</span></a>.</p></li>
+</ul>
+<img alt="../../_images/spatial_material9.webp" src="../../_images/spatial_material9.webp" />
+<p>The <strong>Particles Anim</strong> section is only visible when the billboard mode is <strong>Particle Billboard</strong>.</p>
+</section>
+<section id="billboard-keep-scale">
+<h3>Billboard Keep Scale<a class="headerlink" href="#billboard-keep-scale" title="Link to this heading"></a></h3>
+<p>Enables scaling a mesh in billboard mode.</p>
+</section>
+</section>
+<section id="grow">
+<span id="ref-standard-material-3d-grow"></span><h2>Grow<a class="headerlink" href="#grow" title="Link to this heading"></a></h2>
+<p>Grows the object vertices in the direction pointed by their normals:</p>
+<img alt="../../_images/spatial_material10.png" src="../../_images/spatial_material10.png" />
+<p>This is commonly used to create cheap outlines. Add a second material pass,
+make it black and unshaded, reverse culling (Cull Front), and add some grow:</p>
+<img alt="../../_images/spatial_material11.png" src="../../_images/spatial_material11.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For Grow to work as expected, the mesh must have connected faces with shared
+vertices, or &quot;smooth shading&quot;. If the mesh has disconnected faces with unique
+vertices, or &quot;flat shading&quot;, the mesh will appear to have gaps when using Grow.</p>
+</div>
+<p>Note that in Godot 4.5 onwards, stencil buffer-based outlines are available
+using the <strong>Outline</strong> <a class="reference internal" href="#doc-standard-material-3d-stencil"><span class="std std-ref">stencil mode</span></a>.
+This can be used as an alternative to Grow for outlines.</p>
+</section>
+<section id="transform">
+<h2>Transform<a class="headerlink" href="#transform" title="Link to this heading"></a></h2>
+<section id="fixed-size">
+<h3>Fixed Size<a class="headerlink" href="#fixed-size" title="Link to this heading"></a></h3>
+<p>This causes the object to be rendered at the same size no matter the distance.
+This is useful mostly for indicators (no depth test and high render priority)
+and some types of billboards.</p>
+</section>
+<section id="use-point-size">
+<h3>Use Point Size<a class="headerlink" href="#use-point-size" title="Link to this heading"></a></h3>
+<p>This option is only effective when the geometry rendered is made of points
+(generally it's made of triangles when imported from 3D modeling software). If
+so, then those points can be resized (see below).</p>
+</section>
+<section id="point-size">
+<h3>Point Size<a class="headerlink" href="#point-size" title="Link to this heading"></a></h3>
+<p>When drawing points, specify the point size in pixels.</p>
+</section>
+<section id="use-particle-trails">
+<h3>Use Particle Trails<a class="headerlink" href="#use-particle-trails" title="Link to this heading"></a></h3>
+<p><em>This is only available in the Forward+ and Mobile renderers, not the Compatibility
+renderer.</em></p>
+<p>If true, enables parts of the shader required for GPUParticles3D trails to function.
+This also requires using a mesh with appropriate skinning, such as RibbonTrailMesh
+or TubeTrailMesh. Enabling this feature outside of materials used in GPUParticles3D
+meshes will break material rendering.</p>
+</section>
+<section id="use-z-clip-scale">
+<h3>Use Z Clip Scale<a class="headerlink" href="#use-z-clip-scale" title="Link to this heading"></a></h3>
+<p>Scales the object being rendered towards the camera to avoid clipping into things
+like walls. This is intended to be used for objects that are fixed with respect to
+the camera like player arms, tools, etc. Lighting and shadows will continue to work
+correctly when this setting is adjusted, but screen-space effects like SSAO and SSR
+may break with lower scales. Therefore, try to keep this setting as close to 1.0 as
+possible.</p>
+</section>
+<section id="use-fov-override">
+<h3>Use FOV Override<a class="headerlink" href="#use-fov-override" title="Link to this heading"></a></h3>
+<p>Overrides the <code class="docutils literal notranslate"><span class="pre">Camera3D</span></code>'s field of view angle (in degrees).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This behaves as if the field of view is set on a <code class="docutils literal notranslate"><span class="pre">Camera3D</span></code> with
+<code class="docutils literal notranslate"><span class="pre">Camera3D.keep_aspect</span></code> set to <code class="docutils literal notranslate"><span class="pre">Camera3D.KEEP_HEIGHT</span></code>. Additionally, it may not
+look correct on a non-perspective camera where the field of view setting is
+ignored.</p>
+</div>
+</section>
+</section>
+<section id="proximity-and-distance-fade">
+<h2>Proximity and Distance Fade<a class="headerlink" href="#proximity-and-distance-fade" title="Link to this heading"></a></h2>
+<p>Godot allows materials to fade by proximity to each other as well as depending
+on the distance from the viewer. Proximity fade is useful for effects such as
+soft particles or a mass of water with a smooth blending to the shores.</p>
+<img alt="../../_images/spatial_material_proxfade.gif" src="../../_images/spatial_material_proxfade.gif" />
+<p>Distance fade is useful for light shafts or indicators that are only present
+after a given distance.</p>
+<p>Keep in mind enabling proximity fade or distance fade with <strong>Pixel Alpha</strong> mode
+enables alpha blending. Alpha blending is more GPU-intensive and can cause
+transparency sorting issues. Alpha blending also disables many material
+features such as the ability to cast shadows.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To hide a character when they get too close to the camera, consider using
+<strong>Pixel Dither</strong> or better, <strong>Object Dither</strong> (which is even faster than
+<strong>Pixel Dither</strong>).</p>
+</div>
+<p><strong>Pixel Alpha</strong> mode: The actual transparency of a pixel of the object changes
+with distance to the camera. This is the most effect, but forces the material
+into the transparency pipeline (which leads, for example, to no shadows).</p>
+<img alt="../../_images/standart_material_distance_fade_pixel_alpha_mode.webp" src="../../_images/standart_material_distance_fade_pixel_alpha_mode.webp" />
+<p><strong>Pixel Dither</strong> mode: What this does is sort of approximate the transparency
+by only having a fraction of the pixels rendered.</p>
+<img alt="../../_images/standart_material_distance_fade_pixel_dither_mode.webp" src="../../_images/standart_material_distance_fade_pixel_dither_mode.webp" />
+<p><strong>Object Dither</strong> mode: Like the previous mode, but the calculated transparency
+is the same across the entire object's surface.</p>
+<img alt="../../_images/standart_material_distance_fade_object_dither_mode.webp" src="../../_images/standart_material_distance_fade_object_dither_mode.webp" />
+</section>
+<section id="stencil">
+<span id="doc-standard-material-3d-stencil"></span><h2>Stencil<a class="headerlink" href="#stencil" title="Link to this heading"></a></h2>
+<p>Since Godot 4.5, Godot allows materials to make use of the stencil buffer.
+This feature is commonly used to create outlines and X-ray effects,
+which can be useful to highlight objects, especially behind walls.</p>
+<p>The <strong>Outline</strong> and <strong>X-Ray</strong> modes assign a preconfigured stencil material
+in the material's <strong>Next Pass</strong> property. The <strong>Custom</strong> mode can be used for
+advanced effects.</p>
+<img alt="../../_images/material_stencil.webp" src="../../_images/material_stencil.webp" />
+<p>Materials that write to the stencil buffer are always drawn in the transparent pass,
+so they are subject to the usual
+<a class="reference internal" href="3d_rendering_limitations.html#doc-3d-rendering-limitations-transparency-sorting"><span class="std std-ref">transparency limitations</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Like with the <a class="reference internal" href="#ref-standard-material-3d-grow"><span class="std std-ref">Grow property</span></a>, for the
+stencil outline to work as expected, the mesh must have connected faces with
+shared vertices, or &quot;smooth shading&quot;. If the mesh has disconnected faces with
+unique vertices, or &quot;flat shading&quot;, the mesh will appear to have gaps when using
+a stencil outline.</p>
+<p>Stencil outlines render similarly to the Grow property, but won't look identical
+in every scenario, especially when intersections with opaque surfaces are involved.</p>
+</div>
+</section>
+<section id="material-settings">
+<h2>Material Settings<a class="headerlink" href="#material-settings" title="Link to this heading"></a></h2>
+</section>
+<section id="render-priority">
+<h2>Render priority<a class="headerlink" href="#render-priority" title="Link to this heading"></a></h2>
+<p>The rendering order of objects can be changed, although this is mostly
+useful for transparent objects (or opaque objects that perform depth draw
+but no color draw, such as cracks on the floor).</p>
+<p>Objects are sorted by an opaque/transparent queue, then <a class="reference internal" href="../../classes/class_material.html#class-material-property-render-priority"><span class="std std-ref">render_priority</span></a>,
+with higher priority being drawn later. Transparent objects are also sorted by depth.</p>
+<p>Depth testing overrules priority. Priority alone cannot force opaque objects to be drawn over each other.</p>
+</section>
+<section id="next-pass">
+<h2>Next Pass<a class="headerlink" href="#next-pass" title="Link to this heading"></a></h2>
+<p>Setting <a class="reference internal" href="../../classes/class_material.html#class-material-property-next-pass"><span class="std std-ref">next_pass</span></a> on a material
+will cause an object to be rendered again with that next material.</p>
+<p>Materials are sorted by an opaque/transparent queue, then <a class="reference internal" href="../../classes/class_material.html#class-material-property-render-priority"><span class="std std-ref">render_priority</span></a>,
+with higher priority being drawn later.</p>
+<img alt="../../_images/next_pass.webp" src="../../_images/next_pass.webp" />
+<p>Depth will test equal between both materials unless the grow setting or other vertex transformations are used.
+Multiple transparent passes should use <a class="reference internal" href="../../classes/class_material.html#class-material-property-render-priority"><span class="std std-ref">render_priority</span></a> to ensure correct ordering.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="3d_rendering_limitations.html" class="btn btn-neutral float-left" title="3D rendering limitations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lights_and_shadows.html" class="btn btn-neutral float-right" title="3D lights and shadows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

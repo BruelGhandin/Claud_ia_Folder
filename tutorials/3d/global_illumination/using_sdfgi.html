@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Signed distance field global illumination (SDFGI)" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/global_illumination/using_sdfgi.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Signed distance field global illumination (SDFGI) is a novel technique available in Godot. It provides semi-real-time global illumination that scales to any world size and works with procedurally g..." />
+<meta name="description" content="Signed distance field global illumination (SDFGI) is a novel technique available in Godot. It provides semi-real-time global illumination that scales to any world size and works with procedurally g..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Signed distance field global illumination (SDFGI) &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Using Lightmap global illumination" href="using_lightmap_gi.html" />
+    <link rel="prev" title="Using Voxel global illumination" href="using_voxel_gi.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/global_illumination/using_sdfgi" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/3d/global_illumination/using_sdfgi.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">3D</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Global illumination</a></li>
+      <li class="breadcrumb-item active">Signed distance field global illumination (SDFGI)</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/global_illumination/using_sdfgi.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="signed-distance-field-global-illumination-sdfgi">
+<span id="doc-using-sdfgi"></span><h1>Signed distance field global illumination (SDFGI)<a class="headerlink" href="#signed-distance-field-global-illumination-sdfgi" title="Link to this heading"></a></h1>
+<p>Signed distance field global illumination (SDFGI) is a novel technique available
+in Godot. It provides semi-real-time global illumination that scales to any
+world size and works with procedurally generated levels.</p>
+<p>SDFGI supports dynamic lights, but <em>not</em> dynamic occluders or dynamic emissive surfaces.
+Therefore, SDFGI provides better real-time ability than
+<a class="reference internal" href="using_lightmap_gi.html#doc-using-lightmap-gi"><span class="std std-ref">baked lightmaps</span></a>, but worse real-time ability than
+<a class="reference internal" href="using_voxel_gi.html#doc-using-voxel-gi"><span class="std std-ref">VoxelGI</span></a>.</p>
+<p>From a performance standpoint, SDFGI is one of the most demanding global illumination
+techniques in Godot. Like with VoxelGI, there are still many settings available to tweak
+its performance requirements at the cost of quality.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>SDFGI is only supported when using the Forward+ renderer, not the Mobile or
+Compatibility renderers.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Not sure if SDFGI is suited to your needs?
+See <a class="reference internal" href="introduction_to_global_illumination.html#doc-introduction-to-global-illumination-comparison"><span class="std std-ref">Which global illumination technique should I use?</span></a>
+for a comparison of GI techniques available in Godot 4.</p>
+</div>
+<section id="visual-comparison">
+<h2>Visual comparison<a class="headerlink" href="#visual-comparison" title="Link to this heading"></a></h2>
+<figure class="align-default" id="id1">
+<img alt="SDFGI disabled." src="../../../_images/gi_none.webp" />
+<figcaption>
+<p><span class="caption-text">SDFGI disabled.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id2">
+<img alt="SDFGI enabled." src="../../../_images/gi_sdfgi.webp" />
+<figcaption>
+<p><span class="caption-text">SDFGI enabled.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="setting-up-sdfgi">
+<h2>Setting up SDFGI<a class="headerlink" href="#setting-up-sdfgi" title="Link to this heading"></a></h2>
+<p>In Godot, SDFGI is the global illumination technique with the fewest required
+steps to enable:</p>
+<ol class="arabic simple">
+<li><p>Make sure your MeshInstance nodes have their <strong>Global Illumination &gt; Mode</strong>
+property set to <strong>Static</strong> in the inspector.</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>For imported 3D scenes, the bake mode can be configured in the Import dock
+after selecting the 3D scene file in the FileSystem dock.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>Add a WorldEnvironment node and create an Environment resource for it.</p></li>
+<li><p>Edit the Environment resource, scroll down to the <strong>SDFGI</strong> section and unfold it.</p></li>
+<li><p>Enable <strong>SDFGI &gt; Enabled</strong>. SDFGI will automatically follow the camera when it
+moves, so you do not need to configure extents (unlike VoxelGI).</p></li>
+</ol>
+</section>
+<section id="environment-sdfgi-properties">
+<h2>Environment SDFGI properties<a class="headerlink" href="#environment-sdfgi-properties" title="Link to this heading"></a></h2>
+<p>In the Environment resource, there are several properties available to adjust
+SDFGI appearance and quality:</p>
+<ul class="simple">
+<li><p><strong>Use Occlusion:</strong> If enabled, SDFGI will throw additional rays to find and
+reduce light leaks. This has a performance cost, so only enable this property
+if you actually need it.</p></li>
+<li><p><strong>Read Sky Light:</strong> If enabled, the environment lighting is represented in the
+global illumination. This should be enabled in outdoor scenes and disabled in
+fully indoor scenes.</p></li>
+<li><p><strong>Bounce Feedback:</strong> By default, indirect lighting only bounces once when
+using SDFGI. Setting this value above <code class="docutils literal notranslate"><span class="pre">0.0</span></code> will cause SDFGI to bounce more
+than once, which provides more realistic indirect lighting at a small
+performance cost. Sensible values are usually between <code class="docutils literal notranslate"><span class="pre">0.3</span></code> and <code class="docutils literal notranslate"><span class="pre">1.0</span></code>
+depending on the scene. Note that in some scenes, values above <code class="docutils literal notranslate"><span class="pre">0.5</span></code> can
+cause infinite feedback loops to happen, causing the scene to become extremely
+bright in a few seconds' time.
+If your indirect lighting looks &quot;splotchy&quot;, consider increasing this value above
+<code class="docutils literal notranslate"><span class="pre">0.0</span></code> to get more uniform-looking lighting. If your lighting ends up looking
+too bright as a result, decrease <strong>Energy</strong> to compensate.</p></li>
+<li><p><strong>Cascades:</strong> Higher values result in more detailed GI information
+(and/or greater maximum distance), but are significantly more expensive on the
+CPU and GPU. The performance cost of having more cascades especially increases
+when the camera moves fast, so consider decreasing this to <code class="docutils literal notranslate"><span class="pre">4</span></code> or lower
+if your camera moves fast.</p></li>
+<li><p><strong>Min Cell Size:</strong> The minimum SDFGI cell size to use for the nearest, most detailed
+cascade. Lower values result in more accurate indirect lighting and reflection
+at the cost of lower performance.
+Adjusting this setting also affects <strong>Cascade 0 Distance</strong> and <strong>Max Distance</strong> automatically.</p></li>
+<li><p><strong>Cascade 0 Distance:</strong> The distance at which the nearest, most detailed
+cascade ends. Greater values make the nearest cascade transition less noticeable,
+at the cost of reducing the level of detail in the nearest cascade.
+Adjusting this setting also affects <strong>Min Cell Size</strong> and <strong>Max Distance</strong> automatically.</p></li>
+<li><p><strong>Max Distance:</strong> Controls how far away the signed distance field will be computed
+(for the least detailed cascade). SDFGI will not have any effect past this distance.
+This value should always be set below the Camera's Far value, as there is no benefit
+in computing SDFGI past the viewing distance.
+Adjusting this setting also affects <strong>Min Cell Size</strong> and <strong>Cascade 0 Distance</strong> automatically.</p></li>
+<li><p><strong>Y Scale:</strong> Controls how far apart SDFGI probes are spread <em>vertically</em>.
+By default, vertical spread is the same as horizontal. However, since most
+game scenes aren't highly vertical, setting the Y Scale to
+<code class="docutils literal notranslate"><span class="pre">75%</span></code> or even <code class="docutils literal notranslate"><span class="pre">50%</span></code> can provide better quality and reduce light leaks
+without impacting performance.</p></li>
+<li><p><strong>Energy:</strong> The brightness multiplier for SDFGI's indirect lighting.</p></li>
+<li><p><strong>Normal Bias:</strong> The normal bias to use for SDFGI's probe ray bounces.
+Unlike <strong>Probe Bias</strong>, this only increases the value in relation to the
+mesh's normals. This makes the bias adjustment more nuanced and avoids
+increasing the bias too much for no reason. Increase this
+value if you notice striping artifacts in indirect lighting or reflections.</p></li>
+<li><p><strong>Probe Bias:</strong> The bias to use for SDFGI's probe ray bounces. Increase this
+value if you notice striping artifacts in indirect lighting or reflections.</p></li>
+</ul>
+</section>
+<section id="sdfgi-interaction-with-lights-and-objects">
+<h2>SDFGI interaction with lights and objects<a class="headerlink" href="#sdfgi-interaction-with-lights-and-objects" title="Link to this heading"></a></h2>
+<p>The amount of indirect energy emitted by a light is defined by its color,
+energy <em>and</em> indirect energy properties. To make a specific light emit more
+or less indirect energy without affecting the amount of direct light emitted
+by the light, adjust the <strong>Indirect Energy</strong> property in the Light3D inspector.</p>
+<p>To ensure correct visuals when using SDFGI, you must configure your meshes
+and lights' global illumination properties according to their <em>purpose</em> in the
+scene (static or dynamic).</p>
+<p>There are 3 global illumination modes available for meshes:</p>
+<ul class="simple">
+<li><p><strong>Disabled:</strong> The mesh won't be taken into account in SDFGI generation.
+The mesh will receive indirect lighting from the scene, but it will not
+contribute indirect lighting to the scene.</p></li>
+<li><p><strong>Static (default):</strong> The mesh will be taken into account in SDFGI generation.
+The mesh will both receive <em>and</em> contribute indirect lighting to the scene. If
+the mesh is changed in any way after SDFGI is generated, the camera must move
+away from the object then move back close to it for SDFGI to regenerate.
+Alternatively, SDFGI can be toggled off and back on. If neither is done,
+indirect lighting will look incorrect.</p></li>
+<li><p><strong>Dynamic (not supported with SDFGI):</strong> The mesh won't be taken into account in SDFGI generation.
+The mesh will receive indirect lighting from the scene, but it will not
+contribute indirect lighting to the scene.
+This acts identical to the <strong>Disabled</strong> bake mode when using SDFGI.</p></li>
+</ul>
+<p>Additionally, there are 3 bake modes available for lights
+(DirectionalLight3D, OmniLight3D, SpotLight3D, and AreaLight3D):</p>
+<ul class="simple">
+<li><p><strong>Disabled:</strong> The light won't be taken into account for SDFGI baking.
+The light won't contribute indirect lighting to the scene.</p></li>
+<li><p><strong>Static:</strong> The light will be taken into account for SDFGI baking. The light
+will contribute indirect lighting to the scene. If the light is changed in any
+way after baking, indirect lighting will look incorrect until the camera moves
+away from the light and back (which causes SDFGI to be baked again).
+If in doubt, use this mode for level lighting.</p></li>
+<li><p><strong>Dynamic (default):</strong> The light won't be taken into account for SDFGI baking,
+but it will still contribute indirect lighting to the scene in real-time.
+This option is slower compared to <strong>Static</strong>. Only use the <strong>Dynamic</strong> global
+illumination mode on lights that will change significantly during gameplay.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The amount of indirect energy emitted by a light depends on its color,
+energy <em>and</em> indirect energy properties. To make a specific light emit more
+or less indirect energy without affecting the amount of direct light emitted
+by the light, adjust the <strong>Indirect Energy</strong> property in the Light3D inspector.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="introduction_to_global_illumination.html#doc-introduction-to-global-illumination-gi-mode-recommendations"><span class="std std-ref">Which global illumination mode should I use on meshes and lights?</span></a>
+for general usage recommendations.</p>
+</div>
+</section>
+<section id="adjusting-sdfgi-performance-and-quality">
+<h2>Adjusting SDFGI performance and quality<a class="headerlink" href="#adjusting-sdfgi-performance-and-quality" title="Link to this heading"></a></h2>
+<p>Since SDFGI is relatively demanding, it will perform best on systems with recent
+dedicated GPUs. On older dedicated GPUs and integrated graphics,
+tweaking the settings is necessary to achieve reasonable performance.</p>
+<p>In the Project Settings' <strong>Rendering &gt; Global Illumination</strong> section,
+SDFGI quality can also be adjusted in several ways:</p>
+<ul class="simple">
+<li><p><strong>Sdfgi &gt; Probe Ray Count:</strong> Higher values result in better quality,
+at the cost of higher GPU usage. If this value is set too low,
+this can cause surfaces to have visible &quot;splotches&quot; of indirect lighting on
+them due to the number of rays thrown being very low.</p></li>
+<li><p><strong>Sdfgi &gt; Frames To Converge:</strong> Higher values result in better quality, but GI will take
+more time to fully converge. The effect of this setting is especially noticeable when first
+loading a scene, or when lights with a bake mode other than <strong>Disabled</strong> are moving fast.
+If this value is set too low, this can cause surfaces to have visible &quot;splotches&quot;
+of indirect lighting on them due to the number of rays thrown being very low.
+If your scene's lighting doesn't have fast-moving lights that contribute to GI,
+consider setting this to <code class="docutils literal notranslate"><span class="pre">30</span></code> to improve quality without impacting performance.</p></li>
+<li><p><strong>Sdfgi &gt; Frames To Update Light:</strong> Lower values result in moving lights being
+reflected faster, at the cost of higher GPU usage. If your scene's lighting
+doesn't have fast-moving lights that contribute to GI, consider setting this
+to <code class="docutils literal notranslate"><span class="pre">16</span></code> to improve performance.</p></li>
+<li><p><strong>Gi &gt; Use Half Resolution:</strong> If enabled, both SDFGI and VoxelGI will have
+their GI buffer rendering at halved resolution. For instance, when rendering
+in 3840×2160, the GI buffer will be computed at a 1920×1080 resolution.
+Enabling this option saves a lot of GPU time, but it can introduce visible
+aliasing around thin details.</p></li>
+</ul>
+<p>SDFGI rendering performance also depends on the number of cascades and
+the cell size chosen in the Environment resource (see above).</p>
+</section>
+<section id="sdfgi-caveats">
+<h2>SDFGI caveats<a class="headerlink" href="#sdfgi-caveats" title="Link to this heading"></a></h2>
+<p>SDFGI has some downsides due to its cascaded nature. When the camera moves,
+cascade shifts may be visible in indirect lighting. This can be alleviated
+by adjusting the cascade size, but also by adding fog (which will make distant
+cascade shifts less noticeable).</p>
+<p>Additionally, performance will suffer if the camera moves too fast.
+This can be fixed in two ways:</p>
+<ul class="simple">
+<li><p>Ensuring the camera doesn't move too fast in any given situation.</p></li>
+<li><p>Temporarily disabling SDFGI in the Environment resource if the camera needs
+to be moved at a high speed, then enabling SDFGI once the camera speed slows down.</p></li>
+</ul>
+<p>When SDFGI is enabled, it will also take some time for global illumination
+to be fully converged (30 frames by default). This can create a noticeable transition
+effect while GI is still converging. To hide this, you can use a ColorRect node
+that spans the whole viewport and fade it out when switching scenes using an
+AnimationPlayer node.</p>
+<p>The signed distance field is only updated when the camera moves in and out of a
+cascade. This means that if geometry is modified in the distance, the global
+illumination appearance will be correct once the camera gets closer. However, if
+a nearby object with a bake mode set to <strong>Static</strong> or <strong>Dynamic</strong> is moved (such
+as a door), the global illumination will appear incorrect until the camera moves
+away from the object.</p>
+<p>SDFGI's sharp reflections are only visible on opaque materials. Transparent
+materials will only use rough reflections, even if the material's roughness is
+lower than 0.2.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="using_voxel_gi.html" class="btn btn-neutral float-left" title="Using Voxel global illumination" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="using_lightmap_gi.html" class="btn btn-neutral float-right" title="Using Lightmap global illumination" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

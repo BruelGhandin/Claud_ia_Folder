@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Thread-safe APIs" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/performance/thread_safe_apis.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Threads: Threads are used to balance processing power across CPUs and cores. Godot supports multithreading, but not in the whole engine. Below is a list of ways multithreading can be used in differ..." />
+<meta name="description" content="Threads: Threads are used to balance processing power across CPUs and cores. Godot supports multithreading, but not in the whole engine. Below is a list of ways multithreading can be used in differ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Thread-safe APIs &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Physics" href="../physics/index.html" />
+    <link rel="prev" title="Using multiple threads" href="using_multiple_threads.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/performance/thread_safe_apis" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/performance/thread_safe_apis.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Performance</a></li>
+      <li class="breadcrumb-item active">Thread-safe APIs</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/performance/thread_safe_apis.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="thread-safe-apis">
+<span id="doc-thread-safe-apis"></span><h1>Thread-safe APIs<a class="headerlink" href="#thread-safe-apis" title="Link to this heading"></a></h1>
+<section id="threads">
+<h2>Threads<a class="headerlink" href="#threads" title="Link to this heading"></a></h2>
+<p>Threads are used to balance processing power across CPUs and cores.
+Godot supports multithreading, but not in the whole engine.</p>
+<p>Below is a list of ways multithreading can be used in different areas of Godot.</p>
+</section>
+<section id="global-scope">
+<h2>Global scope<a class="headerlink" href="#global-scope" title="Link to this heading"></a></h2>
+<p>Most <a class="reference internal" href="../../classes/class_%40globalscope.html#class-globalscope"><span class="std std-ref">Global Scope</span></a> singletons are thread-safe by default.
+Accessing servers from threads is supported. However, for the
+<a class="reference internal" href="#doc-thread-safe-apis-rendering"><span class="std std-ref">rendering</span></a> and
+<a class="reference internal" href="#doc-thread-safe-apis-physics"><span class="std std-ref">physics</span></a> servers,
+thread-safe operation must be enabled in the project settings first.</p>
+<p>This makes singletons ideal for code that creates dozens of thousands of instances
+in servers and controls them from threads. Of course, it requires a bit more
+code, as this is used directly and not within the scene tree.</p>
+</section>
+<section id="scene-tree">
+<h2>Scene tree<a class="headerlink" href="#scene-tree" title="Link to this heading"></a></h2>
+<p>Interacting with the active scene tree is <strong>not</strong> thread-safe. Make sure
+to use mutexes when sending data between threads. If you want to call
+functions or set properties from a thread, you may use
+<a class="reference internal" href="../../classes/class_object.html#class-object-method-call-deferred"><span class="std std-ref">call_deferred</span></a> or <a class="reference internal" href="../../classes/class_object.html#class-object-method-set-deferred"><span class="std std-ref">set_deferred</span></a>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unsafe:</span>
+<span class="n">node</span><span class="o">.</span><span class="nf">add_child</span><span class="p">(</span><span class="n">child_node</span><span class="p">)</span>
+<span class="c1"># Safe:</span>
+<span class="n">node</span><span class="o">.</span><span class="vi">add_child</span><span class="o">.</span><span class="nf">call_deferred</span><span class="p">(</span><span class="n">child_node</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Unsafe:</span>
+<span class="n">node</span><span class="p">.</span><span class="n">AddChild</span><span class="p">(</span><span class="n">childNode</span><span class="p">);</span>
+<span class="c1">// Safe:</span>
+<span class="n">node</span><span class="p">.</span><span class="n">CallDeferred</span><span class="p">(</span><span class="n">Node</span><span class="p">.</span><span class="n">MethodName</span><span class="p">.</span><span class="n">AddChild</span><span class="p">,</span><span class="w"> </span><span class="n">childNode</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>However, creating scene chunks (nodes in tree arrangement) outside the active
+tree is fine. This way, parts of a scene can be built or instantiated
+in a thread, then added in the main thread:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">enemy_scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">load</span><span class="p">(</span><span class="s2">&quot;res://enemy_scene.scn&quot;</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">enemy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enemy_scene</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+<span class="n">enemy</span><span class="o">.</span><span class="nf">add_child</span><span class="p">(</span><span class="n">weapon</span><span class="p">)</span><span class="w"> </span><span class="c1"># Set a weapon.</span>
+<span class="n">world</span><span class="o">.</span><span class="vi">add_child</span><span class="o">.</span><span class="nf">call_deferred</span><span class="p">(</span><span class="n">enemy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">PackedScene</span><span class="w"> </span><span class="n">enemyScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">PackedScene</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://EnemyScene.scn&quot;</span><span class="p">);</span>
+<span class="n">Node</span><span class="w"> </span><span class="n">enemy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enemyScene</span><span class="p">.</span><span class="n">Instantiate</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">enemy</span><span class="p">.</span><span class="n">AddChild</span><span class="p">(</span><span class="n">weapon</span><span class="p">);</span>
+<span class="n">world</span><span class="p">.</span><span class="n">CallDeferred</span><span class="p">(</span><span class="n">Node</span><span class="p">.</span><span class="n">MethodName</span><span class="p">.</span><span class="n">AddChild</span><span class="p">,</span><span class="w"> </span><span class="n">enemy</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>Still, this is only really useful if you have <strong>one</strong> thread loading data.
+Attempting to load or create scene chunks from multiple threads may work,
+but you risk resources (which are only loaded once in Godot) being tweaked
+by the multiple threads, resulting in unexpected behaviors or crashes.</p>
+<p>Only use more than one thread to generate scene data if you <em>really</em> know what
+you are doing and you are sure that a single resource is not being used or
+set in multiple ones. Otherwise, you are safer just using the servers API
+(which is fully thread-safe) directly and not touching scene or resources.</p>
+</section>
+<section id="rendering">
+<span id="doc-thread-safe-apis-rendering"></span><h2>Rendering<a class="headerlink" href="#rendering" title="Link to this heading"></a></h2>
+<p>Instancing nodes that render anything in 2D or 3D (such as <a class="reference internal" href="../../classes/class_sprite2d.html#class-sprite2d"><span class="std std-ref">Sprite2D</span></a>
+or <a class="reference internal" href="../../classes/class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a>) is <em>not</em> thread-safe by default. To run the
+rendering driver on a separate thread, set the
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-rendering-driver-threads-thread-model"><span class="std std-ref">Rendering &gt; Driver &gt; Thread Model</span></a>
+project setting to <strong>Separate</strong>.</p>
+<p>Note that the <strong>Separate</strong> thread model has several known bugs, so it may not be usable
+in all scenarios.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You should avoid calling functions involving direct interaction with the GPU
+on other threads, such as creating new textures or modifying and retrieving
+image data. These operations can lead to performance stalls because they require
+synchronization with the <a class="reference internal" href="../../classes/class_renderingserver.html#class-renderingserver"><span class="std std-ref">RenderingServer</span></a>,
+as data needs to be transmitted to or updated on the GPU.</p>
+</div>
+</section>
+<section id="physics">
+<span id="doc-thread-safe-apis-physics"></span><h2>Physics<a class="headerlink" href="#physics" title="Link to this heading"></a></h2>
+<p>Physics simulation is <em>not</em> thread-safe by default. To run the physics servers
+on separate threads (making them thread-safe), enable the following project settings:</p>
+<ul class="simple">
+<li><p><strong>PhysicsServer2D:</strong> <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-physics-2d-run-on-separate-thread"><span class="std std-ref">Physics &gt; 2D &gt; Run on Separate Thread</span></a>.</p></li>
+<li><p><strong>PhysicsServer3D:</strong> <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-physics-3d-run-on-separate-thread"><span class="std std-ref">Physics &gt; 3D &gt; Run on Separate Thread</span></a>.</p></li>
+</ul>
+</section>
+<section id="navigation">
+<h2>Navigation<a class="headerlink" href="#navigation" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../../classes/class_navigationserver2d.html#class-navigationserver2d"><span class="std std-ref">NavigationServer2D</span></a> and <a class="reference internal" href="../../classes/class_navigationserver3d.html#class-navigationserver3d"><span class="std std-ref">NavigationServer3D</span></a> are both thread-safe and thread-friendly.</p>
+<p>The navigation-related query functions can be called by threads and run in true parallel.</p>
+<p>By default, a conservative number of threads is supported running in true parallel on navigation maps before
+additional threads have to wait for map data access at a semaphore.
+To increase the number of threads that can run simultaneously on map data,
+set <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-navigation-pathfinding-max-threads"><span class="std std-ref">Navigation &gt; Pathfinding &gt; Max Threads</span></a>.</p>
+<p>The navigation server-related resources like NavigationSourceGeometryData, NavigationMesh, and NavigationPolygon are all thread-safe but not necessarily thread-friendly.
+They use internal read-write locks for thread-safety so editing the same resource (e.g. a single big navmesh) on multiple threads at the same time can cause thread congestion.</p>
+<p>The navigation-related helper classes like <a class="reference internal" href="../../classes/class_astar2d.html#class-astar2d"><span class="std std-ref">AStar2D</span></a>, <a class="reference internal" href="../../classes/class_astar3d.html#class-astar3d"><span class="std std-ref">AStar3D</span></a>, and <a class="reference internal" href="../../classes/class_astargrid2d.html#class-astargrid2d"><span class="std std-ref">AStarGrid2D</span></a> are <strong>not</strong> thread-safe.
+They can be used with threads to some limited capacity, but using two or more threads on the same AStar object causes corruption.
+For example, using a dedicated background thread per AStar object to populate points or do queries works,
+but two threads using the same AStar object would corrupt each other's data.</p>
+</section>
+<section id="gdscript-arrays-and-dictionaries">
+<h2>GDScript arrays and dictionaries<a class="headerlink" href="#gdscript-arrays-and-dictionaries" title="Link to this heading"></a></h2>
+<p>In GDScript, reading and writing elements from multiple threads is OK, but anything
+that changes the container size (resizing, adding, or removing elements) requires
+locking a <a class="reference internal" href="using_multiple_threads.html#doc-using-multiple-threads-mutexes"><span class="std std-ref">mutex</span></a>.</p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading"></a></h2>
+<p>Modifying a unique resource from multiple threads is not supported. However,
+handling references on multiple threads <em>is</em> supported. Hence loading resources
+on a thread is, as well. Scenes, textures, meshes, etc. can be loaded and manipulated
+on a thread and then added to the active scene on the main thread. The limitation here
+is as described above: one must be careful not to load the same resource from
+multiple threads at once. Therefore, it's easiest to use <strong>one</strong> thread for loading
+and modifying resources, and then the main thread for adding them.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="using_multiple_threads.html" class="btn btn-neutral float-left" title="Using multiple threads" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../physics/index.html" class="btn btn-neutral float-right" title="Physics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

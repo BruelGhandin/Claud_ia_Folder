@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Player scene and input actions" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="getting_started/first_3d_game/02.player_input.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="In the next two lessons, we will design the player scene, register custom input actions, and code player movement. By the end, you&#x27;ll have a playable character that moves in eight directions. ..." />
+<meta name="description" content="In the next two lessons, we will design the player scene, register custom input actions, and code player movement. By the end, you&#x27;ll have a playable character that moves in eight directions. ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Player scene and input actions &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Moving the player with code" href="03.player_movement_code.html" />
+    <link rel="prev" title="Setting up the game area" href="01.game_setup.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="getting_started/first_3d_game/02.player_input" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="getting_started/first_3d_game/02.player_input.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Your first 3D game</a></li>
+      <li class="breadcrumb-item active">Player scene and input actions</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/getting_started/first_3d_game/02.player_input.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="player-scene-and-input-actions">
+<span id="doc-first-3d-game-player-scene-and-input"></span><h1>Player scene and input actions<a class="headerlink" href="#player-scene-and-input-actions" title="Link to this heading"></a></h1>
+<p>In the next two lessons, we will design the player scene, register custom input
+actions, and code player movement. By the end, you'll have a playable character
+that moves in eight directions.</p>
+<p>Create a new scene by going to the <strong>Scene</strong> menu in the top-left
+and clicking <strong>New Scene</strong>.</p>
+<img alt="../../_images/new_scene.webp" src="../../_images/new_scene.webp" />
+<p>Click the <strong>Other Node</strong> button and select the <code class="docutils literal notranslate"><span class="pre">CharacterBody3D</span></code> node type
+to create a <a class="reference internal" href="../../classes/class_characterbody3d.html#class-characterbody3d"><span class="std std-ref">CharacterBody3D</span></a> as the root node.</p>
+<img alt="../../_images/add_character_body3D.webp" src="../../_images/add_character_body3D.webp" />
+<p>Rename the <a class="reference internal" href="../../classes/class_characterbody3d.html#class-characterbody3d"><span class="std std-ref">CharacterBody3D</span></a> to <code class="docutils literal notranslate"><span class="pre">Player</span></code>.
+Character bodies are complementary to the area and rigid bodies used in the 2D
+game tutorial. Like rigid bodies, they can move and collide with the
+environment, but instead of being controlled by the physics engine, <strong>you</strong> dictate
+their movement. You will see how we use the node's unique features when we code
+the jump and squash mechanics.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To learn more about the different physics node types, see the
+<a class="reference internal" href="../../tutorials/physics/physics_introduction.html#doc-physics-introduction"><span class="std std-ref">Physics introduction</span></a>.</p>
+</div>
+<p>For now, we're going to create a basic rig for our character's 3D model. This
+will allow us to rotate the model later via code while it plays an animation.</p>
+<p>Add a <a class="reference internal" href="../../classes/class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> node as a child of <code class="docutils literal notranslate"><span class="pre">Player</span></code>.
+Select the <code class="docutils literal notranslate"><span class="pre">Player</span></code> node in the <strong>Scene</strong> tree and click the &quot;<strong>+</strong>&quot; button to add a child node.
+Rename it to <code class="docutils literal notranslate"><span class="pre">Pivot</span></code>.</p>
+<img alt="../../_images/adding_node3D.webp" src="../../_images/adding_node3D.webp" />
+<p>Then, in the FileSystem dock, expand the <code class="docutils literal notranslate"><span class="pre">art/</span></code> folder
+by double-clicking it and drag and
+drop <code class="docutils literal notranslate"><span class="pre">player.glb</span></code> onto <code class="docutils literal notranslate"><span class="pre">Pivot</span></code>.</p>
+<img alt="../../_images/instantiating_the_model.webp" src="../../_images/instantiating_the_model.webp" />
+<p>This should instantiate the model as a child of <code class="docutils literal notranslate"><span class="pre">Pivot</span></code>.
+You can rename it to <code class="docutils literal notranslate"><span class="pre">Character</span></code>.</p>
+<img alt="../../_images/scene_structure.webp" src="../../_images/scene_structure.webp" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.glb</span></code> files contain 3D scene data based on the open source glTF 2.0
+specification. They're a modern and powerful alternative to a proprietary format
+like FBX, which Godot also supports. To produce these files, we designed the
+model in <a class="reference external" href="https://www.blender.org/">Blender 3D</a> and exported it to glTF.</p>
+</div>
+<p>As with all kinds of physics nodes, we need a collision shape for our character
+to collide with the environment. Select the <code class="docutils literal notranslate"><span class="pre">Player</span></code> node again and add a child node
+<a class="reference internal" href="../../classes/class_collisionshape3d.html#class-collisionshape3d"><span class="std std-ref">CollisionShape3D</span></a>. In the <strong>Inspector</strong>, on the <strong>Shape</strong> property,
+add a new <a class="reference internal" href="../../classes/class_sphereshape3d.html#class-sphereshape3d"><span class="std std-ref">SphereShape3D</span></a>.</p>
+<img alt="../../_images/add_capsuleshape3d.webp" src="../../_images/add_capsuleshape3d.webp" />
+<p>The sphere's wireframe appears below the character.</p>
+<img alt="../../_images/sphere_shape.png" src="../../_images/sphere_shape.png" />
+<p>It will be the shape the physics engine uses to collide with the environment, so
+we want it to better fit the 3D model. Make it a bit larger by dragging the orange
+dot in the viewport. My sphere has a radius of about <code class="docutils literal notranslate"><span class="pre">0.8</span></code> meters.</p>
+<p>Then, move the collision shape up so its bottom roughly aligns with the grid's plane.</p>
+<img alt="../../_images/moving_the_sphere_up.png" src="../../_images/moving_the_sphere_up.png" />
+<p>To make moving the shape easier, you can toggle the model's visibility by clicking
+the <strong>eye icon</strong> next to the <code class="docutils literal notranslate"><span class="pre">Character</span></code> or the <code class="docutils literal notranslate"><span class="pre">Pivot</span></code> nodes.</p>
+<img alt="../../_images/toggling_visibility.webp" src="../../_images/toggling_visibility.webp" />
+<p>Save the scene as <code class="docutils literal notranslate"><span class="pre">player.tscn</span></code>.</p>
+<p>With the nodes ready, we can almost get coding. But first, we need to define
+some input actions.</p>
+<section id="creating-input-actions">
+<span id="doc-first-3d-game-input-actions"></span><h2>Creating input actions<a class="headerlink" href="#creating-input-actions" title="Link to this heading"></a></h2>
+<p>To move the character, we will listen to the player's input, like pressing the
+arrow keys. In Godot, while we could write all the key bindings in code, there's
+a powerful system that allows you to assign a label to a set of keys and
+buttons. This simplifies our scripts and makes them more readable.</p>
+<p>This system is the Input Map. To access its editor, head to the <strong>Project</strong> menu
+and select <strong>Project Settings...</strong>.</p>
+<img alt="../../_images/project_settings.webp" src="../../_images/project_settings.webp" />
+<p>At the top, there are multiple tabs. Click on <strong>Input Map</strong>. This window allows
+you to add new actions at the top; they are your labels. In the bottom part, you
+can bind keys to these actions.</p>
+<img alt="../../_images/input_map_tab.webp" src="../../_images/input_map_tab.webp" />
+<p>Godot projects come with some predefined actions designed for user interface
+design (see above screenshot). These will become visible if you enable the
+<strong>Show Built-in Actions</strong> toggle. We could use these here, but instead we're
+defining our own to support gamepads. Leave <strong>Show Built-in Actions</strong> disabled.</p>
+<p>We're going to name our actions <code class="docutils literal notranslate"><span class="pre">move_left</span></code>, <code class="docutils literal notranslate"><span class="pre">move_right</span></code>, <code class="docutils literal notranslate"><span class="pre">move_forward</span></code>,
+<code class="docutils literal notranslate"><span class="pre">move_back</span></code>, and <code class="docutils literal notranslate"><span class="pre">jump</span></code>.</p>
+<p>To add an action, write its name in the bar at the top and press Enter or click the <strong>Add</strong> button.</p>
+<img alt="../../_images/adding_action.webp" src="../../_images/adding_action.webp" />
+<p>Create the following five actions:</p>
+<img alt="../../_images/actions_list_empty.webp" src="../../_images/actions_list_empty.webp" />
+<p>To bind a key or button to an action, click the &quot;<strong>+</strong>&quot; button to its right. Do this
+for <code class="docutils literal notranslate"><span class="pre">move_left</span></code>. Press the left arrow key and click <strong>OK</strong>.</p>
+<img alt="../../_images/left_inputmap.webp" src="../../_images/left_inputmap.webp" />
+<p>Bind also the <kbd class="kbd docutils literal notranslate">A</kbd> key, onto the action <code class="docutils literal notranslate"><span class="pre">move_left</span></code>.</p>
+<img alt="../../_images/keyboard_keys.webp" src="../../_images/keyboard_keys.webp" />
+<p>Let's now add support for a gamepad's left joystick. Click the &quot;<strong>+</strong>&quot; button again
+but this time, select the input within the input tree yourself.
+Select the negative X axis of the left joystick under <strong>Joypad Axes</strong>.</p>
+<img alt="../../_images/joystick_axis_input.webp" src="../../_images/joystick_axis_input.webp" />
+<p>Leave the other values as default and press <strong>OK</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want controllers to have different input actions, you should use the Devices option in Additional Options. Device 0 corresponds to the first plugged gamepad, Device 1 corresponds to the second plugged gamepad, and so on.</p>
+</div>
+<p>Do the same for the other input actions. For example, bind the right arrow, D,
+and the left joystick's positive axis to <code class="docutils literal notranslate"><span class="pre">move_right</span></code>. After binding all keys,
+your interface should look like this.</p>
+<img alt="../../_images/move_inputs_mapped.webp" src="../../_images/move_inputs_mapped.webp" />
+<p>The final action to set up is the <code class="docutils literal notranslate"><span class="pre">jump</span></code> action. Bind the Space key and the gamepad's
+A button located under <strong>Joypad Buttons</strong>.</p>
+<img alt="../../_images/joy_button_option.webp" src="../../_images/joy_button_option.webp" />
+<p>Your jump input action should look like this.</p>
+<img alt="../../_images/jump_input_action.webp" src="../../_images/jump_input_action.webp" />
+<p>That's all the actions we need for this game. You can use this menu to label any
+groups of keys and buttons in your projects.</p>
+<p>In the next part, we'll code and test the player's movement.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="01.game_setup.html" class="btn btn-neutral float-left" title="Setting up the game area" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="03.player_movement_code.html" class="btn btn-neutral float-right" title="Moving the player with code" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Variant class" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="engine_details/architecture/variant_class.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="About: Variant is the most important datatype in Godot. A Variant takes up only 24 bytes on 64-bit platforms (20 bytes on 32-bit platforms) and can store almost any engine datatype inside of it. Va..." />
+<meta name="description" content="About: Variant is the most important datatype in Godot. A Variant takes up only 24 bytes on 64-bit platforms (20 bytes on 32-bit platforms) and can store almost any engine datatype inside of it. Va..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Variant class &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Object class" href="object_class.html" />
+    <link rel="prev" title="Core types" href="core_types.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="engine_details/architecture/variant_class" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="engine_details/architecture/variant_class.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Engine architecture</a></li>
+      <li class="breadcrumb-item active">Variant class</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/engine_details/architecture/variant_class.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="variant-class">
+<span id="doc-variant-class"></span><h1>Variant class<a class="headerlink" href="#variant-class" title="Link to this heading"></a></h1>
+<section id="about">
+<h2>About<a class="headerlink" href="#about" title="Link to this heading"></a></h2>
+<p>Variant is the most important datatype in Godot. A Variant takes up only 24
+bytes on 64-bit platforms (20 bytes on 32-bit platforms) and can store almost
+any engine datatype inside of it. Variants are rarely used to hold information
+for long periods of time, instead they are used mainly for communication,
+editing, serialization and generally moving data around.</p>
+<p>A Variant can:</p>
+<ul class="simple">
+<li><p>Store almost any datatype.</p></li>
+<li><p>Perform operations between many variants (GDScript uses Variant as
+its atomic/native datatype).</p></li>
+<li><p>Be hashed, so it can be compared quickly to other variants.</p></li>
+<li><p>Be used to convert safely between datatypes.</p></li>
+<li><p>Be used to abstract calling methods and their arguments (Godot
+exports all its functions through variants).</p></li>
+<li><p>Be used to defer calls or move data between threads.</p></li>
+<li><p>Be serialized as binary and stored to disk, or transferred via
+network.</p></li>
+<li><p>Be serialized to text and use it for printing values and editable
+settings.</p></li>
+<li><p>Work as an exported property, so the editor can edit it universally.</p></li>
+<li><p>Be used for dictionaries, arrays, parsers, etc.</p></li>
+</ul>
+<p>Basically, thanks to the Variant class, writing Godot itself was a much,
+much easier task, as it allows for highly dynamic constructs not common
+of C++ with little effort. Become a friend of Variant today.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All types within Variant except Nil and Object <strong>cannot</strong> be <code class="docutils literal notranslate"><span class="pre">null</span></code> and
+must always store a valid value. These types within Variant are therefore
+called <em>non-nullable</em> types.</p>
+<p>One of the Variant types is <em>Nil</em> which can only store the value <code class="docutils literal notranslate"><span class="pre">null</span></code>.
+Therefore, it is possible for a Variant to contain the value <code class="docutils literal notranslate"><span class="pre">null</span></code>, even
+though all Variant types excluding Nil and Object are non-nullable.</p>
+</div>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/variant/variant.h">core/variant/variant.h</a></p></li>
+</ul>
+</section>
+</section>
+<section id="list-of-variant-types">
+<h2>List of variant types<a class="headerlink" href="#list-of-variant-types" title="Link to this heading"></a></h2>
+<p>These types are available in Variant:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Nil (can only store <code class="docutils literal notranslate"><span class="pre">null</span></code>)</p></td>
+<td><p>Nullable type</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_vector2.html#class-vector2"><span class="std std-ref">Vector2</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_vector2i.html#class-vector2i"><span class="std std-ref">Vector2i</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_rect2.html#class-rect2"><span class="std std-ref">Rect2</span></a></p></td>
+<td><p>2D counterpart of AABB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_rect2i.html#class-rect2i"><span class="std std-ref">Rect2i</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_vector3.html#class-vector3"><span class="std std-ref">Vector3</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_vector3i.html#class-vector3i"><span class="std std-ref">Vector3i</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_vector4.html#class-vector4"><span class="std std-ref">Vector4</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_vector4i.html#class-vector4i"><span class="std std-ref">Vector4i</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_plane.html#class-plane"><span class="std std-ref">Plane</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_quaternion.html#class-quaternion"><span class="std std-ref">Quaternion</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_aabb.html#class-aabb"><span class="std std-ref">AABB</span></a></p></td>
+<td><p>3D counterpart of Rect2</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_basis.html#class-basis"><span class="std std-ref">Basis</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_projection.html#class-projection"><span class="std std-ref">Projection</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_color.html#class-color"><span class="std std-ref">Color</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_nodepath.html#class-nodepath"><span class="std std-ref">NodePath</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_rid.html#class-rid"><span class="std std-ref">RID</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_object.html#class-object"><span class="std std-ref">Object</span></a></p></td>
+<td><p>Nullable type</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_callable.html#class-callable"><span class="std std-ref">Callable</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_signal.html#class-signal"><span class="std std-ref">Signal</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_dictionary.html#class-dictionary"><span class="std std-ref">Dictionary</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_array.html#class-array"><span class="std std-ref">Array</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_packedint32array.html#class-packedint32array"><span class="std std-ref">PackedInt32Array</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_packedint64array.html#class-packedint64array"><span class="std std-ref">PackedInt64Array</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_packedfloat64array.html#class-packedfloat64array"><span class="std std-ref">PackedFloat64Array</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_packedstringarray.html#class-packedstringarray"><span class="std std-ref">PackedStringArray</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_packedvector2array.html#class-packedvector2array"><span class="std std-ref">PackedVector2Array</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_packedvector3array.html#class-packedvector3array"><span class="std std-ref">PackedVector3Array</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../classes/class_packedcolorarray.html#class-packedcolorarray"><span class="std std-ref">PackedColorArray</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../classes/class_packedvector4array.html#class-packedvector4array"><span class="std std-ref">PackedVector4Array</span></a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="containers-array-and-dictionary">
+<h2>Containers: Array and Dictionary<a class="headerlink" href="#containers-array-and-dictionary" title="Link to this heading"></a></h2>
+<p>Both <a class="reference internal" href="../../classes/class_array.html#class-array"><span class="std std-ref">Array</span></a> and <a class="reference internal" href="../../classes/class_dictionary.html#class-dictionary"><span class="std std-ref">Dictionary</span></a> are implemented using
+variants. A Dictionary can match any datatype used as key to any other datatype.
+An Array just holds an array of Variants. Of course, a Variant can also hold a
+Dictionary or an Array inside, making it even more flexible.</p>
+<p>Modifications to a container will modify all references to
+it. A <a class="reference internal" href="core_types.html#doc-core-concurrency-types"><span class="std std-ref">Mutex</span></a> should be created to lock it if
+<a class="reference internal" href="../../tutorials/performance/using_multiple_threads.html#doc-using-multiple-threads"><span class="std std-ref">multi-threaded access</span></a> is desired.</p>
+<section id="id1">
+<h3>References<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/variant/dictionary.h">core/variant/dictionary.h</a></p></li>
+<li><p><a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/variant/array.h">core/variant/array.h</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="core_types.html" class="btn btn-neutral float-left" title="Core types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="object_class.html" class="btn btn-neutral float-right" title="Object class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

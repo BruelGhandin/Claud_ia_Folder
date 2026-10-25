@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Viewport and canvas transforms" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/2d/2d_transforms.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: This is an overview of the 2D transforms going on for nodes from the moment they draw their content locally to the time they are drawn onto the screen. This overview discusses very lo..." />
+<meta name="description" content="Introduction: This is an overview of the 2D transforms going on for nodes from the moment they draw their content locally to the time they are drawn onto the screen. This overview discusses very lo..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Viewport and canvas transforms &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2D lights and shadows" href="2d_lights_and_shadows.html" />
+    <link rel="prev" title="Canvas layers" href="canvas_layers.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/2d/2d_transforms" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/2d/2d_transforms.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">2D</a></li>
+      <li class="breadcrumb-item active">Viewport and canvas transforms</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/2d/2d_transforms.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="viewport-and-canvas-transforms">
+<span id="doc-viewport-and-canvas-transforms"></span><h1>Viewport and canvas transforms<a class="headerlink" href="#viewport-and-canvas-transforms" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This is an overview of the 2D transforms going on for nodes from the
+moment they draw their content locally to the time they are drawn onto
+the screen. This overview discusses very low-level details of the engine.</p>
+<p>The goal of this tutorial is to teach a way for feeding input events to the
+Input with a position in the correct coordinate system.</p>
+<p>A more extensive description of all coordinate systems and 2d transforms is
+available in <a class="reference internal" href="../../engine_details/architecture/2d_coordinate_systems.html#doc-2d-coordinate-systems"><span class="std std-ref">2D coordinate systems and 2D transforms</span></a>.</p>
+</section>
+<section id="canvas-transform">
+<h2>Canvas transform<a class="headerlink" href="#canvas-transform" title="Link to this heading"></a></h2>
+<p>As mentioned in the previous tutorial, <a class="reference internal" href="canvas_layers.html#doc-canvas-layers"><span class="std std-ref">Canvas layers</span></a>, every
+CanvasItem node (remember that Node2D and Control based nodes use
+CanvasItem as their common root) will reside in a <em>Canvas Layer</em>. Every
+canvas layer has a transform (translation, rotation, scale, etc.) that
+can be accessed as a <a class="reference internal" href="../../classes/class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a>.</p>
+<p>Also covered in the previous tutorial, nodes are drawn by default in Layer 0,
+in the built-in canvas. To put nodes in a different layer, a <a class="reference internal" href="../../classes/class_canvaslayer.html#class-canvaslayer"><span class="std std-ref">CanvasLayer</span></a> node can be used.</p>
+</section>
+<section id="global-canvas-transform">
+<h2>Global canvas transform<a class="headerlink" href="#global-canvas-transform" title="Link to this heading"></a></h2>
+<p>Viewports also have a Global Canvas transform (also a
+<a class="reference internal" href="../../classes/class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a>). This is the master transform and
+affects all individual <em>Canvas Layer</em> transforms. Generally, this is primarily
+used in Godot's CanvasItem Editor.</p>
+</section>
+<section id="stretch-transform">
+<h2>Stretch transform<a class="headerlink" href="#stretch-transform" title="Link to this heading"></a></h2>
+<p>Finally, viewports have a <em>Stretch Transform</em>, which is used when
+resizing or stretching the screen. This transform is used internally (as
+described in <a class="reference internal" href="../rendering/multiple_resolutions.html#doc-multiple-resolutions"><span class="std std-ref">Multiple resolutions</span></a>), but can also be manually set
+on each viewport.</p>
+<p>Input events are multiplied by this transform, but lack the ones above. To
+convert InputEvent coordinates to local CanvasItem coordinates, the
+<a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem-method-make-input-local"><span class="std std-ref">CanvasItem.make_input_local()</span></a>
+function was added for convenience.</p>
+</section>
+<section id="window-transform">
+<h2>Window transform<a class="headerlink" href="#window-transform" title="Link to this heading"></a></h2>
+<p>The root viewport is a <a class="reference internal" href="../../classes/class_window.html#class-window"><span class="std std-ref">Window</span></a>. In order to scale and
+position the <em>Window's</em> content as described in <a class="reference internal" href="../rendering/multiple_resolutions.html#doc-multiple-resolutions"><span class="std std-ref">Multiple resolutions</span></a>,
+each <a class="reference internal" href="../../classes/class_window.html#class-window"><span class="std std-ref">Window</span></a> contains a <em>window transform</em>. It is for
+example responsible for the black bars at the <em>Window's</em> sides so that the
+<em>Viewport</em> is displayed with a fixed aspect ratio.</p>
+</section>
+<section id="transform-order">
+<h2>Transform order<a class="headerlink" href="#transform-order" title="Link to this heading"></a></h2>
+<p>To convert a CanvasItem local coordinate to an actual screen coordinate,
+the following chain of transforms must be applied:</p>
+<img alt="../../_images/viewport_transforms3.webp" src="../../_images/viewport_transforms3.webp" />
+</section>
+<section id="transform-functions">
+<h2>Transform functions<a class="headerlink" href="#transform-functions" title="Link to this heading"></a></h2>
+<p>The above graphic shows some available transform functions. All transforms are directed from right
+to left, this means multiplying a transform with a coordinate results in a coordinate system
+further to the left, multiplying the <a class="reference internal" href="../../classes/class_transform2d.html#class-transform2d-method-affine-inverse"><span class="std std-ref">affine inverse</span></a>
+of a transform results in a coordinate system further to the right:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Called from a CanvasItem.</span>
+<span class="n">canvas_pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_global_transform</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">local_pos</span>
+<span class="n">local_pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_global_transform</span><span class="p">()</span><span class="o">.</span><span class="nf">affine_inverse</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canvas_pos</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Called from a CanvasItem.</span>
+<span class="n">canvasPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetGlobalTransform</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">localPos</span><span class="p">;</span>
+<span class="n">localPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetGlobalTransform</span><span class="p">().</span><span class="n">AffineInverse</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canvasPos</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>Finally, then, to convert a CanvasItem local coordinates to screen coordinates, just multiply in
+the following order:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">screen_coord</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_viewport</span><span class="p">()</span><span class="o">.</span><span class="nf">get_screen_transform</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">get_global_transform_with_canvas</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">local_pos</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">screenCoord</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetViewport</span><span class="p">().</span><span class="n">GetScreenTransform</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">GetGlobalTransformWithCanvas</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">localPos</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>Keep in mind, however, that it is generally not desired to work with screen coordinates. The
+recommended approach is to simply work in Canvas coordinates
+(<code class="docutils literal notranslate"><span class="pre">CanvasItem.get_global_transform()</span></code>), to allow automatic screen resolution resizing to work
+properly.</p>
+</section>
+<section id="feeding-custom-input-events">
+<h2>Feeding custom input events<a class="headerlink" href="#feeding-custom-input-events" title="Link to this heading"></a></h2>
+<p>It is often desired to feed custom input events to the game. With the above knowledge, to correctly
+do this in the focused window, it must be done the following way:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">local_pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="c1"># Local to Control/Node2D.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">ie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">InputEventMouseButton</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="n">ie</span><span class="o">.</span><span class="vi">button_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MOUSE_BUTTON_LEFT</span>
+<span class="n">ie</span><span class="o">.</span><span class="vi">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_viewport</span><span class="p">()</span><span class="o">.</span><span class="nf">get_screen_transform</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">get_global_transform_with_canvas</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">local_pos</span>
+<span class="nb">Input</span><span class="o">.</span><span class="nf">parse_input_event</span><span class="p">(</span><span class="n">ie</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">localPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">);</span><span class="w"> </span><span class="c1">// Local to Control/Node2D.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">ie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InputEventMouseButton</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ButtonIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MouseButton</span><span class="p">.</span><span class="n">Left</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetViewport</span><span class="p">().</span><span class="n">GetScreenTransform</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">GetGlobalTransformWithCanvas</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">localPos</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">Input</span><span class="p">.</span><span class="n">ParseInputEvent</span><span class="p">(</span><span class="n">ie</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="canvas_layers.html" class="btn btn-neutral float-left" title="Canvas layers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2d_lights_and_shadows.html" class="btn btn-neutral float-right" title="2D lights and shadows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

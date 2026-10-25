@@ -1,0 +1,566 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using 3D transforms" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/using_transforms.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: If you have never made 3D games before, working with rotations in three dimensions can be confusing at first. Coming from 2D, the natural way of thinking is along the lines of&quot;Oh..." />
+<meta name="description" content="Introduction: If you have never made 3D games before, working with rotations in three dimensions can be confusing at first. Coming from 2D, the natural way of thinking is along the lines of&quot;Oh..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using 3D transforms &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Procedural geometry" href="procedural_geometry/index.html" />
+    <link rel="prev" title="Introduction to 3D" href="introduction_to_3d.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/using_transforms" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/3d/using_transforms.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">3D</a></li>
+      <li class="breadcrumb-item active">Using 3D transforms</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/using_transforms.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-3d-transforms">
+<span id="doc-using-transforms"></span><h1>Using 3D transforms<a class="headerlink" href="#using-3d-transforms" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>If you have never made 3D games before, working with rotations in three dimensions can be confusing at first.
+Coming from 2D, the natural way of thinking is along the lines of <em>&quot;Oh, it's just like rotating in 2D, except now rotations happen in X, Y and Z&quot;</em>.</p>
+<p>At first, this seems easy. For simple games, this way of thinking may even be enough. Unfortunately, it's often incorrect.</p>
+<p>Angles in three dimensions are most commonly referred to as &quot;Euler Angles&quot;.</p>
+<img alt="../../_images/transforms_euler.webp" src="../../_images/transforms_euler.webp" />
+<p>Euler angles were introduced by mathematician Leonhard Euler in the early 1700s.</p>
+<img alt="../../_images/transforms_euler_himself.png" src="../../_images/transforms_euler_himself.png" />
+<p>This way of representing 3D rotations was groundbreaking at the time, but it has several shortcomings when used in game development (which is to be expected from a guy with a funny
+hat).
+The idea of this document is to explain why, as well as outlining best practices for dealing with transforms when programming 3D games.</p>
+</section>
+<section id="problems-of-euler-angles">
+<h2>Problems of Euler angles<a class="headerlink" href="#problems-of-euler-angles" title="Link to this heading"></a></h2>
+<p>While it may seem intuitive that each axis has a rotation, the truth is that it's just not practical.</p>
+<section id="axis-order">
+<h3>Axis order<a class="headerlink" href="#axis-order" title="Link to this heading"></a></h3>
+<p>The main reason for this is that there isn't a <em>unique</em> way to construct an orientation from the angles. There isn't a standard mathematical function that
+takes all the angles together and produces an actual 3D rotation. The only way an orientation can be produced from angles is to rotate the object angle
+by angle, in an <em>arbitrary order</em>.</p>
+<p>This could be done by first rotating in <em>X</em>, then <em>Y</em> and then in <em>Z</em>. Alternatively, you could first rotate in <em>Y</em>, then in <em>Z</em> and finally in <em>X</em>. Anything works,
+but depending on the order, the final orientation of the object will <em>not necessarily be the same</em>. Indeed, this means that there are several ways to construct an orientation
+from 3 different angles, depending on <em>the order of the rotations</em>.</p>
+<p>Following is a visualization of rotation axes (in X, Y, Z order) in a gimbal (from Wikipedia). As you can see, the orientation of each axis depends on the rotation of the previous one:</p>
+<img alt="../../_images/transforms_gimbal.gif" src="../../_images/transforms_gimbal.gif" />
+<p>You may be wondering how this affects you. Let's look at a practical example:</p>
+<p>Imagine you are working on a first-person controller (e.g. an FPS game). Moving the mouse left and right controls your view angle parallel to the ground, while moving it up and down moves the player's view up and down.</p>
+<p>In this case to achieve the desired effect, rotation must be applied first in the <em>Y</em> axis (&quot;up&quot; in this case, since Godot uses a &quot;Y-Up&quot; orientation), followed by rotation in the <em>X</em> axis.</p>
+<img alt="../../_images/transforms_rotate1.gif" src="../../_images/transforms_rotate1.gif" />
+<p>If we were to apply rotation in the <em>X</em> axis first, and then in <em>Y</em>, the effect would be undesired:</p>
+<img alt="../../_images/transforms_rotate2.gif" src="../../_images/transforms_rotate2.gif" />
+<p>Depending on the type of game or effect desired, the order in which you want axis rotations to be applied may differ. Therefore, applying rotations in X, Y, and Z is not enough: you also need a <em>rotation order</em>.</p>
+</section>
+<section id="interpolation">
+<h3>Interpolation<a class="headerlink" href="#interpolation" title="Link to this heading"></a></h3>
+<p>Another problem with using Euler angles is interpolation. Imagine you want to transition between two different camera or enemy positions (including rotations). One logical way to approach this is to interpolate the angles from one position to the next. One would expect it to look like this:</p>
+<img alt="../../_images/transforms_interpolate1.gif" src="../../_images/transforms_interpolate1.gif" />
+<p>But this does not always have the expected effect when using angles:</p>
+<img alt="../../_images/transforms_interpolate2.gif" src="../../_images/transforms_interpolate2.gif" />
+<p>The camera actually rotated the opposite direction!</p>
+<p>There are a few reasons this may happen:</p>
+<ul class="simple">
+<li><p>Rotations don't map linearly to orientation, so interpolating them does not always result in the shortest path (i.e., to go from <code class="docutils literal notranslate"><span class="pre">270</span></code> to <code class="docutils literal notranslate"><span class="pre">0</span></code> degrees is not the same as going from <code class="docutils literal notranslate"><span class="pre">270</span></code> to <code class="docutils literal notranslate"><span class="pre">360</span></code>, even though the angles are equivalent).</p></li>
+<li><p>Gimbal lock is at play (first and last rotated axis align, so a degree of freedom is lost). See <a class="reference external" href="https://en.wikipedia.org/wiki/Gimbal_lock">Wikipedia's page on Gimbal Lock</a> for a detailed explanation of this problem.</p></li>
+</ul>
+</section>
+<section id="say-no-to-euler-angles">
+<h3>Say no to Euler angles<a class="headerlink" href="#say-no-to-euler-angles" title="Link to this heading"></a></h3>
+<p>The result of all this is that you should <strong>not use</strong> the <code class="docutils literal notranslate"><span class="pre">rotation</span></code> property of <a class="reference internal" href="../../classes/class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> nodes in Godot for games. It's there to be used mainly in the editor, for coherence with the 2D engine, and for simple rotations (generally just one axis, or even two in limited cases). As much as you may be tempted, don't use it.</p>
+<p>Instead, there is a better way to solve your rotation problems.</p>
+</section>
+</section>
+<section id="introducing-transforms">
+<h2>Introducing transforms<a class="headerlink" href="#introducing-transforms" title="Link to this heading"></a></h2>
+<p>Godot uses the <a class="reference internal" href="../../classes/class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a> datatype for orientations. Each <a class="reference internal" href="../../classes/class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> node contains a <code class="docutils literal notranslate"><span class="pre">transform</span></code> property which is relative to the parent's transform, if the parent is a Node3D-derived type.</p>
+<p>It is also possible to access the world coordinate transform via the <code class="docutils literal notranslate"><span class="pre">global_transform</span></code> property.</p>
+<p>A transform has a <a class="reference internal" href="../../classes/class_basis.html#class-basis"><span class="std std-ref">Basis</span></a> (transform.basis sub-property), which consists of three <a class="reference internal" href="../../classes/class_vector3.html#class-vector3"><span class="std std-ref">Vector3</span></a> vectors. These are accessed via the <code class="docutils literal notranslate"><span class="pre">transform.basis</span></code> property and can be accessed directly by <code class="docutils literal notranslate"><span class="pre">transform.basis.x</span></code>, <code class="docutils literal notranslate"><span class="pre">transform.basis.y</span></code>, and <code class="docutils literal notranslate"><span class="pre">transform.basis.z</span></code>. Each vector points in the direction its axis has been rotated, so they effectively describe the node's total rotation. The scale (as long as it's uniform) can also be inferred from the length of the axes. A <em>basis</em> can also be interpreted as a 3x3 matrix and used as <code class="docutils literal notranslate"><span class="pre">transform.basis[x][y]</span></code>.</p>
+<p>A default basis (unmodified) is akin to:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">basis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Basis</span><span class="p">()</span>
+<span class="c1"># Contains the following default values:</span>
+<span class="n">basis</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1"># Vector pointing along the X axis</span>
+<span class="n">basis</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1"># Vector pointing along the Y axis</span>
+<span class="n">basis</span><span class="o">.</span><span class="vi">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1"># Vector pointing along the Z axis</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Due to technical limitations on structs in C# the default</span>
+<span class="c1">// constructor will contain zero values for all fields.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">defaultBasis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Basis</span><span class="p">();</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">defaultBasis</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints: ((0, 0, 0), (0, 0, 0), (0, 0, 0))</span>
+
+<span class="c1">// Instead we can use the Identity property.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">identityBasis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Basis</span><span class="p">.</span><span class="n">Identity</span><span class="p">;</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">identityBasis</span><span class="p">.</span><span class="n">X</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints: (1, 0, 0)</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">identityBasis</span><span class="p">.</span><span class="n">Y</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints: (0, 1, 0)</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">identityBasis</span><span class="p">.</span><span class="n">Z</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints: (0, 0, 1)</span>
+
+<span class="c1">// The Identity basis is equivalent to:</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">basis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Basis</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">Right</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Back</span><span class="p">);</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">basis</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints: ((1, 0, 0), (0, 1, 0), (0, 0, 1))</span>
+</pre></div>
+</div>
+</div></div>
+<p>This is also an analog of a 3x3 identity matrix.</p>
+<p>Following the OpenGL convention, <code class="docutils literal notranslate"><span class="pre">X</span></code> is the <em>Right</em> axis, <code class="docutils literal notranslate"><span class="pre">Y</span></code> is the <em>Up</em> axis and <code class="docutils literal notranslate"><span class="pre">Z</span></code> is the <em>Forward</em> axis.</p>
+<p>Together with the <em>basis</em>, a transform also has an <em>origin</em>. This is a <em>Vector3</em> specifying how far away from the actual origin <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code> this transform is. Combining the <em>basis</em> with the <em>origin</em>, a <em>transform</em> efficiently represents a unique translation, rotation, and scale in space.</p>
+<img alt="../../_images/transforms_camera.png" src="../../_images/transforms_camera.png" />
+<p>One way to visualize a transform is to look at an object's 3D gizmo while in &quot;local space&quot; mode.</p>
+<img alt="../../_images/transforms_local_space.png" src="../../_images/transforms_local_space.png" />
+<p>The gizmo's arrows show the <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">Y</span></code>, and <code class="docutils literal notranslate"><span class="pre">Z</span></code> axes (in red, green, and blue respectively) of the basis, while the gizmo's center is at the object's origin.</p>
+<img alt="../../_images/transforms_gizmo.png" src="../../_images/transforms_gizmo.png" />
+<p>For more information on the mathematics of vectors and transforms, please read the <a class="reference internal" href="../math/vector_math.html#doc-vector-math"><span class="std std-ref">Vector math</span></a> tutorials.</p>
+<section id="manipulating-transforms">
+<h3>Manipulating transforms<a class="headerlink" href="#manipulating-transforms" title="Link to this heading"></a></h3>
+<p>Of course, transforms are not as straightforward to manipulate as angles and have problems of their own.</p>
+<p>It is possible to rotate a transform, either by multiplying its basis by another (this is called accumulation), or by using the rotation methods.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1"># Or Vector3.RIGHT</span>
+<span class="k">var</span><span class="w"> </span><span class="n">rotation_amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span>
+<span class="c1"># Rotate the transform around the X axis by 0.1 radians.</span>
+<span class="n">transform</span><span class="o">.</span><span class="vi">basis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Basis</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">rotation_amount</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">transform</span><span class="o">.</span><span class="vi">basis</span>
+<span class="c1"># shortened</span>
+<span class="n">transform</span><span class="o">.</span><span class="vi">basis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="o">.</span><span class="vi">basis</span><span class="o">.</span><span class="nf">rotated</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">rotation_amount</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Transform3D</span><span class="w"> </span><span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Transform</span><span class="p">;</span>
+<span class="n">Vector3</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Or Vector3.Right</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">rotationAmount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">;</span>
+
+<span class="c1">// Rotate the transform around the X axis by 0.1 radians.</span>
+<span class="n">transform</span><span class="p">.</span><span class="n">Basis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Basis</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">rotationAmount</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">transform</span><span class="p">.</span><span class="n">Basis</span><span class="p">;</span>
+<span class="c1">// shortened</span>
+<span class="n">transform</span><span class="p">.</span><span class="n">Basis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="p">.</span><span class="n">Basis</span><span class="p">.</span><span class="n">Rotated</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">rotationAmount</span><span class="p">);</span>
+
+<span class="n">Transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>A method in Node3D simplifies this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rotate the transform around the X axis by 0.1 radians.</span>
+<span class="nf">rotate</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1"># shortened</span>
+<span class="nf">rotate_x</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Rotate the transform around the X axis by 0.1 radians.</span>
+<span class="n">Rotate</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">);</span>
+<span class="c1">// shortened</span>
+<span class="n">RotateX</span><span class="p">(</span><span class="mf">0.1f</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>This rotates the node relative to the parent node.</p>
+<p>To rotate relative to object space (the node's own transform), use the following:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rotate around the object&#39;s local X axis by 0.1 radians.</span>
+<span class="nf">rotate_object_local</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Rotate around the object&#39;s local X axis by 0.1 radians.</span>
+<span class="n">RotateObjectLocal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>The axis should be defined in the local coordinate system of the object. For example, to rotate around the object's local X, Y, or Z axes, use <code class="docutils literal notranslate"><span class="pre">Vector3.RIGHT</span></code> for the X-axis, <code class="docutils literal notranslate"><span class="pre">Vector3.UP</span></code> for the Y-axis, and <code class="docutils literal notranslate"><span class="pre">Vector3.FORWARD</span></code> for the Z-axis.</p>
+</section>
+<section id="precision-errors">
+<h3>Precision errors<a class="headerlink" href="#precision-errors" title="Link to this heading"></a></h3>
+<p>Doing successive operations on transforms will result in a loss of precision due to floating-point error. This means the scale of each axis may no longer be exactly <code class="docutils literal notranslate"><span class="pre">1.0</span></code>, and they may not be exactly <code class="docutils literal notranslate"><span class="pre">90</span></code> degrees from each other.</p>
+<p>If a transform is rotated every frame, it will eventually start deforming over time. This is unavoidable.</p>
+<p>There are two different ways to handle this. The first is to <em>orthonormalize</em> the transform after some time (maybe once per frame if you modify it every frame):</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="o">.</span><span class="nf">orthonormalized</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="p">.</span><span class="n">Orthonormalized</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>This will make all axes have <code class="docutils literal notranslate"><span class="pre">1.0</span></code> length again and be <code class="docutils literal notranslate"><span class="pre">90</span></code> degrees from each other. However, any scale applied to the transform will be lost.</p>
+<p>It is recommended you not scale nodes that are going to be manipulated; scale their children nodes instead (such as MeshInstance3D). If you absolutely must scale the node, then re-apply it at the end:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="o">.</span><span class="nf">orthonormalized</span><span class="p">()</span>
+<span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="o">.</span><span class="nf">scaled</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="p">.</span><span class="n">Orthonormalized</span><span class="p">();</span>
+<span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="p">.</span><span class="n">Scaled</span><span class="p">(</span><span class="n">scale</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="obtaining-information">
+<h3>Obtaining information<a class="headerlink" href="#obtaining-information" title="Link to this heading"></a></h3>
+<p>You might be thinking at this point: <strong>&quot;Ok, but how do I get angles from a transform?&quot;</strong>. The answer again is: you don't. You must do your best to stop thinking in angles.</p>
+<p>Imagine you need to shoot a bullet in the direction your player is facing. Just use the forward axis.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-6-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-6-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-6-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># On RigidBody3D.</span>
+
+<span class="c1"># Keep in mind that -Z is forward.</span>
+<span class="n">bullet</span><span class="o">.</span><span class="vi">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span>
+<span class="n">bullet</span><span class="o">.</span><span class="vi">linear_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">transform</span><span class="o">.</span><span class="vi">basis</span><span class="o">.</span><span class="vi">z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">BULLET_SPEED</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-6-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-6-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// On RigidBody3D.</span>
+
+<span class="c1">// Keep in mind that -Z is forward.</span>
+<span class="n">bullet</span><span class="p">.</span><span class="n">Transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Transform</span><span class="p">;</span>
+<span class="n">bullet</span><span class="p">.</span><span class="n">LinearVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">Transform</span><span class="p">.</span><span class="n">Basis</span><span class="p">.</span><span class="n">Z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">BulletSpeed</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>Is the enemy looking at the player? Use the dot product for this (see the <a class="reference internal" href="../math/vector_math.html#doc-vector-math"><span class="std std-ref">Vector math</span></a> tutorial for an explanation of the dot product):</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-7-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-7-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-7-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the direction vector from player to enemy</span>
+<span class="k">var</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enemy</span><span class="o">.</span><span class="vi">transform</span><span class="o">.</span><span class="vi">origin</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">player</span><span class="o">.</span><span class="vi">transform</span><span class="o">.</span><span class="vi">origin</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">direction</span><span class="o">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">enemy</span><span class="o">.</span><span class="vi">transform</span><span class="o">.</span><span class="vi">basis</span><span class="o">.</span><span class="vi">z</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">    </span><span class="n">enemy</span><span class="o">.</span><span class="nf">im_watching_you</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-7-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-7-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get the direction vector from player to enemy</span>
+<span class="n">Vector3</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enemy</span><span class="p">.</span><span class="n">Transform</span><span class="p">.</span><span class="n">Origin</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">player</span><span class="p">.</span><span class="n">Transform</span><span class="p">.</span><span class="n">Origin</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">direction</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">enemy</span><span class="p">.</span><span class="n">Transform</span><span class="p">.</span><span class="n">Basis</span><span class="p">.</span><span class="n">Z</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">enemy</span><span class="p">.</span><span class="n">ImWatchingYou</span><span class="p">(</span><span class="n">player</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Strafe left:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-8-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-8-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-8-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-8-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># On CharacterBody3D.</span>
+
+<span class="c1"># Keep in mind that -X is left.</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;strafe_left&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">transform</span><span class="o">.</span><span class="vi">basis</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MOVE_SPEED</span>
+
+<span class="nf">move_and_slide</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-8-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-8-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// On CharacterBody3D.</span>
+
+<span class="c1">// Keep in mind that -X is left.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;strafe_left&quot;</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">Transform</span><span class="p">.</span><span class="n">Basis</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MoveSpeed</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">MoveAndSlide</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>Jump:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-9-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-9-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-9-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-9-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-9-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-9-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># On CharacterBody3D.</span>
+
+<span class="c1"># Keep in mind that +Y is up.</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_just_pressed</span><span class="p">(</span><span class="s2">&quot;jump&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="n">velocity</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JUMP_SPEED</span>
+
+<span class="nf">move_and_slide</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-9-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-9-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// On CharacterBody3D.</span>
+
+<span class="c1">// Keep in mind that +Y is up.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionJustPressed</span><span class="p">(</span><span class="s">&quot;jump&quot;</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">JumpSpeed</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">MoveAndSlide</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>All common behaviors and logic can be done with just vectors.</p>
+</section>
+<section id="setting-information">
+<h3>Setting information<a class="headerlink" href="#setting-information" title="Link to this heading"></a></h3>
+<p>There are, of course, cases where you want to set information to a transform. Imagine a first person controller or orbiting camera. Those are definitely done using angles, because you <em>do want</em> the transforms to happen in a specific order.</p>
+<p>For such cases, keep the angles and rotations <em>outside</em> the transform and set them every frame. Don't try to retrieve and reuse them because the transform is not meant to be used this way.</p>
+<p>Example of looking around, FPS style:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-10-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-10-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-10-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-10-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-10-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-10-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># accumulators</span>
+<span class="k">var</span><span class="w"> </span><span class="n">rot_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="k">var</span><span class="w"> </span><span class="n">rot_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_input</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nb">InputEventMouseMotion</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="vi">button_mask</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># modify accumulated mouse rotation</span>
+<span class="w">        </span><span class="n">rot_x</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="vi">screen_relative</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">LOOKAROUND_SPEED</span>
+<span class="w">        </span><span class="n">rot_y</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="vi">screen_relative</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">LOOKAROUND_SPEED</span>
+<span class="w">        </span><span class="n">transform</span><span class="o">.</span><span class="vi">basis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Basis</span><span class="p">()</span><span class="w"> </span><span class="c1"># reset rotation</span>
+<span class="w">        </span><span class="nf">rotate_object_local</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">rot_x</span><span class="p">)</span><span class="w"> </span><span class="c1"># first rotate in Y</span>
+<span class="w">        </span><span class="nf">rotate_object_local</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">rot_y</span><span class="p">)</span><span class="w"> </span><span class="c1"># then rotate in X</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-10-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-10-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// accumulators</span>
+<span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_rotationX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0f</span><span class="p">;</span>
+<span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_rotationY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0f</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Input</span><span class="p">(</span><span class="n">InputEvent</span><span class="w"> </span><span class="n">@event</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">@event</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">InputEventMouseMotion</span><span class="w"> </span><span class="n">mouseMotion</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// modify accumulated mouse rotation</span>
+<span class="w">        </span><span class="n">_rotationX</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">mouseMotion</span><span class="p">.</span><span class="n">ScreenRelative</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">LookAroundSpeed</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_rotationY</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">mouseMotion</span><span class="p">.</span><span class="n">ScreenRelative</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">LookAroundSpeed</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// reset rotation</span>
+<span class="w">        </span><span class="n">Transform3D</span><span class="w"> </span><span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Transform</span><span class="p">;</span>
+<span class="w">        </span><span class="n">transform</span><span class="p">.</span><span class="n">Basis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Basis</span><span class="p">.</span><span class="n">Identity</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">RotateObjectLocal</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">,</span><span class="w"> </span><span class="n">_rotationX</span><span class="p">);</span><span class="w"> </span><span class="c1">// first rotate about Y</span>
+<span class="w">        </span><span class="n">RotateObjectLocal</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">Right</span><span class="p">,</span><span class="w"> </span><span class="n">_rotationY</span><span class="p">);</span><span class="w"> </span><span class="c1">// then rotate about X</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>As you can see, in such cases it's even simpler to keep the rotation outside, then use the transform as the <em>final</em> orientation.</p>
+</section>
+<section id="interpolating-with-quaternions">
+<h3>Interpolating with quaternions<a class="headerlink" href="#interpolating-with-quaternions" title="Link to this heading"></a></h3>
+<p>Interpolating between two transforms can efficiently be done with quaternions. More information about how quaternions work can be found in other places around the Internet. For practical use, it's enough to understand that pretty much their main use is doing a closest path interpolation. As in, if you have two rotations, a quaternion will smoothly allow interpolation between them using the closest axis.</p>
+<p>Converting a rotation to quaternion is straightforward.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-11-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-11-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-11-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-11-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-11-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-11-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert basis to quaternion, keep in mind scale is lost</span>
+<span class="k">var</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Quaternion</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="vi">basis</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Quaternion</span><span class="p">(</span><span class="n">transform2</span><span class="o">.</span><span class="vi">basis</span><span class="p">)</span>
+<span class="c1"># Interpolate using spherical-linear interpolation (SLERP).</span>
+<span class="k">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="o">.</span><span class="nf">slerp</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span><span class="w"> </span><span class="c1"># find halfway point between a and b</span>
+<span class="c1"># Apply back</span>
+<span class="n">transform</span><span class="o">.</span><span class="vi">basis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Basis</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-11-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-11-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Convert basis to quaternion, keep in mind scale is lost</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Quaternion</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">Basis</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Quaternion</span><span class="p">(</span><span class="n">transform2</span><span class="p">.</span><span class="n">Basis</span><span class="p">);</span>
+<span class="c1">// Interpolate using spherical-linear interpolation (SLERP).</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">Slerp</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">);</span><span class="w"> </span><span class="c1">// find halfway point between a and b</span>
+<span class="c1">// Apply back</span>
+<span class="n">transform</span><span class="p">.</span><span class="n">Basis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Basis</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>The <a class="reference internal" href="../../classes/class_quaternion.html#class-quaternion"><span class="std std-ref">Quaternion</span></a> type reference has more information on the datatype (it
+can also do transform accumulation, transform points, etc., though this is used
+less often). If you interpolate or apply operations to quaternions many times,
+keep in mind they need to be eventually normalized. Otherwise, they will also
+suffer from numerical precision errors.</p>
+<p>Quaternions are useful when doing camera/path/etc. interpolations, as the result will always be correct and smooth.</p>
+</section>
+</section>
+<section id="transforms-are-your-friend">
+<h2>Transforms are your friend<a class="headerlink" href="#transforms-are-your-friend" title="Link to this heading"></a></h2>
+<p>For most beginners, getting used to working with transforms can take some time. However, once you get used to them, you will appreciate their simplicity and power.</p>
+<p>Don't hesitate to ask for help on this topic in any of Godot's <a class="reference external" href="https://godotengine.org/community">online communities</a> and, once you become confident enough, please help others!</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction_to_3d.html" class="btn btn-neutral float-left" title="Introduction to 3D" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="procedural_geometry/index.html" class="btn btn-neutral float-right" title="Procedural geometry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

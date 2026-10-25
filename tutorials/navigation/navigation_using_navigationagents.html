@@ -1,0 +1,952 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using NavigationAgents" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/navigation/navigation_using_navigationagents.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="NavigationsAgents are helper nodes that combine functionality for pathfinding, path following and agent avoidance for a Node2D/3D inheriting parent node. They facilitate common calls to the Navigat..." />
+<meta name="description" content="NavigationsAgents are helper nodes that combine functionality for pathfinding, path following and agent avoidance for a Node2D/3D inheriting parent node. They facilitate common calls to the Navigat..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using NavigationAgents &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using NavigationObstacles" href="navigation_using_navigationobstacles.html" />
+    <link rel="prev" title="Using NavigationPathQueryObjects" href="navigation_using_navigationpathqueryobjects.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/navigation/navigation_using_navigationagents" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/navigation/navigation_using_navigationagents.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Navigation</a></li>
+      <li class="breadcrumb-item active">Using NavigationAgents</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/navigation/navigation_using_navigationagents.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-navigationagents">
+<span id="doc-navigation-using-navigationagents"></span><h1>Using NavigationAgents<a class="headerlink" href="#using-navigationagents" title="Link to this heading"></a></h1>
+<p>NavigationsAgents are helper nodes that combine functionality
+for pathfinding, path following and agent avoidance for a Node2D/3D inheriting parent node.
+They facilitate common calls to the NavigationServer API on
+behalf of the parent actor node in a more convenient manner for beginners.</p>
+<p>2D and 3D version of NavigationAgents are available as
+<a class="reference internal" href="../../classes/class_navigationagent2d.html#class-navigationagent2d"><span class="std std-ref">NavigationAgent2D</span></a> and
+<a class="reference internal" href="../../classes/class_navigationagent3d.html#class-navigationagent3d"><span class="std std-ref">NavigationAgent3D</span></a> respectively.</p>
+<p>New NavigationAgent nodes will automatically join the default navigation map on the <a class="reference internal" href="../../classes/class_world2d.html#class-world2d"><span class="std std-ref">World2D</span></a>/<a class="reference internal" href="../../classes/class_world3d.html#class-world3d"><span class="std std-ref">World3D</span></a>.</p>
+<p>NavigationsAgent nodes are optional and not a hard requirement to use the navigation system.
+Their entire functionality can be replaced with scripts and direct calls to the NavigationServer API.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For more advanced uses consider <a class="reference internal" href="navigation_using_navigationpathqueryobjects.html#doc-navigation-using-navigationpathqueryobjects"><span class="std std-ref">Using NavigationPathQueryObjects</span></a> over NavigationAgent nodes.</p>
+</div>
+<section id="navigationagent-pathfinding">
+<h2>NavigationAgent Pathfinding<a class="headerlink" href="#navigationagent-pathfinding" title="Link to this heading"></a></h2>
+<p>NavigationAgents query a new navigation path on their current navigation map when their <code class="docutils literal notranslate"><span class="pre">target_position</span></code> is set with a global position.</p>
+<p>The result of the pathfinding can be influenced with the following properties.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">navigation_layers</span></code> bitmask can be used to limit the navigation meshes that the agent can use.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pathfinding_algorithm</span></code> controls how the pathfinding travels through the navigation mesh polygons in the path search.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">path_postprocessing</span></code> sets if or how the raw path corridor found by the pathfinding is altered before it is returned.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">path_metadata_flags</span></code> enable the collection of additional path point meta data returned by the path.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">simplify_path</span></code> and <code class="docutils literal notranslate"><span class="pre">simplify_epsilon</span></code> properties can be used to remove less critical points from the path.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Disabling path meta flags will disable related signal emissions on the agent.</p>
+</div>
+</section>
+<section id="navigationagent-pathfollowing">
+<h2>NavigationAgent Pathfollowing<a class="headerlink" href="#navigationagent-pathfollowing" title="Link to this heading"></a></h2>
+<p>After a <code class="docutils literal notranslate"><span class="pre">target_position</span></code> has been set for the agent, the next position to follow in the path
+can be retrieved with the <code class="docutils literal notranslate"><span class="pre">get_next_path_position()</span></code> function.</p>
+<p>Once the next path position is received, move the parent actor node of the agent
+towards this path position with your own movement code.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The navigation system never moves the parent node of a NavigationAgent.
+The movement is entirely in the hands of users and their custom scripts.</p>
+</div>
+<p>NavigationAgents have their own internal logic to proceed with the current path and call for updates.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">get_next_path_position()</span></code> function is responsible for updating many of the agent's internal states and properties.
+The function should be repeatedly called <em>once</em> every <code class="docutils literal notranslate"><span class="pre">physics_process</span></code> until <code class="docutils literal notranslate"><span class="pre">is_navigation_finished()</span></code> tells that the path is finished.
+The function should not be called after the target position or path end has been reached
+as it can make the agent jitter in place due to the repeated path updates.
+Always check very early in script with <code class="docutils literal notranslate"><span class="pre">is_navigation_finished()</span></code> if the path is already finished.</p>
+<p>The following distance properties influence the path following behavior.</p>
+<ul class="simple">
+<li><p>At <code class="docutils literal notranslate"><span class="pre">path_desired_distance</span></code> from the next path position, the agent advances its internal path index to the subsequent next path position.</p></li>
+<li><p>At <code class="docutils literal notranslate"><span class="pre">target_desired_distance</span></code> from the target path position, the agent considers the target position to be reached and the path at its end.</p></li>
+<li><p>At <code class="docutils literal notranslate"><span class="pre">path_max_distance</span></code> from the ideal path to the next path position, the agent requests a new path because it was pushed too far off.</p></li>
+</ul>
+<p>The important updates are all triggered with the <code class="docutils literal notranslate"><span class="pre">get_next_path_position()</span></code> function
+when called in <code class="docutils literal notranslate"><span class="pre">_physics_process()</span></code>.</p>
+<p>NavigationAgents can be used with <code class="docutils literal notranslate"><span class="pre">process</span></code> but are still limited to a single update that happens in <code class="docutils literal notranslate"><span class="pre">physics_process</span></code>.</p>
+<p>Script examples for various nodes commonly used with NavigationAgents can be found further below.</p>
+<section id="pathfollowing-common-problems">
+<h3>Pathfollowing common problems<a class="headerlink" href="#pathfollowing-common-problems" title="Link to this heading"></a></h3>
+<p>There are some common user problems and important caveats to consider when writing agent movement scripts.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>The path is returned empty</dt><dd><p>If an agent queries a path before the navigation map synchronisation, e.g. in a <code class="docutils literal notranslate"><span class="pre">_ready()</span></code> function, the path might return empty. In this case the <code class="docutils literal notranslate"><span class="pre">get_next_path_position()</span></code> function will return the same position as the agent parent node and the agent will consider the path end reached. This is fixed by making a deferred call or using a callback e.g. waiting for the navigation map changed signal.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The agent is stuck dancing between two positions</dt><dd><p>This is usually caused by very frequent path updates every single frame, either deliberate or by accident (e.g. max path distance set too short). The pathfinding needs to find the closest position that are valid on navigation mesh. If a new path is requested every single frame the first path positions might end up switching constantly in front and behind the agent's current position, causing it to dance between the two positions.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The agent is backtracking sometimes</dt><dd><p>If an agent moves very fast it might overshoot the path_desired_distance check without ever advancing the path index. This can lead to the agent backtracking to the path point now behind it until it passes the distance check to increase the path index. Increase the desired distances accordingly for your agent speed and update rate usually fixes this as well as a more balanced navigation mesh polygon layout with not too many polygon edges cramped together in small spaces.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The agent is sometimes looking backwards for a frame</dt><dd><p>Same as with stuck dancing agents between two positions, this is usually caused by very frequent path updates every single frame. Depending on your navigation mesh layout, and especially when an agent is directly placed over a navigation mesh edge or edge connection, expect path positions to be sometimes slightly &quot;behind&quot; your actors current orientation. This happens due to precision issues and can not always be avoided. This is usually only a visible problem if actors are instantly rotated to face the current path position.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+<section id="navigationagent-avoidance">
+<h2>NavigationAgent Avoidance<a class="headerlink" href="#navigationagent-avoidance" title="Link to this heading"></a></h2>
+<p>This section explains how to use the navigation avoidance specific to NavigationAgents.</p>
+<p>In order for NavigationAgents to use the avoidance feature the <code class="docutils literal notranslate"><span class="pre">avoidance_enabled</span></code> property must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<img alt="../../_images/agent_avoidance_enabled.png" src="../../_images/agent_avoidance_enabled.png" />
+<p>The <code class="docutils literal notranslate"><span class="pre">velocity_computed</span></code> signal of the NavigationAgent node must be connected to receive the safe velocity calculation result.</p>
+<img alt="../../_images/agent_safevelocity_signal.png" src="../../_images/agent_safevelocity_signal.png" />
+<p>Set the <code class="docutils literal notranslate"><span class="pre">velocity</span></code> of the NavigationAgent node in <code class="docutils literal notranslate"><span class="pre">_physics_process()</span></code> to update the agent with the current velocity of the agent's parent node.</p>
+<p>While avoidance is enabled on the agent the <code class="docutils literal notranslate"><span class="pre">safe_velocity</span></code> vector will be received with the velocity_computed signal every physics frame.
+This velocity vector should be used to move the NavigationAgent's parent node in order to avoidance collision with other avoidance using agents or avoidance obstacles.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only other agents on the same map that are registered for avoidance themself will be considered in the avoidance calculation.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The NavigationAgent <strong>must</strong> be supplied with a <code class="docutils literal notranslate"><span class="pre">target_position</span></code> attribute,
+even if you are only using the agent for avoidance. Otherwise, the <code class="docutils literal notranslate"><span class="pre">safe_velocity</span></code>
+received from the <code class="docutils literal notranslate"><span class="pre">velocity_computed</span></code> signal will always be the zero vector.</p>
+</div>
+<p>The following NavigationAgent properties are relevant for avoidance:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The property <code class="docutils literal notranslate"><span class="pre">height</span></code> is available in 3D only. The height together with the current global y-axis position of the agent determines the vertical placement of the agent in the avoidance simulation. Agents using the 2D avoidance will automatically ignore other agents or obstacles that are below or above them.</p></li>
+<li><p>The property <code class="docutils literal notranslate"><span class="pre">radius</span></code> controls the radius of the avoidance circle, or sphere in 3D, around the agent. This area describes the agents body and not the avoidance maneuver distance.</p></li>
+<li><p>The property <code class="docutils literal notranslate"><span class="pre">neighbor_distance</span></code> controls the search radius of the agent when searching for other agents that should be avoided. A lower value reduces processing cost.</p></li>
+<li><p>The property <code class="docutils literal notranslate"><span class="pre">max_neighbors</span></code> controls how many other agents are considered in the avoidance calculation if they all have overlapping radius.
+A lower value reduces processing cost but a too low value may result in agents ignoring the avoidance.</p></li>
+<li><p>The properties <code class="docutils literal notranslate"><span class="pre">time_horizon_agents</span></code> and <code class="docutils literal notranslate"><span class="pre">time_horizon_obstacles</span></code> control the avoidance prediction time for other agents or obstacles in seconds. When agents calculate their safe velocities they choose velocities that can be kept for this amount of seconds without colliding with another avoidance object. The prediction time should be kept as low as possible as agents will slow down their velocities to avoid collision in that timeframe.</p></li>
+<li><p>The property <code class="docutils literal notranslate"><span class="pre">max_speed</span></code> controls the maximum velocity allowed for the agents avoidance calculation.
+If the agents parents moves faster than this value the avoidance <code class="docutils literal notranslate"><span class="pre">safe_velocity</span></code> might not be accurate enough to avoid collision.</p></li>
+<li><p>The property <code class="docutils literal notranslate"><span class="pre">use_3d_avoidance</span></code> switches the agent between the 2D avoidance (xz axis) and the 3D avoidance (xyz axis) on the next update.
+Note that 2D avoidance and 3D avoidance run in separate avoidance simulations so agents split between them do not affect each other.</p></li>
+<li><p>The properties <code class="docutils literal notranslate"><span class="pre">avoidance_layers</span></code> and <code class="docutils literal notranslate"><span class="pre">avoidance_mask</span></code> are bitmasks similar to e.g. physics layers. Agents will only avoid other avoidance objects that are on an avoidance layer that matches at least one of their own avoidance mask bits.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">avoidance_priority</span></code> makes agents with a higher priority ignore agents with a lower priority. This can be used to give certain agents more importance in the avoidance simulation, e.g. important non-playable characters, without constantly changing their entire avoidance layers or mask.</p></li>
+</ul>
+</div></blockquote>
+<p>Avoidance exists in its own space and has no information from navigation meshes or physics collision.
+Behind the scene avoidance agents are just circles with different radius on a flat 2D plane or spheres in an otherwise empty 3D space.
+NavigationObstacles can be used to add some environment constrains to the avoidance simulation, see <a class="reference internal" href="navigation_using_navigationobstacles.html#doc-navigation-using-navigationobstacles"><span class="std std-ref">Using NavigationObstacles</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Avoidance does not affect the pathfinding. It should be seen as an additional option for constantly moving objects that cannot be (re)baked to a navigation mesh efficiently in order to move around them.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>RVO avoidance makes implicit assumptions about natural agent behavior. E.g. that agents move on reasonable passing sides that can be assigned when they encounter each other.
+This means that very clinical avoidance test scenarios will commonly fail. E.g. agents moved directly against each other with perfect opposite velocities will fail because the agents can not get their passing sides assigned.</p>
+</div>
+<p>Using the NavigationAgent <code class="docutils literal notranslate"><span class="pre">avoidance_enabled</span></code> property is the preferred option
+to toggle avoidance. The following code snippets can be used to
+toggle avoidance on agents, create or delete avoidance callbacks or switch avoidance modes.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-MkQgR0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tab" tabindex="0">2D GDScript</button><button aria-controls="panel-0-MkQgQyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-MkQgQyM=" name="MkQgQyM=" role="tab" tabindex="-1">2D C#</button><button aria-controls="panel-0-M0QgR0RTY3JpcHQ=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tab" tabindex="-1">3D GDScript</button><button aria-controls="panel-0-M0QgQyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-M0QgQyM=" name="M0QgQyM=" role="tab" tabindex="-1">3D C#</button></div><div aria-labelledby="tab-0-MkQgR0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">NavigationAgent2D</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">agent</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_rid</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Enable avoidance</span>
+<span class="w">    </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">agent_set_avoidance_enabled</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Create avoidance callback</span>
+<span class="w">    </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">agent_set_avoidance_callback</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Callable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_avoidance_done&quot;</span><span class="p">))</span>
+
+<span class="w">    </span><span class="c1"># Disable avoidance</span>
+<span class="w">    </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">agent_set_avoidance_enabled</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="l">false</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Delete avoidance callback</span>
+<span class="w">    </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">agent_set_avoidance_callback</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Callable</span><span class="p">())</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-MkQgQyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-MkQgQyM=" name="MkQgQyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNavigationAgent2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">NavigationAgent2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Rid</span><span class="w"> </span><span class="n">agent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetRid</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Enable avoidance</span>
+<span class="w">        </span><span class="n">NavigationServer2D</span><span class="p">.</span><span class="n">AgentSetAvoidanceEnabled</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Create avoidance callback</span>
+<span class="w">        </span><span class="n">NavigationServer2D</span><span class="p">.</span><span class="n">AgentSetAvoidanceCallback</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="n">Callable</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">AvoidanceDone</span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// Disable avoidance</span>
+<span class="w">        </span><span class="n">NavigationServer2D</span><span class="p">.</span><span class="n">AgentSetAvoidanceEnabled</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//Delete avoidance callback</span>
+<span class="w">        </span><span class="n">NavigationServer2D</span><span class="p">.</span><span class="n">AgentSetAvoidanceCallback</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">AvoidanceDone</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-M0QgR0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">NavigationAgent3D</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">agent</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_rid</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Enable avoidance</span>
+<span class="w">    </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">agent_set_avoidance_enabled</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Create avoidance callback</span>
+<span class="w">    </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">agent_set_avoidance_callback</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Callable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_avoidance_done&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="c1"># Switch to 3D avoidance</span>
+<span class="w">    </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">agent_set_use_3d_avoidance</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Disable avoidance</span>
+<span class="w">    </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">agent_set_avoidance_enabled</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="l">false</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Delete avoidance callback</span>
+<span class="w">    </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">agent_set_avoidance_callback</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Callable</span><span class="p">())</span>
+<span class="w">    </span><span class="c1"># Switch to 2D avoidance</span>
+<span class="w">    </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">agent_set_use_3d_avoidance</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="l">false</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-M0QgQyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-M0QgQyM=" name="M0QgQyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNavigationAgent3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">NavigationAgent3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Rid</span><span class="w"> </span><span class="n">agent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetRid</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Enable avoidance</span>
+<span class="w">        </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">AgentSetAvoidanceEnabled</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Create avoidance callback</span>
+<span class="w">        </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">AgentSetAvoidanceCallback</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="n">Callable</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">AvoidanceDone</span><span class="p">));</span>
+<span class="w">        </span><span class="c1">// Switch to 3D avoidance</span>
+<span class="w">        </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">AgentSetUse3DAvoidance</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Disable avoidance</span>
+<span class="w">        </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">AgentSetAvoidanceEnabled</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//Delete avoidance callback</span>
+<span class="w">        </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">AgentSetAvoidanceCallback</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Switch to 2D avoidance</span>
+<span class="w">        </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">AgentSetUse3DAvoidance</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">AvoidanceDone</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="navigationagent-script-templates">
+<h2>NavigationAgent Script Templates<a class="headerlink" href="#navigationagent-script-templates" title="Link to this heading"></a></h2>
+<p>The following sections provides script templates for nodes commonly used with NavigationAgents.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">2D GDScript</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">2D C#</button><button aria-controls="panel-1-1-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-2" name="1-2" role="tab" tabindex="-1">3D GDScript</button><button aria-controls="panel-1-1-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-3" name="1-3" role="tab" tabindex="-1">3D C#</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-Tm9kZTJE" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-Tm9kZTJE" name="Tm9kZTJE" role="tab" tabindex="0">Node2D</button><button aria-controls="panel-2-Q2hhcmFjdGVyQm9keTJE" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-Q2hhcmFjdGVyQm9keTJE" name="Q2hhcmFjdGVyQm9keTJE" role="tab" tabindex="-1">CharacterBody2D</button><button aria-controls="panel-2-UmlnaWRCb2R5MkQ=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-UmlnaWRCb2R5MkQ=" name="UmlnaWRCb2R5MkQ=" role="tab" tabindex="-1">RigidBody2D</button></div><div aria-labelledby="tab-2-Tm9kZTJE" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-Tm9kZTJE" name="Tm9kZTJE" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node2D</span>
+
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">movement_speed</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span>
+<span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">navigation_agent</span><span class="p">:</span><span class="w"> </span><span class="nb">NavigationAgent2D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;NavigationAgent2D&quot;</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">movement_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">navigation_agent</span><span class="o">.</span><span class="vi">velocity_computed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="nb nb-Type">Callable</span><span class="p">(</span><span class="n">_on_velocity_computed</span><span class="p">))</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">set_movement_target</span><span class="p">(</span><span class="n">movement_target</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">):</span>
+<span class="w">    </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">set_target_position</span><span class="p">(</span><span class="n">movement_target</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Do not query when the map has never synchronized and is empty.</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">map_get_iteration_id</span><span class="p">(</span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">is_navigation_finished</span><span class="p">():</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="n">movement_delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">movement_speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">next_path_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">get_next_path_position</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">new_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_position</span><span class="o">.</span><span class="nf">direction_to</span><span class="p">(</span><span class="n">next_path_position</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">movement_delta</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="vi">avoidance_enabled</span><span class="p">:</span>
+<span class="w">        </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">set_velocity</span><span class="p">(</span><span class="n">new_velocity</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nf">_on_velocity_computed</span><span class="p">(</span><span class="n">new_velocity</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_velocity_computed</span><span class="p">(</span><span class="n">safe_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">global_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_position</span><span class="o">.</span><span class="nf">move_toward</span><span class="p">(</span><span class="n">global_position</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">safe_velocity</span><span class="p">,</span><span class="w"> </span><span class="n">movement_delta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-Q2hhcmFjdGVyQm9keTJE" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-Q2hhcmFjdGVyQm9keTJE" name="Q2hhcmFjdGVyQm9keTJE" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">CharacterBody2D</span>
+
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">movement_speed</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span>
+<span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">navigation_agent</span><span class="p">:</span><span class="w"> </span><span class="nb">NavigationAgent2D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;NavigationAgent2D&quot;</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">navigation_agent</span><span class="o">.</span><span class="vi">velocity_computed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="nb nb-Type">Callable</span><span class="p">(</span><span class="n">_on_velocity_computed</span><span class="p">))</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">set_movement_target</span><span class="p">(</span><span class="n">movement_target</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">):</span>
+<span class="w">    </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">set_target_position</span><span class="p">(</span><span class="n">movement_target</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Do not query when the map has never synchronized and is empty.</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">map_get_iteration_id</span><span class="p">(</span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">is_navigation_finished</span><span class="p">():</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">next_path_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">get_next_path_position</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">new_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_position</span><span class="o">.</span><span class="nf">direction_to</span><span class="p">(</span><span class="n">next_path_position</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">movement_speed</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="vi">avoidance_enabled</span><span class="p">:</span>
+<span class="w">        </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">set_velocity</span><span class="p">(</span><span class="n">new_velocity</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nf">_on_velocity_computed</span><span class="p">(</span><span class="n">new_velocity</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_velocity_computed</span><span class="p">(</span><span class="n">safe_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">):</span>
+<span class="w">    </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safe_velocity</span>
+<span class="w">    </span><span class="nf">move_and_slide</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-UmlnaWRCb2R5MkQ=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-UmlnaWRCb2R5MkQ=" name="UmlnaWRCb2R5MkQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">RigidBody2D</span>
+
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">movement_speed</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span>
+<span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">navigation_agent</span><span class="p">:</span><span class="w"> </span><span class="nb">NavigationAgent2D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;NavigationAgent2D&quot;</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">navigation_agent</span><span class="o">.</span><span class="vi">velocity_computed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="nb nb-Type">Callable</span><span class="p">(</span><span class="n">_on_velocity_computed</span><span class="p">))</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">set_movement_target</span><span class="p">(</span><span class="n">movement_target</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">):</span>
+<span class="w">    </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">set_target_position</span><span class="p">(</span><span class="n">movement_target</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Do not query when the map has never synchronized and is empty.</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">map_get_iteration_id</span><span class="p">(</span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">is_navigation_finished</span><span class="p">():</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">next_path_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">get_next_path_position</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">new_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_position</span><span class="o">.</span><span class="nf">direction_to</span><span class="p">(</span><span class="n">next_path_position</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">movement_speed</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="vi">avoidance_enabled</span><span class="p">:</span>
+<span class="w">        </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">set_velocity</span><span class="p">(</span><span class="n">new_velocity</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nf">_on_velocity_computed</span><span class="p">(</span><span class="n">new_velocity</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_velocity_computed</span><span class="p">(</span><span class="n">safe_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">):</span>
+<span class="w">    </span><span class="n">linear_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safe_velocity</span>
+</pre></div>
+</div>
+</div></div>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-Tm9kZTJE" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-Tm9kZTJE" name="Tm9kZTJE" role="tab" tabindex="0">Node2D</button><button aria-controls="panel-3-Q2hhcmFjdGVyQm9keTJE" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-Q2hhcmFjdGVyQm9keTJE" name="Q2hhcmFjdGVyQm9keTJE" role="tab" tabindex="-1">CharacterBody2D</button><button aria-controls="panel-3-UmlnaWRCb2R5MkQ=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-UmlnaWRCb2R5MkQ=" name="UmlnaWRCb2R5MkQ=" role="tab" tabindex="-1">RigidBody2D</button></div><div aria-labelledby="tab-3-Tm9kZTJE" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-Tm9kZTJE" name="Tm9kZTJE" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">MovementSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">NavigationAgent2D</span><span class="w"> </span><span class="n">_navigationAgent</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_movementDelta</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">NavigationAgent2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;NavigationAgent2D&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">VelocityComputed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnVelocityComputed</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetMovementTarget</span><span class="p">(</span><span class="n">Vector2</span><span class="w"> </span><span class="n">movementTarget</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">TargetPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">movementTarget</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Do not query when the map has never synchronized and is empty.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavigationServer2D</span><span class="p">.</span><span class="n">MapGetIterationId</span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">GetNavigationMap</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">IsNavigationFinished</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">_movementDelta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MovementSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Vector2</span><span class="w"> </span><span class="n">nextPathPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">GetNextPathPosition</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Vector2</span><span class="w"> </span><span class="n">newVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GlobalPosition</span><span class="p">.</span><span class="n">DirectionTo</span><span class="p">(</span><span class="n">nextPathPosition</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_movementDelta</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">AvoidanceEnabled</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newVelocity</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">OnVelocityComputed</span><span class="p">(</span><span class="n">newVelocity</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnVelocityComputed</span><span class="p">(</span><span class="n">Vector2</span><span class="w"> </span><span class="n">safeVelocity</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GlobalPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GlobalPosition</span><span class="p">.</span><span class="n">MoveToward</span><span class="p">(</span><span class="n">GlobalPosition</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">safeVelocity</span><span class="p">,</span><span class="w"> </span><span class="n">_movementDelta</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-Q2hhcmFjdGVyQm9keTJE" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-Q2hhcmFjdGVyQm9keTJE" name="Q2hhcmFjdGVyQm9keTJE" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyCharacterBody2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CharacterBody2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">MovementSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">NavigationAgent2D</span><span class="w"> </span><span class="n">_navigationAgent</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">NavigationAgent2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;NavigationAgent2D&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">VelocityComputed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnVelocityComputed</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetMovementTarget</span><span class="p">(</span><span class="n">Vector2</span><span class="w"> </span><span class="n">movementTarget</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">TargetPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">movementTarget</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Do not query when the map has never synchronized and is empty.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavigationServer2D</span><span class="p">.</span><span class="n">MapGetIterationId</span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">GetNavigationMap</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">IsNavigationFinished</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Vector2</span><span class="w"> </span><span class="n">nextPathPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">GetNextPathPosition</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Vector2</span><span class="w"> </span><span class="n">newVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GlobalPosition</span><span class="p">.</span><span class="n">DirectionTo</span><span class="p">(</span><span class="n">nextPathPosition</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MovementSpeed</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">AvoidanceEnabled</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newVelocity</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">OnVelocityComputed</span><span class="p">(</span><span class="n">newVelocity</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnVelocityComputed</span><span class="p">(</span><span class="n">Vector2</span><span class="w"> </span><span class="n">safeVelocity</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeVelocity</span><span class="p">;</span>
+<span class="w">        </span><span class="n">MoveAndSlide</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-UmlnaWRCb2R5MkQ=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-UmlnaWRCb2R5MkQ=" name="UmlnaWRCb2R5MkQ=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyRigidBody2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RigidBody2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">MovementSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">NavigationAgent2D</span><span class="w"> </span><span class="n">_navigationAgent</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">NavigationAgent2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;NavigationAgent2D&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">VelocityComputed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnVelocityComputed</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetMovementTarget</span><span class="p">(</span><span class="n">Vector2</span><span class="w"> </span><span class="n">movementTarget</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">TargetPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">movementTarget</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Do not query when the map has never synchronized and is empty.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavigationServer2D</span><span class="p">.</span><span class="n">MapGetIterationId</span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">GetNavigationMap</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">IsNavigationFinished</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Vector2</span><span class="w"> </span><span class="n">nextPathPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">GetNextPathPosition</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Vector2</span><span class="w"> </span><span class="n">newVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GlobalPosition</span><span class="p">.</span><span class="n">DirectionTo</span><span class="p">(</span><span class="n">nextPathPosition</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MovementSpeed</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">AvoidanceEnabled</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newVelocity</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">OnVelocityComputed</span><span class="p">(</span><span class="n">newVelocity</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnVelocityComputed</span><span class="p">(</span><span class="n">Vector2</span><span class="w"> </span><span class="n">safeVelocity</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LinearVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeVelocity</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</div><div aria-labelledby="tab-1-1-2" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-2" name="1-2" role="tabpanel" tabindex="0"><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-Tm9kZTNE" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-Tm9kZTNE" name="Tm9kZTNE" role="tab" tabindex="0">Node3D</button><button aria-controls="panel-4-Q2hhcmFjdGVyQm9keTNE" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-Q2hhcmFjdGVyQm9keTNE" name="Q2hhcmFjdGVyQm9keTNE" role="tab" tabindex="-1">CharacterBody3D</button><button aria-controls="panel-4-UmlnaWRCb2R5M0Q=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-UmlnaWRCb2R5M0Q=" name="UmlnaWRCb2R5M0Q=" role="tab" tabindex="-1">RigidBody3D</button></div><div aria-labelledby="tab-4-Tm9kZTNE" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-Tm9kZTNE" name="Tm9kZTNE" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node3D</span>
+
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">movement_speed</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span>
+<span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">navigation_agent</span><span class="p">:</span><span class="w"> </span><span class="nb">NavigationAgent3D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;NavigationAgent3D&quot;</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">physics_delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">navigation_agent</span><span class="o">.</span><span class="vi">velocity_computed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="nb nb-Type">Callable</span><span class="p">(</span><span class="n">_on_velocity_computed</span><span class="p">))</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">set_movement_target</span><span class="p">(</span><span class="n">movement_target</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">):</span>
+<span class="w">    </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">set_target_position</span><span class="p">(</span><span class="n">movement_target</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Save the delta for use in _on_velocity_computed.</span>
+<span class="w">    </span><span class="n">physics_delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">delta</span>
+<span class="w">    </span><span class="c1"># Do not query when the map has never synchronized and is empty.</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_get_iteration_id</span><span class="p">(</span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">is_navigation_finished</span><span class="p">():</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">next_path_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">get_next_path_position</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">new_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_position</span><span class="o">.</span><span class="nf">direction_to</span><span class="p">(</span><span class="n">next_path_position</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">movement_speed</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="vi">avoidance_enabled</span><span class="p">:</span>
+<span class="w">        </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">set_velocity</span><span class="p">(</span><span class="n">new_velocity</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nf">_on_velocity_computed</span><span class="p">(</span><span class="n">new_velocity</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_velocity_computed</span><span class="p">(</span><span class="n">safe_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">global_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_position</span><span class="o">.</span><span class="nf">move_toward</span><span class="p">(</span><span class="n">global_position</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">safe_velocity</span><span class="p">,</span><span class="w"> </span><span class="n">physics_delta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">movement_speed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-Q2hhcmFjdGVyQm9keTNE" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-Q2hhcmFjdGVyQm9keTNE" name="Q2hhcmFjdGVyQm9keTNE" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">CharacterBody3D</span>
+
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">movement_speed</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span>
+<span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">navigation_agent</span><span class="p">:</span><span class="w"> </span><span class="nb">NavigationAgent3D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;NavigationAgent3D&quot;</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">navigation_agent</span><span class="o">.</span><span class="vi">velocity_computed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="nb nb-Type">Callable</span><span class="p">(</span><span class="n">_on_velocity_computed</span><span class="p">))</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">set_movement_target</span><span class="p">(</span><span class="n">movement_target</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">):</span>
+<span class="w">    </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">set_target_position</span><span class="p">(</span><span class="n">movement_target</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Do not query when the map has never synchronized and is empty.</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_get_iteration_id</span><span class="p">(</span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">is_navigation_finished</span><span class="p">():</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">next_path_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">get_next_path_position</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">new_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_position</span><span class="o">.</span><span class="nf">direction_to</span><span class="p">(</span><span class="n">next_path_position</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">movement_speed</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="vi">avoidance_enabled</span><span class="p">:</span>
+<span class="w">        </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">set_velocity</span><span class="p">(</span><span class="n">new_velocity</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nf">_on_velocity_computed</span><span class="p">(</span><span class="n">new_velocity</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_velocity_computed</span><span class="p">(</span><span class="n">safe_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">):</span>
+<span class="w">    </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safe_velocity</span>
+<span class="w">    </span><span class="nf">move_and_slide</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-UmlnaWRCb2R5M0Q=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-UmlnaWRCb2R5M0Q=" name="UmlnaWRCb2R5M0Q=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">RigidBody3D</span>
+
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">movement_speed</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span>
+<span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">navigation_agent</span><span class="p">:</span><span class="w"> </span><span class="nb">NavigationAgent3D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;NavigationAgent3D&quot;</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">navigation_agent</span><span class="o">.</span><span class="vi">velocity_computed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="nb nb-Type">Callable</span><span class="p">(</span><span class="n">_on_velocity_computed</span><span class="p">))</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">set_movement_target</span><span class="p">(</span><span class="n">movement_target</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">):</span>
+<span class="w">    </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">set_target_position</span><span class="p">(</span><span class="n">movement_target</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Do not query when the map has never synchronized and is empty.</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_get_iteration_id</span><span class="p">(</span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">is_navigation_finished</span><span class="p">():</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">next_path_position</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">get_next_path_position</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">new_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_position</span><span class="o">.</span><span class="nf">direction_to</span><span class="p">(</span><span class="n">next_path_position</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">movement_speed</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">navigation_agent</span><span class="o">.</span><span class="vi">avoidance_enabled</span><span class="p">:</span>
+<span class="w">        </span><span class="n">navigation_agent</span><span class="o">.</span><span class="nf">set_velocity</span><span class="p">(</span><span class="n">new_velocity</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nf">_on_velocity_computed</span><span class="p">(</span><span class="n">new_velocity</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_velocity_computed</span><span class="p">(</span><span class="n">safe_velocity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">):</span>
+<span class="w">    </span><span class="n">linear_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safe_velocity</span>
+</pre></div>
+</div>
+</div></div>
+</div><div aria-labelledby="tab-1-1-3" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-3" name="1-3" role="tabpanel" tabindex="0"><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-Tm9kZTNE" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-Tm9kZTNE" name="Tm9kZTNE" role="tab" tabindex="0">Node3D</button><button aria-controls="panel-5-Q2hhcmFjdGVyQm9keTNE" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-Q2hhcmFjdGVyQm9keTNE" name="Q2hhcmFjdGVyQm9keTNE" role="tab" tabindex="-1">CharacterBody3D</button><button aria-controls="panel-5-UmlnaWRCb2R5M0Q=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-UmlnaWRCb2R5M0Q=" name="UmlnaWRCb2R5M0Q=" role="tab" tabindex="-1">RigidBody3D</button></div><div aria-labelledby="tab-5-Tm9kZTNE" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-Tm9kZTNE" name="Tm9kZTNE" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">MovementSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">NavigationAgent3D</span><span class="w"> </span><span class="n">_navigationAgent</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_movementDelta</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">NavigationAgent3D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;NavigationAgent3D&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">VelocityComputed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnVelocityComputed</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetMovementTarget</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">movementTarget</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">TargetPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">movementTarget</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Do not query when the map has never synchronized and is empty.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapGetIterationId</span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">GetNavigationMap</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">IsNavigationFinished</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">_movementDelta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MovementSpeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Vector3</span><span class="w"> </span><span class="n">nextPathPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">GetNextPathPosition</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Vector3</span><span class="w"> </span><span class="n">newVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GlobalPosition</span><span class="p">.</span><span class="n">DirectionTo</span><span class="p">(</span><span class="n">nextPathPosition</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_movementDelta</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">AvoidanceEnabled</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newVelocity</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">OnVelocityComputed</span><span class="p">(</span><span class="n">newVelocity</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnVelocityComputed</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">safeVelocity</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GlobalPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GlobalPosition</span><span class="p">.</span><span class="n">MoveToward</span><span class="p">(</span><span class="n">GlobalPosition</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">safeVelocity</span><span class="p">,</span><span class="w"> </span><span class="n">_movementDelta</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-Q2hhcmFjdGVyQm9keTNE" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-Q2hhcmFjdGVyQm9keTNE" name="Q2hhcmFjdGVyQm9keTNE" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyCharacterBody3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CharacterBody3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">MovementSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">NavigationAgent3D</span><span class="w"> </span><span class="n">_navigationAgent</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">NavigationAgent3D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;NavigationAgent3D&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">VelocityComputed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnVelocityComputed</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetMovementTarget</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">movementTarget</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">TargetPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">movementTarget</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Do not query when the map has never synchronized and is empty.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapGetIterationId</span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">GetNavigationMap</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">IsNavigationFinished</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Vector3</span><span class="w"> </span><span class="n">nextPathPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">GetNextPathPosition</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Vector3</span><span class="w"> </span><span class="n">newVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GlobalPosition</span><span class="p">.</span><span class="n">DirectionTo</span><span class="p">(</span><span class="n">nextPathPosition</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MovementSpeed</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">AvoidanceEnabled</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newVelocity</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">OnVelocityComputed</span><span class="p">(</span><span class="n">newVelocity</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnVelocityComputed</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">safeVelocity</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeVelocity</span><span class="p">;</span>
+<span class="w">        </span><span class="n">MoveAndSlide</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-UmlnaWRCb2R5M0Q=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-UmlnaWRCb2R5M0Q=" name="UmlnaWRCb2R5M0Q=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyRigidBody3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RigidBody3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">MovementSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">NavigationAgent3D</span><span class="w"> </span><span class="n">_navigationAgent</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">NavigationAgent3D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;NavigationAgent3D&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">VelocityComputed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnVelocityComputed</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetMovementTarget</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">movementTarget</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">TargetPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">movementTarget</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Do not query when the map has never synchronized and is empty.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapGetIterationId</span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">GetNavigationMap</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">IsNavigationFinished</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Vector3</span><span class="w"> </span><span class="n">nextPathPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">GetNextPathPosition</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Vector3</span><span class="w"> </span><span class="n">newVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GlobalPosition</span><span class="p">.</span><span class="n">DirectionTo</span><span class="p">(</span><span class="n">nextPathPosition</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MovementSpeed</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">AvoidanceEnabled</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_navigationAgent</span><span class="p">.</span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newVelocity</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">OnVelocityComputed</span><span class="p">(</span><span class="n">newVelocity</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnVelocityComputed</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">safeVelocity</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LinearVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safeVelocity</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</div></div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="navigation_using_navigationpathqueryobjects.html" class="btn btn-neutral float-left" title="Using NavigationPathQueryObjects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="navigation_using_navigationobstacles.html" class="btn btn-neutral float-right" title="Using NavigationObstacles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

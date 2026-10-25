@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="3D Particle collisions" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/particles/collision.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Particle collisions Since GPU particles are processed entirely on the GPU, they don&#x27;t have access to the game&#x27;s physical world. If you need particles to collide with the environment, you ..." />
+<meta name="description" content="Particle collisions Since GPU particles are processed entirely on the GPU, they don&#x27;t have access to the game&#x27;s physical world. If you need particles to collide with the environment, you ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>3D Particle collisions &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Complex emission shapes" href="complex_shapes.html" />
+    <link rel="prev" title="3D Particle attractors" href="attractors.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/particles/collision" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/3d/particles/collision.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">3D</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Particle systems (3D)</a></li>
+      <li class="breadcrumb-item active">3D Particle collisions</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/particles/collision.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="d-particle-collisions">
+<span id="doc-3d-particles-collision"></span><h1>3D Particle collisions<a class="headerlink" href="#d-particle-collisions" title="Link to this heading"></a></h1>
+<figure class="align-default">
+<img alt="Particle collisions" src="../../../_images/particle_collision.webp" />
+</figure>
+<p>Since GPU particles are processed entirely on the GPU, they don't have access to the game's physical
+world. If you need particles to collide with the environment, you have to set up particle collision nodes.
+There are four of them: <a class="reference internal" href="../../../classes/class_gpuparticlescollisionbox3d.html#class-gpuparticlescollisionbox3d"><span class="std std-ref">GPUParticlesCollisionBox3D</span></a>, <a class="reference internal" href="../../../classes/class_gpuparticlescollisionsphere3d.html#class-gpuparticlescollisionsphere3d"><span class="std std-ref">GPUParticlesCollisionSphere3D</span></a>,
+<a class="reference internal" href="../../../classes/class_gpuparticlescollisionsdf3d.html#class-gpuparticlescollisionsdf3d"><span class="std std-ref">GPUParticlesCollisionSDF3D</span></a>, and <a class="reference internal" href="../../../classes/class_gpuparticlescollisionheightfield3d.html#class-gpuparticlescollisionheightfield3d"><span class="std std-ref">GPUParticlesCollisionHeightField3D</span></a>.</p>
+<section id="common-properties">
+<h2>Common properties<a class="headerlink" href="#common-properties" title="Link to this heading"></a></h2>
+<figure class="align-right" id="id1">
+<img alt="Common particle collision properties" src="../../../_images/particle_collision_common.webp" />
+<figcaption>
+<p><span class="caption-text">Common collision properties</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>There are some properties that you can find on all collision nodes. They're located in the
+<code class="docutils literal notranslate"><span class="pre">GPUParticlesCollision3D</span></code> section in the inspector.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Cull</span> <span class="pre">Mask</span></code> property controls which particle systems are affected by a collision node based
+on each system's <a class="reference internal" href="../../../classes/class_visualinstance3d.html#class-visualinstance3d"><span class="std std-ref">visibility layers</span></a>. A particle system collides with a
+collision node only if at least one of the system's visibility layers is enabled in the
+collider's cull mask.</p>
+</section>
+<section id="box-collision">
+<h2>Box collision<a class="headerlink" href="#box-collision" title="Link to this heading"></a></h2>
+<figure class="align-right" id="id2">
+<img alt="Particle collision box" src="../../../_images/particle_collision_box_entry.webp" />
+<figcaption>
+<p><span class="caption-text">Box collision in the node list</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Box collision nodes are shaped like a solid, rectangular box. You control their size with the <code class="docutils literal notranslate"><span class="pre">Extents</span></code>
+property. Box extents always measure half of the sides of its bounds, so a value of <code class="docutils literal notranslate"><span class="pre">(X=1.0,Y=1.0,Z=1.0)</span></code>
+creates a box that is 2 meters wide on each side. Box collision nodes are useful for simulating floor
+and wall geometry that particles should collide against.</p>
+<p>To create a box collision node, add a new child node to your scene and select <code class="docutils literal notranslate"><span class="pre">GPUParticlesCollisionBox3D</span></code>
+from the list of available nodes. You can animate the box position or attach it to a
+moving node for more dynamic effects.</p>
+<figure class="align-default" id="id3">
+<img alt="Box collision with particle systems" src="../../../_images/particle_collision_box.webp" />
+<figcaption>
+<p><span class="caption-text">Two particle systems collide with a box collision node</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="sphere-collision">
+<h2>Sphere collision<a class="headerlink" href="#sphere-collision" title="Link to this heading"></a></h2>
+<figure class="align-right" id="id4">
+<img alt="Particle collision sphere" src="../../../_images/particle_collision_sphere_entry.webp" />
+<figcaption>
+<p><span class="caption-text">Sphere collision in the node list</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Sphere collision nodes are shaped like a solid sphere. The <code class="docutils literal notranslate"><span class="pre">Radius</span></code> property controls the size of the sphere.
+While box collision nodes don't have to be perfect cubes, sphere collision nodes will always be
+spheres. If you want to set width independently from height, you have to change the <code class="docutils literal notranslate"><span class="pre">Scale</span></code>
+property in the <code class="docutils literal notranslate"><span class="pre">Node3D</span></code> section.</p>
+<p>To create a sphere collision node, add a new child node to your scene and select <code class="docutils literal notranslate"><span class="pre">GPUParticlesCollisionSphere3D</span></code>
+from the list of available nodes. You can animate the sphere's position or attach it to a
+moving node for more dynamic effects.</p>
+<figure class="align-default" id="id5">
+<img alt="Sphere collision with particle systems" src="../../../_images/particle_collision_sphere.webp" />
+<figcaption>
+<p><span class="caption-text">Two particle systems collide with a sphere collision node</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="height-field-collision">
+<h2>Height field collision<a class="headerlink" href="#height-field-collision" title="Link to this heading"></a></h2>
+<figure class="align-right" id="id6">
+<img alt="Particle collision height field" src="../../../_images/particle_collision_height.webp" />
+<figcaption>
+<p><span class="caption-text">Height field collision in the node list</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Height field particle collision is very useful for large outdoor areas that need to collide with particles.
+At runtime, the node creates a height field from all the meshes within its bounds that match its cull mask.
+Particles collide against the mesh that this height field represents. Since the height field generation is
+done dynamically, it can follow the player camera around and react to changes in the level. Different
+settings for the height field density offer a wide range of performance adjustments.</p>
+<p>To create a height field collision node, add a new child node to your scene and select <code class="docutils literal notranslate"><span class="pre">GPUParticlesCollisionHeightField3D</span></code>
+from the list of available nodes.</p>
+<p>A height field collision node is shaped like a box. The <code class="docutils literal notranslate"><span class="pre">Extents</span></code> property controls its size. Extents
+always measure half of the sides of its bounds, so a value of <code class="docutils literal notranslate"><span class="pre">(X=1.0,Y=1.0,Z=1.0)</span></code> creates a box that
+is 2 meters wide on each side. Anything outside of the node's extents is ignored for height field creation.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Resolution</span></code> property controls how detailed the height field is. A lower resolution performs faster
+at the cost of accuracy. If the height field resolution is too low, it may look like particles penetrate level geometry
+or get stuck in the air during collision events. They might also ignore some smaller meshes completely.</p>
+<figure class="align-default" id="id7">
+<img alt="Height field resolutions" src="../../../_images/particle_heightfield_res.webp" />
+<figcaption>
+<p><span class="caption-text">At low resolutions, height field collision misses some finer details (left)</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The <code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">Mode</span></code> property controls when the height field is recreated from the meshes within its
+bounds. Set it to <code class="docutils literal notranslate"><span class="pre">When</span> <span class="pre">Moved</span></code> to make it refresh only when it moves. This performs well and is
+suited for static scenes that don't change very often. If you need particles to collide with dynamic objects
+that change position frequently, you can select <code class="docutils literal notranslate"><span class="pre">Always</span></code> to refresh every frame. This comes with a
+cost to performance and should only be used when necessary.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It's important to remember that when <code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">Mode</span></code> is set to <code class="docutils literal notranslate"><span class="pre">When</span> <span class="pre">Moved</span></code>, it is the <em>height field node</em>
+whose movement triggers an update. The height field is not updated when one of the meshes inside it moves.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Follow</span> <span class="pre">Camera</span> <span class="pre">Enabled</span></code> property makes the height field follow the current camera when enabled. It will
+update whenever the camera moves. This property can be used to make sure that there is always particle collision
+around the player while not wasting performance on regions that are out of sight or too far away.</p>
+</section>
+<section id="sdf-collision">
+<h2>SDF collision<a class="headerlink" href="#sdf-collision" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Particle SDF collision is only supported in the Forward+ and Mobile renderers,
+not Compatibility.</p>
+</div>
+<figure class="align-right" id="id8">
+<img alt="Particle collision SDF" src="../../../_images/particle_collision_sdf_entry.webp" />
+<figcaption>
+<p><span class="caption-text">SDF collision in the node list</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>SDF collision nodes create a <a class="reference external" href="https://www.reddit.com/r/explainlikeimfive/comments/k2zbos/eli5_what_are_distance_fields_in_graphics">signed distance field</a>
+that particles can collide with. SDF collision is similar to height field collision in that it turns multiple
+meshes within its bounds into a single collision volume for particles. A major difference is that signed distance
+fields can represent holes, tunnels and overhangs, which is impossible to do with height fields alone. The
+performance overhead is larger compared to height fields, so they're best suited for small-to-medium-sized environments.</p>
+<p>To create an SDF collision node, add a new child node to your scene and select <code class="docutils literal notranslate"><span class="pre">GPUParticlesCollisionSDF3D</span></code>
+from the list of available nodes. SDF collision nodes have to be baked in order to have any effect on particles
+in the level. To do that, click the <span class="role-button role-ui">Bake SDF</span> button in the viewport toolbar
+while the SDF collision node is selected and choose a directory to store the baked data. Since SDF collision needs
+to be baked in the editor, it's static and cannot change at runtime.</p>
+<figure class="align-default" id="id9">
+<img alt="SDF particle collision" src="../../../_images/particle_collision_sdf.webp" />
+<figcaption>
+<p><span class="caption-text">SDF particle collision allows for very detailed 3-dimensional collision shapes</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>An SDF collision node is shaped like a box. The <code class="docutils literal notranslate"><span class="pre">Extents</span></code> property controls its size. Extents
+always measure half of the sides of its bounds, so a value of <code class="docutils literal notranslate"><span class="pre">(X=1.0,Y=1.0,Z=1.0)</span></code> creates a box that
+is 2 meters wide on each side. Anything outside of the node's extents is ignored for collision.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Resolution</span></code> property controls how detailed the distance field is. A lower resolution performs faster
+at the cost of accuracy. If the resolution is too low, it may look like particles penetrate level geometry
+or get stuck in the air during collision events. They might also ignore some smaller meshes completely.</p>
+<figure class="align-default" id="id10">
+<img alt="Resolution comparison" src="../../../_images/particle_collision_sdf_res.webp" />
+<figcaption>
+<p><span class="caption-text">The same area covered by a signed distance field at different resolutions: 16 (left) and 256 (right)</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The <code class="docutils literal notranslate"><span class="pre">Thickness</span></code> property gives the distance field, which is usually hollow on the inside, a thickness to
+prevent particles from penetrating at high speeds. If you find that some particles don't collide with the
+level geometry and instead shoot right through it, try setting this property to a higher value.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Bake</span> <span class="pre">Mask</span></code> property controls which meshes will be considered when the SDF is baked. Only meshes that
+render on the active layers in the bake mask contribute to particle collision.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<p>For particle collision to work, the particle's <a class="reference internal" href="properties.html#doc-3d-particles-properties-draw"><span class="std std-ref">visibility AABB</span></a>
+must overlap with the collider's AABB. If collisions appear to be not working
+despite colliders being set up, generate an updated visibility AABB by selecting
+the GPUParticles3D node and choosing <strong>GPUParticles3D &gt; Generate Visibility AABB…</strong>
+at the top of the 3D editor viewport.</p>
+<p>If the particles move fast and colliders are thin. There are two solutions for this:</p>
+<ul class="simple">
+<li><p>Make the colliders thicker. For instance, if particles cannot get below a
+solid floor, you could make the collider representing the floor thicker than
+its actual visual representation. The heightfield collider automatically
+handles this by design, as heightfields cannot represent &quot;room over room&quot;
+collision.</p></li>
+<li><p>Increased <code class="docutils literal notranslate"><span class="pre">Fixed</span> <span class="pre">FPS</span></code> in the GPUParticles3D node, which will perform collision
+checks more often. This comes at a performance cost, so avoid setting this too high.</p></li>
+</ul>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="attractors.html" class="btn btn-neutral float-left" title="3D Particle attractors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="complex_shapes.html" class="btn btn-neutral float-right" title="Complex emission shapes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

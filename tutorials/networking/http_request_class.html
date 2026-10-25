@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Making HTTP requests" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/networking/http_request_class.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Why use HTTP?: HTTP requests are useful to communicate with web servers and other non-Godot programs. Compared to Godot&#x27;s other networking features (like High-level multiplayer), HTTP requests..." />
+<meta name="description" content="Why use HTTP?: HTTP requests are useful to communicate with web servers and other non-Godot programs. Compared to Godot&#x27;s other networking features (like High-level multiplayer), HTTP requests..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Making HTTP requests &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="HTTP client class" href="http_client_class.html" />
+    <link rel="prev" title="High-level multiplayer" href="high_level_multiplayer.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/networking/http_request_class" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/networking/http_request_class.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Networking</a></li>
+      <li class="breadcrumb-item active">Making HTTP requests</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/networking/http_request_class.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="making-http-requests">
+<span id="doc-http-request-class"></span><h1>Making HTTP requests<a class="headerlink" href="#making-http-requests" title="Link to this heading"></a></h1>
+<section id="why-use-http">
+<h2>Why use HTTP?<a class="headerlink" href="#why-use-http" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP">HTTP requests</a> are useful
+to communicate with web servers and other non-Godot programs.</p>
+<p>Compared to Godot's other networking features (like
+<a class="reference internal" href="high_level_multiplayer.html#doc-high-level-multiplayer"><span class="std std-ref">High-level multiplayer</span></a>),
+HTTP requests have more overhead and take more time to get going,
+so they aren't suited for real-time communication, and aren't great to send
+lots of small updates as is common for multiplayer gameplay.</p>
+<p>HTTP, however, offers interoperability with external
+web resources and is great at sending and receiving large amounts
+of data, for example to transfer files like game assets. These assets can then
+be loaded using
+<a class="reference internal" href="../io/runtime_file_loading_and_saving.html#doc-runtime-loading-and-saving"><span class="std std-ref">runtime file loading and saving</span></a>.</p>
+<p>So HTTP may be useful for your game's login system, lobby browser,
+to retrieve some information from the web or to download game assets.</p>
+</section>
+<section id="http-requests-in-godot">
+<h2>HTTP requests in Godot<a class="headerlink" href="#http-requests-in-godot" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="../../classes/class_httprequest.html#class-httprequest"><span class="std std-ref">HTTPRequest</span></a> node is the easiest way to make HTTP requests in Godot.
+It is backed by the more low-level <a class="reference internal" href="../../classes/class_httpclient.html#class-httpclient"><span class="std std-ref">HTTPClient</span></a>,
+for which a tutorial is available <a class="reference internal" href="http_client_class.html#doc-http-client-class"><span class="std std-ref">here</span></a>.</p>
+<p>For this example, we will make an HTTP request to GitHub to retrieve the name
+of the latest Godot release.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When exporting to <strong>Android</strong>, make sure to enable the <strong>Internet</strong>
+permission in the Android export preset before exporting the project or
+using one-click deploy. Otherwise, network communication of any kind will be
+blocked by the Android OS.</p>
+</div>
+</section>
+<section id="preparing-the-scene">
+<h2>Preparing the scene<a class="headerlink" href="#preparing-the-scene" title="Link to this heading"></a></h2>
+<p>Create a new empty scene, add a root <a class="reference internal" href="../../classes/class_node.html#class-node"><span class="std std-ref">Node</span></a> and add a script to it.
+Then add an <a class="reference internal" href="../../classes/class_httprequest.html#class-httprequest"><span class="std std-ref">HTTPRequest</span></a> node as a child.</p>
+<img alt="../../_images/rest_api_scene.webp" src="../../_images/rest_api_scene.webp" />
+</section>
+<section id="scripting-the-request">
+<h2>Scripting the request<a class="headerlink" href="#scripting-the-request" title="Link to this heading"></a></h2>
+<p>When the project is started (so in <code class="docutils literal notranslate"><span class="pre">_ready()</span></code>), we're going to send an HTTP request
+to Github using our <a class="reference internal" href="../../classes/class_httprequest.html#class-httprequest"><span class="std std-ref">HTTPRequest</span></a> node,
+and once the request completes, we're going to parse the returned JSON data,
+look for the <code class="docutils literal notranslate"><span class="pre">name</span></code> field and print that to console.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="sx">$HTTPRequest</span><span class="o">.</span><span class="vi">request_completed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_request_completed</span><span class="p">)</span>
+<span class="w">    </span><span class="sx">$HTTPRequest</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="s2">&quot;https://api.github.com/repos/godotengine/godot/releases/latest&quot;</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_request_completed</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">response_code</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="o">.</span><span class="nf">parse_string</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="nf">get_string_from_utf8</span><span class="p">())</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">System.Text</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">HttpRequest</span><span class="w"> </span><span class="n">httpRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">HttpRequest</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;HTTPRequest&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">httpRequest</span><span class="p">.</span><span class="n">RequestCompleted</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnRequestCompleted</span><span class="p">;</span>
+<span class="w">        </span><span class="n">httpRequest</span><span class="p">.</span><span class="n">Request</span><span class="p">(</span><span class="s">&quot;https://api.github.com/repos/godotengine/godot/releases/latest&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnRequestCompleted</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">responseCode</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">body</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Json</span><span class="p">.</span><span class="n">ParseString</span><span class="p">(</span><span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">.</span><span class="n">GetString</span><span class="p">(</span><span class="n">body</span><span class="p">)).</span><span class="n">AsGodotDictionary</span><span class="p">();</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Save the script and the scene, and run the project.
+The name of the most recent Godot release on Github should be printed to the output log.
+For more information on parsing JSON, see the class references for <a class="reference internal" href="../../classes/class_json.html#class-json"><span class="std std-ref">JSON</span></a>.</p>
+<p>Note that you may want to check whether the <code class="docutils literal notranslate"><span class="pre">result</span></code> equals <code class="docutils literal notranslate"><span class="pre">RESULT_SUCCESS</span></code>
+and whether a JSON parsing error occurred, see the JSON class reference and
+<a class="reference internal" href="../../classes/class_httprequest.html#class-httprequest"><span class="std std-ref">HTTPRequest</span></a> for more.</p>
+<p>You have to wait for a request to finish before sending another one.
+Making multiple request at once requires you to have one node per request.
+A common strategy is to create and delete HTTPRequest nodes at runtime as necessary.</p>
+</section>
+<section id="sending-data-to-the-server">
+<h2>Sending data to the server<a class="headerlink" href="#sending-data-to-the-server" title="Link to this heading"></a></h2>
+<p>Until now, we have limited ourselves to requesting data from a server.
+But what if you need to send data to the server? Here is a common way of doing it:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="o">.</span><span class="nf">stringify</span><span class="p">(</span><span class="n">data_to_send</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="p">]</span>
+<span class="sx">$HTTPRequest</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="nb">HTTPClient</span><span class="o">.</span><span class="vi">METHOD_POST</span><span class="p">,</span><span class="w"> </span><span class="n">json</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Json</span><span class="p">.</span><span class="n">Stringify</span><span class="p">(</span><span class="n">dataToSend</span><span class="p">);</span>
+<span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Content-Type: application/json&quot;</span><span class="p">];</span>
+<span class="n">HttpRequest</span><span class="w"> </span><span class="n">httpRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">HttpRequest</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;HTTPRequest&quot;</span><span class="p">);</span>
+<span class="n">httpRequest</span><span class="p">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">.</span><span class="n">Method</span><span class="p">.</span><span class="n">Post</span><span class="p">,</span><span class="w"> </span><span class="n">json</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="setting-custom-http-headers">
+<h2>Setting custom HTTP headers<a class="headerlink" href="#setting-custom-http-headers" title="Link to this heading"></a></h2>
+<p>Of course, you can also set custom HTTP headers. These are given as a string array,
+with each string containing a header in the format <code class="docutils literal notranslate"><span class="pre">&quot;header:</span> <span class="pre">value&quot;</span></code>.
+For example, to set a custom user agent (the HTTP <code class="docutils literal notranslate"><span class="pre">User-Agent</span></code> header) you could use the following:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="sx">$HTTPRequest</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="s2">&quot;https://api.github.com/repos/godotengine/godot/releases/latest&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;User-Agent: YourCustomUserAgent&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">HttpRequest</span><span class="w"> </span><span class="n">httpRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">HttpRequest</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;HTTPRequest&quot;</span><span class="p">);</span>
+<span class="n">httpRequest</span><span class="p">.</span><span class="n">Request</span><span class="p">(</span><span class="s">&quot;https://api.github.com/repos/godotengine/godot/releases/latest&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;User-Agent: YourCustomUserAgent&quot;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Be aware that someone might analyse and decompile your released application and
+thus may gain access to any embedded authorization information like tokens, usernames or passwords.
+That means it is usually not a good idea to embed things such as database
+access credentials inside your game. Avoid providing information useful to an attacker whenever possible.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="high_level_multiplayer.html" class="btn btn-neutral float-left" title="High-level multiplayer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="http_client_class.html" class="btn btn-neutral float-right" title="HTTP client class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

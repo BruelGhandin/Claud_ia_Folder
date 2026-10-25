@@ -1,0 +1,767 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using the ArrayMesh" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/3d/procedural_geometry/arraymesh.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="This tutorial will present the basics of using an ArrayMesh. To do so, we will use the function add_surface_from_arrays(), which takes up to five parameters. The first two are required, while the l..." />
+<meta name="description" content="This tutorial will present the basics of using an ArrayMesh. To do so, we will use the function add_surface_from_arrays(), which takes up to five parameters. The first two are required, while the l..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using the ArrayMesh &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Using the MeshDataTool" href="meshdatatool.html" />
+    <link rel="prev" title="Procedural geometry" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/3d/procedural_geometry/arraymesh" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/3d/procedural_geometry/arraymesh.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">3D</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Procedural geometry</a></li>
+      <li class="breadcrumb-item active">Using the ArrayMesh</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/3d/procedural_geometry/arraymesh.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-the-arraymesh">
+<span id="doc-arraymesh"></span><h1>Using the ArrayMesh<a class="headerlink" href="#using-the-arraymesh" title="Link to this heading"></a></h1>
+<p>This tutorial will present the basics of using an <a class="reference internal" href="../../../classes/class_arraymesh.html#class-arraymesh"><span class="std std-ref">ArrayMesh</span></a>.</p>
+<p>To do so, we will use the function <a class="reference internal" href="../../../classes/class_arraymesh.html#class-arraymesh-method-add-surface-from-arrays"><span class="std std-ref">add_surface_from_arrays()</span></a>,
+which takes up to five parameters. The first two are required, while the last three are optional.</p>
+<p>The first parameter is the <code class="docutils literal notranslate"><span class="pre">PrimitiveType</span></code>, an OpenGL concept that instructs the GPU
+how to arrange the primitive based on the vertices given, i.e. whether they represent triangles,
+lines, points, etc. See <a class="reference internal" href="../../../classes/class_mesh.html#enum-mesh-primitivetype"><span class="std std-ref">Mesh.PrimitiveType</span></a> for the options available.</p>
+<p>The second parameter, <code class="docutils literal notranslate"><span class="pre">arrays</span></code>, is the actual Array that stores the mesh information. The array is a normal Godot array that
+is constructed with empty brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code>. It stores a <code class="docutils literal notranslate"><span class="pre">Packed**Array</span></code> (e.g. PackedVector3Array,
+PackedInt32Array, etc.) for each type of information that will be used to build the surface.</p>
+<p>Common elements of <code class="docutils literal notranslate"><span class="pre">arrays</span></code> are listed below, together with the position they must have within <code class="docutils literal notranslate"><span class="pre">arrays</span></code>.
+See <a class="reference internal" href="../../../classes/class_mesh.html#enum-mesh-arraytype"><span class="std std-ref">Mesh.ArrayType</span></a> for a full list.</p>
+<table class="wrap-normal docutils align-default" style="width: 100%">
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p>Mesh.ArrayType Enum</p></th>
+<th class="head"><p>Array type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ARRAY_VERTEX</span></code></p></td>
+<td><p><a class="reference internal" href="../../../classes/class_packedvector3array.html#class-packedvector3array"><span class="std std-ref">PackedVector3Array</span></a> or <a class="reference internal" href="../../../classes/class_packedvector2array.html#class-packedvector2array"><span class="std std-ref">PackedVector2Array</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ARRAY_NORMAL</span></code></p></td>
+<td><p><a class="reference internal" href="../../../classes/class_packedvector3array.html#class-packedvector3array"><span class="std std-ref">PackedVector3Array</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ARRAY_TANGENT</span></code></p></td>
+<td><p><a class="reference internal" href="../../../classes/class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a> or <a class="reference internal" href="../../../classes/class_packedfloat64array.html#class-packedfloat64array"><span class="std std-ref">PackedFloat64Array</span></a> of groups of 4 floats. The first 3 floats determine the tangent, and the last float the binormal
+direction as -1 or 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ARRAY_COLOR</span></code></p></td>
+<td><p><a class="reference internal" href="../../../classes/class_packedcolorarray.html#class-packedcolorarray"><span class="std std-ref">PackedColorArray</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ARRAY_TEX_UV</span></code></p></td>
+<td><p><a class="reference internal" href="../../../classes/class_packedvector2array.html#class-packedvector2array"><span class="std std-ref">PackedVector2Array</span></a> or <a class="reference internal" href="../../../classes/class_packedvector3array.html#class-packedvector3array"><span class="std std-ref">PackedVector3Array</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ARRAY_TEX_UV2</span></code></p></td>
+<td><p><a class="reference internal" href="../../../classes/class_packedvector2array.html#class-packedvector2array"><span class="std std-ref">PackedVector2Array</span></a> or <a class="reference internal" href="../../../classes/class_packedvector3array.html#class-packedvector3array"><span class="std std-ref">PackedVector3Array</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ARRAY_BONES</span></code></p></td>
+<td><p><a class="reference internal" href="../../../classes/class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a> of groups of 4 floats or <a class="reference internal" href="../../../classes/class_packedint32array.html#class-packedint32array"><span class="std std-ref">PackedInt32Array</span></a> of groups of 4 ints. Each group lists indexes of 4 bones that affects a given vertex.</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ARRAY_WEIGHTS</span></code></p></td>
+<td><p><a class="reference internal" href="../../../classes/class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a> or <a class="reference internal" href="../../../classes/class_packedfloat64array.html#class-packedfloat64array"><span class="std std-ref">PackedFloat64Array</span></a> of groups of 4 floats. Each float lists the amount of weight the corresponding bone in <code class="docutils literal notranslate"><span class="pre">ARRAY_BONES</span></code> has on a given vertex.</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ARRAY_INDEX</span></code></p></td>
+<td><p><a class="reference internal" href="../../../classes/class_packedint32array.html#class-packedint32array"><span class="std std-ref">PackedInt32Array</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<p>In most cases when creating a mesh, we define it by its vertex positions. So usually, the array of vertices (at index 0) is required, while the index array (at index 12) is optional and
+will only be used if included. It is also possible to create a mesh with only the index array and no vertex array, but that's beyond the scope of this tutorial.</p>
+<p>All the other arrays carry information about the vertices. They are optional and will only be used if included. Some of these arrays (e.g. <code class="docutils literal notranslate"><span class="pre">ARRAY_COLOR</span></code>)
+use one entry per vertex to provide extra information about vertices. They must have the same size as the vertex array. Other arrays (e.g. <code class="docutils literal notranslate"><span class="pre">ARRAY_TANGENT</span></code>) use
+four entries to describe a single vertex. These must be exactly four times larger than the vertex array.</p>
+<p>For normal usage, the last three parameters in <a class="reference internal" href="../../../classes/class_arraymesh.html#class-arraymesh-method-add-surface-from-arrays"><span class="std std-ref">add_surface_from_arrays()</span></a> are typically left empty.</p>
+<section id="setting-up-the-arraymesh">
+<h2>Setting up the ArrayMesh<a class="headerlink" href="#setting-up-the-arraymesh" title="Link to this heading"></a></h2>
+<p>In the editor, create a <a class="reference internal" href="../../../classes/class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a> and add an <a class="reference internal" href="../../../classes/class_arraymesh.html#class-arraymesh"><span class="std std-ref">ArrayMesh</span></a> to it in the Inspector.
+Normally, adding an ArrayMesh in the editor is not useful, but in this case it allows us to access the ArrayMesh
+from code without creating one.</p>
+<p>Next, add a script to the MeshInstance3D.</p>
+<p>Under <code class="docutils literal notranslate"><span class="pre">_ready()</span></code>, create a new Array.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">surface_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="w"> </span><span class="n">surfaceArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+</pre></div>
+</div>
+</div></div>
+<p>This will be the array that we keep our surface information in - it will hold
+all the arrays of data that the surface needs. Godot will expect it to be of
+size <code class="docutils literal notranslate"><span class="pre">Mesh.ARRAY_MAX</span></code>, so resize it accordingly.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">surface_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="n">surface_array</span><span class="o">.</span><span class="nf">resize</span><span class="p">(</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">ARRAY_MAX</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="w"> </span><span class="n">surfaceArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="n">surfaceArray</span><span class="p">.</span><span class="n">Resize</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">Mesh</span><span class="p">.</span><span class="n">ArrayType</span><span class="p">.</span><span class="n">Max</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>Next create the arrays for each data type you will use.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">verts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">uvs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector2Array</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">normals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">indices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedInt32Array</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Vector3</span><span class="o">&gt;</span><span class="w"> </span><span class="n">verts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Vector2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">uvs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Vector3</span><span class="o">&gt;</span><span class="w"> </span><span class="n">normals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">indices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+</pre></div>
+</div>
+</div></div>
+<p>Once you have filled your data arrays with your geometry you can create a mesh
+by adding each array to <code class="docutils literal notranslate"><span class="pre">surface_array</span></code> and then committing to the mesh.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">surface_array</span><span class="p">[</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">ARRAY_VERTEX</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">verts</span>
+<span class="n">surface_array</span><span class="p">[</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">ARRAY_TEX_UV</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uvs</span>
+<span class="n">surface_array</span><span class="p">[</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">ARRAY_NORMAL</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normals</span>
+<span class="n">surface_array</span><span class="p">[</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">ARRAY_INDEX</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">indices</span>
+
+<span class="c1"># No blendshapes, lods, or compression used.</span>
+<span class="n">mesh</span><span class="o">.</span><span class="nf">add_surface_from_arrays</span><span class="p">(</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">PRIMITIVE_TRIANGLES</span><span class="p">,</span><span class="w"> </span><span class="n">surface_array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">surfaceArray</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">Mesh</span><span class="p">.</span><span class="n">ArrayType</span><span class="p">.</span><span class="n">Vertex</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">verts</span><span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+<span class="n">surfaceArray</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">Mesh</span><span class="p">.</span><span class="n">ArrayType</span><span class="p">.</span><span class="n">TexUV</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uvs</span><span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+<span class="n">surfaceArray</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">Mesh</span><span class="p">.</span><span class="n">ArrayType</span><span class="p">.</span><span class="n">Normal</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normals</span><span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+<span class="n">surfaceArray</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">Mesh</span><span class="p">.</span><span class="n">ArrayType</span><span class="p">.</span><span class="n">Index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">indices</span><span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+
+<span class="kt">var</span><span class="w"> </span><span class="n">arrMesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mesh</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ArrayMesh</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">arrMesh</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// No blendshapes, lods, or compression used.</span>
+<span class="w">    </span><span class="n">arrMesh</span><span class="p">.</span><span class="n">AddSurfaceFromArrays</span><span class="p">(</span><span class="n">Mesh</span><span class="p">.</span><span class="n">PrimitiveType</span><span class="p">.</span><span class="n">Triangles</span><span class="p">,</span><span class="w"> </span><span class="n">surfaceArray</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this example, we used <code class="docutils literal notranslate"><span class="pre">Mesh.PRIMITIVE_TRIANGLES</span></code>, but you can use any primitive type
+available from mesh.</p>
+</div>
+<p>Put together, the full code looks like:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">MeshInstance3D</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">surface_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="n">surface_array</span><span class="o">.</span><span class="nf">resize</span><span class="p">(</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">ARRAY_MAX</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># PackedVector**Arrays for mesh construction.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">verts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">uvs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector2Array</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">normals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">indices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedInt32Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c c-Doc">#######################################</span>
+<span class="w">    </span><span class="c c-Doc">## Insert code here to generate mesh ##</span>
+<span class="w">    </span><span class="c c-Doc">#######################################</span>
+
+<span class="w">    </span><span class="c1"># Assign arrays to surface array.</span>
+<span class="w">    </span><span class="n">surface_array</span><span class="p">[</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">ARRAY_VERTEX</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">verts</span>
+<span class="w">    </span><span class="n">surface_array</span><span class="p">[</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">ARRAY_TEX_UV</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uvs</span>
+<span class="w">    </span><span class="n">surface_array</span><span class="p">[</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">ARRAY_NORMAL</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normals</span>
+<span class="w">    </span><span class="n">surface_array</span><span class="p">[</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">ARRAY_INDEX</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">indices</span>
+
+<span class="w">    </span><span class="c1"># Create mesh surface from mesh array.</span>
+<span class="w">    </span><span class="c1"># No blendshapes, lods, or compression used.</span>
+<span class="w">    </span><span class="n">mesh</span><span class="o">.</span><span class="nf">add_surface_from_arrays</span><span class="p">(</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">PRIMITIVE_TRIANGLES</span><span class="p">,</span><span class="w"> </span><span class="n">surface_array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyMeshInstance3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MeshInstance3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="w"> </span><span class="n">surfaceArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">        </span><span class="n">surfaceArray</span><span class="p">.</span><span class="n">Resize</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">Mesh</span><span class="p">.</span><span class="n">ArrayType</span><span class="p">.</span><span class="n">Max</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// C# arrays cannot be resized or expanded, so use Lists to create geometry.</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Vector3</span><span class="o">&gt;</span><span class="w"> </span><span class="n">verts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Vector2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">uvs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Vector3</span><span class="o">&gt;</span><span class="w"> </span><span class="n">normals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">indices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+
+<span class="w">        </span><span class="cm">/***********************************</span>
+<span class="cm">        * Insert code here to generate mesh.</span>
+<span class="cm">        * *********************************/</span>
+
+<span class="w">        </span><span class="c1">// Convert Lists to arrays and assign to surface array</span>
+<span class="w">        </span><span class="n">surfaceArray</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">Mesh</span><span class="p">.</span><span class="n">ArrayType</span><span class="p">.</span><span class="n">Vertex</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">verts</span><span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+<span class="w">        </span><span class="n">surfaceArray</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">Mesh</span><span class="p">.</span><span class="n">ArrayType</span><span class="p">.</span><span class="n">TexUV</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uvs</span><span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+<span class="w">        </span><span class="n">surfaceArray</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">Mesh</span><span class="p">.</span><span class="n">ArrayType</span><span class="p">.</span><span class="n">Normal</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normals</span><span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+<span class="w">        </span><span class="n">surfaceArray</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">Mesh</span><span class="p">.</span><span class="n">ArrayType</span><span class="p">.</span><span class="n">Index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">indices</span><span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">arrMesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mesh</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ArrayMesh</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">arrMesh</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Create mesh surface from mesh array</span>
+<span class="w">            </span><span class="c1">// No blendshapes, lods, or compression used.</span>
+<span class="w">            </span><span class="n">arrMesh</span><span class="p">.</span><span class="n">AddSurfaceFromArrays</span><span class="p">(</span><span class="n">Mesh</span><span class="p">.</span><span class="n">PrimitiveType</span><span class="p">.</span><span class="n">Triangles</span><span class="p">,</span><span class="w"> </span><span class="n">surfaceArray</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>The code that goes in the middle can be whatever you want. Below we will present some
+example code for generating shapes, starting with a rectangle.</p>
+</section>
+<section id="generating-a-rectangle">
+<h2>Generating a rectangle<a class="headerlink" href="#generating-a-rectangle" title="Link to this heading"></a></h2>
+<p>Since we are using <code class="docutils literal notranslate"><span class="pre">Mesh.PRIMITIVE_TRIANGLES</span></code> to render, we will construct a rectangle
+with triangles.</p>
+<p>A rectangle is formed by two triangles sharing four vertices. For our example, we will create
+a rectangle with its top left point at <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code> with a width and length of one as shown below:</p>
+<a class="reference internal image-reference" href="../../../_images/array_mesh_rectangle_as_triangles.webp"><img alt="A rectangle made of two triangles sharing four vertices." src="../../../_images/array_mesh_rectangle_as_triangles.webp" style="width: 422.40000000000003px; height: 330.0px;" />
+</a>
+<p>To draw this rectangle, define the coordinates of each vertex in the <code class="docutils literal notranslate"><span class="pre">verts</span></code> array.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">verts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">([</span>
+<span class="w">        </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">        </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">        </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">        </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">    </span><span class="p">])</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">verts</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">[]</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">uvs</span></code> array helps describe where parts of a texture should go onto the mesh. The values
+range from 0 to 1. Depending on your texture, you may want to change these values.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-6-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-6-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-6-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">uvs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector2Array</span><span class="p">([</span>
+<span class="w">        </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">        </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">        </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">        </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">    </span><span class="p">])</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-6-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-6-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">uvs</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">[]</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">normals</span></code> array is used to describe the direction the vertices face and is
+used in lighting calculations. For this example, we will default to the <code class="docutils literal notranslate"><span class="pre">Vector3.UP</span></code>
+direction.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-7-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-7-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-7-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">normals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">([</span>
+<span class="w">        </span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">UP</span><span class="p">,</span>
+<span class="w">        </span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">UP</span><span class="p">,</span>
+<span class="w">        </span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">UP</span><span class="p">,</span>
+<span class="w">        </span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">UP</span><span class="p">,</span>
+<span class="w">    </span><span class="p">])</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-7-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-7-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">normals</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">[]</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">,</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">indices</span></code> array defines the order vertices are drawn. Godot
+renders in a <em>clockwise</em> direction, meaning that we must specify the vertices
+of a triangle we want to draw in clockwise order.</p>
+<p>For example, to draw the first triangle, we will want to draw the vertices <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>, and <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">1)</span></code> in that order. This is the same as drawing <code class="docutils literal notranslate"><span class="pre">vert[0]</span></code>, <code class="docutils literal notranslate"><span class="pre">vert[2]</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">vert[1]</span></code>, i.e., indices 0, 2, and 1, in the <code class="docutils literal notranslate"><span class="pre">verts</span></code> array. These index values are what the
+<code class="docutils literal notranslate"><span class="pre">indices</span></code> array defines.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">verts[Index]</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">uvs[Index]</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">normals[Index]</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>(0, 0, 0)</p></td>
+<td><p>(0, 0)</p></td>
+<td><p>Vector3.UP</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>(0, 0, 1)</p></td>
+<td><p>(1, 0)</p></td>
+<td><p>Vector3.UP</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>(1, 0, 0)</p></td>
+<td><p>(0, 1)</p></td>
+<td><p>Vector3.UP</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>(1, 0, 1)</p></td>
+<td><p>(1, 1)</p></td>
+<td><p>Vector3.UP</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-8-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-8-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-8-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-8-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedInt32Array</span><span class="p">([</span>
+<span class="w">        </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="c1"># Draw the first triangle.</span>
+<span class="w">        </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="c1"># Draw the second triangle.</span>
+<span class="w">    </span><span class="p">])</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-8-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-8-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="c1">// Draw the first triangle.</span>
+<span class="w">    </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="c1">// Draw the second triangle.</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div></div>
+<p>Put together, the rectangle generation code looks like:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-9-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-9-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-9-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-9-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-9-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-9-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">MeshInstance3D</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+
+<span class="w">  </span><span class="c1"># Insert setting up the PackedVector**Arrays here.</span>
+
+<span class="w">  </span><span class="n">verts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">([</span>
+<span class="w">          </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">          </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">          </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">          </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">      </span><span class="p">])</span>
+
+<span class="w">  </span><span class="n">uvs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector2Array</span><span class="p">([</span>
+<span class="w">          </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">          </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">          </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">          </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">      </span><span class="p">])</span>
+
+<span class="w">  </span><span class="n">normals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">([</span>
+<span class="w">          </span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">UP</span><span class="p">,</span>
+<span class="w">          </span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">UP</span><span class="p">,</span>
+<span class="w">          </span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">UP</span><span class="p">,</span>
+<span class="w">          </span><span class="nb nb-Type">Vector3</span><span class="o">.</span><span class="vi">UP</span><span class="p">,</span>
+<span class="w">      </span><span class="p">])</span>
+
+<span class="w">  </span><span class="n">indices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedInt32Array</span><span class="p">([</span>
+<span class="w">          </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">          </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="p">])</span>
+
+<span class="w">  </span><span class="c1"># Insert committing to the ArrayMesh here.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-9-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-9-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MeshInstance3d</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MeshInstance3D</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Insert setting up the surface array and lists here.</span>
+
+<span class="w">      </span><span class="n">verts</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">[]</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">      </span><span class="p">});</span>
+
+<span class="w">      </span><span class="n">uvs</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">[]</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">      </span><span class="p">});</span>
+
+<span class="w">      </span><span class="n">normals</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">[]</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">          </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">,</span>
+<span class="w">          </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">,</span>
+<span class="w">          </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">,</span>
+<span class="w">          </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Up</span><span class="p">,</span>
+<span class="w">      </span><span class="p">});</span>
+
+<span class="w">      </span><span class="n">indices</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">          </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">          </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="p">});</span>
+
+<span class="w">      </span><span class="c1">// Insert committing to the ArrayMesh here.</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>For a more complex example, see the sphere generation section below.</p>
+</section>
+<section id="generating-a-sphere">
+<h2>Generating a sphere<a class="headerlink" href="#generating-a-sphere" title="Link to this heading"></a></h2>
+<p>Here is sample code for generating a sphere. Although the code is presented in
+GDScript, there is nothing Godot specific about the approach to generating it.
+This implementation has nothing in particular to do with ArrayMeshes and is just a
+generic approach to generating a sphere. If you are having trouble understanding it
+or want to learn more about procedural geometry in general, you can use any tutorial
+that you find online.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-10-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-10-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-10-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-10-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-10-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-10-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">MeshInstance3D</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">rings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
+<span class="k">var</span><span class="w"> </span><span class="n">radial_segments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
+<span class="k">var</span><span class="w"> </span><span class="n">radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+
+<span class="w">    </span><span class="c1"># Insert setting up the PackedVector**Arrays here.</span>
+
+<span class="w">    </span><span class="c1"># Vertex indices.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">thisrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">prevrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="c1"># Loop over rings.</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">rings</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">rings</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">sin</span><span class="p">(</span><span class="l">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">)</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">cos</span><span class="p">(</span><span class="l">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c1"># Loop over segments in ring.</span>
+<span class="w">        </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">radial_segments</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">):</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">radial_segments</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">sin</span><span class="p">(</span><span class="n">u</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="l">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="p">)</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">cos</span><span class="p">(</span><span class="n">u</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="l">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="p">)</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">vert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">radius</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">radius</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">radius</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w</span><span class="p">)</span>
+<span class="w">            </span><span class="n">verts</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">vert</span><span class="p">)</span>
+<span class="w">            </span><span class="n">normals</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">vert</span><span class="o">.</span><span class="nf">normalized</span><span class="p">())</span>
+<span class="w">            </span><span class="n">uvs</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">))</span>
+<span class="w">            </span><span class="n">point</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="w">            </span><span class="c1"># Create triangles in ring using indices.</span>
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">                </span><span class="n">indices</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">prevrow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                </span><span class="n">indices</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">prevrow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">)</span>
+<span class="w">                </span><span class="n">indices</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">thisrow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">                </span><span class="n">indices</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">prevrow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">)</span>
+<span class="w">                </span><span class="n">indices</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">thisrow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">)</span>
+<span class="w">                </span><span class="n">indices</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">thisrow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">prevrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thisrow</span>
+<span class="w">        </span><span class="n">thisrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">point</span>
+
+<span class="w">  </span><span class="c1"># Insert committing to the ArrayMesh here.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-10-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-10-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyMeshInstance3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MeshInstance3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_rings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_radialSegments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Insert setting up the surface array and lists here.</span>
+
+<span class="w">        </span><span class="c1">// Vertex indices.</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">thisRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">prevRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Loop over rings.</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">_rings</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">_rings</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Sin</span><span class="p">(</span><span class="n">Mathf</span><span class="p">.</span><span class="n">Pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">);</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Cos</span><span class="p">(</span><span class="n">Mathf</span><span class="p">.</span><span class="n">Pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// Loop over segments in ring.</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">_radialSegments</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="kt">var</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">_radialSegments</span><span class="p">;</span>
+<span class="w">                </span><span class="kt">var</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Sin</span><span class="p">(</span><span class="n">u</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">                </span><span class="kt">var</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Cos</span><span class="p">(</span><span class="n">u</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">Pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">                </span><span class="kt">var</span><span class="w"> </span><span class="n">vert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_radius</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_radius</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_radius</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w</span><span class="p">);</span>
+<span class="w">                </span><span class="n">verts</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">vert</span><span class="p">);</span>
+<span class="w">                </span><span class="n">normals</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">vert</span><span class="p">.</span><span class="n">Normalized</span><span class="p">());</span>
+<span class="w">                </span><span class="n">uvs</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">));</span>
+<span class="w">                </span><span class="n">point</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">                </span><span class="c1">// Create triangles in ring using indices.</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">indices</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">prevRow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">indices</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">prevRow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">indices</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">thisRow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">                    </span><span class="n">indices</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">prevRow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">indices</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">thisRow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">indices</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">thisRow</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="n">prevRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thisRow</span><span class="p">;</span>
+<span class="w">            </span><span class="n">thisRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">point</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Insert committing to the ArrayMesh here.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="saving">
+<h2>Saving<a class="headerlink" href="#saving" title="Link to this heading"></a></h2>
+<p>Finally, we can use the <a class="reference internal" href="../../../classes/class_resourcesaver.html#class-resourcesaver"><span class="std std-ref">ResourceSaver</span></a> class to save the ArrayMesh.
+This is useful when you want to generate a mesh and then use it later without having to re-generate it.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-11-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-11-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-11-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-11-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-11-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-11-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Saves mesh to a .tres file with compression enabled.</span>
+<span class="nb">ResourceSaver</span><span class="o">.</span><span class="nf">save</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;res://sphere.tres&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">ResourceSaver</span><span class="o">.</span><span class="vi">FLAG_COMPRESS</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-11-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-11-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Saves mesh to a .tres file with compression enabled.</span>
+<span class="n">ResourceSaver</span><span class="p">.</span><span class="n">Save</span><span class="p">(</span><span class="n">Mesh</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;res://sphere.tres&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ResourceSaver</span><span class="p">.</span><span class="n">SaverFlags</span><span class="p">.</span><span class="n">Compress</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Procedural geometry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="meshdatatool.html" class="btn btn-neutral float-right" title="Using the MeshDataTool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
