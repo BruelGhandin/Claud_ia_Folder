@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="OpenXR hand tracking" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/xr/openxr_hand_tracking.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: When discussing hand tracking it is important to know that there are differences of opinion as to where lines are drawn. The practical result of this is that there are differences in ..." />
+<meta name="description" content="Introduction: When discussing hand tracking it is important to know that there are differences of opinion as to where lines are drawn. The practical result of this is that there are differences in ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>OpenXR hand tracking &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="OpenXR body tracking" href="openxr_body_tracking.html" />
+    <link rel="prev" title="OpenXR composition layers" href="openxr_composition_layers.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/xr/openxr_hand_tracking" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/xr/openxr_hand_tracking.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">XR</a></li>
+      <li class="breadcrumb-item active">OpenXR hand tracking</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/xr/openxr_hand_tracking.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="openxr-hand-tracking">
+<span id="doc-openxr-hand-tracking"></span><h1>OpenXR hand tracking<a class="headerlink" href="#openxr-hand-tracking" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This page focuses specifically on the feature set exposed through OpenXR.
+Parts of the functionality presented here also applies to WebXR and can by provided
+by other XR interfaces.</p>
+</div>
+<p>When discussing hand tracking it is important to know that there are differences of opinion as to where lines are drawn.
+The practical result of this is that there are differences in implementation between the different OpenXR runtimes.
+You may find yourself in a place where chosen hardware doesn't support a piece of the puzzle or does things differently
+enough from the other platforms that you need to do extra work.</p>
+<p>That said, recent improvements to the OpenXR specification are closing these gaps and as platforms implement
+these improvements we are getting closer to a future where we have either full portability between platforms
+or at least a clear way to detect the capabilities of a platform.</p>
+<p>When we look at the early days of VR the focus of the major platforms was on tracked controller based input.
+Here we are tracking a physical device that also has buttons for further input.
+From the tracking data we can infer the location of the player's hands but no further information is known,
+traditionally it was left up to the game to implement a mechanism to display the player's hand and animate
+the fingers based on further input from the controller, be it due to buttons being pressed or through proximity
+sensors.
+Often fingers are also placed based on context, what the user is holding, and what action a user is performing.</p>
+<p>More recently optical hand tracking has become a popular solution, where cameras track the user's hands
+and full tracking data for the hand and finger positions becomes available.
+Many vendors saw this as completely separate from controller tracking and introduced independent APIs to
+access hand and finger positions and orientation data.
+When handling input, it was up to the game developer to implement a gesture detection mechanism.</p>
+<p>This split also exists in OpenXR, where controller tracking is handled primarily by the action map system,
+while optical hand tracking is primarily handled by the hand tracking API extension.</p>
+<p>However, the world is not that black and white and we're seeing a number of scenarios
+where we cross the line:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Devices that fit in both categories, such as tracked gloves
+and controllers such as the Index controller that also perform finger tracking.</p></li>
+<li><p>XR Runtimes that implement inferred hand tracking from controller data as a means
+to solve proper finger placement for multiple controllers.</p></li>
+<li><p>XR applications that wish to seamlessly switch between controller and hand tracking
+offering the same user experience regardless of approach used.</p></li>
+</ul>
+</div></blockquote>
+<p>OpenXR is answering this call by introducing further extensions that lets us query the capabilities of
+the XR runtime/hardware or that add further functionality across this divide.
+The problem that currently does remain is that there are gaps in adopting these extensions,
+with some platforms thus not reporting capabilities to their full extent.
+As such you may need to test for the features available on specific hardware
+and adjust your approach accordingly.</p>
+</section>
+<section id="demo-project">
+<h2>Demo project<a class="headerlink" href="#demo-project" title="Link to this heading"></a></h2>
+<p>The information presented on this page was used to create a demo project that can be found
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/xr/openxr_hand_tracking_demo">here</a>.</p>
+</section>
+<section id="the-hand-tracking-api">
+<h2>The Hand Tracking API<a class="headerlink" href="#the-hand-tracking-api" title="Link to this heading"></a></h2>
+<p>As mentioned in our introduction, the hand tracking API is primarily used with optical hand tracking
+and on many platforms only works when the user is not holding a controller.
+Some platforms support controller inferred hand tracking meaning that you will get hand tracking data
+even if the user is holding a controller.
+This includes SteamVR, Meta Quest (currently native only but Meta link support is likely coming),
+and hopefully soon others as well.</p>
+<p>The hand tracking implementation in Godot has been standardized around the Godot Humanoid Skeleton
+and works both in OpenXR and WebXR. The instructions below will thus work in both environments.</p>
+<p>In order to use the hand tracking API with OpenXR you first need to enable it.
+This can be done in the project settings:</p>
+<img alt="../../_images/xr_enable_handtracking.webp" src="../../_images/xr_enable_handtracking.webp" />
+<p>For some standalone XR devices you also need to configure the hand tracking extension in export settings,
+for instance for Meta Quest:</p>
+<img alt="../../_images/openxr_enable_hand_tracking_meta.webp" src="../../_images/openxr_enable_hand_tracking_meta.webp" />
+<p>Now you need to add 3 components into your scene for each hand:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>A tracked node to position the hand.</p></li>
+<li><p>A properly skinned hand mesh with skeleton.</p></li>
+<li><p>A skeleton modifier that applies finger tracking data to the skeleton.</p></li>
+</ul>
+</div></blockquote>
+<img alt="../../_images/openxr_hand_tracking_nodes.webp" src="../../_images/openxr_hand_tracking_nodes.webp" />
+<section id="hand-tracking-node">
+<h3>Hand tracking node<a class="headerlink" href="#hand-tracking-node" title="Link to this heading"></a></h3>
+<p>The hand tracking system uses separate hand trackers to track the position of the player's hands
+within our tracking space.</p>
+<p>This information has been separated out for the following use cases:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Tracking happens in the local space of the <a class="reference internal" href="../../classes/class_xrorigin3d.html#class-xrorigin3d"><span class="std std-ref">XROrigin3D</span></a> node.
+This node must be a child of the <cite>XROrigin3D</cite> node in order to be correctly placed.</p></li>
+<li><p>This node can be used as an IK target when an upper body mesh with arms is used instead
+of separate hand meshes.</p></li>
+<li><p>Actual placement of the hands may be loosely bound to the tracking in scenarios such as
+avatar creation UIs, fake mirrors, or similar situations
+resulting in the hand mesh and finger tracking being localized elsewhere.</p></li>
+</ul>
+</div></blockquote>
+<p>We'll concentrate on the first use case only.</p>
+<p>For this you need to add an <a class="reference internal" href="../../classes/class_xrnode3d.html#class-xrnode3d"><span class="std std-ref">XRNode3D</span></a> node to your <code class="docutils literal notranslate"><span class="pre">XROrigin3D</span></code> node.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>On this node the <code class="docutils literal notranslate"><span class="pre">tracker</span></code> should be set to <code class="docutils literal notranslate"><span class="pre">/user/hand_tracker/left</span></code> or <code class="docutils literal notranslate"><span class="pre">/user/hand_tracker/right</span></code>
+for the left or right hand respectively.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pose</span></code> should remain set to <code class="docutils literal notranslate"><span class="pre">default</span></code>, no other option will work here.</p></li>
+<li><p>The checkbox <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">When</span> <span class="pre">Tracked</span></code> will automatically hide this node if no tracking data is available,
+or make this node visible if tracking data is available.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="rigged-hand-mesh">
+<h3>Rigged hand mesh<a class="headerlink" href="#rigged-hand-mesh" title="Link to this heading"></a></h3>
+<p>In order to display our hand we need a hand mesh that is properly rigged and skinned.
+For this Godot uses the hand bone structure as defined for the <a class="reference internal" href="../../classes/class_skeletonprofilehumanoid.html#class-skeletonprofilehumanoid"><span class="std std-ref">Godot Humanoid</span></a>
+but optionally supporting an extra tip bone for each finger.</p>
+<p>The <a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/xr/openxr_hand_tracking_demo">OpenXR hand tracking demo</a>
+contains example glTF files of properly rigged hands.</p>
+<p>We will be using those here and add them as a child to our <code class="docutils literal notranslate"><span class="pre">XRNode3D</span></code> node.
+We also need to enable editable children to gain access to our <a class="reference internal" href="../../classes/class_skeleton3d.html#class-skeleton3d"><span class="std std-ref">Skeleton3D</span></a> node.</p>
+</section>
+<section id="the-hand-skeleton-modifier">
+<h3>The hand skeleton modifier<a class="headerlink" href="#the-hand-skeleton-modifier" title="Link to this heading"></a></h3>
+<p>Finally we need to add an <a class="reference internal" href="../../classes/class_xrhandmodifier3d.html#class-xrhandmodifier3d"><span class="std std-ref">XRHandModifier3D</span></a> node as a child to our <code class="docutils literal notranslate"><span class="pre">Skeleton3D</span></code> node.
+This node will obtain the finger tracking data from OpenXR and apply it the hand model.</p>
+<p>You need to set the <code class="docutils literal notranslate"><span class="pre">Hand</span> <span class="pre">Tracker</span></code> property to either <code class="docutils literal notranslate"><span class="pre">/user/hand_tracker/left</span></code> or <code class="docutils literal notranslate"><span class="pre">/user/hand_tracker/right</span></code>
+depending on whether we are apply the tracking data of respectively the left or right hand.</p>
+<p>You can also set the <code class="docutils literal notranslate"><span class="pre">Bone</span> <span class="pre">Update</span></code> mode on this node.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Full</span></code> applies the hand tracking data fully.
+This does mean that the skeleton positioning will potentially reflect the size of the actual hand of the user.
+This can lead to scrunching effect if meshes aren't weighted properly to account for this.
+Make sure you test your game with players of all sizes when optical hand tracking is used!</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Rotation</span> <span class="pre">Only</span></code> will only apply rotation to the bones of the hands and keep the bone length as is.
+In this mode the size of the hand mesh doesn't change.</p></li>
+</ul>
+</div></blockquote>
+<p>With this added, when we run the project we should see the hand correctly displayed if hand tracking is supported.</p>
+</section>
+</section>
+<section id="the-hand-tracking-data-source">
+<h2>The hand tracking data source<a class="headerlink" href="#the-hand-tracking-data-source" title="Link to this heading"></a></h2>
+<p>This is an OpenXR extension that provides information about the source of the hand tracking data.
+At this moment only a few runtimes implement it but if it is available, Godot will activate it.</p>
+<p>If this extension is not supported and thus unknown is returned, you can make the following assumptions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If you are using SteamVR (including Steam link), only controller based hand tracking is supported.</p></li>
+<li><p>For any other runtime, if hand tracking is supported, only optical hand tracking is supported
+(Note, Meta Link currently fall into this category).</p></li>
+<li><p>In all other cases, no hand tracking is supported at all.</p></li>
+</ul>
+</div></blockquote>
+<p>You can access this information through code:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">hand_tracker</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">XRHandTracker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">XRServer</span><span class="o">.</span><span class="nf">get_tracker</span><span class="p">(</span><span class="s1">&#39;/user/hand_tracker/left&#39;</span><span class="p">)</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">hand_tracker</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">hand_tracker</span><span class="o">.</span><span class="vi">has_tracking_data</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">hand_tracker</span><span class="o">.</span><span class="vi">hand_tracking_source</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">XRHandTracker</span><span class="o">.</span><span class="vi">HAND_TRACKING_SOURCE_UNKNOWN</span><span class="p">:</span>
+<span class="w">            </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Hand tracking source unknown&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k k-ControlFlow">elif</span><span class="w"> </span><span class="n">hand_tracker</span><span class="o">.</span><span class="vi">hand_tracking_source</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">XRHandTracker</span><span class="o">.</span><span class="vi">HAND_TRACKING_SOURCE_UNOBSTRUCTED</span><span class="p">:</span>
+<span class="w">            </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Hand tracking source is optical hand tracking&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k k-ControlFlow">elif</span><span class="w"> </span><span class="n">hand_tracker</span><span class="o">.</span><span class="vi">hand_tracking_source</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">XRHandTracker</span><span class="o">.</span><span class="vi">HAND_TRACKING_SOURCE_CONTROLLER</span><span class="p">:</span>
+<span class="w">            </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Hand tracking data is inferred from controller data&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">            </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Unknown hand tracking source &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hand_tracker</span><span class="o">.</span><span class="vi">hand_tracking_source</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Hand is currently not being tracked&quot;</span><span class="p">)</span>
+<span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;No hand tracker registered&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example logs the state for the left hand.</p>
+<p>If in this example no hand tracker is returned by <code class="docutils literal notranslate"><span class="pre">get_tracker</span></code>,
+this means the hand tracking API is not supported on the XR runtime at all.</p>
+<p>If there is a tracker but <cite>has_tracking_data</cite> is false, the user's hand is currently not being tracked.
+This is likely caused by one of the following reasons:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The player's hand is not visible by any of the tracking cameras on the headset</p></li>
+<li><p>The player is currently using a controller and the headset only supports optical hand tracking</p></li>
+<li><p>The controller is turned off and only controller hand tracking is supported.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="handling-user-input">
+<h2>Handling user input<a class="headerlink" href="#handling-user-input" title="Link to this heading"></a></h2>
+<p>Reacting to actions performed by the user is handled through <a class="reference internal" href="xr_action_map.html#doc-xr-action-map"><span class="std std-ref">The XR action map</span></a>
+if controllers are used.
+In the action map you can map various inputs like the trigger or joystick on the controller
+to an action. This can then drive logic in your game.</p>
+<p>When hand tracking is used we originally had no such inputs,
+inputs are driven by gestures made by the user such as making a fist to grab
+or pinching the thumb and index finger together to select something.
+It was up to the game developer to implement this.</p>
+<p>Recognizing that there is an increasing demand for applications that can switch seamlessly
+between controller and hand tracking and the need some form of basic input capability,
+a number of extensions were added to the specification that provide some basic gesture recognition
+and can be used with the action map.</p>
+<section id="the-hand-interaction-profile">
+<h3>The hand interaction profile<a class="headerlink" href="#the-hand-interaction-profile" title="Link to this heading"></a></h3>
+<p>The <a class="reference external" href="https://github.khronos.org/OpenXR-Inventory/extension_support.html#XR_EXT_hand_interaction">hand interaction profile extension</a>
+is a new core extension which supports pinch, grasp, and poke gestures and related poses.
+There is still limited support for this extension but it should become available in more
+runtimes in the near future.</p>
+<img alt="../../_images/openxr_hand_interaction_profile.webp" src="../../_images/openxr_hand_interaction_profile.webp" />
+<p>The pinch gesture is triggered by pinching your thumb and index finger together.
+This is often used as a select gesture for menu systems, similar to using your controller
+to point at an object and press the trigger to select and is thus often mapped as such.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pinch</span> <span class="pre">pose</span></code> is a pose positioned in the middle between the tip of the thumb and
+the tip of the index finger and oriented such that a ray cast can be used to identify a target.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pinch</span></code> float input is a value between 0.0 (the tip of the thumb and index finger are apart)
+and 1.0 (the tip of the thumb and index finger are touching).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pinch</span> <span class="pre">ready</span></code> input is true when the tips of the fingers are (close to) touching.</p></li>
+</ul>
+</div></blockquote>
+<p>The grasp gesture is triggered by making a fist and is often used to pick items up,
+similar to engaging the squeeze input on controllers.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">grasp</span></code> float input is a value between 0.0 (open hand) and 1.0 (fist).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">grasp</span> <span class="pre">ready</span></code> input is true when the user made a fist.</p></li>
+</ul>
+</div></blockquote>
+<p>The poke gesture is triggered by extending your index finger, this one is a bit
+of an exception as the pose at the tip of your index finger is often used to poke
+an interactable object. The <code class="docutils literal notranslate"><span class="pre">poke</span> <span class="pre">pose</span></code> is a pose positioned on the tip of the index finger.</p>
+<p>Finally the <code class="docutils literal notranslate"><span class="pre">aim</span> <span class="pre">activate</span> <span class="pre">(ready)</span></code> input is defined as an input that is 1.0/true
+when the index finger is extended and pointing at a target that can be activated.
+How runtimes interpret this, is not clear.</p>
+<p>With this setup the normal <code class="docutils literal notranslate"><span class="pre">left_hand</span></code> and <code class="docutils literal notranslate"><span class="pre">right_hand</span></code> trackers are used and you can
+thus seamlessly switch between controller and hand tracking input.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You need to enable the hand interaction profile extension in the OpenXR project settings.</p>
+</div>
+</section>
+<section id="microsoft-hand-interaction-profile">
+<h3>Microsoft hand interaction profile<a class="headerlink" href="#microsoft-hand-interaction-profile" title="Link to this heading"></a></h3>
+<p>The <a class="reference external" href="https://github.khronos.org/OpenXR-Inventory/extension_support.html#XR_MSFT_hand_interaction">Microsoft hand interaction profile extension</a>
+was introduced by Microsoft and loosely mimics the simple controller profile.
+Meta has also added support for this extension but only on their native OpenXR client,
+it is currently not available over Meta Link.</p>
+<img alt="../../_images/openxr_msft_hand_interaction_profile.webp" src="../../_images/openxr_msft_hand_interaction_profile.webp" />
+<p>Pinch support is exposed through the <code class="docutils literal notranslate"><span class="pre">select</span></code> input, the value of which
+is 0.0 when the tip of the thumb and index finger are apart
+and 1.0 when they are together.</p>
+<p>Note that in this profile the <code class="docutils literal notranslate"><span class="pre">aim</span> <span class="pre">pose</span></code> is redefined as a pose between thumb
+and index finger, oriented so a ray cast can be used to identify a target.</p>
+<p>Grasp support is exposed through the <code class="docutils literal notranslate"><span class="pre">squeeze</span></code> input, the value of which
+is 0.0 when the hand is open, and 1.0 when a fist is made.</p>
+<p>With this setup the normal <code class="docutils literal notranslate"><span class="pre">left_hand</span></code> and <code class="docutils literal notranslate"><span class="pre">right_hand</span></code> trackers are used and you can
+thus seamlessly switch between controller and hand tracking input.</p>
+</section>
+<section id="htc-hand-interaction-profile">
+<h3>HTC hand interaction profile<a class="headerlink" href="#htc-hand-interaction-profile" title="Link to this heading"></a></h3>
+<p>The <a class="reference external" href="https://github.khronos.org/OpenXR-Inventory/extension_support.html#XR_HTC_hand_interaction">HTC hand interaction profile extension</a>
+was introduced by HTC and is defined similarly to the Microsoft extension.
+It is only supported by HTC for the Focus 3 and Elite XR headsets.</p>
+<img alt="../../_images/openxr_htc_hand_interaction_profile.webp" src="../../_images/openxr_htc_hand_interaction_profile.webp" />
+<p>See the Microsoft hand interaction profile for the gesture support.</p>
+<p>The defining difference is that this extension introduces two new trackers,
+<code class="docutils literal notranslate"><span class="pre">/user/hand_htc/left</span></code> and <code class="docutils literal notranslate"><span class="pre">/user/hand_htc/right</span></code>.
+This means that extra logic needs to be implemented to switch between the default trackers
+and the HTC specific trackers when the user puts down, or picks up, their controller.</p>
+</section>
+<section id="simple-controller-profile">
+<h3>Simple controller profile<a class="headerlink" href="#simple-controller-profile" title="Link to this heading"></a></h3>
+<p>The simple controller profile is a standard core profile defined as a fallback profile
+when a controller is used for which no profile exists.</p>
+<p>There are a number of OpenXR runtimes that will mimic controllers through
+the simple controller profile when hand tracking is used.</p>
+<p>Unfortunately there is no sound way to determine whether an unknown controller is used
+or whether hand tracking is emulating a controller through this profile.</p>
+<img alt="../../_images/openxr_simple_controller_hand.webp" src="../../_images/openxr_simple_controller_hand.webp" />
+<p>XR runtimes are free to define how the simple controller profile operates,
+so there is also no certainty to how this profile is mapped to gestures.</p>
+<p>The most common mapping seems to be that <code class="docutils literal notranslate"><span class="pre">select</span> <span class="pre">click</span></code> is true
+when the tip of the thumb and index fingers are touching while the
+user's palm is facing away from the user.
+<code class="docutils literal notranslate"><span class="pre">menu</span> <span class="pre">click</span></code> will be true when tip of the thumb and index fingers
+are touching while the user's palm is facing towards the user.</p>
+<p>With this setup the normal <code class="docutils literal notranslate"><span class="pre">left_hand</span></code> and <code class="docutils literal notranslate"><span class="pre">right_hand</span></code> trackers are used and you can
+thus seamlessly switch between controller and hand tracking input.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As some of these interaction profiles have overlap it is important to know
+that you can add each profile to your action map and the XR runtime will choose
+the best fitting profile.</p>
+<p>For instance, a Meta Quest supports both the Microsoft hand interaction profile
+and simple controller profile.
+If both are specified the Microsoft hand interaction profile will take precedence
+and will be used.</p>
+<p>The expectation is that once Meta supports the core hand interaction profile
+extension, that profile will take precedence over both Microsoft
+and simple controller profiles.</p>
+</div>
+</section>
+<section id="gesture-based-input">
+<h3>Gesture based input<a class="headerlink" href="#gesture-based-input" title="Link to this heading"></a></h3>
+<p>If the platform doesn't support any interaction profiles when hand tracking is used,
+or if you're building an application where you need more complicated gesture support
+you're going to need to build your own gesture recognition system.</p>
+<p>You can obtain the full hand tracking data through the <a class="reference internal" href="../../classes/class_xrhandtracker.html#class-xrhandtracker"><span class="std std-ref">XRHandTracker</span></a>
+resource for each hand. You can obtain the hand tracker by calling <code class="docutils literal notranslate"><span class="pre">XRServer.get_tracker</span></code>
+and using either <code class="docutils literal notranslate"><span class="pre">/user/hand_tracker/left</span></code> or <code class="docutils literal notranslate"><span class="pre">/user/hand_tracker/left</span></code> as the tracker.
+This resource provides access to all the joint information for the given hand.</p>
+<p>Detailing out a full gesture recognition algorithm goes beyond the scope of this manual
+however there are a number of community projects you can look at:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/Godot-Dojo/Godot-XR-AH">Julian Todd's Auto hands library</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Malcolmnixon/GodotXRHandPoseDetector">Malcolm Nixons Hand Pose Detector</a></p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="openxr_composition_layers.html" class="btn btn-neutral float-left" title="OpenXR composition layers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="openxr_body_tracking.html" class="btn btn-neutral float-right" title="OpenXR body tracking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

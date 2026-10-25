@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="GDScript format strings" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/scripting/gdscript/gdscript_format_string.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Godot offers multiple ways to dynamically change the contents of strings: Format strings: var string = &quot;I have %s cats.&quot; % &quot;3&quot;, The String.format() method: var string = &quot;I ..." />
+<meta name="description" content="Godot offers multiple ways to dynamically change the contents of strings: Format strings: var string = &quot;I have %s cats.&quot; % &quot;3&quot;, The String.format() method: var string = &quot;I ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>GDScript format strings &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="C#/.NET" href="../c_sharp/index.html" />
+    <link rel="prev" title="GDScript warning system" href="warning_system.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/scripting/gdscript/gdscript_format_string" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/scripting/gdscript/gdscript_format_string.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Scripting</a></li>
+          <li class="breadcrumb-item"><a href="index.html">GDScript</a></li>
+      <li class="breadcrumb-item active">GDScript format strings</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/scripting/gdscript/gdscript_format_string.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="gdscript-format-strings">
+<span id="doc-gdscript-printf"></span><h1>GDScript format strings<a class="headerlink" href="#gdscript-format-strings" title="Link to this heading"></a></h1>
+<p>Godot offers multiple ways to dynamically change the contents of strings:</p>
+<ul class="simple">
+<li><p>Format strings: <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">string</span> <span class="pre">=</span> <span class="pre">&quot;I</span> <span class="pre">have</span> <span class="pre">%s</span> <span class="pre">cats.&quot;</span> <span class="pre">%</span> <span class="pre">&quot;3&quot;</span></code></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">String.format()</span></code> method: <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">string</span> <span class="pre">=</span> <span class="pre">&quot;I</span> <span class="pre">have</span> <span class="pre">{0}</span> <span class="pre">cats.&quot;.format([3])</span></code></p></li>
+<li><p>String concatenation: <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">string</span> <span class="pre">=</span> <span class="pre">&quot;I</span> <span class="pre">have</span> <span class="pre">&quot;</span> <span class="pre">+</span> <span class="pre">str(3)</span> <span class="pre">+</span> <span class="pre">&quot;</span> <span class="pre">cats.&quot;</span></code></p></li>
+</ul>
+<p>This page explains how to use format strings, and briefly explains the <code class="docutils literal notranslate"><span class="pre">format()</span></code>
+method and string concatenation.</p>
+<section id="format-strings">
+<h2>Format strings<a class="headerlink" href="#format-strings" title="Link to this heading"></a></h2>
+<p><em>Format strings</em> are a way to reuse text templates to succinctly create different
+but similar strings.</p>
+<p>Format strings are just like normal strings, except they contain certain
+placeholder character sequences such as <code class="docutils literal notranslate"><span class="pre">%s</span></code>. These placeholders can then
+be replaced by parameters handed to the format string.</p>
+<p>Examine this concrete GDScript example:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a format string with placeholder &#39;%s&#39;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">format_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;We&#39;re waiting for </span><span class="si">%s</span><span class="s2">.&quot;</span>
+
+<span class="c1"># Using the &#39;%&#39; operator, the placeholder is replaced with the desired value</span>
+<span class="k">var</span><span class="w"> </span><span class="n">actual_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">format_string</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="s2">&quot;Godot&quot;</span>
+
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">actual_string</span><span class="p">)</span>
+<span class="c1"># Output: &quot;We&#39;re waiting for Godot.&quot;</span>
+</pre></div>
+</div>
+<p>Placeholders always start with a <code class="docutils literal notranslate"><span class="pre">%</span></code>, but the next character or characters,
+the <em>format specifier</em>, determines how the given value is converted to a
+string.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">%s</span></code> seen in the example above is the simplest placeholder and works for
+most use cases: it converts the value by the same method by which an implicit
+String conversion or <a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-str"><span class="std std-ref">str()</span></a> would convert
+it. Strings remain unchanged, booleans turn into either <code class="docutils literal notranslate"><span class="pre">&quot;true&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;false&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">float</span></code> types become decimals, and other types usually return their data
+in a human-readable string.</p>
+<p>There are other <a class="reference internal" href="#format-specifiers">format specifiers</a>.</p>
+</section>
+<section id="multiple-placeholders">
+<h2>Multiple placeholders<a class="headerlink" href="#multiple-placeholders" title="Link to this heading"></a></h2>
+<p>Format strings may contain multiple placeholders. In such a case, the values
+are handed in the form of an array, one value per placeholder (unless using a
+format specifier with <code class="docutils literal notranslate"><span class="pre">*</span></code>, see <a class="reference internal" href="#dynamic-padding">dynamic padding</a>):</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">format_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> was reluctant to learn </span><span class="si">%s</span><span class="s2">, but now he enjoys it.&quot;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">actual_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">format_string</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Estragon&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GDScript&quot;</span><span class="p">]</span>
+
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">actual_string</span><span class="p">)</span>
+<span class="c1"># Output: &quot;Estragon was reluctant to learn GDScript, but now he enjoys it.&quot;</span>
+</pre></div>
+</div>
+<p>Note the values are inserted in order. Remember all placeholders must be
+replaced at once, so there must be an appropriate number of values.</p>
+</section>
+<section id="format-specifiers">
+<h2>Format specifiers<a class="headerlink" href="#format-specifiers" title="Link to this heading"></a></h2>
+<p>There are format specifiers other than <code class="docutils literal notranslate"><span class="pre">s</span></code> that can be used in placeholders.
+They consist of one or more characters. Some of them work by themselves like
+<code class="docutils literal notranslate"><span class="pre">s</span></code>, some appear before other characters, some only work with certain
+values or characters.</p>
+<section id="placeholder-types">
+<h3>Placeholder types<a class="headerlink" href="#placeholder-types" title="Link to this heading"></a></h3>
+<p>One and only one of these must always appear as the last character in a format
+specifier. Apart from <code class="docutils literal notranslate"><span class="pre">s</span></code>, these require certain types of parameters.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p><strong>Simple</strong> conversion to String by the same method as implicit
+String conversion.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>A single <strong>Unicode character</strong>. Accepts a Unicode code point
+(integer) or a single-character string. Supports values beyond 255.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">d</span></code></p></td>
+<td><p>A <strong>decimal integer</strong>. Expects an integer or a real number
+(will be floored).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">o</span></code></p></td>
+<td><p>An <strong>octal integer</strong>. Expects an integer or a real number
+(will be floored).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
+<td><p>A <strong>hexadecimal integer</strong> with <strong>lower-case</strong> letters.
+Expects an integer or a real number (will be floored).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">X</span></code></p></td>
+<td><p>A <strong>hexadecimal integer</strong> with <strong>upper-case</strong> letters.
+Expects an integer or a real number (will be floored).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">f</span></code></p></td>
+<td><p>A <strong>decimal real</strong> number. Expects an integer or a real number.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">v</span></code></p></td>
+<td><p>A <strong>vector</strong>. Expects any float or int-based vector object (
+<code class="docutils literal notranslate"><span class="pre">Vector2</span></code>, <code class="docutils literal notranslate"><span class="pre">Vector3</span></code>, <code class="docutils literal notranslate"><span class="pre">Vector4</span></code>, <code class="docutils literal notranslate"><span class="pre">Vector2i</span></code>, <code class="docutils literal notranslate"><span class="pre">Vector3i</span></code> or
+<code class="docutils literal notranslate"><span class="pre">Vector4i</span></code>). Will display the vector coordinates in parentheses,
+formatting each coordinate as if it was an <code class="docutils literal notranslate"><span class="pre">%f</span></code>, and using the
+same modifiers.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="placeholder-modifiers">
+<h3>Placeholder modifiers<a class="headerlink" href="#placeholder-modifiers" title="Link to this heading"></a></h3>
+<p>These characters appear before the above. Some of them work only under certain
+conditions.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>In number specifiers, <strong>show + sign</strong> if positive.</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>Set <strong>padding</strong>. Padded with spaces or with zeroes if integer
+starts with <code class="docutils literal notranslate"><span class="pre">0</span></code> in an integer or real number placeholder.
+The leading <code class="docutils literal notranslate"><span class="pre">0</span></code> is ignored if <code class="docutils literal notranslate"><span class="pre">-</span></code> is present.
+When used after <code class="docutils literal notranslate"><span class="pre">.</span></code>, see <code class="docutils literal notranslate"><span class="pre">.</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.</span></code></p></td>
+<td><p>Before <code class="docutils literal notranslate"><span class="pre">f</span></code> or <code class="docutils literal notranslate"><span class="pre">v</span></code>, set <strong>precision</strong> to 0 decimal places. Can
+be followed up with numbers to change. Padded with zeroes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p><strong>Pad to the right</strong> rather than the left.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p><strong>Dynamic padding</strong>, expects additional integer parameter to set
+padding or precision after <code class="docutils literal notranslate"><span class="pre">.</span></code>, see <a class="reference internal" href="#dynamic-padding">dynamic padding</a>.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="padding">
+<h2>Padding<a class="headerlink" href="#padding" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">.</span></code> (<em>dot</em>), <code class="docutils literal notranslate"><span class="pre">*</span></code> (<em>asterisk</em>), <code class="docutils literal notranslate"><span class="pre">-</span></code> (<em>minus sign</em>) and digit
+(<code class="docutils literal notranslate"><span class="pre">0</span></code>-<code class="docutils literal notranslate"><span class="pre">9</span></code>) characters are used for padding. This allows printing several
+values aligned vertically as if in a column, provided a fixed-width font is
+used.</p>
+<p>To pad a string to a minimum length, add an integer to the specifier:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%10d</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">12345</span><span class="p">)</span>
+<span class="c1"># output: &quot;     12345&quot;</span>
+<span class="c1"># 5 leading spaces for a total length of 10</span>
+</pre></div>
+</div>
+<p>If the integer starts with <code class="docutils literal notranslate"><span class="pre">0</span></code>, integer values are padded with zeroes
+instead of white space:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%010d</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">12345</span><span class="p">)</span>
+<span class="c1"># output: &quot;0000012345&quot;</span>
+</pre></div>
+</div>
+<p>Precision can be specified for real numbers by adding a <code class="docutils literal notranslate"><span class="pre">.</span></code> (<em>dot</em>) with an
+integer following it. With no integer after <code class="docutils literal notranslate"><span class="pre">.</span></code>, a precision of 0 is used,
+rounding to integer values. The integer to use for padding must appear before
+the dot.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pad to minimum length of 10, round to 3 decimal places</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%10.3f</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">10000.5555</span><span class="p">)</span>
+<span class="c1"># Output: &quot; 10000.556&quot;</span>
+<span class="c1"># 1 leading space</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-</span></code> character will cause padding to the right rather than the left,
+useful for right text alignment:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%-10d</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">12345678</span><span class="p">)</span>
+<span class="c1"># Output: &quot;12345678  &quot;</span>
+<span class="c1"># 2 trailing spaces</span>
+</pre></div>
+</div>
+<section id="dynamic-padding">
+<h3>Dynamic padding<a class="headerlink" href="#dynamic-padding" title="Link to this heading"></a></h3>
+<p>By using the <code class="docutils literal notranslate"><span class="pre">*</span></code> (<em>asterisk</em>) character, the padding or precision can be set
+without modifying the format string. It is used in place of an integer in the
+format specifier. The values for padding and precision are then passed when
+formatting:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">format_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">%*.*f</span><span class="s2">&quot;</span>
+<span class="c1"># Pad to length of 7, round to 3 decimal places:</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">format_string</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">8.8888</span><span class="p">])</span>
+<span class="c1"># Output: &quot;  8.889&quot;</span>
+<span class="c1"># 2 leading spaces</span>
+</pre></div>
+</div>
+<p>It is still possible to pad with zeroes in integer placeholders by adding <code class="docutils literal notranslate"><span class="pre">0</span></code>
+before <code class="docutils literal notranslate"><span class="pre">*</span></code>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%0*d</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
+<span class="c1"># Output: &quot;03&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="escape-sequence">
+<h2>Escape sequence<a class="headerlink" href="#escape-sequence" title="Link to this heading"></a></h2>
+<p>To insert a literal <code class="docutils literal notranslate"><span class="pre">%</span></code> character into a format string, it must be escaped to
+avoid reading it as a placeholder. This is done by doubling the character:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">56</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Remaining health: </span><span class="si">%d%%</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">health</span><span class="p">)</span>
+<span class="c1"># Output: &quot;Remaining health: 56%&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="string-format-method">
+<h2>String format method<a class="headerlink" href="#string-format-method" title="Link to this heading"></a></h2>
+<p>There is also another way to format text in GDScript, namely the
+<a class="reference internal" href="../../../classes/class_string.html#class-string-method-format"><span class="std std-ref">String.format()</span></a>
+method. It replaces all occurrences of a key in the string with the corresponding
+value. The method can handle arrays or dictionaries for the key/value pairs.</p>
+<p>Arrays can be used as key, index, or mixed style (see below examples). Order only
+matters when the index or mixed style of Array is used.</p>
+<p>A quick example in GDScript:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a format string</span>
+<span class="k">var</span><span class="w"> </span><span class="n">format_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;We&#39;re waiting for {str}&quot;</span>
+
+<span class="c1"># Using the &#39;format&#39; method, replace the &#39;str&#39; placeholder</span>
+<span class="k">var</span><span class="w"> </span><span class="n">actual_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">format_string</span><span class="o">.</span><span class="nf">format</span><span class="p">({</span><span class="s2">&quot;str&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Godot&quot;</span><span class="p">})</span>
+
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">actual_string</span><span class="p">)</span>
+<span class="c1"># Output: &quot;We&#39;re waiting for Godot&quot;</span>
+</pre></div>
+</div>
+<section id="format-method-examples">
+<h3>Format method examples<a class="headerlink" href="#format-method-examples" title="Link to this heading"></a></h3>
+<p>The following are some examples of how to use the various invocations of the
+<code class="docutils literal notranslate"><span class="pre">String.format()</span></code>  method.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Type</strong></p></td>
+<td><p><strong>Style</strong></p></td>
+<td><p><strong>Example</strong></p></td>
+<td><p><strong>Result</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Dictionary</p></td>
+<td><p>key</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">{name}</span> <span class="pre">v{version}!&quot;.format({&quot;name&quot;:&quot;Godette&quot;,</span> <span class="pre">&quot;version&quot;:&quot;3.0&quot;})</span></code></p></td>
+<td><p>Hi, Godette v3.0!</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dictionary</p></td>
+<td><p>index</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">{0}</span> <span class="pre">v{1}!&quot;.format({&quot;0&quot;:&quot;Godette&quot;,</span> <span class="pre">&quot;1&quot;:&quot;3.0&quot;})</span></code></p></td>
+<td><p>Hi, Godette v3.0!</p></td>
+</tr>
+<tr class="row-even"><td><p>Dictionary</p></td>
+<td><p>mix</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">{0}</span> <span class="pre">v{version}!&quot;.format({&quot;0&quot;:&quot;Godette&quot;,</span> <span class="pre">&quot;version&quot;:&quot;3.0&quot;})</span></code></p></td>
+<td><p>Hi, Godette v3.0!</p></td>
+</tr>
+<tr class="row-odd"><td><p>Array</p></td>
+<td><p>key</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">{name}</span> <span class="pre">v{version}!&quot;.format([[&quot;version&quot;,&quot;3.0&quot;],</span> <span class="pre">[&quot;name&quot;,&quot;Godette&quot;]])</span></code></p></td>
+<td><p>Hi, Godette v3.0!</p></td>
+</tr>
+<tr class="row-even"><td><p>Array</p></td>
+<td><p>index</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">{0}</span> <span class="pre">v{1}!&quot;.format([&quot;Godette&quot;,&quot;3.0&quot;])</span></code></p></td>
+<td><p>Hi, Godette v3.0!</p></td>
+</tr>
+<tr class="row-odd"><td><p>Array</p></td>
+<td><p>mix</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">{name}</span> <span class="pre">v{0}!&quot;.format([&quot;3.0&quot;,</span> <span class="pre">[&quot;name&quot;,&quot;Godette&quot;]])</span></code></p></td>
+<td><p>Hi, Godette v3.0!</p></td>
+</tr>
+<tr class="row-even"><td><p>Array</p></td>
+<td><p>no index</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">{}</span> <span class="pre">v{}!&quot;.format([&quot;Godette&quot;,</span> <span class="pre">&quot;3.0&quot;],</span> <span class="pre">&quot;{}&quot;)</span></code></p></td>
+<td><p>Hi, Godette v3.0!</p></td>
+</tr>
+</tbody>
+</table>
+<p>Placeholders can also be customized when using <code class="docutils literal notranslate"><span class="pre">String.format</span></code>, here's some
+examples of that functionality.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Type</strong></p></td>
+<td><p><strong>Example</strong></p></td>
+<td><p><strong>Result</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Infix (default)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">{0}</span> <span class="pre">v{1}&quot;.format([&quot;Godette&quot;,</span> <span class="pre">&quot;3.0&quot;],</span> <span class="pre">&quot;{_}&quot;)</span></code></p></td>
+<td><p>Hi, Godette v3.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Postfix</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">0%</span> <span class="pre">v1%&quot;.format([&quot;Godette&quot;,</span> <span class="pre">&quot;3.0&quot;],</span> <span class="pre">&quot;_%&quot;)</span></code></p></td>
+<td><p>Hi, Godette v3.0</p></td>
+</tr>
+<tr class="row-even"><td><p>Prefix</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">%0</span> <span class="pre">v%1&quot;.format([&quot;Godette&quot;,</span> <span class="pre">&quot;3.0&quot;],</span> <span class="pre">&quot;%_&quot;)</span></code></p></td>
+<td><p>Hi, Godette v3.0</p></td>
+</tr>
+</tbody>
+</table>
+<p>Combining both the <code class="docutils literal notranslate"><span class="pre">String.format</span></code> method and the <code class="docutils literal notranslate"><span class="pre">%</span></code> operator could be useful, as
+<code class="docutils literal notranslate"><span class="pre">String.format</span></code> does not have a way to manipulate the representation of numbers.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Example</strong></p></td>
+<td><p><strong>Result</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;Hi,</span> <span class="pre">{0}</span> <span class="pre">v{version}&quot;.format({0:&quot;Godette&quot;,</span> <span class="pre">&quot;version&quot;:&quot;%0.2f&quot;</span> <span class="pre">%</span> <span class="pre">3.114})</span></code></p></td>
+<td><p>Hi, Godette v3.11</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="string-concatenation">
+<h2>String concatenation<a class="headerlink" href="#string-concatenation" title="Link to this heading"></a></h2>
+<p>You can also combine strings by <em>concatenating</em> them together, using the <code class="docutils literal notranslate"><span class="pre">+</span></code>
+operator.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a base string</span>
+<span class="k">var</span><span class="w"> </span><span class="n">base_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;We&#39;re waiting for &quot;</span>
+
+<span class="c1"># Concatenate the string</span>
+<span class="k">var</span><span class="w"> </span><span class="n">actual_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_string</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Godot&quot;</span>
+
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">actual_string</span><span class="p">)</span>
+<span class="c1"># Output: &quot;We&#39;re waiting for Godot&quot;</span>
+</pre></div>
+</div>
+<p>When using string concatenation, values that are not strings must be converted using
+the <code class="docutils literal notranslate"><span class="pre">str()</span></code> function. There is no way to specify the string format of converted
+values.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">name_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Godette&quot;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span>
+<span class="k">var</span><span class="w"> </span><span class="n">actual_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hi, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name_string</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; v&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb nb-Function">str</span><span class="p">(</span><span class="n">version</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;!&quot;</span>
+
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">actual_string</span><span class="p">)</span>
+<span class="c1"># Output: &quot;Hi, Godette v3!&quot;</span>
+</pre></div>
+</div>
+<p>Because of these limitations, format strings or the <code class="docutils literal notranslate"><span class="pre">format()</span></code> method are often
+a better choice. In many cases, string concatenation is also less readable.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Godot's C++ code, GDScript format strings can be accessed using the
+<code class="docutils literal notranslate"><span class="pre">vformat()</span></code> helper function in the <a class="reference internal" href="../../../classes/class_variant.html#class-variant"><span class="std std-ref">Variant</span></a> header.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="warning_system.html" class="btn btn-neutral float-left" title="GDScript warning system" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../c_sharp/index.html" class="btn btn-neutral float-right" title="C#/.NET" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

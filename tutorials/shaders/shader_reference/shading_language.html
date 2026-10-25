@@ -1,0 +1,1551 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Shading language" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/shaders/shader_reference/shading_language.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: Godot uses a shading language similar to GLSL ES 3.0. Most datatypes and functions are supported, and the few remaining ones will likely be added over time. If you are already familia..." />
+<meta name="description" content="Introduction: Godot uses a shading language similar to GLSL ES 3.0. Most datatypes and functions are supported, and the few remaining ones will likely be added over time. If you are already familia..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Shading language &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Built-in shader functions" href="shader_functions.html" />
+    <link rel="prev" title="Shading reference" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/shaders/shader_reference/shading_language" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/shaders/shader_reference/shading_language.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Shaders</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Shading reference</a></li>
+      <li class="breadcrumb-item active">Shading language</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/shaders/shader_reference/shading_language.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="shading-language">
+<span id="doc-shading-language"></span><h1>Shading language<a class="headerlink" href="#shading-language" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Godot uses a shading language similar to GLSL ES 3.0. Most datatypes and
+functions are supported, and the few remaining ones will likely be added over
+time.</p>
+<p>If you are already familiar with GLSL, the <a class="reference internal" href="../converting_glsl_to_godot_shaders.html#doc-converting-glsl-to-godot-shaders"><span class="std std-ref">Godot Shader Migration
+Guide</span></a> is a resource that will help you
+transition from regular GLSL to Godot's shading language.</p>
+</section>
+<section id="data-types">
+<span id="doc-shading-language-data-types"></span><h2>Data types<a class="headerlink" href="#data-types" title="Link to this heading"></a></h2>
+<p>Most GLSL ES 3.0 datatypes are supported:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>void</strong></p></td>
+<td><p>Void datatype, useful only for functions that return nothing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>bool</strong></p></td>
+<td><p>Boolean datatype, can only contain <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>bvec2</strong></p></td>
+<td><p>Two-component vector of booleans.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>bvec3</strong></p></td>
+<td><p>Three-component vector of booleans.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>bvec4</strong></p></td>
+<td><p>Four-component vector of booleans.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>int</strong></p></td>
+<td><p>32 bit signed scalar integer.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>ivec2</strong></p></td>
+<td><p>Two-component vector of signed integers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>ivec3</strong></p></td>
+<td><p>Three-component vector of signed integers.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>ivec4</strong></p></td>
+<td><p>Four-component vector of signed integers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>uint</strong></p></td>
+<td><p>Unsigned scalar integer; can't contain negative numbers.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>uvec2</strong></p></td>
+<td><p>Two-component vector of unsigned integers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>uvec3</strong></p></td>
+<td><p>Three-component vector of unsigned integers.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>uvec4</strong></p></td>
+<td><p>Four-component vector of unsigned integers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>float</strong></p></td>
+<td><p>32 bit floating-point scalar.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>vec2</strong></p></td>
+<td><p>Two-component vector of floating-point values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>vec3</strong></p></td>
+<td><p>Three-component vector of floating-point values.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>vec4</strong></p></td>
+<td><p>Four-component vector of floating-point values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>mat2</strong></p></td>
+<td><p>2x2 matrix, in column major order.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>mat3</strong></p></td>
+<td><p>3x3 matrix, in column major order.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>mat4</strong></p></td>
+<td><p>4x4 matrix, in column major order.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sampler2D</strong></p></td>
+<td><p>Sampler type for binding 2D textures, which are read as float.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>isampler2D</strong></p></td>
+<td><p>Sampler type for binding 2D textures, which are read as signed integer.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>usampler2D</strong></p></td>
+<td><p>Sampler type for binding 2D textures, which are read as unsigned integer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sampler2DArray</strong></p></td>
+<td><p>Sampler type for binding 2D texture arrays, which are read as float.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>isampler2DArray</strong></p></td>
+<td><p>Sampler type for binding 2D texture arrays, which are read as signed integer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>usampler2DArray</strong></p></td>
+<td><p>Sampler type for binding 2D texture arrays, which are read as unsigned integer.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sampler3D</strong></p></td>
+<td><p>Sampler type for binding 3D textures, which are read as float.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>isampler3D</strong></p></td>
+<td><p>Sampler type for binding 3D textures, which are read as signed integer.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>usampler3D</strong></p></td>
+<td><p>Sampler type for binding 3D textures, which are read as unsigned integer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>samplerCube</strong></p></td>
+<td><p>Sampler type for binding Cubemaps, which are read as float.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>samplerCubeArray</strong></p></td>
+<td><p>Sampler type for binding Cubemap arrays, which are read as float.
+Only supported in Forward+ and Mobile, not Compatibility.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>samplerExternalOES</strong></p></td>
+<td><p>External sampler type.
+Only supported in Compatibility/Android platform.</p></td>
+</tr>
+</tbody>
+</table>
+<p>These types can also be put inside <a class="reference internal" href="#doc-shading-language-arrays"><span class="std std-ref">arrays</span></a>
+or <a class="reference internal" href="#doc-shading-language-structs"><span class="std std-ref">structs</span></a>, which are also usable as function parameters
+or return values. Arrays can be used as uniforms, but structs cannot.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Local variables are not initialized to a default value such as <code class="docutils literal notranslate"><span class="pre">0.0</span></code>. If
+you use a variable without assigning it first, it will contain whatever
+value was already present at that memory location, and unpredictable visual
+glitches will appear. However, uniforms and varyings are initialized to a
+default value.</p>
+</div>
+<section id="comments">
+<h3>Comments<a class="headerlink" href="#comments" title="Link to this heading"></a></h3>
+<p>The shading language supports the same comment syntax as used in C# and C++,
+using <code class="docutils literal notranslate"><span class="pre">//</span></code> for single-line comments and <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">*/</span></code> for multi-line comments:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="c1">// Single-line comment.</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">  </span><span class="c1">// Another single-line comment.</span>
+
+<span class="cm">/*</span>
+<span class="cm">Multi-line comment.</span>
+<span class="cm">The comment ends when the ending delimiter is found</span>
+<span class="cm">(here, it&#39;s on the line below).</span>
+<span class="cm">*/</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Additionally, you can use documentation comments that are displayed in the
+inspector when hovering a shader parameter. Documentation comments are currently
+only supported when placed immediately above a <code class="docutils literal notranslate"><span class="pre">uniform</span></code> declaration. These
+documentation comments only support the <strong>multiline</strong> comment syntax
+(even if used on a single line) and must use <strong>two</strong> leading asterisks
+(<code class="docutils literal notranslate"><span class="pre">/**</span></code>) instead of just one (<code class="docutils literal notranslate"><span class="pre">/*</span></code>):</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * This is a documentation comment.</span>
+<span class="cm"> * These lines will appear in the inspector when hovering the shader parameter</span>
+<span class="cm"> * named &quot;Something&quot;.</span>
+<span class="cm"> * You can use [b]BBCode[/b] [i]formatting[/i] in the comment.</span>
+<span class="cm"> */</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">something</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="cm">/** This is a single-line documentation comment. */</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">something_else</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The asterisks on the follow-up lines are not required, but are recommended as
+per the <a class="reference internal" href="../shaders_style_guide.html#doc-shaders-style-guide"><span class="std std-ref">Shaders style guide</span></a>. These asterisks are automatically
+stripped by the inspector, so they won't appear in the tooltip.</p>
+</section>
+<section id="casting">
+<h3>Casting<a class="headerlink" href="#casting" title="Link to this heading"></a></h3>
+<p>Just like GLSL ES 3.0, implicit casting between scalars and vectors of the same
+size but different type is not allowed. Casting of types of different size is
+also not allowed. Conversion must be done explicitly via constructors.</p>
+<p>Example:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// invalid</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// valid</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">float</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// valid</span>
+</pre></div>
+</div>
+<p>Default integer constants are signed, so casting is always needed to convert to
+unsigned:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// valid</span>
+<span class="kt">uint</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// invalid</span>
+<span class="kt">uint</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">uint</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// valid</span>
+</pre></div>
+</div>
+</section>
+<section id="members">
+<h3>Members<a class="headerlink" href="#members" title="Link to this heading"></a></h3>
+<p>Individual scalar members of vector types are accessed via the &quot;x&quot;, &quot;y&quot;, &quot;z&quot; and
+&quot;w&quot; members. Alternatively, using &quot;r&quot;, &quot;g&quot;, &quot;b&quot; and &quot;a&quot; also works and is
+equivalent. Use whatever fits best for your needs.</p>
+<p>For matrices, use the <code class="docutils literal notranslate"><span class="pre">m[column][row]</span></code> indexing syntax to access each scalar,
+or <code class="docutils literal notranslate"><span class="pre">m[column]</span></code> to access a vector by column index. For example, for accessing the
+y-component of the translation from a mat4 transform matrix (4th column, 2nd line) you use <code class="docutils literal notranslate"><span class="pre">m[3][1]</span></code> or <code class="docutils literal notranslate"><span class="pre">m[3].y</span></code>.</p>
+</section>
+<section id="constructing">
+<h3>Constructing<a class="headerlink" href="#constructing" title="Link to this heading"></a></h3>
+<p>Construction of vector types must always pass:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="c1">// The required amount of scalars</span>
+<span class="kt">vec4</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">);</span>
+<span class="c1">// Complementary vectors and/or scalars</span>
+<span class="kt">vec4</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="kt">vec2</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="kt">vec2</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">));</span>
+<span class="kt">vec4</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">),</span><span class="w"> </span><span class="mf">3.0</span><span class="p">);</span>
+<span class="c1">// A single scalar for the whole vector</span>
+<span class="kt">vec4</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Construction of matrix types requires vectors of the same dimension as the
+matrix, interpreted as columns. You can also build a diagonal matrix using <code class="docutils literal notranslate"><span class="pre">matx(float)</span></code> syntax.
+Accordingly, <code class="docutils literal notranslate"><span class="pre">mat4(1.0)</span></code> is an identity matrix.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">mat2</span><span class="w"> </span><span class="n">m2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">mat2</span><span class="p">(</span><span class="kt">vec2</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="kt">vec2</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">));</span>
+<span class="kt">mat3</span><span class="w"> </span><span class="n">m3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">mat3</span><span class="p">(</span><span class="kt">vec3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">));</span>
+<span class="kt">mat4</span><span class="w"> </span><span class="n">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">mat4</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Matrices can also be built from a matrix of another dimension. There are two
+rules:</p>
+<p>1. If a larger matrix is constructed from a smaller matrix, the additional rows
+and columns are set to the values they would have in an identity matrix.
+1. If a smaller matrix is constructed from a larger matrix, the top, left
+submatrix of the larger matrix is used.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">mat3</span><span class="w"> </span><span class="n">basis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">mat3</span><span class="p">(</span><span class="n">MODEL_MATRIX</span><span class="p">);</span>
+<span class="kt">mat4</span><span class="w"> </span><span class="n">m4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">mat4</span><span class="p">(</span><span class="n">basis</span><span class="p">);</span>
+<span class="kt">mat2</span><span class="w"> </span><span class="n">m2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">mat2</span><span class="p">(</span><span class="n">m4</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="swizzling">
+<h3>Swizzling<a class="headerlink" href="#swizzling" title="Link to this heading"></a></h3>
+<p>It is possible to obtain any combination of components in any order, as long as
+the result is another vector type (or scalar). This is easier shown than
+explained:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">vec4</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">);</span>
+<span class="kt">vec3</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">rgb</span><span class="p">;</span><span class="w"> </span><span class="c1">// Creates a vec3 with vec4 components.</span>
+<span class="kt">vec3</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">ggg</span><span class="p">;</span><span class="w"> </span><span class="c1">// Also valid; creates a vec3 and fills it with a single vec4 component.</span>
+<span class="kt">vec3</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">bgr</span><span class="p">;</span><span class="w"> </span><span class="c1">// &quot;b&quot; will be vec3(2.0, 1.0, 0.0).</span>
+<span class="kt">vec3</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">xyz</span><span class="p">;</span><span class="w"> </span><span class="c1">// Also rgba, xyzw are equivalent.</span>
+<span class="kt">vec3</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">stp</span><span class="p">;</span><span class="w"> </span><span class="c1">// And stpq (for texture coordinates).</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">w</span><span class="p">;</span><span class="w"> </span><span class="c1">// Invalid, because &quot;w&quot; is not present in vec3 b.</span>
+<span class="kt">vec3</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">xrt</span><span class="p">;</span><span class="w"> </span><span class="c1">// Invalid, mixing different styles is forbidden.</span>
+<span class="n">b</span><span class="p">.</span><span class="n">rrr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">rgb</span><span class="p">;</span><span class="w"> </span><span class="c1">// Invalid, assignment with duplication.</span>
+<span class="n">b</span><span class="p">.</span><span class="n">bgr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">rgb</span><span class="p">;</span><span class="w"> </span><span class="c1">// Valid assignment. &quot;b&quot;&#39;s &quot;blue&quot; component will be &quot;a&quot;&#39;s &quot;red&quot; and vice versa.</span>
+</pre></div>
+</div>
+</section>
+<section id="precision">
+<h3>Precision<a class="headerlink" href="#precision" title="Link to this heading"></a></h3>
+<p>It is possible to add precision modifiers to datatypes; use them for uniforms,
+variables, arguments and varyings:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">lowp</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">);</span><span class="w"> </span><span class="c1">// low precision, usually 8 bits per component mapped to 0-1</span>
+<span class="k">mediump</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">);</span><span class="w"> </span><span class="c1">// medium precision, usually 16 bits or half float</span>
+<span class="k">highp</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">);</span><span class="w"> </span><span class="c1">// high precision, uses full float or integer range (32 bit default)</span>
+</pre></div>
+</div>
+<p>Using lower precision for some operations can speed up the math involved (at the
+cost of less precision). This is rarely needed in the vertex processor function
+(where full precision is needed most of the time), but is often useful in the
+fragment processor.</p>
+<p>Some architectures (mainly mobile) can benefit significantly from this, but
+there are downsides such as the additional overhead of conversion between
+precisions. Refer to the documentation of the target architecture for further
+information. In many cases, mobile drivers cause inconsistent or unexpected
+behavior and it is best to avoid specifying precision unless necessary.</p>
+</section>
+</section>
+<section id="arrays">
+<span id="doc-shading-language-arrays"></span><h2>Arrays<a class="headerlink" href="#arrays" title="Link to this heading"></a></h2>
+<p>Arrays are containers for multiple variables of a similar type.</p>
+<section id="local-arrays">
+<h3>Local arrays<a class="headerlink" href="#local-arrays" title="Link to this heading"></a></h3>
+<p>Local arrays are declared in functions. They can use all of the allowed
+datatypes, except samplers. The array declaration follows a C-style syntax:
+<code class="docutils literal notranslate"><span class="pre">[const]</span> <span class="pre">+</span> <span class="pre">[precision]</span> <span class="pre">+</span> <span class="pre">typename</span> <span class="pre">+</span> <span class="pre">identifier</span> <span class="pre">+</span> <span class="pre">[array</span> <span class="pre">size]</span></code>.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>They can be initialized at the beginning like:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">float_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span><span class="w"> </span><span class="c1">// first constructor</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">int_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mo">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// second constructor</span>
+
+<span class="kt">vec2</span><span class="w"> </span><span class="n">vec2_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">vec2</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="kt">vec2</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">),</span><span class="w"> </span><span class="kt">vec2</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// third constructor</span>
+
+<span class="kt">bool</span><span class="w"> </span><span class="n">bool_arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// fourth constructor - size is defined automatically from the element count</span>
+</pre></div>
+</div>
+<p>You can declare multiple arrays (even with different sizes) in one expression:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="p">},</span>
+<span class="n">c</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.7</span><span class="w"> </span><span class="p">},</span>
+<span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="n">e</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>To access an array element, use the indexing syntax:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+<span class="n">arr</span><span class="p">[</span><span class="mo">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// setter</span>
+
+<span class="n">COLOR</span><span class="p">.</span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mo">0</span><span class="p">];</span><span class="w"> </span><span class="c1">// getter</span>
+</pre></div>
+</div>
+<p>Arrays also have a built-in function <code class="docutils literal notranslate"><span class="pre">.length()</span></code> (not to be confused with the
+built-in <code class="docutils literal notranslate"><span class="pre">length()</span></code> function). It doesn't accept any parameters and will
+return the array's size.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="w"> </span><span class="p">};</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">arr</span><span class="p">.</span><span class="n">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you use an index either below 0 or greater than array size - the shader will
+crash and break rendering. To prevent this, use <code class="docutils literal notranslate"><span class="pre">length()</span></code>, <code class="docutils literal notranslate"><span class="pre">if</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">clamp()</span></code> functions to ensure the index is between 0 and the array's
+length. Always carefully test and check your code. If you pass a constant
+expression or a number, the editor will check its bounds to prevent
+this crash.</p>
+</div>
+</section>
+<section id="global-arrays">
+<h3>Global arrays<a class="headerlink" href="#global-arrays" title="Link to this heading"></a></h3>
+<p>You can declare arrays in global scope as either <code class="docutils literal notranslate"><span class="pre">const</span></code> or <code class="docutils literal notranslate"><span class="pre">uniform</span></code>:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+
+<span class="k">const</span><span class="w"> </span><span class="k">lowp</span><span class="w"> </span><span class="kt">vec3</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">lowp</span><span class="w"> </span><span class="kt">vec3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mo">0</span><span class="p">,</span><span class="w"> </span><span class="mo">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+<span class="k">uniform</span><span class="w"> </span><span class="k">lowp</span><span class="w"> </span><span class="kt">vec3</span><span class="w"> </span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">ALBEDO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="mo">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">w</span><span class="p">[</span><span class="mo">0</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Global arrays use the same syntax as local arrays, except with a <code class="docutils literal notranslate"><span class="pre">const</span></code>
+or <code class="docutils literal notranslate"><span class="pre">uniform</span></code> added to their declaration. Note that uniform arrays can't
+have a default value.</p>
+</div>
+</section>
+</section>
+<section id="constants">
+<h2>Constants<a class="headerlink" href="#constants" title="Link to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">const</span></code> keyword before the variable declaration to make that variable
+immutable, which means that it cannot be modified. All basic types, except
+samplers can be declared as constants. Accessing and using a constant value is
+slightly faster than using a uniform. Constants must be initialized at their
+declaration.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec2</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="kt">vec2</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="c1">// invalid</span>
+<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"> </span><span class="c1">// valid</span>
+</pre></div>
+</div>
+<p>Constants cannot be modified and additionally cannot have hints, but multiple of
+them (if they have the same type) can be declared in a single expression e.g</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">V1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">V2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec2</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Similar to variables, arrays can also be declared with <code class="docutils literal notranslate"><span class="pre">const</span></code>.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="p">};</span>
+
+<span class="n">arr</span><span class="p">[</span><span class="mo">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// invalid</span>
+
+<span class="n">COLOR</span><span class="p">.</span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mo">0</span><span class="p">];</span><span class="w"> </span><span class="c1">// valid</span>
+</pre></div>
+</div>
+<p>Constants can be declared both globally (outside of any function) or locally
+(inside a function). Global constants are useful when you want to have access to
+a value throughout your shader that does not need to be modified. Like uniforms,
+global constants are shared between all shader stages, but they are not
+accessible outside of the shader.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">GOLDEN_RATIO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.618033988749894</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Constants of the <code class="docutils literal notranslate"><span class="pre">float</span></code> type must be initialized using <code class="docutils literal notranslate"><span class="pre">.</span></code> notation after the
+decimal part or by using the scientific notation. The optional <code class="docutils literal notranslate"><span class="pre">f</span></code> post-suffix is
+also supported.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="n">f</span><span class="p">;</span><span class="w"> </span><span class="c1">// same, using suffix for clarity</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// gives 0.1 by using the scientific notation</span>
+</pre></div>
+</div>
+<p>Constants of the <code class="docutils literal notranslate"><span class="pre">uint</span></code> (unsigned int) type must have a <code class="docutils literal notranslate"><span class="pre">u</span></code> suffix to differentiate them from signed integers.
+Alternatively, this can be done by using the <code class="docutils literal notranslate"><span class="pre">uint(x)</span></code> built-in conversion function.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">uint</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">u</span><span class="p">;</span>
+<span class="kt">uint</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">uint</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="structs">
+<span id="doc-shading-language-structs"></span><h2>Structs<a class="headerlink" href="#structs" title="Link to this heading"></a></h2>
+<p>Structs are compound types which can be used for better abstraction of shader
+code. You can declare them at the global scope like:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="n">PointLight</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">vec3</span><span class="w"> </span><span class="n">position</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">vec3</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">intensity</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>After declaration, you can instantiate and initialize them like:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">PointLight</span><span class="w"> </span><span class="n">light</span><span class="p">;</span>
+<span class="w">    </span><span class="n">light</span><span class="p">.</span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">light</span><span class="p">.</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">light</span><span class="p">.</span><span class="n">intensity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Or use struct constructor for same purpose:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">PointLight</span><span class="w"> </span><span class="n">light</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PointLight</span><span class="p">(</span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="mf">0.5</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Structs may contain other struct or array, you can also instance them as global
+constant:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="n">Scene</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">PointLight</span><span class="w"> </span><span class="n">lights</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="k">const</span><span class="w"> </span><span class="n">Scene</span><span class="w"> </span><span class="n">scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Scene</span><span class="p">(</span><span class="n">PointLight</span><span class="p">[</span><span class="mi">2</span><span class="p">](</span><span class="n">PointLight</span><span class="p">(</span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="n">PointLight</span><span class="p">(</span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)));</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ALBEDO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scene</span><span class="p">.</span><span class="n">lights</span><span class="p">[</span><span class="mo">0</span><span class="p">].</span><span class="n">color</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can also pass them to functions:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">canvas_item</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+<span class="n">Scene</span><span class="w"> </span><span class="n">construct_scene</span><span class="p">(</span><span class="n">PointLight</span><span class="w"> </span><span class="n">light1</span><span class="p">,</span><span class="w"> </span><span class="n">PointLight</span><span class="w"> </span><span class="n">light2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Scene</span><span class="p">({</span><span class="n">light1</span><span class="p">,</span><span class="w"> </span><span class="n">light2</span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">COLOR</span><span class="p">.</span><span class="n">rgb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_scene</span><span class="p">(</span><span class="n">PointLight</span><span class="p">(</span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="n">PointLight</span><span class="p">(</span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)).</span><span class="n">lights</span><span class="p">[</span><span class="mo">0</span><span class="p">].</span><span class="n">color</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
+<p>Godot shading language supports the same set of operators as GLSL ES 3.0. Below
+is the list of them in precedence order:</p>
+<table class="nowrap-col3 docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Precedence</p></td>
+<td><p>Class</p></td>
+<td><p>Operator</p></td>
+</tr>
+<tr class="row-even"><td><p>1 (highest)</p></td>
+<td><p>parenthetical grouping</p></td>
+<td><p><strong>()</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>unary</p></td>
+<td><p><strong>+, -, !, ~</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>multiplicative</p></td>
+<td><p><strong>/, *, %</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>additive</p></td>
+<td><p><strong>+, -</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>bit-wise shift</p></td>
+<td><p><strong>&lt;&lt;, &gt;&gt;</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>relational</p></td>
+<td><p><strong>&lt;, &gt;, &lt;=, &gt;=</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>equality</p></td>
+<td><p><strong>==, !=</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>bit-wise AND</p></td>
+<td><p><strong>&amp;</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>bit-wise exclusive OR</p></td>
+<td><p><strong>^</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>bit-wise inclusive OR</p></td>
+<td><p><strong>|</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>logical AND</p></td>
+<td><p><strong>&amp;&amp;</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>12 (lowest)</p></td>
+<td><p>logical inclusive OR</p></td>
+<td><p><strong>||</strong></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most operators that accept vectors or matrices (multiplication, division, etc) operate component-wise, meaning the function
+is applied to the first value of each vector and then on the second value of each vector, etc. Some examples:</p>
+<table class="nowrap-col2 nowrap-col1 docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Equivalent Scalar Operation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">vec3(4,</span> <span class="pre">5,</span> <span class="pre">6)</span> <span class="pre">+</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vec3(4</span> <span class="pre">+</span> <span class="pre">2,</span> <span class="pre">5</span> <span class="pre">+</span> <span class="pre">2,</span> <span class="pre">6</span> <span class="pre">+</span> <span class="pre">2)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">vec2(3,</span> <span class="pre">4)</span> <span class="pre">*</span> <span class="pre">vec2(10,</span> <span class="pre">20)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vec2(3</span> <span class="pre">*</span> <span class="pre">10,</span> <span class="pre">4</span> <span class="pre">*</span> <span class="pre">20)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mat2(vec2(1,</span> <span class="pre">2),</span> <span class="pre">vec2(3,</span> <span class="pre">4))</span> <span class="pre">+</span> <span class="pre">10</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mat2(vec2(1</span> <span class="pre">+</span> <span class="pre">10,</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">10),</span> <span class="pre">vec2(3</span> <span class="pre">+</span> <span class="pre">10,</span> <span class="pre">4</span> <span class="pre">+</span> <span class="pre">10))</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The <a class="reference external" href="http://www.opengl.org/registry/doc/GLSLangSpec.4.30.6.pdf">GLSL Language Specification</a> says under section 5.10 Vector and Matrix Operations:</p>
+<blockquote>
+<div><p>With a few exceptions, operations are component-wise. Usually, when an operator operates on a
+vector or matrix, it is operating independently on each component of the vector or matrix,
+in a component-wise fashion. [...] The exceptions are matrix multiplied by vector,
+vector multiplied by matrix, and matrix multiplied by matrix. These do not operate component-wise,
+but rather perform the correct linear algebraic multiply.</p>
+</div></blockquote>
+</div>
+</section>
+<section id="flow-control">
+<h2>Flow control<a class="headerlink" href="#flow-control" title="Link to this heading"></a></h2>
+<p>Godot Shading language supports the most common types of flow control:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="c1">// `if`, `else if` and `else`.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cond</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">other_cond</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">// Ternary operator.</span>
+<span class="c1">// This is an expression that behaves like `if`/`else` and returns the value.</span>
+<span class="c1">// If `cond` evaluates to `true`, `result` will be `9`.</span>
+<span class="c1">// Otherwise, `result` will be `5`.</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cond</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="c1">// `switch`.</span>
+<span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// `i` should be a signed integer expression.</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="o">:</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mo">0</span><span class="o">:</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">// `break` or `return` to avoid running the next `case`.</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="w"> </span><span class="c1">// Fallthrough (no `break` or `return`): will run the next `case`.</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//...</span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="c1">// Only run if no `case` above matches. Optional.</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// `for` loop. Best used when the number of elements to iterate on</span>
+<span class="c1">// is known in advance.</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">// `while` loop. Best used when the number of elements to iterate on</span>
+<span class="c1">// is not known in advance.</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cond</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">// `do while`. Like `while`, but always runs at least once even if `cond`</span>
+<span class="c1">// never evaluates to `true`.</span>
+<span class="k">do</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cond</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Keep in mind that in modern GPUs, an infinite loop can exist and can freeze
+your application (including editor). Godot can't protect you from this, so be
+careful not to make this mistake!</p>
+<p>Also, when comparing floating-point values against a number, make sure to
+compare them against a <em>range</em> instead of an exact number.</p>
+<p>A comparison like <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(value</span> <span class="pre">==</span> <span class="pre">0.3)</span></code> may not evaluate to <code class="docutils literal notranslate"><span class="pre">true</span></code>.
+Floating-point math is often approximate and can defy expectations. It can also
+behave differently depending on the hardware.</p>
+<p><strong>Don't</strong> do this.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="p">;</span>
+
+<span class="c1">// May not evaluate to `true`!</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0.3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Instead, always perform a range comparison with an epsilon value. The larger the
+floating-point number (and the less precise the floating-point number), the
+larger the epsilon value should be.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">EPSILON</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">EPSILON</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0.3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">EPSILON</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://floating-point-gui.de/">floating-point-gui.de</a> for more
+information.</p>
+</section>
+<section id="discarding">
+<h2>Discarding<a class="headerlink" href="#discarding" title="Link to this heading"></a></h2>
+<p>Fragment, light, and custom functions (called from fragment or light) can use the
+<code class="docutils literal notranslate"><span class="pre">discard</span></code> keyword. If used, the fragment is discarded and nothing is written.</p>
+<p>Beware that <code class="docutils literal notranslate"><span class="pre">discard</span></code> has a performance cost when used, as it will prevent the
+depth prepass from being effective on any surfaces using the shader. Also, a
+discarded pixel still needs to be rendered in the vertex shader, which means a
+shader that uses <code class="docutils literal notranslate"><span class="pre">discard</span></code> on all of its pixels is still more expensive to
+render compared to not rendering any object in the first place.</p>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<p>It is possible to define functions in a Godot shader. They use the following
+syntax:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">ret_type</span><span class="w"> </span><span class="n">func_name</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ret_type</span><span class="p">;</span><span class="w"> </span><span class="c1">// if returning a value</span>
+<span class="p">}</span>
+
+<span class="c1">// a more specific example:</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">sum2</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can only use functions that have been defined above (higher in the editor)
+the function from which you are calling them. Redefining a function that has
+already been defined above (or is a built-in function name) will cause an error.</p>
+<p>Function arguments can have special qualifiers:</p>
+<ul class="simple">
+<li><p><strong>in</strong>: Means the argument is only for reading (default).</p></li>
+<li><p><strong>out</strong>: Means the argument is only for writing.</p></li>
+<li><p><strong>inout</strong>: Means the argument is fully passed via reference.</p></li>
+<li><p><strong>const</strong>: Means the argument is a constant and cannot be changed, may be
+combined with <strong>in</strong> qualifier.</p></li>
+</ul>
+<p>Example below:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">sum2</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="k">inout</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Function overloading is supported. You can define multiple functions with the same
+name, but different arguments. Note that <a class="reference internal" href="#casting">implicit casting</a> in overloaded
+function calls is not allowed, such as from <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">float</span></code> (<code class="docutils literal notranslate"><span class="pre">1</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>).</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">vec3</span><span class="w"> </span><span class="n">get_color</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mo">0</span><span class="p">,</span><span class="w"> </span><span class="mo">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Red color.</span>
+<span class="p">}</span>
+<span class="kt">vec3</span><span class="w"> </span><span class="n">get_color</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mo">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mo">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Green color.</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">vec3</span><span class="w"> </span><span class="n">red</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_color</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">vec3</span><span class="w"> </span><span class="n">green</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_color</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="varyings">
+<span id="doc-shading-language-varyings"></span><h2>Varyings<a class="headerlink" href="#varyings" title="Link to this heading"></a></h2>
+<p>To send data from the vertex to the fragment (or light) processor function, <em>varyings</em> are
+used. They are set for every primitive vertex in the <em>vertex processor</em>, and the
+value is interpolated for every pixel in the <em>fragment processor</em>.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+
+<span class="k">varying</span><span class="w"> </span><span class="kt">vec3</span><span class="w"> </span><span class="n">some_color</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">vertex</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">some_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NORMAL</span><span class="p">;</span><span class="w"> </span><span class="c1">// Make the normal the color.</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ALBEDO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">some_color</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">light</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">DIFFUSE_LIGHT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">some_color</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="c1">// optionally</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Varying can also be an array:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+
+<span class="k">varying</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">var_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">vertex</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">var_arr</span><span class="p">[</span><span class="mo">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">var_arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ALBEDO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="n">var_arr</span><span class="p">[</span><span class="mo">0</span><span class="p">],</span><span class="w"> </span><span class="n">var_arr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">var_arr</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span><span class="w"> </span><span class="c1">// red color</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It's also possible to send data from <em>fragment</em> to <em>light</em> processors using <em>varying</em> keyword. To do so you can assign it in the <em>fragment</em> and later use it in the <em>light</em> function.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+
+<span class="k">varying</span><span class="w"> </span><span class="kt">vec3</span><span class="w"> </span><span class="n">some_light</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">some_light</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ALBEDO</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">100.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// Make a shining light.</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">light</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">DIFFUSE_LIGHT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">some_light</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that varying may not be assigned in custom functions or a <em>light processor</em> function like:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+
+<span class="k">varying</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">test</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">foo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// Error.</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">vertex</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">light</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// Error too.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This limitation was introduced to prevent incorrect usage before initialization.</p>
+</section>
+<section id="interpolation-qualifiers">
+<h2>Interpolation qualifiers<a class="headerlink" href="#interpolation-qualifiers" title="Link to this heading"></a></h2>
+<p>Certain values are interpolated during the shading pipeline. You can modify how
+these interpolations are done by using <em>interpolation qualifiers</em>.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+
+<span class="k">varying</span><span class="w"> </span><span class="k">flat</span><span class="w"> </span><span class="kt">vec3</span><span class="w"> </span><span class="n">our_color</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">vertex</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">our_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COLOR</span><span class="p">.</span><span class="n">rgb</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ALBEDO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">our_color</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There are two possible interpolation qualifiers:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Qualifier</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>flat</strong></p></td>
+<td><p>The value is not interpolated.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>smooth</strong></p></td>
+<td><p>The value is interpolated in a perspective-correct fashion. This is the default.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uniforms">
+<span id="doc-shading-language-uniforms"></span><h2>Uniforms<a class="headerlink" href="#uniforms" title="Link to this heading"></a></h2>
+<p>Passing values to shaders is possible with <em>uniforms</em>, which are defined in the
+global scope of the shader, outside of functions. When a shader is later
+assigned to a material, the uniforms will appear as editable parameters in the
+material's inspector. Uniforms can't be written from within the shader. Any
+<a class="reference internal" href="#doc-shading-language-data-types"><span class="std std-ref">data type</span></a> except for <code class="docutils literal notranslate"><span class="pre">void</span></code> can be a uniform.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+
+<span class="k">uniform</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">some_value</span><span class="p">;</span>
+
+<span class="k">uniform</span><span class="w"> </span><span class="kt">vec3</span><span class="w"> </span><span class="n">colors</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>You can set uniforms in the editor in the material's inspector. Alternately, you
+can set them <a class="reference internal" href="#doc-shading-language-setting-uniforms-from-code"><span class="std std-ref">from code</span></a>.</p>
+<section id="uniform-hints">
+<h3>Uniform hints<a class="headerlink" href="#uniform-hints" title="Link to this heading"></a></h3>
+<p>Godot provides optional uniform hints to make the compiler understand what the
+uniform is used for, and how the editor should allow users to modify it.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+
+<span class="k">uniform</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">source_color</span><span class="p">;</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_range</span><span class="p">(</span><span class="mo">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">other_color</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">source_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Default values go after the hint.</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">source_color</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Uniforms can also be assigned default values:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+
+<span class="k">uniform</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">some_vector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">some_color</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">source_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that when adding a default value and a hint, the default value goes after the hint.</p>
+<p>Full list of uniform hints below:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Hint</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>vec3, vec4</strong></p></td>
+<td><p>source_color</p></td>
+<td><p>Used as color.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>int</strong></p></td>
+<td><p>hint_enum(&quot;String1&quot;, &quot;String2&quot;)</p></td>
+<td><p>Displays int input as a dropdown widget in the editor.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>int, float</strong></p></td>
+<td><p>hint_range(min, max[, step])</p></td>
+<td><p>Restricted to values in a range (with min/max/step).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sampler2D</strong></p></td>
+<td><p>source_color</p></td>
+<td><p>Used as albedo color.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sampler2D</strong></p></td>
+<td><p>hint_normal</p></td>
+<td><p>Used as normalmap.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sampler2D</strong></p></td>
+<td><p>hint_default_white</p></td>
+<td><p>As value or albedo color, default to opaque white.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sampler2D</strong></p></td>
+<td><p>hint_default_black</p></td>
+<td><p>As value or albedo color, default to opaque black.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sampler2D</strong></p></td>
+<td><p>hint_default_transparent</p></td>
+<td><p>As value or albedo color, default to transparent black.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sampler2D</strong></p></td>
+<td><p>hint_anisotropy</p></td>
+<td><p>As flowmap, default to right.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sampler2D</strong></p></td>
+<td><p>hint_roughness[_r, _g, _b, _a, _normal, _gray]</p></td>
+<td><p>Used for roughness limiter on import (attempts reducing specular aliasing).
+<code class="docutils literal notranslate"><span class="pre">_normal</span></code> is a normal map that guides the roughness limiter,
+with roughness increasing in areas that have high-frequency detail.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sampler2D</strong></p></td>
+<td><p>filter[_nearest, _linear][_mipmap][_anisotropic]</p></td>
+<td><p>Enabled specified texture filtering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sampler2D</strong></p></td>
+<td><p>repeat[_enable, _disable]</p></td>
+<td><p>Enabled texture repeating.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sampler2D</strong></p></td>
+<td><p>hint_screen_texture</p></td>
+<td><p>Texture is the screen texture.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sampler2D</strong></p></td>
+<td><p>hint_depth_texture</p></td>
+<td><p>Texture is the depth texture.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sampler2D</strong></p></td>
+<td><p>hint_normal_roughness_texture</p></td>
+<td><p>Texture is the normal roughness texture (only supported in Forward+).</p></td>
+</tr>
+</tbody>
+</table>
+<section id="using-hint-enum">
+<h4>Using <code class="docutils literal notranslate"><span class="pre">hint_enum</span></code><a class="headerlink" href="#using-hint-enum" title="Link to this heading"></a></h4>
+<p>You can access <code class="docutils literal notranslate"><span class="pre">int</span></code> values as a readable dropdown widget using the <code class="docutils literal notranslate"><span class="pre">hint_enum</span></code> uniform:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">uniform</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="n">noise_type</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nf">hint_enum</span><span class="p">(</span><span class="s2">&quot;OpenSimplex2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Cellular&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Perlin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Value&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>You can assign explicit values to the <code class="docutils literal notranslate"><span class="pre">hint_enum</span></code> uniform using colon syntax similar to GDScript:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">uniform</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="n">character_speed</span><span class="p">:</span><span class="w"> </span><span class="nf">hint_enum</span><span class="p">(</span><span class="s2">&quot;Slow:30&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Average:60&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Very Fast:200&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The value will be stored as an integer, corresponding to the index of the selected
+option (i.e. <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>, or <code class="docutils literal notranslate"><span class="pre">2</span></code>) or the value assigned by colon syntax
+(i.e. <code class="docutils literal notranslate"><span class="pre">30</span></code>, <code class="docutils literal notranslate"><span class="pre">60</span></code>, or <code class="docutils literal notranslate"><span class="pre">200</span></code>). When setting the value with
+<code class="docutils literal notranslate"><span class="pre">set_shader_parameter()</span></code>, you must use the integer value, not the <code class="docutils literal notranslate"><span class="pre">String</span></code>
+name.</p>
+</section>
+<section id="using-source-color">
+<h4>Using <code class="docutils literal notranslate"><span class="pre">source_color</span></code><a class="headerlink" href="#using-source-color" title="Link to this heading"></a></h4>
+<p>Any texture which contains <em>sRGB color data</em> requires a <code class="docutils literal notranslate"><span class="pre">source_color</span></code> hint
+in order to be correctly sampled. This is because Godot renders in linear
+color space, but some textures contain sRGB color data. If this hint is not
+used, the texture will appear washed out.</p>
+<p>Albedo and color textures should typically have a <code class="docutils literal notranslate"><span class="pre">source_color</span></code> hint. Normal,
+roughness, metallic, and height textures typically do not need a <code class="docutils literal notranslate"><span class="pre">source_color</span></code>
+hint.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">source_color</span></code> hint is required in the Forward+ and Mobile renderers,
+and in <code class="docutils literal notranslate"><span class="pre">canvas_item</span></code> shaders when <a class="reference internal" href="../../../classes/class_projectsettings.html#class-projectsettings-property-rendering-viewport-hdr-2d"><span class="std std-ref">HDR 2D</span></a>
+is enabled. The <code class="docutils literal notranslate"><span class="pre">source_color</span></code> hint is optional for the Compatibility renderer,
+and for <code class="docutils literal notranslate"><span class="pre">canvas_item</span></code> shaders if <code class="docutils literal notranslate"><span class="pre">HDR</span> <span class="pre">2D</span></code> is disabled. However, it is
+recommended to always use the <code class="docutils literal notranslate"><span class="pre">source_color</span></code> hint, because it works even
+if you change renderers or disable <code class="docutils literal notranslate"><span class="pre">HDR</span> <span class="pre">2D</span></code>.</p>
+</section>
+</section>
+<section id="uniform-groups">
+<h3>Uniform groups<a class="headerlink" href="#uniform-groups" title="Link to this heading"></a></h3>
+<p>To group multiple uniforms in a section in the inspector, you can use a
+<code class="docutils literal notranslate"><span class="pre">group_uniform</span></code> keyword like this:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">group_uniforms</span><span class="w"> </span><span class="n">MyGroup</span><span class="p">;</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">test</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>You can close the group by using:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">group_uniforms</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The syntax also supports subgroups (it's not mandatory to declare the base group before this):</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">group_uniforms</span><span class="w"> </span><span class="n">MyGroup</span><span class="p">.</span><span class="n">MySubgroup</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="global-uniforms">
+<span id="doc-shading-language-global-uniforms"></span><h3>Global uniforms<a class="headerlink" href="#global-uniforms" title="Link to this heading"></a></h3>
+<p>Sometimes, you want to modify a parameter in many different shaders at once.
+With a regular uniform, this takes a lot of work as all these shaders need to be
+tracked and the uniform needs to be set for each of them. Global uniforms allow
+you to create and update uniforms that will be available in all shaders, in
+every shader type (<code class="docutils literal notranslate"><span class="pre">canvas_item</span></code>, <code class="docutils literal notranslate"><span class="pre">spatial</span></code>, <code class="docutils literal notranslate"><span class="pre">particles</span></code>, <code class="docutils literal notranslate"><span class="pre">sky</span></code> and
+<code class="docutils literal notranslate"><span class="pre">fog</span></code>).</p>
+<p>Global uniforms are especially useful for environmental effects that affect many
+objects in a scene, like having foliage bend when the player is nearby, or having
+objects move with the wind.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>Global uniforms</em> are not the same as <em>global scope</em> for an individual
+shader. While regular uniforms are defined outside of shader functions and are
+therefore the global scope of the shader, global uniforms are global to all
+shaders in the entire project (but within each shader, are also in the global
+scope).</p>
+</div>
+<p>To create a global uniform, open the <strong>Project Settings</strong> then go to the
+<strong>Shader Globals</strong> tab. Specify a name for the uniform (case-sensitive) and a
+type, then click <strong>Add</strong> in the top-right corner of the dialog. You can then
+edit the value assigned to the uniform by clicking the value in the list of
+uniforms:</p>
+<figure class="align-center" id="id1">
+<img alt="Adding a global uniform in the Shader Globals tab of the Project Settings" src="../../../_images/shading_language_adding_global_uniforms.webp" />
+<figcaption>
+<p><span class="caption-text">Adding a global uniform in the Shader Globals tab of the Project Settings</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>After creating a global uniform, you can use it in a shader as follows:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">canvas_item</span><span class="p">;</span>
+
+<span class="n">global</span><span class="w"> </span><span class="k">uniform</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">my_color</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_color</span><span class="p">.</span><span class="n">rgb</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that the global uniform <em>must</em> exist in the Project Settings at the time
+the shader is saved, or compilation will fail. While you can assign a default
+value using <code class="docutils literal notranslate"><span class="pre">global</span> <span class="pre">uniform</span> <span class="pre">vec4</span> <span class="pre">my_color</span> <span class="pre">=</span> <span class="pre">...</span></code> in the shader code, it will
+be ignored as the global uniform must always be defined in the Project Settings
+anyway.</p>
+<p>To change the value of a global uniform at runtime, use the
+<a class="reference internal" href="../../../classes/class_renderingserver.html#class-renderingserver-method-global-shader-parameter-set"><span class="std std-ref">RenderingServer.global_shader_parameter_set</span></a>
+method in a script:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nb">RenderingServer</span><span class="o">.</span><span class="nf">global_shader_parameter_set</span><span class="p">(</span><span class="s2">&quot;my_color&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Assigning global uniform values can be done as many times as desired without
+impacting performance, as setting data doesn't require synchronization between
+the CPU and GPU.</p>
+<p>You can also add or remove global uniforms at runtime:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nb">RenderingServer</span><span class="o">.</span><span class="nf">global_shader_parameter_add</span><span class="p">(</span><span class="s2">&quot;my_color&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">RenderingServer</span><span class="o">.</span><span class="vi">GLOBAL_VAR_TYPE_COLOR</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">))</span>
+<span class="nb">RenderingServer</span><span class="o">.</span><span class="nf">global_shader_parameter_remove</span><span class="p">(</span><span class="s2">&quot;my_color&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Adding or removing global uniforms at runtime has a performance cost, although
+it's not as pronounced compared to getting global uniform values from a script
+(see the warning below).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>While you <em>can</em> query the value of a global uniform at runtime in a script
+using <code class="docutils literal notranslate"><span class="pre">RenderingServer.global_shader_parameter_get(&quot;uniform_name&quot;)</span></code>, this
+has a large performance penalty as the rendering thread needs to synchronize
+with the calling thread.</p>
+<p>Therefore, it's not recommended to read global shader uniform values
+continuously in a script. If you need to read values in a script after
+setting them, consider creating an <a class="reference internal" href="../../scripting/singletons_autoload.html#doc-singletons-autoload"><span class="std std-ref">autoload</span></a>
+where you store the values you need to query at the same time you're setting
+them as global uniforms.</p>
+</div>
+</section>
+<section id="per-instance-uniforms">
+<span id="doc-shading-language-per-instance-uniforms"></span><h3>Per-instance uniforms<a class="headerlink" href="#per-instance-uniforms" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Per-instance uniforms are available in both <code class="docutils literal notranslate"><span class="pre">canvas_item</span></code> (2D) and <code class="docutils literal notranslate"><span class="pre">spatial</span></code> (3D) shaders.</p>
+</div>
+<p>Sometimes, you want to modify a parameter on each node using the material. As an
+example, in a forest full of trees, when you want each tree to have a slightly
+different color that is editable by hand. Without per-instance uniforms, this
+requires creating a unique material for each tree (each with a slightly
+different hue). This makes material management more complex, and also has a
+performance overhead due to the scene requiring more unique material instances.
+Vertex colors could also be used here, but they'd require creating unique copies
+of the mesh for each different color, which also has a performance overhead.</p>
+<p>Per-instance uniforms are set on each GeometryInstance3D, rather than on each
+Material instance. Take this into account when working with meshes that have
+multiple materials assigned to them, or MultiMesh setups.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+
+<span class="c1">// Provide a hint to edit as a color. Optionally, a default value can be provided.</span>
+<span class="c1">// If no default value is provided, the type&#39;s default is used (e.g. opaque black for colors).</span>
+<span class="n">instance</span><span class="w"> </span><span class="k">uniform</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">my_color</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">source_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ALBEDO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_color</span><span class="p">.</span><span class="n">rgb</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>After saving the shader, you can change the per-instance uniform's value using
+the inspector:</p>
+<figure class="align-center" id="id2">
+<img alt="Setting a per-instance uniform's value in the GeometryInstance3D section of the inspector" src="../../../_images/shading_language_per_instance_uniforms_inspector.webp" />
+<figcaption>
+<p><span class="caption-text">Setting a per-instance uniform's value in the GeometryInstance3D section of the inspector</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Per-instance uniform values can also be set at runtime using
+<a class="reference internal" href="../../../classes/class_geometryinstance3d.html#class-geometryinstance3d-method-set-instance-shader-parameter"><span class="std std-ref">set_instance_shader_parameter</span></a>
+method on a node that inherits from <a class="reference internal" href="../../../classes/class_geometryinstance3d.html#class-geometryinstance3d"><span class="std std-ref">GeometryInstance3D</span></a>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="sx">$MeshInstance3D</span><span class="o">.</span><span class="nf">set_instance_shader_parameter</span><span class="p">(</span><span class="s2">&quot;my_color&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>When using per-instance uniforms, there are some restrictions you should be aware of:</p>
+<ul class="simple">
+<li><p><strong>Per-instance uniforms do not support textures or arrays</strong>, only regular scalar and
+vector types. As a workaround, you can pass a texture array as a regular uniform,
+then pass the index of the texture to be drawn using a per-instance uniform.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<blockquote>
+<div><p>In GLSL versions before 4.0 (i.e. GLSL 3.3 and lower), you cannot directly index
+a texture array using a per-instance uniform, as sampler arrays can only be indexed by
+compile-time constant expressions. This affects shaders compiled with the Compatibility
+renderer.</p>
+<p>If you are affected, use the <code class="docutils literal notranslate"><span class="pre">switch</span></code> statement to select the texture:</p>
+</div></blockquote>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">texture_array</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="n">instance</span><span class="w"> </span><span class="k">uniform</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">texture_index</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">vec4</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">texture_index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mo">0</span><span class="o">:</span>
+<span class="w">            </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">texture_array</span><span class="p">[</span><span class="mo">0</span><span class="p">],</span><span class="w"> </span><span class="n">UV</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span>
+<span class="w">            </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">texture_array</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">UV</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><p>There is a practical maximum limit of 16 instance uniforms per shader.</p></li>
+<li><p>If your mesh uses multiple materials, the parameters for the first mesh
+material found will &quot;win&quot; over the subsequent ones, unless they have the same
+name, index <em>and</em> type. In this case, all parameters are affected correctly.</p></li>
+<li><p>If you run into the above situation, you can avoid clashes by manually
+specifying the index (0-15) of the instance uniform by using the
+<code class="docutils literal notranslate"><span class="pre">instance_index</span></code> hint:</p></li>
+</ul>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">instance</span><span class="w"> </span><span class="k">uniform</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">my_color</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">source_color</span><span class="p">,</span><span class="w"> </span><span class="n">instance_index</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="setting-uniforms-from-code">
+<span id="doc-shading-language-setting-uniforms-from-code"></span><h3>Setting uniforms from code<a class="headerlink" href="#setting-uniforms-from-code" title="Link to this heading"></a></h3>
+<p>You can set uniforms from GDScript using the
+<a class="reference internal" href="../../../classes/class_shadermaterial.html#class-shadermaterial-method-set-shader-parameter"><span class="std std-ref">set_shader_parameter()</span></a>
+method:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">material</span><span class="o">.</span><span class="nf">set_shader_parameter</span><span class="p">(</span><span class="s2">&quot;some_value&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">some_value</span><span class="p">)</span>
+
+<span class="n">material</span><span class="o">.</span><span class="nf">set_shader_parameter</span><span class="p">(</span><span class="s2">&quot;colors&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)])</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The first argument to <code class="docutils literal notranslate"><span class="pre">set_shader_parameter()</span></code> is the name of the uniform
+in the shader. It must match <em>exactly</em> to the name of the uniform in
+the shader or else it will not be recognized.</p>
+</div>
+<p>GDScript uses different variable types than GLSL does, so when passing variables
+from GDScript to shaders, Godot converts the type automatically. Below is a
+table of the corresponding types:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>GLSL type</p></th>
+<th class="head"><p>GDScript type</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>bool</strong></p></td>
+<td><p><strong>bool</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>bvec2</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td><p>Bitwise packed int where bit 0 (LSB) corresponds to x.</p>
+<p>For example, a bvec2 of (bx, by) could be created in
+the following way:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">bvec2_input</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nb nb-Type">int</span><span class="p">(</span><span class="n">bx</span><span class="p">))</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="nb nb-Type">int</span><span class="p">(</span><span class="n">by</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><strong>bvec3</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td><p>Bitwise packed int where bit 0 (LSB) corresponds to x.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>bvec4</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td><p>Bitwise packed int where bit 0 (LSB) corresponds to x.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>int</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>ivec2</strong></p></td>
+<td><p><strong>Vector2i</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>ivec3</strong></p></td>
+<td><p><strong>Vector3i</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>ivec4</strong></p></td>
+<td><p><strong>Vector4i</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>uint</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>uvec2</strong></p></td>
+<td><p><strong>Vector2i</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>uvec3</strong></p></td>
+<td><p><strong>Vector3i</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>uvec4</strong></p></td>
+<td><p><strong>Vector4i</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>float</strong></p></td>
+<td><p><strong>float</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>vec2</strong></p></td>
+<td><p><strong>Vector2</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>vec3</strong></p></td>
+<td><p><strong>Vector3</strong>, <strong>Color</strong></p></td>
+<td><p>When Color is used, it will be interpreted as (r, g, b).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>vec4</strong></p></td>
+<td><p><strong>Vector4</strong>, <strong>Color</strong>,
+<strong>Rect2</strong>, <strong>Plane</strong>,
+<strong>Quaternion</strong></p></td>
+<td><p>When Color is used, it will be interpreted as (r, g, b, a).</p>
+<p>When Rect2 is used, it will be interpreted as
+(position.x, position.y, size.x, size.y).</p>
+<p>When Plane is used it will be interpreted as
+(normal.x, normal.y, normal.z, d).</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><strong>mat2</strong></p></td>
+<td><p><strong>Transform2D</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>mat3</strong></p></td>
+<td><p><strong>Basis</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>mat4</strong></p></td>
+<td><p><strong>Projection</strong>,
+<strong>Transform3D</strong></p></td>
+<td><p>When a Transform3D is used, the w Vector is set to the
+identity.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sampler2D</strong></p></td>
+<td><p><strong>Texture2D</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>isampler2D</strong></p></td>
+<td><p><strong>Texture2D</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>usampler2D</strong></p></td>
+<td><p><strong>Texture2D</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>sampler2DArray</strong></p></td>
+<td><p><strong>Texture2DArray</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>isampler2DArray</strong></p></td>
+<td><p><strong>Texture2DArray</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>usampler2DArray</strong></p></td>
+<td><p><strong>Texture2DArray</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sampler3D</strong></p></td>
+<td><p><strong>Texture3D</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>isampler3D</strong></p></td>
+<td><p><strong>Texture3D</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>usampler3D</strong></p></td>
+<td><p><strong>Texture3D</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>samplerCube</strong></p></td>
+<td><p><strong>Cubemap</strong></p></td>
+<td><p>See <a class="reference internal" href="../../assets_pipeline/importing_images.html#doc-importing-images-changing-import-type"><span class="std std-ref">Changing import type</span></a> for
+instructions on importing cubemaps for use in Godot.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>samplerCubeArray</strong></p></td>
+<td><p><strong>CubemapArray</strong></p></td>
+<td><p>Only supported in Forward+ and Mobile, not Compatibility.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>samplerExternalOES</strong></p></td>
+<td><p><strong>ExternalTexture</strong></p></td>
+<td><p>Only supported in Compatibility/Android platform.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be careful when setting shader uniforms from GDScript, since no error
+will be thrown if the type does not match. Your shader will just exhibit
+undefined behavior. Specifically, this includes setting a GDScript
+int/float (64 bit) into a Godot shader language int/float (32 bit).
+This may lead to unintended consequences in cases where high
+precision is required.</p>
+</div>
+</section>
+<section id="uniform-limits">
+<h3>Uniform limits<a class="headerlink" href="#uniform-limits" title="Link to this heading"></a></h3>
+<p>There is a limit to the total size of shader uniforms that you can use
+in a single shader. On most desktop platforms, this limit is <code class="docutils literal notranslate"><span class="pre">65536</span></code>
+bytes, or 4096 <code class="docutils literal notranslate"><span class="pre">vec4</span></code> uniforms. On mobile platforms, the limit is
+typically <code class="docutils literal notranslate"><span class="pre">16384</span></code> bytes, or 1024 <code class="docutils literal notranslate"><span class="pre">vec4</span></code> uniforms. Vector uniforms
+smaller than a <code class="docutils literal notranslate"><span class="pre">vec4</span></code>, such as <code class="docutils literal notranslate"><span class="pre">vec2</span></code> or <code class="docutils literal notranslate"><span class="pre">vec3</span></code>, are padded to
+the size of a <code class="docutils literal notranslate"><span class="pre">vec4</span></code>. Scalar uniforms such as <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>
+are not padded, and <code class="docutils literal notranslate"><span class="pre">bool</span></code> is padded to the size of an <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<p>Arrays count as the total size of their contents. If you need a uniform
+array that is larger than this limit, consider packing the data into a
+texture instead, since the <em>contents</em> of a texture do not count towards
+this limit, only the size of the sampler uniform.</p>
+</section>
+</section>
+<section id="built-in-variables">
+<h2>Built-in variables<a class="headerlink" href="#built-in-variables" title="Link to this heading"></a></h2>
+<p>A large number of built-in variables are available, like <code class="docutils literal notranslate"><span class="pre">UV</span></code>, <code class="docutils literal notranslate"><span class="pre">COLOR</span></code> and
+<code class="docutils literal notranslate"><span class="pre">VERTEX</span></code>. What variables are available depends on the type of shader
+(<code class="docutils literal notranslate"><span class="pre">spatial</span></code>, <code class="docutils literal notranslate"><span class="pre">canvas_item</span></code>, <code class="docutils literal notranslate"><span class="pre">particle</span></code>, etc) and the
+function used (<code class="docutils literal notranslate"><span class="pre">vertex</span></code>, <code class="docutils literal notranslate"><span class="pre">fragment</span></code>, <code class="docutils literal notranslate"><span class="pre">light</span></code>, <code class="docutils literal notranslate"><span class="pre">start</span></code>, <code class="docutils literal notranslate"><span class="pre">process</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sky</span></code>, or <code class="docutils literal notranslate"><span class="pre">fog</span></code>). For a list of the built-in variables that are available,
+please see the corresponding pages:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="spatial_shader.html#doc-spatial-shader"><span class="std std-ref">Spatial shaders</span></a></p></li>
+<li><p><a class="reference internal" href="canvas_item_shader.html#doc-canvas-item-shader"><span class="std std-ref">Canvas item shaders</span></a></p></li>
+<li><p><a class="reference internal" href="particle_shader.html#doc-particle-shader"><span class="std std-ref">Particle shaders</span></a></p></li>
+<li><p><a class="reference internal" href="sky_shader.html#doc-sky-shader"><span class="std std-ref">Sky shaders</span></a></p></li>
+<li><p><a class="reference internal" href="fog_shader.html#doc-fog-shader"><span class="std std-ref">Fog shaders</span></a></p></li>
+</ul>
+</section>
+<section id="built-in-functions">
+<h2>Built-in functions<a class="headerlink" href="#built-in-functions" title="Link to this heading"></a></h2>
+<p>A large number of built-in functions are supported, conforming to GLSL ES 3.0.
+See the <a class="reference internal" href="shader_functions.html#doc-shader-functions"><span class="std std-ref">Built-in functions</span></a> page for details.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Shading reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="shader_functions.html" class="btn btn-neutral float-right" title="Built-in shader functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

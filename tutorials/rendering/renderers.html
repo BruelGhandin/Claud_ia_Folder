@@ -1,0 +1,867 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Overview of renderers" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/rendering/renderers.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: Godot 4 includes three renderers: Forward+. The most advanced renderer, suited for desktop platforms only. Used by default on desktop platforms. This renderer uses Vulkan, Direct3D 12..." />
+<meta name="description" content="Introduction: Godot 4 includes three renderers: Forward+. The most advanced renderer, suited for desktop platforms only. Used by default on desktop platforms. This renderer uses Vulkan, Direct3D 12..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Overview of renderers &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using Viewports" href="viewports.html" />
+    <link rel="prev" title="Rendering" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/rendering/renderers" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/rendering/renderers.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Rendering</a></li>
+      <li class="breadcrumb-item active">Overview of renderers</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/rendering/renderers.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="overview-of-renderers">
+<span id="doc-renderers"></span><h1>Overview of renderers<a class="headerlink" href="#overview-of-renderers" title="Link to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>This page gives an overview of Godot's renderers, focusing on the differences
+between their rendering features. For more technical details on the renderers,
+see <a class="reference internal" href="../../engine_details/architecture/internal_rendering_architecture.html#doc-internal-rendering-architecture"><span class="std std-ref">Internal rendering architecture</span></a>.</p>
+</div>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Godot 4 includes three renderers:</p>
+<ul class="simple">
+<li><p><strong>Forward+</strong>. The most advanced renderer, suited for desktop platforms only.
+Used by default on desktop platforms. This renderer uses <strong>Vulkan</strong>, <strong>Direct3D 12</strong>,
+or <strong>Metal</strong> as the rendering driver, and it uses the <strong>RenderingDevice</strong> backend.</p></li>
+<li><p><strong>Mobile</strong>. Fewer features, but renders simple scenes faster. Suited for mobile
+and desktop platforms. Used by default on mobile platforms. This renderer uses
+<strong>Vulkan</strong>, <strong>Direct3D 12</strong>, or <strong>Metal</strong> as the rendering driver, and it uses
+the <strong>RenderingDevice</strong> backend.</p></li>
+<li><p><strong>Compatibility</strong>, sometimes called <strong>GL Compatibility</strong>. The least advanced
+renderer, suited for low-end desktop and mobile platforms. Used by default on
+the web platform. This renderer uses <strong>OpenGL</strong> as the rendering driver.</p></li>
+</ul>
+<section id="renderers-rendering-drivers-and-renderingdevice">
+<h3>Renderers, rendering drivers, and RenderingDevice<a class="headerlink" href="#renderers-rendering-drivers-and-renderingdevice" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id1">
+<img alt="Diagram of rendering layers. The Compatibility renderer runs on the OpenGL driver. The Forward+ and Mobile renderers run on RenderingDevice, which can use Vulkan, Direct3D 12, or Metal as a rendering driver." src="../../_images/renderers_rendering_layers.webp" />
+<figcaption>
+<p><span class="caption-text">Godot's rendering abstraction layers.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The <em>renderer</em>, or <em>rendering method</em>, determines which features are available.
+Most of the time, this is the only thing you need to think about. Godot's renderers
+are <strong>Forward+</strong>, <strong>Mobile</strong>, and <strong>Compatibility</strong>.</p>
+<p>The <em>rendering driver</em> tells the GPU what to do, using a graphics API. Godot can
+use the <strong>OpenGL</strong>, <strong>Vulkan</strong>, <strong>Direct3D 12</strong>, and <strong>Metal</strong> rendering drivers.
+Not every GPU supports every rendering driver, and therefore not every GPU supports
+all renderers. Vulkan, Direct3D 12, and Metal are modern, low-level graphics APIs,
+and require newer hardware. OpenGL is an older graphics API that runs on most hardware.</p>
+<p>RenderingDevice is a <em>rendering backend</em>, an abstraction layer between the renderer
+and the rendering driver. It is used by the Forward+ and Mobile renderers, and
+these renderers are sometimes called &quot;RenderingDevice-based renderers&quot;.</p>
+</section>
+</section>
+<section id="choosing-a-renderer">
+<h2>Choosing a renderer<a class="headerlink" href="#choosing-a-renderer" title="Link to this heading"></a></h2>
+<p>Choosing a renderer is a complex question, and depends on your hardware and the
+which platforms you are developing for. As a starting point:</p>
+<p>Choose <strong>Forward+</strong> if:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>You are developing for desktop.</p></li>
+<li><p>You have relatively new hardware which supports Vulkan, Direct3D 12, or Metal.</p></li>
+<li><p>You are developing a 3D game.</p></li>
+<li><p>You want to use the most advanced rendering features.</p></li>
+</ul>
+</div></blockquote>
+<p>Choose <strong>Mobile</strong> if:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>You are developing for newer mobile devices, desktop XR, standalone XR, or
+desktop.</p></li>
+<li><p>You have relatively new hardware which supports Vulkan, Direct3D 12, or Metal.</p></li>
+<li><p>You are developing a 3D game.</p></li>
+<li><p>You want to use advanced rendering features, subject to the limitations
+of mobile hardware.</p></li>
+</ul>
+</div></blockquote>
+<p>Choose <strong>Compatibility</strong> if:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>You are developing for older mobile devices, or older desktop devices.
+The Compatibility renderer supports the widest range of hardware.</p></li>
+<li><p>You are developing for web. In this case, Compatibility is the only choice.</p></li>
+<li><p>You have older hardware which does not support Vulkan. In this case,
+Compatibility is the only choice.</p></li>
+<li><p>You are developing a 2D game, or a 3D game which does not need advanced
+rendering features.</p></li>
+<li><p>You want the best performance possible on all devices and don't need advanced
+rendering features.</p></li>
+</ul>
+</div></blockquote>
+<p>Keep in mind every game is unique, and this is only a starting point. For example,
+you might choose to use the Compatibility renderer even though you have the latest
+GPU, so you can support the widest range of hardware. Or you might want to use the
+Forward+ renderer for a 2D game, so you can use advanced features like compute shaders.</p>
+<section id="switching-between-renderers">
+<h3>Switching between renderers<a class="headerlink" href="#switching-between-renderers" title="Link to this heading"></a></h3>
+<p>In the editor, you can always switch between renderers by clicking on the renderer
+name in the upper-right corner of the editor.</p>
+<p>Switching between renderers may require some manual tweaks to your scene, lighting,
+and environment, since each renderer is different. In general, switching between
+the Mobile and Forward+ renderers will require fewer adjustments than switching
+between the Compatibility renderer and the Forward+ or Mobile renderers.</p>
+<p>Since Godot 4.4, when using Forward+ or Mobile, if Vulkan is not supported, the
+engine will fall back to Direct3D 12 and vice versa. If the attempted fallback
+driver is not supported either, the engine will then fall back to Compatibility
+when the RenderingDevice backend is not supported. This allows the project to run
+anyway, but it may look different than the intended appearance due to the more
+limited renderer. This behavior can be disabled in the project settings by unchecking
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-rendering-rendering-device-fallback-to-opengl3"><span class="std std-ref">Rendering &gt; Rendering Device &gt; Fallback to OpenGL 3</span></a>.</p>
+</section>
+</section>
+<section id="feature-comparison">
+<h2>Feature comparison<a class="headerlink" href="#feature-comparison" title="Link to this heading"></a></h2>
+<p>This is not a complete list of the features of each renderer. If a feature is
+not listed here, it is available in all renderers, though it may be much faster
+on some renderers. For a list of <em>all</em> features in Godot, see <a class="reference internal" href="../../about/list_of_features.html#doc-list-of-features"><span class="std std-ref">List of features</span></a>.</p>
+<p>Hardware with RenderingDevice support is hardware which can run Vulkan, Direct3D
+12, or Metal.</p>
+<section id="overall-comparison">
+<h3>Overall comparison<a class="headerlink" href="#overall-comparison" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Compatibility</p></th>
+<th class="head"><p>Mobile</p></th>
+<th class="head"><p>Forward+</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Required</strong>
+<strong>hardware</strong></p></td>
+<td><p>Older or low-end.</p></td>
+<td><p>Newer or high-end.
+Requires Vulkan, Direct3D
+12, or Metal support.</p></td>
+<td><p>Newer or high-end.
+Requires Vulkan, Direct3D
+12, or Metal support.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runs on new hardware</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>✔️ Yes.</p></td>
+</tr>
+<tr class="row-even"><td><p>Runs on old and
+low-end hardware</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>✔️ Yes, but slower than
+Compatibility.</p></td>
+<td><p>✔️ Yes, but slowest of
+all renderers.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runs on hardware
+without
+RenderingDevice
+support</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>❌ No.</p></td>
+<td><p>❌ No.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Target platforms</strong></p></td>
+<td><p>Mobile, low-end desktop,
+web.</p></td>
+<td><p>Mobile, desktop.</p></td>
+<td><p>Desktop.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Desktop</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>✔️ Yes.</p></td>
+</tr>
+<tr class="row-even"><td><p>Mobile</p></td>
+<td><p>✔️ Yes (low-end).</p></td>
+<td><p>✔️ Yes (high-end).</p></td>
+<td><p>⚠️ Supported, but poorly
+optimized. Use Mobile or
+Compatibility instead.</p></td>
+</tr>
+<tr class="row-odd"><td><p>XR</p></td>
+<td><p>⚠️ Supported, but not
+recommended. Use Mobile
+instead.</p></td>
+<td><p>✔️ Yes. Recommended for
+desktop and standalone
+headsets.</p></td>
+<td><p>⚠️ Supported, but poorly
+optimized. Use Mobile or
+Compatibility instead.</p></td>
+</tr>
+<tr class="row-even"><td><p>Web</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>❌ No.</p></td>
+<td><p>❌ No.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2D Games</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>✔️ Yes, but
+Compatibility is usually
+good enough for 2D.</p></td>
+<td><p>✔️ Yes, but
+Compatibility is usually
+good enough for 2D.</p></td>
+</tr>
+<tr class="row-even"><td><p>3D Games</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>✔️ Yes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Feature set</strong></p></td>
+<td><p>2D and core 3D features.</p></td>
+<td><p>Most rendering features.</p></td>
+<td><p>All rendering features.</p></td>
+</tr>
+<tr class="row-even"><td><p>2D rendering
+features</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>✔️ Yes.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Core 3D rendering
+features</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>✔️ Yes.</p></td>
+<td><p>✔️ Yes.</p></td>
+</tr>
+<tr class="row-even"><td><p>Advanced
+rendering features</p></td>
+<td><p>❌ No.</p></td>
+<td><p>⚠️ Yes, limited by
+mobile hardware.</p></td>
+<td><p>✔️ Yes. All rendering
+features are supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>New features</p></td>
+<td><p>⚠️ Some new rendering
+features are added to
+Compatibility. Features
+are added after Mobile
+and Forward+.</p></td>
+<td><p>✔️ Most new rendering
+features are added to
+Mobile. Mobile usually
+gets new features as
+Forward+ does.</p></td>
+<td><p>✔️ All new features are
+added to Forward+. As the
+focus of new development,
+Forward+ gets features
+first.</p></td>
+</tr>
+<tr class="row-even"><td><p>Rendering cost</p></td>
+<td><p>Low base cost, but
+high scaling cost.</p></td>
+<td><p>Medium base cost, and
+medium scaling cost.</p></td>
+<td><p>Highest base cost, and
+low scaling cost.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rendering driver</p></td>
+<td><p>OpenGL.</p></td>
+<td><p>Vulkan, Direct3D 12, or
+Metal.</p></td>
+<td><p>Vulkan, Direct3D 12, or
+Metal.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lights-and-shadows">
+<h3>Lights and shadows<a class="headerlink" href="#lights-and-shadows" title="Link to this heading"></a></h3>
+<p>See <a class="reference internal" href="../3d/lights_and_shadows.html#doc-lights-and-shadows"><span class="std std-ref">3D lights and shadows</span></a> for more information.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Compatibility</p></th>
+<th class="head"><p>Mobile</p></th>
+<th class="head"><p>Forward+</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Lighting approach</p></td>
+<td><p>Forward single-pass.
+Lights with shadows use
+a multi-pass approach and
+less accurate blending.</p></td>
+<td><p>Forward single-pass.</p></td>
+<td><p>Clustered forward.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Maximum
+OmniLights</p></td>
+<td><p>8 per mesh. Can be
+increased.</p></td>
+<td><p>8 per mesh, 256 per view.</p></td>
+<td><p>512 per cluster. Can be
+increased.</p></td>
+</tr>
+<tr class="row-even"><td><p>Maximum
+SpotLights</p></td>
+<td><p>8 per mesh. Can be
+increased.</p></td>
+<td><p>8 per mesh, 256 per view.</p></td>
+<td><p>512 per cluster. Can be
+increased.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Maximum
+DirectionalLights</p></td>
+<td><p>8</p></td>
+<td><p>8</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>PCSS for
+OmniLight and SpotLight</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PCSS for
+DirectionalLight</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>Light projector
+textures</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="global-illumination">
+<h3>Global Illumination<a class="headerlink" href="#global-illumination" title="Link to this heading"></a></h3>
+<p>See <a class="reference internal" href="../3d/global_illumination/introduction_to_global_illumination.html#doc-introduction-to-global-illumination"><span class="std std-ref">Introduction to global illumination</span></a> for more information.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Compatibility</p></th>
+<th class="head"><p>Mobile</p></th>
+<th class="head"><p>Forward+</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ReflectionProbe</p></td>
+<td><p>✔️ Supported, 2 per
+mesh.</p></td>
+<td><p>✔️ Supported, 8 per
+mesh.</p></td>
+<td><p>✔️ Supported, unlimited.</p></td>
+</tr>
+<tr class="row-odd"><td><p>LightmapGI</p></td>
+<td><p>⚠️ Rendering of baked
+lightmaps is supported.
+Baking requires hardware
+with RenderingDevice
+support.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>VoxelGI</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Screen-Space
+Indirect Lighting (SSIL)</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>Signed Distance Field
+Global Illumination
+(SDFGI)</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="environment-and-post-processing">
+<h3>Environment and post-processing<a class="headerlink" href="#environment-and-post-processing" title="Link to this heading"></a></h3>
+<p>See <a class="reference internal" href="../3d/environment_and_post_processing.html#doc-environment-and-post-processing"><span class="std std-ref">Environment and post-processing</span></a> for more information.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Compatibility</p></th>
+<th class="head"><p>Mobile</p></th>
+<th class="head"><p>Forward+</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fog (Depth and Height)</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Volumetric Fog</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>Tonemapping</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Screen-Space Reflections</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>Screen-Space Ambient
+Occlusion (SSAO)</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Screen-Space
+Indirect Lighting (SSIL)</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>Signed Distance Field
+Global Illumination
+(SDFGI)</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Glow</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>Adjustments</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Custom post-processing
+with fullscreen quad</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>Custom post-processing
+with CompositorEffects</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="antialiasing">
+<h3>Antialiasing<a class="headerlink" href="#antialiasing" title="Link to this heading"></a></h3>
+<p>See <a class="reference internal" href="../3d/3d_antialiasing.html#doc-3d-antialiasing"><span class="std std-ref">3D antialiasing</span></a> for more information.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Compatibility</p></th>
+<th class="head"><p>Mobile</p></th>
+<th class="head"><p>Forward+</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MSAA 3D</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MSAA 2D</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>TAA</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>FSR2</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>FXAA</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>SMAA</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>SSAA</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Screen-space
+roughness limiter</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="standardmaterial-features">
+<h3>StandardMaterial features<a class="headerlink" href="#standardmaterial-features" title="Link to this heading"></a></h3>
+<p>See <a class="reference internal" href="../3d/standard_material_3d.html#doc-standard-material-3d"><span class="std std-ref">Standard Material 3D and ORM Material 3D</span></a> for more information.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Compatibility</p></th>
+<th class="head"><p>Mobile</p></th>
+<th class="head"><p>Forward+</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Sub-surface scattering</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="shader-features">
+<h3>Shader features<a class="headerlink" href="#shader-features" title="Link to this heading"></a></h3>
+<p>See <a class="reference internal" href="../shaders/shader_reference/index.html#doc-shading-reference"><span class="std std-ref">Shading reference</span></a> for more information.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Compatibility</p></th>
+<th class="head"><p>Mobile</p></th>
+<th class="head"><p>Forward+</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Screen texture</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Depth texture</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>Normal/Roughness buffer</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Compute shaders</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>⚠️ Supported, but comes
+with a performance
+penalty on older devices.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="other-features">
+<h3>Other features<a class="headerlink" href="#other-features" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Compatibility</p></th>
+<th class="head"><p>Mobile</p></th>
+<th class="head"><p>Forward+</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Color precision</p></td>
+<td><p>RGBA8. Low dynamic range,
+medium precision.</p></td>
+<td><p>RGB10A2. Medium dynamic
+range, low precision.
+RGBA16F if HDR 2D is
+enabled.</p></td>
+<td><p>RGBA16F. High dynamic
+range, good precision.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Depth precision</p></td>
+<td><p>24-bit without reverse Z.
+Medium precision.</p></td>
+<td><p>24-bit with reverse Z.
+Medium precision.</p></td>
+<td><p>32-bit with reverse Z.
+Good precision.</p></td>
+</tr>
+<tr class="row-even"><td><p>Debanding</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Variable rate
+shading</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>Decals</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Particle trails</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>Particle SDF collision</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Depth of field blur</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>Adaptive and Mailbox
+VSync modes</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2D HDR Viewport</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>HDR output</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p>RenderingDevice
+access</p></td>
+<td><p>❌ Not supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+<td><p>✔️ Supported.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Rendering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="viewports.html" class="btn btn-neutral float-right" title="Using Viewports" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

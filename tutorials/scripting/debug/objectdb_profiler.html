@@ -1,0 +1,425 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using the ObjectDB profiler" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/scripting/debug/objectdb_profiler.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Since Godot 4.6, there is a new ObjectDB Profiler tab in the Debugger bottom panel. This profiler allows you to take snapshots of the current state of the ObjectDB, which is the database that conta..." />
+<meta name="description" content="Since Godot 4.6, there is a new ObjectDB Profiler tab in the Debugger bottom panel. This profiler allows you to take snapshots of the current state of the ObjectDB, which is the database that conta..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using the ObjectDB profiler &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Custom performance monitors" href="custom_performance_monitors.html" />
+    <link rel="prev" title="The Profiler" href="the_profiler.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/scripting/debug/objectdb_profiler" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/scripting/debug/objectdb_profiler.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Scripting</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Debug</a></li>
+      <li class="breadcrumb-item active">Using the ObjectDB profiler</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/scripting/debug/objectdb_profiler.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-the-objectdb-profiler">
+<span id="doc-objectdb-profiler"></span><h1>Using the ObjectDB profiler<a class="headerlink" href="#using-the-objectdb-profiler" title="Link to this heading"></a></h1>
+<p>Since Godot 4.6, there is a new <strong>ObjectDB Profiler</strong> tab in the Debugger bottom panel.
+This profiler allows you to take snapshots of the current state of the ObjectDB,
+which is the database that contains all the <a class="reference internal" href="../../../classes/class_object.html#class-object"><span class="std std-ref">Object</span></a>-derived classes
+currently allocated in memory. This is useful for identifying memory leaks and
+understanding the memory usage of your project.</p>
+<p>Additionally, this tool is able to visualize differences between two snapshots.
+This can be used to identify improvements or regressions in memory usage after
+making changes to your project. Reducing memory usage can lead to better performance,
+even in cases where memory is not a bottleneck. By reducing memory usage,
+you can perform fewer allocations, which can be a costly operation, especially
+if performed in large amounts during gameplay.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="../../best_practices/node_alternatives.html#doc-node-alternatives"><span class="std std-ref">When and how to avoid using nodes for everything</span></a> for information on using lighter-weight
+alternatives to nodes, which can help reduce memory usage in your project.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The ObjectDB profiler does <strong>not</strong> track every bit of memory used by the engine or
+by external libraries. Native engine classes that are not exposed to the scripting
+API will not appear in snapshots.</p>
+<p>Consider using external memory profiling tools if you need access to this information.</p>
+</div>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Open the ObjectDB Profiler tab in the <span class="role-menu role-ui">Debugger</span> bottom panel.
+You will land on the summary page with no snapshots taken yet.</p>
+<figure class="align-center" id="id1">
+<img alt="ObjectDB profiler summary with no snapshots taken" src="../../../_images/objectdb_profiler_summary_no_snapshots.webp" />
+<figcaption>
+<p><span class="caption-text">ObjectDB profiler summary with no snapshots taken</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Run the project, then get to a point where you'd like to take a snapshot
+(for example, after loading a level). Click <span class="role-button role-ui">Take ObjectDB Snapshot</span>
+to take a snapshot at the current point in time. If the button appears grayed out,
+make sure the project is running first.</p>
+<figure class="align-center" id="id2">
+<img alt="ObjectDB profiler summary with one snapshot taken" src="../../../_images/objectdb_profiler_summary_snapshot.webp" />
+<figcaption>
+<p><span class="caption-text">ObjectDB profiler summary with one snapshot taken</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can take multiple snapshots during a single run of the project.
+Also, you can right-click a snapshot in the snapshot list to rename it,
+show it in the file manager, or delete it.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It's a good idea to rename snapshots
+after taking them to give them descriptive names (e.g., <code class="docutils literal notranslate"><span class="pre">before_optimization</span></code>,
+<code class="docutils literal notranslate"><span class="pre">after_optimization</span></code>). Regardless of the name, the date at which the snapshot
+was taken remains saved in the snapshot file itself.</p>
+<p>Snapshot files have a <code class="docutils literal notranslate"><span class="pre">.odb_snapshot</span></code> extension and are located in
+<code class="docutils literal notranslate"><span class="pre">user://objectdb_snapshots/</span></code> (see <a class="reference internal" href="../../io/data_paths.html#doc-data-paths-accessing-persistent-user-data"><span class="std std-ref">Data paths</span></a>
+details). These can safely be copied across devices, as they're platform-independent.</p>
+</div>
+<section id="viewing-differences-between-snapshots">
+<h3>Viewing differences between snapshots<a class="headerlink" href="#viewing-differences-between-snapshots" title="Link to this heading"></a></h3>
+<p>After taking at least two snapshots, the <span class="role-menu role-ui">Diff Against</span> dropdown becomes
+available. Here, you can select another snapshot to compare the currently selected
+snapshot with.</p>
+<figure class="align-center" id="id3">
+<img alt="Diff Against dropdown in the bottom-left corner of the ObjectDB profiler" src="../../../_images/objectdb_profiler_summary_diff_against.webp" />
+<figcaption>
+<p><span class="caption-text">Diff Against dropdown in the bottom-left corner of the ObjectDB profiler</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The summary page will then show the differences between the two snapshots:</p>
+<figure class="align-center" id="id4">
+<img alt="Two snapshots being compared in the Summary tab" src="../../../_images/objectdb_profiler_summary_snapshot_diff.webp" />
+<figcaption>
+<p><span class="caption-text">Two snapshots being compared in the Summary tab</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>This also applies to every other tab in the ObjectDB profiler, which will show
+the differences between the two snapshots in additional columns.</p>
+</section>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
+<p>In the Classes tab, you can view how many instances of each class have been
+created at the moment the snapshot was taken:</p>
+<figure class="align-center" id="id5">
+<img alt="One snapshots being viewed in the Classes tab" src="../../../_images/objectdb_profiler_classes.webp" />
+<figcaption>
+<p><span class="caption-text">One snapshots being viewed in the Classes tab</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>When in diff mode, it will show the class instance count for the currently
+selected snapshot (column A) and the snapshot that is being diffed against
+(column B). It will also show the difference in instance count in the column Delta.</p>
+<figure class="align-center" id="id6">
+<img alt="Two snapshots being compared in the Classes tab. Here, column A is ``second_session``, column B is ``first_session``" src="../../../_images/objectdb_profiler_classes_diff.webp" />
+<figcaption>
+<p><span class="caption-text">Two snapshots being compared in the Classes tab. Here, column A is <code class="docutils literal notranslate"><span class="pre">second_session</span></code>, column B is <code class="docutils literal notranslate"><span class="pre">first_session</span></code></span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can click on a class in the list on the right to view it in the inspector.</p>
+<figure class="align-center" id="id7">
+<img alt="A selected class instance being viewed in the inspector" src="../../../_images/objectdb_profiler_classes_inspector.webp" />
+<figcaption>
+<p><span class="caption-text">A selected class instance being viewed in the inspector</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Previewing instances in the inspector is also available in other tabs
+(Nodes, Objects, and RefCounted).</p>
+</div>
+</section>
+<section id="objects">
+<h3>Objects<a class="headerlink" href="#objects" title="Link to this heading"></a></h3>
+<p>The Objects tab is similar, but differs in the way it presents data. Here,
+every instance is listed in a linear fashion, instead of grouping them by class.
+When selecting an object, you will see a list of other objects it references
+on the right (<span class="role-menu role-ui">Outbound References</span>), as well as a list of objects
+it's being referenced by (<span class="role-menu role-ui">Inbound References</span>).</p>
+<p>This allows you to view objects either in a &quot;top-down&quot; manner (viewing
+what objects a given object references) or in a &quot;bottom-up&quot; manner (viewing
+what objects reference a given object).</p>
+<figure class="align-center" id="id8">
+<img alt="The Objects tab being used to view objects in a &quot;top-down&quot; manner" src="../../../_images/objectdb_profiler_objects_top_down.webp" />
+<figcaption>
+<p><span class="caption-text">The Objects tab being used to view objects in a &quot;top-down&quot; manner</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>In the above image, clicking the <code class="docutils literal notranslate"><span class="pre">default_font</span></code> object in the list will
+switch the view to the perspective of that object. This object is being
+referenced by a lot of other objects as well, which effectively switches
+to a &quot;bottom-up&quot; perspective.</p>
+<figure class="align-center" id="id9">
+<img alt="The Objects tab being used to view objects in a &quot;bottom-up&quot; manner" src="../../../_images/objectdb_profiler_objects_bottom_up.webp" />
+<figcaption>
+<p><span class="caption-text">The Objects tab being used to view objects in a &quot;bottom-up&quot; manner</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="nodes">
+<h3>Nodes<a class="headerlink" href="#nodes" title="Link to this heading"></a></h3>
+<p>Next, the Nodes tab shows the scene tree at the time the snapshot was taken.</p>
+<figure class="align-center" id="id10">
+<img alt="The Nodes tab being used to view the scene tree" src="../../../_images/objectdb_profiler_nodes.webp" />
+<figcaption>
+<p><span class="caption-text">The Nodes tab being used to view the scene tree</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>This tab is particularly interesting in diff view, since it supports showing
+the difference between the two snapshots in a more visual manner.
+When <span class="role-button role-ui">Combined Diff</span> is unchecked, you can see the differences side by side.</p>
+<figure class="align-center" id="id11">
+<img alt="Separate diff view in the Nodes tab" src="../../../_images/objectdb_profiler_nodes_diff_separate.webp" />
+<figcaption>
+<p><span class="caption-text">Separate diff view in the Nodes tab</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>When <span class="role-button role-ui">Combined Diff</span> is checked, you can see the differences merged
+into a single tree, with added nodes highlighted in green and removed nodes
+highlighted in red.</p>
+<figure class="align-center" id="id12">
+<img alt="Combined diff view in the Nodes tab" src="../../../_images/objectdb_profiler_nodes_diff_combined.webp" />
+<figcaption>
+<p><span class="caption-text">Combined diff view in the Nodes tab</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Additionally, you can view a list of orphan nodes (nodes that are not
+attached to the scene tree root) at the end of the tree view. You can view
+it more easily by collapsing the root node, since these are listed outside
+the main scene tree.</p>
+<figure class="align-center" id="id13">
+<img alt="Orphan nodes at the end of the nodes tree in the ObjectDB profiler" src="../../../_images/objectdb_profiler_nodes_orphan.webp" />
+<figcaption>
+<p><span class="caption-text">Orphan nodes at the end of the nodes tree in the ObjectDB profiler</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="refcounted">
+<h3>RefCounted<a class="headerlink" href="#refcounted" title="Link to this heading"></a></h3>
+<p>The last tab is the RefCounted tab. This tab is similar to the Objects
+tab, but it shows the reference counts of <a class="reference internal" href="../../../classes/class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a>-derived
+classes directly in the table. The table has four columns:</p>
+<ul class="simple">
+<li><p><strong>Native Refs:</strong> The number of native engine references to the object.</p></li>
+<li><p><strong>ObjectDB Refs:</strong> The number of ObjectDB references to the object.</p></li>
+<li><p><strong>Total Refs:</strong> The sum of native references and ObjectDB references.</p></li>
+<li><p><strong>ObjectDB Cycles:</strong> The number of circular references detected.</p></li>
+</ul>
+<p>When in diff view, snapshot B is always listed <em>above</em> snapshot A
+if a RefCounted instance exists in both snapshots.</p>
+<p>The list on the right shows details on the selected instance,
+including a list of references and whether these are duplicates.</p>
+<figure class="align-center" id="id14">
+<img alt="The RefCounted tab being used to view RefCounted instances" src="../../../_images/objectdb_profiler_refcounted.webp" />
+<figcaption>
+<p><span class="caption-text">The RefCounted tab being used to view RefCounted instances</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The RefCounted tab does <strong>not</strong> list objects that derive directly from
+<a class="reference internal" href="../../../classes/class_object.html#class-object"><span class="std std-ref">Object</span></a>, as these don't use reference counting.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="the_profiler.html" class="btn btn-neutral float-left" title="The Profiler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="custom_performance_monitors.html" class="btn btn-neutral float-right" title="Custom performance monitors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

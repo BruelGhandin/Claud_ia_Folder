@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="XR full screen effects" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/xr/xr_full_screen_effects.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="When adding custom full screen effects to your XR application, one approach is using a full screen quad and applying effects to that quad&#x27;s shader. Add a MeshInstance3D node to your scene as a..." />
+<meta name="description" content="When adding custom full screen effects to your XR application, one approach is using a full screen quad and applying effects to that quad&#x27;s shader. Add a MeshInstance3D node to your scene as a..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>XR full screen effects &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Engine architecture" href="../../engine_details/architecture/index.html" />
+    <link rel="prev" title="Room scale in XR" href="xr_room_scale.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/xr/xr_full_screen_effects" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/xr/xr_full_screen_effects.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">XR</a></li>
+      <li class="breadcrumb-item active">XR full screen effects</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/xr/xr_full_screen_effects.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="xr-full-screen-effects">
+<span id="doc-xr-full-screen-effects"></span><h1>XR full screen effects<a class="headerlink" href="#xr-full-screen-effects" title="Link to this heading"></a></h1>
+<p>When adding custom full screen effects to your XR application, one approach is
+using a full screen quad and applying effects to that quad's shader.
+Add a <a class="reference internal" href="../../classes/class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a> node
+to your scene as a child of your <a class="reference internal" href="../../classes/class_xrcamera3d.html#class-xrcamera3d"><span class="std std-ref">XRCamera3D</span></a>,
+and set the <code class="docutils literal notranslate"><span class="pre">mesh</span></code> property to a <a class="reference internal" href="../../classes/class_quadmesh.html#class-quadmesh"><span class="std std-ref">QuadMesh</span></a>.
+Set the width and height of the quad to <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
+<img alt="../../_images/xr_full_screen_effects_starting_quad.webp" src="../../_images/xr_full_screen_effects_starting_quad.webp" />
+<p>You can then add a shader to your quad to make it cover the screen. This is done by setting the
+vertex shader's <code class="docutils literal notranslate"><span class="pre">POSITION</span></code> built-in to <code class="docutils literal notranslate"><span class="pre">vec4(VERTEX.xy,</span> <span class="pre">1.0,</span> <span class="pre">1.0)</span></code>.
+However, when creating an effect that is centered straight ahead in the user's view
+(such as a vignette effect), the end result may look incorrect in XR.</p>
+<p>Below shows captures of the right-eye view with a vignette shader, both from the headset and the render target itself.
+The left captures are an unmodified shader; the right captures adjust the full screen quad using the projection matrix.
+While the capture on the left is centered in the render target, it is off-center in the headset view.
+But, after applying the projection matrix, we see that the effect is centered in the headset itself.</p>
+<img alt="../../_images/xr_full_screen_effects_vignette_before_after.webp" src="../../_images/xr_full_screen_effects_vignette_before_after.webp" />
+<section id="applying-the-projection-matrix">
+<h2>Applying the projection matrix<a class="headerlink" href="#applying-the-projection-matrix" title="Link to this heading"></a></h2>
+<p>To properly center the effect, the <code class="docutils literal notranslate"><span class="pre">POSITION</span></code> of the full screen quad
+needs to take the asymmetric field of view into account. To do this while also ensuring the quad
+has full coverage of the entire render target, we can subdivide the quad and apply the projection matrix
+to the inner vertices. Let's increase the subdivide width and depth of the quad.</p>
+<img alt="../../_images/xr_full_screen_effects_ending_quad.webp" src="../../_images/xr_full_screen_effects_ending_quad.webp" />
+<p>Then, in the vertex function of our shader, we apply an offset from the projection matrix to
+the inner vertices. Here's an example of how you might do this with the above simple vignette shader:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+<span class="n">render_mode</span><span class="w"> </span><span class="n">depth_test_disabled</span><span class="p">,</span><span class="w"> </span><span class="n">skip_vertex_transform</span><span class="p">,</span><span class="w"> </span><span class="n">unshaded</span><span class="p">,</span><span class="w"> </span><span class="n">cull_disabled</span><span class="p">;</span>
+
+<span class="c1">// Modify VERTEX.xy using the projection matrix to correctly center the effect.</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">vertex</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">vec2</span><span class="w"> </span><span class="n">vert_pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VERTEX</span><span class="p">.</span><span class="n">xy</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">vert_pos</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.99</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kt">vec4</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PROJECTION_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="w">                </span><span class="n">vert_pos</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">offset</span><span class="p">.</span><span class="n">xy</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">offset</span><span class="p">.</span><span class="n">w</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">POSITION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">vert_pos</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ALBEDO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ALPHA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dot</span><span class="p">(</span><span class="n">UV</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="n">UV</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For more info on asymmetric FOV and its purpose, see this
+<a class="reference external" href="https://developers.meta.com/horizon/documentation/unity/unity-asymmetric-fov-faq/">Meta Asymmetric Field of View FAQ</a>.</p>
+</div>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<p>This full screen effect method has no performance concerns for per-pixel effects such as the above vignette shader.
+However, it is not recommended to read from the screen texture when using this technique.
+Full screen effects that require reading from the screen texture effectively disable all rendering performance optimizations in XR.
+This is because, when reading from the screen texture, Godot makes a full copy of the render buffer;
+this drastically increases the workload for the GPU and can create performance concerns.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="xr_room_scale.html" class="btn btn-neutral float-left" title="Room scale in XR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../engine_details/architecture/index.html" class="btn btn-neutral float-right" title="Engine architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

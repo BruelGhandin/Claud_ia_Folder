@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Collision shapes (2D)" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/physics/collision_shapes_2d.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="This guide explains: The types of collision shapes available in 2D in Godot., Using an image converted to a polygon as a collision shape., Performance considerations regarding 2D collisions.. Godot..." />
+<meta name="description" content="This guide explains: The types of collision shapes available in 2D in Godot., Using an image converted to a polygon as a collision shape., Performance considerations regarding 2D collisions.. Godot..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Collision shapes (2D) &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Collision shapes (3D)" href="collision_shapes_3d.html" />
+    <link rel="prev" title="Using SoftBody3D" href="soft_body.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/physics/collision_shapes_2d" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/physics/collision_shapes_2d.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Physics</a></li>
+      <li class="breadcrumb-item active">Collision shapes (2D)</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/physics/collision_shapes_2d.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="collision-shapes-2d">
+<span id="doc-collision-shapes-2d"></span><h1>Collision shapes (2D)<a class="headerlink" href="#collision-shapes-2d" title="Link to this heading"></a></h1>
+<p>This guide explains:</p>
+<ul class="simple">
+<li><p>The types of collision shapes available in 2D in Godot.</p></li>
+<li><p>Using an image converted to a polygon as a collision shape.</p></li>
+<li><p>Performance considerations regarding 2D collisions.</p></li>
+</ul>
+<p>Godot provides many kinds of collision shapes, with different performance and
+accuracy tradeoffs.</p>
+<p>You can define the shape of a <a class="reference internal" href="../../classes/class_physicsbody2d.html#class-physicsbody2d"><span class="std std-ref">PhysicsBody2D</span></a> by adding one or more
+<a class="reference internal" href="../../classes/class_collisionshape2d.html#class-collisionshape2d"><span class="std std-ref">CollisionShape2Ds</span></a> or
+<a class="reference internal" href="../../classes/class_collisionpolygon2d.html#class-collisionpolygon2d"><span class="std std-ref">CollisionPolygon2Ds</span></a> as <em>direct</em> child nodes.
+Indirect child nodes (i.e. children of child nodes) will be ignored and won't be
+used as collision shapes. Also, note that you must add a <a class="reference internal" href="../../classes/class_shape2d.html#class-shape2d"><span class="std std-ref">Shape2D</span></a>
+<em>resource</em> to collision shape nodes in the Inspector dock.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you add multiple collision shapes to a single PhysicsBody2D, you don't
+have to worry about them overlapping. They won't &quot;collide&quot; with each other.</p>
+</div>
+<section id="primitive-collision-shapes">
+<h2>Primitive collision shapes<a class="headerlink" href="#primitive-collision-shapes" title="Link to this heading"></a></h2>
+<p>Godot provides the following primitive collision shape types:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../classes/class_rectangleshape2d.html#class-rectangleshape2d"><span class="std std-ref">RectangleShape2D</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_circleshape2d.html#class-circleshape2d"><span class="std std-ref">CircleShape2D</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_capsuleshape2d.html#class-capsuleshape2d"><span class="std std-ref">CapsuleShape2D</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_segmentshape2d.html#class-segmentshape2d"><span class="std std-ref">SegmentShape2D</span></a></p></li>
+<li><p><a class="reference internal" href="../../classes/class_separationrayshape2d.html#class-separationrayshape2d"><span class="std std-ref">SeparationRayShape2D</span></a> (designed for characters)</p></li>
+<li><p><a class="reference internal" href="../../classes/class_worldboundaryshape2d.html#class-worldboundaryshape2d"><span class="std std-ref">WorldBoundaryShape2D</span></a> (infinite plane)</p></li>
+</ul>
+<p>You can represent the collision of most smaller objects using one or more
+primitive shapes. However, for more complex objects, such as a large ship or a
+whole level, you may need convex or concave shapes instead. More on that below.</p>
+<p>We recommend favoring primitive shapes for dynamic objects such as RigidBodies
+and CharacterBodies as their behavior is the most reliable. They often provide
+better performance as well.</p>
+</section>
+<section id="convex-collision-shapes">
+<h2>Convex collision shapes<a class="headerlink" href="#convex-collision-shapes" title="Link to this heading"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Godot currently doesn't offer a built-in way to create 2D convex collision
+shapes. This section is mainly here for reference purposes.</p>
+</div>
+<p><a class="reference internal" href="../../classes/class_convexpolygonshape2d.html#class-convexpolygonshape2d"><span class="std std-ref">Convex collision shapes</span></a> are a compromise
+between primitive collision shapes and concave collision shapes. They can
+represent shapes of any complexity, but with an important caveat. As their name
+implies, an individual shape can only represent a <em>convex</em> shape. For instance,
+a pyramid is <em>convex</em>, but a hollow box is <em>concave</em>. To define a concave object
+with a single collision shape, you need to use a concave collision shape.</p>
+<p>Depending on the object's complexity, you may get better performance by using
+multiple convex shapes instead of a concave collision shape. Godot lets you use
+<em>convex decomposition</em> to generate convex shapes that roughly match a hollow
+object. Note this performance advantage no longer applies after a certain amount
+of convex shapes. For large and complex objects such as a whole level, we
+recommend using concave shapes instead.</p>
+</section>
+<section id="concave-or-trimesh-collision-shapes">
+<h2>Concave or trimesh collision shapes<a class="headerlink" href="#concave-or-trimesh-collision-shapes" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../../classes/class_concavepolygonshape2d.html#class-concavepolygonshape2d"><span class="std std-ref">Concave collision shapes</span></a>, also called trimesh
+collision shapes, can take any form, from a few triangles to thousands of
+triangles. Concave shapes are the slowest option but are also the most accurate
+in Godot. <strong>You can only use concave shapes within StaticBodies.</strong> They will not
+work with CharacterBodies or RigidBodies unless the RigidBody's mode is Static.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Even though concave shapes offer the most accurate <em>collision</em>, contact
+reporting can be less precise than primitive shapes.</p>
+</div>
+<p>When not using TileMaps for level design, concave shapes are the best approach
+for a level's collision.</p>
+<p>You can configure the CollisionPolygon2D node's <em>build mode</em> in the inspector.
+If it is set to <strong>Solids</strong> (the default), collisions will include the polygon
+and its contained area. If it is set to <strong>Segments</strong>, collisions will only
+include the polygon edges.</p>
+<p>You can generate a concave collision shape from the editor by selecting a Sprite2D
+and using the <strong>Sprite2D</strong> menu at the top of the 2D viewport. The Sprite2D menu
+dropdown exposes an option called <strong>Create CollisionPolygon2D Sibling</strong>.
+Once you click it, it displays a menu with 3 settings:</p>
+<ul class="simple">
+<li><p><strong>Simplification:</strong> Higher values will result in a less detailed shape, which
+improves performance at the cost of accuracy.</p></li>
+<li><p><strong>Shrink (Pixels):</strong> Higher values will shrink the generated collision polygon
+relative to the sprite's edges.</p></li>
+<li><p><strong>Grow (Pixels):</strong> Higher values will grow the generated collision polygon
+relative to the sprite's edges. Note that setting Grow and Shrink to equal
+values may yield different results than leaving both of them on 0.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have an image with many small details, it's recommended to create a
+simplified version and use it to generate the collision polygon. This
+can result in better performance and game feel, since the player won't
+be blocked by small, decorative details.</p>
+<p>To use a separate image for collision polygon generation, create another
+Sprite2D, generate a collision polygon sibling from it then remove the Sprite2D
+node. This way, you can exclude small details from the generated collision.</p>
+</div>
+</section>
+<section id="performance-caveats">
+<h2>Performance caveats<a class="headerlink" href="#performance-caveats" title="Link to this heading"></a></h2>
+<p>You aren't limited to a single collision shape per PhysicsBody. Still, we
+recommend keeping the number of shapes as low as possible to improve
+performance, especially for dynamic objects like RigidBodies and
+CharacterBodies. On top of that, avoid translating, rotating, or scaling
+CollisionShapes to benefit from the physics engine's internal optimizations.</p>
+<p>When using a single non-transformed collision shape in a StaticBody, the
+engine's <em>broad phase</em> algorithm can discard inactive PhysicsBodies. The <em>narrow
+phase</em> will then only have to take into account the active bodies' shapes. If a
+StaticBody has many collision shapes, the broad phase will fail. The narrow
+phase, which is slower, must then perform a collision check against each shape.</p>
+<p>If you run into performance issues, you may have to make tradeoffs in terms of
+accuracy. Most games out there don't have a 100% accurate collision. They find
+creative ways to hide it or otherwise make it unnoticeable during normal
+gameplay.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="soft_body.html" class="btn btn-neutral float-left" title="Using SoftBody3D" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="collision_shapes_3d.html" class="btn btn-neutral float-right" title="Collision shapes (3D)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Integrating with Android APIs" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/platform/android/javaclasswrapper_and_androidruntimeplugin.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="The Android platform has numerous APIs as well as a rich ecosystem of third-party libraries with wide and diverse functionality, like push notifications, analytics, authentication, ads, etc... Thes..." />
+<meta name="description" content="The Android platform has numerous APIs as well as a rich ecosystem of third-party libraries with wide and diverse functionality, like push notifications, analytics, authentication, ads, etc... Thes..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Integrating with Android APIs &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Resolving crashes on Android" href="resolving_crashes_on_android.html" />
+    <link rel="prev" title="Android in-app purchases" href="android_in_app_purchases.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/platform/android/javaclasswrapper_and_androidruntimeplugin" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/platform/android/javaclasswrapper_and_androidruntimeplugin.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Platform-specific</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Android</a></li>
+      <li class="breadcrumb-item active">Integrating with Android APIs</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/platform/android/javaclasswrapper_and_androidruntimeplugin.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="integrating-with-android-apis">
+<span id="doc-javaclasswrapper-and-androidruntimeplugin"></span><h1>Integrating with Android APIs<a class="headerlink" href="#integrating-with-android-apis" title="Link to this heading"></a></h1>
+<p>The Android platform has numerous APIs as well as a rich ecosystem of third-party libraries with wide and
+diverse functionality, like push notifications, analytics, authentication, ads, etc...</p>
+<p>These don't make sense in Godot core itself so Godot has long provided an <a class="reference internal" href="android_plugin.html#doc-android-plugin"><span class="std std-ref">Android plugin system</span></a>.
+The <a class="reference internal" href="android_plugin.html#doc-android-plugin"><span class="std std-ref">Android plugin system</span></a> enables developers to create Godot Android plugins using Java or Kotlin code,
+which provides an interface to access and use Android APIs or third-party libraries in Godot projects from GDScript, C# or GDExtension.</p>
+<div class="highlight-kotlin notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nc">MyAndroidSingleton</span><span class="p">(</span><span class="n">godot</span><span class="p">:</span><span class="w"> </span><span class="n">Godot?)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GodotPlugin</span><span class="p">(</span><span class="n">godot</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@UsedByGodot</span>
+<span class="w">        </span><span class="kd">fun</span><span class="w"> </span><span class="nf">doSomething</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Writing an Android plugin however requires knowledge of Java or Kotlin code, which most Godot developers do not have.
+As such there are many Android APIs and third-party libraries that don't have a Godot plugin that developers can interface with.
+In fact, this is one of the main reasons that developers cite for not being able to switch to Godot from other game engines.</p>
+<p>To address this, we've introduced a couple of tools in <strong>Godot 4.4</strong> to simplify the process for developers to access Android APIs and third-party libraries.</p>
+<section id="javaclasswrapper-godot-singleton">
+<h2>JavaClassWrapper (Godot singleton)<a class="headerlink" href="#javaclasswrapper-godot-singleton" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">JavaClassWrapper</span></code> is a <a class="reference internal" href="../../../classes/class_javaclasswrapper.html#class-javaclasswrapper"><span class="std std-ref">Godot singleton</span></a> which allows
+creating instances of Java / Kotlin classes, implementing Java / Kotlin interfaces, and calling methods on them using only GDScript, C# or GDExtension.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="nc">LocalDateTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaClassWrapper</span><span class="o">.</span><span class="nf">wrap</span><span class="p">(</span><span class="s2">&quot;java.time.LocalDateTime&quot;</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="nc">DateTimeFormatter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaClassWrapper</span><span class="o">.</span><span class="nf">wrap</span><span class="p">(</span><span class="s2">&quot;java.time.format.DateTimeFormatter&quot;</span><span class="p">)</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">datetime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">LocalDateTime</span><span class="o">.</span><span class="nf">now</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">formatter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="nf">ofPattern</span><span class="p">(</span><span class="s2">&quot;dd-MM-yyyy HH:mm:ss&quot;</span><span class="p">)</span>
+
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="nf">format</span><span class="p">(</span><span class="n">formatter</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In the code snippet above, <code class="docutils literal notranslate"><span class="pre">JavaClassWrapper</span></code> is used from GDScript to access the Java <code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> and <code class="docutils literal notranslate"><span class="pre">DateTimeFormatter</span></code> classes.
+Through <code class="docutils literal notranslate"><span class="pre">JavaClassWrapper</span></code>, we can call the Java classes methods directly from GDScript as if they were GDScript methods.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PrintProxy</span><span class="p">:</span>
+<span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">println</span><span class="p">(</span><span class="n">content</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">print_proxy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">PrintProxy</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">printer_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaClassWrapper</span><span class="o">.</span><span class="nf">create_proxy</span><span class="p">(</span><span class="n">print_proxy</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;android.util.Printer&quot;</span><span class="p">])</span>
+<span class="n">printer_object</span><span class="o">.</span><span class="nf">println</span><span class="p">(</span><span class="s2">&quot;Hello Godot World!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the code snippet above, <code class="docutils literal notranslate"><span class="pre">JavaClassWrapper</span></code> is used to implement the Java <code class="docutils literal notranslate"><span class="pre">android.util.Printer</span></code> interface from GDScript using a <a class="reference internal" href="../../../classes/class_object.html#class-object"><span class="std std-ref">Object</span></a> as the implementation.
+The instantiated proxy can then be passed to Java methods that accept a <code class="docutils literal notranslate"><span class="pre">android.util.Printer</span></code> parameter.</p>
+<p>Check out the <a class="reference internal" href="../../../classes/class_javaclasswrapper.html#class-javaclasswrapper"><span class="std std-ref">JavaClassWrapper documentation</span></a> to learn more about its API.</p>
+</section>
+<section id="androidruntime-plugin">
+<h2>AndroidRuntime plugin<a class="headerlink" href="#androidruntime-plugin" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">JavaClassWrapper</span></code> is great, but to do many things on Android, you need access to various Android lifecycle / runtime objects.
+<code class="docutils literal notranslate"><span class="pre">AndroidRuntime</span></code> plugin is a <a class="reference external" href="https://javadoc.io/doc/org.godotengine/godot/latest/org/godotengine/godot/plugin/AndroidRuntimePlugin.html">built-in Godot Android plugin</a> that allows you to do this.</p>
+<p>Combining <code class="docutils literal notranslate"><span class="pre">JavaClassWrapper</span></code> and <code class="docutils literal notranslate"><span class="pre">AndroidRuntime</span></code> plugin allows developers to access and use Android APIs without switching away from GDScript, or using any tools aside from Godot itself.
+This is <strong>huge</strong> for the adoption of Godot for Android development:</p>
+<ul class="simple">
+<li><p>If you need to do something simple, or only use a small part of a third-party library, you don't have to make a plugin</p></li>
+<li><p>It allows developers to quickly integrate Android functionality</p></li>
+<li><p>It allows developers to create Godot addons using only GDScript and <code class="docutils literal notranslate"><span class="pre">JavaClassWrapper</span></code> (no Java or Kotlin needed)</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For exports using <code class="docutils literal notranslate"><span class="pre">gradle</span></code>, Godot will automatically include <code class="docutils literal notranslate"><span class="pre">.jar</span></code> or <code class="docutils literal notranslate"><span class="pre">.aar</span></code> files it find in the project <code class="docutils literal notranslate"><span class="pre">addons</span></code> directory.
+So to use a third-party library, you can just drop its <code class="docutils literal notranslate"><span class="pre">.jar</span></code> or <code class="docutils literal notranslate"><span class="pre">.aar</span></code> file in the <code class="docutils literal notranslate"><span class="pre">addons</span></code> directory, and call its method directly from GDScript using <code class="docutils literal notranslate"><span class="pre">JavaClassWrapper</span></code>.</p>
+</div>
+<section id="example-show-an-android-toast">
+<h3>Example: Show an Android toast<a class="headerlink" href="#example-show-an-android-toast" title="Link to this heading"></a></h3>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the AndroidRuntime singleton.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">android_runtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">get_singleton</span><span class="p">(</span><span class="s2">&quot;AndroidRuntime&quot;</span><span class="p">)</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">android_runtime</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Retrieve the Android Activity instance.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">activity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">android_runtime</span><span class="o">.</span><span class="nf">getActivity</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># Create a Godot Callable to wrap the toast display logic.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">toast_callable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">():</span>
+<span class="w">        </span><span class="c1"># Use JavaClassWrapper to retrieve the android.widget.Toast class, then make and show a toast using the class APIs.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="nc">ToastClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaClassWrapper</span><span class="o">.</span><span class="nf">wrap</span><span class="p">(</span><span class="s2">&quot;android.widget.Toast&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nc">ToastClass</span><span class="o">.</span><span class="nf">makeText</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;This is a test&quot;</span><span class="p">,</span><span class="w"> </span><span class="nc">ToastClass</span><span class="o">.</span><span class="vi">LENGTH_LONG</span><span class="p">)</span><span class="o">.</span><span class="nf">show</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># Wrap the Callable in a Java Runnable and run it on the Android UI thread to show the toast.</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="nf">runOnUiThread</span><span class="p">(</span><span class="n">android_runtime</span><span class="o">.</span><span class="nf">createRunnableFromGodotCallable</span><span class="p">(</span><span class="n">toast_callable</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="example-vibrate-the-device">
+<h3>Example: Vibrate the device<a class="headerlink" href="#example-vibrate-the-device" title="Link to this heading"></a></h3>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the AndroidRuntime singleton.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">android_runtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">get_singleton</span><span class="p">(</span><span class="s2">&quot;AndroidRuntime&quot;</span><span class="p">)</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">android_runtime</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Retrieve the Android Vibrator system service and check if the device supports it.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">vibrator_service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">android_runtime</span><span class="o">.</span><span class="nf">getApplicationContext</span><span class="p">()</span><span class="o">.</span><span class="nf">getSystemService</span><span class="p">(</span><span class="s2">&quot;vibrator&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">vibrator_service</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">vibrator_service</span><span class="o">.</span><span class="nf">hasVibrator</span><span class="p">():</span>
+<span class="w">        </span><span class="c1"># Configure and run a VibrationEffect.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="nc">VibrationEffect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaClassWrapper</span><span class="o">.</span><span class="nf">wrap</span><span class="p">(</span><span class="s2">&quot;android.os.VibrationEffect&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">VibrationEffect</span><span class="o">.</span><span class="nf">createOneShot</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="nc">VibrationEffect</span><span class="o">.</span><span class="vi">DEFAULT_AMPLITUDE</span><span class="p">)</span>
+<span class="w">        </span><span class="n">vibrator_service</span><span class="o">.</span><span class="nf">vibrate</span><span class="p">(</span><span class="n">effect</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-accessing-inner-classes">
+<h3>Example: Accessing inner classes<a class="headerlink" href="#example-accessing-inner-classes" title="Link to this heading"></a></h3>
+<p>Java inner classes can be accessed using the <code class="docutils literal notranslate"><span class="pre">$</span></code> sign:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Accessing &#39;VERSION&#39; class, which is an inner class from the &#39;android.os.Build&#39; class.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaClassWrapper</span><span class="o">.</span><span class="nf">wrap</span><span class="p">(</span><span class="s2">&quot;android.os.Build$VERSION&quot;</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">sdk_int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">version</span><span class="o">.</span><span class="vi">SDK_INT</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">sdk_int</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">30</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Do something specific on android 11 devices.</span>
+<span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># All other devices</span>
+</pre></div>
+</div>
+</section>
+<section id="example-calling-a-constructor">
+<h3>Example: Calling a constructor<a class="headerlink" href="#example-calling-a-constructor" title="Link to this heading"></a></h3>
+<p>A constructor is invoked by calling a method with the same name as the class.</p>
+<p>This example creates an intent to send a text:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the AndroidRuntime singleton.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">android_runtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">get_singleton</span><span class="p">(</span><span class="s2">&quot;AndroidRuntime&quot;</span><span class="p">)</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">android_runtime</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="nc">Intent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaClassWrapper</span><span class="o">.</span><span class="nf">wrap</span><span class="p">(</span><span class="s2">&quot;android.content.Intent&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">activity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">android_runtime</span><span class="o">.</span><span class="nf">getActivity</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">intent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Intent</span><span class="o">.</span><span class="nf">Intent</span><span class="p">()</span><span class="w"> </span><span class="c1"># Call the constructor.</span>
+<span class="w">    </span><span class="n">intent</span><span class="o">.</span><span class="nf">setAction</span><span class="p">(</span><span class="nc">Intent</span><span class="o">.</span><span class="vi">ACTION_SEND</span><span class="p">)</span>
+<span class="w">    </span><span class="n">intent</span><span class="o">.</span><span class="nf">putExtra</span><span class="p">(</span><span class="nc">Intent</span><span class="o">.</span><span class="vi">EXTRA_TEXT</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;This is a test message.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">intent</span><span class="o">.</span><span class="nf">setType</span><span class="p">(</span><span class="s2">&quot;text/plain&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="nf">startActivity</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-saving-an-image-to-the-android-gallery">
+<h3>Example: Saving an image to the Android gallery<a class="headerlink" href="#example-saving-an-image-to-the-android-gallery" title="Link to this heading"></a></h3>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the AndroidRuntime singleton.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">android_runtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">get_singleton</span><span class="p">(</span><span class="s2">&quot;AndroidRuntime&quot;</span><span class="p">)</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">android_runtime</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="nc">Intent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaClassWrapper</span><span class="o">.</span><span class="nf">wrap</span><span class="p">(</span><span class="s2">&quot;android.content.Intent&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">activity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">android_runtime</span><span class="o">.</span><span class="nf">getActivity</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">intent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Intent</span><span class="o">.</span><span class="nf">Intent</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># Create the File and Uri.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="nc">Uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaClassWrapper</span><span class="o">.</span><span class="nf">wrap</span><span class="p">(</span><span class="s2">&quot;android.net.Uri&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="nc">File</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaClassWrapper</span><span class="o">.</span><span class="nf">wrap</span><span class="p">(</span><span class="s2">&quot;java.io.File&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">File</span><span class="o">.</span><span class="nf">File</span><span class="p">(</span><span class="n">file_path_to_image_here</span><span class="p">)</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Uri</span><span class="o">.</span><span class="nf">fromFile</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Set Action and Data of Intent.</span>
+<span class="w">    </span><span class="n">intent</span><span class="o">.</span><span class="nf">setAction</span><span class="p">(</span><span class="nc">Intent</span><span class="o">.</span><span class="vi">ACTION_MEDIA_SCANNER_SCAN_FILE</span><span class="p">)</span>
+<span class="w">    </span><span class="n">intent</span><span class="o">.</span><span class="nf">setData</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Broadcast it.</span>
+<span class="w">    </span><span class="n">activity</span><span class="o">.</span><span class="nf">sendBroadcast</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="android_in_app_purchases.html" class="btn btn-neutral float-left" title="Android in-app purchases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="resolving_crashes_on_android.html" class="btn btn-neutral float-right" title="Resolving crashes on Android" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

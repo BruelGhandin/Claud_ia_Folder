@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="The Profiler" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/scripting/debug/the_profiler.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="You run your game from Godot and play around. It&#x27;s fun, it&#x27;s becoming feature complete, and you feel it&#x27;s getting close to release. But then, you open the skill tree, and it grinds t..." />
+<meta name="description" content="You run your game from Godot and play around. It&#x27;s fun, it&#x27;s becoming feature complete, and you feel it&#x27;s getting close to release. But then, you open the skill tree, and it grinds t..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>The Profiler &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Using the ObjectDB profiler" href="objectdb_profiler.html" />
+    <link rel="prev" title="Debugger panel" href="debugger_panel.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/scripting/debug/the_profiler" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/scripting/debug/the_profiler.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Scripting</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Debug</a></li>
+      <li class="breadcrumb-item active">The Profiler</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/scripting/debug/the_profiler.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="the-profiler">
+<span id="doc-the-profiler"></span><h1>The Profiler<a class="headerlink" href="#the-profiler" title="Link to this heading"></a></h1>
+<p>You run your game from Godot and play around. It's fun, it's becoming feature
+complete, and you feel it's getting close to release.</p>
+<p>But then, you open the skill tree, and it grinds to a halt as something snags in
+your code. Watching the skill tree scroll by like it's a slide show is
+unacceptable. What went wrong? Is it positioning the skill tree elements, the
+UI, or rendering?</p>
+<p>You could try to optimize everything and run the game repeatedly, but you can be
+smarter about this and narrow down the possibilities. Enter Godot's profiler.</p>
+<section id="an-overview-of-the-profiler">
+<h2>An overview of the profiler<a class="headerlink" href="#an-overview-of-the-profiler" title="Link to this heading"></a></h2>
+<p>You can open the profiler by opening the <strong>Debugger</strong> panel and clicking on the
+<strong>Profiler</strong> tab.</p>
+<img alt="../../../_images/profiler.png" src="../../../_images/profiler.png" />
+<p>Godot's profiler does not automatically run because profiling is
+performance-intensive. It has to continually measure everything happening in the
+game and report back to the debugger, so it's off by default.</p>
+<p>To begin profiling, run your game then focus back on the editor. Click on the
+<strong>Start</strong> button in the top-left corner of the <strong>Profiler</strong> tab. You can also
+check <strong>Autostart</strong>, which will make the profiler automatically start when the
+project is run the next time. Note that the <strong>Autostart</strong> checkbox's state is not
+preserved across editor sessions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The profiler does not currently support C# scripts. C# scripts can be profiled
+using JetBrains Rider and JetBrains dotTrace with the Godot support plugin.</p>
+</div>
+<p>You can clear the data by clicking the <strong>Clear</strong> button anytime. Use the
+<strong>Measure</strong> drop-down menu to change the type of data you measure. The
+measurements panel and the graph will update accordingly.</p>
+</section>
+<section id="the-measured-data">
+<h2>The measured data<a class="headerlink" href="#the-measured-data" title="Link to this heading"></a></h2>
+<p>The profiler's interface is split into two. There is a list of functions on the
+left and the performance graph on the right.</p>
+<p>The main measurements are frame time, physics frame, idle time, and physics time.</p>
+<ul class="simple">
+<li><p>The <strong>frame time</strong> is the time it takes Godot to execute all the logic for an
+entire image, from physics to rendering.</p></li>
+<li><p><strong>Physics frame</strong> is the time Godot has allocated between physics updates. In
+an ideal scenario, the frame time is whatever you chose: 16.66 milliseconds by
+default, which corresponds to 60FPS. It's a frame of reference you can use for
+everything else around it.</p></li>
+<li><p><strong>Idle time</strong> is the time Godot took to update logic other than physics, such
+as code that lives in <cite>_process</cite> or timers and cameras set to update on
+<strong>Idle</strong>.</p></li>
+<li><p><strong>Physics time</strong> is the time Godot took to update physics tasks, like
+<cite>_physics_process</cite> and built-in nodes set to <strong>Physics</strong> update.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Frame Time</strong> includes rendering time. Say you find a mysterious
+spike of lag in your game, but your physics and scripts are
+all running fast. The delay could be due to the appearance of
+particles or visual effects!</p>
+</div>
+<p>By default, Godot ticks on Frame Time and Physics Time. This gives you an
+overview of how long each frame takes relative to the allocated desired physics
+FPS. You can toggle functions on and off by clicking the checkboxes on the left.
+Other facilities make appearances as you go down the list, like Physics 2D,
+Physics, and Audio, before reaching Script functions, where your code appears.</p>
+<p>If you click on the graph, you change which frame's information appears on the
+left. In the top right, there is also a frame counter where you can manually
+adjust the frame you are looking at more granularly.</p>
+</section>
+<section id="scope-of-measurement-and-measurement-windows">
+<h2>Scope of measurement and measurement windows<a class="headerlink" href="#scope-of-measurement-and-measurement-windows" title="Link to this heading"></a></h2>
+<p>You can change what measurement you are looking at using the <strong>Measure</strong>
+drop-down menu. By default, it starts with Frame Time and lists the time it
+takes to go through the frame in milliseconds. The average time is the average
+time any given function took when called more than once. For example, a function
+that took 0.05 milliseconds to run five times should give you an average of 0.01
+milliseconds.</p>
+<p>If accurate milliseconds count is not important, and you want to see proportions
+of time relative to the rest of the frame, use percentage measurements. Frame %
+is relative to Frame Time, and Physics % is relative to Physics Time.</p>
+<p>The last option is the scope of the time. <strong>Inclusive</strong> measures the time a
+function took <strong>with</strong> any nested function calls. For example:</p>
+<img alt="../../../_images/split_curve.png" src="../../../_images/split_curve.png" />
+<p><cite>get_neighbors</cite>, <cite>find_nearest_neighbor</cite> and <cite>move_subject</cite> all took a lot of
+time. You could be fooled into thinking that this is because all three of them
+are slow.</p>
+<p>But when changed to <strong>Self</strong>, Godot measures the time spent in the function body
+without considering function calls it made itself.</p>
+<img alt="../../../_images/self_curve.png" src="../../../_images/self_curve.png" />
+<p>You can see that <cite>get_neighbors</cite> and <cite>move_subject</cite> have lost a lot of their
+importance. In effect, that means that <cite>get_neighbors</cite> and <cite>move_subject</cite> have
+spent more time waiting for some other function call to finish than not, and
+<cite>find_nearest_neighbor</cite> is <strong>actually</strong> slow.</p>
+</section>
+<section id="debugging-slow-code-with-the-profiler">
+<h2>Debugging slow code with the profiler<a class="headerlink" href="#debugging-slow-code-with-the-profiler" title="Link to this heading"></a></h2>
+<p>Finding slow code with the profiler boils down to running your game and watching
+the performance graph as it draws. When an unacceptable spike occurs in the
+frame time, you can click on the graph to pause your game and narrow the _Frame
+#_ to the spike's start. You may need to jump back and forth between frames and
+functions to find the root cause.</p>
+<p>Under the Script functions, turn on the checkboxes for some functions to find
+which take time. These are the functions you need to review and optimize.</p>
+</section>
+<section id="measuring-manually-in-microseconds">
+<h2>Measuring manually in microseconds<a class="headerlink" href="#measuring-manually-in-microseconds" title="Link to this heading"></a></h2>
+<p>If your function is complex, it could be challenging to figure out which part
+needs optimization. Is it your math or the way you access other pieces of data
+to do the math with? Is it the <cite>for</cite> loop? The <cite>if</cite> statements?</p>
+<p>You can narrow down the measurement by manually counting ticks as the code runs
+with some temporary functions. The two functions are part of the <cite>Time</cite> class
+object. They are <cite>get_ticks_msec</cite> and <cite>get_ticks_usec</cite>. The first measures in
+milliseconds (1,000 per second), and the second measures in microseconds
+(1,000,000 per second).</p>
+<p>Either one returns the amount of time since the game engine started in their respective
+time frame.</p>
+<p>If you wrap a piece of code with a start and end count of microseconds, the
+difference between the two is the amount of time it took to run that piece of
+code.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Measuring the time it takes for worker_function() to run</span>
+<span class="k">var</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Time</span><span class="o">.</span><span class="nf">get_ticks_usec</span><span class="p">()</span>
+<span class="nf">worker_function</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Time</span><span class="o">.</span><span class="nf">get_ticks_usec</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">worker_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mf">1000000.0</span>
+
+<span class="c1"># Measuring the time spent running a calculation over each element of an array</span>
+<span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Time</span><span class="o">.</span><span class="nf">get_ticks_usec</span><span class="p">()</span>
+<span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">calc</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">calculations</span><span class="p">:</span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">calc</span><span class="o">.</span><span class="vi">power</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">calc</span><span class="o">.</span><span class="vi">product</span>
+<span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Time</span><span class="o">.</span><span class="nf">get_ticks_usec</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">loop_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mf">1000000.0</span>
+
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Worker time: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">Loop time: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">worker_time</span><span class="p">,</span><span class="w"> </span><span class="n">loop_time</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></div>
+<p>As you become a more experienced programmer, this technique becomes less
+necessary. You begin to learn what parts of a running program are slow. Knowing
+that loops and branches can be slow comes from experience, and you gain
+experience by measuring and doing research.</p>
+<p>But between the profiler and the ticks functions, you should have enough to get
+started finding which parts of your code need optimization.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="debugger_panel.html" class="btn btn-neutral float-left" title="Debugger panel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="objectdb_profiler.html" class="btn btn-neutral float-right" title="Using the ObjectDB profiler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

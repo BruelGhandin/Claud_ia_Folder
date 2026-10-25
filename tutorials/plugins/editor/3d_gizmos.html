@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="3D gizmo plugins" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/plugins/editor/3d_gizmos.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: 3D gizmo plugins are used by the editor and custom plugins to define the gizmos attached to any kind of Node3D node. This tutorial shows the two main approaches to defining your own c..." />
+<meta name="description" content="Introduction: 3D gizmo plugins are used by the editor and custom plugins to define the gizmos attached to any kind of Node3D node. This tutorial shows the two main approaches to defining your own c..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>3D gizmo plugins &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Inspector plugins" href="inspector_plugins.html" />
+    <link rel="prev" title="Import plugins" href="import_plugins.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/plugins/editor/3d_gizmos" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/plugins/editor/3d_gizmos.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Plugins</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Editor plugins</a></li>
+      <li class="breadcrumb-item active">3D gizmo plugins</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/plugins/editor/3d_gizmos.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+    <div class="admonition attention article-status">
+      <p class="first admonition-title">Work in progress</p>
+      <p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.7</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+    </div>
+    
+  </div>
+  
+
+  
+  <section id="d-gizmo-plugins">
+<span id="doc-3d-gizmo-plugins"></span><h1>3D gizmo plugins<a class="headerlink" href="#d-gizmo-plugins" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>3D gizmo plugins are used by the editor and custom plugins to define the
+gizmos attached to any kind of Node3D node.</p>
+<p>This tutorial shows the two main approaches to defining your own custom
+gizmos. The first option works well for simple gizmos and creates less clutter in
+your plugin structure, and the second one will let you store some per-gizmo data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tutorial assumes you already know how to make generic plugins. If
+in doubt, refer to the <a class="reference internal" href="making_plugins.html#doc-making-plugins"><span class="std std-ref">Making plugins</span></a> page.</p>
+</div>
+</section>
+<section id="the-editornode3dgizmoplugin">
+<h2>The EditorNode3DGizmoPlugin<a class="headerlink" href="#the-editornode3dgizmoplugin" title="Link to this heading"></a></h2>
+<p>Regardless of the approach we choose, we will need to create a new
+<a class="reference internal" href="../../../classes/class_editornode3dgizmoplugin.html#class-editornode3dgizmoplugin"><span class="std std-ref">EditorNode3DGizmoPlugin</span></a>. This will allow
+us to set a name for the new gizmo type and define other behaviors such as whether
+the gizmo can be hidden or not.</p>
+<p>This would be a basic setup:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># my_custom_gizmo_plugin.gd</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorNode3DGizmoPlugin</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_gizmo_name</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="s2">&quot;CustomNode&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># MyCustomEditorPlugin.gd</span>
+<span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorPlugin</span>
+
+
+<span class="k">const</span><span class="w"> </span><span class="nc">MyCustomGizmoPlugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://addons/my-addon/my_custom_gizmo_plugin.gd&quot;</span><span class="p">)</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">gizmo_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">MyCustomGizmoPlugin</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_enter_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">add_node_3d_gizmo_plugin</span><span class="p">(</span><span class="n">gizmo_plugin</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_exit_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">remove_node_3d_gizmo_plugin</span><span class="p">(</span><span class="n">gizmo_plugin</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For simple gizmos, inheriting <a class="reference internal" href="../../../classes/class_editornode3dgizmoplugin.html#class-editornode3dgizmoplugin"><span class="std std-ref">EditorNode3DGizmoPlugin</span></a>
+is enough. If you want to store some per-gizmo data, you should go with the second approach.</p>
+</section>
+<section id="simple-approach">
+<h2>Simple approach<a class="headerlink" href="#simple-approach" title="Link to this heading"></a></h2>
+<p>The first step is to, in our custom gizmo plugin, override the <a class="reference internal" href="../../../classes/class_editornode3dgizmoplugin.html#class-editornode3dgizmoplugin-private-method-has-gizmo"><span class="std std-ref">_has_gizmo()</span></a>
+method so that it returns <code class="docutils literal notranslate"><span class="pre">true</span></code> when the node parameter is of our target type.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_has_gizmo</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">MyCustomNode3D</span>
+
+
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+<p>Then we can override methods like <a class="reference internal" href="../../../classes/class_editornode3dgizmoplugin.html#class-editornode3dgizmoplugin-private-method-redraw"><span class="std std-ref">_redraw()</span></a>
+or all the handle related ones.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_init</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">create_material</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="w">    </span><span class="nf">create_handle_material</span><span class="p">(</span><span class="s2">&quot;handles&quot;</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_redraw</span><span class="p">(</span><span class="n">gizmo</span><span class="p">):</span>
+<span class="w">    </span><span class="n">gizmo</span><span class="o">.</span><span class="nf">clear</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">node3d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gizmo</span><span class="o">.</span><span class="nf">get_node_3d</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">lines</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="w">    </span><span class="n">lines</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">node3d</span><span class="o">.</span><span class="vi">my_custom_value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">handles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">handles</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="w">    </span><span class="n">handles</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">node3d</span><span class="o">.</span><span class="vi">my_custom_value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="w">    </span><span class="n">gizmo</span><span class="o">.</span><span class="nf">add_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span><span class="w"> </span><span class="nf">get_material</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">gizmo</span><span class="p">),</span><span class="w"> </span><span class="l">false</span><span class="p">)</span>
+<span class="w">    </span><span class="n">gizmo</span><span class="o">.</span><span class="nf">add_handles</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span><span class="w"> </span><span class="nf">get_material</span><span class="p">(</span><span class="s2">&quot;handles&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">gizmo</span><span class="p">),</span><span class="w"> </span><span class="p">[])</span>
+
+
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+<p>Note that we created a material in the <cite>_init</cite> method, and retrieved it in the <cite>_redraw</cite>
+method using <a class="reference internal" href="../../../classes/class_editornode3dgizmoplugin.html#class-editornode3dgizmoplugin-method-get-material"><span class="std std-ref">get_material()</span></a>. This
+method retrieves one of the material's variants depending on the state of the gizmo
+(selected and/or editable).</p>
+<p>So the final plugin would look somewhat like this:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">EditorNode3DGizmoPlugin</span>
+
+
+<span class="k">const</span><span class="w"> </span><span class="n">MyCustomNode3D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://addons/my-addon/my_custom_node_3d.gd&quot;</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_init</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">create_material</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="w">    </span><span class="nf">create_handle_material</span><span class="p">(</span><span class="s2">&quot;handles&quot;</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_has_gizmo</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">MyCustomNode3D</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_redraw</span><span class="p">(</span><span class="n">gizmo</span><span class="p">):</span>
+<span class="w">    </span><span class="n">gizmo</span><span class="o">.</span><span class="nf">clear</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">node3d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gizmo</span><span class="o">.</span><span class="nf">get_node_3d</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">lines</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="w">    </span><span class="n">lines</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">node3d</span><span class="o">.</span><span class="vi">my_custom_value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">handles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">handles</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="w">    </span><span class="n">handles</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">node3d</span><span class="o">.</span><span class="vi">my_custom_value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="w">    </span><span class="n">gizmo</span><span class="o">.</span><span class="nf">add_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span><span class="w"> </span><span class="nf">get_material</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">gizmo</span><span class="p">),</span><span class="w"> </span><span class="l">false</span><span class="p">)</span>
+<span class="w">    </span><span class="n">gizmo</span><span class="o">.</span><span class="nf">add_handles</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span><span class="w"> </span><span class="nf">get_material</span><span class="p">(</span><span class="s2">&quot;handles&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">gizmo</span><span class="p">),</span><span class="w"> </span><span class="p">[])</span>
+
+
+<span class="c1"># You should implement the rest of handle-related callbacks</span>
+<span class="c1"># (_get_handle_name(), _get_handle_value(), _commit_handle(), ...).</span>
+</pre></div>
+</div>
+<p>Note that we just added some handles in the <cite>_redraw</cite> method, but we still need to implement
+the rest of handle-related callbacks in <a class="reference internal" href="../../../classes/class_editornode3dgizmoplugin.html#class-editornode3dgizmoplugin"><span class="std std-ref">EditorNode3DGizmoPlugin</span></a>
+to get properly working handles.</p>
+</section>
+<section id="alternative-approach">
+<h2>Alternative approach<a class="headerlink" href="#alternative-approach" title="Link to this heading"></a></h2>
+<p>In some cases we want to provide our own implementation of <a class="reference internal" href="../../../classes/class_editornode3dgizmo.html#class-editornode3dgizmo"><span class="std std-ref">EditorNode3DGizmo</span></a>,
+maybe because we want to have some state stored in each gizmo or because we are porting
+an old gizmo plugin and we don't want to go through the rewriting process.</p>
+<p>In these cases all we need to do is, in our new gizmo plugin, override
+<a class="reference internal" href="../../../classes/class_editornode3dgizmoplugin.html#class-editornode3dgizmoplugin-private-method-create-gizmo"><span class="std std-ref">_create_gizmo()</span></a>, so it returns our custom gizmo implementation
+for the Node3D nodes we want to target.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># my_custom_gizmo_plugin.gd</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorNode3DGizmoPlugin</span>
+
+
+<span class="k">const</span><span class="w"> </span><span class="n">MyCustomNode3D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://addons/my-addon/my_custom_node_3d.gd&quot;</span><span class="p">)</span>
+<span class="k">const</span><span class="w"> </span><span class="nc">MyCustomGizmo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://addons/my-addon/my_custom_gizmo.gd&quot;</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_init</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">create_material</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="w">    </span><span class="nf">create_handle_material</span><span class="p">(</span><span class="s2">&quot;handles&quot;</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_create_gizmo</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">MyCustomNode3D</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nc">MyCustomGizmo</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">null</span>
+</pre></div>
+</div>
+<p>This way all the gizmo logic and drawing methods can be implemented in a new class extending
+<a class="reference internal" href="../../../classes/class_editornode3dgizmo.html#class-editornode3dgizmo"><span class="std std-ref">EditorNode3DGizmo</span></a>, like so:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># my_custom_gizmo.gd</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorNode3DGizmo</span>
+
+
+<span class="c1"># You can store data in the gizmo itself (more useful when working with handles).</span>
+<span class="k">var</span><span class="w"> </span><span class="n">gizmo_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_redraw</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">clear</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">node3d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node_3d</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">lines</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="w">    </span><span class="n">lines</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="n">gizmo_size</span><span class="p">,</span><span class="w"> </span><span class="n">node3d</span><span class="o">.</span><span class="vi">my_custom_value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">handles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">handles</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="w">    </span><span class="n">handles</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="n">gizmo_size</span><span class="p">,</span><span class="w"> </span><span class="n">node3d</span><span class="o">.</span><span class="vi">my_custom_value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">material</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_plugin</span><span class="p">()</span><span class="o">.</span><span class="nf">get_material</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">add_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span><span class="w"> </span><span class="n">material</span><span class="p">,</span><span class="w"> </span><span class="l">false</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">handles_material</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_plugin</span><span class="p">()</span><span class="o">.</span><span class="nf">get_material</span><span class="p">(</span><span class="s2">&quot;handles&quot;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">add_handles</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span><span class="w"> </span><span class="n">handles_material</span><span class="p">,</span><span class="w"> </span><span class="p">[])</span>
+
+
+<span class="c1"># You should implement the rest of handle-related callbacks</span>
+<span class="c1"># (_get_handle_name(), _get_handle_value(), _commit_handle(), ...).</span>
+</pre></div>
+</div>
+<p>Note that we just added some handles in the <cite>_redraw</cite> method, but we still need to implement
+the rest of handle-related callbacks in <a class="reference internal" href="../../../classes/class_editornode3dgizmo.html#class-editornode3dgizmo"><span class="std std-ref">EditorNode3DGizmo</span></a>
+to get properly working handles.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="import_plugins.html" class="btn btn-neutral float-left" title="Import plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="inspector_plugins.html" class="btn btn-neutral float-right" title="Inspector plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

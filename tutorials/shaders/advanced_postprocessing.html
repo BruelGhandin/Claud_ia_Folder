@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Advanced post-processing" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/shaders/advanced_postprocessing.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: This tutorial describes an advanced method for post-processing in Godot. In particular, it will explain how to write a post-processing shader that uses the depth buffer. You should al..." />
+<meta name="description" content="Introduction: This tutorial describes an advanced method for post-processing in Godot. In particular, it will explain how to write a post-processing shader that uses the depth buffer. You should al..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Advanced post-processing &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Making trees" href="making_trees.html" />
+    <link rel="prev" title="Custom post-processing" href="custom_postprocessing.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/shaders/advanced_postprocessing" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/shaders/advanced_postprocessing.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Shaders</a></li>
+      <li class="breadcrumb-item active">Advanced post-processing</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/shaders/advanced_postprocessing.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="advanced-post-processing">
+<span id="doc-advanced-postprocessing"></span><h1>Advanced post-processing<a class="headerlink" href="#advanced-post-processing" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This tutorial describes an advanced method for post-processing in Godot.
+In particular, it will explain how to write a post-processing shader that
+uses the depth buffer. You should already be familiar with post-processing
+generally and, in particular, with the methods outlined in the <a class="reference internal" href="custom_postprocessing.html#doc-custom-postprocessing"><span class="std std-ref">custom post-processing tutorial</span></a>.</p>
+</section>
+<section id="full-screen-quad">
+<h2>Full screen quad<a class="headerlink" href="#full-screen-quad" title="Link to this heading"></a></h2>
+<p>One way to make custom post-processing effects is by using a viewport. However,
+there are two main drawbacks of using a Viewport:</p>
+<ol class="arabic simple">
+<li><p>The depth buffer cannot be accessed</p></li>
+<li><p>The effect of the post-processing shader is not visible in the editor</p></li>
+</ol>
+<p>To get around the limitation on using the depth buffer, use a <a class="reference internal" href="../../classes/class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a>
+with a <a class="reference internal" href="../../classes/class_quadmesh.html#class-quadmesh"><span class="std std-ref">QuadMesh</span></a> primitive. This allows us to use a
+shader and to access the depth texture of the scene. Next, use a vertex shader
+to make the quad cover the screen at all times so that the post-processing
+effect will be applied at all times, including in the editor.</p>
+<p>First, create a new MeshInstance3D and set its mesh to a QuadMesh. This creates
+a quad centered at position <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code> with a width and height of <code class="docutils literal notranslate"><span class="pre">1</span></code>. Set
+the width and height to <code class="docutils literal notranslate"><span class="pre">2</span></code> and enable <strong>Flip Faces</strong>. Right now, the quad
+occupies a position in world space at the origin. However, we want it to move
+with the camera so that it always covers the entire screen. To do this, we will
+bypass the coordinate transforms that translate the vertex positions through the
+difference coordinate spaces and treat the vertices as if they were already in
+clip space.</p>
+<p>The vertex shader expects coordinates to be output in clip space, which are coordinates
+ranging from <code class="docutils literal notranslate"><span class="pre">-1</span></code> at the left and bottom of the screen to <code class="docutils literal notranslate"><span class="pre">1</span></code> at the top and right
+of the screen. This is why the QuadMesh needs to have height and width of <code class="docutils literal notranslate"><span class="pre">2</span></code>.
+Godot handles the transform from model to view space to clip space behind the scenes,
+so we need to nullify the effects of Godot's transformations. We do this by setting the
+<code class="docutils literal notranslate"><span class="pre">POSITION</span></code> built-in to our desired position. <code class="docutils literal notranslate"><span class="pre">POSITION</span></code> bypasses the built-in transformations
+and sets the vertex position in clip space directly.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+<span class="c1">// Prevent the quad from being affected by lighting and fog. This also improves performance.</span>
+<span class="n">render_mode</span><span class="w"> </span><span class="n">unshaded</span><span class="p">,</span><span class="w"> </span><span class="n">fog_disabled</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">vertex</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">POSITION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">VERTEX</span><span class="p">.</span><span class="n">xy</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In versions of Godot earlier than 4.3, this code recommended using <code class="docutils literal notranslate"><span class="pre">POSITION</span> <span class="pre">=</span> <span class="pre">vec4(VERTEX,</span> <span class="pre">1.0);</span></code>
+which implicitly assumed the clip-space near plane was at <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.
+That code is now incorrect and will not work in versions 4.3+ as we
+use a &quot;reversed-z&quot; depth buffer now where the near plane is at <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p>
+</div>
+<p>Even with this vertex shader, the quad keeps disappearing. This is due to frustum
+culling, which is done on the CPU. Frustum culling uses the camera matrix and the
+AABBs of Meshes to determine if the Mesh will be visible <em>before</em> passing it to the GPU.
+The CPU has no knowledge of what we are doing with the vertices, so it assumes the
+coordinates specified refer to world positions, not clip space positions, which results
+in Godot culling the quad when we turn away from the center of the scene. In
+order to keep the quad from being culled, there are a few options:</p>
+<ol class="arabic simple">
+<li><p>Add the QuadMesh as a child to the camera, so the camera is always pointed at it</p></li>
+<li><p>Set the Geometry property <code class="docutils literal notranslate"><span class="pre">extra_cull_margin</span></code> as large as possible in the QuadMesh</p></li>
+</ol>
+<p>The second option ensures that the quad is visible in the editor, while the first
+option guarantees that it will still be visible even if the camera moves outside the cull margin.
+You can also use both options.</p>
+</section>
+<section id="depth-texture">
+<h2>Depth texture<a class="headerlink" href="#depth-texture" title="Link to this heading"></a></h2>
+<p>To read from the depth texture, we first need to create a texture uniform set to the depth buffer
+by using <code class="docutils literal notranslate"><span class="pre">hint_depth_texture</span></code>.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">depth_texture</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_depth_texture</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Once defined, the depth texture can be read with the <code class="docutils literal notranslate"><span class="pre">texture()</span></code> function.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">depth_texture</span><span class="p">,</span><span class="w"> </span><span class="n">SCREEN_UV</span><span class="p">).</span><span class="n">x</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Similar to accessing the screen texture, accessing the depth texture is only
+possible when reading from the current viewport. The depth texture cannot be
+accessed from another viewport to which you have rendered.</p>
+</div>
+<p>The values returned by <code class="docutils literal notranslate"><span class="pre">depth_texture</span></code> are between <code class="docutils literal notranslate"><span class="pre">1.0</span></code> and <code class="docutils literal notranslate"><span class="pre">0.0</span></code> (corresponding to
+the near and far plane, respectively, because of using a &quot;reverse-z&quot; depth buffer) and are nonlinear.
+When displaying depth directly from the <code class="docutils literal notranslate"><span class="pre">depth_texture</span></code>, everything will look almost
+black unless it is very close due to that nonlinearity. In order to make the depth value align with world or
+model coordinates, we need to linearize the value. When we apply the projection matrix to the
+vertex position, the z value is made nonlinear, so to linearize it, we multiply it by the
+inverse of the projection matrix, which in Godot, is accessible with the variable
+<code class="docutils literal notranslate"><span class="pre">INV_PROJECTION_MATRIX</span></code>.</p>
+<p>Firstly, take the screen space coordinates and transform them into normalized device
+coordinates (NDC). NDC run <code class="docutils literal notranslate"><span class="pre">-1.0</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> in <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> directions and
+from <code class="docutils literal notranslate"><span class="pre">0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> in the <code class="docutils literal notranslate"><span class="pre">z</span></code> direction when using the Vulkan backend.
+Reconstruct the NDC using <code class="docutils literal notranslate"><span class="pre">SCREEN_UV</span></code> for the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> axis, and
+the depth value for <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">depth_texture</span><span class="p">,</span><span class="w"> </span><span class="n">SCREEN_UV</span><span class="p">).</span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">vec3</span><span class="w"> </span><span class="n">ndc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="n">SCREEN_UV</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tutorial assumes the use of the Forward+ or Mobile renderers, which both
+use Vulkan NDCs with a Z-range of <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>. In contrast, the Compatibility
+renderer uses OpenGL NDCs with a Z-range of <code class="docutils literal notranslate"><span class="pre">[-1.0,</span> <span class="pre">1.0]</span></code>. For the Compatibility
+renderer, replace the NDC calculation with this instead:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">vec3</span><span class="w"> </span><span class="n">ndc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="n">SCREEN_UV</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">CURRENT_RENDERER</span></code> and <code class="docutils literal notranslate"><span class="pre">RENDERER_COMPATIBILITY</span></code>
+built-in defines for a shader that will work in all renderers:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="cp">#if CURRENT_RENDERER == RENDERER_COMPATIBILITY</span>
+<span class="kt">vec3</span><span class="w"> </span><span class="n">ndc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="n">SCREEN_UV</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="cp">#else</span>
+<span class="kt">vec3</span><span class="w"> </span><span class="n">ndc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="n">SCREEN_UV</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="p">);</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+<p>Convert NDC to view space by multiplying the NDC by <code class="docutils literal notranslate"><span class="pre">INV_PROJECTION_MATRIX</span></code>.
+Recall that view space gives positions relative to the camera, so the <code class="docutils literal notranslate"><span class="pre">z</span></code> value will give us
+the distance to the point.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">...</span>
+<span class="w">  </span><span class="kt">vec4</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INV_PROJECTION_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">ndc</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">view</span><span class="p">.</span><span class="n">xyz</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="n">view</span><span class="p">.</span><span class="n">w</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">linear_depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">view</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Because the camera is facing the negative <code class="docutils literal notranslate"><span class="pre">z</span></code> direction, the position will have a negative <code class="docutils literal notranslate"><span class="pre">z</span></code> value.
+In order to get a usable depth value, we have to negate <code class="docutils literal notranslate"><span class="pre">view.z</span></code>.</p>
+<p>The world position can be constructed from the depth buffer using the following code, using the
+<code class="docutils literal notranslate"><span class="pre">INV_VIEW_MATRIX</span></code> to transform the position from view space into world space.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">...</span>
+<span class="w">  </span><span class="kt">vec4</span><span class="w"> </span><span class="n">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INV_VIEW_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">INV_PROJECTION_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">ndc</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">vec3</span><span class="w"> </span><span class="n">world_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">world</span><span class="p">.</span><span class="n">xyz</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">world</span><span class="p">.</span><span class="n">w</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="example-shader">
+<h2>Example shader<a class="headerlink" href="#example-shader" title="Link to this heading"></a></h2>
+<p>Once we add a line to output to <code class="docutils literal notranslate"><span class="pre">ALBEDO</span></code>, we have a complete shader that looks something like this.
+This shader lets you visualize the linear depth or world space coordinates, depending on which
+line is commented out.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+<span class="c1">// Prevent the quad from being affected by lighting and fog. This also improves performance.</span>
+<span class="n">render_mode</span><span class="w"> </span><span class="n">unshaded</span><span class="p">,</span><span class="w"> </span><span class="n">fog_disabled</span><span class="p">;</span>
+
+<span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">depth_texture</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_depth_texture</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">vertex</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">POSITION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">VERTEX</span><span class="p">.</span><span class="n">xy</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">depth_texture</span><span class="p">,</span><span class="w"> </span><span class="n">SCREEN_UV</span><span class="p">).</span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">vec3</span><span class="w"> </span><span class="n">ndc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="n">SCREEN_UV</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">vec4</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INV_PROJECTION_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">ndc</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">view</span><span class="p">.</span><span class="n">xyz</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="n">view</span><span class="p">.</span><span class="n">w</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">linear_depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">view</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">vec4</span><span class="w"> </span><span class="n">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INV_VIEW_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">INV_PROJECTION_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">ndc</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">vec3</span><span class="w"> </span><span class="n">world_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">world</span><span class="p">.</span><span class="n">xyz</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">world</span><span class="p">.</span><span class="n">w</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Visualize linear depth</span>
+<span class="w">  </span><span class="n">ALBEDO</span><span class="p">.</span><span class="n">rgb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="n">fract</span><span class="p">(</span><span class="n">linear_depth</span><span class="p">));</span>
+
+<span class="w">  </span><span class="c1">// Visualize world coordinates</span>
+<span class="w">  </span><span class="c1">//ALBEDO.rgb = fract(world_position).xyz;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="an-optimization">
+<h2>An optimization<a class="headerlink" href="#an-optimization" title="Link to this heading"></a></h2>
+<p>You can benefit from using a single large triangle rather than using a full
+screen quad. The reason for this is explained <a class="reference external" href="https://michaldrobot.com/2014/04/01/gcn-execution-patterns-in-full-screen-passes">here</a>.
+However, the benefit is quite small and only beneficial when running especially
+complex fragment shaders.</p>
+<p>Set the Mesh in the MeshInstance3D to an <a class="reference internal" href="../../classes/class_arraymesh.html#class-arraymesh"><span class="std std-ref">ArrayMesh</span></a>. An
+ArrayMesh is a tool that allows you to easily construct a Mesh from Arrays for
+vertices, normals, colors, etc.</p>
+<p>Now, attach a script to the MeshInstance3D and use the following code:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">MeshInstance3D</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">  </span><span class="c1"># Create a single triangle out of vertices:</span>
+<span class="w">  </span><span class="k">var</span><span class="w"> </span><span class="n">verts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedVector3Array</span><span class="p">()</span>
+<span class="w">  </span><span class="n">verts</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">))</span>
+<span class="w">  </span><span class="n">verts</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">))</span>
+<span class="w">  </span><span class="n">verts</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">))</span>
+
+<span class="w">  </span><span class="c1"># Create an array of arrays.</span>
+<span class="w">  </span><span class="c1"># This could contain normals, colors, UVs, etc.</span>
+<span class="w">  </span><span class="k">var</span><span class="w"> </span><span class="n">mesh_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="n">mesh_array</span><span class="o">.</span><span class="nf">resize</span><span class="p">(</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">ARRAY_MAX</span><span class="p">)</span><span class="w"> </span><span class="c1">#required size for ArrayMesh Array</span>
+<span class="w">  </span><span class="n">mesh_array</span><span class="p">[</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">ARRAY_VERTEX</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">verts</span><span class="w"> </span><span class="c1">#position of vertex array in ArrayMesh Array</span>
+
+<span class="w">  </span><span class="c1"># Create mesh from mesh_array:</span>
+<span class="w">  </span><span class="n">mesh</span><span class="o">.</span><span class="nf">add_surface_from_arrays</span><span class="p">(</span><span class="nb">Mesh</span><span class="o">.</span><span class="vi">PRIMITIVE_TRIANGLES</span><span class="p">,</span><span class="w"> </span><span class="n">mesh_array</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The triangle is specified in normalized device coordinates.
+Recall, NDC run from <code class="docutils literal notranslate"><span class="pre">-1.0</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> in both the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>
+directions. This makes the screen <code class="docutils literal notranslate"><span class="pre">2</span></code> units wide and <code class="docutils literal notranslate"><span class="pre">2</span></code> units
+tall. In order to cover the entire screen with a single triangle, use
+a triangle that is <code class="docutils literal notranslate"><span class="pre">4</span></code> units wide and <code class="docutils literal notranslate"><span class="pre">4</span></code> units tall, double its
+height and width.</p>
+</div>
+<p>Assign the same vertex shader from above and everything should look exactly the same.</p>
+<p>The one drawback to using an ArrayMesh over using a QuadMesh is that the ArrayMesh
+is not visible in the editor because the triangle is not constructed until the scene
+is run. To get around that, construct a single triangle Mesh in a modeling program
+and use that in the MeshInstance3D instead.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="custom_postprocessing.html" class="btn btn-neutral float-left" title="Custom post-processing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="making_trees.html" class="btn btn-neutral float-right" title="Making trees" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

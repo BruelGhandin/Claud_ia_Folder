@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Introduction to shaders" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/shaders/introduction_to_shaders.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="This page explains what shaders are and will give you an overview of how they work in Godot. For a detailed reference of the engine&#x27;s shading language, see Shading language. Shaders are a spec..." />
+<meta name="description" content="This page explains what shaders are and will give you an overview of how they work in Godot. For a detailed reference of the engine&#x27;s shading language, see Shading language. Shaders are a spec..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Introduction to shaders &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Shading reference" href="shader_reference/index.html" />
+    <link rel="prev" title="Shaders" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/shaders/introduction_to_shaders" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/shaders/introduction_to_shaders.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Shaders</a></li>
+      <li class="breadcrumb-item active">Introduction to shaders</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/shaders/introduction_to_shaders.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="introduction-to-shaders">
+<span id="doc-introduction-to-shaders"></span><h1>Introduction to shaders<a class="headerlink" href="#introduction-to-shaders" title="Link to this heading"></a></h1>
+<p>This page explains what shaders are and will give you an overview of how they
+work in Godot. For a detailed reference of the engine's shading language, see
+<a class="reference internal" href="shader_reference/shading_language.html#doc-shading-language"><span class="std std-ref">Shading language</span></a>.</p>
+<p>Shaders are a special kind of program that runs on Graphics Processing Units
+(GPUs). They were initially used to shade 3D scenes but can nowadays do much
+more. You can use them to control how the engine draws geometry and pixels on
+the screen, allowing you to achieve all sorts of effects.</p>
+<p>Modern rendering engines like Godot draw everything with shaders: graphics cards
+can run thousands of instructions in parallel, leading to incredible rendering
+speed.</p>
+<p>Because of their parallel nature, though, shaders don't process information the
+way a typical program does. Shader code runs on each vertex or pixel in
+isolation. You cannot store data between frames either. As a result, when
+working with shaders, you need to code and think differently from other
+programming languages.</p>
+<p>Suppose you want to update all the pixels in a texture to a given color. In
+GDScript, your code would use <code class="docutils literal notranslate"><span class="pre">for</span></code> loops:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+<span class="w">        </span><span class="nf">set_color</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">some_color</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Your code is already part of a loop in a shader, so the corresponding code would
+look like this.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">canvas_item</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">some_color</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The graphics card calls the <code class="docutils literal notranslate"><span class="pre">fragment()</span></code> function once or more for each
+pixel it has to draw. More on that below.</p>
+</div>
+<section id="shaders-in-godot">
+<h2>Shaders in Godot<a class="headerlink" href="#shaders-in-godot" title="Link to this heading"></a></h2>
+<p>Godot provides a shading language based on the popular OpenGL Shading Language
+(GLSL) but simplified. The engine handles some of the lower-level initialization
+work for you, making it easier to write complex shaders.</p>
+<p>In Godot, shaders are made up of main functions called &quot;processor functions&quot;.
+Processor functions are the entry point for your shader into the program. There
+are seven different processor functions.</p>
+<ol class="arabic simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> function runs over all the vertices in the mesh and sets
+their positions and some other per-vertex variables. Used in
+<a class="reference internal" href="shader_reference/canvas_item_shader.html#doc-canvas-item-shader"><span class="std std-ref">canvas_item shaders</span></a> and
+<a class="reference internal" href="shader_reference/spatial_shader.html#doc-spatial-shader"><span class="std std-ref">spatial shaders</span></a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">fragment()</span></code> function runs for every pixel covered by the mesh. It uses
+values output by the <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> function, interpolated between the
+vertices. Used in <a class="reference internal" href="shader_reference/canvas_item_shader.html#doc-canvas-item-shader"><span class="std std-ref">canvas_item shaders</span></a> and
+<a class="reference internal" href="shader_reference/spatial_shader.html#doc-spatial-shader"><span class="std std-ref">spatial shaders</span></a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">light()</span></code> function runs for every pixel and for every light. It takes
+variables from the <code class="docutils literal notranslate"><span class="pre">fragment()</span></code> function and from its previous runs. Used
+in <a class="reference internal" href="shader_reference/canvas_item_shader.html#doc-canvas-item-shader"><span class="std std-ref">canvas_item shaders</span></a> and
+<a class="reference internal" href="shader_reference/spatial_shader.html#doc-spatial-shader"><span class="std std-ref">spatial shaders</span></a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">start()</span></code> function runs for every particle in a particle system once
+when the particle is first spawned. Used in
+<a class="reference internal" href="shader_reference/particle_shader.html#doc-particle-shader"><span class="std std-ref">particles shaders</span></a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">process()</span></code> function runs for every particle in a particle system for
+each frame. Used in <a class="reference internal" href="shader_reference/particle_shader.html#doc-particle-shader"><span class="std std-ref">particles shaders</span></a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">sky()</span></code> function runs for every pixel in the radiance cubemap when the
+radiance cubemap needs to be updated, and for every pixel on the current
+screen. Used in <a class="reference internal" href="shader_reference/sky_shader.html#doc-sky-shader"><span class="std std-ref">sky shaders</span></a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">fog()</span></code> function runs for every froxel in the volumetric fog froxel
+buffer that intersects with the <a class="reference internal" href="../../classes/class_fogvolume.html#class-fogvolume"><span class="std std-ref">FogVolume</span></a>. Used by
+<a class="reference internal" href="shader_reference/fog_shader.html#doc-fog-shader"><span class="std std-ref">fog shaders</span></a>.</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">light()</span></code> function won't run if the <code class="docutils literal notranslate"><span class="pre">vertex_lighting</span></code> render mode is
+enabled, or if <strong>Rendering &gt; Quality &gt; Shading &gt; Force Vertex Shading</strong> is
+enabled in the Project Settings. It's enabled by default on mobile
+platforms.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Godot also exposes an API for users to write totally custom GLSL shaders. For
+more information see <a class="reference internal" href="compute_shaders.html#doc-compute-shaders"><span class="std std-ref">Using compute shaders</span></a>.</p>
+</div>
+</section>
+<section id="shader-types">
+<h2>Shader types<a class="headerlink" href="#shader-types" title="Link to this heading"></a></h2>
+<p>Instead of supplying a general-purpose configuration for all uses (2D, 3D,
+particles, sky, fog), you must specify the type of shader you're writing.
+Different types support different render modes, built-in variables, and
+processing functions.</p>
+<p>In Godot, all shaders need to specify their type in the first line, like so:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Here are the available types:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="shader_reference/spatial_shader.html#doc-spatial-shader"><span class="std std-ref">spatial</span></a> for 3D rendering.</p></li>
+<li><p><a class="reference internal" href="shader_reference/canvas_item_shader.html#doc-canvas-item-shader"><span class="std std-ref">canvas_item</span></a> for 2D rendering.</p></li>
+<li><p><a class="reference internal" href="shader_reference/particle_shader.html#doc-particle-shader"><span class="std std-ref">particles</span></a> for particle systems.</p></li>
+<li><p><a class="reference internal" href="shader_reference/sky_shader.html#doc-sky-shader"><span class="std std-ref">sky</span></a> to render <a class="reference internal" href="../../classes/class_sky.html#class-sky"><span class="std std-ref">Skies</span></a>.</p></li>
+<li><p><a class="reference internal" href="shader_reference/fog_shader.html#doc-fog-shader"><span class="std std-ref">fog</span></a> to render <a class="reference internal" href="../../classes/class_fogvolume.html#class-fogvolume"><span class="std std-ref">FogVolumes</span></a>.</p></li>
+<li><p><a class="reference internal" href="shader_reference/texture_blit_shader.html#doc-texture-blit-shader"><span class="std std-ref">texture_blit</span></a> to render <a class="reference internal" href="../../classes/class_drawabletexture2d.html#class-drawabletexture2d"><span class="std std-ref">DrawableTexture2Ds</span></a>.</p></li>
+</ul>
+</section>
+<section id="render-modes">
+<h2>Render modes<a class="headerlink" href="#render-modes" title="Link to this heading"></a></h2>
+<p>Shaders have optional render modes you can specify on the second line, after the
+shader type, like so:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+<span class="n">render_mode</span><span class="w"> </span><span class="n">unshaded</span><span class="p">,</span><span class="w"> </span><span class="n">cull_disabled</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Render modes alter the way Godot applies the shader. For example, the
+<code class="docutils literal notranslate"><span class="pre">unshaded</span></code> mode makes the engine skip the built-in light processor function.</p>
+<p>Each shader type has different render modes. See the reference for each shader
+type for a complete list of render modes.</p>
+<section id="vertex-processor">
+<h3>Vertex processor<a class="headerlink" href="#vertex-processor" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> processing function is called once for every vertex in
+<code class="docutils literal notranslate"><span class="pre">spatial</span></code> and <code class="docutils literal notranslate"><span class="pre">canvas_item</span></code> shaders.</p>
+<p>Each vertex in your world's geometry has properties like a position and color.
+The function modifies those values and passes them to the fragment function. You
+can also use it to send extra data to the fragment function using varyings.</p>
+<p>By default, Godot transforms your vertex information for you, which is necessary
+to project geometry onto the screen. You can use render modes to transform the
+data yourself; see the <a class="reference internal" href="shader_reference/spatial_shader.html#doc-spatial-shader"><span class="std std-ref">Spatial shader doc</span></a> for an
+example.</p>
+</section>
+<section id="fragment-processor">
+<h3>Fragment processor<a class="headerlink" href="#fragment-processor" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">fragment()</span></code> processing function is used to set up the Godot material
+parameters per pixel. This code runs on every visible pixel the object or
+primitive draws. It is only available in <code class="docutils literal notranslate"><span class="pre">spatial</span></code> and <code class="docutils literal notranslate"><span class="pre">canvas_item</span></code> shaders.</p>
+<p>The standard use of the fragment function is to set up material properties used
+to calculate lighting. For example, you would set values for <code class="docutils literal notranslate"><span class="pre">ROUGHNESS</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RIM</span></code>, or <code class="docutils literal notranslate"><span class="pre">TRANSMISSION</span></code>, which would tell the light function how the lights
+respond to that fragment. This makes it possible to control a complex shading
+pipeline without the user having to write much code. If you don't need this
+built-in functionality, you can ignore it and write your own light processing
+function, and Godot will optimize it away. For example, if you do not write a
+value to <code class="docutils literal notranslate"><span class="pre">RIM</span></code>, Godot will not calculate rim lighting. During compilation,
+Godot checks to see if <code class="docutils literal notranslate"><span class="pre">RIM</span></code> is used; if not, it cuts all the corresponding
+code out. Therefore, you will not waste calculations on the effects that you do
+not use.</p>
+</section>
+<section id="light-processor">
+<h3>Light processor<a class="headerlink" href="#light-processor" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">light()</span></code> processor runs per pixel too, and it runs once for every light
+that affects the object. It does not run if no lights affect the object. It
+exists as a function called inside the <code class="docutils literal notranslate"><span class="pre">fragment()</span></code> processor and typically
+operates on the material properties setup inside the <code class="docutils literal notranslate"><span class="pre">fragment()</span></code> function.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">light()</span></code> processor works differently in 2D than it does in 3D; for a
+description of how it works in each, see their documentation, <a class="reference internal" href="shader_reference/canvas_item_shader.html#doc-canvas-item-shader"><span class="std std-ref">CanvasItem
+shaders</span></a> and <a class="reference internal" href="shader_reference/spatial_shader.html#doc-spatial-shader"><span class="std std-ref">Spatial shaders</span></a>, respectively.</p>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Shaders" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="shader_reference/index.html" class="btn btn-neutral float-right" title="Shading reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

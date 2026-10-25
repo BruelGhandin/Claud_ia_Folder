@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using Containers" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/ui/gui_containers.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Anchors are an efficient way to handle different aspect ratios for basic multiple resolution handling in GUIs. For more complex user interfaces, they can become difficult to use. This is often the ..." />
+<meta name="description" content="Anchors are an efficient way to handle different aspect ratios for basic multiple resolution handling in GUIs. For more complex user interfaces, they can become difficult to use. This is often the ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using Containers &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Custom GUI controls" href="custom_gui_controls.html" />
+    <link rel="prev" title="Size and anchors" href="size_and_anchors.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/ui/gui_containers" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/ui/gui_containers.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">User interface (UI)</a></li>
+      <li class="breadcrumb-item active">Using Containers</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/ui/gui_containers.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-containers">
+<span id="doc-gui-containers"></span><h1>Using Containers<a class="headerlink" href="#using-containers" title="Link to this heading"></a></h1>
+<p><a class="reference internal" href="size_and_anchors.html#doc-size-and-anchors"><span class="std std-ref">Anchors</span></a> are an efficient way to handle
+different aspect ratios for basic multiple resolution handling in GUIs.</p>
+<p>For more complex user interfaces, they can become difficult to use.</p>
+<p>This is often the case of games, such as RPGs, online chats, tycoons or simulations. Another
+common case where more advanced layout features may be required is in-game tools (or simply just tools).</p>
+<p>All these situations require a more capable OS-like user interface, with advanced layout and formatting.
+For that, <a class="reference internal" href="../../classes/class_container.html#class-container"><span class="std std-ref">Containers</span></a> are more useful.</p>
+<section id="container-layout">
+<h2>Container layout<a class="headerlink" href="#container-layout" title="Link to this heading"></a></h2>
+<p>Containers provide a huge amount of layout power (as an example, the Godot editor user interface is entirely done using them):</p>
+<blockquote>
+<div><img alt="../../_images/godot_containers.png" src="../../_images/godot_containers.png" />
+</div></blockquote>
+<p>When a <a class="reference internal" href="../../classes/class_container.html#class-container"><span class="std std-ref">Container</span></a>-derived node is used, all children <a class="reference internal" href="../../classes/class_control.html#class-control"><span class="std std-ref">Control</span></a> nodes give up their
+own positioning ability. This means the <em>Container</em> will control their positioning and any attempt to manually alter these
+nodes will be either ignored or invalidated the next time their parent is resized.</p>
+<p>Likewise, when a <em>Container</em> derived node is resized, all its children will be re-positioned according to it,
+with a behavior based on the type of container used:</p>
+<blockquote>
+<div><img alt="../../_images/container_example.gif" src="../../_images/container_example.gif" />
+</div></blockquote>
+<p>Example of <em>HBoxContainer</em> resizing children buttons.</p>
+<p>The real strength of containers is that they can be nested (as nodes), allowing the creation of very complex layouts that resize effortlessly.</p>
+</section>
+<section id="sizing-options">
+<h2>Sizing options<a class="headerlink" href="#sizing-options" title="Link to this heading"></a></h2>
+<p>When adding a node to a container, the way the container treats each child depends mainly on their <em>container sizing options</em>. These options
+can be found by inspecting the layout of any <em>Control</em> that is a child of a <em>Container</em>.</p>
+<blockquote>
+<div><img alt="../../_images/container_sizing_options.webp" src="../../_images/container_sizing_options.webp" />
+</div></blockquote>
+<p>Sizing options are independent for vertical and horizontal sizing and not all containers make use of them (but most do):</p>
+<ul class="simple">
+<li><p><strong>Fill</strong>: Ensures the control <em>fills</em> the designated area within the container. No matter if
+a control <em>expands</em> or not (see below), it will only <em>fill</em> the designated area when this is toggled on (it is by default).</p></li>
+<li><p><strong>Expand</strong>: Attempts to use as much space as possible in the parent container (in each axis).
+Controls that don't expand will be pushed away by those that do. Between expanding controls, the
+amount of space they take from each other is determined by the <em>Stretch Ratio</em> (see below).
+This option is only available when the parent Container is of the right type, for example the <em>HBoxContainer</em> has this option
+for horizontal sizing.</p></li>
+<li><p><strong>Shrink Begin</strong> When expanding, try to remain at the left or top of the expanded
+area.</p></li>
+<li><p><strong>Shrink Center</strong> When expanding, try to remain at the center of the expanded
+area.</p></li>
+<li><p><strong>Shrink End</strong> When expanding, try to remain at the right or bottom of the expanded
+area.</p></li>
+<li><p><strong>Stretch Ratio</strong>: The ratio of how much expanded controls take up the available space in relation to each
+other. A control with &quot;2&quot;, will take up twice as much available space as one with &quot;1&quot;.</p></li>
+</ul>
+<p>Experimenting with these flags and different containers is recommended to get a better grasp on how they work.</p>
+</section>
+<section id="container-types">
+<h2>Container types<a class="headerlink" href="#container-types" title="Link to this heading"></a></h2>
+<p>Godot provides several container types out of the box as they serve different purposes:</p>
+<section id="box-containers">
+<h3>Box Containers<a class="headerlink" href="#box-containers" title="Link to this heading"></a></h3>
+<p>Arranges child controls vertically or horizontally (via <a class="reference internal" href="../../classes/class_hboxcontainer.html#class-hboxcontainer"><span class="std std-ref">HBoxContainer</span></a> and
+<a class="reference internal" href="../../classes/class_vboxcontainer.html#class-vboxcontainer"><span class="std std-ref">VBoxContainer</span></a>). In the opposite of the designated direction
+(as in, vertical for a horizontal container), it just expands the children.</p>
+<blockquote>
+<div><img alt="../../_images/containers_box.png" src="../../_images/containers_box.png" />
+</div></blockquote>
+<p>These containers make use of the <em>Stretch Ratio</em> property for children with the <em>Expand</em> flag set.</p>
+</section>
+<section id="grid-container">
+<h3>Grid Container<a class="headerlink" href="#grid-container" title="Link to this heading"></a></h3>
+<p>Arranges child controls in a grid layout (via <a class="reference internal" href="../../classes/class_gridcontainer.html#class-gridcontainer"><span class="std std-ref">GridContainer</span></a>, amount
+of columns must be specified). Uses both the vertical and horizontal expand flags.</p>
+<blockquote>
+<div><img alt="../../_images/containers_grid.png" src="../../_images/containers_grid.png" />
+</div></blockquote>
+</section>
+<section id="margin-container">
+<h3>Margin Container<a class="headerlink" href="#margin-container" title="Link to this heading"></a></h3>
+<p>Child controls are expanded towards the bounds of this control (via
+<a class="reference internal" href="../../classes/class_margincontainer.html#class-margincontainer"><span class="std std-ref">MarginContainer</span></a>). Padding will be added on the margins
+depending on the theme configuration.</p>
+<blockquote>
+<div><img alt="../../_images/containers_margin.png" src="../../_images/containers_margin.png" />
+</div></blockquote>
+<p>Again, keep in mind that the margins are a <em>Theme</em> value, so they need to be edited from the
+constants overrides section of each control:</p>
+<blockquote>
+<div><img alt="../../_images/containers_margin_constants.png" src="../../_images/containers_margin_constants.png" />
+</div></blockquote>
+</section>
+<section id="tab-container">
+<h3>Tab Container<a class="headerlink" href="#tab-container" title="Link to this heading"></a></h3>
+<p>Allows you to place several child controls stacked on top of each other (via
+<a class="reference internal" href="../../classes/class_tabcontainer.html#class-tabcontainer"><span class="std std-ref">TabContainer</span></a>), with only the <em>current</em> one visible.</p>
+<blockquote>
+<div><img alt="../../_images/containers_tab.png" src="../../_images/containers_tab.png" />
+</div></blockquote>
+<p>Changing the <em>current</em> one is done via tabs located at the top of the container, via clicking:</p>
+<blockquote>
+<div><img alt="../../_images/containers_tab_click.gif" src="../../_images/containers_tab_click.gif" />
+</div></blockquote>
+<p>The titles are generated from the node names by default (although they can be overridden via <em>TabContainer</em> API).</p>
+<p>Settings such as tab placement and <em>StyleBox</em> can be modified in the <em>TabContainer</em> theme overrides.</p>
+</section>
+<section id="split-container">
+<h3>Split Container<a class="headerlink" href="#split-container" title="Link to this heading"></a></h3>
+<p>Arranges child controls vertically or horizontally and creates grabbers between them
+(via <a class="reference internal" href="../../classes/class_hsplitcontainer.html#class-hsplitcontainer"><span class="std std-ref">HSplitContainer</span></a> and <a class="reference internal" href="../../classes/class_vsplitcontainer.html#class-vsplitcontainer"><span class="std std-ref">VSplitContainer</span></a>).
+Respects both horizontal and vertical expand flags, as well as <em>Stretch Ratio</em>.</p>
+<blockquote>
+<div><img alt="../../_images/containers_split.png" src="../../_images/containers_split.png" />
+</div></blockquote>
+<p>The grabbers can be dragged around to change the size relation between the children:</p>
+<blockquote>
+<div><img alt="../../_images/containers_split_drag.gif" src="../../_images/containers_split_drag.gif" />
+</div></blockquote>
+</section>
+<section id="panelcontainer">
+<h3>PanelContainer<a class="headerlink" href="#panelcontainer" title="Link to this heading"></a></h3>
+<p>A container that draws a <em>StyleBox</em>, then expands children to cover its whole area
+(via <a class="reference internal" href="../../classes/class_panelcontainer.html#class-panelcontainer"><span class="std std-ref">PanelContainer</span></a>, respecting the <em>StyleBox</em> margins).
+It respects both the horizontal and vertical sizing options.</p>
+<blockquote>
+<div><img alt="../../_images/containers_panel.png" src="../../_images/containers_panel.png" />
+</div></blockquote>
+<p>This container is useful as a top-level control, or just to add custom backgrounds to sections of a layout.</p>
+</section>
+<section id="foldablecontainer">
+<h3>FoldableContainer<a class="headerlink" href="#foldablecontainer" title="Link to this heading"></a></h3>
+<p>A container that can be expanded/collapsed
+(via <a class="reference internal" href="../../classes/class_foldablecontainer.html#class-foldablecontainer"><span class="std std-ref">FoldableContainer</span></a>).
+Child controls are hidden when it is collapsed.</p>
+</section>
+<section id="scrollcontainer">
+<h3>ScrollContainer<a class="headerlink" href="#scrollcontainer" title="Link to this heading"></a></h3>
+<p>Accepts a single child node. If the child node is bigger than the container, scrollbars will be added
+to allow panning the node around (via <a class="reference internal" href="../../classes/class_scrollcontainer.html#class-scrollcontainer"><span class="std std-ref">ScrollContainer</span></a>). Both
+vertical and horizontal size options are respected, and the behavior can be turned on or off
+per axis in the properties.</p>
+<blockquote>
+<div><img alt="../../_images/containers_scroll.png" src="../../_images/containers_scroll.png" />
+</div></blockquote>
+<p>Mouse wheel and touch drag (when touch is available) are also valid ways to pan the child control around.</p>
+<blockquote>
+<div><img alt="../../_images/containers_center_pan.gif" src="../../_images/containers_center_pan.gif" />
+</div></blockquote>
+<p>As in the example above, one of the most common ways to use this container is together with a <em>VBoxContainer</em> as child.</p>
+</section>
+<section id="aspectratiocontainer">
+<h3>AspectRatioContainer<a class="headerlink" href="#aspectratiocontainer" title="Link to this heading"></a></h3>
+<p>A container type that arranges its child controls in a way that preserves their proportions
+automatically when the container is resized.
+(via <a class="reference internal" href="../../classes/class_aspectratiocontainer.html#class-aspectratiocontainer"><span class="std std-ref">AspectRatioContainer</span></a>).
+It has multiple stretch modes, providing options for adjusting the child controls' sizes concerning the container:
+&quot;fill,&quot; &quot;width control height,&quot; &quot;height control width,&quot; and &quot;cover.&quot;</p>
+<blockquote>
+<div><img alt="../../_images/containers_aspectratio.webp" src="../../_images/containers_aspectratio.webp" />
+</div></blockquote>
+<p>It is useful when you have a container that needs to be dynamic and responsive to different screen sizes,
+and you want the child elements to scale proportionally without losing their intended shapes.</p>
+<blockquote>
+<div><img alt="../../_images/containers_aspectratio_drag.webp" src="../../_images/containers_aspectratio_drag.webp" />
+</div></blockquote>
+</section>
+<section id="flowcontainer">
+<h3>FlowContainer<a class="headerlink" href="#flowcontainer" title="Link to this heading"></a></h3>
+<p>FlowContainer is a container that arranges its child controls either horizontally or vertically
+(via <a class="reference internal" href="../../classes/class_hflowcontainer.html#class-hflowcontainer"><span class="std std-ref">HFlowContainer</span></a> and via <a class="reference internal" href="../../classes/class_vflowcontainer.html#class-vflowcontainer"><span class="std std-ref">VFlowContainer</span></a>).
+When the available space runs out, it wraps the children to the next line or column, similar to how text wraps in a book.</p>
+<blockquote>
+<div><img alt="../../_images/containers_hflow.webp" src="../../_images/containers_hflow.webp" />
+</div></blockquote>
+<p>It is useful for creating flexible layouts where the child controls adjust automatically to the available space without overlapping.</p>
+<blockquote>
+<div><img alt="../../_images/containers_hflow_drag.webp" src="../../_images/containers_hflow_drag.webp" />
+</div></blockquote>
+</section>
+<section id="centercontainer">
+<h3>CenterContainer<a class="headerlink" href="#centercontainer" title="Link to this heading"></a></h3>
+<p>CenterContainer is a container that automatically keeps all of its child controls centered within it at their minimum size.
+It ensures that the child controls are always aligned to the center, making it easier to create centered layouts without manual positioning
+(via <a class="reference internal" href="../../classes/class_centercontainer.html#class-centercontainer"><span class="std std-ref">CenterContainer</span></a>).</p>
+<blockquote>
+<div><img alt="../../_images/containers_center.webp" src="../../_images/containers_center.webp" />
+<img alt="../../_images/containers_center_drag.webp" src="../../_images/containers_center_drag.webp" />
+</div></blockquote>
+</section>
+<section id="subviewportcontainer">
+<h3>SubViewportContainer<a class="headerlink" href="#subviewportcontainer" title="Link to this heading"></a></h3>
+<p>This is a special control that will only accept a single <em>Viewport</em> node as child, and it will display
+it as if it was an image (via <a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer"><span class="std std-ref">SubViewportContainer</span></a>).</p>
+</section>
+</section>
+<section id="creating-custom-containers">
+<h2>Creating custom Containers<a class="headerlink" href="#creating-custom-containers" title="Link to this heading"></a></h2>
+<p>It is possible to create a custom container using a script.
+Here is an example of a container that fits children to its size:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Container</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_notification</span><span class="p">(</span><span class="n">what</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">NOTIFICATION_SORT_CHILDREN</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Must re-sort the children</span>
+<span class="w">        </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nf">get_children</span><span class="p">():</span>
+<span class="w">            </span><span class="c1"># Fit to own size</span>
+<span class="w">            </span><span class="nf">fit_child_in_rect</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Rect2</span><span class="p">(</span><span class="nb nb-Type">Vector2</span><span class="p">(),</span><span class="w"> </span><span class="n">size</span><span class="p">))</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">set_some_setting</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Some setting changed, ask for children re-sort.</span>
+<span class="w">    </span><span class="nf">queue_sort</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">CustomContainer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Container</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Notification</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">what</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">what</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">NotificationSortChildren</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Must re-sort the children</span>
+<span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Control</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">GetChildren</span><span class="p">())</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Fit to own size</span>
+<span class="w">                </span><span class="n">FitChildInRect</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rect2</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(),</span><span class="w"> </span><span class="n">Size</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetSomeSetting</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Some setting changed, ask for children re-sort.</span>
+<span class="w">        </span><span class="n">QueueSort</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="size_and_anchors.html" class="btn btn-neutral float-left" title="Size and anchors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="custom_gui_controls.html" class="btn btn-neutral float-right" title="Custom GUI controls" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

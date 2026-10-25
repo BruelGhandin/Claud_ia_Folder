@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using compute shaders" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/shaders/compute_shaders.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="This tutorial will walk you through the process of creating a minimal compute shader. But first, a bit of background on compute shaders and how they work with Godot. A compute shader is a special t..." />
+<meta name="description" content="This tutorial will walk you through the process of creating a minimal compute shader. But first, a bit of background on compute shaders and how they work with Godot. A compute shader is a special t..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using compute shaders &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Screen-reading shaders" href="screen-reading_shaders.html" />
+    <link rel="prev" title="Using VisualShaders" href="visual_shaders.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/shaders/compute_shaders" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/shaders/compute_shaders.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Shaders</a></li>
+      <li class="breadcrumb-item active">Using compute shaders</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/shaders/compute_shaders.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-compute-shaders">
+<span id="doc-compute-shaders"></span><h1>Using compute shaders<a class="headerlink" href="#using-compute-shaders" title="Link to this heading"></a></h1>
+<p>This tutorial will walk you through the process of creating a minimal compute
+shader. But first, a bit of background on compute shaders and how they work with
+Godot.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tutorial assumes you are familiar with shaders generally. If you are new
+to shaders please read <a class="reference internal" href="introduction_to_shaders.html#doc-introduction-to-shaders"><span class="std std-ref">Introduction to shaders</span></a> and <a class="reference internal" href="your_first_shader/index.html#toc-your-first-shader"><span class="std std-ref">your
+first shader</span></a> before proceeding with this tutorial.</p>
+</div>
+<p>A compute shader is a special type of shader program that is orientated towards
+general purpose programming. In other words, they are more flexible than vertex
+shaders and fragment shaders as they don't have a fixed purpose (i.e.
+transforming vertices or writing colors to an image). Unlike fragment shaders
+and vertex shaders, compute shaders have very little going on behind the scenes.
+The code you write is what the GPU runs and very little else. This can make them
+a very useful tool to offload heavy calculations to the GPU.</p>
+<p>Now let's get started by creating a short compute shader.</p>
+<p>First, in the <strong>external</strong> text editor of your choice, create a new file called
+<code class="docutils literal notranslate"><span class="pre">compute_example.glsl</span></code> in your project folder. When you write compute shaders
+in Godot, you write them in GLSL directly. The Godot shader language is based on
+GLSL. If you are familiar with normal shaders in Godot, the syntax below will
+look somewhat familiar.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Compute shaders can only be used from RenderingDevice-based renderers (the
+Forward+ or Mobile renderer). To follow along with this tutorial, ensure that
+you are using the Forward+ or Mobile renderer. The setting for which is
+located in the top right-hand corner of the editor.</p>
+<p>Note that compute shader support is generally poor on mobile devices (due to
+driver bugs), even if they are technically supported.</p>
+</div>
+<p>Let's take a look at this compute shader code:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="cp">#[compute]</span>
+<span class="cp">#version 450</span>
+
+<span class="c1">// Invocations in the (x, y, z) dimension</span>
+<span class="k">layout</span><span class="p">(</span><span class="n">local_size_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">local_size_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">local_size_z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="p">;</span>
+
+<span class="c1">// A binding to the buffer we create in our script</span>
+<span class="k">layout</span><span class="p">(</span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0</span><span class="p">,</span><span class="w"> </span><span class="n">binding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0</span><span class="p">,</span><span class="w"> </span><span class="n">std430</span><span class="p">)</span><span class="w"> </span><span class="k">restrict</span><span class="w"> </span><span class="k">buffer</span><span class="w"> </span><span class="n">MyDataBuffer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">data</span><span class="p">[];</span>
+<span class="p">}</span>
+<span class="n">my_data_buffer</span><span class="p">;</span>
+
+<span class="c1">// The code we want to execute in each invocation</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// gl_GlobalInvocationID.x uniquely identifies this invocation across all work groups</span>
+<span class="w">    </span><span class="n">my_data_buffer</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="nb">gl_GlobalInvocationID</span><span class="p">.</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This code takes an array of floats, multiplies each element by 2 and store the
+results back in the buffer array. Now let's look at it line-by-line.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="cp">#[compute]</span>
+<span class="cp">#version 450</span>
+</pre></div>
+</div>
+<p>These two lines communicate two things:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>The following code is a compute shader. This is a Godot-specific hint that is needed for the editor to properly import the shader file.</p></li>
+<li><p>The code is using GLSL version 450.</p></li>
+</ol>
+</div></blockquote>
+<p>You should never have to change these two lines for your custom compute shaders.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invocations in the (x, y, z) dimension</span>
+<span class="k">layout</span><span class="p">(</span><span class="n">local_size_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">local_size_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">local_size_z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Next, we communicate the number of invocations to be used in each workgroup.
+Invocations are instances of the shader that are running within the same
+workgroup. When we launch a compute shader from the CPU, we tell it how many
+workgroups to run. Workgroups run in parallel to each other. While running one
+workgroup, you cannot access information in another workgroup. However,
+invocations in the same workgroup can have some limited access to other invocations.</p>
+<p>Think about workgroups and invocations as a giant nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">workgroup_size_x</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">workgroup_size_y</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0</span><span class="p">;</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">workgroup_size_z</span><span class="p">;</span><span class="w"> </span><span class="n">z</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Each workgroup runs independently and in parallel.</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">local_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0</span><span class="p">;</span><span class="w"> </span><span class="n">local_x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">invocation_size_x</span><span class="p">;</span><span class="w"> </span><span class="n">local_x</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">           </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">local_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0</span><span class="p">;</span><span class="w"> </span><span class="n">local_y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">invocation_size_y</span><span class="p">;</span><span class="w"> </span><span class="n">local_y</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">local_z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0</span><span class="p">;</span><span class="w"> </span><span class="n">local_z</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">invocation_size_z</span><span class="p">;</span><span class="w"> </span><span class="n">local_z</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                 </span><span class="c1">// Compute shader runs here.</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="w">           </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Workgroups and invocations are an advanced topic. For now, remember that we will
+be running two invocations per workgroup.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="c1">// A binding to the buffer we create in our script</span>
+<span class="k">layout</span><span class="p">(</span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0</span><span class="p">,</span><span class="w"> </span><span class="n">binding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0</span><span class="p">,</span><span class="w"> </span><span class="n">std430</span><span class="p">)</span><span class="w"> </span><span class="k">restrict</span><span class="w"> </span><span class="k">buffer</span><span class="w"> </span><span class="n">MyDataBuffer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">data</span><span class="p">[];</span>
+<span class="p">}</span>
+<span class="n">my_data_buffer</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Here we provide information about the memory that the compute shader will have
+access to. The <code class="docutils literal notranslate"><span class="pre">layout</span></code> property allows us to tell the shader where to look
+for the buffer, we will need to match these <code class="docutils literal notranslate"><span class="pre">set</span></code> and <code class="docutils literal notranslate"><span class="pre">binding</span></code> positions
+from the CPU side later.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">restrict</span></code> keyword tells the shader that this buffer is only going to be
+accessed from one place in this shader. In other words, we won't bind this
+buffer in another <code class="docutils literal notranslate"><span class="pre">set</span></code> or <code class="docutils literal notranslate"><span class="pre">binding</span></code> index. This is important as it allows
+the shader compiler to optimize the shader code. Always use <code class="docutils literal notranslate"><span class="pre">restrict</span></code> when
+you can.</p>
+<p>This is an <em>unsized</em> buffer, which means it can be any size. So we need to be
+careful not to read from an index larger than the size of the buffer.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="c1">// The code we want to execute in each invocation</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// gl_GlobalInvocationID.x uniquely identifies this invocation across all work groups</span>
+<span class="w">    </span><span class="n">my_data_buffer</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="nb">gl_GlobalInvocationID</span><span class="p">.</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, we write the <code class="docutils literal notranslate"><span class="pre">main</span></code> function which is where all the logic happens. We
+access a position in the storage buffer using the <code class="docutils literal notranslate"><span class="pre">gl_GlobalInvocationID</span></code>
+built-in variables. <code class="docutils literal notranslate"><span class="pre">gl_GlobalInvocationID</span></code> gives you the global unique ID for
+the current invocation.</p>
+<p>To continue, write the code above into your newly created <code class="docutils literal notranslate"><span class="pre">compute_example.glsl</span></code>
+file.</p>
+<section id="create-a-local-renderingdevice">
+<h2>Create a local RenderingDevice<a class="headerlink" href="#create-a-local-renderingdevice" title="Link to this heading"></a></h2>
+<p>To interact with and execute a compute shader, we need a script.
+Create a new script in the language of your choice and attach it to any Node
+in your scene.</p>
+<p>Now to execute our shader we need a local <a class="reference internal" href="../../classes/class_renderingdevice.html#class-renderingdevice"><span class="std std-ref">RenderingDevice</span></a>
+which can be created using the <a class="reference internal" href="../../classes/class_renderingserver.html#class-renderingserver"><span class="std std-ref">RenderingServer</span></a>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a local rendering device.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">rd</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nb">RenderingServer</span><span class="o">.</span><span class="nf">create_local_rendering_device</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a local rendering device.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">rd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RenderingServer</span><span class="p">.</span><span class="n">CreateLocalRenderingDevice</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>After that, we can load the newly created shader file <code class="docutils literal notranslate"><span class="pre">compute_example.glsl</span></code>
+and create a precompiled version of it using this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load GLSL shader</span>
+<span class="k">var</span><span class="w"> </span><span class="n">shader_file</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">load</span><span class="p">(</span><span class="s2">&quot;res://compute_example.glsl&quot;</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">shader_spirv</span><span class="p">:</span><span class="w"> </span><span class="nb">RDShaderSPIRV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shader_file</span><span class="o">.</span><span class="nf">get_spirv</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">shader</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">rd</span><span class="o">.</span><span class="nf">shader_create_from_spirv</span><span class="p">(</span><span class="n">shader_spirv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Load GLSL shader</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">shaderFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">RDShaderFile</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://compute_example.glsl&quot;</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">shaderBytecode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shaderFile</span><span class="p">.</span><span class="n">GetSpirV</span><span class="p">();</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">shader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rd</span><span class="p">.</span><span class="n">ShaderCreateFromSpirV</span><span class="p">(</span><span class="n">shaderBytecode</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Local RenderingDevices cannot be debugged using tools such as
+<a class="reference external" href="https://renderdoc.org/">RenderDoc</a>.</p>
+</div>
+</section>
+<section id="provide-input-data">
+<h2>Provide input data<a class="headerlink" href="#provide-input-data" title="Link to this heading"></a></h2>
+<p>As you might remember, we want to pass an input array to our shader, multiply
+each element by 2 and get the results.</p>
+<p>We need to create a buffer to pass values to a compute shader. We are dealing
+with an array of floats, so we will use a storage buffer for this example. A
+storage buffer takes an array of bytes and allows the CPU to transfer data to
+and from the GPU.</p>
+<p>So let's initialize an array of floats and create a storage buffer:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prepare our data. We use floats in the shader, so we need 32 bit.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedFloat32Array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">])</span>
+<span class="k">var</span><span class="w"> </span><span class="n">input_bytes</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="o">.</span><span class="nf">to_byte_array</span><span class="p">()</span>
+
+<span class="c1"># Create a storage buffer that can hold our float values.</span>
+<span class="c1"># Each float has 4 bytes (32 bit) so 10 x 4 = 40 bytes</span>
+<span class="k">var</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">rd</span><span class="o">.</span><span class="nf">storage_buffer_create</span><span class="p">(</span><span class="n">input_bytes</span><span class="o">.</span><span class="nf">size</span><span class="p">(),</span><span class="w"> </span><span class="n">input_bytes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Prepare our data. We use floats in the shader, so we need 32 bit.</span>
+<span class="kt">float</span><span class="p">[]</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">];</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">inputBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="p">[</span><span class="n">input</span><span class="p">.</span><span class="n">Length</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)];</span>
+<span class="n">Buffer</span><span class="p">.</span><span class="n">BlockCopy</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">inputBytes</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">inputBytes</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+
+<span class="c1">// Create a storage buffer that can hold our float values.</span>
+<span class="c1">// Each float has 4 bytes (32 bit) so 10 x 4 = 40 bytes</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rd</span><span class="p">.</span><span class="n">StorageBufferCreate</span><span class="p">((</span><span class="kt">uint</span><span class="p">)</span><span class="n">inputBytes</span><span class="p">.</span><span class="n">Length</span><span class="p">,</span><span class="w"> </span><span class="n">inputBytes</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>With the buffer in place we need to tell the rendering device to use this
+buffer. To do that we will need to create a uniform (like in normal shaders) and
+assign it to a uniform set which we can pass to our shader later.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a uniform to assign the buffer to the rendering device</span>
+<span class="k">var</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nb">RDUniform</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="n">uniform</span><span class="o">.</span><span class="vi">uniform_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">RenderingDevice</span><span class="o">.</span><span class="vi">UNIFORM_TYPE_STORAGE_BUFFER</span>
+<span class="n">uniform</span><span class="o">.</span><span class="vi">binding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1"># this needs to match the &quot;binding&quot; in our shader file</span>
+<span class="n">uniform</span><span class="o">.</span><span class="nf">add_id</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">uniform_set</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">rd</span><span class="o">.</span><span class="nf">uniform_set_create</span><span class="p">([</span><span class="n">uniform</span><span class="p">],</span><span class="w"> </span><span class="n">shader</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1"># the last parameter (the 0) needs to match the &quot;set&quot; in our shader file</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a uniform to assign the buffer to the rendering device</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RDUniform</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">UniformType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RenderingDevice</span><span class="p">.</span><span class="n">UniformType</span><span class="p">.</span><span class="n">StorageBuffer</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Binding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">};</span>
+<span class="n">uniform</span><span class="p">.</span><span class="n">AddId</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">uniformSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rd</span><span class="p">.</span><span class="n">UniformSetCreate</span><span class="p">([</span><span class="n">uniform</span><span class="p">],</span><span class="w"> </span><span class="n">shader</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="defining-a-compute-pipeline">
+<h2>Defining a compute pipeline<a class="headerlink" href="#defining-a-compute-pipeline" title="Link to this heading"></a></h2>
+<p>The next step is to create a set of instructions our GPU can execute.
+We need a pipeline and a compute list for that.</p>
+<p>The steps we need to do to compute our result are:</p>
+<ol class="arabic simple">
+<li><p>Create a new pipeline.</p></li>
+<li><p>Begin a list of instructions for our GPU to execute.</p></li>
+<li><p>Bind our compute list to our pipeline</p></li>
+<li><p>Bind our buffer uniform to our pipeline</p></li>
+<li><p>Specify how many workgroups to use</p></li>
+<li><p>End the list of instructions</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a compute pipeline</span>
+<span class="k">var</span><span class="w"> </span><span class="n">pipeline</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">rd</span><span class="o">.</span><span class="nf">compute_pipeline_create</span><span class="p">(</span><span class="n">shader</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">compute_list</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">rd</span><span class="o">.</span><span class="nf">compute_list_begin</span><span class="p">()</span>
+<span class="n">rd</span><span class="o">.</span><span class="nf">compute_list_bind_compute_pipeline</span><span class="p">(</span><span class="n">compute_list</span><span class="p">,</span><span class="w"> </span><span class="n">pipeline</span><span class="p">)</span>
+<span class="n">rd</span><span class="o">.</span><span class="nf">compute_list_bind_uniform_set</span><span class="p">(</span><span class="n">compute_list</span><span class="p">,</span><span class="w"> </span><span class="n">uniform_set</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="n">rd</span><span class="o">.</span><span class="nf">compute_list_dispatch</span><span class="p">(</span><span class="n">compute_list</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="n">rd</span><span class="o">.</span><span class="nf">compute_list_end</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a compute pipeline</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">pipeline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rd</span><span class="p">.</span><span class="n">ComputePipelineCreate</span><span class="p">(</span><span class="n">shader</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">computeList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rd</span><span class="p">.</span><span class="n">ComputeListBegin</span><span class="p">();</span>
+<span class="n">rd</span><span class="p">.</span><span class="n">ComputeListBindComputePipeline</span><span class="p">(</span><span class="n">computeList</span><span class="p">,</span><span class="w"> </span><span class="n">pipeline</span><span class="p">);</span>
+<span class="n">rd</span><span class="p">.</span><span class="n">ComputeListBindUniformSet</span><span class="p">(</span><span class="n">computeList</span><span class="p">,</span><span class="w"> </span><span class="n">uniformSet</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="n">rd</span><span class="p">.</span><span class="n">ComputeListDispatch</span><span class="p">(</span><span class="n">computeList</span><span class="p">,</span><span class="w"> </span><span class="n">xGroups</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">yGroups</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">zGroups</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="n">rd</span><span class="p">.</span><span class="n">ComputeListEnd</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>Note that we are dispatching the compute shader with 5 work groups in the
+X axis, and one in the others. Since we have 2 local invocations in the X axis
+(specified in our shader), 10 compute shader invocations will be launched in
+total. If you read or write to indices outside of the range of your buffer, you
+may access memory outside of your shaders control or parts of other variables
+which may cause issues on some hardware.</p>
+</section>
+<section id="execute-a-compute-shader">
+<h2>Execute a compute shader<a class="headerlink" href="#execute-a-compute-shader" title="Link to this heading"></a></h2>
+<p>After all of this we are almost done, but we still need to execute our pipeline.
+So far we have only recorded what we would like the GPU to do; we have not
+actually run the shader program.</p>
+<p>To execute our compute shader we need to submit the pipeline to the GPU and
+wait for the execution to finish:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Submit to GPU and wait for sync</span>
+<span class="n">rd</span><span class="o">.</span><span class="nf">submit</span><span class="p">()</span>
+<span class="n">rd</span><span class="o">.</span><span class="nf">sync</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Submit to GPU and wait for sync</span>
+<span class="n">rd</span><span class="p">.</span><span class="n">Submit</span><span class="p">();</span>
+<span class="n">rd</span><span class="p">.</span><span class="n">Sync</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>Ideally, you would not call <code class="docutils literal notranslate"><span class="pre">sync()</span></code> to synchronize the RenderingDevice right
+away as it will cause the CPU to wait for the GPU to finish working. In our
+example, we synchronize right away because we want our data available for reading
+right away. In general, you will want to wait <em>at least</em> 2 or 3 frames before
+synchronizing so that the GPU is able to run in parallel with the CPU.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Long computations can cause Windows graphics drivers to &quot;crash&quot; due to
+<abbr title="Timeout Detection and Recovery">TDR</abbr> being triggered by Windows.
+This is a mechanism that reinitializes the graphics driver after a certain
+amount of time has passed without any activity from the graphics driver
+(usually 5 to 10 seconds).</p>
+<p>Depending on the duration your compute shader takes to execute, you may need
+to split it into multiple dispatches to reduce the time each dispatch takes
+and reduce the chances of triggering a TDR. Given TDR is time-dependent,
+slower GPUs may be more prone to TDRs when running a given compute shader
+compared to a faster GPU.</p>
+</div>
+</section>
+<section id="retrieving-results">
+<h2>Retrieving results<a class="headerlink" href="#retrieving-results" title="Link to this heading"></a></h2>
+<p>You may have noticed that, in the example shader, we modified the contents of the
+storage buffer. In other words, the shader read from our array and stored the data
+in the same array again so our results are already there. Let's retrieve
+the data and print the results to our console.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-6-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-6-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-6-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read back the data from the buffer</span>
+<span class="k">var</span><span class="w"> </span><span class="n">output_bytes</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">rd</span><span class="o">.</span><span class="nf">buffer_get_data</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">output_bytes</span><span class="o">.</span><span class="nf">to_float32_array</span><span class="p">()</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Input: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Output: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-6-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-6-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Read back the data from the buffers</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">outputBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rd</span><span class="p">.</span><span class="n">BufferGetData</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">input</span><span class="p">.</span><span class="n">Length</span><span class="p">];</span>
+<span class="n">Buffer</span><span class="p">.</span><span class="n">BlockCopy</span><span class="p">(</span><span class="n">outputBytes</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">outputBytes</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Input: &quot;</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">input</span><span class="p">));</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Output: &quot;</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="freeing-memory">
+<h2>Freeing memory<a class="headerlink" href="#freeing-memory" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">buffer</span></code>, <code class="docutils literal notranslate"><span class="pre">pipeline</span></code>, and <code class="docutils literal notranslate"><span class="pre">uniform_set</span></code> variables we've been using are
+each an <a class="reference internal" href="../../classes/class_rid.html#class-rid"><span class="std std-ref">RID</span></a>. Because RenderingDevice is meant to be a lower-level
+API, RIDs aren't freed automatically. This means that once you're done using
+<code class="docutils literal notranslate"><span class="pre">buffer</span></code> or any other RID, you are responsible for freeing its memory
+manually using the RenderingDevice's
+<a class="reference internal" href="../../classes/class_renderingdevice.html#class-renderingdevice-method-free-rid"><span class="std std-ref">free_rid()</span></a> method.</p>
+<p>With that, you have everything you need to get started working with compute
+shaders.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The demo projects repository contains a
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/compute/heightmap">Compute Shader Heightmap demo</a>
+This project performs heightmap image generation on the CPU and
+GPU separately, which lets you compare how a similar algorithm can be
+implemented in two different ways (with the GPU implementation being faster
+in most cases).</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="visual_shaders.html" class="btn btn-neutral float-left" title="Using VisualShaders" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="screen-reading_shaders.html" class="btn btn-neutral float-right" title="Screen-reading shaders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

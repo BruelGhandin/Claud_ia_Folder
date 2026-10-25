@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Sky shaders" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/shaders/shader_reference/sky_shader.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Sky shaders are a special type of shader used for drawing sky backgrounds and for updating radiance cubemaps which are used for image-based lighting (IBL). Sky shaders only have one processing func..." />
+<meta name="description" content="Sky shaders are a special type of shader used for drawing sky backgrounds and for updating radiance cubemaps which are used for image-based lighting (IBL). Sky shaders only have one processing func..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Sky shaders &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Fog shaders" href="fog_shader.html" />
+    <link rel="prev" title="Particle shaders" href="particle_shader.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/shaders/shader_reference/sky_shader" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/shaders/shader_reference/sky_shader.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Shaders</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Shading reference</a></li>
+      <li class="breadcrumb-item active">Sky shaders</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/shaders/shader_reference/sky_shader.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="sky-shaders">
+<span id="doc-sky-shader"></span><h1>Sky shaders<a class="headerlink" href="#sky-shaders" title="Link to this heading"></a></h1>
+<p>Sky shaders are a special type of shader used for drawing sky backgrounds
+and for updating radiance cubemaps which are used for image-based lighting
+(IBL). Sky shaders only have one processing function, the <code class="docutils literal notranslate"><span class="pre">sky()</span></code>
+function.</p>
+<p>There are three places the sky shader is used.</p>
+<ul class="simple">
+<li><p>First the sky shader is used to draw the sky when you have selected to use
+a Sky as the background in your scene.</p></li>
+<li><p>Second, the sky shader is used to update the radiance cubemap
+when using the Sky for ambient color or reflections.</p></li>
+<li><p>Third, the sky shader is used to draw the lower res subpasses which can be
+used in the high-res background or cubemap pass.</p></li>
+</ul>
+<p>In total, this means the sky shader can run up
+to six times per frame, however, in practice it will be much less than that
+because the radiance cubemap does not need to be updated every frame, and
+not all subpasses will be used. You can change the behavior of the shader
+based on where it is called by checking the <code class="docutils literal notranslate"><span class="pre">AT_*_PASS</span></code> booleans. For
+example:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">sky</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">sky</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">AT_CUBEMAP_PASS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Sets the radiance cubemap to a nice shade of blue instead of doing</span>
+<span class="w">        </span><span class="c1">// expensive sky calculations</span>
+<span class="w">        </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Do expensive sky calculations for background sky only</span>
+<span class="w">        </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_sky_color</span><span class="p">(</span><span class="n">EYEDIR</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When using the sky shader to draw a background, the shader will be called for
+all non-occluded fragments on the screen. However, for the background's
+subpasses, the shader will be called for every pixel of the subpass.</p>
+<p>When using the sky shader to update the radiance cubemap, the sky shader
+will be called for every pixel in the cubemap. On the other hand, the shader
+will only be called when the radiance cubemap needs to be updated. The radiance
+cubemap needs to be updated when any of the shader parameters are updated.
+For example, if <code class="docutils literal notranslate"><span class="pre">TIME</span></code> is used in the shader, then the radiance cubemap
+will update every frame. The following list of changes force an update of
+the radiance cubemap:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TIME</span></code> is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">POSITION</span></code> is used and the camera position changes.</p></li>
+<li><p>If any <code class="docutils literal notranslate"><span class="pre">LIGHTX_*</span></code> properties are used and any
+<a class="reference internal" href="../../../classes/class_directionallight3d.html#class-directionallight3d"><span class="std std-ref">DirectionalLight3D</span></a> changes.</p></li>
+<li><p>If any uniform is changed in the shader.</p></li>
+<li><p>If the screen is resized and either of the subpasses are used.</p></li>
+</ul>
+<p>Try to avoid updating the radiance cubemap needlessly. If you do need to
+update the radiance cubemap each frame, make sure your
+<a class="reference internal" href="../../../classes/class_sky.html#class-sky-property-process-mode"><span class="std std-ref">Sky process mode</span></a> is set to
+<a class="reference internal" href="../../../classes/class_sky.html#class-sky-constant-process-mode-realtime"><span class="std std-ref">PROCESS_MODE_REALTIME</span></a>.</p>
+<p>Note that the <a class="reference internal" href="../../../classes/class_sky.html#class-sky-property-process-mode"><span class="std std-ref">process mode</span></a> only
+affects the rendering of the radiance cubemap. The visible sky is always
+rendered by calling the fragment shader for every pixel. With complex fragment
+shaders, this can result in a high rendering overhead. If the sky is static
+(the conditions listed above are met) or changes slowly, running the full
+fragment shader every frame is not needed. This can be avoided by rendering the
+full sky into the radiance cubemap, and reading from this cubemap when
+rendering the visible sky. With a completely static sky, this means that it
+needs to be rendered only once.</p>
+<p>The following code renders the full sky into the radiance cubemap and reads
+from that cubemap for displaying the visible sky:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">sky</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">sky</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">AT_CUBEMAP_PASS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">vec3</span><span class="w"> </span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EYEDIR</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">vec4</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Complex color calculation</span>
+
+<span class="w">        </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">col</span><span class="p">.</span><span class="n">xyz</span><span class="p">;</span>
+<span class="w">        </span><span class="n">ALPHA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">RADIANCE</span><span class="p">,</span><span class="w"> </span><span class="n">EYEDIR</span><span class="p">).</span><span class="n">rgb</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This way, the complex calculations happen only in the cubemap pass, which can
+be optimized by setting the sky's <a class="reference internal" href="../../../classes/class_sky.html#class-sky-property-process-mode"><span class="std std-ref">process mode</span></a>
+and the <a class="reference internal" href="../../../classes/class_sky.html#class-sky-property-radiance-size"><span class="std std-ref">radiance size</span></a> to get the
+desired balance between performance and visual fidelity.</p>
+<section id="render-modes">
+<h2>Render modes<a class="headerlink" href="#render-modes" title="Link to this heading"></a></h2>
+<p>Subpasses allow you to do more expensive calculations at a lower resolution
+to speed up your shaders. For example the following code renders clouds at
+a lower resolution than the rest of the sky:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">sky</span><span class="p">;</span>
+<span class="n">render_mode</span><span class="w"> </span><span class="n">use_half_res_pass</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">sky</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">AT_HALF_RES_PASS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Run cloud calculation for 1/4 of the pixels</span>
+<span class="w">        </span><span class="kt">vec4</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generate_clouds</span><span class="p">(</span><span class="n">EYEDIR</span><span class="p">);</span>
+<span class="w">        </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="p">.</span><span class="n">rgb</span><span class="p">;</span>
+<span class="w">        </span><span class="n">ALPHA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="p">.</span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// At full resolution pass, blend sky and clouds together</span>
+<span class="w">        </span><span class="kt">vec3</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generate_sky</span><span class="p">(</span><span class="n">EYEDIR</span><span class="p">);</span>
+<span class="w">        </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">HALF_RES_COLOR</span><span class="p">.</span><span class="n">rgb</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">HALF_RES_COLOR</span><span class="p">.</span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Render mode</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>use_half_res_pass</strong></p></td>
+<td><p>Allows the shader to write to and access the half resolution pass.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>use_quarter_res_pass</strong></p></td>
+<td><p>Allows the shader to write to and access the quarter resolution pass.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>disable_fog</strong></p></td>
+<td><p>If used, fog will not affect the sky.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="built-ins">
+<h2>Built-ins<a class="headerlink" href="#built-ins" title="Link to this heading"></a></h2>
+<p>Values marked as <code class="docutils literal notranslate"><span class="pre">in</span></code> are read-only. Values marked as <code class="docutils literal notranslate"><span class="pre">out</span></code> can optionally
+be written to and will not necessarily contain sensible values. Samplers cannot
+be written to so they are not marked.</p>
+</section>
+<section id="global-built-ins">
+<h2>Global built-ins<a class="headerlink" href="#global-built-ins" title="Link to this heading"></a></h2>
+<p>Global built-ins are available everywhere, including in custom functions.</p>
+<p>There are 4 <code class="docutils literal notranslate"><span class="pre">LIGHTX</span></code> lights, accessed as <code class="docutils literal notranslate"><span class="pre">LIGHT0</span></code>, <code class="docutils literal notranslate"><span class="pre">LIGHT1</span></code>, <code class="docutils literal notranslate"><span class="pre">LIGHT2</span></code>, and <code class="docutils literal notranslate"><span class="pre">LIGHT3</span></code>.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Built-in</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>in float <strong>TIME</strong></p></td>
+<td><p>Global time since the engine has started, in seconds. It repeats after every <code class="docutils literal notranslate"><span class="pre">3,600</span></code>
+seconds (which can be changed with the
+<a class="reference internal" href="../../../classes/class_projectsettings.html#class-projectsettings-property-rendering-limits-time-time-rollover-secs"><span class="std std-ref">rollover</span></a>
+setting). It's affected by <a class="reference internal" href="../../../classes/class_engine.html#class-engine-property-time-scale"><span class="std std-ref">time_scale</span></a> but not by pausing. If you need a
+<code class="docutils literal notranslate"><span class="pre">TIME</span></code> variable that is not affected by time scale, add your own
+<a class="reference internal" href="shading_language.html#doc-shading-language-global-uniforms"><span class="std std-ref">global shader uniform</span></a> and update it each
+frame.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>POSITION</strong></p></td>
+<td><p>Camera position, in world space.</p></td>
+</tr>
+<tr class="row-even"><td><p>samplerCube <strong>RADIANCE</strong></p></td>
+<td><p>Radiance cubemap. Can only be read from during the background pass. Check <code class="docutils literal notranslate"><span class="pre">!AT_CUBEMAP_PASS</span></code> before using.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in bool <strong>AT_HALF_RES_PASS</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> when rendering to the half resolution pass.</p></td>
+</tr>
+<tr class="row-even"><td><p>in bool <strong>AT_QUARTER_RES_PASS</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> when rendering to the quarter resolution pass.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in bool <strong>AT_CUBEMAP_PASS</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> when rendering to the radiance cubemap.</p></td>
+</tr>
+<tr class="row-even"><td><p>in bool <strong>LIGHTX_ENABLED</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">LIGHTX</span></code> is visible and in the scene. If <code class="docutils literal notranslate"><span class="pre">false</span></code>, other light properties may be garbage.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in float <strong>LIGHTX_ENERGY</strong></p></td>
+<td><p>Energy multiplier for <code class="docutils literal notranslate"><span class="pre">LIGHTX</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec3 <strong>LIGHTX_DIRECTION</strong></p></td>
+<td><p>Direction that <code class="docutils literal notranslate"><span class="pre">LIGHTX</span></code> is facing.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>LIGHTX_COLOR</strong></p></td>
+<td><p>Color of <code class="docutils literal notranslate"><span class="pre">LIGHTX</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>in float <strong>LIGHTX_SIZE</strong></p></td>
+<td><p>Angular diameter of <code class="docutils literal notranslate"><span class="pre">LIGHTX</span></code> in the sky. Expressed in radians. For reference, the sun from earth is about .0087 radians
+(0.5 degrees).</p></td>
+</tr>
+<tr class="row-odd"><td><p>in float <strong>PI</strong></p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">PI</span></code> constant (<code class="docutils literal notranslate"><span class="pre">3.141592</span></code>).
+The ratio of a circle's circumference to its diameter and the number of radians in a half turn.</p></td>
+</tr>
+<tr class="row-even"><td><p>in float <strong>TAU</strong></p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">TAU</span></code> constant (<code class="docutils literal notranslate"><span class="pre">6.283185</span></code>).
+Equivalent to <code class="docutils literal notranslate"><span class="pre">PI</span> <span class="pre">*</span> <span class="pre">2</span></code> and the number of radians in a full turn.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in float <strong>E</strong></p></td>
+<td><p>An <code class="docutils literal notranslate"><span class="pre">E</span></code> constant (<code class="docutils literal notranslate"><span class="pre">2.718281</span></code>).
+Euler's number, the base of the natural logarithm.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sky-built-ins">
+<h2>Sky built-ins<a class="headerlink" href="#sky-built-ins" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Built-in</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>in vec3 <strong>EYEDIR</strong></p></td>
+<td><p>Normalized direction of the current pixel. Use this as your basic direction for procedural effects.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec2 <strong>SCREEN_UV</strong></p></td>
+<td><p>Screen UV coordinate for the current pixel. Used to map a texture to the full screen.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec2 <strong>SKY_COORDS</strong></p></td>
+<td><p>Sphere UV. Used to map a panorama texture to the sky.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec4 <strong>HALF_RES_COLOR</strong></p></td>
+<td><p>Color value of the corresponding pixel from the half resolution pass. Uses linear filter.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec4 <strong>QUARTER_RES_COLOR</strong></p></td>
+<td><p>Color value of the corresponding pixel from the quarter resolution pass. Uses linear filter.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out vec3 <strong>COLOR</strong></p></td>
+<td><p>Output color.</p></td>
+</tr>
+<tr class="row-even"><td><p>out float <strong>ALPHA</strong></p></td>
+<td><p>Output alpha value, can only be used in subpasses.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out vec4 <strong>FOG</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="particle_shader.html" class="btn btn-neutral float-left" title="Particle shaders" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fog_shader.html" class="btn btn-neutral float-right" title="Fog shaders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

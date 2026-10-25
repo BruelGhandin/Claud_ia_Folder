@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using VisualShaders" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/shaders/visual_shaders.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="VisualShaders are the visual alternative for creating shaders. As shaders are inherently linked to visuals, the graph-based approach with previews of textures, materials, etc. offers a lot of addit..." />
+<meta name="description" content="VisualShaders are the visual alternative for creating shaders. As shaders are inherently linked to visuals, the graph-based approach with previews of textures, materials, etc. offers a lot of addit..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using VisualShaders &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using compute shaders" href="compute_shaders.html" />
+    <link rel="prev" title="Your second 3D shader" href="your_first_shader/your_second_3d_shader.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/shaders/visual_shaders" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/shaders/visual_shaders.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Shaders</a></li>
+      <li class="breadcrumb-item active">Using VisualShaders</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/shaders/visual_shaders.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-visualshaders">
+<span id="doc-visual-shaders"></span><h1>Using VisualShaders<a class="headerlink" href="#using-visualshaders" title="Link to this heading"></a></h1>
+<p>VisualShaders are the visual alternative for creating shaders.</p>
+<p>As shaders are inherently linked to visuals, the graph-based approach with
+previews of textures, materials, etc. offers a lot of additional convenience
+compared to purely script-based shaders. On the other hand, VisualShaders do not
+expose all features of the shader script and using both in parallel might be
+necessary for specific effects.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are not familiar with shaders, start by reading
+<a class="reference internal" href="introduction_to_shaders.html#doc-introduction-to-shaders"><span class="std std-ref">Introduction to shaders</span></a>.</p>
+</div>
+<section id="creating-a-visualshader">
+<h2>Creating a VisualShader<a class="headerlink" href="#creating-a-visualshader" title="Link to this heading"></a></h2>
+<p>VisualShaders can be created in any <a class="reference internal" href="../../classes/class_shadermaterial.html#class-shadermaterial"><span class="std std-ref">ShaderMaterial</span></a>. To begin using
+VisualShaders, create a new <code class="docutils literal notranslate"><span class="pre">ShaderMaterial</span></code> in an object of your choice.</p>
+<img alt="../../_images/shader_material_create_mesh.webp" src="../../_images/shader_material_create_mesh.webp" />
+<p>Then assign a <a class="reference internal" href="../../classes/class_shader.html#class-shader"><span class="std std-ref">Shader</span></a> resource to the <code class="docutils literal notranslate"><span class="pre">Shader</span></code> property.</p>
+<img alt="../../_images/visual_shader_create.webp" src="../../_images/visual_shader_create.webp" />
+<p>Click on the new <code class="docutils literal notranslate"><span class="pre">Shader</span></code> resource and the Create Shader dialog will
+open automatically. Change the Type option to <a class="reference internal" href="../../classes/class_visualshader.html#class-visualshader"><span class="std std-ref">VisualShader</span></a>
+in the dropdown, then give it a name.</p>
+<img alt="../../_images/visual_shader_create2.webp" src="../../_images/visual_shader_create2.webp" />
+<p>Click on the visual shader you just created to open the Shader Editor.
+The layout of the Shader Editor comprises four parts, a file list on
+the left, the upper toolbar, the graph itself, and a material preview
+on the right that can be toggled off</p>
+<img alt="../../_images/visual_shader_editor2.webp" src="../../_images/visual_shader_editor2.webp" />
+<p>From left to right in the toolbar:</p>
+<ul class="simple">
+<li><p>The arrow can be used to toggle the files panel's visibility.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">File</span></code> button opens a dropdown menu for saving, loading, and creating
+files.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Node</span></code> button displays a popup menu to let you add nodes to the
+shader graph.</p></li>
+<li><p>The drop-down menu is the shader type: Vertex, Fragment and Light. Like for
+script shaders, it defines what built-in nodes will be available.</p></li>
+<li><p>The following buttons and number input control the zooming level, grid
+snapping and distance between grid lines (in pixels).</p></li>
+<li><p>The toggle controls if the graph minimap in the bottom right of the editor
+is visible or not.</p></li>
+<li><p>The automatically arrange selected nodes button will try to organize any
+nodes you have selected as efficiently and cleanly as possible.</p></li>
+<li><p>The Manage Varyings button opens a dropdown that lets you add or remove a
+varying.</p></li>
+<li><p>The show generated code button shows shader code corresponding to your graph.</p></li>
+<li><p>The toggle turns the material preview on or off.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Online</span> <span class="pre">Docs</span></code> button opens this documentation page in your web browser.</p></li>
+<li><p>The last button allows you to put the shader editor in its own window,
+separate from the rest of the editor.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although VisualShaders do not require coding, they share the same logic with
+script shaders. It is advised to learn the basics of both to have a good
+understanding of the shading pipeline.</p>
+<p>The visual shader graph is converted to a script shader behind the scene,
+and you can see this code by pressing the last button in the toolbar. This
+can be convenient to understand what a given node does and how to reproduce
+it in scripts.</p>
+</div>
+</section>
+<section id="using-the-visual-shader-editor">
+<h2>Using the Visual Shader Editor<a class="headerlink" href="#using-the-visual-shader-editor" title="Link to this heading"></a></h2>
+<p>By default, every new <code class="docutils literal notranslate"><span class="pre">VisualShader</span></code> will have an output node. Every node
+connection ends at one of the output node's sockets. A node is the basic unit to
+create your shader. To add a new node, click on the <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Node</span></code> button on the
+upper left corner or right click on any empty location in the graph, and a menu
+will pop up.</p>
+<img alt="../../_images/vs_popup.webp" src="../../_images/vs_popup.webp" />
+<p>This popup has the following properties:</p>
+<ul class="simple">
+<li><p>If you right-click on the graph, this menu will be called at the cursor
+position and the created node, in that case, will also be placed under that
+position; otherwise, it will be created at the graph's center.</p></li>
+<li><p>It can be resized horizontally and vertically allowing more content to be
+shown. Size transform and tree content position are saved between the calls,
+so if you suddenly closed the popup you can easily restore its previous state.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Expand</span> <span class="pre">All</span></code> and <code class="docutils literal notranslate"><span class="pre">Collapse</span> <span class="pre">All</span></code> options in the drop-down option menu
+can be used to easily list the available nodes.</p></li>
+<li><p>You can also drag and drop nodes from the popup onto the graph.</p></li>
+</ul>
+<p>While the popup has nodes sorted in categories, it can seem overwhelming at
+first. Try to add some of the nodes, plug them in the output socket and observe
+what happens.</p>
+<p>When connecting any <code class="docutils literal notranslate"><span class="pre">scalar</span></code> output to a <code class="docutils literal notranslate"><span class="pre">vector</span></code> input, all components of
+the vector will take the value of the scalar.</p>
+<p>When connecting any <code class="docutils literal notranslate"><span class="pre">vector</span></code> output to a <code class="docutils literal notranslate"><span class="pre">scalar</span></code> input, the value of the
+scalar will be the average of the vector's components.</p>
+</section>
+<section id="visual-shader-node-interface">
+<h2>Visual Shader node interface<a class="headerlink" href="#visual-shader-node-interface" title="Link to this heading"></a></h2>
+<p>Visual shader nodes have input and output ports. The input ports are located on the left side of the node, and output ports are located on the right side of the node.</p>
+<figure class="align-default">
+<img alt="../../_images/vs_node.webp" src="../../_images/vs_node.webp" />
+</figure>
+<p>These ports are colored to differentiate type of port:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Port types</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Color</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Scalar</p></td>
+<td><p>Gray</p></td>
+<td><p>Scalar is a single value.</p></td>
+<td><p><img alt="scalar" src="../../_images/vs_scalar.webp" /></p></td>
+</tr>
+<tr class="row-odd"><td><p>Vector</p></td>
+<td><p>Purple</p></td>
+<td><p>Vector is a set of values.</p></td>
+<td><p><img alt="vector" src="../../_images/vs_vector.webp" /></p></td>
+</tr>
+<tr class="row-even"><td><p>Boolean</p></td>
+<td><p>Green</p></td>
+<td><p>On or off, true or false.</p></td>
+<td><p><img alt="boolean" src="../../_images/vs_boolean.webp" /></p></td>
+</tr>
+<tr class="row-odd"><td><p>Transform</p></td>
+<td><p>Pink</p></td>
+<td><p>A matrix, usually used to transform vertices.</p></td>
+<td><p><img alt="transform" src="../../_images/vs_transform.webp" /></p></td>
+</tr>
+<tr class="row-even"><td><p>Sampler</p></td>
+<td><p>Orange</p></td>
+<td><p>A texture sampler. It can be used to sample textures.</p></td>
+<td><p><img alt="sampler" src="../../_images/vs_sampler.webp" /></p></td>
+</tr>
+</tbody>
+</table>
+<p>All of the types are used in the calculations of vertices, fragments, and lights in the shader. For example: matrix multiplication,
+vector addition, or scalar division.</p>
+<p>There are other types but these are the main ones.</p>
+</section>
+<section id="visual-shader-nodes">
+<h2>Visual Shader nodes<a class="headerlink" href="#visual-shader-nodes" title="Link to this heading"></a></h2>
+<p>Below are some special nodes that are worth knowing about. The list is not
+exhaustive and might be expanded with more nodes and examples.</p>
+<section id="expression-node">
+<h3>Expression node<a class="headerlink" href="#expression-node" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Expression</span></code> node allows you to write Godot Shading Language (GLSL-like)
+expressions inside your visual shaders. The node has buttons to add any amount
+of required input and output ports and can be resized. You can also set up the
+name and type of each port. The expression you have entered will apply
+immediately to the material (once the focus leaves the expression text box). Any
+parsing or compilation errors will be printed to the Output tab. The outputs are
+initialized to their zero value by default. The node is located under the
+Special tab and can be used in all shader modes.</p>
+<p>The possibilities of this node are almost limitless – you can write complex
+procedures, and use all the power of text-based shaders, such as loops, the
+<code class="docutils literal notranslate"><span class="pre">discard</span></code> keyword, extended types, etc. For example:</p>
+<img alt="../../_images/vs_expression2.png" src="../../_images/vs_expression2.png" />
+</section>
+<section id="reroute-node">
+<h3>Reroute node<a class="headerlink" href="#reroute-node" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Reroute</span></code> node is used purely for organizational purposes. In a complicated
+shader with many nodes you may find that the paths between nodes can make
+things hard to read. Reroute, as its name suggests, allows you to adjust the path
+between nodes to make things easier to read. You can even have multiple reroute
+nodes for a single path, which can be used to make right angles.</p>
+<img alt="../../_images/vs_reroute.webp" src="../../_images/vs_reroute.webp" />
+<p>To move a reroute node move your mouse cursor above it, and grab the handle that
+appears.</p>
+<img alt="../../_images/vs_reroute_handle.webp" src="../../_images/vs_reroute_handle.webp" />
+</section>
+<section id="fresnel-node">
+<h3>Fresnel node<a class="headerlink" href="#fresnel-node" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Fresnel</span></code> node is designed to accept normal and view vectors and produces
+a scalar which is the saturated dot product between them. Additionally, you can
+setup the inversion and the power of equation. The <code class="docutils literal notranslate"><span class="pre">Fresnel</span></code> node is great for
+adding a rim-like lighting effect to objects.</p>
+<img alt="../../_images/vs_fresnel.webp" src="../../_images/vs_fresnel.webp" />
+</section>
+<section id="boolean-node">
+<h3>Boolean node<a class="headerlink" href="#boolean-node" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Boolean</span></code> node can be converted to <code class="docutils literal notranslate"><span class="pre">Scalar</span></code> or <code class="docutils literal notranslate"><span class="pre">Vector</span></code> to represent
+<code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code> or <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1,</span> <span class="pre">1)</span></code> respectively. This property
+can be used to enable or disable some effect parts with one click.</p>
+<img alt="../../_images/vs_boolean.gif" src="../../_images/vs_boolean.gif" />
+</section>
+<section id="if-node">
+<h3>If node<a class="headerlink" href="#if-node" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">If</span></code> node allows you to setup a vector which will be returned the result
+of the comparison between <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>. There are three vectors which can be
+returned: <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span></code> (in that case the tolerance parameter is provided as a
+comparison threshold – by default it is equal to the minimal value, i.e.
+<code class="docutils literal notranslate"><span class="pre">0.00001</span></code>), <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&gt;</span> <span class="pre">b</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;</span> <span class="pre">b</span></code>.</p>
+<img alt="../../_images/vs_if.png" src="../../_images/vs_if.png" />
+</section>
+<section id="switch-node">
+<h3>Switch node<a class="headerlink" href="#switch-node" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Switch</span></code> node returns a vector if the boolean condition is <code class="docutils literal notranslate"><span class="pre">true</span></code> or
+<code class="docutils literal notranslate"><span class="pre">false</span></code>. <code class="docutils literal notranslate"><span class="pre">Boolean</span></code> was introduced above. If you want to convert a vector
+to a true boolean, all components of the vector should be non-zero.</p>
+<img alt="../../_images/vs_switch.webp" src="../../_images/vs_switch.webp" />
+</section>
+<section id="mesh-emitter">
+<h3>Mesh Emitter<a class="headerlink" href="#mesh-emitter" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Mesh</span> <span class="pre">Emitter</span></code> node is used for emitting particles from mesh vertices. This is
+only available for shaders that are in <code class="docutils literal notranslate"><span class="pre">Particles</span></code> mode.</p>
+<p>Keep in mind that not all 3D objects are mesh files. a glTF file can't be dragged
+and dropped into the graph. However, you can create an inherited scene from it,
+save the mesh in that scene as its own file, and use that.</p>
+<img alt="../../_images/vs_meshemitter.webp" src="../../_images/vs_meshemitter.webp" />
+<p>You can also drag and drop obj files into the graph editor to add the node
+for that specific mesh, other mesh files will not work for this.</p>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="your_first_shader/your_second_3d_shader.html" class="btn btn-neutral float-left" title="Your second 3D shader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="compute_shaders.html" class="btn btn-neutral float-right" title="Using compute shaders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

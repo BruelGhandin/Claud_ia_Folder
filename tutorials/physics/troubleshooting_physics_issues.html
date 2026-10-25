@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Troubleshooting physics issues" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/physics/troubleshooting_physics_issues.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="When working with a physics engine, you may encounter unexpected results. While many of these issues can be resolved through configuration, some of them are the result of engine bugs. For known iss..." />
+<meta name="description" content="When working with a physics engine, you may encounter unexpected results. While many of these issues can be resolved through configuration, some of them are the result of engine bugs. For known iss..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Troubleshooting physics issues &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Platform-specific" href="../platform/index.html" />
+    <link rel="prev" title="2D and 3D physics interpolation" href="interpolation/2d_and_3d_physics_interpolation.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/physics/troubleshooting_physics_issues" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/physics/troubleshooting_physics_issues.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Physics</a></li>
+      <li class="breadcrumb-item active">Troubleshooting physics issues</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/physics/troubleshooting_physics_issues.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="troubleshooting-physics-issues">
+<span id="doc-troubleshooting-physics-issues"></span><h1>Troubleshooting physics issues<a class="headerlink" href="#troubleshooting-physics-issues" title="Link to this heading"></a></h1>
+<p>When working with a physics engine, you may encounter unexpected results.</p>
+<p>While many of these issues can be resolved through configuration, some of them
+are the result of engine bugs. For known issues related to the physics engine,
+see
+<a class="reference external" href="https://github.com/godotengine/godot/issues?q=is%3Aopen+is%3Aissue+label%3Atopic%3Aphysics">open physics-related issues on GitHub</a>.
+Looking through <a class="reference external" href="https://github.com/godotengine/godot/issues?q=+is%3Aclosed+is%3Aissue+label%3Atopic%3Aphysics">closed issues</a>
+can also help answer questions related to physics engine behavior.</p>
+<section id="objects-are-passing-through-each-other-at-high-speeds">
+<h2>Objects are passing through each other at high speeds<a class="headerlink" href="#objects-are-passing-through-each-other-at-high-speeds" title="Link to this heading"></a></h2>
+<p>This is known as <em>tunneling</em>. Enabling <strong>Continuous CD</strong> (Continuous Collision Detection) in the RigidBody
+properties can sometimes resolve this issue. If this does not help, there are
+other solutions you can try:</p>
+<ul class="simple">
+<li><p>Make your static collision shapes thicker. For example, if you have a thin
+floor that the player can't get below in some way, you can make the collider
+thicker than the floor's visual representation.</p></li>
+<li><p>Modify your fast-moving object's collision shape depending on its movement
+speed. The faster the object moves, the larger the collision shape should
+extend outside of the object to ensure it can collide with thin walls more
+reliably.</p></li>
+<li><p>Increase <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-physics-common-physics-ticks-per-second"><span class="std std-ref">Physics Ticks per Second</span></a>
+in the advanced Project Settings. While
+this has other benefits (such as more stable simulation and reduced input
+lag), this increases CPU utilization and may not be viable for mobile/web
+platforms. Multipliers of the default value of <code class="docutils literal notranslate"><span class="pre">60</span></code> (such as <code class="docutils literal notranslate"><span class="pre">120</span></code>, <code class="docutils literal notranslate"><span class="pre">180</span></code>
+or <code class="docutils literal notranslate"><span class="pre">240</span></code>) should be preferred for a smooth appearance on most displays.</p></li>
+</ul>
+</section>
+<section id="stacked-objects-are-unstable-and-wobbly">
+<h2>Stacked objects are unstable and wobbly<a class="headerlink" href="#stacked-objects-are-unstable-and-wobbly" title="Link to this heading"></a></h2>
+<p>Despite seeming like a simple problem, stable RigidBody simulation with stacked
+objects is difficult to implement in a physics engine. This is caused by
+integrating forces going against each other. The more stacked objects are
+present, the stronger the forces will be against each other. This eventually
+causes the simulation to become wobbly, making the objects unable to rest on top
+of each other without moving.</p>
+<p>Increasing the physics simulation rate can help alleviate this issue. To do so,
+increase <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-physics-common-physics-ticks-per-second"><span class="std std-ref">Physics Ticks per Second</span></a>
+in the advanced Project Settings. Note that doing this
+increases CPU utilization and may not be viable for mobile/web platforms.
+Multipliers of the default value of <code class="docutils literal notranslate"><span class="pre">60</span></code> (such as <code class="docutils literal notranslate"><span class="pre">120</span></code>, <code class="docutils literal notranslate"><span class="pre">180</span></code> or <code class="docutils literal notranslate"><span class="pre">240</span></code>)
+should be preferred for a smooth appearance on most displays.</p>
+<p>In 3D, switching the physics engine from the default GodotPhysics to Jolt
+can also improve stability. See <a class="reference internal" href="using_jolt_physics.html#doc-using-jolt-physics"><span class="std std-ref">Using Jolt Physics</span></a> for more information.</p>
+</section>
+<section id="scaled-physics-bodies-or-collision-shapes-do-not-collide-correctly">
+<h2>Scaled physics bodies or collision shapes do not collide correctly<a class="headerlink" href="#scaled-physics-bodies-or-collision-shapes-do-not-collide-correctly" title="Link to this heading"></a></h2>
+<p>Godot does not currently support scaling of physics bodies or collision shapes.
+As a workaround, change the collision shape's extents instead of changing its
+scale. If you want the visual representation's scale to change as well, change
+the scale of the underlying visual representation (Sprite2D, MeshInstance3D, …)
+and change the collision shape's extents separately. Make sure the collision
+shape is not a child of the visual representation in this case.</p>
+<p>Since resources are shared by default, you'll have to make the collision shape
+resource unique if you don't want the change to be applied to all nodes using
+the same collision shape resource in the scene. This can be done in two ways:</p>
+<ul class="simple">
+<li><p>In the editor, by clicking <span class="role-menu role-ui">Make Unique</span> in the CollisionShape
+resource dropdown in the inspector, then changing its size.</p></li>
+<li><p>In a script, by calling <code class="docutils literal notranslate"><span class="pre">duplicate()</span></code> in a script on the collision shape
+resource <em>before</em> changing its size.</p></li>
+</ul>
+</section>
+<section id="thin-objects-are-wobbly-when-resting-on-the-floor">
+<h2>Thin objects are wobbly when resting on the floor<a class="headerlink" href="#thin-objects-are-wobbly-when-resting-on-the-floor" title="Link to this heading"></a></h2>
+<p>This can be due to one of two causes:</p>
+<ul class="simple">
+<li><p>The floor's collision shape is too thin.</p></li>
+<li><p>The RigidBody's collision shape is too thin.</p></li>
+</ul>
+<p>In the first case, this can be alleviated by making the floor's collision shape
+thicker. For example, if you have a thin floor that the player can't get below
+in some way, you can make the collider thicker than the floor's visual
+representation.</p>
+<p>In the second case, this can usually only be resolved by increasing the physics
+simulation rate (as making the shape thicker would cause a disconnect between
+the RigidBody's visual representation and its collision).</p>
+<p>In both cases, increasing the physics simulation rate can also help alleviate
+this issue. To do so, increase
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-physics-common-physics-ticks-per-second"><span class="std std-ref">Physics Ticks per Second</span></a>
+in the advanced
+Project Settings. Note that this increases CPU utilization and may not be viable
+for mobile/web platforms. Multipliers of the default value of <code class="docutils literal notranslate"><span class="pre">60</span></code> (such as
+<code class="docutils literal notranslate"><span class="pre">120</span></code>, <code class="docutils literal notranslate"><span class="pre">180</span></code> or <code class="docutils literal notranslate"><span class="pre">240</span></code>) should be preferred for a smooth appearance on most
+displays.</p>
+</section>
+<section id="cylinder-collision-shapes-are-unstable">
+<h2>Cylinder collision shapes are unstable<a class="headerlink" href="#cylinder-collision-shapes-are-unstable" title="Link to this heading"></a></h2>
+<p>Switching the physics engine from the default GodotPhysics to Jolt
+should make cylinder collision shapes more reliable.
+See <a class="reference internal" href="using_jolt_physics.html#doc-using-jolt-physics"><span class="std std-ref">Using Jolt Physics</span></a> for more information.</p>
+<p>During the transition from Bullet to GodotPhysics in Godot 4, cylinder collision
+shapes had to be reimplemented from scratch. However, cylinder collision shapes
+are one of the most difficult shapes to support, which is why many other physics
+engines don't provide any support for them. There are several known bugs with
+cylinder collision shapes currently.</p>
+<p>If you are sticking to GodotPhysics, we recommend using box or capsule collision
+shapes for characters for now. Boxes generally provide the best reliability,
+but have the downside of making the character take more space diagonally.
+Capsule collision shapes do not have this downside, but their shape can make
+precision platforming more difficult.</p>
+</section>
+<section id="vehiclebody-simulation-is-unstable-especially-at-high-speeds">
+<h2>VehicleBody simulation is unstable, especially at high speeds<a class="headerlink" href="#vehiclebody-simulation-is-unstable-especially-at-high-speeds" title="Link to this heading"></a></h2>
+<p>When a physics body moves at a high speed, it travels a large distance between
+each physics step. For instance, when using the 1 unit = 1 meter convention in
+3D, a vehicle moving at 360 km/h will travel 100 units per second. With the
+default physics simulation rate of 60 Hz, the vehicle moves by ~1.67 units each
+physics tick. This means that small objects may be ignored entirely by the
+vehicle (due to tunneling), but also that the simulation has little data to work
+with in general at such a high speed.</p>
+<p>Fast-moving vehicles can benefit a lot from an increased physics simulation
+rate. To do so, increase
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-property-physics-common-physics-ticks-per-second"><span class="std std-ref">Physics Ticks per Second</span></a>
+in the advanced Project
+Settings. Note that this increases CPU utilization and may not be viable for
+mobile/web platforms. Multipliers of the default value of <code class="docutils literal notranslate"><span class="pre">60</span></code> (such as
+<code class="docutils literal notranslate"><span class="pre">120</span></code>, <code class="docutils literal notranslate"><span class="pre">180</span></code> or <code class="docutils literal notranslate"><span class="pre">240</span></code>) should be preferred for a smooth appearance on most
+displays.</p>
+</section>
+<section id="collision-results-in-bumps-when-an-object-moves-across-tiles">
+<h2>Collision results in bumps when an object moves across tiles<a class="headerlink" href="#collision-results-in-bumps-when-an-object-moves-across-tiles" title="Link to this heading"></a></h2>
+<p>This is a known issue in the physics engine caused by the object bumping on a
+shape's edges, even though that edge is covered by another shape. This can occur
+in both 2D and 3D.</p>
+<p>The best way to work around this issue is to create a &quot;composite&quot; collider. This
+means that instead of individual tiles having their collision, you create a
+single collision shape representing the collision for a group of tiles.
+Typically, you should split composite colliders on a per-island basis (which
+means each group of touching tiles gets its own collider).</p>
+<p>Using a composite collider can also improve physics simulation performance in
+certain cases. However, since the composite collision shape is much more
+complex, this may not be a net performance win in all cases.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In Godot 4.5 and later, creating a composite collider is automatically done
+when using a TileMapLayer node. The chunk size (<code class="docutils literal notranslate"><span class="pre">16</span></code> tiles on each axis
+by default) can be set using the <strong>Physics Quadrant Size</strong> property in the
+TileMapLayer inspector. Larger values provide more reliable collision,
+at the cost of slower updates when the TileMap is changed.</p>
+</div>
+</section>
+<section id="framerate-drops-when-an-object-touches-another-object">
+<h2>Framerate drops when an object touches another object<a class="headerlink" href="#framerate-drops-when-an-object-touches-another-object" title="Link to this heading"></a></h2>
+<p>This is likely due to one of the objects using a collision shape that is too
+complex. Convex collision shapes should use a number of shapes as low as
+possible for performance reasons. When relying on Godot's automatic generation,
+it's possible that you ended up with dozens if not hundreds of shapes created
+for a single convex shape collision resource.</p>
+<p>In some cases, replacing a convex collider with a couple of primitive collision
+shapes (box, sphere, or capsule) can deliver better performance.</p>
+<p>This issue can also occur with StaticBodies that use very detailed trimesh
+(concave) collisions. In this case, use a simplified representation of the level
+geometry as a collider. Not only this will improve physics simulation
+performance significantly, but this can also improve stability by letting you
+remove small fixtures and crevices from being considered by collision.</p>
+<p>In 3D, switching the physics engine from the default GodotPhysics to Jolt
+can also improve performance. See <a class="reference internal" href="using_jolt_physics.html#doc-using-jolt-physics"><span class="std std-ref">Using Jolt Physics</span></a> for more information.</p>
+</section>
+<section id="framerate-suddenly-drops-to-a-very-low-value-beyond-a-certain-amount-of-physics-simulation">
+<h2>Framerate suddenly drops to a very low value beyond a certain amount of physics simulation<a class="headerlink" href="#framerate-suddenly-drops-to-a-very-low-value-beyond-a-certain-amount-of-physics-simulation" title="Link to this heading"></a></h2>
+<p>This occurs because the physics engine can't keep up with the expected
+simulation rate. In this case, the framerate will start dropping, but the engine
+is only allowed to simulate a certain number of physics steps per rendered
+frame. This snowballs into a situation where framerate keeps dropping until it
+reaches a very low framerate (typically 1-2 FPS) and is called the <em>physics
+spiral of death</em>.</p>
+<p>To avoid this, you should check for situations in your project that can cause
+excessive number of physics simulations to occur at the same time (or with
+excessively complex collision shapes). If these situations cannot be avoided,
+you can increase the <strong>Max Physics Steps per Frame</strong> project setting and/or
+reduce <strong>Physics Ticks per Second</strong> to alleviate this.</p>
+</section>
+<section id="physics-simulation-is-unreliable-when-far-away-from-the-world-origin">
+<h2>Physics simulation is unreliable when far away from the world origin<a class="headerlink" href="#physics-simulation-is-unreliable-when-far-away-from-the-world-origin" title="Link to this heading"></a></h2>
+<p>This is caused by floating-point precision errors, which become more pronounced
+as the physics simulation occurs further away from the world origin. This issue
+also affects rendering, which results in wobbly camera movement when far away
+from the world origin. See <a class="reference internal" href="large_world_coordinates.html#doc-large-world-coordinates"><span class="std std-ref">Large world coordinates</span></a> for more
+information.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="interpolation/2d_and_3d_physics_interpolation.html" class="btn btn-neutral float-left" title="2D and 3D physics interpolation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../platform/index.html" class="btn btn-neutral float-right" title="Platform-specific" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Large world coordinates" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/physics/large_world_coordinates.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Why use large world coordinates?: In Godot, physics simulation and rendering both rely on floating-point numbers. However, in computing, floating-point numbers have limited precision and range. Thi..." />
+<meta name="description" content="Why use large world coordinates?: In Godot, physics simulation and rendering both rely on floating-point numbers. However, in computing, floating-point numbers have limited precision and range. Thi..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Large world coordinates &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Physics Interpolation" href="interpolation/index.html" />
+    <link rel="prev" title="Collision shapes (3D)" href="collision_shapes_3d.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/physics/large_world_coordinates" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/physics/large_world_coordinates.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Physics</a></li>
+      <li class="breadcrumb-item active">Large world coordinates</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/physics/large_world_coordinates.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="large-world-coordinates">
+<span id="doc-large-world-coordinates"></span><h1>Large world coordinates<a class="headerlink" href="#large-world-coordinates" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Large world coordinates are mainly useful in 3D projects; they are rarely
+required in 2D projects. Also, unlike 3D rendering, 2D rendering currently
+doesn't benefit from increased precision when large world coordinates are
+enabled.</p>
+</div>
+<section id="why-use-large-world-coordinates">
+<h2>Why use large world coordinates?<a class="headerlink" href="#why-use-large-world-coordinates" title="Link to this heading"></a></h2>
+<p>In Godot, physics simulation and rendering both rely on <em>floating-point</em> numbers.
+However, in computing, floating-point numbers have <strong>limited precision and range</strong>.
+This can be a problem for games with huge worlds, such as space or planetary-scale
+simulation games.</p>
+<p>Precision is the greatest when the value is close to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>. Precision becomes
+gradually lower as the value increases or decreases away from <code class="docutils literal notranslate"><span class="pre">0.0</span></code>. This
+occurs every time the floating-point number's <em>exponent</em> increases, which
+happens when the floating-point number surpasses a power of 2 value (2, 4, 8,
+16, …). Every time this occurs, the number's minimum step will <em>increase</em>,
+resulting in a loss of precision.</p>
+<p>In practice, this means that as the player moves away from the world origin
+(<code class="docutils literal notranslate"><span class="pre">Vector2(0,</span> <span class="pre">0)</span></code> in 2D games or <code class="docutils literal notranslate"><span class="pre">Vector3(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code> in 3D games), precision
+will decrease.</p>
+<p>This loss of precision can result in objects appearing to &quot;vibrate&quot; when far
+away from the world origin, as the model's position will snap to the
+nearest value that can be represented in a floating-point number. This can also
+result in physics glitches that only occur when the player is far from the world
+origin.</p>
+<p>The range determines the minimum and maximum values that can be stored in the
+number. If the player tries to move past this range, they will simply not be
+able to. However, in practice, floating-point precision almost always becomes
+a problem before the range does.</p>
+<p>The range and precision (minimum step between two exponent intervals) are
+determined by the floating-point number type. The <em>theoretical</em> range allows
+extremely high values to be stored in single-precision floats, but with very low
+precision. In practice, a floating-point type that cannot represent all integer
+values is not very useful. At extreme values, precision becomes so low that the
+number cannot even distinguish two separate <em>integer</em> values from each other.</p>
+<p>This is the range where individual integer values can be represented in a
+floating-point number:</p>
+<ul class="simple">
+<li><p><strong>Single-precision float range (represent all integers):</strong> Between -16,777,216 and 16,777,216</p></li>
+<li><p><strong>Double-precision float range (represent all integers):</strong> Between -9 quadrillion and 9 quadrillion</p></li>
+</ul>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Range</p></td>
+<td><p>Single step</p></td>
+<td><p>Double step</p></td>
+<td><p>Comment</p></td>
+</tr>
+<tr class="row-even"><td><p>[1; 2]</p></td>
+<td><p>~0.0000001</p></td>
+<td><p>~1e-15</p></td>
+<td><p>Precision becomes greater near 0.0 (this table is abbreviated).</p></td>
+</tr>
+<tr class="row-odd"><td><p>[2; 4]</p></td>
+<td><p>~0.0000002</p></td>
+<td><p>~1e-15</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>[4; 8]</p></td>
+<td><p>~0.0000005</p></td>
+<td><p>~1e-15</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>[8; 16]</p></td>
+<td><p>~0.000001</p></td>
+<td><p>~1e-14</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>[16; 32]</p></td>
+<td><p>~0.000002</p></td>
+<td><p>~1e-14</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>[32; 64]</p></td>
+<td><p>~0.000004</p></td>
+<td><p>~1e-14</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>[64; 128]</p></td>
+<td><p>~0.000008</p></td>
+<td><p>~1e-13</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>[128; 256]</p></td>
+<td><p>~0.000015</p></td>
+<td><p>~1e-13</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>[256; 512]</p></td>
+<td><p>~0.00003</p></td>
+<td><p>~1e-13</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>[512; 1024]</p></td>
+<td><p>~0.00006</p></td>
+<td><p>~1e-12</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>[1024; 2048]</p></td>
+<td><p>~0.0001</p></td>
+<td><p>~1e-12</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>[2048; 4096]</p></td>
+<td><p>~0.0002</p></td>
+<td><p>~1e-12</p></td>
+<td><p>Maximum <em>recommended</em> single-precision range for a first-person 3D game
+without rendering artifacts or physics glitches.</p></td>
+</tr>
+<tr class="row-even"><td><p>[4096; 8192]</p></td>
+<td><p>~0.0005</p></td>
+<td><p>~1e-12</p></td>
+<td><p>Maximum <em>recommended</em> single-precision range for a third-person 3D game
+without rendering artifacts or physics glitches.</p></td>
+</tr>
+<tr class="row-odd"><td><p>[8192; 16384]</p></td>
+<td><p>~0.001</p></td>
+<td><p>~1e-12</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>[16384; 32768]</p></td>
+<td><p>~0.0019</p></td>
+<td><p>~1e-11</p></td>
+<td><p>Maximum <em>recommended</em> single-precision range for a top-down 3D game
+without rendering artifacts or physics glitches.</p></td>
+</tr>
+<tr class="row-odd"><td><p>[32768; 65536]</p></td>
+<td><p>~0.0039</p></td>
+<td><p>~1e-11</p></td>
+<td><p>Maximum <em>recommended</em> single-precision range for any 3D game. Double
+precision (large world coordinates) is usually required past this point.</p></td>
+</tr>
+<tr class="row-even"><td><p>[65536; 131072]</p></td>
+<td><p>~0.0078</p></td>
+<td><p>~1e-11</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>[131072; 262144]</p></td>
+<td><p>~0.0156</p></td>
+<td><p>~1e-10</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>&gt; 262144</p></td>
+<td><p>&gt; ~0.0313</p></td>
+<td><p>~1e-10 (0.0000000001)</p></td>
+<td><p>Double-precision remains far more precise than single-precision
+past this value.</p></td>
+</tr>
+</tbody>
+</table>
+<p>When using single-precision floats, it is possible to go past the suggested
+ranges, but more visible artifacting will occur and physics glitches will be
+more common (such as the player not walking straight in certain directions).</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See the <a class="reference external" href="https://blog.demofox.org/2017/11/21/">Demystifying Floating Point Precision</a>
+article for more information.</p>
+</div>
+</section>
+<section id="how-large-world-coordinates-work">
+<h2>How large world coordinates work<a class="headerlink" href="#how-large-world-coordinates-work" title="Link to this heading"></a></h2>
+<p>Large world coordinates (also known as <strong>double-precision physics</strong>) increase
+the precision level of all floating-point computations within the engine.</p>
+<p>By default, <a class="reference internal" href="../../classes/class_float.html#class-float"><span class="std std-ref">float</span></a> is 64-bit in GDScript, but <a class="reference internal" href="../../classes/class_vector2.html#class-vector2"><span class="std std-ref">Vector2</span></a>,
+<a class="reference internal" href="../../classes/class_vector3.html#class-vector3"><span class="std std-ref">Vector3</span></a> and <a class="reference internal" href="../../classes/class_vector4.html#class-vector4"><span class="std std-ref">Vector4</span></a> are 32-bit. This means that the
+precision of vector types is much more limited. To resolve this, we can increase
+the number of bits used to represent a floating-point number in a Vector type.
+This results in an <em>exponential</em> increase in precision, which means the final
+value is not just twice as precise, but potentially thousands of times more
+precise at high values. The maximum value that can be represented is also
+greatly increased by going from a single-precision float to a double-precision
+float.</p>
+<p>To avoid model snapping issues when far away from the world origin, Godot's 3D
+rendering engine will increase its precision for rendering operations when large
+world coordinates are enabled. The shaders do not use double-precision floats
+for performance reasons, but an <a class="reference external" href="https://github.com/godotengine/godot/pull/66178">alternative solution</a>
+is used to emulate double precision for rendering using single-precision floats.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Enabling large world coordinates comes with a performance and memory usage
+penalty, especially on 32-bit CPUs. Only enable large world coordinates if
+you actually need them.</p>
+<p>This feature is tailored towards mid-range/high-end desktop platforms. Large
+world coordinates may not perform well on low-end mobile devices, unless you
+take steps to reduce CPU usage with other means (such as decreasing the
+number of physics ticks per second).</p>
+<p>On low-end platforms, an <em>origin shifting</em> approach can be used instead to
+allow for large worlds without using double-precision physics and rendering.
+Origin shifting works with single-precision floats, but it introduces more
+complexity to game logic, especially in multiplayer games. Therefore, origin
+shifting is not detailed on this page.</p>
+</div>
+</section>
+<section id="who-are-large-world-coordinates-for">
+<h2>Who are large world coordinates for?<a class="headerlink" href="#who-are-large-world-coordinates-for" title="Link to this heading"></a></h2>
+<p>Large world coordinates are typically required for 3D space or planetary-scale
+simulation games. This extends to games that require supporting <em>very</em> fast
+movement speeds, but also very slow <em>and</em> precise movements at times.</p>
+<p>On the other hand, it's important to only use large world coordinates when
+actually required (for performance reasons). Large world coordinates are usually
+<strong>not</strong> required for:</p>
+<ul class="simple">
+<li><p>2D games, as precision issues are usually less noticeable.</p></li>
+<li><p>Games with small-scale or medium-scale worlds.</p></li>
+<li><p>Games with large worlds, but split into different levels with loading
+sequences in between. You can center each level portion around the world
+origin to avoid precision issues without a performance penalty.</p></li>
+<li><p>Open world games with a <em>playable on-foot area</em> not exceeding 8192×8192 meters
+(centered around the world origin). As shown in the above table, the level of
+precision remains acceptable within that range, even for a first-person game.</p></li>
+</ul>
+<p><strong>If in doubt</strong>, you probably don't need to use large world coordinates in your
+project. For reference, most modern AAA open world titles don't use a large
+world coordinates system and still rely on single-precision floats for both
+rendering and physics.</p>
+</section>
+<section id="enabling-large-world-coordinates">
+<h2>Enabling large world coordinates<a class="headerlink" href="#enabling-large-world-coordinates" title="Link to this heading"></a></h2>
+<p>This process requires recompiling the editor and all export template binaries
+you intend to use. If you only intend to export your project in release mode,
+you can skip the compilation of debug export templates. In any case, you'll need
+to compile an editor build so you can test your large precision world without
+having to export the project every time.</p>
+<p>See the <a class="reference internal" href="../../engine_details/development/compiling/index.html#toc-devel-compiling"><span class="std std-ref">Compiling</span></a> section for compiling
+instructions for each target platform. You will need to add the <code class="docutils literal notranslate"><span class="pre">precision=double</span></code>
+SCons option when compiling the editor and export templates.</p>
+<p>The resulting binaries will be named with a <code class="docutils literal notranslate"><span class="pre">.double</span></code> suffix to distinguish
+them from single-precision binaries (which lack any precision suffix). You can
+then specify the binaries as custom export templates in your project's export
+presets in the Export dialog.</p>
+</section>
+<section id="compatibility-between-single-precision-and-double-precision-builds">
+<h2>Compatibility between single-precision and double-precision builds<a class="headerlink" href="#compatibility-between-single-precision-and-double-precision-builds" title="Link to this heading"></a></h2>
+<p>When saving a <em>binary</em> resource using the <a class="reference internal" href="../../classes/class_resourcesaver.html#class-resourcesaver"><span class="std std-ref">ResourceSaver</span></a> singleton,
+a special flag is stored in the file if the resource was saved using a build
+that uses double-precision numbers. As a result, all binary resources will
+change on disk when you switch to a double-precision build and save over them.</p>
+<p>Both single-precision and double-precision builds support using the
+<a class="reference internal" href="../../classes/class_resourceloader.html#class-resourceloader"><span class="std std-ref">ResourceLoader</span></a> singleton on resources that use this special flag.
+This means single-precision builds can load resources saved using
+double-precision builds and vice versa. Text-based resources don't store a
+double-precision flag, as they don't require such a flag for correct reading.</p>
+<section id="known-incompatibilities">
+<h3>Known incompatibilities<a class="headerlink" href="#known-incompatibilities" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>In a networked multiplayer game, the server and all clients should be using
+the same build type to ensure precision remains consistent across clients.
+Using different build types <em>may</em> work, but various issues can occur.</p></li>
+<li><p>The GDExtension API changes in an incompatible way in double-precision builds.
+This means extensions <strong>must</strong> be rebuilt to work with double-precision
+builds. On the extension developer's end, the <code class="docutils literal notranslate"><span class="pre">REAL_T_IS_DOUBLE</span></code> define is
+enabled when building a GDExtension with <code class="docutils literal notranslate"><span class="pre">precision=double</span></code>.
+<code class="docutils literal notranslate"><span class="pre">real_t</span></code> can be used as an alias for <code class="docutils literal notranslate"><span class="pre">float</span></code> in single-precision builds,
+and <code class="docutils literal notranslate"><span class="pre">double</span></code> in double-precision builds.</p></li>
+</ul>
+</section>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<p>Since 3D rendering shaders don't actually use double-precision floats, there are
+some limitations when it comes to 3D rendering precision:</p>
+<ul>
+<li><p><a class="reference internal" href="../3d/standard_material_3d.html#doc-standard-material-3d-triplanar-mapping"><span class="std std-ref">Triplanar mapping</span></a> doesn't
+benefit from increased precision. Materials using triplanar mapping will exhibit
+visible jittering when far away from the world origin.</p></li>
+<li><p><a class="reference internal" href="../../classes/class_gpuparticles3d.html#class-gpuparticles3d"><span class="std std-ref">GPUParticles3D</span></a> nodes with <strong>Local Coords</strong> disabled will not benefit
+from increased precision. This can cause visible particle snapping to occur
+when far away from the world origin. Nodes with <strong>Local Coords</strong> enabled,
+as well as <a class="reference internal" href="../../classes/class_cpuparticles3d.html#class-cpuparticles3d"><span class="std std-ref">CPUParticles3D</span></a> nodes, will still benefit from increased precision.</p></li>
+<li><p>Shaders using the <code class="docutils literal notranslate"><span class="pre">skip_vertex_transform</span></code> or <code class="docutils literal notranslate"><span class="pre">world_vertex_coords</span></code> render modes
+don't benefit from increased precision.</p></li>
+<li><p>In double-precision builds, world space coordinates in a shader <code class="docutils literal notranslate"><span class="pre">fragment()</span></code>
+function can't be reconstructed from view space, for example:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">vec3</span><span class="w"> </span><span class="n">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">INV_VIEW_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">VERTEX</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)).</span><span class="n">xyz</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Instead, calculate the world space coordinates in the <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> function and
+pass them using a <a class="reference internal" href="../shaders/shader_reference/shading_language.html#doc-shading-language-varyings"><span class="std std-ref">varying</span></a>, for example:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">varying</span><span class="w"> </span><span class="kt">vec3</span><span class="w"> </span><span class="n">world</span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">vertex</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">MODEL_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">VERTEX</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)).</span><span class="n">xyz</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>2D rendering currently doesn't benefit from increased precision when large world
+coordinates are enabled. This can cause visible model snapping to occur when
+far away from the world origin (starting from a few million pixels at typical
+zoom levels). 2D physics calculations will still benefit from increased
+precision though.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="collision_shapes_3d.html" class="btn btn-neutral float-left" title="Collision shapes (3D)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="interpolation/index.html" class="btn btn-neutral float-right" title="Physics Interpolation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

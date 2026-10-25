@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="GDScript: An introduction to dynamic languages" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/scripting/gdscript/gdscript_advanced.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="About: This tutorial aims to be a quick reference for how to use GDScript more efficiently. It focuses on common cases specific to the language, but also covers a lot of information on dynamically ..." />
+<meta name="description" content="About: This tutorial aims to be a quick reference for how to use GDScript more efficiently. It focuses on common cases specific to the language, but also covers a lot of information on dynamically ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>GDScript: An introduction to dynamic languages &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="GDScript exported properties" href="gdscript_exports.html" />
+    <link rel="prev" title="GDScript reference" href="gdscript_basics.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/scripting/gdscript/gdscript_advanced" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/scripting/gdscript/gdscript_advanced.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Scripting</a></li>
+          <li class="breadcrumb-item"><a href="index.html">GDScript</a></li>
+      <li class="breadcrumb-item active">GDScript: An introduction to dynamic languages</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/scripting/gdscript/gdscript_advanced.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="gdscript-an-introduction-to-dynamic-languages">
+<span id="doc-gdscript-more-efficiently"></span><h1>GDScript: An introduction to dynamic languages<a class="headerlink" href="#gdscript-an-introduction-to-dynamic-languages" title="Link to this heading"></a></h1>
+<section id="about">
+<h2>About<a class="headerlink" href="#about" title="Link to this heading"></a></h2>
+<p>This tutorial aims to be a quick reference for how to use GDScript more
+efficiently. It focuses on common cases specific to the language, but
+also covers a lot of information on dynamically typed languages.</p>
+<p>It's meant to be especially useful for programmers with little or no previous
+experience with dynamically typed languages.</p>
+</section>
+<section id="dynamic-nature">
+<h2>Dynamic nature<a class="headerlink" href="#dynamic-nature" title="Link to this heading"></a></h2>
+<section id="pros-cons-of-dynamic-typing">
+<h3>Pros &amp; cons of dynamic typing<a class="headerlink" href="#pros-cons-of-dynamic-typing" title="Link to this heading"></a></h3>
+<p>GDScript is a Dynamically Typed language. As such, its main advantages
+are that:</p>
+<ul class="simple">
+<li><p>The language is easy to get started with.</p></li>
+<li><p>Most code can be written and changed quickly and without hassle.</p></li>
+<li><p>The code is easy to read (little clutter).</p></li>
+<li><p>No compilation is required to test.</p></li>
+<li><p>Runtime is tiny.</p></li>
+<li><p>It has duck-typing and polymorphism by nature.</p></li>
+</ul>
+<p>While the main disadvantages are:</p>
+<ul class="simple">
+<li><p>Less performance than statically typed languages.</p></li>
+<li><p>More difficult to refactor (symbols can't be traced).</p></li>
+<li><p>Some errors that would typically be detected at compile time in
+statically typed languages only appear while running the code
+(because expression parsing is more strict).</p></li>
+<li><p>Less flexibility for code-completion (some variable types are only
+known at runtime).</p></li>
+</ul>
+<p>This, translated to reality, means that Godot used with GDScript is a combination
+designed to create games quickly and efficiently. For games that are very
+computationally intensive and can't benefit from the engine built-in
+tools (such as the Vector types, Physics Engine, Math library, etc), the
+possibility of using C++ is present too. This allows you to still create most of the
+game in GDScript and add small bits of C++ in the areas that need
+a performance boost.</p>
+</section>
+<section id="variables-assignment">
+<h3>Variables &amp; assignment<a class="headerlink" href="#variables-assignment" title="Link to this heading"></a></h3>
+<p>All variables in a dynamically typed language are &quot;variant&quot;-like. This
+means that their type is not fixed, and is only modified through
+assignment. Example:</p>
+<p>Static:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"> </span><span class="c1">// Value uninitialized.</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="c1">// This is valid.</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hi!&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// This is invalid.</span>
+</pre></div>
+</div>
+<p>Dynamic:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="c1"># &#39;null&#39; by default.</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="c1"># Valid, &#39;a&#39; becomes an integer.</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hi!&quot;</span><span class="w"> </span><span class="c1"># Valid, &#39;a&#39; changed to a string.</span>
+</pre></div>
+</div>
+</section>
+<section id="as-function-arguments">
+<h3>As function arguments:<a class="headerlink" href="#as-function-arguments" title="Link to this heading"></a></h3>
+<p>Functions are of dynamic nature too, which means they can be called with
+different arguments, for example:</p>
+<p>Static:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">print_value</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;value is %i</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">[..]</span>
+
+<span class="n">print_value</span><span class="p">(</span><span class="mi">55</span><span class="p">);</span><span class="w"> </span><span class="c1">// Valid.</span>
+<span class="n">print_value</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Invalid.</span>
+</pre></div>
+</div>
+<p>Dynamic:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">print_value</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<span class="p">[</span><span class="o">..</span><span class="p">]</span>
+
+<span class="nf">print_value</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span><span class="w"> </span><span class="c1"># Valid.</span>
+<span class="nf">print_value</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1"># Valid.</span>
+</pre></div>
+</div>
+</section>
+<section id="pointers-referencing">
+<h3>Pointers &amp; referencing:<a class="headerlink" href="#pointers-referencing" title="Link to this heading"></a></h3>
+<p>In static languages, such as C or C++ (and to some extent Java and C#),
+there is a distinction between a variable and a pointer/reference to a
+variable. The latter allows the object to be modified by other functions
+by passing a reference to the original one.</p>
+<p>In C# or Java, everything not a built-in type (int, float, sometimes
+String) is always a pointer or a reference. References are also
+garbage-collected automatically, which means they are erased when no
+longer used. Dynamically typed languages tend to use this memory model,
+too. Some Examples:</p>
+<ul class="simple">
+<li><p>C++:</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">use_class</span><span class="p">(</span><span class="n">SomeClass</span><span class="w"> </span><span class="o">*</span><span class="n">instance</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">instance</span><span class="o">-&gt;</span><span class="n">use</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">do_something</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">SomeClass</span><span class="w"> </span><span class="o">*</span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SomeClass</span><span class="p">;</span><span class="w"> </span><span class="c1">// Created as pointer.</span>
+<span class="w">    </span><span class="n">use_class</span><span class="p">(</span><span class="n">instance</span><span class="p">);</span><span class="w"> </span><span class="c1">// Passed as pointer.</span>
+<span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span><span class="w"> </span><span class="c1">// Otherwise it will leak memory.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Java:</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">use_class</span><span class="p">(</span><span class="n">SomeClass</span><span class="w"> </span><span class="n">instance</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">instance</span><span class="p">.</span><span class="na">use</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">do_something</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">SomeClass</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SomeClass</span><span class="p">();</span><span class="w"> </span><span class="c1">// Created as reference.</span>
+<span class="w">    </span><span class="n">use_class</span><span class="p">(</span><span class="n">instance</span><span class="p">);</span><span class="w"> </span><span class="c1">// Passed as reference.</span>
+<span class="w">    </span><span class="c1">// Garbage collector will get rid of it when not in</span>
+<span class="w">    </span><span class="c1">// use and freeze your game randomly for a second.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>GDScript:</p></li>
+</ul>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">use_class</span><span class="p">(</span><span class="n">instance</span><span class="p">):</span><span class="w"> </span><span class="c1"># Does not care about class type</span>
+<span class="w">    </span><span class="n">instance</span><span class="o">.</span><span class="nf">use</span><span class="p">()</span><span class="w"> </span><span class="c1"># Will work with any class that has a &quot;.use()&quot; method.</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">do_something</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">SomeClass</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span><span class="w"> </span><span class="c1"># Created as reference.</span>
+<span class="w">    </span><span class="nf">use_class</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span><span class="w"> </span><span class="c1"># Passed as reference.</span>
+<span class="w">    </span><span class="c1"># Will be unreferenced and deleted.</span>
+</pre></div>
+</div>
+<p>In GDScript, only base types (int, float, string and the vector types)
+are passed by value to functions (value is copied). Everything else
+(instances, arrays, dictionaries, etc) is passed as reference. Classes
+that inherit <a class="reference internal" href="../../../classes/class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> (the default if nothing is specified)
+will be freed when not used, but manual memory management is allowed too
+if inheriting manually from <a class="reference internal" href="../../../classes/class_object.html#class-object"><span class="std std-ref">Object</span></a>.</p>
+</section>
+</section>
+<section id="arrays">
+<h2>Arrays<a class="headerlink" href="#arrays" title="Link to this heading"></a></h2>
+<p>Arrays in dynamically typed languages can contain many different mixed
+datatypes inside and are always dynamic (can be resized at any time).
+Compare for example arrays in statically typed languages:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span><span class="w"> </span><span class="c1">// Create array.</span>
+<span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="c1">// Initialize manually.</span>
+<span class="n">array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="c1">// Can&#39;t mix types.</span>
+<span class="n">array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
+<span class="n">array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
+<span class="c1">// Can&#39;t resize.</span>
+<span class="n">use_array</span><span class="p">(</span><span class="n">array</span><span class="p">);</span><span class="w"> </span><span class="c1">// Passed as pointer.</span>
+<span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">array</span><span class="p">;</span><span class="w"> </span><span class="c1">// Must be freed.</span>
+
+<span class="c1">// or</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">array</span><span class="p">;</span>
+<span class="n">array</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="c1">// Initialize manually.</span>
+<span class="n">array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="c1">// Can&#39;t mix types.</span>
+<span class="n">array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
+<span class="n">array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
+<span class="n">array</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// Can be resized.</span>
+<span class="n">use_array</span><span class="p">(</span><span class="n">array</span><span class="p">);</span><span class="w"> </span><span class="c1">// Passed reference or value.</span>
+<span class="c1">// Freed when stack ends.</span>
+</pre></div>
+</div>
+<p>And in GDScript:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">]</span><span class="w"> </span><span class="c1"># You can mix types.</span>
+<span class="n">array</span><span class="o">.</span><span class="nf">resize</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1"># Can be resized.</span>
+<span class="nf">use_array</span><span class="p">(</span><span class="n">array</span><span class="p">)</span><span class="w"> </span><span class="c1"># Passed as reference.</span>
+<span class="c1"># Freed when no longer in use.</span>
+</pre></div>
+</div>
+<p>In dynamically typed languages, arrays can also double as other
+datatypes, such as lists:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="n">array</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">array</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">array</span><span class="o">.</span><span class="nf">pop_front</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Or unordered sets:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">]:</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;We have a winner!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="dictionaries">
+<h2>Dictionaries<a class="headerlink" href="#dictionaries" title="Link to this heading"></a></h2>
+<p>Dictionaries are a powerful tool in dynamically typed languages. In
+GDScript, untyped dictionaries can be used for many cases where a statically
+typed language would tend to use another data structure.</p>
+<p>Dictionaries can map any value to any other value with complete
+disregard for the datatype used as either key or value. Contrary to
+popular belief, they are efficient because they can be implemented
+with hash tables. They are, in fact, so efficient that some languages
+will go as far as implementing arrays as dictionaries.</p>
+<p>Example of Dictionary:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">}</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Name: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span><span class="w"> </span><span class="s2">&quot; Age: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Dictionaries are also dynamic, keys can be added or removed at any point
+at little cost:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;mother&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Rebecca&quot;</span><span class="w"> </span><span class="c1"># Addition.</span>
+<span class="n">d</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="c1"># Modification.</span>
+<span class="n">d</span><span class="o">.</span><span class="nf">erase</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1"># Removal.</span>
+</pre></div>
+</div>
+<p>In most cases, two-dimensional arrays can often be implemented more
+easily with dictionaries. Here's a battleship game example:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Battleship Game</span>
+
+<span class="k">const</span><span class="w"> </span><span class="n">SHIP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="k">const</span><span class="w"> </span><span class="n">SHIP_HIT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">const</span><span class="w"> </span><span class="n">WATER_HIT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">board</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">initialize</span><span class="p">():</span>
+<span class="w">    </span><span class="n">board</span><span class="p">[</span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SHIP</span>
+<span class="w">    </span><span class="n">board</span><span class="p">[</span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SHIP</span>
+<span class="w">    </span><span class="n">board</span><span class="p">[</span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SHIP</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">missile</span><span class="p">(</span><span class="n">pos</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">board</span><span class="p">:</span><span class="w"> </span><span class="c1"># Something at that position.</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">board</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SHIP</span><span class="p">:</span><span class="w"> </span><span class="c1"># There was a ship! hit it.</span>
+<span class="w">            </span><span class="n">board</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SHIP_HIT</span>
+<span class="w">        </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">            </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Already hit here!&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1"># Hey dude you already hit here.</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span><span class="w"> </span><span class="c1"># Nothing, mark as water.</span>
+<span class="w">        </span><span class="n">board</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WATER_HIT</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">game</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">initialize</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">missile</span><span class="p">(</span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+<span class="w">    </span><span class="nf">missile</span><span class="p">(</span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">))</span>
+<span class="w">    </span><span class="nf">missile</span><span class="p">(</span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Dictionaries can also be used as data markup or quick structures. While
+GDScript's dictionaries resemble python dictionaries, it also supports Lua
+style syntax and indexing, which makes it useful for writing initial
+states and quick structs:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Same example, lua-style support.</span>
+<span class="c1"># This syntax is a lot more readable and usable.</span>
+<span class="c1"># Like any GDScript identifier, keys written in this form cannot start</span>
+<span class="c1"># with a digit.</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;John&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">22</span>
+<span class="p">}</span>
+
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Name: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">.</span><span class="vi">name</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; Age: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">.</span><span class="vi">age</span><span class="p">)</span><span class="w"> </span><span class="c1"># Used &quot;.&quot; based indexing.</span>
+
+<span class="c1"># Indexing</span>
+
+<span class="n">d</span><span class="p">[</span><span class="s2">&quot;mother&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Rebecca&quot;</span>
+<span class="n">d</span><span class="o">.</span><span class="vi">mother</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Caroline&quot;</span><span class="w"> </span><span class="c1"># This would work too to create a new key.</span>
+</pre></div>
+</div>
+</section>
+<section id="for-while">
+<h2>For &amp; while<a class="headerlink" href="#for-while" title="Link to this heading"></a></h2>
+<p>Iterating using the C-style for loop in C-derived languages can be quite complex:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">strings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
+
+<span class="p">[..]</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value: %c Index: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">strings</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Even in STL:</span>
+<span class="n">std</span><span class="o">::</span><span class="n">list</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">strings</span><span class="p">;</span>
+
+<span class="p">[..]</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">const_iterator</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strings</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">strings</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">it</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Because of this, GDScript makes the opinionated decision to have a for-in loop over iterables instead:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">strings</span><span class="p">:</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Container datatypes (arrays and dictionaries) are iterable. Dictionaries
+allow iterating the keys:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; -&gt; &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Iterating with indices is also possible:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="nf">size</span><span class="p">()):</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">strings</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">range()</span></code> function can take 3 arguments:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nb nb-Function">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="c1"># Will count from 0 to n in steps of 1. The parameter n is exclusive.</span>
+<span class="nb nb-Function">range</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="c1"># Will count from b to n in steps of 1. The parameters b is inclusive. The parameter n is exclusive.</span>
+<span class="nb nb-Function">range</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="c1"># Will count from b to n, in steps of s. The parameters b is inclusive. The parameter n is exclusive.</span>
+</pre></div>
+</div>
+<p>Some examples involving C-style for loops:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+</pre></div>
+</div>
+<p>Translate to:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+
+<span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+
+<span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+</pre></div>
+</div>
+<p>And backwards looping done through a negative counter:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="p">(</span><span class="nb nb-Type">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+</pre></div>
+</div>
+<p>Becomes:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb nb-Function">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="while">
+<h2>While<a class="headerlink" href="#while" title="Link to this heading"></a></h2>
+<p>while() loops are the same everywhere:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="k k-ControlFlow">while</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">strings</span><span class="o">.</span><span class="nf">size</span><span class="p">():</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">strings</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+<section id="custom-iterators">
+<h2>Custom iterators<a class="headerlink" href="#custom-iterators" title="Link to this heading"></a></h2>
+<p>You can create custom iterators in case the default ones don't quite meet your
+needs by overriding <code class="docutils literal notranslate"><span class="pre">_iter_init()</span></code>, <code class="docutils literal notranslate"><span class="pre">_iter_next()</span></code>, and <code class="docutils literal notranslate"><span class="pre">_iter_get()</span></code>
+functions in your script. An example implementation of a forward iterator follows:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ForwardIterator</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">_start</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">_end</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">_increment</span>
+
+<span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_init</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">increment</span><span class="p">):</span>
+<span class="w">        </span><span class="n">_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">start</span>
+<span class="w">        </span><span class="n">_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end</span>
+<span class="w">        </span><span class="n">_increment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">increment</span>
+
+<span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_should_continue</span><span class="p">(</span><span class="n">current</span><span class="p">):</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">_end</span>
+
+<span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_iter_init</span><span class="p">(</span><span class="n">iter</span><span class="p">):</span>
+<span class="w">        </span><span class="c1"># Initialize the state to store the current value.</span>
+<span class="w">        </span><span class="n">iter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_start</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nf">_should_continue</span><span class="p">(</span><span class="n">iter</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_iter_next</span><span class="p">(</span><span class="n">iter</span><span class="p">):</span>
+<span class="w">        </span><span class="n">iter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">_increment</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nf">_should_continue</span><span class="p">(</span><span class="n">iter</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_iter_get</span><span class="p">(</span><span class="n">iter</span><span class="p">):</span>
+<span class="w">        </span><span class="c1"># The state is not wrapped in an array for `_iter_get()`.</span>
+<span class="w">        </span><span class="c1"># The iteration value is the same as the state.</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">iter</span>
+</pre></div>
+</div>
+<p>And it can be used like any other iterator:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">itr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ForwardIterator</span><span class="o">.</span><span class="nf">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">itr</span><span class="p">:</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="c1"># Will print 0, 2, and 4.</span>
+</pre></div>
+</div>
+<p>It is possible but discouraged to store the state in a member variable.
+Multiple states are necessary in cases such as nested loops where the same
+iterator instance is used simultaneously. The <code class="docutils literal notranslate"><span class="pre">iter</span></code> parameter in
+<code class="docutils literal notranslate"><span class="pre">_iter_init()</span></code> and <code class="docutils literal notranslate"><span class="pre">_iter_next()</span></code> is a single-element array so that updates
+can persist. Whereas in <code class="docutils literal notranslate"><span class="pre">_iter_get()</span></code>, the state is is not wrapped because it
+is supposed to be read-only.</p>
+<p>Returning <code class="docutils literal notranslate"><span class="pre">true</span></code> from <code class="docutils literal notranslate"><span class="pre">_iter_init()</span></code> and <code class="docutils literal notranslate"><span class="pre">_iter_next()</span></code> indicates that the
+iterator is valid. Returning <code class="docutils literal notranslate"><span class="pre">false</span></code> will terminate the loop.</p>
+<p>For more details see <a class="reference internal" href="../../../classes/class_object.html#class-object-private-method-iter-init"><span class="std std-ref">_iter_init()</span></a>,
+<a class="reference internal" href="../../../classes/class_object.html#class-object-private-method-iter-next"><span class="std std-ref">_iter_next()</span></a>, and
+<a class="reference internal" href="../../../classes/class_object.html#class-object-private-method-iter-get"><span class="std std-ref">_iter_get()</span></a>.</p>
+</section>
+<section id="duck-typing">
+<h2>Duck typing<a class="headerlink" href="#duck-typing" title="Link to this heading"></a></h2>
+<p>One of the most difficult concepts to grasp when moving from a
+statically typed language to a dynamic one is duck typing. Duck typing
+makes overall code design much simpler and straightforward to write, but
+it's not obvious how it works.</p>
+<p>As an example, imagine a situation where a big rock is falling down a
+tunnel, smashing everything on its way. The code for the rock, in a
+statically typed language would be something like:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">BigRollingRock::on_object_hit</span><span class="p">(</span><span class="n">Smashable</span><span class="w"> </span><span class="o">*</span><span class="n">entity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">entity</span><span class="o">-&gt;</span><span class="n">smash</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This way, everything that can be smashed by a rock would have to
+inherit Smashable. If a character, enemy, piece of furniture, small rock
+were all smashable, they would need to inherit from the class Smashable,
+possibly requiring multiple inheritance. If multiple inheritance was
+undesired, then they would have to inherit a common class like Entity.
+Yet, it would not be very elegant to add a virtual method <code class="docutils literal notranslate"><span class="pre">smash()</span></code> to
+Entity only if a few of them can be smashed.</p>
+<p>With dynamically typed languages, this is not a problem. Duck typing
+makes sure you only have to define a <code class="docutils literal notranslate"><span class="pre">smash()</span></code> function where required
+and that's it. No need to consider inheritance, base classes, etc.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_object_hit</span><span class="p">(</span><span class="n">object</span><span class="p">):</span>
+<span class="w">    </span><span class="n">object</span><span class="o">.</span><span class="nf">smash</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>And that's it. If the object that hit the big rock has a smash() method,
+it will be called. No need for inheritance or polymorphism. Dynamically
+typed languages only care about the instance having the desired method
+or member, not what it inherits or the class type. The definition of
+Duck Typing should make this clearer:</p>
+<p><em>&quot;When I see a bird that walks like a duck and swims like a duck and
+quacks like a duck, I call that bird a duck&quot;</em></p>
+<p>In this case, it translates to:</p>
+<p><em>&quot;If the object can be smashed, don't care what it is, just smash it.&quot;</em></p>
+<p>Yes, we should call it Hulk typing instead.</p>
+<p>It's possible that the object being hit doesn't have a smash() function.
+Some dynamically typed languages simply ignore a method call when it
+doesn't exist, but GDScript is stricter, so checking if the function
+exists is desirable:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_object_hit</span><span class="p">(</span><span class="n">object</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">object</span><span class="o">.</span><span class="nf">has_method</span><span class="p">(</span><span class="s2">&quot;smash&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="n">object</span><span class="o">.</span><span class="nf">smash</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then, define that method and anything the rock touches can be smashed.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gdscript_basics.html" class="btn btn-neutral float-left" title="GDScript reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gdscript_exports.html" class="btn btn-neutral float-right" title="GDScript exported properties" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

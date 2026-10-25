@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Secondary build system: Working with CMake" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/scripting/cpp/build_system/cmake.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Beside the SCons based build system, godot-cpp also provides a CMakeLists.txt file to support users that prefer using CMake over SCons for their build system. While actively supported, the CMake sy..." />
+<meta name="description" content="Beside the SCons based build system, godot-cpp also provides a CMakeLists.txt file to support users that prefer using CMake over SCons for their build system. While actively supported, the CMake sy..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Secondary build system: Working with CMake &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Core functions and types" href="../core_types.html" />
+    <link rel="prev" title="Main build system: Working with SCons" href="scons.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/scripting/cpp/build_system/cmake" />
+
+<link rel="manifest" href="../../../../manifest.webmanifest" /><link rel="icon" href="../../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../../_static/css/godot-mobile.css"><script defer src="../../../../_static/js/godot-pwa.js"></script><script defer src="../../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../../" data-godot-page="tutorials/scripting/cpp/build_system/cmake.html"></div><script src="../../../../_static/js/godot-menu-data.js"></script><script src="../../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Scripting</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">C++ (godot-cpp)</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Build system</a></li>
+      <li class="breadcrumb-item active">Secondary build system: Working with CMake</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/scripting/cpp/build_system/cmake.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="secondary-build-system-working-with-cmake">
+<span id="doc-godot-cpp-build-system-cmake"></span><h1>Secondary build system: Working with CMake<a class="headerlink" href="#secondary-build-system-working-with-cmake" title="Link to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>This page documents how to compile godot-cpp. If you're looking to compile
+Godot instead, see <a class="reference internal" href="../../../../engine_details/development/compiling/introduction_to_the_buildsystem.html#doc-introduction-to-the-buildsystem"><span class="std std-ref">Introduction to the buildsystem</span></a>.</p>
+</div>
+<p>Beside the <a class="reference external" href="http://scons.org">SCons</a> based build system, godot-cpp also provides a <a class="reference external" href="https://github.com/godotengine/godot-cpp/blob/master/CMakeLists.txt">CMakeLists.txt</a>
+file to support users that prefer using <a class="reference external" href="http://cmake.org">CMake</a> over SCons for their build
+system.</p>
+<p>While actively supported, the CMake system is considered secondary to the
+SCons build system. This means it may lack some features that are available to
+projects using SCons.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Compiling godot-cpp independently of an extension project is mainly for
+godot-cpp developers, package maintainers, and CI/CD.</p>
+<p>Examples of how to use CMake to consume the godot-cpp library as part of an
+extension project:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/godotengine/godot-cpp-template/">godot-cpp-template</a></p></li>
+<li><p><a class="reference external" href="https://github.com/vorlac/godot-roguelite/">godot_roguelite</a></p></li>
+<li><p><a class="reference external" href="https://github.com/CraterCrash/godot-orchestrator/">godot-orchestrator</a></p></li>
+</ul>
+<p>Examples for configuring godot-cpp are listed at the bottom of the page, many
+of which may help with configuring your project.</p>
+</section>
+<section id="cmake-s-debug-vs-godot-s-template-debug">
+<h2>CMake's <code class="docutils literal notranslate"><span class="pre">Debug</span></code> vs Godot's <code class="docutils literal notranslate"><span class="pre">template_debug</span></code><a class="headerlink" href="#cmake-s-debug-vs-godot-s-template-debug" title="Link to this heading"></a></h2>
+<p>Something that has come up during many discussions is the conflation of a
+compilation of C++ source code with debug symbols enabled, and compiling a
+Godot extension with debug features enabled. The two concepts are not mutually
+exclusive.</p>
+<section id="debug-features">
+<h3>Debug Features<a class="headerlink" href="#debug-features" title="Link to this heading"></a></h3>
+<p>Enables a pre-processor definition to selectively compile code to help users of
+a Godot extension with their own project.</p>
+<p>Debug features are enabled in <code class="docutils literal notranslate"><span class="pre">editor</span></code> and <code class="docutils literal notranslate"><span class="pre">template_debug</span></code> builds, which
+can be specified during the configure phase like so:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>godot-cpp<span class="w"> </span>-B<span class="w"> </span>cmake-build<span class="w"> </span>-DGODOTCPP_TARGET<span class="o">=</span>&lt;target<span class="w"> </span>choice&gt;
+</pre></div>
+</div>
+</section>
+<section id="debug">
+<h3>Debug<a class="headerlink" href="#debug" title="Link to this heading"></a></h3>
+<p>Sets compiler flags so that debug symbols are generated to help godot extension
+developers debug their extension.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Debug</span></code> is the default build type for CMake projects, the way to select another
+depends on the generator used:</p>
+<ul class="simple">
+<li><p>For single configuration generators, add <code class="docutils literal notranslate"><span class="pre">-DCMAKE_BUILD_TYPE=&lt;type&gt;</span></code> to the
+configure command.</p></li>
+<li><p>For multi-config generators, add <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">&lt;type&gt;</span></code> to the build command.</p></li>
+</ul>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;type&gt;</span></code> is one of <code class="docutils literal notranslate"><span class="pre">Debug</span></code>, <code class="docutils literal notranslate"><span class="pre">Release</span></code>, <code class="docutils literal notranslate"><span class="pre">RelWithDebInfo</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">MinSizeRel</span></code>.</p>
+</section>
+</section>
+<section id="scons-deviations">
+<h2>SCons Deviations<a class="headerlink" href="#scons-deviations" title="Link to this heading"></a></h2>
+<p>Not all code from the SCons system can be perfectly represented in CMake, here
+are the notable differences:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">debug_symbols</span></code></p>
+<blockquote>
+<div><p>Is no longer an explicit option, and is enabled when using CMake build
+configurations; <code class="docutils literal notranslate"><span class="pre">Debug</span></code>, <code class="docutils literal notranslate"><span class="pre">RelWithDebInfo</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dev_build</span></code></p>
+<blockquote>
+<div><p>Does not define <code class="docutils literal notranslate"><span class="pre">NDEBUG</span></code> when disabled, <code class="docutils literal notranslate"><span class="pre">NDEBUG</span></code> is set when using
+CMake build configurations; <code class="docutils literal notranslate"><span class="pre">Release</span></code>, <code class="docutils literal notranslate"><span class="pre">MinSizeRel</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arch</span></code></p>
+<blockquote>
+<div><p>CMake sets the architecture via the toolchain files, macOS universal is
+controlled via the <code class="docutils literal notranslate"><span class="pre">CMAKE_OSX_ARCHITECTURES</span></code> property which is copied to
+targets when they are defined.</p>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">debug_crt</span></code></p>
+<blockquote>
+<div><p>CMake controls linking to Windows runtime libraries by copying the value of
+<code class="docutils literal notranslate"><span class="pre">CMAKE_MSVC_RUNTIME_LIBRARIES</span></code> to targets as they are defined. godot-cpp
+will set this variable if it isn't already set. So, include it before other
+dependencies to have the value propagate across the projects.</p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="basic-walk-through">
+<h2>Basic Walk-Through<a class="headerlink" href="#basic-walk-through" title="Link to this heading"></a></h2>
+<section id="clone-the-git-repository">
+<h3>Clone the git repository<a class="headerlink" href="#clone-the-git-repository" title="Link to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/godotengine/godot-cpp.git
+Cloning<span class="w"> </span>into<span class="w"> </span><span class="s1">&#39;godot-cpp&#39;</span>...
+...
+</pre></div>
+</div>
+</section>
+<section id="configure-the-build">
+<h3>Configure the build<a class="headerlink" href="#configure-the-build" title="Link to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>godot-cpp<span class="w"> </span>-B<span class="w"> </span>cmake-build<span class="w"> </span>-G<span class="w"> </span>Ninja
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-S</span></code> Specifies the source directory as <code class="docutils literal notranslate"><span class="pre">godot-cpp</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-B</span></code> Specifies the build directory as <code class="docutils literal notranslate"><span class="pre">cmake-build</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-G</span></code> Specifies the Generator as <code class="docutils literal notranslate"><span class="pre">Ninja</span></code></p></li>
+</ul>
+<p>The source directory in this example is the source root for the freshly cloned
+godot-cpp. CMake will also interpret the first path in the command as the
+source path, or if an existing build path is specified it will deduce the
+source path from the build cache.</p>
+<p>The following three commands are equivalent:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Current working directory is the godot-cpp source root.</span>
+cmake<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build-dir
+
+<span class="c1"># Current working directory is an empty godot-cpp/build-dir.</span>
+cmake<span class="w"> </span>../
+
+<span class="c1"># Current working directory is an existing build path.</span>
+cmake<span class="w"> </span>.
+</pre></div>
+</div>
+<p>The build directory is specified so that generated files do not clutter the
+source tree with build artifacts.</p>
+<p>CMake doesn't build the code, it generates the files that a build tool uses, in
+this case the <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> generator creates <a class="reference external" href="https://ninja-build.org/">Ninja</a> build files.</p>
+<p>To see the list of generators run <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">--help</span></code>.</p>
+</section>
+<section id="build-options">
+<h3>Build Options<a class="headerlink" href="#build-options" title="Link to this heading"></a></h3>
+<p>To list the available options use the <code class="docutils literal notranslate"><span class="pre">-L[AH]</span></code> command flags. <code class="docutils literal notranslate"><span class="pre">A</span></code> is for
+advanced, and <code class="docutils literal notranslate"><span class="pre">H</span></code> is for help strings:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>godot-cpp<span class="w"> </span>-LH
+</pre></div>
+</div>
+<p>Options are specified on the command line when configuring, for example:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>godot-cpp<span class="w"> </span>-DGODOTCPP_USE_HOT_RELOAD:BOOL<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DGODOTCPP_PRECISION:STRING<span class="o">=</span>double<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_BUILD_TYPE:STRING<span class="o">=</span>Debug
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://cmake.org/cmake/help/latest/guide/user-interaction/index.html#setting-build-variables">setting-build-variables</a> and <a class="reference external" href="https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations">build-configurations</a> for more information.</p>
+<section id="a-non-exhaustive-list-of-options">
+<h4>A non-exhaustive list of options:<a class="headerlink" href="#a-non-exhaustive-list-of-options" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>// Path to a custom GDExtension API JSON file.
+// (takes precedence over GODOTCPP_GDEXTENSION_DIR)
+// ( /path/to/custom_api_file )
+GODOTCPP_CUSTOM_API_FILE:FILEPATH=
+
+// Force disabling exception handling code. (ON|OFF)
+GODOTCPP_DISABLE_EXCEPTIONS:BOOL=ON
+
+// Path to a custom directory containing the GDExtension interface
+// header and API JSON file. ( /path/to/gdextension_dir )
+GODOTCPP_GDEXTENSION_DIR:PATH=gdextension
+
+// Set the floating-point precision level. (single|double)
+GODOTCPP_PRECISION:STRING=single
+
+// Enable the extra accounting required to support hot reload. (ON|OFF)
+GODOTCPP_USE_HOT_RELOAD:BOOL=
+</pre></div>
+</div>
+</section>
+</section>
+<section id="compiling">
+<h3>Compiling<a class="headerlink" href="#compiling" title="Link to this heading"></a></h3>
+<p>Tell CMake to invoke the build system it generated in the specified directory.
+The default target is <code class="docutils literal notranslate"><span class="pre">template_debug</span></code> and the default build configuration is
+Debug.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>--build<span class="w"> </span>cmake-build
+</pre></div>
+</div>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>These examples, while intended for godot-cpp developers, package maintainers,
+and CI/CD may help you configure your own extension project.</p>
+<p>Practical examples for how to consume the godot-cpp library as part of an
+extension project are listed in the <a class="reference internal" href="#introduction">Introduction</a>.</p>
+<section id="enabling-integration-testing">
+<h3>Enabling Integration Testing<a class="headerlink" href="#enabling-integration-testing" title="Link to this heading"></a></h3>
+<p>The testing target <code class="docutils literal notranslate"><span class="pre">godot-cpp-test</span></code> is guarded by <code class="docutils literal notranslate"><span class="pre">GODOTCPP_ENABLE_TESTING</span></code>
+which is off by default.</p>
+<p>To configure and build the godot-cpp project to enable the integration
+testing targets the command will look something like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>godot-cpp<span class="w"> </span>-B<span class="w"> </span>cmake-build<span class="w"> </span>-DGODOTCPP_ENABLE_TESTING<span class="o">=</span>YES
+cmake<span class="w"> </span>--build<span class="w"> </span>cmake-build<span class="w"> </span>--target<span class="w"> </span>godot-cpp-test
+</pre></div>
+</div>
+</section>
+<section id="windows-and-msvc-release">
+<h3>Windows and MSVC - Release<a class="headerlink" href="#windows-and-msvc-release" title="Link to this heading"></a></h3>
+<p>So long as CMake is installed from the <a class="reference external" href="https://cmake.org/download/">CMake Downloads</a> page and in the PATH,
+and Microsoft Visual Studio is installed with C++ support, CMake will detect
+the MSVC compiler.</p>
+<p>Note that Visual Studio is a Multi-Config Generator so the build configuration
+needs to be specified at build time, for example, <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">Release</span></code>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>godot-cpp<span class="w"> </span>-B<span class="w"> </span>cmake-build<span class="w"> </span>-DGODOTCPP_ENABLE_TESTING<span class="o">=</span>YES
+cmake<span class="w"> </span>--build<span class="w"> </span>cmake-build<span class="w"> </span>-t<span class="w"> </span>godot-cpp-test<span class="w"> </span>--config<span class="w"> </span>Release
+</pre></div>
+</div>
+</section>
+<section id="msys2-clang64-ninja-debug">
+<h3>MSys2/clang64, &quot;Ninja&quot; - Debug<a class="headerlink" href="#msys2-clang64-ninja-debug" title="Link to this heading"></a></h3>
+<p>Assumes the <code class="docutils literal notranslate"><span class="pre">ming-w64-clang-x86_64</span></code>-toolchain is installed.</p>
+<p>Note that Ninja is a Single-Config Generator so the build type needs to be
+specified at configuration time.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">msys2/clang64</span></code> shell:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>godot-cpp<span class="w"> </span>-B<span class="w"> </span>cmake-build<span class="w"> </span>-G<span class="s2">&quot;Ninja&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DGODOTCPP_ENABLE_TESTING<span class="o">=</span>YES<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+cmake<span class="w"> </span>--build<span class="w"> </span>cmake-build<span class="w"> </span>-t<span class="w"> </span>godot-cpp-test
+</pre></div>
+</div>
+</section>
+<section id="msys2-clang64-ninja-multi-config-dev-build-debug-symbols">
+<h3>MSys2/clang64, &quot;Ninja Multi-Config&quot; - dev_build, Debug Symbols<a class="headerlink" href="#msys2-clang64-ninja-multi-config-dev-build-debug-symbols" title="Link to this heading"></a></h3>
+<p>Assumes the <code class="docutils literal notranslate"><span class="pre">ming-w64-clang-x86_64</span></code>-toolchain is installed.</p>
+<p>This time we are choosing the 'Ninja Multi-Config' generator, so the build
+type is specified at build time.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">msys2/clang64</span></code> shell:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>godot-cpp<span class="w"> </span>-B<span class="w"> </span>cmake-build<span class="w"> </span>-G<span class="s2">&quot;Ninja Multi-Config&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DGODOTCPP_ENABLE_TESTING<span class="o">=</span>YES<span class="w"> </span>-DGODOTCPP_DEV_BUILD:BOOL<span class="o">=</span>ON
+cmake<span class="w"> </span>--build<span class="w"> </span>cmake-build<span class="w"> </span>-t<span class="w"> </span>godot-cpp-test<span class="w"> </span>--config<span class="w"> </span>Debug
+</pre></div>
+</div>
+</section>
+<section id="emscripten-for-web-platform">
+<h3>Emscripten for web platform<a class="headerlink" href="#emscripten-for-web-platform" title="Link to this heading"></a></h3>
+<p>This has only been tested on Windows so far. You can use this example workflow:</p>
+<ul class="simple">
+<li><p>Clone and install the latest Emscripten tools to <code class="docutils literal notranslate"><span class="pre">c:\emsdk</span></code>.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">C:\emsdk\emsdk.ps1</span> <span class="pre">activate</span> <span class="pre">latest</span></code> to enable the environment from
+powershell in the current shell.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">emcmake.bat</span></code> utility adds the emscripten toolchain to the CMake
+command. It can also be added manually;
+the location is listed inside the <code class="docutils literal notranslate"><span class="pre">emcmake.bat</span></code> file</p></li>
+</ul>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:\</span><span class="n">emsdk</span><span class="p">\</span><span class="n">emsdk</span><span class="p">.</span><span class="n">ps1</span> <span class="n">activate</span> <span class="n">latest</span>
+<span class="n">emcmake</span><span class="p">.</span><span class="n">bat</span> <span class="n">cmake</span> <span class="n">-S</span> <span class="n">godot-cpp</span> <span class="n">-B</span> <span class="n">cmake-build-web</span> <span class="n">-DCMAKE_BUILD_TYPE</span><span class="p">=</span><span class="n">Release</span>
+<span class="n">cmake</span> <span class="p">-</span><span class="n">-build</span> <span class="n">cmake-build-web</span>
+</pre></div>
+</div>
+</section>
+<section id="android-cross-compile-from-windows">
+<h3>Android Cross Compile from Windows<a class="headerlink" href="#android-cross-compile-from-windows" title="Link to this heading"></a></h3>
+<p>There are two separate paths you can choose when configuring for android.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">CMAKE_ANDROID_*</span></code> variables specified on the command line or in your
+own toolchain file as listed in the <a class="reference external" href="https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling-for-android-with-the-ndk">cmake-toolchains</a> documentation.</p>
+<p>Or use the toolchain and scripts provided by the Android SDK and make changes
+using the <code class="docutils literal notranslate"><span class="pre">ANDROID_*</span></code> variables listed there. Where <code class="docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> is whatever
+NDK version you have installed (tested with <cite>28.1.13356709</cite>) and <code class="docutils literal notranslate"><span class="pre">&lt;platform&gt;</span></code>
+is for the Android sdk platform, (tested with <code class="docutils literal notranslate"><span class="pre">android-29</span></code>).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The Android SDK <a class="reference external" href="https://developer.android.com/ndk/guides/cmake">website</a> explicitly states that they do not support using
+the CMake built-in method, and recommends you stick with their toolchain
+files.</p>
+</div>
+<section id="using-your-own-toolchain-file">
+<h4>Using your own toolchain file<a class="headerlink" href="#using-your-own-toolchain-file" title="Link to this heading"></a></h4>
+<p>As described in the CMake documentation:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>godot-cpp<span class="w"> </span>-B<span class="w"> </span>cmake-build<span class="w"> </span>--toolchain<span class="w"> </span>my_toolchain.cmake
+cmake<span class="w"> </span>--build<span class="w"> </span>cmake-build<span class="w"> </span>-t<span class="w"> </span>template_release
+</pre></div>
+</div>
+<p>Doing the equivalent just using the command line:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>godot-cpp<span class="w"> </span>-B<span class="w"> </span>cmake-build<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_SYSTEM_NAME<span class="o">=</span>Android<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_SYSTEM_VERSION<span class="o">=</span>&lt;platform&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_ANDROID_ARCH_ABI<span class="o">=</span>&lt;arch&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_ANDROID_NDK<span class="o">=</span>/path/to/android-ndk
+cmake<span class="w"> </span>--build<span class="w"> </span>cmake-build
+</pre></div>
+</div>
+</section>
+<section id="using-the-android-sdk-toolchain-file">
+<h4>Using the Android SDK toolchain file<a class="headerlink" href="#using-the-android-sdk-toolchain-file" title="Link to this heading"></a></h4>
+<p>This defaults to the minimum supported version and armv7-a:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>godot-cpp<span class="w"> </span>-B<span class="w"> </span>cmake-build<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--toolchain<span class="w"> </span><span class="nv">$ANDROID_HOME</span>/ndk/&lt;version&gt;/build/cmake/android.toolchain.cmake
+cmake<span class="w"> </span>--build<span class="w"> </span>cmake-build
+</pre></div>
+</div>
+<p>Specifying the Android platform and ABI:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>godot-cpp<span class="w"> </span>-B<span class="w"> </span>cmake-build<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--toolchain<span class="w"> </span><span class="nv">$ANDROID_HOME</span>/ndk/&lt;version&gt;/build/cmake/android.toolchain.cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DANDROID_PLATFORM:STRING<span class="o">=</span>android-29<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DANDROID_ABI:STRING<span class="o">=</span>armeabi-v7a
+cmake<span class="w"> </span>--build<span class="w"> </span>cmake-build
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scons.html" class="btn btn-neutral float-left" title="Main build system: Working with SCons" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../core_types.html" class="btn btn-neutral float-right" title="Core functions and types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

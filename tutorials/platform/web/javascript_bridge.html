@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="The JavaScriptBridge singleton" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/platform/web/javascript_bridge.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="In web builds, the JavaScriptBridge singleton allows interaction with JavaScript and web browsers, and can be used to implement some functionalities unique to the web platform. Interacting with Jav..." />
+<meta name="description" content="In web builds, the JavaScriptBridge singleton allows interaction with JavaScript and web browsers, and can be used to implement some functionalities unique to the web platform. Interacting with Jav..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>The JavaScriptBridge singleton &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="HTML5 shell class reference" href="html5_shell_classref.html" />
+    <link rel="prev" title="Web" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/platform/web/javascript_bridge" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/platform/web/javascript_bridge.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Platform-specific</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Web</a></li>
+      <li class="breadcrumb-item active">The JavaScriptBridge singleton</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/platform/web/javascript_bridge.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="the-javascriptbridge-singleton">
+<span id="doc-web-javascript-bridge"></span><h1>The JavaScriptBridge singleton<a class="headerlink" href="#the-javascriptbridge-singleton" title="Link to this heading"></a></h1>
+<p>In web builds, the <a class="reference internal" href="../../../classes/class_javascriptbridge.html#class-javascriptbridge"><span class="std std-ref">JavaScriptBridge</span></a> singleton
+allows interaction with JavaScript and web browsers, and can be used to implement some
+functionalities unique to the web platform.</p>
+<section id="interacting-with-javascript">
+<h2>Interacting with JavaScript<a class="headerlink" href="#interacting-with-javascript" title="Link to this heading"></a></h2>
+<p>Sometimes, when exporting Godot for the Web, it might be necessary to interface
+with external JavaScript code like third-party SDKs, libraries, or
+simply to access browser features that are not directly exposed by Godot.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">JavaScriptBridge</span></code> singleton provides methods to wrap a native JavaScript object into
+a Godot <a class="reference internal" href="../../../classes/class_javascriptobject.html#class-javascriptobject"><span class="std std-ref">JavaScriptObject</span></a> that tries to feel
+natural in the context of Godot scripting (e.g. GDScript and C#).</p>
+<p>The <a class="reference internal" href="../../../classes/class_javascriptbridge.html#class-javascriptbridge-method-get-interface"><span class="std std-ref">JavaScriptBridge.get_interface()</span></a>
+method retrieves an object in the global scope.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Retrieve the `window.console` object.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">console</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">get_interface</span><span class="p">(</span><span class="s2">&quot;console&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Call the `window.console.log()` method.</span>
+<span class="w">    </span><span class="n">console</span><span class="o">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../../../classes/class_javascriptbridge.html#class-javascriptbridge-method-create-object"><span class="std std-ref">JavaScriptBridge.create_object()</span></a>
+creates a new object via the JavaScript <code class="docutils literal notranslate"><span class="pre">new</span></code> constructor.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Call the JavaScript `new` operator on the `window.Array` object.</span>
+<span class="w">    </span><span class="c1"># Passing 10 as argument to the constructor:</span>
+<span class="w">    </span><span class="c1"># JS: `new Array(10);`</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">create_object</span><span class="p">(</span><span class="s2">&quot;Array&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Set the first element of the JavaScript array to the number 42.</span>
+<span class="w">    </span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span>
+<span class="w">    </span><span class="c1"># Call the `pop` function on the JavaScript array.</span>
+<span class="w">    </span><span class="n">arr</span><span class="o">.</span><span class="nf">pop</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Print the value of the `length` property of the array (9 after the pop).</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="vi">length</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As you can see, by wrapping JavaScript objects into <code class="docutils literal notranslate"><span class="pre">JavaScriptObject</span></code> you can
+interact with them like they were native Godot objects, calling their methods,
+and retrieving (or even setting) their properties.</p>
+<p>Base types (int, floats, strings, booleans) are automatically converted (floats
+might lose precision when converted from Godot to JavaScript). Anything else
+(i.e. objects, arrays, functions) are seen as <code class="docutils literal notranslate"><span class="pre">JavaScriptObjects</span></code> themselves.</p>
+</section>
+<section id="callbacks">
+<h2>Callbacks<a class="headerlink" href="#callbacks" title="Link to this heading"></a></h2>
+<p>Calling JavaScript code from Godot is nice, but sometimes you need to call a
+Godot function from JavaScript instead.</p>
+<p>This case is a bit more complicated. JavaScript relies on garbage collection,
+while Godot uses reference counting for memory management. This means you have
+to explicitly create callbacks (which are returned as <code class="docutils literal notranslate"><span class="pre">JavaScriptObjects</span></code>
+themselves) and you have to keep their reference.</p>
+<p>Arguments passed by JavaScript to the callback will be passed as a single Godot
+<code class="docutils literal notranslate"><span class="pre">Array</span></code>.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="c1"># Here we create a reference to the `_my_callback` function (below).</span>
+<span class="c1"># This reference will be kept until the node is freed.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">_callback_ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">create_callback</span><span class="p">(</span><span class="n">_my_callback</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Get the JavaScript `window` object.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">get_interface</span><span class="p">(</span><span class="s2">&quot;window&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Set the `window.onbeforeunload` DOM event listener.</span>
+<span class="w">    </span><span class="n">window</span><span class="o">.</span><span class="vi">onbeforeunload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_callback_ref</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_my_callback</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Get the first argument (the DOM event in our case).</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">js_event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="c1"># Call preventDefault and set the `returnValue` property of the DOM event.</span>
+<span class="w">    </span><span class="n">js_event</span><span class="o">.</span><span class="nf">preventDefault</span><span class="p">()</span>
+<span class="w">    </span><span class="n">js_event</span><span class="o">.</span><span class="vi">returnValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Callback methods created via <a class="reference internal" href="../../../classes/class_javascriptbridge.html#class-javascriptbridge-method-get-interface"><span class="std std-ref">JavaScriptBridge.get_interface()</span></a>
+(<code class="docutils literal notranslate"><span class="pre">_my_callback</span></code> in the above example) <strong>must</strong> take exactly one <a class="reference internal" href="../../../classes/class_array.html#class-array"><span class="std std-ref">Array</span></a>
+argument, which is going to be the JavaScript <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments">arguments object</a>
+converted to an array. Otherwise, the callback method will not be called.</p>
+</div>
+<p>Here is another example that asks the user for the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API">Notification permission</a>
+and waits asynchronously to deliver a notification if the permission is
+granted:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="c1"># Here we create a reference to the `_on_permissions` function (below).</span>
+<span class="c1"># This reference will be kept until the node is freed.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">_permission_callback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">create_callback</span><span class="p">(</span><span class="n">_on_permissions</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># NOTE: This is done in `_ready` for simplicity, but SHOULD BE done in response</span>
+<span class="w">    </span><span class="c1"># to user input instead (e.g. during `_input`, or `button_pressed` event, etc.),</span>
+<span class="w">    </span><span class="c1"># otherwise it might not work.</span>
+
+<span class="w">    </span><span class="c1"># Get the `window.Notification` JavaScript object.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">notification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">get_interface</span><span class="p">(</span><span class="s2">&quot;Notification&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Call the `window.Notification.requestPermission` method which returns a JavaScript</span>
+<span class="w">    </span><span class="c1"># Promise, and bind our callback to it.</span>
+<span class="w">    </span><span class="n">notification</span><span class="o">.</span><span class="nf">requestPermission</span><span class="p">()</span><span class="o">.</span><span class="nf">then</span><span class="p">(</span><span class="n">_permission_callback</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_permissions</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># The first argument of this callback is the string &quot;granted&quot; if the permission is granted.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">permission</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">permission</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;granted&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Permission granted, sending notification.&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="c1"># Create the notification: `new Notification(&quot;Hi there!&quot;)`</span>
+<span class="w">        </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">create_object</span><span class="p">(</span><span class="s2">&quot;Notification&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Hi there!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;No notification permission.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="can-i-use-my-favorite-library">
+<h2>Can I use my favorite library?<a class="headerlink" href="#can-i-use-my-favorite-library" title="Link to this heading"></a></h2>
+<p>You most likely can. First, you have to
+include your library in the page. You can customize the
+<a class="reference internal" href="../../export/exporting_for_web.html#doc-javascript-export-options"><span class="std std-ref">Head Include</span></a> during export (see below),
+or even <a class="reference internal" href="customizing_html5_shell.html#doc-customizing-html5-shell"><span class="std std-ref">write your own template</span></a>.</p>
+<p>In the example below, we customize the <code class="docutils literal notranslate"><span class="pre">Head</span> <span class="pre">Include</span></code> to add an external library
+(<a class="reference external" href="https://axios-http.com/">axios</a>) from a content delivery network, and a
+second <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> tag to define our own custom function:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- Axios --&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="cm">&lt;!-- Custom function --&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">myFunc</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;My func!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>We can then access both the library and the function from Godot, like we did in
+previous examples:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="c1"># Here create a reference to the `_on_get` function (below).</span>
+<span class="c1"># This reference will be kept until the node is freed.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">_callback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">create_callback</span><span class="p">(</span><span class="n">_on_get</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Get the `window` object, where globally defined functions are.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">get_interface</span><span class="p">(</span><span class="s2">&quot;window&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Call the JavaScript `myFunc` function defined in the custom HTML head.</span>
+<span class="w">    </span><span class="n">window</span><span class="o">.</span><span class="nf">myFunc</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Get the `axios` library (loaded from a CDN in the custom HTML head).</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">axios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">get_interface</span><span class="p">(</span><span class="s2">&quot;axios&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Make a GET request to the current location, and receive the callback when done.</span>
+<span class="w">    </span><span class="n">axios</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="n">window</span><span class="o">.</span><span class="vi">location</span><span class="o">.</span><span class="nf">toString</span><span class="p">())</span><span class="o">.</span><span class="nf">then</span><span class="p">(</span><span class="n">_callback</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_get</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="nb">OS</span><span class="o">.</span><span class="nf">alert</span><span class="p">(</span><span class="s2">&quot;On Get&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="the-eval-interface">
+<h2>The eval interface<a class="headerlink" href="#the-eval-interface" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">eval</span></code> method works similarly to the JavaScript function of the same
+name. It takes a string as an argument and executes it as JavaScript code.
+This allows interacting with the browser in ways not possible with script
+languages integrated into Godot.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">my_func</span><span class="p">():</span>
+<span class="w">    </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">eval</span><span class="p">(</span><span class="s2">&quot;alert(&#39;Calling JavaScript per GDScript!&#39;);&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MyFunc</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">JavaScriptBridge</span><span class="p">.</span><span class="n">Eval</span><span class="p">(</span><span class="s">&quot;alert(&#39;Calling JavaScript per C#!&#39;);&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>The value of the last JavaScript statement is converted to a GDScript value and
+returned by <code class="docutils literal notranslate"><span class="pre">eval()</span></code> under certain circumstances:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>JavaScript <code class="docutils literal notranslate"><span class="pre">number</span></code> is returned as <a class="reference internal" href="../../../classes/class_float.html#class-float"><span class="std std-ref">float</span></a></p></li>
+<li><p>JavaScript <code class="docutils literal notranslate"><span class="pre">boolean</span></code> is returned as <a class="reference internal" href="../../../classes/class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></li>
+<li><p>JavaScript <code class="docutils literal notranslate"><span class="pre">string</span></code> is returned as <a class="reference internal" href="../../../classes/class_string.html#class-string"><span class="std std-ref">String</span></a></p></li>
+<li><p>JavaScript <code class="docutils literal notranslate"><span class="pre">ArrayBuffer</span></code>, <code class="docutils literal notranslate"><span class="pre">TypedArray</span></code>, and <code class="docutils literal notranslate"><span class="pre">DataView</span></code> are returned as <a class="reference internal" href="../../../classes/class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a></p></li>
+</ul>
+</div></blockquote>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">my_func2</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">js_return</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">eval</span><span class="p">(</span><span class="s2">&quot;var myNumber = 1; myNumber + 2;&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">js_return</span><span class="p">)</span><span class="w"> </span><span class="c1"># prints &#39;3.0&#39;</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MyFunc2</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">jsReturn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JavaScriptBridge</span><span class="p">.</span><span class="n">Eval</span><span class="p">(</span><span class="s">&quot;var myNumber = 1; myNumber + 2;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">jsReturn</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints &#39;3.0&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Any other JavaScript value is returned as <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<p>HTML5 export templates may be <a class="reference internal" href="../../../engine_details/development/compiling/compiling_for_web.html#doc-compiling-for-web"><span class="std std-ref">built</span></a> without
+support for the singleton to improve security. With such templates, and on
+platforms other than HTML5, calling <code class="docutils literal notranslate"><span class="pre">JavaScriptBridge.eval</span></code> will also return
+<code class="docutils literal notranslate"><span class="pre">null</span></code>. The availability of the singleton can be checked with the
+<code class="docutils literal notranslate"><span class="pre">web</span></code> <a class="reference internal" href="../../export/feature_tags.html#doc-feature-tags"><span class="std std-ref">feature tag</span></a>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">my_func3</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">OS</span><span class="o">.</span><span class="nf">has_feature</span><span class="p">(</span><span class="s1">&#39;web&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">eval</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="s2">console.log(&#39;The JavaScriptBridge singleton is available&#39;)</span>
+<span class="w">        </span><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;The JavaScriptBridge singleton is NOT available&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MyFunc3</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">OS</span><span class="p">.</span><span class="n">HasFeature</span><span class="p">(</span><span class="s">&quot;web&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">JavaScriptBridge</span><span class="p">.</span><span class="n">Eval</span><span class="p">(</span><span class="s">&quot;console.log(&#39;The JavaScriptBridge singleton is available&#39;)&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;The JavaScriptBridge singleton is NOT available&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>GDScript's multi-line strings, surrounded by 3 quotes <code class="docutils literal notranslate"><span class="pre">&quot;&quot;&quot;</span></code> as in
+<code class="docutils literal notranslate"><span class="pre">my_func3()</span></code> above, are useful to keep JavaScript code readable.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">eval</span></code> method also accepts a second, optional Boolean argument, which
+specifies whether to execute the code in the global execution context,
+defaulting to <code class="docutils literal notranslate"><span class="pre">false</span></code> to prevent polluting the global namespace:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">my_func4</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># execute in global execution context,</span>
+<span class="w">    </span><span class="c1"># thus adding a new JavaScript global variable `SomeGlobal`</span>
+<span class="w">    </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">eval</span><span class="p">(</span><span class="s2">&quot;var SomeGlobal = {};&quot;</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MyFunc4</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// execute in global execution context,</span>
+<span class="w">    </span><span class="c1">// thus adding a new JavaScript global variable `SomeGlobal`</span>
+<span class="w">    </span><span class="n">JavaScriptBridge</span><span class="p">.</span><span class="n">Eval</span><span class="p">(</span><span class="s">&quot;var SomeGlobal = {};&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="downloading-files">
+<span id="doc-web-downloading-files"></span><h2>Downloading files<a class="headerlink" href="#downloading-files" title="Link to this heading"></a></h2>
+<p>Downloading files (e.g. a save game) from the Godot Web export to the user's computer can be done by directly interacting with JavaScript, but given it is a
+very common use case, Godot exposes this functionality to scripting via
+a dedicated <a class="reference internal" href="../../../classes/class_javascriptbridge.html#class-javascriptbridge-method-download-buffer"><span class="std std-ref">JavaScriptBridge.download_buffer()</span></a>
+function which lets you download any generated buffer.</p>
+<p>Here is a minimal example on how to use it:</p>
+<p>extends Node</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Asks the user download a file called &quot;hello.txt&quot; whose content will be the string &quot;Hello&quot;.</span>
+<span class="w">    </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">download_buffer</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="o">.</span><span class="nf">to_utf8_buffer</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot;hello.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And here is a more complete example on how to download a previously saved file:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="c1"># Open a file for reading and download it via the JavaScript singleton.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_download_file</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">FileAccess</span><span class="o">.</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="nb">FileAccess</span><span class="o">.</span><span class="vi">READ</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="l">null</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">push_error</span><span class="p">(</span><span class="s2">&quot;Failed to load file&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+<span class="w">    </span><span class="c1"># Get the file name.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">fname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">path</span><span class="o">.</span><span class="nf">get_file</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Read the whole file to memory.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">.</span><span class="nf">get_buffer</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="nf">get_len</span><span class="p">())</span>
+<span class="w">    </span><span class="c1"># Prompt the user to download the file (will have the same name as the input file).</span>
+<span class="w">    </span><span class="nb">JavaScriptBridge</span><span class="o">.</span><span class="nf">download_buffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">fname</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Create a temporary file.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ConfigFile</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">config</span><span class="o">.</span><span class="nf">set_value</span><span class="p">(</span><span class="s2">&quot;option&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="l">false</span><span class="p">)</span>
+<span class="w">    </span><span class="n">config</span><span class="o">.</span><span class="nf">save</span><span class="p">(</span><span class="s2">&quot;/tmp/test.cfg&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Download it</span>
+<span class="w">    </span><span class="nf">_download_file</span><span class="p">(</span><span class="s2">&quot;/tmp/test.cfg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Web" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="html5_shell_classref.html" class="btn btn-neutral float-right" title="HTML5 shell class reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

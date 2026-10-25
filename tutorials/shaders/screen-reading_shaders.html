@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Screen-reading shaders" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/shaders/screen-reading_shaders.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: It is often desired to make a shader that reads from the same screen to which it&#x27;s writing. 3D APIs, such as OpenGL or DirectX, make this very difficult because of internal hardw..." />
+<meta name="description" content="Introduction: It is often desired to make a shader that reads from the same screen to which it&#x27;s writing. 3D APIs, such as OpenGL or DirectX, make this very difficult because of internal hardw..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Screen-reading shaders &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Converting GLSL to Godot shaders" href="converting_glsl_to_godot_shaders.html" />
+    <link rel="prev" title="Using compute shaders" href="compute_shaders.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/shaders/screen-reading_shaders" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/shaders/screen-reading_shaders.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Shaders</a></li>
+      <li class="breadcrumb-item active">Screen-reading shaders</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/shaders/screen-reading_shaders.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="screen-reading-shaders">
+<span id="doc-screen-reading-shaders"></span><h1>Screen-reading shaders<a class="headerlink" href="#screen-reading-shaders" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>It is often desired to make a shader that reads from the same
+screen to which it's writing. 3D APIs, such as OpenGL or DirectX, make this very
+difficult because of internal hardware limitations. GPUs are extremely
+parallel, so reading and writing causes all sorts of cache and coherency
+problems. As a result, not even the most modern hardware supports this
+properly.</p>
+<p>The workaround is to make a copy of the screen, or a part of the screen,
+to a back-buffer and then read from it while drawing. Godot provides a
+few tools that make this process easy.</p>
+</section>
+<section id="screen-texture">
+<h2>Screen texture<a class="headerlink" href="#screen-texture" title="Link to this heading"></a></h2>
+<p>Godot <a class="reference internal" href="shader_reference/shading_language.html#doc-shading-language"><span class="std std-ref">Shading language</span></a> has a special texture to access the already
+rendered contents of the screen. It is used by specifying a hint when declaring
+a <code class="docutils literal notranslate"><span class="pre">sampler2D</span></code> uniform: <code class="docutils literal notranslate"><span class="pre">hint_screen_texture</span></code>. A special built-in varying
+<code class="docutils literal notranslate"><span class="pre">SCREEN_UV</span></code> can be used to obtain the UV relative to the screen for the current
+fragment. As a result, this canvas_item fragment shader results in an invisible
+object, because it only shows what lies behind:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">canvas_item</span><span class="p">;</span>
+
+<span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">screen_texture</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_screen_texture</span><span class="p">,</span><span class="w"> </span><span class="n">repeat_disable</span><span class="p">,</span><span class="w"> </span><span class="n">filter_nearest</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">textureLod</span><span class="p">(</span><span class="n">screen_texture</span><span class="p">,</span><span class="w"> </span><span class="n">SCREEN_UV</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">textureLod</span></code> is used here as we only want to read from the bottom mipmap. If
+you want to read from a blurred version of the texture instead, you can increase
+the third argument to <code class="docutils literal notranslate"><span class="pre">textureLod</span></code> and change the hint <code class="docutils literal notranslate"><span class="pre">filter_nearest</span></code> to
+<code class="docutils literal notranslate"><span class="pre">filter_nearest_mipmap</span></code> (or any other filter with mipmaps enabled). If using a
+filter with mipmaps, Godot will automatically calculate the blurred texture for
+you.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the filter mode is not changed to a filter mode that contains <code class="docutils literal notranslate"><span class="pre">mipmap</span></code> in its name,
+<code class="docutils literal notranslate"><span class="pre">textureLod</span></code> with an LOD parameter greater than <code class="docutils literal notranslate"><span class="pre">0.0</span></code> will have the same appearance
+as with the <code class="docutils literal notranslate"><span class="pre">0.0</span></code> LOD parameter.</p>
+</div>
+</section>
+<section id="screen-texture-example">
+<h2>Screen texture example<a class="headerlink" href="#screen-texture-example" title="Link to this heading"></a></h2>
+<p>The screen texture can be used for many things. There is a
+special demo for <em>Screen Space Shaders</em>, that you can download to see
+and learn. One example is a simple shader to adjust brightness, contrast
+and saturation:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">canvas_item</span><span class="p">;</span>
+
+<span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">screen_texture</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_screen_texture</span><span class="p">,</span><span class="w"> </span><span class="n">repeat_disable</span><span class="p">,</span><span class="w"> </span><span class="n">filter_nearest</span><span class="p">;</span>
+
+<span class="k">uniform</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">brightness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">contrast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">saturation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">vec3</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">textureLod</span><span class="p">(</span><span class="n">screen_texture</span><span class="p">,</span><span class="w"> </span><span class="n">SCREEN_UV</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">).</span><span class="n">rgb</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">c</span><span class="p">.</span><span class="n">rgb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mix</span><span class="p">(</span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">rgb</span><span class="p">,</span><span class="w"> </span><span class="n">brightness</span><span class="p">);</span>
+<span class="w">    </span><span class="n">c</span><span class="p">.</span><span class="n">rgb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mix</span><span class="p">(</span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">rgb</span><span class="p">,</span><span class="w"> </span><span class="n">contrast</span><span class="p">);</span>
+<span class="w">    </span><span class="n">c</span><span class="p">.</span><span class="n">rgb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mix</span><span class="p">(</span><span class="kt">vec3</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="kt">vec3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">rgb</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.33333</span><span class="p">),</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">rgb</span><span class="p">,</span><span class="w"> </span><span class="n">saturation</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">COLOR</span><span class="p">.</span><span class="n">rgb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="behind-the-scenes">
+<h2>Behind the scenes<a class="headerlink" href="#behind-the-scenes" title="Link to this heading"></a></h2>
+<p>While this seems magical, it's not. In 2D, when <code class="docutils literal notranslate"><span class="pre">hint_screen_texture</span></code> is first
+found in a node that is about to be drawn, Godot does a full-screen copy to a
+back-buffer. Subsequent nodes that use it in shaders will not have the screen
+copied for them, because this ends up being inefficient. In 3D, the screen is
+copied after the opaque geometry pass, but before the transparent geometry pass,
+so transparent objects will not be captured in the screen texture.</p>
+<p>As a result, in 2D, if shaders that use <code class="docutils literal notranslate"><span class="pre">hint_screen_texture</span></code> overlap, the
+second one will not use the result of the first one, resulting in unexpected
+visuals:</p>
+<img alt="../../_images/texscreen_demo1.png" src="../../_images/texscreen_demo1.png" />
+<p>In the above image, the second sphere (top right) is using the same source for
+the screen texture as the first one below, so the first one &quot;disappears&quot;, or is
+not visible.</p>
+<p>In 2D, this can be corrected via the <a class="reference internal" href="../../classes/class_backbuffercopy.html#class-backbuffercopy"><span class="std std-ref">BackBufferCopy</span></a>
+node, which can be instantiated between both spheres. BackBufferCopy can work by
+either specifying a screen region or the whole screen:</p>
+<img alt="../../_images/texscreen_bbc.png" src="../../_images/texscreen_bbc.png" />
+<p>With correct back-buffer copying, the two spheres blend correctly:</p>
+<img alt="../../_images/texscreen_demo2.png" src="../../_images/texscreen_demo2.png" />
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In 3D, materials that use <code class="docutils literal notranslate"><span class="pre">hint_screen_texture</span></code> are considered transparent themselves and
+will not appear in the resulting screen texture of other materials.
+If you plan to instance a scene that uses a material with <code class="docutils literal notranslate"><span class="pre">hint_screen_texture</span></code>,
+you will need to use a BackBufferCopy node.</p>
+</div>
+<p>In 3D, there is less flexibility to solve this particular issue because the
+screen texture is only captured once. Be careful when using the screen texture
+in 3D as it won't capture transparent objects and may capture some opaque
+objects that are in front of the object using the screen texture.</p>
+<p>You can reproduce the back-buffer logic in 3D by creating a <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a>
+with a camera in the same position as your object, and then use the
+<a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport's</span></a> texture instead of the screen texture.</p>
+</section>
+<section id="back-buffer-logic">
+<h2>Back-buffer logic<a class="headerlink" href="#back-buffer-logic" title="Link to this heading"></a></h2>
+<p>So, to make it clearer, here's how the backbuffer copying logic works in 2D in
+Godot:</p>
+<ul class="simple">
+<li><p>If a node uses <code class="docutils literal notranslate"><span class="pre">hint_screen_texture</span></code>, the entire screen is copied to the
+back buffer before drawing that node. This only happens the first
+time; subsequent nodes do not trigger this.</p></li>
+<li><p>If a BackBufferCopy node was processed before the situation in the point
+above (even if <code class="docutils literal notranslate"><span class="pre">hint_screen_texture</span></code> was not used), the behavior described
+in the point above does not happen. In other words, automatic copying of the
+entire screen only happens if <code class="docutils literal notranslate"><span class="pre">hint_screen_texture</span></code> is used in a node for
+the first time and no BackBufferCopy node (not disabled) was found before in
+tree-order.</p></li>
+<li><p>BackBufferCopy can copy either the entire screen or a region. If set to only
+a region (not the whole screen) and your shader uses pixels not in the region
+copied, the result of that read is undefined (most likely garbage from
+previous frames). In other words, it's possible to use BackBufferCopy to copy
+back a region of the screen and then read the screen texture from a different
+region. Avoid this behavior!</p></li>
+</ul>
+</section>
+<section id="depth-texture">
+<h2>Depth texture<a class="headerlink" href="#depth-texture" title="Link to this heading"></a></h2>
+<p>For 3D shaders, it's also possible to access the screen depth buffer. For this,
+the <code class="docutils literal notranslate"><span class="pre">hint_depth_texture</span></code> hint is used. This texture is not linear; it must be
+converted using the inverse projection matrix.</p>
+<p>The following code retrieves the 3D position below the pixel being drawn:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">depth_texture</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_depth_texture</span><span class="p">,</span><span class="w"> </span><span class="n">repeat_disable</span><span class="p">,</span><span class="w"> </span><span class="n">filter_nearest</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">textureLod</span><span class="p">(</span><span class="n">depth_texture</span><span class="p">,</span><span class="w"> </span><span class="n">SCREEN_UV</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">).</span><span class="n">r</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">vec4</span><span class="w"> </span><span class="n">upos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INV_PROJECTION_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">SCREEN_UV</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">vec3</span><span class="w"> </span><span class="n">pixel_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upos</span><span class="p">.</span><span class="n">xyz</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">upos</span><span class="p">.</span><span class="n">w</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="normal-roughness-texture">
+<h2>Normal-roughness texture<a class="headerlink" href="#normal-roughness-texture" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Normal-roughness texture is only supported in the Forward+ rendering method,
+not Mobile or Compatibility.</p>
+</div>
+<p>Similarly, the normal-roughness texture can be used to read the normals and
+roughness of objects rendered in the depth prepass. The normal is stored in the
+<code class="docutils literal notranslate"><span class="pre">.xyz</span></code> channels (mapped to the 0-1 range) while the roughness is stored in the
+<code class="docutils literal notranslate"><span class="pre">.w</span></code> channel.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">normal_roughness_texture</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_normal_roughness_texture</span><span class="p">,</span><span class="w"> </span><span class="n">repeat_disable</span><span class="p">,</span><span class="w"> </span><span class="n">filter_nearest</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">screen_roughness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">normal_roughness_texture</span><span class="p">,</span><span class="w"> </span><span class="n">SCREEN_UV</span><span class="p">).</span><span class="n">w</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">vec3</span><span class="w"> </span><span class="n">screen_normal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">normal_roughness_texture</span><span class="p">,</span><span class="w"> </span><span class="n">SCREEN_UV</span><span class="p">).</span><span class="n">xyz</span><span class="p">;</span>
+<span class="w">    </span><span class="n">screen_normal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">screen_normal</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="redefining-screen-textures">
+<h2>Redefining screen textures<a class="headerlink" href="#redefining-screen-textures" title="Link to this heading"></a></h2>
+<p>The screen texture hints (<code class="docutils literal notranslate"><span class="pre">hint_screen_texture</span></code>, <code class="docutils literal notranslate"><span class="pre">hint_depth_texture</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">hint_normal_roughness_texture</span></code>) can be used with multiple uniforms. For
+example, you may want to read from the texture multiple times with a different
+repeat flag or filter flag.</p>
+<p>The following example shows a shader that reads the screen space normal with
+linear filtering, but reads the screen space roughness using nearest neighbor
+filtering.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">normal_roughness_texture</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_normal_roughness_texture</span><span class="p">,</span><span class="w"> </span><span class="n">repeat_disable</span><span class="p">,</span><span class="w"> </span><span class="n">filter_nearest</span><span class="p">;</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">normal_roughness_texture2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_normal_roughness_texture</span><span class="p">,</span><span class="w"> </span><span class="n">repeat_enable</span><span class="p">,</span><span class="w"> </span><span class="n">filter_linear</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">screen_roughness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">normal_roughness_texture</span><span class="p">,</span><span class="w"> </span><span class="n">SCREEN_UV</span><span class="p">).</span><span class="n">w</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">vec3</span><span class="w"> </span><span class="n">screen_normal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">normal_roughness_texture2</span><span class="p">,</span><span class="w"> </span><span class="n">SCREEN_UV</span><span class="p">).</span><span class="n">xyz</span><span class="p">;</span>
+<span class="w">    </span><span class="n">screen_normal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">screen_normal</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="compute_shaders.html" class="btn btn-neutral float-left" title="Using compute shaders" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="converting_glsl_to_godot_shaders.html" class="btn btn-neutral float-right" title="Converting GLSL to Godot shaders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

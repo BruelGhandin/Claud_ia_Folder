@@ -1,0 +1,1056 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Spatial shaders" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/shaders/shader_reference/spatial_shader.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Spatial shaders are used for shading 3D objects. They are the most complex type of shader Godot offers. Spatial shaders are highly configurable with different render modes and different rendering o..." />
+<meta name="description" content="Spatial shaders are used for shading 3D objects. They are the most complex type of shader Godot offers. Spatial shaders are highly configurable with different render modes and different rendering o..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Spatial shaders &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="CanvasItem shaders" href="canvas_item_shader.html" />
+    <link rel="prev" title="Shader preprocessor" href="shader_preprocessor.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/shaders/shader_reference/spatial_shader" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/shaders/shader_reference/spatial_shader.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Shaders</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Shading reference</a></li>
+      <li class="breadcrumb-item active">Spatial shaders</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/shaders/shader_reference/spatial_shader.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="spatial-shaders">
+<span id="doc-spatial-shader"></span><h1>Spatial shaders<a class="headerlink" href="#spatial-shaders" title="Link to this heading"></a></h1>
+<p>Spatial shaders are used for shading 3D objects. They are the most complex type of shader Godot offers.
+Spatial shaders are highly configurable with different render modes and different rendering options
+(e.g. Subsurface Scattering, Transmission, Ambient Occlusion, Rim lighting, etc.). Users can optionally
+write vertex, fragment, and light processor functions to affect how objects are drawn.</p>
+<section id="render-modes">
+<h2>Render modes<a class="headerlink" href="#render-modes" title="Link to this heading"></a></h2>
+<p>For visual examples of these render modes, see <a class="reference internal" href="../../3d/standard_material_3d.html#doc-standard-material-3d"><span class="std std-ref">Standard Material 3D and ORM Material 3D</span></a>.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Render mode</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>blend_mix</strong></p></td>
+<td><p>Mix blend mode (alpha is transparency), default.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>blend_add</strong></p></td>
+<td><p>Additive blend mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>blend_sub</strong></p></td>
+<td><p>Subtractive blend mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>blend_mul</strong></p></td>
+<td><p>Multiplicative blend mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>blend_premul_alpha</strong></p></td>
+<td><p>Premultiplied alpha blend mode (fully transparent = add, fully opaque = mix).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>depth_draw_opaque</strong></p></td>
+<td><p>Only draw depth for opaque geometry (not transparent).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>depth_draw_always</strong></p></td>
+<td><p>Always draw depth (opaque and transparent).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>depth_draw_never</strong></p></td>
+<td><p>Never draw depth.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>depth_prepass_alpha</strong></p></td>
+<td><p>Do opaque depth pre-pass for transparent geometry.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>depth_test_disabled</strong></p></td>
+<td><p>Disable depth testing.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>depth_test_default</strong></p></td>
+<td><p>Depth test will discard the pixel if it is behind other pixels.
+In Forward+ only, the pixel is also discarded if it's at the exact same depth as another pixel.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>depth_test_inverted</strong></p></td>
+<td><p>Depth test will discard the pixel if it is in front of other pixels. Useful for stencil effects.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sss_mode_skin</strong></p></td>
+<td><p>Subsurface Scattering mode for skin (optimizes visuals for human skin, e.g. boosted red channel).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>cull_back</strong></p></td>
+<td><p>Cull back-faces (default).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>cull_front</strong></p></td>
+<td><p>Cull front-faces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>cull_disabled</strong></p></td>
+<td><p>Culling disabled (double sided).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>unshaded</strong></p></td>
+<td><p>Result is just albedo. No lighting/shading happens in material, making it faster to render.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>wireframe</strong></p></td>
+<td><p>Geometry draws using lines (useful for troubleshooting).
+When using the Compatibility renderer, you must call
+<code class="docutils literal notranslate"><span class="pre">RenderingServer.set_debug_generate_wireframes(true)</span></code> <em>before</em> the mesh is loaded for wireframe
+rendering to work. In the Compatibility renderer, backface culling is always disabled in wireframe
+mode, while in the Forward+ and Mobile renderers, the cull mode is respected.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>debug_shadow_splits</strong></p></td>
+<td><p>Directional shadows are drawn using different colors for each split (useful for troubleshooting).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>diffuse_burley</strong></p></td>
+<td><p>Burley (Disney PBS) for diffuse (default).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>diffuse_lambert</strong></p></td>
+<td><p>Lambert shading for diffuse.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>diffuse_lambert_wrap</strong></p></td>
+<td><p>Lambert-wrap shading (roughness-dependent) for diffuse.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>diffuse_toon</strong></p></td>
+<td><p>Toon shading for diffuse.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>specular_schlick_ggx</strong></p></td>
+<td><p>Schlick-GGX for direct light specular lobes (default).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>specular_toon</strong></p></td>
+<td><p>Toon for direct light specular lobes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>specular_disabled</strong></p></td>
+<td><p>Disable direct light specular lobes. Doesn't affect reflected light (use <code class="docutils literal notranslate"><span class="pre">SPECULAR</span> <span class="pre">=</span> <span class="pre">0.0</span></code> instead).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>skip_vertex_transform</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VERTEX</span></code>, <code class="docutils literal notranslate"><span class="pre">NORMAL</span></code>, <code class="docutils literal notranslate"><span class="pre">TANGENT</span></code>, and <code class="docutils literal notranslate"><span class="pre">BITANGENT</span></code>
+need to be transformed manually in the <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>world_vertex_coords</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VERTEX</span></code>, <code class="docutils literal notranslate"><span class="pre">NORMAL</span></code>, <code class="docutils literal notranslate"><span class="pre">TANGENT</span></code>, and <code class="docutils literal notranslate"><span class="pre">BITANGENT</span></code>
+are modified in world space instead of model space.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>ensure_correct_normals</strong></p></td>
+<td><p>Use when non-uniform scale is applied to mesh <em>(note: currently unimplemented)</em>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>shadows_disabled</strong></p></td>
+<td><p>Disable computing shadows in shader. The shader will not receive shadows, but can still cast them.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>ambient_light_disabled</strong></p></td>
+<td><p>Disable contribution from ambient light and radiance map.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>shadow_to_opacity</strong></p></td>
+<td><p>Lighting modifies the alpha so shadowed areas are opaque and
+non-shadowed areas are transparent. Useful for overlaying shadows onto
+a camera feed in AR.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>vertex_lighting</strong></p></td>
+<td><p>Use vertex-based lighting instead of per-pixel lighting.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>particle_trails</strong></p></td>
+<td><p>Enables the trails when used on particle geometry.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>alpha_to_coverage</strong></p></td>
+<td><p>Alpha antialiasing mode, see <a class="reference external" href="https://github.com/godotengine/godot/pull/40364">here</a> for more.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>alpha_to_coverage_and_one</strong></p></td>
+<td><p>Alpha antialiasing mode, see <a class="reference external" href="https://github.com/godotengine/godot/pull/40364">here</a> for more.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>fog_disabled</strong></p></td>
+<td><p>Disable receiving depth-based or volumetric fog. Useful for <code class="docutils literal notranslate"><span class="pre">blend_add</span></code> materials like particles.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="stencil-modes">
+<h2>Stencil modes<a class="headerlink" href="#stencil-modes" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Stencil support is experimental, use at your own risk.
+We will try to not break compatibility as much as possible,
+but if significant flaws are found in the API, it may change
+in the next minor version.</p>
+</div>
+<p>Stencil operations are a set of operations that allow writing to
+an efficient buffer in an hardware-accelerated manner.
+This is generally used to mask in or out parts of the scene.</p>
+<p>Some of the most well-known uses are:</p>
+<ul class="simple">
+<li><p>Outlines: Mask out the inner mesh that is being outlined to avoid inner outlines.</p></li>
+<li><p>X-Ray: Display a mesh behind other objects.</p></li>
+<li><p>Portals: Draw geometry that is normally &quot;impossible&quot; (non-Euclidian) by masking objects.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can only read from the stencil buffer in the transparent pass.
+Any attempt to read in the opaque pass will fail, as it's currently not supported behavior.</p>
+<p>Note that for compositor effects, the main renderer's stencil buffer can't be copied
+to a custom texture.</p>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Stencil mode</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>read</strong></p></td>
+<td><p>Read from the stencil buffer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>write</strong></p></td>
+<td><p>Write reference value to the stencil buffer.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>write_if_depth_fail</strong></p></td>
+<td><p>Write reference value to the stencil buffer if the depth test fails.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>compare_always</strong></p></td>
+<td><p>Always pass stencil test.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>compare_equal</strong></p></td>
+<td><p>Pass stencil test if the reference value is equal to the stencil buffer value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>compare_not_equal</strong></p></td>
+<td><p>Pass stencil test if the reference value is not equal to the stencil buffer value.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>compare_less</strong></p></td>
+<td><p>Pass stencil test if the reference value is less than the stencil buffer value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>compare_less_or_equal</strong></p></td>
+<td><p>Pass stencil test if the reference value is less than or equal to the stencil buffer value.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>compare_greater</strong></p></td>
+<td><p>Pass stencil test if the reference value is greater than the stencil buffer value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>compare_greater_or_equal</strong></p></td>
+<td><p>Pass stencil test if the reference value is greater than or equal to the stencil buffer value.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="built-ins">
+<h2>Built-ins<a class="headerlink" href="#built-ins" title="Link to this heading"></a></h2>
+<p>Values marked as <code class="docutils literal notranslate"><span class="pre">in</span></code> are read-only. Values marked as <code class="docutils literal notranslate"><span class="pre">out</span></code> can optionally be written to and will
+not necessarily contain sensible values. Values marked as <code class="docutils literal notranslate"><span class="pre">inout</span></code> provide a sensible default
+value, and can optionally be written to. Samplers cannot be written to so they are not marked.</p>
+<p>Not all built-ins are available in all processing functions. To access a vertex
+built-in from the <code class="docutils literal notranslate"><span class="pre">fragment()</span></code> function, you can use a <a class="reference internal" href="shading_language.html#doc-shading-language-varyings"><span class="std std-ref">varying</span></a>.
+The same applies for accessing fragment built-ins from the <code class="docutils literal notranslate"><span class="pre">light()</span></code> function.</p>
+</section>
+<section id="global-built-ins">
+<h2>Global built-ins<a class="headerlink" href="#global-built-ins" title="Link to this heading"></a></h2>
+<p>Global built-ins are available everywhere, including custom functions.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Built-in</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>in float <strong>TIME</strong></p></td>
+<td><p>Global time since the engine has started, in seconds. It repeats after every <code class="docutils literal notranslate"><span class="pre">3,600</span></code>
+seconds (which can be changed with the
+<a class="reference internal" href="../../../classes/class_projectsettings.html#class-projectsettings-property-rendering-limits-time-time-rollover-secs"><span class="std std-ref">rollover</span></a>
+setting). It's affected by <a class="reference internal" href="../../../classes/class_engine.html#class-engine-property-time-scale"><span class="std std-ref">time_scale</span></a> but not by pausing.
+If you need a <code class="docutils literal notranslate"><span class="pre">TIME</span></code> variable that is not affected by time scale, add your own
+<a class="reference internal" href="shading_language.html#doc-shading-language-global-uniforms"><span class="std std-ref">global shader uniform</span></a> and update it each
+frame.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in float <strong>PI</strong></p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">PI</span></code> constant (<code class="docutils literal notranslate"><span class="pre">3.141592</span></code>).
+The ratio of a circle's circumference to its diameter and the number of radians in a half turn.</p></td>
+</tr>
+<tr class="row-even"><td><p>in float <strong>TAU</strong></p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">TAU</span></code> constant (<code class="docutils literal notranslate"><span class="pre">6.283185</span></code>).
+Equivalent to <code class="docutils literal notranslate"><span class="pre">PI</span> <span class="pre">*</span> <span class="pre">2</span></code> and the number of radians in a full turn.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in float <strong>E</strong></p></td>
+<td><p>An <code class="docutils literal notranslate"><span class="pre">E</span></code> constant (<code class="docutils literal notranslate"><span class="pre">2.718281</span></code>). Euler's number, the base of the natural logarithm.</p></td>
+</tr>
+<tr class="row-even"><td><p>in bool <strong>OUTPUT_IS_SRGB</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> when output is in sRGB color space (this is <code class="docutils literal notranslate"><span class="pre">true</span></code> in the Compatibility
+renderer, <code class="docutils literal notranslate"><span class="pre">false</span></code> in Forward+ and Mobile).</p></td>
+</tr>
+<tr class="row-odd"><td><p>in float <strong>CLIP_SPACE_FAR</strong></p></td>
+<td><p>Clip space far <code class="docutils literal notranslate"><span class="pre">z</span></code> value.
+In the Forward+ or Mobile renderers, it's <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.
+In the Compatibility renderer, it's <code class="docutils literal notranslate"><span class="pre">-1.0</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>in bool <strong>IS_MULTIVIEW</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> when output is stereoscopic (XR), <code class="docutils literal notranslate"><span class="pre">false</span></code> when output is monoscopic.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in bool <strong>IN_SHADOW_PASS</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> when the shader is being rendered in a shadow mapping pass, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.
+This can be used to render objects differently in shadow maps compared to their regular rendering.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="vertex-built-ins">
+<h2>Vertex built-ins<a class="headerlink" href="#vertex-built-ins" title="Link to this heading"></a></h2>
+<p>Vertex data (<code class="docutils literal notranslate"><span class="pre">VERTEX</span></code>, <code class="docutils literal notranslate"><span class="pre">NORMAL</span></code>, <code class="docutils literal notranslate"><span class="pre">TANGENT</span></code>, and <code class="docutils literal notranslate"><span class="pre">BITANGENT</span></code>) are presented in model space
+(also called local space). If not written to, these values will not be modified and be
+passed through as they came, then transformed into view space to be used in <code class="docutils literal notranslate"><span class="pre">fragment()</span></code>.</p>
+<p>They can optionally be presented in world space by using the <code class="docutils literal notranslate"><span class="pre">world_vertex_coords</span></code> render mode.</p>
+<p>Users can disable the built-in modelview transform (projection will still happen later) and do
+it manually with the following code:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+<span class="n">render_mode</span><span class="w"> </span><span class="n">skip_vertex_transform</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">vertex</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">VERTEX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">MODELVIEW_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">VERTEX</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)).</span><span class="n">xyz</span><span class="p">;</span>
+<span class="w">    </span><span class="n">NORMAL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">((</span><span class="n">MODELVIEW_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">NORMAL</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)).</span><span class="n">xyz</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BINORMAL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">((</span><span class="n">MODELVIEW_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">BINORMAL</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)).</span><span class="n">xyz</span><span class="p">);</span>
+<span class="w">    </span><span class="n">TANGENT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">((</span><span class="n">MODELVIEW_MATRIX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">TANGENT</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)).</span><span class="n">xyz</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Other built-ins, such as <code class="docutils literal notranslate"><span class="pre">UV</span></code>, <code class="docutils literal notranslate"><span class="pre">UV2</span></code>, and <code class="docutils literal notranslate"><span class="pre">COLOR</span></code>, are also passed through to the <code class="docutils literal notranslate"><span class="pre">fragment()</span></code> function if not modified.</p>
+<p>Users can override the modelview and projection transforms using the <code class="docutils literal notranslate"><span class="pre">POSITION</span></code> built-in. If <code class="docutils literal notranslate"><span class="pre">POSITION</span></code> is written
+to anywhere in the shader, it will always be used, so the user becomes responsible for ensuring that it always has
+an acceptable value. When <code class="docutils literal notranslate"><span class="pre">POSITION</span></code> is used, the value from <code class="docutils literal notranslate"><span class="pre">VERTEX</span></code> is ignored and projection does not happen.
+However, the value passed to the fragment shader still comes from <code class="docutils literal notranslate"><span class="pre">VERTEX</span></code>.</p>
+<p>For instancing, the <code class="docutils literal notranslate"><span class="pre">INSTANCE_CUSTOM</span></code> variable contains the instance custom data. When using particles, this information
+is usually:</p>
+<ul class="simple">
+<li><p><strong>x</strong>: Rotation angle in radians.</p></li>
+<li><p><strong>y</strong>: Phase during lifetime (<code class="docutils literal notranslate"><span class="pre">0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>).</p></li>
+<li><p><strong>z</strong>: Animation frame.</p></li>
+</ul>
+<p>This allows you to easily adjust the shader to a particle system using default particle material. When writing a custom particle
+shader, this value can be used as desired.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Built-in</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>in vec2 <strong>VIEWPORT_SIZE</strong></p></td>
+<td><p>Size of viewport (in pixels).</p></td>
+</tr>
+<tr class="row-odd"><td><p>in mat4 <strong>VIEW_MATRIX</strong></p></td>
+<td><p>World space to view space transform.</p></td>
+</tr>
+<tr class="row-even"><td><p>in mat4 <strong>INV_VIEW_MATRIX</strong></p></td>
+<td><p>View space to world space transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in mat4 <strong>MAIN_CAM_INV_VIEW_MATRIX</strong></p></td>
+<td><p>View space to world space transform of the camera used
+to draw the current viewport.</p></td>
+</tr>
+<tr class="row-even"><td><p>in mat4 <strong>INV_PROJECTION_MATRIX</strong></p></td>
+<td><p>Clip space to view space transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>NODE_POSITION_WORLD</strong></p></td>
+<td><p>Node position, in world space.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec3 <strong>NODE_POSITION_VIEW</strong></p></td>
+<td><p>Node position, in view space.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>CAMERA_POSITION_WORLD</strong></p></td>
+<td><p>Camera position, in world space. Represents the
+midpoint of the two eyes when in multiview/stereo
+rendering.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec3 <strong>CAMERA_DIRECTION_WORLD</strong></p></td>
+<td><p>Camera direction, in world space.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in uint <strong>CAMERA_VISIBLE_LAYERS</strong></p></td>
+<td><p>Cull layers of the camera rendering the current pass.</p></td>
+</tr>
+<tr class="row-even"><td><p>in int <strong>INSTANCE_ID</strong></p></td>
+<td><p>Instance ID for instancing.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec4 <strong>INSTANCE_CUSTOM</strong></p></td>
+<td><p>Instance custom data (for particles, mostly).</p></td>
+</tr>
+<tr class="row-even"><td><p>in int <strong>VIEW_INDEX</strong></p></td>
+<td><p>The view that we are rendering.
+<code class="docutils literal notranslate"><span class="pre">VIEW_MONO_LEFT</span></code> (<code class="docutils literal notranslate"><span class="pre">0</span></code>) for Mono (not multiview) or
+left eye, <code class="docutils literal notranslate"><span class="pre">VIEW_RIGHT</span></code> (<code class="docutils literal notranslate"><span class="pre">1</span></code>) for right eye.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in int <strong>VIEW_MONO_LEFT</strong></p></td>
+<td><p>Constant for Mono or left eye, always <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>in int <strong>VIEW_RIGHT</strong></p></td>
+<td><p>Constant for right eye, always <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>EYE_OFFSET</strong></p></td>
+<td><p>Position offset for the eye being rendered, in view
+space. Only applicable for multiview rendering.</p></td>
+</tr>
+<tr class="row-even"><td><p>inout vec3 <strong>VERTEX</strong></p></td>
+<td><p>Position of the vertex, in model space.
+In world space if <code class="docutils literal notranslate"><span class="pre">world_vertex_coords</span></code> is used.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in int <strong>VERTEX_ID</strong></p></td>
+<td><p>The index of the current vertex in the vertex buffer.</p></td>
+</tr>
+<tr class="row-even"><td><p>inout vec3 <strong>NORMAL</strong></p></td>
+<td><p>Normal in model space.
+In world space if <code class="docutils literal notranslate"><span class="pre">world_vertex_coords</span></code> is used.</p></td>
+</tr>
+<tr class="row-odd"><td><p>inout vec3 <strong>TANGENT</strong></p></td>
+<td><p>Tangent in model space.
+In world space if <code class="docutils literal notranslate"><span class="pre">world_vertex_coords</span></code> is used.</p></td>
+</tr>
+<tr class="row-even"><td><p>inout vec3 <strong>BINORMAL</strong></p></td>
+<td><p>Binormal in model space.
+In world space if <code class="docutils literal notranslate"><span class="pre">world_vertex_coords</span></code> is used.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out vec4 <strong>POSITION</strong></p></td>
+<td><p>If written to on any branch, overrides final vertex
+position in clip space.</p></td>
+</tr>
+<tr class="row-even"><td><p>inout vec2 <strong>UV</strong></p></td>
+<td><p>UV main channel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>inout vec2 <strong>UV2</strong></p></td>
+<td><p>UV secondary channel.</p></td>
+</tr>
+<tr class="row-even"><td><p>inout vec4 <strong>COLOR</strong></p></td>
+<td><p>Color from vertices. Limited to values between <code class="docutils literal notranslate"><span class="pre">0.0</span></code>
+and <code class="docutils literal notranslate"><span class="pre">1.0</span></code> for each channel and 8 bits per channel
+precision (256 possible levels). Alpha channel is
+supported. Values outside the allowed range are
+clamped, and values may be rounded due to precision
+limitations. Use <code class="docutils literal notranslate"><span class="pre">CUSTOM0</span></code>-<code class="docutils literal notranslate"><span class="pre">CUSTOM3</span></code> to pass data
+with more precision if needed.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>ROUGHNESS</strong></p></td>
+<td><p>Roughness for vertex lighting.</p></td>
+</tr>
+<tr class="row-even"><td><p>inout float <strong>POINT_SIZE</strong></p></td>
+<td><p>Point size for point rendering.</p></td>
+</tr>
+<tr class="row-odd"><td><p>inout mat4 <strong>MODELVIEW_MATRIX</strong></p></td>
+<td><p>Model/local space to view space transform
+(use if possible).</p></td>
+</tr>
+<tr class="row-even"><td><p>inout mat3 <strong>MODELVIEW_NORMAL_MATRIX</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>in mat4 <strong>MODEL_MATRIX</strong></p></td>
+<td><p>Model/local space to world space transform.</p></td>
+</tr>
+<tr class="row-even"><td><p>in mat3 <strong>MODEL_NORMAL_MATRIX</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>inout mat4 <strong>PROJECTION_MATRIX</strong></p></td>
+<td><p>View space to clip space transform.</p></td>
+</tr>
+<tr class="row-even"><td><p>in uvec4 <strong>BONE_INDICES</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>in vec4 <strong>BONE_WEIGHTS</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>in vec4 <strong>CUSTOM0</strong></p></td>
+<td><p>Custom value from vertex primitive. When using extra
+UVs, <code class="docutils literal notranslate"><span class="pre">xy</span></code> is UV3 and <code class="docutils literal notranslate"><span class="pre">zw</span></code> is UV4.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec4 <strong>CUSTOM1</strong></p></td>
+<td><p>Custom value from vertex primitive. When using extra
+UVs, <code class="docutils literal notranslate"><span class="pre">xy</span></code> is UV5 and <code class="docutils literal notranslate"><span class="pre">zw</span></code> is UV6.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec4 <strong>CUSTOM2</strong></p></td>
+<td><p>Custom value from vertex primitive. When using extra
+UVs, <code class="docutils literal notranslate"><span class="pre">xy</span></code> is UV7 and <code class="docutils literal notranslate"><span class="pre">zw</span></code> is UV8.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec4 <strong>CUSTOM3</strong></p></td>
+<td><p>Custom value from vertex primitive.</p></td>
+</tr>
+<tr class="row-even"><td><p>out float <strong>Z_CLIP_SCALE</strong></p></td>
+<td><p>If written to on any branch, scales the vertex towards
+the camera to avoid clipping into things like walls.
+Lighting and shadows will continue to work correctly
+when this is written to, but screen-space effects like
+SSAO and SSR may break with lower scales. Try to keep
+this value as close to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> as possible.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">MODELVIEW_MATRIX</span></code> combines both the <code class="docutils literal notranslate"><span class="pre">MODEL_MATRIX</span></code> and <code class="docutils literal notranslate"><span class="pre">VIEW_MATRIX</span></code> and is better suited when floating point issues may arise. For example, if the object is very far away from the world origin, you may run into floating point issues when using the separated <code class="docutils literal notranslate"><span class="pre">MODEL_MATRIX</span></code> and <code class="docutils literal notranslate"><span class="pre">VIEW_MATRIX</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">INV_VIEW_MATRIX</span></code> is the matrix used for rendering the object in that pass, unlike <code class="docutils literal notranslate"><span class="pre">MAIN_CAM_INV_VIEW_MATRIX</span></code>, which is the matrix of the camera in the scene. In the shadow pass, <code class="docutils literal notranslate"><span class="pre">INV_VIEW_MATRIX</span></code>'s view is based on the camera that is located at the position of the light.</p>
+</div>
+</section>
+<section id="fragment-built-ins">
+<h2>Fragment built-ins<a class="headerlink" href="#fragment-built-ins" title="Link to this heading"></a></h2>
+<p>The default use of a Godot fragment processor function is to set up the material properties of your object
+and to let the built-in renderer handle the final shading. However, you are not required to use all
+these properties, and if you don't write to them, Godot will optimize away the corresponding functionality.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Built-in</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>in vec2 <strong>VIEWPORT_SIZE</strong></p></td>
+<td><p>Size of viewport (in pixels).</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec4 <strong>FRAGCOORD</strong></p></td>
+<td><p>Coordinate of pixel center in screen space. <code class="docutils literal notranslate"><span class="pre">xy</span></code> specifies position in window. Upper-left of
+the viewport is the origin, <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0)</span></code>. Bottom-right of the viewport is <code class="docutils literal notranslate"><span class="pre">(1.0,</span> <span class="pre">1.0)</span></code>.
+<code class="docutils literal notranslate"><span class="pre">z</span></code> specifies fragment depth. It is also used as the output value for the fragment depth
+unless <code class="docutils literal notranslate"><span class="pre">DEPTH</span></code> is written to.</p></td>
+</tr>
+<tr class="row-even"><td><p>in bool <strong>FRONT_FACING</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if current face is front facing, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>VIEW</strong></p></td>
+<td><p>Normalized vector from fragment position to camera (in view space). This is the same for both
+perspective and orthogonal cameras.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec2 <strong>UV</strong></p></td>
+<td><p>UV that comes from the <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> function.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec2 <strong>UV2</strong></p></td>
+<td><p>UV2 that comes from the <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> function.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec4 <strong>COLOR</strong></p></td>
+<td><p>COLOR that comes from the <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> function.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec2 <strong>POINT_COORD</strong></p></td>
+<td><p>Point coordinate for drawing points with <code class="docutils literal notranslate"><span class="pre">POINT_SIZE</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>in mat4 <strong>MODEL_MATRIX</strong></p></td>
+<td><p>Model/local space to world space transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in mat3 <strong>MODEL_NORMAL_MATRIX</strong></p></td>
+<td><p>Model/local space to world space transform for normals. This is the same as <code class="docutils literal notranslate"><span class="pre">MODEL_MATRIX</span></code>
+by default unless the object is scaled non-uniformly, in which case this is set to
+<code class="docutils literal notranslate"><span class="pre">transpose(inverse(mat3(MODEL_MATRIX)))</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>in mat4 <strong>VIEW_MATRIX</strong></p></td>
+<td><p>World space to view space transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in mat4 <strong>INV_VIEW_MATRIX</strong></p></td>
+<td><p>View space to world space transform.</p></td>
+</tr>
+<tr class="row-even"><td><p>in mat4 <strong>PROJECTION_MATRIX</strong></p></td>
+<td><p>View space to clip space transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in mat4 <strong>INV_PROJECTION_MATRIX</strong></p></td>
+<td><p>Clip space to view space transform.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec3 <strong>NODE_POSITION_WORLD</strong></p></td>
+<td><p>Node position, in world space.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>NODE_POSITION_VIEW</strong></p></td>
+<td><p>Node position, in view space.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec3 <strong>CAMERA_POSITION_WORLD</strong></p></td>
+<td><p>Camera position, in world space. Represents the midpoint of the two eyes when in
+multiview/stereo rendering.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>CAMERA_DIRECTION_WORLD</strong></p></td>
+<td><p>Camera direction, in world space.</p></td>
+</tr>
+<tr class="row-even"><td><p>in uint <strong>CAMERA_VISIBLE_LAYERS</strong></p></td>
+<td><p>Cull layers of the camera rendering the current pass.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>VERTEX</strong></p></td>
+<td><p>Position of the fragment (pixel), in view space. It is the <code class="docutils literal notranslate"><span class="pre">VERTEX</span></code> value from <code class="docutils literal notranslate"><span class="pre">vertex()</span></code>
+interpolated between the face's vertices and transformed into view space.
+If <code class="docutils literal notranslate"><span class="pre">skip_vertex_transform</span></code> is enabled, it may not be in view space.</p></td>
+</tr>
+<tr class="row-even"><td><p>inout vec3 <strong>LIGHT_VERTEX</strong></p></td>
+<td><p>A writable version of <code class="docutils literal notranslate"><span class="pre">VERTEX</span></code> that can be used to alter light and shadows. Writing to this
+will not change the position of the fragment.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in int <strong>VIEW_INDEX</strong></p></td>
+<td><p>The view that we are rendering. Used to distinguish between views in multiview/stereo rendering.
+<code class="docutils literal notranslate"><span class="pre">VIEW_MONO_LEFT</span></code> (<code class="docutils literal notranslate"><span class="pre">0</span></code>) for Mono (not multiview) or
+left eye, <code class="docutils literal notranslate"><span class="pre">VIEW_RIGHT</span></code> (<code class="docutils literal notranslate"><span class="pre">1</span></code>) for right eye.</p></td>
+</tr>
+<tr class="row-even"><td><p>in int <strong>VIEW_MONO_LEFT</strong></p></td>
+<td><p>Constant for Mono or left eye, always <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in int <strong>VIEW_RIGHT</strong></p></td>
+<td><p>Constant for right eye, always <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec3 <strong>EYE_OFFSET</strong></p></td>
+<td><p>Position offset for the eye being rendered, in view space. Only applicable for multiview
+rendering.</p></td>
+</tr>
+<tr class="row-odd"><td><p>sampler2D <strong>SCREEN_TEXTURE</strong></p></td>
+<td><p>Removed in Godot 4. Use a <code class="docutils literal notranslate"><span class="pre">sampler2D</span></code> with <code class="docutils literal notranslate"><span class="pre">hint_screen_texture</span></code> instead.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec2 <strong>SCREEN_UV</strong></p></td>
+<td><p>Screen UV coordinate for the current pixel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>sampler2D <strong>DEPTH_TEXTURE</strong></p></td>
+<td><p>Removed in Godot 4. Use a <code class="docutils literal notranslate"><span class="pre">sampler2D</span></code> with <code class="docutils literal notranslate"><span class="pre">hint_depth_texture</span></code> instead.</p></td>
+</tr>
+<tr class="row-even"><td><p>out float <strong>DEPTH</strong></p></td>
+<td><p>Custom depth value (range <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>). If <code class="docutils literal notranslate"><span class="pre">DEPTH</span></code> is written to in any shader branch,
+then you are responsible for setting <code class="docutils literal notranslate"><span class="pre">DEPTH</span></code> for <strong>all</strong> other branches.
+Otherwise, the graphics API will leave them uninitialized.</p></td>
+</tr>
+<tr class="row-odd"><td><p>inout vec3 <strong>NORMAL</strong></p></td>
+<td><p>Normal that comes from the <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> function, in view space.
+If <code class="docutils literal notranslate"><span class="pre">skip_vertex_transform</span></code> is enabled, it may not be in view space.</p></td>
+</tr>
+<tr class="row-even"><td><p>inout vec3 <strong>TANGENT</strong></p></td>
+<td><p>Tangent that comes from the <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> function, in view space.
+If <code class="docutils literal notranslate"><span class="pre">skip_vertex_transform</span></code> is enabled, it may not be in view space.</p></td>
+</tr>
+<tr class="row-odd"><td><p>inout vec3 <strong>BINORMAL</strong></p></td>
+<td><p>Binormal that comes from the <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> function, in view space.
+If <code class="docutils literal notranslate"><span class="pre">skip_vertex_transform</span></code> is enabled, it may not be in view space.</p></td>
+</tr>
+<tr class="row-even"><td><p>out vec3 <strong>NORMAL_MAP</strong></p></td>
+<td><p>Set normal here in tangent space if reading normal from a texture instead of <code class="docutils literal notranslate"><span class="pre">NORMAL</span></code>.
+The blue channel is ignored, as it's reconstructed in the engine instead.
+This allows normal maps with <abbr title="Red-Green Texture Compression">RGTC</abbr> compression to work.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>NORMAL_MAP_DEPTH</strong></p></td>
+<td><p>Depth from <code class="docutils literal notranslate"><span class="pre">NORMAL_MAP</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>out vec3 <strong>BENT_NORMAL_MAP</strong></p></td>
+<td><p>Set bent normal map here in tangent space to enable
+<a class="reference internal" href="../../3d/standard_material_3d.html#doc-standard-material-3d-bent-normal-map"><span class="std std-ref">bent normals</span></a>.
+This is used to improve specular occlusion, and requires a specially authored bent normal map.
+The blue channel is ignored, as it's reconstructed in the engine instead. This allows
+bent normal maps with <abbr title="Red-Green Texture Compression">RGTC</abbr> compression to work.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out vec3 <strong>ALBEDO</strong></p></td>
+<td><p>Albedo (default white). Base color.</p></td>
+</tr>
+<tr class="row-even"><td><p>out float <strong>ALPHA</strong></p></td>
+<td><p>Alpha (range <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>). If read from or written to, the material will go to the
+transparent pipeline.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>ALPHA_SCISSOR_THRESHOLD</strong></p></td>
+<td><p>If written to on any branch, values below a certain amount of alpha are discarded.</p></td>
+</tr>
+<tr class="row-even"><td><p>out float <strong>ALPHA_HASH_SCALE</strong></p></td>
+<td><p>Alpha hash scale when using the alpha hash transparency mode. Defaults to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.
+Higher values result in more visible pixels in the dithering pattern.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>ALPHA_ANTIALIASING_EDGE</strong></p></td>
+<td><p>The threshold below which alpha to coverage antialiasing should be used. Defaults to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.
+Requires the <code class="docutils literal notranslate"><span class="pre">alpha_to_coverage</span></code> render mode. Should be set to a value lower than
+<code class="docutils literal notranslate"><span class="pre">ALPHA_SCISSOR_THRESHOLD</span></code> to be effective.</p></td>
+</tr>
+<tr class="row-even"><td><p>out vec2 <strong>ALPHA_TEXTURE_COORDINATE</strong></p></td>
+<td><p>The texture coordinate to use for alpha-to-coverge antialiasing. Requires the
+<code class="docutils literal notranslate"><span class="pre">alpha_to_coverage</span></code> render mode. Typically set to <code class="docutils literal notranslate"><span class="pre">UV</span> <span class="pre">*</span> <span class="pre">vec2(albedo_texture_size)</span></code> where
+<code class="docutils literal notranslate"><span class="pre">albedo_texture_size</span></code> is the size of the albedo texture in pixels.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>PREMUL_ALPHA_FACTOR</strong></p></td>
+<td><p>Premultiplied alpha factor. Only effective if <code class="docutils literal notranslate"><span class="pre">render_mode</span> <span class="pre">blend_premul_alpha;</span></code> is used.
+This should be written to when using a <em>shaded</em> material with premultiplied alpha blending for
+interaction with lighting. This is not required for unshaded materials.</p></td>
+</tr>
+<tr class="row-even"><td><p>out float <strong>METALLIC</strong></p></td>
+<td><p>Metallic (range <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>SPECULAR</strong></p></td>
+<td><p>Specular (not physically accurate to change). Defaults to <code class="docutils literal notranslate"><span class="pre">0.5</span></code>. <code class="docutils literal notranslate"><span class="pre">0.0</span></code> disables reflections.</p></td>
+</tr>
+<tr class="row-even"><td><p>out float <strong>ROUGHNESS</strong></p></td>
+<td><p>Roughness (range <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>RIM</strong></p></td>
+<td><p>Rim (range <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>). If used, Godot calculates rim lighting.
+Rim size depends on <code class="docutils literal notranslate"><span class="pre">ROUGHNESS</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>out float <strong>RIM_TINT</strong></p></td>
+<td><p>Rim Tint, range from <code class="docutils literal notranslate"><span class="pre">0.0</span></code> (white) to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> (albedo). If used, Godot calculates rim lighting.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>CLEARCOAT</strong></p></td>
+<td><p>Small specular blob added on top of the existing one. If used, Godot calculates clearcoat.</p></td>
+</tr>
+<tr class="row-even"><td><p>out float <strong>CLEARCOAT_ROUGHNESS</strong></p></td>
+<td><p>The roughness of the clearcoat. If used, Godot calculates clearcoat.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>ANISOTROPY</strong></p></td>
+<td><p>For distorting the specular blob according to tangent space.</p></td>
+</tr>
+<tr class="row-even"><td><p>out vec2 <strong>ANISOTROPY_FLOW</strong></p></td>
+<td><p>Distortion direction, use with flowmaps.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>SSS_STRENGTH</strong></p></td>
+<td><p>Strength of subsurface scattering. If used, subsurface scattering will be applied to the object.</p></td>
+</tr>
+<tr class="row-even"><td><p>out vec4 <strong>SSS_TRANSMITTANCE_COLOR</strong></p></td>
+<td><p>Color of subsurface scattering transmittance. If used, subsurface scattering transmittance
+will be applied to the object.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>SSS_TRANSMITTANCE_DEPTH</strong></p></td>
+<td><p>Depth of subsurface scattering transmittance. Higher values allow the effect to reach deeper
+into the object.</p></td>
+</tr>
+<tr class="row-even"><td><p>out float <strong>SSS_TRANSMITTANCE_BOOST</strong></p></td>
+<td><p>Boosts the subsurface scattering transmittance if set above <code class="docutils literal notranslate"><span class="pre">0.0</span></code>. This makes the effect
+show up even on directly lit surfaces</p></td>
+</tr>
+<tr class="row-odd"><td><p>inout vec3 <strong>BACKLIGHT</strong></p></td>
+<td><p>Color of backlighting (works like direct light, but it's received even if the normal
+is slightly facing away from the light). If used, backlighting will be applied to the object.
+Can be used as a cheaper approximation of subsurface scattering.</p></td>
+</tr>
+<tr class="row-even"><td><p>out float <strong>AO</strong></p></td>
+<td><p>Strength of ambient occlusion. For use with pre-baked AO.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>AO_LIGHT_AFFECT</strong></p></td>
+<td><p>How much ambient occlusion affects direct light (range <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>, default <code class="docutils literal notranslate"><span class="pre">0.0</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p>out vec3 <strong>EMISSION</strong></p></td>
+<td><p>Emission color (can go over <code class="docutils literal notranslate"><span class="pre">(1.0,</span> <span class="pre">1.0,</span> <span class="pre">1.0)</span></code> for HDR).</p></td>
+</tr>
+<tr class="row-odd"><td><p>out vec4 <strong>FOG</strong></p></td>
+<td><p>If written to on any branch, blends final pixel color with <code class="docutils literal notranslate"><span class="pre">FOG.rgb</span></code> based on <code class="docutils literal notranslate"><span class="pre">FOG.a</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>out vec4 <strong>RADIANCE</strong></p></td>
+<td><p>If written to on any branch, blends environment map radiance with <code class="docutils literal notranslate"><span class="pre">RADIANCE.rgb</span></code> based on
+<code class="docutils literal notranslate"><span class="pre">RADIANCE.a</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out vec4 <strong>IRRADIANCE</strong></p></td>
+<td><p>If written to on any branch, blends environment map irradiance with <code class="docutils literal notranslate"><span class="pre">IRRADIANCE.rgb</span></code> based on
+<code class="docutils literal notranslate"><span class="pre">IRRADIANCE.a</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Shaders going through the transparent pipeline when <code class="docutils literal notranslate"><span class="pre">ALPHA</span></code> is written to
+may exhibit transparency sorting issues. Read the
+<a class="reference internal" href="../../3d/3d_rendering_limitations.html#doc-3d-rendering-limitations-transparency-sorting"><span class="std std-ref">transparency sorting section in the 3D rendering limitations page</span></a>
+for more information and ways to avoid issues.</p>
+</div>
+</section>
+<section id="light-built-ins">
+<h2>Light built-ins<a class="headerlink" href="#light-built-ins" title="Link to this heading"></a></h2>
+<p>Writing light processor functions is completely optional. You can skip the <code class="docutils literal notranslate"><span class="pre">light()</span></code> function by using
+the <code class="docutils literal notranslate"><span class="pre">unshaded</span></code> render mode. If no light function is written, Godot will use the material properties
+written to in the <code class="docutils literal notranslate"><span class="pre">fragment()</span></code> function to calculate the lighting for you (subject to the render mode).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">light()</span></code> function is called for every light in every pixel. It is called within a loop for each light type.</p>
+<p>Below is an example of a custom <code class="docutils literal notranslate"><span class="pre">light()</span></code> function using a Lambertian lighting model:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">light</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">LIGHT_IS_AREA</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Area light GGX shading.</span>
+<span class="w">        </span><span class="n">DIFFUSE_LIGHT</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">LIGHT_AREA_DIFFUSE_MULTIPLIER</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ATTENUATION</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">LIGHT_COLOR</span><span class="p">;</span>
+<span class="w">        </span><span class="n">SPECULAR_LIGHT</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">LIGHT_AREA_SPECULAR_MULTIPLIER</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ATTENUATION</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">LIGHT_COLOR</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">SPECULAR_AMOUNT</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Used for all other light types (directional, omni, spot).</span>
+<span class="w">        </span><span class="n">DIFFUSE_LIGHT</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">clamp</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="n">NORMAL</span><span class="p">,</span><span class="w"> </span><span class="n">LIGHT</span><span class="p">),</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ATTENUATION</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">LIGHT_COLOR</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">PI</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you want the lights to add together, add the light contribution to <code class="docutils literal notranslate"><span class="pre">DIFFUSE_LIGHT</span></code> using <code class="docutils literal notranslate"><span class="pre">+=</span></code>, rather than overwriting it.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">light()</span></code> function won't be run if the <code class="docutils literal notranslate"><span class="pre">vertex_lighting</span></code> render mode is enabled, or if
+<a class="reference internal" href="../../../classes/class_projectsettings.html#class-projectsettings-property-rendering-shading-overrides-force-vertex-shading"><span class="std std-ref">Rendering &gt; Quality &gt; Shading &gt; Force Vertex Shading</span></a>
+is enabled in the Project Settings. (It's enabled by default on mobile platforms.)</p>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Built-in</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>in vec2 <strong>VIEWPORT_SIZE</strong></p></td>
+<td><p>Size of viewport (in pixels).</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec4 <strong>FRAGCOORD</strong></p></td>
+<td><p>Coordinate of pixel center in screen space. <code class="docutils literal notranslate"><span class="pre">xy</span></code> specifies position
+in window. Upper-left of the viewport is the origin, <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0)</span></code>.
+Bottom-right of the viewport is <code class="docutils literal notranslate"><span class="pre">(1.0,</span> <span class="pre">1.0)</span></code>.
+<code class="docutils literal notranslate"><span class="pre">z</span></code> specifies fragment depth. It is also used as the output value
+for the fragment depth unless <code class="docutils literal notranslate"><span class="pre">DEPTH</span></code> is written to.</p></td>
+</tr>
+<tr class="row-even"><td><p>in mat4 <strong>MODEL_MATRIX</strong></p></td>
+<td><p>Model/local space to world space transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in mat4 <strong>INV_VIEW_MATRIX</strong></p></td>
+<td><p>View space to world space transform.</p></td>
+</tr>
+<tr class="row-even"><td><p>in mat4 <strong>VIEW_MATRIX</strong></p></td>
+<td><p>World space to view space transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in mat4 <strong>PROJECTION_MATRIX</strong></p></td>
+<td><p>View space to clip space transform.</p></td>
+</tr>
+<tr class="row-even"><td><p>in mat4 <strong>INV_PROJECTION_MATRIX</strong></p></td>
+<td><p>Clip space to view space transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>NORMAL</strong></p></td>
+<td><p>Normal vector, in view space.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec2 <strong>SCREEN_UV</strong></p></td>
+<td><p>Screen UV coordinate for the current pixel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec2 <strong>UV</strong></p></td>
+<td><p>UV that comes from the <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> function.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec2 <strong>UV2</strong></p></td>
+<td><p>UV2 that comes from the <code class="docutils literal notranslate"><span class="pre">vertex()</span></code> function.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>VIEW</strong></p></td>
+<td><p>View vector, in view space.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec3 <strong>LIGHT</strong></p></td>
+<td><p>Light vector, in view space.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>LIGHT_COLOR</strong></p></td>
+<td><p><a class="reference internal" href="../../../classes/class_light3d.html#class-light3d-property-light-color"><span class="std std-ref">Light color</span></a> multiplied by
+<a class="reference internal" href="../../../classes/class_light3d.html#class-light3d-property-light-energy"><span class="std std-ref">light energy</span></a> multiplied by
+<code class="docutils literal notranslate"><span class="pre">PI</span></code>. The <code class="docutils literal notranslate"><span class="pre">PI</span></code> multiplication is present because
+physically-based lighting models include a division by <code class="docutils literal notranslate"><span class="pre">PI</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>in float <strong>SPECULAR_AMOUNT</strong></p></td>
+<td><p>For <a class="reference internal" href="../../../classes/class_omnilight3d.html#class-omnilight3d"><span class="std std-ref">OmniLight3D</span></a> and <a class="reference internal" href="../../../classes/class_spotlight3d.html#class-spotlight3d"><span class="std std-ref">SpotLight3D</span></a>,
+<code class="docutils literal notranslate"><span class="pre">2.0</span></code> multiplied by
+<a class="reference internal" href="../../../classes/class_light3d.html#class-light3d-property-light-specular"><span class="std std-ref">light_specular</span></a>.
+For <a class="reference internal" href="../../../classes/class_directionallight3d.html#class-directionallight3d"><span class="std std-ref">DirectionalLight3D</span></a>, <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in bool <strong>LIGHT_IS_DIRECTIONAL</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if this pass is a <a class="reference internal" href="../../../classes/class_directionallight3d.html#class-directionallight3d"><span class="std std-ref">DirectionalLight3D</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>in float <strong>ATTENUATION</strong></p></td>
+<td><p>Attenuation based on distance or shadow.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in vec3 <strong>ALBEDO</strong></p></td>
+<td><p>Base albedo.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec3 <strong>BACKLIGHT</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>in float <strong>METALLIC</strong></p></td>
+<td><p>Metallic.</p></td>
+</tr>
+<tr class="row-even"><td><p>in float <strong>ROUGHNESS</strong></p></td>
+<td><p>Roughness.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out vec3 <strong>DIFFUSE_LIGHT</strong></p></td>
+<td><p>Diffuse light result.</p></td>
+</tr>
+<tr class="row-even"><td><p>out vec3 <strong>SPECULAR_LIGHT</strong></p></td>
+<td><p>Specular light result.</p></td>
+</tr>
+<tr class="row-odd"><td><p>out float <strong>ALPHA</strong></p></td>
+<td><p>Alpha (range <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>). If written to on any branch, the
+material will go through the transparent pipeline.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Shaders going through the transparent pipeline when <code class="docutils literal notranslate"><span class="pre">ALPHA</span></code> is written to
+may exhibit transparency sorting issues. Read the
+<a class="reference internal" href="../../3d/3d_rendering_limitations.html#doc-3d-rendering-limitations-transparency-sorting"><span class="std std-ref">transparency sorting section in the 3D rendering limitations page</span></a>
+for more information and ways to avoid issues.</p>
+<p>Transparent materials also cannot cast shadows or appear in
+<code class="docutils literal notranslate"><span class="pre">hint_screen_texture</span></code> and <code class="docutils literal notranslate"><span class="pre">hint_depth_texture</span></code> uniforms. This in turn prevents those
+materials from appearing in screen-space reflections or refraction.
+<a class="reference internal" href="../../3d/global_illumination/using_sdfgi.html#doc-using-sdfgi"><span class="std std-ref">SDFGI</span></a> sharp reflections are not visible on transparent
+materials (only rough reflections are visible on transparent materials).</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="shader_preprocessor.html" class="btn btn-neutral float-left" title="Shader preprocessor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="canvas_item_shader.html" class="btn btn-neutral float-right" title="CanvasItem shaders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

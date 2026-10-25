@@ -1,0 +1,752 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="C# exported properties" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/scripting/c_sharp/c_sharp_exports.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="In Godot, class members can be exported. This means their value gets saved along with the resource (such as the scene) they&#x27;re attached to. They will also be available for editing in the prope..." />
+<meta name="description" content="In Godot, class members can be exported. This means their value gets saved along with the resource (such as the scene) they&#x27;re attached to. They will also be available for editing in the prope..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>C# exported properties &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="C# global classes" href="c_sharp_global_classes.html" />
+    <link rel="prev" title="C# signals" href="c_sharp_signals.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/scripting/c_sharp/c_sharp_exports" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/scripting/c_sharp/c_sharp_exports.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Scripting</a></li>
+          <li class="breadcrumb-item"><a href="index.html">C#/.NET</a></li>
+      <li class="breadcrumb-item active">C# exported properties</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/scripting/c_sharp/c_sharp_exports.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="c-exported-properties">
+<span id="doc-c-sharp-exports"></span><h1>C# exported properties<a class="headerlink" href="#c-exported-properties" title="Link to this heading"></a></h1>
+<p>In Godot, class members can be exported. This means their value gets saved along
+with the resource (such as the <a class="reference internal" href="../../../classes/class_packedscene.html#class-packedscene"><span class="std std-ref">scene</span></a>) they're
+attached to. They will also be available for editing in the property editor.
+Exporting is done by using the <code class="docutils literal notranslate"><span class="pre">[Export]</span></code> attribute.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ExportExample</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Export]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In that example the value <code class="docutils literal notranslate"><span class="pre">5</span></code> will be saved, and after building the current project
+it will be visible in the property editor.</p>
+<p>One of the fundamental benefits of exporting member variables is to have
+them visible and editable in the editor. This way, artists and game designers
+can modify values that later influence how the program runs. For this, a
+special export syntax is provided.</p>
+<p>Exporting can only be done with <a class="reference internal" href="c_sharp_variant.html#c-sharp-variant-compatible-types"><span class="std std-ref">Variant-compatible types</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Exporting properties can also be done in GDScript, for information on that
+see <a class="reference internal" href="../gdscript/gdscript_exports.html#doc-gdscript-exports"><span class="std std-ref">GDScript exported properties</span></a>.</p>
+</div>
+<section id="basic-use">
+<h2>Basic use<a class="headerlink" href="#basic-use" title="Link to this heading"></a></h2>
+<p>Exporting works with fields and properties. They can have any access modifier.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_number</span><span class="p">;</span>
+
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Exported members can specify a default value; otherwise, the <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values">default value of the type</a> is used instead.</p>
+<p>An <code class="docutils literal notranslate"><span class="pre">int</span></code> like <code class="docutils literal notranslate"><span class="pre">Number</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>. <code class="docutils literal notranslate"><span class="pre">Text</span></code> defaults to null because
+<code class="docutils literal notranslate"><span class="pre">string</span></code> is a reference type.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Text</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Default values can be specified for fields and properties.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">_greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span><span class="p">;</span>
+
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Greeting</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Properties with a backing field use the default value of the backing field.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">NumberWithBackingField</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">_number</span><span class="p">;</span>
+<span class="w">    </span><span class="k">set</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A property's <code class="docutils literal notranslate"><span class="pre">get</span></code> is not actually executed to determine the default
+value. Instead, Godot analyzes the C# source code. This works fine for most
+cases, such as the examples on this page. However, some properties are too
+complex for the analyzer to understand.</p>
+<p>For example, the following property attempts to use math to display the
+default value as <code class="docutils literal notranslate"><span class="pre">5</span></code> in the property editor, but it doesn't work:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">NumberWithBackingField</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">_number</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="k">set</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The analyzer doesn't understand this code and falls back to the default
+value for <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code>. However, when running the scene or inspecting a
+node with an attached tool script, <code class="docutils literal notranslate"><span class="pre">_number</span></code> will be <code class="docutils literal notranslate"><span class="pre">2</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">NumberWithBackingField</span></code> will return <code class="docutils literal notranslate"><span class="pre">5</span></code>. This difference may cause
+confusing behavior. To avoid this, don't use complex properties. Alternatively,
+if the default value can be explicitly specified, it can be overridden with the
+<a class="reference internal" href="../../../classes/class_object.html#class-object-private-method-property-can-revert"><span class="std std-ref">_PropertyCanRevert()</span></a> and
+<a class="reference internal" href="../../../classes/class_object.html#class-object-private-method-property-get-revert"><span class="std std-ref">_PropertyGetRevert()</span></a> methods.</p>
+</div>
+<p>Any type of <code class="docutils literal notranslate"><span class="pre">Resource</span></code> or <code class="docutils literal notranslate"><span class="pre">Node</span></code> can be exported. The property editor shows
+a user-friendly assignment dialog for these types. This can be used instead of
+<code class="docutils literal notranslate"><span class="pre">GD.Load</span></code> and <code class="docutils literal notranslate"><span class="pre">GetNode</span></code>. See <a class="reference internal" href="#doc-c-sharp-exports-nodes"><span class="std std-ref">Nodes and Resources</span></a>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">PackedScene</span><span class="w"> </span><span class="n">PackedScene</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">RigidBody2D</span><span class="w"> </span><span class="n">RigidBody2D</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="grouping-exports">
+<h2>Grouping exports<a class="headerlink" href="#grouping-exports" title="Link to this heading"></a></h2>
+<p>It is possible to group your exported properties inside the Inspector with the <code class="docutils literal notranslate"><span class="pre">[ExportGroup]</span></code>
+attribute. Every exported property after this attribute will be added to the group. Start a new
+group or use <code class="docutils literal notranslate"><span class="pre">[ExportGroup(&quot;&quot;)]</span></code> to break out.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[ExportGroup(&quot;My Properties&quot;)]</span>
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The second argument of the attribute can be used to only group properties with the specified prefix.</p>
+<p>Groups cannot be nested, use <code class="docutils literal notranslate"><span class="pre">[ExportSubgroup]</span></code> to create subgroups within a group.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[ExportSubgroup(&quot;Extra Properties&quot;)]</span>
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Text</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">Flag</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>You can also change the name of your main category, or create additional categories in the property
+list with the <code class="docutils literal notranslate"><span class="pre">[ExportCategory]</span></code> attribute.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[ExportCategory(&quot;Main Category&quot;)]</span>
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Text</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+
+<span class="na">[ExportCategory(&quot;Extra Category&quot;)]</span>
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">Flag</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The list of properties is organized based on the class inheritance, and new categories break
+that expectation. Use them carefully, especially when creating projects for public use.</p>
+</div>
+</section>
+<section id="strings-as-paths">
+<h2>Strings as paths<a class="headerlink" href="#strings-as-paths" title="Link to this heading"></a></h2>
+<p>Property hints can be used to export strings as paths</p>
+<p>String as a path to a file.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.File)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">GameFile</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>String as a path to a directory.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Dir)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">GameDirectory</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>String as a path to a file, custom filter provided as hint.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.File, &quot;*.txt,&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">GameFile</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Using paths in the global filesystem is also possible,
+but only in scripts in tool mode.</p>
+<p>String as a path to a PNG file in the global filesystem.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.GlobalFile, &quot;*.png&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">ToolImage</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>String as a path to a directory in the global filesystem.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.GlobalDir)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">ToolDir</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The multiline annotation tells the editor to show a large input
+field for editing over multiple lines.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.MultilineText)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Text</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="limiting-editor-input-ranges">
+<h2>Limiting editor input ranges<a class="headerlink" href="#limiting-editor-input-ranges" title="Link to this heading"></a></h2>
+<p>Using the range property hint allows you to limit what can be
+input as a value using the editor.</p>
+<p>Allow integer values from 0 to 20.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Range, &quot;0,20,&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Allow integer values from -10 to 20.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Range, &quot;-10,20,&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Allow floats from -10 to 20 and snap the value to multiples of 0.2.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Range, &quot;-10,20,0.2&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>If you add the hints &quot;or_greater&quot; and/or &quot;or_less&quot; you can go above
+or below the limits when adjusting the value by typing it instead of using
+the slider.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Range, &quot;0,100,1,or_greater,or_less&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="floats-with-easing-hint">
+<h2>Floats with easing hint<a class="headerlink" href="#floats-with-easing-hint" title="Link to this heading"></a></h2>
+<p>Display a visual representation of the <a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-ease"><span class="std std-ref">ease</span></a>
+function when editing.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.ExpEasing)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">TransitionSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="export-with-suffix-hint">
+<h2>Export with suffix hint<a class="headerlink" href="#export-with-suffix-hint" title="Link to this heading"></a></h2>
+<p>Display a unit hint suffix for exported variables. Works with numeric types,
+such as floats or vectors:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.None, &quot;suffix:m/s\u00b2&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">Gravity</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">9.8f</span><span class="p">;</span>
+<span class="na">[Export(PropertyHint.None, &quot;suffix:m/s&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">Velocity</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>In the above example, <code class="docutils literal notranslate"><span class="pre">\u00b2</span></code> is used to write the &quot;squared&quot; character
+(<code class="docutils literal notranslate"><span class="pre">²</span></code>).</p>
+</section>
+<section id="colors">
+<h2>Colors<a class="headerlink" href="#colors" title="Link to this heading"></a></h2>
+<p>Regular color given as red-green-blue-alpha value.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Color given as red-green-blue value (alpha will always be 1).</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.ColorNoAlpha)]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="nodes">
+<span id="doc-c-sharp-exports-nodes"></span><h2>Nodes<a class="headerlink" href="#nodes" title="Link to this heading"></a></h2>
+<p>Nodes can also be directly exported without having to use NodePaths.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>A specific type of node can also be directly exported. The list of nodes shown
+after pressing &quot;Assign&quot; in the inspector is filtered to the specified type, and
+only a correct node can be assigned.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Sprite2D</span><span class="w"> </span><span class="n">Sprite2D</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Custom node classes can also be exported directly. The filtering behavior
+depends on whether the custom class is a
+<a class="reference internal" href="c_sharp_global_classes.html#doc-c-sharp-global-classes"><span class="std std-ref">global class</span></a>.</p>
+<p>Exporting NodePaths like in Godot 3.x is still possible, in case you need it:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">NodePath</span><span class="w"> </span><span class="n">NodePath</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="p">(</span><span class="n">NodePath</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading"></a></h2>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>In the Inspector, you can then drag and drop a resource file
+from the FileSystem dock into the variable slot.</p>
+<p>Opening the inspector dropdown may result in an
+extremely long list of possible classes to create, however.
+Therefore, if you specify a type derived from Resource such as:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">AnimationNode</span><span class="w"> </span><span class="n">AnimationNode</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The drop-down menu will be limited to AnimationNode and all
+its derived classes. Custom resource classes can also be used,
+see <a class="reference internal" href="c_sharp_global_classes.html#doc-c-sharp-global-classes"><span class="std std-ref">C# global classes</span></a>.</p>
+<p>It must be noted that even if the script is not being run while in the
+editor, the exported properties are still editable. This can be used
+in conjunction with a <a class="reference internal" href="../gdscript/gdscript_basics.html#doc-gdscript-tool-mode"><span class="std std-ref">script in &quot;tool&quot; mode</span></a>.</p>
+</section>
+<section id="exporting-bit-flags">
+<h2>Exporting bit flags<a class="headerlink" href="#exporting-bit-flags" title="Link to this heading"></a></h2>
+<p>Members whose type is an enum with the <code class="docutils literal notranslate"><span class="pre">[Flags]</span></code> attribute can be exported and
+their values are limited to the members of the enum type.
+The editor will create a widget in the Inspector, allowing to select none, one,
+or multiple of the enum members. The value will be stored as an integer.</p>
+<p>A flags enum uses powers of 2 for the values of the enum members. Members that
+combine multiple flags using logical OR (<code class="docutils literal notranslate"><span class="pre">|</span></code>) are also possible.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Flags]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">SpellElements</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Fire</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Water</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Earth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Wind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+
+<span class="w">    </span><span class="n">FireAndWater</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Fire</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Water</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">SpellElements</span><span class="w"> </span><span class="n">MySpellElements</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Integers used as bit flags can store multiple <code class="docutils literal notranslate"><span class="pre">true</span></code>/<code class="docutils literal notranslate"><span class="pre">false</span></code> (boolean)
+values in one property. By using the <code class="docutils literal notranslate"><span class="pre">Flags</span></code> property hint, any of the given
+flags can be set from the editor.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Flags, &quot;Fire,Water,Earth,Wind&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">SpellElements</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>You must provide a string description for each flag. In this example, <code class="docutils literal notranslate"><span class="pre">Fire</span></code>
+has value 1, <code class="docutils literal notranslate"><span class="pre">Water</span></code> has value 2, <code class="docutils literal notranslate"><span class="pre">Earth</span></code> has value 4 and <code class="docutils literal notranslate"><span class="pre">Wind</span></code>
+corresponds to value 8. Usually, constants should be defined accordingly (e.g.
+<code class="docutils literal notranslate"><span class="pre">private</span> <span class="pre">const</span> <span class="pre">int</span> <span class="pre">ElementWind</span> <span class="pre">=</span> <span class="pre">8</span></code> and so on).</p>
+<p>You can add explicit values using a colon:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Flags, &quot;Self:4,Allies:8,Foes:16&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">SpellTargets</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Only power of 2 values are valid as bit flags options. The lowest allowed value
+is 1, as 0 means that nothing is selected. You can also add options that are a
+combination of other flags:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Flags, &quot;Self:4,Allies:8,Self and Allies:12,Foes:16&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">SpellTargets</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Export annotations are also provided for the physics and render layers defined in the project settings.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Layers2DPhysics)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">uint</span><span class="w"> </span><span class="n">Layers2DPhysics</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="na">[Export(PropertyHint.Layers2DRender)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">uint</span><span class="w"> </span><span class="n">Layers2DRender</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="na">[Export(PropertyHint.Layers3DPhysics)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">uint</span><span class="w"> </span><span class="n">Layers3DPhysics</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="na">[Export(PropertyHint.Layers3DRender)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">uint</span><span class="w"> </span><span class="n">Layers3DRender</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Using bit flags requires some understanding of bitwise operations.
+If in doubt, use boolean variables instead.</p>
+</section>
+<section id="exporting-enums">
+<h2>Exporting enums<a class="headerlink" href="#exporting-enums" title="Link to this heading"></a></h2>
+<p>Members whose type is an enum can be exported and their values are limited to the members
+of the enum type. The editor will create a widget in the Inspector, enumerating the
+following as &quot;Thing 1&quot;, &quot;Thing 2&quot;, &quot;Another Thing&quot;. The value will be stored as an integer.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">MyEnum</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Thing1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Thing2</span><span class="p">,</span>
+<span class="w">    </span><span class="n">AnotherThing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">MyEnum</span><span class="w"> </span><span class="n">MyEnumCurrent</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Integer and string members can also be limited to a specific list of values using the
+<code class="docutils literal notranslate"><span class="pre">[Export]</span></code> annotation with the <code class="docutils literal notranslate"><span class="pre">PropertyHint.Enum</span></code> hint.
+The editor will create a widget in the Inspector, enumerating the following as Warrior,
+Magician, Thief. The value will be stored as an integer, corresponding to the index
+of the selected option (i.e. <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>, or <code class="docutils literal notranslate"><span class="pre">2</span></code>).</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Enum, &quot;Warrior,Magician,Thief&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">CharacterClass</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>You can add explicit values using a colon:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Enum, &quot;Slow:30,Average:60,Very Fast:200&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">CharacterSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>If the type is <code class="docutils literal notranslate"><span class="pre">string</span></code>, the value will be stored as a string.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Enum, &quot;Rebecca,Mary,Leah&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">CharacterName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>If you want to set an initial value, you must specify it explicitly:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export(PropertyHint.Enum, &quot;Rebecca,Mary,Leah&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">CharacterName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rebecca&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="exporting-inspector-buttons-with-exporttoolbutton">
+<h2>Exporting inspector buttons with <code class="docutils literal notranslate"><span class="pre">[ExportToolButton]</span></code><a class="headerlink" href="#exporting-inspector-buttons-with-exporttoolbutton" title="Link to this heading"></a></h2>
+<p>If you want to create a clickable button in the inspector, you can use the
+<code class="docutils literal notranslate"><span class="pre">[ExportToolButton]</span></code> attribute.  This exports a Callable property or field as
+a clickable button. Since this runs in the editor, usage of the <a class="reference internal" href="../../plugins/running_code_in_the_editor.html#doc-running-code-in-the-editor"><span class="std std-ref">[Tool]</span></a> attribute is required. When the button is
+pressed, the callable is called:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Tool]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[ExportToolButton(&quot;Click me!&quot;)]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Callable</span><span class="w"> </span><span class="n">ClickMeButton</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Callable</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">ClickMe</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ClickMe</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can also set an icon for the button with a second argument. If specified, an
+icon will be fetched via <a class="reference internal" href="../../../classes/class_control.html#class-control-method-get-theme-icon"><span class="std std-ref">GetThemeIcon()</span></a>,
+from the <code class="docutils literal notranslate"><span class="pre">&quot;EditorIcons&quot;</span></code> theme type.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[ExportToolButton(&quot;Click me!&quot;, Icon = &quot;CharacterBody2D&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Callable</span><span class="w"> </span><span class="n">ClickMeButton</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Callable</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">ClickMe</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="exporting-collections">
+<h2>Exporting collections<a class="headerlink" href="#exporting-collections" title="Link to this heading"></a></h2>
+<p>As explained in the <a class="reference internal" href="c_sharp_variant.html#doc-c-sharp-variant"><span class="std std-ref">C# Variant</span></a> documentation, only
+certain C# arrays and the collection types defined in the <code class="docutils literal notranslate"><span class="pre">Godot.Collections</span></code>
+namespace are Variant-compatible, therefore, only those types can be exported.</p>
+<section id="exporting-godot-arrays">
+<h3>Exporting Godot arrays<a class="headerlink" href="#exporting-godot-arrays" title="Link to this heading"></a></h3>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="w"> </span><span class="n">Array</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Using the generic <code class="docutils literal notranslate"><span class="pre">Godot.Collections.Array&lt;T&gt;</span></code> allows specifying the type of the
+array elements, which will be used as a hint for the editor. The Inspector will
+restrict the elements to the specified type.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Array</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The default value of Godot arrays is null. A different default can be specified:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">CharacterNames</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span>
+<span class="na">[</span>
+<span class="na">    &quot;Rebecca&quot;,</span>
+<span class="na">    &quot;Mary&quot;,</span>
+<span class="na">    &quot;Leah&quot;,</span>
+<span class="na">]</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Arrays with specified types which inherit from resource can be set by
+drag-and-dropping multiple files from the FileSystem dock.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">Texture</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Textures</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">PackedScene</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Scenes</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="exporting-godot-dictionaries">
+<h3>Exporting Godot dictionaries<a class="headerlink" href="#exporting-godot-dictionaries" title="Link to this heading"></a></h3>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="w"> </span><span class="n">Dictionary</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Using the generic <code class="docutils literal notranslate"><span class="pre">Godot.Collections.Dictionary&lt;TKey,</span> <span class="pre">TValue&gt;</span></code> allows specifying
+the types of the key and value elements of the dictionary.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Dictionary</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The default value of Godot dictionaries is null. A different default can be specified:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">CharacterLives</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[&quot;Rebecca&quot;]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">    </span><span class="na">[&quot;Mary&quot;]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+<span class="w">    </span><span class="na">[&quot;Leah&quot;]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="exporting-c-arrays">
+<h3>Exporting C# arrays<a class="headerlink" href="#exporting-c-arrays" title="Link to this heading"></a></h3>
+<p>C# arrays can exported as long as the element type is a <a class="reference internal" href="c_sharp_variant.html#c-sharp-variant-compatible-types"><span class="std std-ref">Variant-compatible type</span></a>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Vector3</span><span class="p">[]</span><span class="w"> </span><span class="n">Vectors</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">NodePath</span><span class="p">[]</span><span class="w"> </span><span class="n">NodePaths</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The default value of C# arrays is null. A different default can be specified:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Vector3</span><span class="p">[]</span><span class="w"> </span><span class="n">Vectors</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span>
+<span class="na">[</span>
+<span class="na">    new Vector3(1, 2, 3),</span>
+<span class="na">    new Vector3(3, 2, 1),</span>
+<span class="na">]</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="setting-exported-variables-from-a-tool-script">
+<h2>Setting exported variables from a tool script<a class="headerlink" href="#setting-exported-variables-from-a-tool-script" title="Link to this heading"></a></h2>
+<p>When changing an exported variable's value from a script in
+<a class="reference internal" href="../gdscript/gdscript_basics.html#doc-gdscript-tool-mode"><span class="std std-ref">Tool mode</span></a>, the value in the inspector won't be updated
+automatically. To update it, call
+<a class="reference internal" href="../../../classes/class_object.html#class-object-method-notify-property-list-changed"><span class="std std-ref">NotifyPropertyListChanged()</span></a>
+after setting the exported variable's value.</p>
+</section>
+<section id="advanced-exports">
+<h2>Advanced exports<a class="headerlink" href="#advanced-exports" title="Link to this heading"></a></h2>
+<p>Not every type of export can be provided on the level of the language itself to
+avoid unnecessary design complexity. The following describes some more or less
+common exporting features which can be implemented with a low-level API.</p>
+<p>Before reading further, you should get familiar with the way properties are
+handled and how they can be customized with
+<a class="reference internal" href="../../../classes/class_object.html#class-object-private-method-set"><span class="std std-ref">_Set()</span></a>,
+<a class="reference internal" href="../../../classes/class_object.html#class-object-private-method-get"><span class="std std-ref">_Get()</span></a>, and
+<a class="reference internal" href="../../../classes/class_object.html#class-object-private-method-get-property-list"><span class="std std-ref">_GetPropertyList()</span></a> methods as
+described in <a class="reference internal" href="../../best_practices/godot_interfaces.html#doc-accessing-data-or-logic-from-object"><span class="std std-ref">Accessing data or logic from an object</span></a>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For binding properties using the above methods in C++, see
+<a class="reference internal" href="../../../engine_details/architecture/object_class.html#doc-binding-properties-using-set-get-property-list"><span class="std std-ref">Binding properties using _set/_get/_get_property_list</span></a>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The script must operate in the <code class="docutils literal notranslate"><span class="pre">tool</span></code> mode so the above methods
+can work from within the editor.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="c_sharp_signals.html" class="btn btn-neutral float-left" title="C# signals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="c_sharp_global_classes.html" class="btn btn-neutral float-right" title="C# global classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Scene Unique Nodes" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/scripting/scene_unique_nodes.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: Using get_node() to reference nodes from a script can sometimes be fragile. If you move a button in a UI scene from one panel to another, the button&#x27;s node path changes, and if a..." />
+<meta name="description" content="Introduction: Using get_node() to reference nodes from a script can sometimes be fragile. If you move a button in a UI scene from one panel to another, the button&#x27;s node path changes, and if a..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Scene Unique Nodes &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Logging" href="logging.html" />
+    <link rel="prev" title="Using SceneTree" href="scene_tree.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/scripting/scene_unique_nodes" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/scripting/scene_unique_nodes.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Scripting</a></li>
+      <li class="breadcrumb-item active">Scene Unique Nodes</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/scripting/scene_unique_nodes.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="scene-unique-nodes">
+<span id="doc-scene-unique-nodes"></span><h1>Scene Unique Nodes<a class="headerlink" href="#scene-unique-nodes" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Using <code class="docutils literal notranslate"><span class="pre">get_node()</span></code> to reference nodes from a script can sometimes be fragile.
+If you move a button in a UI scene from one panel to another, the button's node
+path changes, and if a script uses <code class="docutils literal notranslate"><span class="pre">get_node()</span></code> with a hard-coded node path,
+the script will not be able to find the button anymore.</p>
+<p>In situations like this, the node can be turned into a scene
+unique node to avoid having to update the script every time
+the node's path is changed.</p>
+</section>
+<section id="creation-and-usage">
+<h2>Creation and usage<a class="headerlink" href="#creation-and-usage" title="Link to this heading"></a></h2>
+<p>There are two ways to create a scene unique node.</p>
+<p>In the Scene tree dock, right-click on a node and select
+<strong>Access as Unique Name</strong> in the context menu.</p>
+<img alt="../../_images/unique_name.webp" src="../../_images/unique_name.webp" />
+<p>After selecting the option, the node will now have a percent symbol (<strong>%</strong>) next
+to its name in the scene tree:</p>
+<img alt="../../_images/percent.webp" src="../../_images/percent.webp" />
+<p>You can also do this while renaming the node by adding &quot;%&quot; to the beginning of the name.
+Once you confirm, the percent symbol will appear next to its name.</p>
+<p>You can now use the node in your script. For example, you can reference it with
+a <code class="docutils literal notranslate"><span class="pre">get_node()</span></code> method call by typing the % symbol, followed by the node's
+name:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nf">get_node</span><span class="p">(</span><span class="s2">&quot;%RedButton&quot;</span><span class="p">)</span><span class="o">.</span><span class="vi">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="sx">%RedButton</span><span class="o">.</span><span class="vi">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="w"> </span><span class="c1"># Shorter syntax</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Button</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;%RedButton&quot;</span><span class="p">).</span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="same-scene-limitation">
+<h2>Same-scene limitation<a class="headerlink" href="#same-scene-limitation" title="Link to this heading"></a></h2>
+<p>A scene unique node can only be retrieved by a node inside the same scene. To
+demonstrate this limitation, consider this example <strong>Player</strong> scene that
+instances a <strong>Sword</strong> scene:</p>
+<img alt="../../_images/unique_name_scene_instance_example.webp" src="../../_images/unique_name_scene_instance_example.webp" />
+<p>Here are the results of <code class="docutils literal notranslate"><span class="pre">get_node()</span></code> calls inside the <strong>Player</strong> script:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_node(&quot;%Eyes&quot;)</span></code> returns the <strong>Eyes</strong> node.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_node(&quot;%Hilt&quot;)</span></code> returns <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+</ul>
+<p>These are the results of <code class="docutils literal notranslate"><span class="pre">get_node()</span></code> calls inside the <strong>Sword</strong> script:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_node(&quot;%Eyes&quot;)</span></code> returns <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_node(&quot;%Hilt&quot;)</span></code> returns the <strong>Hilt</strong> node.</p></li>
+</ul>
+<p>If a script has access to a node in another scene, it can call <code class="docutils literal notranslate"><span class="pre">get_node()</span></code> on
+that node to get scene unique nodes from that node's scene. This also works in a
+node path, which avoids multiple <code class="docutils literal notranslate"><span class="pre">get_node()</span></code> calls. Here are two ways to get
+the <strong>Hilt</strong> node from the <strong>Player</strong> script using scene unique nodes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_node(&quot;Hand/Sword&quot;).get_node(&quot;%Hilt&quot;)</span></code> returns the <strong>Hilt</strong> node.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_node(&quot;Hand/Sword/%Hilt&quot;)</span></code> also returns the <strong>Hilt</strong> node.</p></li>
+</ul>
+<p>Scene unique names don't only work at the end of a node path. They can be used
+in the middle to navigate from one node to another. For example, the <strong>Sword</strong> node
+is marked as a scene unique node in the <strong>Player</strong> scene, so this is possible:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_node(&quot;%Sword/%Hilt&quot;)</span></code> returns the <strong>Hilt</strong> node.</p></li>
+</ul>
+</section>
+<section id="alternatives">
+<h2>Alternatives<a class="headerlink" href="#alternatives" title="Link to this heading"></a></h2>
+<p>Scene unique nodes are a useful tool to navigate a scene. However, there are
+some situations where other techniques may be better.</p>
+<p>A <a class="reference internal" href="groups.html#doc-groups"><span class="std std-ref">Group</span></a> allows locating a node (or a group of many nodes)
+from any other node, no matter what scene the two nodes are located in.</p>
+<p>A <a class="reference internal" href="singletons_autoload.html#doc-singletons-autoload"><span class="std std-ref">Singleton (Autoload)</span></a> is an always loaded node
+that can be accessed directly by any node regardless of the scene. These are useful
+when some data or functionality is shared globally.</p>
+<p><a class="reference internal" href="../../classes/class_node.html#class-node-method-find-child"><span class="std std-ref">Node.find_child()</span></a> finds a node by name
+without knowing its full path. This seems similar to a scene unique node, but
+this method is able to find nodes in nested scenes, and doesn't require marking
+the node in the scene editor in any way. However, this method is slow. Scene
+unique nodes are cached by Godot and are fast to retrieve, but each time the
+method is called, <code class="docutils literal notranslate"><span class="pre">find_child()</span></code> needs to check every descendant (every child,
+grandchild, and so on).</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scene_tree.html" class="btn btn-neutral float-left" title="Using SceneTree" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="logging.html" class="btn btn-neutral float-right" title="Logging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

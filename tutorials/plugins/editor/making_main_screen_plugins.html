@@ -1,0 +1,503 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Making main screen plugins" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/plugins/editor/making_main_screen_plugins.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="What this tutorial covers: Main screen plugins allow you to create new UIs in the central part of the editor, which appear next to the &quot;2D&quot;, &quot;3D&quot;, &quot;Script&quot;, &quot;Game..." />
+<meta name="description" content="What this tutorial covers: Main screen plugins allow you to create new UIs in the central part of the editor, which appear next to the &quot;2D&quot;, &quot;3D&quot;, &quot;Script&quot;, &quot;Game..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Making main screen plugins &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Import plugins" href="import_plugins.html" />
+    <link rel="prev" title="Making plugins" href="making_plugins.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/plugins/editor/making_main_screen_plugins" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/plugins/editor/making_main_screen_plugins.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Plugins</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Editor plugins</a></li>
+      <li class="breadcrumb-item active">Making main screen plugins</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/plugins/editor/making_main_screen_plugins.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="making-main-screen-plugins">
+<span id="doc-making-main-screen-plugins"></span><h1>Making main screen plugins<a class="headerlink" href="#making-main-screen-plugins" title="Link to this heading"></a></h1>
+<section id="what-this-tutorial-covers">
+<h2>What this tutorial covers<a class="headerlink" href="#what-this-tutorial-covers" title="Link to this heading"></a></h2>
+<p>Main screen plugins allow you to create
+new UIs in the central part of the editor, which appear next to the
+&quot;2D&quot;, &quot;3D&quot;, &quot;Script&quot;, &quot;Game&quot;, and &quot;AssetLib&quot; buttons. Such editor plugins are
+referred as &quot;Main screen plugins&quot;.</p>
+<p>This tutorial leads you through the creation of a basic main screen plugin.
+For the sake of simplicity, our main screen plugin will contain a single
+button that prints text to the console.</p>
+</section>
+<section id="initializing-the-plugin">
+<h2>Initializing the plugin<a class="headerlink" href="#initializing-the-plugin" title="Link to this heading"></a></h2>
+<p>First create a new plugin from the Plugins menu. For this tutorial, we'll put
+it in a folder called <code class="docutils literal notranslate"><span class="pre">main_screen</span></code>, but you can use any name you'd like.</p>
+<p>The plugin script will come with <code class="docutils literal notranslate"><span class="pre">_enter_tree()</span></code> and <code class="docutils literal notranslate"><span class="pre">_exit_tree()</span></code>
+methods, but for a main screen plugin we need to add a few extra methods.
+Add four extra methods such that the script looks like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorPlugin</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_enter_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_exit_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_has_main_screen</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">true</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_make_visible</span><span class="p">(</span><span class="n">visible</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_plugin_name</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="s2">&quot;Main Screen Plugin&quot;</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_plugin_icon</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb">EditorInterface</span><span class="o">.</span><span class="nf">get_editor_theme</span><span class="p">()</span><span class="o">.</span><span class="nf">get_icon</span><span class="p">(</span><span class="s2">&quot;Node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;EditorIcons&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="cp">#if TOOLS</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="na">[Tool]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MainScreenPlugin</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">EditorPlugin</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_EnterTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_ExitTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">_HasMainScreen</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_MakeVisible</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">visible</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">_GetPluginName</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Main Screen Plugin&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">Texture2D</span><span class="w"> </span><span class="nf">_GetPluginIcon</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">EditorInterface</span><span class="p">.</span><span class="n">Singleton</span><span class="p">.</span><span class="n">GetEditorTheme</span><span class="p">().</span><span class="n">GetIcon</span><span class="p">(</span><span class="s">&quot;Node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EditorIcons&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div></div>
+<p>The important part in this script is the <code class="docutils literal notranslate"><span class="pre">_has_main_screen()</span></code> function,
+which is overridden to return <code class="docutils literal notranslate"><span class="pre">true</span></code>. This function is automatically
+called by the editor on plugin activation, to tell it that this plugin
+adds a new center view to the editor. For now, we'll leave this script
+as-is and we'll come back to it later.</p>
+</section>
+<section id="main-screen-scene">
+<h2>Main screen scene<a class="headerlink" href="#main-screen-scene" title="Link to this heading"></a></h2>
+<p>Create a new scene with a root node derived from <code class="docutils literal notranslate"><span class="pre">Control</span></code> (for this
+example plugin, we'll make the root node a <code class="docutils literal notranslate"><span class="pre">CenterContainer</span></code>).
+Select this root node, and in the viewport, click the <code class="docutils literal notranslate"><span class="pre">Layout</span></code> menu
+and select <code class="docutils literal notranslate"><span class="pre">Full</span> <span class="pre">Rect</span></code>. You also need to enable the <code class="docutils literal notranslate"><span class="pre">Expand</span></code>
+vertical size flag in the inspector.
+The panel now uses all the space available in the main viewport.</p>
+<p>Next, let's add a button to our example main screen plugin.
+Add a <code class="docutils literal notranslate"><span class="pre">Button</span></code> node, and set the text to &quot;Print Hello&quot; or similar.
+Add a script to the button like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">Button</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_print_hello_pressed</span><span class="p">():</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;Hello from the main screen plugin!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="na">[Tool]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">PrintHello</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Button</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnPrintHelloPressed</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Hello from the main screen plugin!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Then connect the &quot;pressed&quot; signal to itself. If you need help with signals,
+see the <a class="reference internal" href="../../../getting_started/step_by_step/signals.html#doc-signals"><span class="std std-ref">Using signals</span></a> article.</p>
+<p>We are done with the main screen panel. Save the scene as <code class="docutils literal notranslate"><span class="pre">main_panel.tscn</span></code>.</p>
+</section>
+<section id="update-the-plugin-script">
+<h2>Update the plugin script<a class="headerlink" href="#update-the-plugin-script" title="Link to this heading"></a></h2>
+<p>We need to update the <code class="docutils literal notranslate"><span class="pre">main_screen_plugin.gd</span></code> script so the plugin
+instances our main panel scene and places it where it needs to be.
+Here is the full plugin script:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorPlugin</span>
+
+
+<span class="k">const</span><span class="w"> </span><span class="nc">MainPanel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://addons/main_screen/main_panel.tscn&quot;</span><span class="p">)</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">main_panel_instance</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_enter_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="n">main_panel_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">MainPanel</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Add the main panel to the editor&#39;s main viewport.</span>
+<span class="w">    </span><span class="nb">EditorInterface</span><span class="o">.</span><span class="nf">get_editor_main_screen</span><span class="p">()</span><span class="o">.</span><span class="nf">add_child</span><span class="p">(</span><span class="n">main_panel_instance</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Hide the main panel. Very much required.</span>
+<span class="w">    </span><span class="nf">_make_visible</span><span class="p">(</span><span class="l">false</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_exit_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">main_panel_instance</span><span class="p">:</span>
+<span class="w">        </span><span class="n">main_panel_instance</span><span class="o">.</span><span class="nf">queue_free</span><span class="p">()</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_has_main_screen</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">true</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_make_visible</span><span class="p">(</span><span class="n">visible</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">main_panel_instance</span><span class="p">:</span>
+<span class="w">        </span><span class="n">main_panel_instance</span><span class="o">.</span><span class="vi">visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">visible</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_plugin_name</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="s2">&quot;Main Screen Plugin&quot;</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_plugin_icon</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Must return some kind of Texture for the icon.</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb">EditorInterface</span><span class="o">.</span><span class="nf">get_editor_theme</span><span class="p">()</span><span class="o">.</span><span class="nf">get_icon</span><span class="p">(</span><span class="s2">&quot;Node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;EditorIcons&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="cp">#if TOOLS</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="na">[Tool]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MainScreenPlugin</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">EditorPlugin</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">PackedScene</span><span class="w"> </span><span class="n">MainPanel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResourceLoader</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">PackedScene</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://addons/main_screen/main_panel.tscn&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Control</span><span class="w"> </span><span class="n">MainPanelInstance</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_EnterTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MainPanelInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Control</span><span class="p">)</span><span class="n">MainPanel</span><span class="p">.</span><span class="n">Instantiate</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Add the main panel to the editor&#39;s main viewport.</span>
+<span class="w">        </span><span class="n">EditorInterface</span><span class="p">.</span><span class="n">Singleton</span><span class="p">.</span><span class="n">GetEditorMainScreen</span><span class="p">().</span><span class="n">AddChild</span><span class="p">(</span><span class="n">MainPanelInstance</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Hide the main panel. Very much required.</span>
+<span class="w">        </span><span class="n">_MakeVisible</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_ExitTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">MainPanelInstance</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainPanelInstance</span><span class="p">.</span><span class="n">QueueFree</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">_HasMainScreen</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_MakeVisible</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">visible</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">MainPanelInstance</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainPanelInstance</span><span class="p">.</span><span class="n">Visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">visible</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">_GetPluginName</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Main Screen Plugin&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">Texture2D</span><span class="w"> </span><span class="nf">_GetPluginIcon</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Must return some kind of Texture for the icon.</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">EditorInterface</span><span class="p">.</span><span class="n">Singleton</span><span class="p">.</span><span class="n">GetEditorTheme</span><span class="p">().</span><span class="n">GetIcon</span><span class="p">(</span><span class="s">&quot;Node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EditorIcons&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div></div>
+<p>A couple of specific lines were added. <code class="docutils literal notranslate"><span class="pre">MainPanel</span></code> is a constant that holds
+a reference to the scene, and we instance it into <cite>main_panel_instance</cite>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">_enter_tree()</span></code> function is called before <code class="docutils literal notranslate"><span class="pre">_ready()</span></code>. This is where
+we instance the main panel scene, and add them as children of specific parts
+of the editor. We use <code class="docutils literal notranslate"><span class="pre">EditorInterface.get_editor_main_screen()</span></code> to
+obtain the main editor screen and add our main panel instance as a child to it.
+We call the <code class="docutils literal notranslate"><span class="pre">_make_visible(false)</span></code> function to hide the main panel so
+it doesn't compete for space when first activating the plugin.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">_exit_tree()</span></code> function is called when the plugin is deactivated.
+If the main screen still exists, we call <code class="docutils literal notranslate"><span class="pre">queue_free()</span></code> to free the
+instance and remove it from memory.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">_make_visible()</span></code> function is overridden to hide or show the main
+panel as needed. This function is automatically called by the editor when the
+user clicks on the main viewport buttons at the top of the editor.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">_get_plugin_name()</span></code> and <code class="docutils literal notranslate"><span class="pre">_get_plugin_icon()</span></code> functions control
+the displayed name and icon for the plugin's main viewport button.</p>
+<p>Another function you can add is the <code class="docutils literal notranslate"><span class="pre">_handles()</span></code> function, which
+allows you to handle a node type, automatically focusing the main
+screen when the type is selected. This is similar to how clicking
+on a 3D node will automatically switch to the 3D viewport.</p>
+</section>
+<section id="main-screen-icons">
+<h2>Main screen icons<a class="headerlink" href="#main-screen-icons" title="Link to this heading"></a></h2>
+<p>You can either use one of the built-in icons from the editor, or provide your
+own icon for the main screen plugin. In both cases, this is done by overriding the
+<code class="docutils literal notranslate"><span class="pre">_get_plugin_icon()</span></code> method in the plugin script.</p>
+<p>To use a built-in icon, copy an icon name from the
+<a class="reference external" href="https://godotengine.github.io/editor-icons/">Godot editor icons</a> website.
+Use the name copied from the website as the <em>first</em> parameter of
+<code class="docutils literal notranslate"><span class="pre">EditorInterface.get_editor_theme().get_icon()</span></code> (the second parameter should
+remain <code class="docutils literal notranslate"><span class="pre">&quot;EditorIcons&quot;</span></code>).</p>
+<p>You can use a custom icon by returning something such as
+<code class="docutils literal notranslate"><span class="pre">preload(&quot;res://addons/main_screen/icon.svg&quot;)</span></code>. When designing your own icon,
+you should follow the same guidelines as for node icons (SVG format recommended,
+16×16 size). See <a class="reference internal" href="../../../engine_details/editor/creating_icons.html#doc-editor-icons"><span class="std std-ref">Editor icons</span></a> for information on how to create icons
+for your plugin.</p>
+</section>
+<section id="try-the-plugin">
+<h2>Try the plugin<a class="headerlink" href="#try-the-plugin" title="Link to this heading"></a></h2>
+<p>Activate the plugin in the Project Settings. You'll observe a new button next
+to 2D, 3D, Script above the main viewport. Clicking it will take you to your
+new main screen plugin, and the button in the middle will print text.</p>
+<p>If you would like to try a finished version of this plugin,
+check out the plugin demos here:
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/plugins">https://github.com/godotengine/godot-demo-projects/tree/master/plugins</a></p>
+<p>If you would like to see a more complete example of what main screen plugins
+are capable of, check out the 2.5D demo projects here:
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/misc/2.5d">https://github.com/godotengine/godot-demo-projects/tree/master/misc/2.5d</a></p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="making_plugins.html" class="btn btn-neutral float-left" title="Making plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="import_plugins.html" class="btn btn-neutral float-right" title="Import plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

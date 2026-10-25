@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="OpenXR Render Models" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/xr/openxr_render_models.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="A cornerstone of OpenXR&#x27;s API design is being as platform agnostic as possible. A great example of this is OpenXR&#x27;s action map system where XR runtimes have to support core interaction pr..." />
+<meta name="description" content="A cornerstone of OpenXR&#x27;s API design is being as platform agnostic as possible. A great example of this is OpenXR&#x27;s action map system where XR runtimes have to support core interaction pr..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>OpenXR Render Models &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="OpenXR spatial entities" href="openxr_spatial_entities.html" />
+    <link rel="prev" title="OpenXR body tracking" href="openxr_body_tracking.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/xr/openxr_render_models" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/xr/openxr_render_models.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">XR</a></li>
+      <li class="breadcrumb-item active">OpenXR Render Models</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/xr/openxr_render_models.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="openxr-render-models">
+<span id="doc-openxr-render-models"></span><h1>OpenXR Render Models<a class="headerlink" href="#openxr-render-models" title="Link to this heading"></a></h1>
+<p>A cornerstone of OpenXR's API design is being as platform agnostic as possible.
+A great example of this is OpenXR's action map system where XR runtimes
+have to support core interaction profiles to fall back on,
+if no interaction profile exists for the hardware being used.
+This ensures that OpenXR applications keep functioning even when used on
+hardware that didn't exist when the application was released,
+or that the developers of the application did not have access too.</p>
+<p>A consequence of this is that the application developer doesn't know with any
+certainty what hardware is being used, as the XR runtime could be mimicking
+other hardware.
+The application developer thus can't show anything in relation to the actual
+hardware used, the most common use case being showing the controllers the user
+is currently holding.</p>
+<p>Showing the correct controller models and having these models
+correctly positioned is important to a proper sense of immersion.</p>
+<p>This is where OpenXR's <a class="reference external" href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_render_models">render models API</a> comes in.
+This API allows us to query the XR runtime for 3D assets that are correct
+for the physical hardware being used.
+The API also allows us to query the position of this hardware within the
+tracking volume and the correct positioning of subcomponents of this hardware.</p>
+<p>For instance, we can correctly position and animate the trigger or show buttons
+being pressed.</p>
+<p>For those runtimes that support the
+<a class="reference external" href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_hand_tracking_data_source">controller data source for hand tracking</a>
+, we can also correctly position the user's fingers and hand according to the
+shape of the controller.
+Do note that this works in combination with the
+<a class="reference external" href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_hand_joints_motion_range">hand joints motion range extension</a>
+to prevent clipping of the fingers.</p>
+<section id="openxr-render-models-node">
+<h2>OpenXR Render models node<a class="headerlink" href="#openxr-render-models-node" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="../../classes/class_openxrrendermodelmanager.html#class-openxrrendermodelmanager"><span class="std std-ref">OpenXRRenderModelManager</span></a>
+node can be used to automate most of the render models functionality.
+This node keeps track of the active render models currently made
+available by the XR runtime.</p>
+<p>It will create child nodes for each active render model resulting in
+that render model being displayed.</p>
+<p>This node must have an <a class="reference internal" href="../../classes/class_xrorigin3d.html#class-xrorigin3d"><span class="std std-ref">XROrigin3D</span></a> node as an
+ancestor.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">tracker</span></code> is set to <code class="docutils literal notranslate"><span class="pre">Any</span></code> our node will show all render models
+currently being tracked. In this scenario this node must be a direct
+child of our <a class="reference internal" href="../../classes/class_xrorigin3d.html#class-xrorigin3d"><span class="std std-ref">XROrigin3D</span></a> node.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">tracker</span></code> is set to <code class="docutils literal notranslate"><span class="pre">None</span> <span class="pre">set</span></code> our node will only show render
+models for which no tracker has been identified. In this scenario this
+node must also be a direct child of our
+<a class="reference internal" href="../../classes/class_xrorigin3d.html#class-xrorigin3d"><span class="std std-ref">XROrigin3D</span></a> node.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">tracker</span></code> is set to <code class="docutils literal notranslate"><span class="pre">Left</span> <span class="pre">Hand</span></code> or <code class="docutils literal notranslate"><span class="pre">Right</span> <span class="pre">Hand</span></code> our node will
+only show render models related to our left or right hand respectively.
+In this scenario, our node can be placed deeper in the scene tree.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For most XR runtimes this means the render model represents a controller
+that is actually being held by the user but this is not a guarantee.
+Some XR runtimes will always set the tracker to either the left or right
+hand even if the controller is not currently held but is being tracked.
+You should always test this as this will lead to unwanted behavior.</p>
+</div>
+<p>In this scenario we can also specify an action for a pose in the action map
+by setting the <code class="docutils literal notranslate"><span class="pre">make_local_to_pose</span></code> property to the pose action.
+Use this in combination with an <a class="reference internal" href="../../classes/class_xrcontroller3d.html#class-xrcontroller3d"><span class="std std-ref">XRController3D</span></a>
+node that is using the same pose and you can now add a layer that allows
+you to deviate from the tracked position of both your controller and the
+related render model (see example below).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Combining the above with hand tracking does introduce the problem
+that hand tracking is completely independent from the action map
+system. You will need to combine the hand tracking and controller
+tracking poses to properly offset the render models.</p>
+<p>This falls beyond the scope of this documentation.</p>
+</div>
+<section id="render-model-manager-example">
+<h3>Render model manager example<a class="headerlink" href="#render-model-manager-example" title="Link to this heading"></a></h3>
+<p>You can download <a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/xr/openxr_render_models">our render models demo</a>
+which implements the setup described below.</p>
+<img alt="../../_images/openxr_render_models_setup.webp" src="../../_images/openxr_render_models_setup.webp" />
+<p>In this setup we find an <a class="reference internal" href="../../classes/class_openxrrendermodelmanager.html#class-openxrrendermodelmanager"><span class="std std-ref">OpenXRRenderModelManager</span></a>
+node directly underneath our <a class="reference internal" href="../../classes/class_xrorigin3d.html#class-xrorigin3d"><span class="std std-ref">XROrigin3D</span></a> node.
+On this node our <code class="docutils literal notranslate"><span class="pre">target</span></code> property is set to <code class="docutils literal notranslate"><span class="pre">None</span> <span class="pre">set</span></code> and will handle
+showing all render models that are currently not related to our left or
+right hand controllers.</p>
+<p>We then see the same setup for our left and right hand so we'll focus on
+just the left hand.</p>
+<p>We have an <a class="reference internal" href="../../classes/class_xrcontroller3d.html#class-xrcontroller3d"><span class="std std-ref">XRController3D</span></a> that will track the
+location of our hand.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are using the <code class="docutils literal notranslate"><span class="pre">grip</span></code> pose in this example. The <code class="docutils literal notranslate"><span class="pre">palm</span></code> pose is
+arguably more suitable and predictable however it is not supported
+by all XR runtimes. See the hand tracking demo project for a
+solution to switching between these poses based on what is supported.</p>
+</div>
+<p>As a child of the node we have an <a class="reference internal" href="../../classes/class_animatablebody3d.html#class-animatablebody3d"><span class="std std-ref">AnimatableBody3D</span></a>
+node that follows the tracked location of the hand <strong>but</strong> will interact
+with physics objects to stop the player's hand from going through walls etc.
+This node has a collision shape that encapsulates the hand.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is important to set the physics priority so that this logic runs
+after any physics logic that moves the XROrigin3D node or the hand
+will lag a frame behind.</p>
+</div>
+<p>The script below shows a basic implementation for this that you can build
+upon.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">class_name</span><span class="w"> </span><span class="n">CollisionHands3D</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">AnimatableBody3D</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Make sure these are set correctly.</span>
+<span class="w">    </span><span class="n">top_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="w">    </span><span class="n">sync_to_physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">    </span><span class="n">process_physics_priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">90</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Follow our parent node around.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">dest_transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_parent</span><span class="p">()</span><span class="o">.</span><span class="vi">global_transform</span>
+
+<span class="w">    </span><span class="c1"># We just apply rotation for this example.</span>
+<span class="w">    </span><span class="n">global_basis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dest_transform</span><span class="o">.</span><span class="vi">basis</span>
+
+<span class="w">    </span><span class="c1"># Attempt to move to where our tracked hand is.</span>
+<span class="w">    </span><span class="nf">move_and_collide</span><span class="p">(</span><span class="n">dest_transform</span><span class="o">.</span><span class="vi">origin</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">global_position</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally we see another <a class="reference internal" href="../../classes/class_openxrrendermodelmanager.html#class-openxrrendermodelmanager"><span class="std std-ref">OpenXRRenderModelManager</span></a>
+node, this one with <code class="docutils literal notranslate"><span class="pre">target</span></code> set to the appropriate hand and
+<code class="docutils literal notranslate"><span class="pre">make_local_to_pose</span></code> set to the correct pose.
+This will ensure that the render models related to this hand are properly
+shown and offset if our collision handler has altered the location.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <p class="offline-video"><em>Vidéo YouTube non disponible hors-ligne : <a class="reference external" href="https://www.youtube-nocookie.com/embed/_gNOd7wQ62M">https://www.youtube-nocookie.com/embed/_gNOd7wQ62M</a></em></p>
+</div></section>
+</section>
+<section id="render-model-node">
+<h2>Render model node<a class="headerlink" href="#render-model-node" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="../../classes/class_openxrrendermodel.html#class-openxrrendermodel"><span class="std std-ref">OpenXRRenderModel</span></a> node implements
+all the logic to display and position a given render model provided by
+the render models API.</p>
+<p>Instances of this node are added by the render model manager node we used up
+above but you can interact with these directly if you wish.</p>
+<p>Whenever Godot obtains information about a new render model an RID is
+created to reference that render model.</p>
+<p>By assigning that RID to the <code class="docutils literal notranslate"><span class="pre">render_model</span></code> property on this node,
+the node will start displaying the render model and manage both the
+transform that places the render model in the correct place and
+animates all the sub objects.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">get_top_level_path</span></code> function will return the top level path
+associated with this render model. This will point to either the
+left or right hand. As the top level path can be set or cleared
+depending on whether the user picks up, or puts down, the controller
+you can connect to the <code class="docutils literal notranslate"><span class="pre">render_model_top_level_path_changes</span></code> signal
+and react to these changes.</p>
+<p>Depending on your setup of the
+<a class="reference internal" href="../../classes/class_openxrrendermodelmanager.html#class-openxrrendermodelmanager"><span class="std std-ref">OpenXRRenderModelManager</span></a> nodes,
+render models will be removed or added as their top level path changes.</p>
+</section>
+<section id="backend-access">
+<h2>Backend access<a class="headerlink" href="#backend-access" title="Link to this heading"></a></h2>
+<p>The nodes we've detailed out above handle all the display logic
+for us but it is possible to interact with the data that drives
+this directly and create your own implementation.</p>
+<p>For this you can access the
+<a class="reference internal" href="../../classes/class_openxrrendermodelextension.html#class-openxrrendermodelextension"><span class="std std-ref">OpenXRRenderModelExtension</span></a>
+singleton.</p>
+<p>This object also lets you query whether render models are
+supported and enabled on the device currently being used by
+calling the <code class="docutils literal notranslate"><span class="pre">is_active</span></code> function on this object.</p>
+<p>The built-in logic implements the
+<a class="reference external" href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_interaction_render_model">interaction render model API</a>
+that lists all render models related to controllers and similar
+devices that are present in the action map.
+It will automatically create and remove render model entities
+that are exposed through this API.</p>
+<p>As other extensions become available these can be implemented
+in a GDExtension plugin. Such a plugin can call
+<code class="docutils literal notranslate"><span class="pre">render_model_create</span></code> and <code class="docutils literal notranslate"><span class="pre">render_model_destroy</span></code> to
+create the object that will provide access to that render
+model through the core render models API.</p>
+<p>You should not destroy a render model outside of this logic.</p>
+<p>You can connect to the <code class="docutils literal notranslate"><span class="pre">render_model_added</span></code> and
+<code class="docutils literal notranslate"><span class="pre">render_model_removed</span></code> signals to be informed when new render
+models are added or removed.</p>
+<p>The core methods for working with this API are listed
+below:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Render model extension functions</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>render_model_get_all</p></td>
+<td><p>Provides an array of RIDs for all render models
+that are being tracked.</p></td>
+</tr>
+<tr class="row-odd"><td><p>render_model_new_scene_instance</p></td>
+<td><p>Provides a new scene that contains all meshes
+needed to display the render model.</p></td>
+</tr>
+<tr class="row-even"><td><p>render_model_get_subaction_paths</p></td>
+<td><p>Provides a list of subaction paths from your
+action map related to this render mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>render_model_get_top_level_path</p></td>
+<td><p>Returns the top level path associated with this
+render model (if any).
+Use the <code class="docutils literal notranslate"><span class="pre">render_model_top_level_path_changed</span></code>
+signal to react to this changing.</p></td>
+</tr>
+<tr class="row-even"><td><p>render_model_get_confidence</p></td>
+<td><p>Returns the tracking confidence for the tracking
+data for this render model.</p></td>
+</tr>
+<tr class="row-odd"><td><p>render_model_get_root_transform</p></td>
+<td><p>Returns the root transform for this render model
+within our current reference space. This can be
+used to place the render model in space.</p></td>
+</tr>
+<tr class="row-even"><td><p>render_model_get_animatable_node_count</p></td>
+<td><p>Returns the number of nodes in our render model
+scene that can be animated</p></td>
+</tr>
+<tr class="row-odd"><td><p>render_model_get_animatable_node_name</p></td>
+<td><p>Returns the name of the node that we can animate.
+Note that this node can be any number of levels
+deep within the scene.</p></td>
+</tr>
+<tr class="row-even"><td><p>render_model_is_animatable_node_visible</p></td>
+<td><p>Returns true if this animatable node should be
+visible</p></td>
+</tr>
+<tr class="row-odd"><td><p>render_model_get_animatable_node_transform</p></td>
+<td><p>Returns the transform for this animatable node.
+This is a local transform that can be directly
+applied.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="openxr_body_tracking.html" class="btn btn-neutral float-left" title="OpenXR body tracking" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="openxr_spatial_entities.html" class="btn btn-neutral float-right" title="OpenXR spatial entities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

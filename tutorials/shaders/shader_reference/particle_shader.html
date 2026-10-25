@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Particle shaders" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/shaders/shader_reference/particle_shader.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Particle shaders are a special type of shader that runs before the object is drawn. They are used for calculating material properties such as color, position, and rotation. They can be drawn with a..." />
+<meta name="description" content="Particle shaders are a special type of shader that runs before the object is drawn. They are used for calculating material properties such as color, position, and rotation. They can be drawn with a..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Particle shaders &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Sky shaders" href="sky_shader.html" />
+    <link rel="prev" title="CanvasItem shaders" href="canvas_item_shader.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/shaders/shader_reference/particle_shader" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/shaders/shader_reference/particle_shader.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Shaders</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Shading reference</a></li>
+      <li class="breadcrumb-item active">Particle shaders</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/shaders/shader_reference/particle_shader.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="particle-shaders">
+<span id="doc-particle-shader"></span><h1>Particle shaders<a class="headerlink" href="#particle-shaders" title="Link to this heading"></a></h1>
+<p>Particle shaders are a special type of shader that runs before the object is
+drawn. They are used for calculating material properties such as color,
+position, and rotation. They can be drawn with any regular material for CanvasItem
+or Spatial, depending on whether they are 2D or 3D.</p>
+<p>Particle shaders are unique because they are not used to draw the object itself;
+they are used to calculate particle properties, which are then used by a
+<a class="reference internal" href="canvas_item_shader.html#doc-canvas-item-shader"><span class="std std-ref">CanvasItem</span></a> or <a class="reference internal" href="spatial_shader.html#doc-spatial-shader"><span class="std std-ref">Spatial</span></a>
+shader. They contain two processor functions: <code class="docutils literal notranslate"><span class="pre">start()</span></code> and <code class="docutils literal notranslate"><span class="pre">process()</span></code>.</p>
+<p>Unlike other shader types, particle shaders keep the data that was output the
+previous frame. Therefore, particle shaders can be used for complex effects that
+take place over multiple frames.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Particle shaders are only available with GPU-based particle nodes
+(<a class="reference internal" href="../../../classes/class_gpuparticles2d.html#class-gpuparticles2d"><span class="std std-ref">GPUParticles2D</span></a> and <a class="reference internal" href="../../../classes/class_gpuparticles3d.html#class-gpuparticles3d"><span class="std std-ref">GPUParticles3D</span></a>).</p>
+<p>CPU-based particle nodes (<a class="reference internal" href="../../../classes/class_cpuparticles2d.html#class-cpuparticles2d"><span class="std std-ref">CPUParticles2D</span></a> and
+<a class="reference internal" href="../../../classes/class_cpuparticles3d.html#class-cpuparticles3d"><span class="std std-ref">CPUParticles3D</span></a>) are <em>rendered</em> on the GPU (which means they can
+use custom CanvasItem or Spatial shaders), but their motion is <em>simulated</em>
+on the CPU.</p>
+</div>
+<section id="render-modes">
+<h2>Render modes<a class="headerlink" href="#render-modes" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Render mode</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>keep_data</strong></p></td>
+<td><p>Do not clear previous data on restart.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>disable_force</strong></p></td>
+<td><p>Disable attractor force.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>disable_velocity</strong></p></td>
+<td><p>Ignore <code class="docutils literal notranslate"><span class="pre">VELOCITY</span></code> value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>collision_use_scale</strong></p></td>
+<td><p>Scale the particle's size for collisions.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="built-ins">
+<h2>Built-ins<a class="headerlink" href="#built-ins" title="Link to this heading"></a></h2>
+<p>Values marked as <code class="docutils literal notranslate"><span class="pre">in</span></code> are read-only. Values marked as <code class="docutils literal notranslate"><span class="pre">out</span></code> can optionally be written to and will
+not necessarily contain sensible values. Values marked as <code class="docutils literal notranslate"><span class="pre">inout</span></code> provide a sensible default
+value, and can optionally be written to. Samplers cannot be written to so they are not marked.</p>
+</section>
+<section id="global-built-ins">
+<h2>Global built-ins<a class="headerlink" href="#global-built-ins" title="Link to this heading"></a></h2>
+<p>Global built-ins are available everywhere, including custom functions.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Built-in</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>in float <strong>TIME</strong></p></td>
+<td><p>Global time since the engine has started, in seconds. It repeats after every <code class="docutils literal notranslate"><span class="pre">3,600</span></code>
+seconds (which can be changed with the
+<a class="reference internal" href="../../../classes/class_projectsettings.html#class-projectsettings-property-rendering-limits-time-time-rollover-secs"><span class="std std-ref">rollover</span></a>
+setting). It's affected by
+<a class="reference internal" href="../../../classes/class_engine.html#class-engine-property-time-scale"><span class="std std-ref">time_scale</span></a> but not by pausing. If you need a
+<code class="docutils literal notranslate"><span class="pre">TIME</span></code> variable that is not affected by time scale, add your own
+<a class="reference internal" href="shading_language.html#doc-shading-language-global-uniforms"><span class="std std-ref">global shader uniform</span></a> and update it each
+frame.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in float <strong>PI</strong></p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">PI</span></code> constant (<code class="docutils literal notranslate"><span class="pre">3.141592</span></code>).
+The ratio of a circle's circumference to its diameter and the number of radians in a half turn.</p></td>
+</tr>
+<tr class="row-even"><td><p>in float <strong>TAU</strong></p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">TAU</span></code> constant (<code class="docutils literal notranslate"><span class="pre">6.283185</span></code>).
+Equivalent to <code class="docutils literal notranslate"><span class="pre">PI</span> <span class="pre">*</span> <span class="pre">2</span></code> and the number of radians in a full turn.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in float <strong>E</strong></p></td>
+<td><p>An <code class="docutils literal notranslate"><span class="pre">E</span></code> constant (<code class="docutils literal notranslate"><span class="pre">2.718281</span></code>). Euler's number, the base of the natural logarithm.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="start-and-process-built-ins">
+<h2>Start and Process built-ins<a class="headerlink" href="#start-and-process-built-ins" title="Link to this heading"></a></h2>
+<p>These properties can be accessed from both the <code class="docutils literal notranslate"><span class="pre">start()</span></code> and <code class="docutils literal notranslate"><span class="pre">process()</span></code> functions.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>in float <strong>LIFETIME</strong></p></td>
+<td><p>Particle lifetime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in float <strong>DELTA</strong></p></td>
+<td><p>Delta process time.</p></td>
+</tr>
+<tr class="row-even"><td><p>in uint <strong>NUMBER</strong></p></td>
+<td><p>Unique number since emission start.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in uint <strong>INDEX</strong></p></td>
+<td><p>Particle index (from total particles).</p></td>
+</tr>
+<tr class="row-even"><td><p>in mat4 <strong>EMISSION_TRANSFORM</strong></p></td>
+<td><p>Emitter transform (used for non-local systems).</p></td>
+</tr>
+<tr class="row-odd"><td><p>in uint <strong>RANDOM_SEED</strong></p></td>
+<td><p>Random seed used as base for random.</p></td>
+</tr>
+<tr class="row-even"><td><p>inout bool <strong>ACTIVE</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> when the particle is active, can be set to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>inout vec4 <strong>COLOR</strong></p></td>
+<td><p>Particle color, can be written to and accessed in the mesh's vertex function.</p></td>
+</tr>
+<tr class="row-even"><td><p>inout vec3 <strong>VELOCITY</strong></p></td>
+<td><p>Particle velocity, can be modified.</p></td>
+</tr>
+<tr class="row-odd"><td><p>inout mat4 <strong>TRANSFORM</strong></p></td>
+<td><p>Particle transform.</p></td>
+</tr>
+<tr class="row-even"><td><p>inout vec4 <strong>CUSTOM</strong></p></td>
+<td><p>Custom particle data. Accessible from the mesh's shader as <code class="docutils literal notranslate"><span class="pre">INSTANCE_CUSTOM</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>inout float <strong>MASS</strong></p></td>
+<td><p>Particle mass, intended to be used with attractors. <code class="docutils literal notranslate"><span class="pre">1.0</span></code> by default.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec4 <strong>USERDATAX</strong></p></td>
+<td><p>Vector that enables the integration of supplementary user-defined data into the particle process shader.
+<code class="docutils literal notranslate"><span class="pre">USERDATAX</span></code> are six built-ins identified by number, <code class="docutils literal notranslate"><span class="pre">X</span></code> can be numbers between 1 and 6, for example <code class="docutils literal notranslate"><span class="pre">USERDATA3</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in uint <strong>FLAG_EMIT_POSITION</strong></p></td>
+<td><p>A flag for the last argument of the <code class="docutils literal notranslate"><span class="pre">emit_subparticle()</span></code> function to assign a position to a new particle's transform.</p></td>
+</tr>
+<tr class="row-even"><td><p>in uint <strong>FLAG_EMIT_ROT_SCALE</strong></p></td>
+<td><p>A flag for the last argument of the <code class="docutils literal notranslate"><span class="pre">emit_subparticle()</span></code> function to assign a rotation and scale to a new particle's transform.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in uint <strong>FLAG_EMIT_VELOCITY</strong></p></td>
+<td><p>A flag for the last argument of the <code class="docutils literal notranslate"><span class="pre">emit_subparticle()</span></code> function to assign a velocity to a new particle.</p></td>
+</tr>
+<tr class="row-even"><td><p>in uint <strong>FLAG_EMIT_COLOR</strong></p></td>
+<td><p>A flag for the last argument of the <code class="docutils literal notranslate"><span class="pre">emit_subparticle()</span></code> function to assign a color to a new particle.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in uint <strong>FLAG_EMIT_CUSTOM</strong></p></td>
+<td><p>A flag for the last argument of the <code class="docutils literal notranslate"><span class="pre">emit_subparticle()</span></code> function to assign a custom data vector to a new particle.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec3 <strong>EMITTER_VELOCITY</strong></p></td>
+<td><p>Velocity of the <a class="reference internal" href="../../../classes/class_gpuparticles2d.html#class-gpuparticles2d"><span class="std std-ref">Particles2D</span></a> (<a class="reference internal" href="../../../classes/class_gpuparticles3d.html#class-gpuparticles3d"><span class="std std-ref">3D</span></a>) node.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in float <strong>INTERPOLATE_TO_END</strong></p></td>
+<td><p>Value of the <a class="reference internal" href="../../../classes/class_gpuparticles2d.html#class-gpuparticles2d-property-interp-to-end"><span class="std std-ref">interp_to_end</span></a>
+(<a class="reference internal" href="../../../classes/class_gpuparticles3d.html#class-gpuparticles3d-property-interp-to-end"><span class="std std-ref">3D</span></a>) property of the Particles node.</p></td>
+</tr>
+<tr class="row-even"><td><p>in uint <strong>AMOUNT_RATIO</strong></p></td>
+<td><p>Value of the <a class="reference internal" href="../../../classes/class_gpuparticles2d.html#class-gpuparticles2d-property-amount-ratio"><span class="std std-ref">amount_ratio</span></a>
+(<a class="reference internal" href="../../../classes/class_gpuparticles3d.html#class-gpuparticles3d-property-amount-ratio"><span class="std std-ref">3D</span></a>) property of the Particles node.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In order to use the <code class="docutils literal notranslate"><span class="pre">COLOR</span></code> variable in a StandardMaterial3D, set <code class="docutils literal notranslate"><span class="pre">vertex_color_use_as_albedo</span></code>
+to <code class="docutils literal notranslate"><span class="pre">true</span></code>. In a ShaderMaterial, access it with the <code class="docutils literal notranslate"><span class="pre">COLOR</span></code> variable.</p>
+</div>
+</section>
+<section id="start-built-ins">
+<h2>Start built-ins<a class="headerlink" href="#start-built-ins" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Built-in</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>in bool <strong>RESTART_POSITION</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if particle is restarted, or emitted without a custom position (i.e. this particle was created by <code class="docutils literal notranslate"><span class="pre">emit_subparticle()</span></code> without the <code class="docutils literal notranslate"><span class="pre">FLAG_EMIT_POSITION</span></code> flag).</p></td>
+</tr>
+<tr class="row-odd"><td><p>in bool <strong>RESTART_ROT_SCALE</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if particle is restarted, or emitted without a custom rotation or scale (i.e. this particle was created by <code class="docutils literal notranslate"><span class="pre">emit_subparticle()</span></code> without the <code class="docutils literal notranslate"><span class="pre">FLAG_EMIT_ROT_SCALE</span></code> flag).</p></td>
+</tr>
+<tr class="row-even"><td><p>in bool <strong>RESTART_VELOCITY</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if particle is restarted, or emitted without a custom velocity (i.e. this particle was created by <code class="docutils literal notranslate"><span class="pre">emit_subparticle()</span></code> without the <code class="docutils literal notranslate"><span class="pre">FLAG_EMIT_VELOCITY</span></code> flag).</p></td>
+</tr>
+<tr class="row-odd"><td><p>in bool <strong>RESTART_COLOR</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if particle is restarted, or emitted without a custom color (i.e. this particle was created by <code class="docutils literal notranslate"><span class="pre">emit_subparticle()</span></code> without the <code class="docutils literal notranslate"><span class="pre">FLAG_EMIT_COLOR</span></code> flag).</p></td>
+</tr>
+<tr class="row-even"><td><p>in bool <strong>RESTART_CUSTOM</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if particle is restarted, or emitted without a custom property (i.e. this particle was created by <code class="docutils literal notranslate"><span class="pre">emit_subparticle()</span></code> without the <code class="docutils literal notranslate"><span class="pre">FLAG_EMIT_CUSTOM</span></code> flag).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="process-built-ins">
+<h2>Process built-ins<a class="headerlink" href="#process-built-ins" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Built-in</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>in bool <strong>RESTART</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if the current process frame is the first for the particle.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in bool <strong>COLLIDED</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> when the particle has collided with a particle collider.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec3 <strong>COLLISION_NORMAL</strong></p></td>
+<td><p>A normal of the last collision. If there is no collision detected it is equal to <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>in float <strong>COLLISION_DEPTH</strong></p></td>
+<td><p>A length of the normal of the last collision. If there is no collision detected it is equal to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>in vec3 <strong>ATTRACTOR_FORCE</strong></p></td>
+<td><p>A combined force of the attractors at the moment on that particle.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="process-functions">
+<h2>Process functions<a class="headerlink" href="#process-functions" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">emit_subparticle()</span></code> is currently the only custom function supported by
+particle shaders. It allows users to add a new particle with specified
+parameters from a sub-emitter. The newly created particle will only use the
+properties that match the <code class="docutils literal notranslate"><span class="pre">flags</span></code> parameter. For example, the
+following code will emit a particle with a specified position, velocity, and
+color, but unspecified rotation, scale, and custom value:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">mat4</span><span class="w"> </span><span class="n">custom_transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">mat4</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+<span class="n">custom_transform</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">xyz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">10.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="p">);</span>
+<span class="n">emit_subparticle</span><span class="p">(</span><span class="n">custom_transform</span><span class="p">,</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="n">FLAG_EMIT_POSITION</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">FLAG_EMIT_VELOCITY</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">FLAG_EMIT_COLOR</span><span class="p">);</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>bool <strong>emit_subparticle</strong> (mat4 xform, vec3 velocity, vec4 color, vec4 custom, uint flags)</p></td>
+<td><p>Emits a particle from a sub-emitter.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="canvas_item_shader.html" class="btn btn-neutral float-left" title="CanvasItem shaders" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sky_shader.html" class="btn btn-neutral float-right" title="Sky shaders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

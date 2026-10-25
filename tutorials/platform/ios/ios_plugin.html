@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Creating iOS plugins" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/platform/ios/ios_plugin.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="This page explains what iOS plugins can do for you, how to use an existing plugin, and the steps to code a new one. iOS plugins allow you to use third-party libraries and support iOS-specific featu..." />
+<meta name="description" content="This page explains what iOS plugins can do for you, how to use an existing plugin, and the steps to code a new one. iOS plugins allow you to use third-party libraries and support iOS-specific featu..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Creating iOS plugins &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Web" href="../web/index.html" />
+    <link rel="prev" title="iOS plugins" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/platform/ios/ios_plugin" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/platform/ios/ios_plugin.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Platform-specific</a></li>
+          <li class="breadcrumb-item"><a href="index.html">iOS plugins</a></li>
+      <li class="breadcrumb-item active">Creating iOS plugins</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/platform/ios/ios_plugin.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+    <div class="admonition attention article-status">
+      <p class="first admonition-title">Work in progress</p>
+      <p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.7</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+    </div>
+    
+  </div>
+  
+
+  
+  <section id="creating-ios-plugins">
+<span id="doc-ios-plugin"></span><h1>Creating iOS plugins<a class="headerlink" href="#creating-ios-plugins" title="Link to this heading"></a></h1>
+<p>This page explains what iOS plugins can do for you, how to use an existing plugin, and the steps to code a new one.</p>
+<p>iOS plugins allow you to use third-party libraries and support iOS-specific features like In-App Purchases, GameCenter integration, ARKit support, and more.</p>
+<section id="loading-and-using-an-existing-plugin">
+<h2>Loading and using an existing plugin<a class="headerlink" href="#loading-and-using-an-existing-plugin" title="Link to this heading"></a></h2>
+<p>An iOS plugin requires a <code class="docutils literal notranslate"><span class="pre">.gdip</span></code> configuration file, a binary file which can be either <code class="docutils literal notranslate"><span class="pre">.a</span></code> static library or <code class="docutils literal notranslate"><span class="pre">.xcframework</span></code> containing <code class="docutils literal notranslate"><span class="pre">.a</span></code> static libraries, and possibly other dependencies. To use it, you need to:</p>
+<ol class="arabic simple">
+<li><p>Copy the plugin's files to your Godot project's <code class="docutils literal notranslate"><span class="pre">res://ios/plugins</span></code> directory. You can also group files in a sub-directory, like <code class="docutils literal notranslate"><span class="pre">res://ios/plugins/my_plugin</span></code>.</p></li>
+<li><p>The Godot editor automatically detects and imports <code class="docutils literal notranslate"><span class="pre">.gdip</span></code> files inside <code class="docutils literal notranslate"><span class="pre">res://ios/plugins</span></code> and its subdirectories.</p></li>
+<li><p>You can find and activate detected plugins by going to Project -&gt; Export... -&gt; iOS and in the Options tab, scrolling to the Plugins section.</p></li>
+</ol>
+<img alt="../../../_images/ios_export_preset_plugins_section.png" src="../../../_images/ios_export_preset_plugins_section.png" />
+<p>When a plugin is active, you can access it in your code using <code class="docutils literal notranslate"><span class="pre">Engine.get_singleton()</span></code>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">has_singleton</span><span class="p">(</span><span class="s2">&quot;MyPlugin&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">singleton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">get_singleton</span><span class="p">(</span><span class="s2">&quot;MyPlugin&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">singleton</span><span class="o">.</span><span class="nf">foo</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The plugin's files have to be in the <code class="docutils literal notranslate"><span class="pre">res://ios/plugins/</span></code> directory or a subdirectory, otherwise the Godot editor will not automatically detect them.</p>
+</div>
+</section>
+<section id="creating-an-ios-plugin">
+<h2>Creating an iOS plugin<a class="headerlink" href="#creating-an-ios-plugin" title="Link to this heading"></a></h2>
+<p>At its core, a Godot iOS plugin is an iOS library (<em>.a</em> archive file or <em>.xcframework</em> containing static libraries) with the following requirements:</p>
+<ul class="simple">
+<li><p>The library must have a dependency on the Godot engine headers.</p></li>
+<li><p>The library must come with a <code class="docutils literal notranslate"><span class="pre">.gdip</span></code> configuration file.</p></li>
+</ul>
+<p>An iOS plugin can have the same functionality as a Godot module but provides more flexibility and doesn't require to rebuild the engine.</p>
+<p>Here are the steps to get a plugin's development started. We recommend using <a class="reference external" href="https://developer.apple.com/develop/">Xcode</a> as your development environment.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The <a class="reference external" href="https://github.com/godotengine/godot-ios-plugins">Godot iOS Plugins</a>.</p>
+<p>The <a class="reference external" href="https://github.com/naithar/godot_ios_plugin">Godot iOS plugin template</a> gives you all the boilerplate you need to get your iOS plugin started.</p>
+</div>
+<p>To build an iOS plugin:</p>
+<ol class="arabic">
+<li><p>Create an Objective-C static library for your plugin inside Xcode.</p></li>
+<li><p>Add the Godot engine header files as a dependency for your plugin library in <code class="docutils literal notranslate"><span class="pre">HEADER_SEARCH_PATHS</span></code>. You can find the setting inside the <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">Settings</span></code> tab:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Download the Godot engine source from the <a class="reference external" href="https://github.com/godotengine/godot">Godot GitHub page</a>.</p></li>
+<li><p>Run SCons to generate headers. You can learn the process by reading <a class="reference internal" href="../../../engine_details/development/compiling/compiling_for_ios.html#doc-compiling-for-ios"><span class="std std-ref">Compiling for iOS</span></a>. You don't have to wait for compilation to complete to move forward as headers are generated before the engine starts to compile.</p></li>
+<li><p>You should use the same header files for iOS plugins and for the iOS export template.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">Settings</span></code> tab, specify the compilation flags for your static library in <code class="docutils literal notranslate"><span class="pre">OTHER_CFLAGS</span></code>. The most important ones are <code class="docutils literal notranslate"><span class="pre">-fcxx-modules</span></code>, <code class="docutils literal notranslate"><span class="pre">-fmodules</span></code>, and <code class="docutils literal notranslate"><span class="pre">-DDEBUG</span></code> if you need debug support. Other flags should be the same you use to compile Godot. For instance:</p></li>
+</ol>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">DPTRCALL_ENABLED</span><span class="w"> </span><span class="o">-</span><span class="n">DDEBUG_ENABLED</span><span class="w"> </span><span class="o">-</span><span class="n">DDEBUG_MEMORY_ALLOC</span><span class="w"> </span><span class="o">-</span><span class="n">DDISABLE_FORCED_INLINE</span><span class="w"> </span><span class="o">-</span><span class="n">DTYPED_METHOD_BIND</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Add the required logic for your plugin and build your library to generate a <code class="docutils literal notranslate"><span class="pre">.a</span></code> file. You will probably need to build both <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">release</span></code> target <code class="docutils literal notranslate"><span class="pre">.a</span></code> files. Depending on your needs, pick either or both. If you need both debug and release <code class="docutils literal notranslate"><span class="pre">.a</span></code> files, their name should match following pattern: <code class="docutils literal notranslate"><span class="pre">[PluginName].[TargetType].a</span></code>. You can also build the static library with your SCons configuration.</p></li>
+<li><p>The iOS plugin system also supports <code class="docutils literal notranslate"><span class="pre">.xcframework</span></code> files. To generate one, you can use a command such as:</p></li>
+</ol>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">xcodebuild</span><span class="w"> </span><span class="o">-</span><span class="n">create</span><span class="o">-</span><span class="n">xcframework</span><span class="w"> </span><span class="o">-</span><span class="n">library</span><span class="w"> </span><span class="p">[</span><span class="nc">DeviceLibrary</span><span class="p">]</span><span class="o">.</span><span class="vi">a</span><span class="w"> </span><span class="o">-</span><span class="n">library</span><span class="w"> </span><span class="p">[</span><span class="nc">SimulatorLibrary</span><span class="p">]</span><span class="o">.</span><span class="vi">a</span><span class="w"> </span><span class="o">-</span><span class="n">output</span><span class="w"> </span><span class="p">[</span><span class="nc">PluginName</span><span class="p">]</span><span class="o">.</span><span class="vi">xcframework</span>
+</pre></div>
+</div>
+<ol class="arabic" start="6">
+<li><p>Create a Godot iOS Plugin configuration file to help the system detect and load your plugin:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The configuration file extension must be <code class="docutils literal notranslate"><span class="pre">gdip</span></code> (e.g.: <code class="docutils literal notranslate"><span class="pre">MyPlugin.gdip</span></code>).</p></li>
+<li><p>The configuration file format is as follow:</p></li>
+</ul>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">config</span><span class="p">]</span>
+<span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyPlugin&quot;</span>
+<span class="n">binary</span><span class="o">=</span><span class="s2">&quot;MyPlugin.a&quot;</span>
+
+<span class="n">initialization</span><span class="o">=</span><span class="s2">&quot;init_my_plugin&quot;</span>
+<span class="n">deinitialization</span><span class="o">=</span><span class="s2">&quot;deinit_my_plugin&quot;</span>
+
+<span class="p">[</span><span class="n">dependencies</span><span class="p">]</span>
+<span class="n">linked</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">embedded</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">system</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Foundation.framework&quot;</span><span class="p">]</span>
+
+<span class="n">capabilities</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;arkit&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;metal&quot;</span><span class="p">]</span>
+
+<span class="n">files</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;data.json&quot;</span><span class="p">]</span>
+
+<span class="n">linker_flags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-ObjC&quot;</span><span class="p">]</span>
+
+<span class="p">[</span><span class="n">plist</span><span class="p">]</span>
+<span class="nc">PlistKeyWithDefaultType</span><span class="o">=</span><span class="s2">&quot;Some Info.plist key you might need&quot;</span>
+<span class="nc">StringPlistKey</span><span class="p">:</span><span class="n">string</span><span class="o">=</span><span class="s2">&quot;String value&quot;</span>
+<span class="nc">IntegerPlistKey</span><span class="p">:</span><span class="n">integer</span><span class="o">=</span><span class="mi">42</span>
+<span class="nc">BooleanPlistKey</span><span class="p">:</span><span class="n">boolean</span><span class="o">=</span><span class="l">true</span>
+<span class="nc">RawPlistKey</span><span class="p">:</span><span class="n">raw</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="o">&lt;</span><span class="n">array</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="n">UIInterfaceOrientationPortrait</span><span class="o">&lt;/</span><span class="n">string</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">array</span><span class="o">&gt;</span>
+<span class="s2">&quot;</span>
+<span class="nc">StringPlistKeyToInput</span><span class="p">:</span><span class="n">string_input</span><span class="o">=</span><span class="s2">&quot;Type something&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">config</span></code> section and fields are required and defined as follow:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>name</strong>: name of the plugin</p></li>
+<li><p><strong>binary</strong>: this should be the filepath of the plugin library (<code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">xcframework</span></code>) file.</p>
+<ul>
+<li><p>The filepath can be relative (e.g.: <code class="docutils literal notranslate"><span class="pre">MyPlugin.a</span></code>, <code class="docutils literal notranslate"><span class="pre">MyPlugin.xcframework</span></code>) in which case it's relative to the directory where the <code class="docutils literal notranslate"><span class="pre">gdip</span></code> file is located.</p></li>
+<li><p>The filepath can be absolute: <code class="docutils literal notranslate"><span class="pre">res://some_path/MyPlugin.a</span></code> or <code class="docutils literal notranslate"><span class="pre">res://some_path/MyPlugin.xcframework</span></code>.</p></li>
+<li><p>In case you need multitarget library usage, the filename should be <code class="docutils literal notranslate"><span class="pre">MyPlugin.a</span></code> and <code class="docutils literal notranslate"><span class="pre">.a</span></code> files should be named as <code class="docutils literal notranslate"><span class="pre">MyPlugin.release.a</span></code> and <code class="docutils literal notranslate"><span class="pre">MyPlugin.debug.a</span></code>.</p></li>
+<li><p>In case you use multitarget <code class="docutils literal notranslate"><span class="pre">xcframework</span></code> libraries, their filename in the configuration should be <code class="docutils literal notranslate"><span class="pre">MyPlugin.xcframework</span></code>. The <code class="docutils literal notranslate"><span class="pre">.xcframework</span></code> files should be named as <code class="docutils literal notranslate"><span class="pre">MyPlugin.release.xcframework</span></code> and <code class="docutils literal notranslate"><span class="pre">MyPlugin.debug.xcframework</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> and <code class="docutils literal notranslate"><span class="pre">plist</span></code> sections are optional and defined as follow:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>dependencies</strong>:</p>
+<ul>
+<li><p><strong>linked</strong>: contains a list of iOS frameworks that the iOS application should be linked with.</p></li>
+<li><p><strong>embedded</strong>: contains a list of iOS frameworks or libraries that should be both linked and embedded into the resulting iOS application.</p></li>
+<li><p><strong>system</strong>: contains a list of iOS system frameworks that are required for plugin.</p></li>
+<li><p><strong>capabilities</strong>: contains a list of iOS capabilities that is required for plugin. A list of available capabilities can be found at <a class="reference external" href="https://developer.apple.com/documentation/bundleresources/information_property_list/uirequireddevicecapabilities">Apple UIRequiredDeviceCapabilities documentation page</a>.</p></li>
+<li><p><strong>files</strong>: contains a list of files that should be copied on export. This is useful for data files or images.</p></li>
+<li><p><strong>linker_flags</strong>: contains a list of linker flags to add to the Xcode project when exporting the plugin.</p></li>
+</ul>
+</li>
+<li><p><strong>plist</strong>: should have keys and values that should be present in <code class="docutils literal notranslate"><span class="pre">Info.plist</span></code> file.</p>
+<ul>
+<li><p>Each line should follow pattern: <code class="docutils literal notranslate"><span class="pre">KeyName:KeyType=KeyValue</span></code></p></li>
+<li><p>Supported values for <code class="docutils literal notranslate"><span class="pre">KeyType</span></code> are <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">integer</span></code>, <code class="docutils literal notranslate"><span class="pre">boolean</span></code>, <code class="docutils literal notranslate"><span class="pre">raw</span></code>, <code class="docutils literal notranslate"><span class="pre">string_input</span></code></p></li>
+<li><p>If no type is used (e.g.: <code class="docutils literal notranslate"><span class="pre">KeyName=&quot;KeyValue&quot;</span></code>) <code class="docutils literal notranslate"><span class="pre">string</span></code> type will be used.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">raw</span></code> type is used value for corresponding key will be stored in <code class="docutils literal notranslate"><span class="pre">Info.plist</span></code> as is.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">string_input</span></code> type is used you will be able to modify value in Export window.</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="iOS plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../web/index.html" class="btn btn-neutral float-right" title="Web" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

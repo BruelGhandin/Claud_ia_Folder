@@ -1,0 +1,743 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Physics introduction" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/physics/physics_introduction.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="In game development, you often need to know when two objects in the game intersect or come into contact. This is known as collision detection. When a collision is detected, you typically want somet..." />
+<meta name="description" content="In game development, you often need to know when two objects in the game intersect or come into contact. This is known as collision detection. When a collision is detected, you typically want somet..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Physics introduction &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using Jolt Physics" href="using_jolt_physics.html" />
+    <link rel="prev" title="Physics" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/physics/physics_introduction" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/physics/physics_introduction.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Physics</a></li>
+      <li class="breadcrumb-item active">Physics introduction</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/physics/physics_introduction.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="physics-introduction">
+<span id="doc-physics-introduction"></span><h1>Physics introduction<a class="headerlink" href="#physics-introduction" title="Link to this heading"></a></h1>
+<p>In game development, you often need to know when two objects in the game
+intersect or come into contact. This is known as <strong>collision detection</strong>.
+When a collision is detected, you typically want something to happen. This
+is known as <strong>collision response</strong>.</p>
+<p>Godot offers a number of collision objects in 2D and 3D to provide both collision detection
+and response. Trying to decide which one to use for your project can be confusing.
+You can avoid problems and simplify development if you understand how each works
+and what their pros and cons are.</p>
+<p>In this guide, you will learn:</p>
+<ul class="simple">
+<li><p>Godot's four collision object types</p></li>
+<li><p>How each collision object works</p></li>
+<li><p>When and why to choose one type over another</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This document's examples will use 2D objects. Every 2D physics object
+and collision shape has a direct equivalent in 3D and in most cases
+they work in much the same way.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Physics in Godot, regardless of physics engine, is <strong>not</strong> deterministic,
+the nature of physics engine determinism is very complex and has to do with many factors,
+this means physics is not guaranteed to run the same way for seemingly identical situations.</p>
+</div>
+<section id="collision-objects">
+<h2>Collision objects<a class="headerlink" href="#collision-objects" title="Link to this heading"></a></h2>
+<p>Godot offers four kinds of collision objects which all extend <a class="reference internal" href="../../classes/class_collisionobject2d.html#class-collisionobject2d"><span class="std std-ref">CollisionObject2D</span></a>.
+The last three listed below are physics bodies and additionally extend <a class="reference internal" href="../../classes/class_physicsbody2d.html#class-physicsbody2d"><span class="std std-ref">PhysicsBody2D</span></a>.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference internal" href="../../classes/class_area2d.html#class-area2d"><span class="std std-ref">Area2D</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">Area2D</span></code> nodes provide <strong>detection</strong> and <strong>influence</strong>. They can detect when
+objects overlap and can emit signals when bodies enter or exit. An <code class="docutils literal notranslate"><span class="pre">Area2D</span></code>
+can also be used to override physics properties, such as gravity or damping,
+in a defined area.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="../../classes/class_staticbody2d.html#class-staticbody2d"><span class="std std-ref">StaticBody2D</span></a></dt><dd><p>A static body is one that is not moved by the physics engine. It participates
+in collision detection, but does not move in response to the collision. They
+are most often used for objects that are part of the environment or that do
+not need to have any dynamic behavior.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="../../classes/class_rigidbody2d.html#class-rigidbody2d"><span class="std std-ref">RigidBody2D</span></a></dt><dd><p>This is the node that implements simulated 2D physics. You do not control a
+<code class="docutils literal notranslate"><span class="pre">RigidBody2D</span></code> directly, but instead you apply forces to it (gravity, impulses,
+etc.) and the physics engine calculates the resulting movement.
+<a class="reference internal" href="rigid_body.html#doc-rigid-body"><span class="std std-ref">Read more about using rigid bodies.</span></a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="../../classes/class_characterbody2d.html#class-characterbody2d"><span class="std std-ref">CharacterBody2D</span></a></dt><dd><p>A body that provides collision detection, but no physics. All movement and
+collision response must be implemented in code.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<section id="physics-material">
+<h3>Physics material<a class="headerlink" href="#physics-material" title="Link to this heading"></a></h3>
+<p>Static bodies and rigid bodies can be configured to use a <a class="reference internal" href="../../classes/class_physicsmaterial.html#class-physicsmaterial"><span class="std std-ref">PhysicsMaterial</span></a>. This allows adjusting the friction and bounce of an object,
+and set if it's absorbent and/or rough.</p>
+</section>
+<section id="collision-shapes">
+<h3>Collision shapes<a class="headerlink" href="#collision-shapes" title="Link to this heading"></a></h3>
+<p>A physics body can hold any number of <a class="reference internal" href="../../classes/class_shape2d.html#class-shape2d"><span class="std std-ref">Shape2D</span></a> objects
+as children. These shapes are used to define the object's collision bounds
+and to detect contact with other objects.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In order to detect collisions, at least one <code class="docutils literal notranslate"><span class="pre">Shape2D</span></code> must be
+assigned to the object.</p>
+</div>
+<p>The most common way to assign a shape is by adding a <a class="reference internal" href="../../classes/class_collisionshape2d.html#class-collisionshape2d"><span class="std std-ref">CollisionShape2D</span></a>
+or <a class="reference internal" href="../../classes/class_collisionpolygon2d.html#class-collisionpolygon2d"><span class="std std-ref">CollisionPolygon2D</span></a> as a child of the object.
+These nodes allow you to draw the shape directly in the editor workspace.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Be careful to never scale your collision shapes in the editor.
+The &quot;Scale&quot; property in the Inspector should remain <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1)</span></code>. When changing
+the size of the collision shape, you should always use the size handles, <strong>not</strong>
+the <code class="docutils literal notranslate"><span class="pre">Node2D</span></code> scale handles. Scaling a shape can result in unexpected
+collision behavior.</p>
+</div>
+<img alt="../../_images/player_coll_shape.webp" src="../../_images/player_coll_shape.webp" />
+</section>
+<section id="physics-process-callback">
+<h3>Physics process callback<a class="headerlink" href="#physics-process-callback" title="Link to this heading"></a></h3>
+<p>The physics engine runs at a fixed rate (a default of 60 iterations per second). This rate
+is typically different from the frame rate which fluctuates based on what is rendered and
+available resources.</p>
+<p>It is important that all physics related code runs at this fixed rate. Therefore Godot
+differentiates <a class="reference internal" href="../scripting/idle_and_physics_processing.html#doc-idle-and-physics-processing"><span class="std std-ref">between physics and idle processing</span></a>.
+Code that runs each frame is called idle processing and code that runs on each physics
+tick is called physics processing. Godot provides two different callbacks, one for each
+of those processing rates.</p>
+<p>The physics callback, <a class="reference internal" href="../../classes/class_node.html#class-node-private-method-physics-process"><span class="std std-ref">Node._physics_process()</span></a>,
+is called before each physics step. Any code that needs to access a body's properties should
+be run in here. This method will be passed a <code class="docutils literal notranslate"><span class="pre">delta</span></code>
+parameter, which is a floating-point number equal to the time passed in
+<em>seconds</em> since the last step. When using the default 60 Hz physics update rate,
+it will typically be equal to <code class="docutils literal notranslate"><span class="pre">0.01666...</span></code> (but not always, see below).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It's recommended to always use the <code class="docutils literal notranslate"><span class="pre">delta</span></code> parameter when relevant in your
+physics calculations, so that the game behaves correctly if you change the
+physics update rate or if the player's device can't keep up.</p>
+</div>
+</section>
+<section id="collision-layers-and-masks">
+<span id="doc-physics-introduction-collision-layers-and-masks"></span><h3>Collision layers and masks<a class="headerlink" href="#collision-layers-and-masks" title="Link to this heading"></a></h3>
+<p>One of the most powerful, but frequently misunderstood, collision features
+is the collision layer system. This system allows you to build up complex
+interactions between a variety of objects. The key concepts are <strong>layers</strong>
+and <strong>masks</strong>. Each <code class="docutils literal notranslate"><span class="pre">CollisionObject2D</span></code> has 32 different physics layers
+it can interact with.</p>
+<p>Let's look at each of the properties in turn:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>collision_layer</dt><dd><p>This describes the layers that the object appears <strong>in</strong>. By default, all
+bodies are on layer <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>collision_mask</dt><dd><p>This describes what layers the body will <strong>scan</strong> for collisions. If an
+object isn't in one of the mask layers, the body will ignore it. By default,
+all bodies scan layer <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>These properties can be configured via code, or by editing them in the Inspector.</p>
+<p>Keeping track of what you're using each layer for can be difficult, so you
+may find it useful to assign names to the layers you're using. Names can
+be assigned in <strong>Project Settings &gt; Layer Names &gt; 2D Physics</strong>.</p>
+<img alt="../../_images/physics_layer_names.webp" src="../../_images/physics_layer_names.webp" />
+<section id="gui-example">
+<h4>GUI example<a class="headerlink" href="#gui-example" title="Link to this heading"></a></h4>
+<p>You have four node types in your game: Walls, Player, Enemy, and Coin. Both
+Player and Enemy should collide with Walls. The Player node should detect
+collisions with both Enemy and Coin, but Enemy and Coin should ignore each
+other.</p>
+<p>Start by naming layers 1-4 &quot;walls&quot;, &quot;player&quot;, &quot;enemies&quot;, and &quot;coins&quot; and
+place each node type in its respective layer using the &quot;Layer&quot; property.
+Then set each node's &quot;Mask&quot; property by selecting the layers it should
+interact with. For example, the Player's settings would look like this:</p>
+<img alt="../../_images/player_collision_layers.webp" src="../../_images/player_collision_layers.webp" />
+<img alt="../../_images/player_collision_mask.webp" src="../../_images/player_collision_mask.webp" />
+</section>
+<section id="code-example">
+<span id="doc-physics-introduction-collision-layer-code-example"></span><h4>Code example<a class="headerlink" href="#code-example" title="Link to this heading"></a></h4>
+<p>In function calls, layers are specified as a bitmask. Where a function enables
+all layers by default, the layer mask will be given as <code class="docutils literal notranslate"><span class="pre">0xffffffff</span></code>. Your code
+can use binary, hexadecimal, or decimal notation for layer masks, depending
+on your preference.</p>
+<p>The code equivalent of the above example where layers 1, 3 and 4 were enabled
+would be as follows:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Setting mask value for enabling layers 1, 3 and 4</span>
+
+<span class="c1"># Binary - set the bit corresponding to the layers you want to enable (1, 3, and 4) to 1, set all other bits to 0.</span>
+<span class="c1"># Note: Layer 32 is the first bit, layer 1 is the last. The mask for layers 4, 3 and 1 is therefore:</span>
+<span class="mb">0b00000000_00000000_00000000_00001101</span>
+<span class="c1"># (This can be shortened to 0b1101)</span>
+
+<span class="c1"># Hexadecimal equivalent (1101 binary converted to hexadecimal).</span>
+<span class="mh">0x000d</span>
+<span class="c1"># (This value can be shortened to 0xd.)</span>
+
+<span class="c1"># Decimal - Add the results of 2 to the power of (layer to be enabled - 1).</span>
+<span class="c1"># (2^(1-1)) + (2^(3-1)) + (2^(4-1)) = 1 + 4 + 8 = 13</span>
+<span class="c1">#</span>
+<span class="c1"># We can use the `&lt;&lt;` operator to shift the bit to the left by the layer number we want to enable.</span>
+<span class="c1"># This is a faster way to multiply by powers of 2 than `pow()`.</span>
+<span class="c1"># Additionally, we use the `|` (binary OR) operator to combine the results of each layer.</span>
+<span class="c1"># This ensures we don&#39;t add the same layer multiple times, which would behave incorrectly.</span>
+<span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># The above can alternatively be written as:</span>
+<span class="c1"># pow(2, 1 - 1) + pow(2, 3 - 1) + pow(2, 4 - 1)</span>
+</pre></div>
+</div>
+<p>You can also set bits independently by calling <code class="docutils literal notranslate"><span class="pre">set_collision_layer_value(layer_number,</span> <span class="pre">value)</span></code>
+or <code class="docutils literal notranslate"><span class="pre">set_collision_mask_value(layer_number,</span> <span class="pre">value)</span></code> on any given <a class="reference internal" href="../../classes/class_collisionobject2d.html#class-collisionobject2d"><span class="std std-ref">CollisionObject2D</span></a> as follows:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Setting mask value to enable layers 1, 3, and 4.</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">collider</span><span class="p">:</span><span class="w"> </span><span class="nb">CollisionObject2D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$CollisionObject2D</span><span class="w">  </span><span class="c1"># Any given collider.</span>
+<span class="n">collider</span><span class="o">.</span><span class="nf">set_collision_mask_value</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+<span class="n">collider</span><span class="o">.</span><span class="nf">set_collision_mask_value</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+<span class="n">collider</span><span class="o">.</span><span class="nf">set_collision_mask_value</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Export annotations can be used to export bitmasks in the editor with a user-friendly GUI:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@export_flags_2d_physics</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">layers_2d_physics</span>
+</pre></div>
+</div>
+<p>Additional export annotations are available for render and navigation layers, in both 2D and 3D. See <a class="reference internal" href="../scripting/gdscript/gdscript_exports.html#doc-gdscript-exports-exporting-bit-flags"><span class="std std-ref">Exporting bit flags</span></a>.</p>
+</section>
+</section>
+</section>
+<section id="area2d">
+<h2>Area2D<a class="headerlink" href="#area2d" title="Link to this heading"></a></h2>
+<p>Area nodes provide <strong>detection</strong> and <strong>influence</strong>. They can detect when
+objects overlap and emit signals when bodies enter or exit. Areas can also
+be used to override physics properties, such as gravity or damping, in a
+defined area.</p>
+<p>There are three main uses for <a class="reference internal" href="../../classes/class_area2d.html#class-area2d"><span class="std std-ref">Area2D</span></a>:</p>
+<ul class="simple">
+<li><p>Overriding physics parameters (such as gravity) in a given region.</p></li>
+<li><p>Detecting when other bodies enter or exit a region or what bodies are currently in a region.</p></li>
+<li><p>Checking other areas for overlap.</p></li>
+</ul>
+<p>By default, areas also receive mouse and touchscreen input.</p>
+</section>
+<section id="staticbody2d">
+<h2>StaticBody2D<a class="headerlink" href="#staticbody2d" title="Link to this heading"></a></h2>
+<p>A static body is one that is not moved by the physics engine. It participates
+in collision detection, but does not move in response to the collision. However,
+it can impart motion or rotation to a colliding body <strong>as if</strong> it were moving,
+using its <code class="docutils literal notranslate"><span class="pre">constant_linear_velocity</span></code> and <code class="docutils literal notranslate"><span class="pre">constant_angular_velocity</span></code> properties.</p>
+<p><code class="docutils literal notranslate"><span class="pre">StaticBody2D</span></code> nodes are most often used for objects that are part of the environment
+or that do not need to have any dynamic behavior.</p>
+<p>Example uses for <code class="docutils literal notranslate"><span class="pre">StaticBody2D</span></code>:</p>
+<ul class="simple">
+<li><p>Platforms (including moving platforms)</p></li>
+<li><p>Conveyor belts</p></li>
+<li><p>Walls and other obstacles</p></li>
+</ul>
+</section>
+<section id="rigidbody2d">
+<h2>RigidBody2D<a class="headerlink" href="#rigidbody2d" title="Link to this heading"></a></h2>
+<p>This is the node that implements simulated 2D physics. You do not control a
+<a class="reference internal" href="../../classes/class_rigidbody2d.html#class-rigidbody2d"><span class="std std-ref">RigidBody2D</span></a> directly. Instead, you apply forces
+to it and the physics engine calculates the resulting movement, including
+collisions with other bodies, and collision responses, such as bouncing,
+rotating, etc.</p>
+<p>You can modify a rigid body's behavior via properties such as &quot;Mass&quot;,
+&quot;Friction&quot;, or &quot;Bounce&quot;, which can be set in the Inspector.</p>
+<p>The body's behavior is also affected by the world's properties, as set in
+<strong>Project Settings &gt; Physics</strong>, or by entering an <a class="reference internal" href="../../classes/class_area2d.html#class-area2d"><span class="std std-ref">Area2D</span></a>
+that is overriding the global physics properties.</p>
+<p>When a rigid body is at rest and hasn't moved for a while, it goes to sleep.
+A sleeping body acts like a static body, and its forces are not calculated by
+the physics engine. The body will wake up when forces are applied, either by
+a collision or via code.</p>
+<section id="using-rigidbody2d">
+<h3>Using RigidBody2D<a class="headerlink" href="#using-rigidbody2d" title="Link to this heading"></a></h3>
+<p>One of the benefits of using a rigid body is that a lot of behavior can be had
+&quot;for free&quot; without writing any code. For example, if you were making an
+&quot;Angry Birds&quot;-style game with falling blocks, you would only need to create
+RigidBody2Ds and adjust their properties. Stacking, falling, and bouncing would
+automatically be calculated by the physics engine.</p>
+<p>However, if you do wish to have some control over the body, you should take
+care - altering the <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">linear_velocity</span></code>, or other physics properties
+of a rigid body can result in unexpected behavior. If you need to alter any
+of the physics-related properties, you should use the <a class="reference internal" href="../../classes/class_rigidbody2d.html#class-rigidbody2d-private-method-integrate-forces"><span class="std std-ref">_integrate_forces()</span></a>
+callback instead of <code class="docutils literal notranslate"><span class="pre">_physics_process()</span></code>. In this callback, you have access
+to the body's <a class="reference internal" href="../../classes/class_physicsdirectbodystate2d.html#class-physicsdirectbodystate2d"><span class="std std-ref">PhysicsDirectBodyState2D</span></a>,
+which allows for safely changing properties and synchronizing them with
+the physics engine.</p>
+<p>For example, here is the code for an &quot;Asteroids&quot; style spaceship:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">RigidBody2D</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">thrust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">250</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">torque</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20000</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_integrate_forces</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;ui_up&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="n">state</span><span class="o">.</span><span class="nf">apply_force</span><span class="p">(</span><span class="n">thrust</span><span class="o">.</span><span class="nf">rotated</span><span class="p">(</span><span class="n">rotation</span><span class="p">))</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="n">state</span><span class="o">.</span><span class="nf">apply_force</span><span class="p">(</span><span class="nb nb-Type">Vector2</span><span class="p">())</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">rotation_direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;ui_right&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="n">rotation_direction</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">&quot;ui_left&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="n">rotation_direction</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">state</span><span class="o">.</span><span class="nf">apply_torque</span><span class="p">(</span><span class="n">rotation_direction</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">torque</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Spaceship</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RigidBody2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Vector2</span><span class="w"> </span><span class="n">_thrust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">250</span><span class="p">);</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_torque</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20000</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_IntegrateForces</span><span class="p">(</span><span class="n">PhysicsDirectBodyState2D</span><span class="w"> </span><span class="n">state</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_up&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">state</span><span class="p">.</span><span class="n">ApplyForce</span><span class="p">(</span><span class="n">_thrust</span><span class="p">.</span><span class="n">Rotated</span><span class="p">(</span><span class="n">Rotation</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">state</span><span class="p">.</span><span class="n">ApplyForce</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">rotationDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_right&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">rotationDir</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_left&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">rotationDir</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">state</span><span class="p">.</span><span class="n">ApplyTorque</span><span class="p">(</span><span class="n">rotationDir</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_torque</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Note that we are not setting the <code class="docutils literal notranslate"><span class="pre">linear_velocity</span></code> or <code class="docutils literal notranslate"><span class="pre">angular_velocity</span></code>
+properties directly, but rather applying forces (<code class="docutils literal notranslate"><span class="pre">thrust</span></code> and <code class="docutils literal notranslate"><span class="pre">torque</span></code>) to
+the body and letting the physics engine calculate the resulting movement.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When a rigid body goes to sleep, the <code class="docutils literal notranslate"><span class="pre">_integrate_forces()</span></code>
+function will not be called. To override this behavior, you will
+need to keep the body awake by creating a collision, applying a
+force to it, or by disabling the <a class="reference internal" href="../../classes/class_rigidbody2d.html#class-rigidbody2d-property-can-sleep"><span class="std std-ref">can_sleep</span></a>
+property. Be aware that this can have a negative effect on performance.</p>
+</div>
+</section>
+<section id="contact-reporting">
+<h3>Contact reporting<a class="headerlink" href="#contact-reporting" title="Link to this heading"></a></h3>
+<p>By default, rigid bodies do not keep track of contacts, because this can
+require a huge amount of memory if many bodies are in the scene. To enable
+contact reporting, set the <a class="reference internal" href="../../classes/class_rigidbody2d.html#class-rigidbody2d-property-max-contacts-reported"><span class="std std-ref">max_contacts_reported</span></a>
+property to a non-zero value. The contacts can then be obtained via
+<a class="reference internal" href="../../classes/class_physicsdirectbodystate2d.html#class-physicsdirectbodystate2d-method-get-contact-count"><span class="std std-ref">PhysicsDirectBodyState2D.get_contact_count()</span></a>
+and related functions.</p>
+<p>Contact monitoring via signals can be enabled via the <a class="reference internal" href="../../classes/class_rigidbody2d.html#class-rigidbody2d-property-contact-monitor"><span class="std std-ref">contact_monitor</span></a>
+property. See <a class="reference internal" href="../../classes/class_rigidbody2d.html#class-rigidbody2d"><span class="std std-ref">RigidBody2D</span></a> for the list of available
+signals.</p>
+</section>
+</section>
+<section id="characterbody2d">
+<h2>CharacterBody2D<a class="headerlink" href="#characterbody2d" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../../classes/class_characterbody2d.html#class-characterbody2d"><span class="std std-ref">CharacterBody2D</span></a> bodies detect collisions with
+other bodies, but are not affected by physics properties like gravity or friction.
+Instead, they must be controlled by the user via code. The physics engine will
+not move a character body.</p>
+<p>When moving a character body, you should not set its <code class="docutils literal notranslate"><span class="pre">position</span></code> directly.
+Instead, you use the <code class="docutils literal notranslate"><span class="pre">move_and_collide()</span></code> or <code class="docutils literal notranslate"><span class="pre">move_and_slide()</span></code> methods.
+These methods move the body along a given vector, and it will instantly stop
+if a collision is detected with another body. After the body has collided,
+any collision response must be coded manually.</p>
+<section id="character-collision-response">
+<h3>Character collision response<a class="headerlink" href="#character-collision-response" title="Link to this heading"></a></h3>
+<p>After a collision, you may want the body to bounce, to slide along a wall,
+or to alter the properties of the object it hit. The way you handle collision
+response depends on which method you used to move the CharacterBody2D.</p>
+<section id="move-and-collide">
+<h4><a class="reference internal" href="../../classes/class_physicsbody2d.html#class-physicsbody2d-method-move-and-collide"><span class="std std-ref">move_and_collide</span></a><a class="headerlink" href="#move-and-collide" title="Link to this heading"></a></h4>
+<p>When using <code class="docutils literal notranslate"><span class="pre">move_and_collide()</span></code>, the function returns a
+<a class="reference internal" href="../../classes/class_kinematiccollision2d.html#class-kinematiccollision2d"><span class="std std-ref">KinematicCollision2D</span></a> object, which contains
+information about the collision and the colliding body. You can use this
+information to determine the response.</p>
+<p>For example, if you want to find the point in space where the collision
+occurred:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">PhysicsBody2D</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">collision_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">move_and_collide</span><span class="p">(</span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">collision_info</span><span class="p">:</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">collision_point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collision_info</span><span class="o">.</span><span class="nf">get_position</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Body</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">PhysicsBody2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Vector2</span><span class="w"> </span><span class="n">_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">collisionInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MoveAndCollide</span><span class="p">(</span><span class="n">_velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">collisionInfo</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">collisionPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collisionInfo</span><span class="p">.</span><span class="n">GetPosition</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Or to bounce off of the colliding object:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">PhysicsBody2D</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">collision_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">move_and_collide</span><span class="p">(</span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">collision_info</span><span class="p">:</span>
+<span class="w">        </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocity</span><span class="o">.</span><span class="nf">bounce</span><span class="p">(</span><span class="n">collision_info</span><span class="o">.</span><span class="nf">get_normal</span><span class="p">())</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Body</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">PhysicsBody2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Vector2</span><span class="w"> </span><span class="n">_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">collisionInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MoveAndCollide</span><span class="p">(</span><span class="n">_velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">collisionInfo</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_velocity</span><span class="p">.</span><span class="n">Bounce</span><span class="p">(</span><span class="n">collisionInfo</span><span class="p">.</span><span class="n">GetNormal</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="move-and-slide">
+<h4><a class="reference internal" href="../../classes/class_characterbody2d.html#class-characterbody2d-method-move-and-slide"><span class="std std-ref">move_and_slide</span></a><a class="headerlink" href="#move-and-slide" title="Link to this heading"></a></h4>
+<p>Sliding is a common collision response; imagine a player moving along walls
+in a top-down game or running up and down slopes in a platformer. While it's
+possible to code this response yourself after using <code class="docutils literal notranslate"><span class="pre">move_and_collide()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">move_and_slide()</span></code> provides a convenient way to implement sliding movement
+without writing much code.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">move_and_slide()</span></code> automatically includes the timestep in its
+calculation, so you should <strong>not</strong> multiply the velocity vector
+by <code class="docutils literal notranslate"><span class="pre">delta</span></code>. This does <strong>not</strong> apply to <code class="docutils literal notranslate"><span class="pre">gravity</span></code> as it is an
+acceleration and is time dependent, and needs to be scaled by
+<code class="docutils literal notranslate"><span class="pre">delta</span></code>.</p>
+</div>
+<p>For example, use the following code to make a character that can walk along
+the ground (including slopes) and jump when standing on the ground:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">CharacterBody2D</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">run_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">350</span>
+<span class="k">var</span><span class="w"> </span><span class="n">jump_speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1000</span>
+<span class="k">var</span><span class="w"> </span><span class="n">gravity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2500</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">get_input</span><span class="p">():</span>
+<span class="w">    </span><span class="n">velocity</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s1">&#39;ui_right&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s1">&#39;ui_left&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">jump</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_just_pressed</span><span class="p">(</span><span class="s1">&#39;ui_select&#39;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nf">is_on_floor</span><span class="p">()</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">jump</span><span class="p">:</span>
+<span class="w">        </span><span class="n">velocity</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jump_speed</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">right</span><span class="p">:</span>
+<span class="w">        </span><span class="n">velocity</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">run_speed</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">left</span><span class="p">:</span>
+<span class="w">        </span><span class="n">velocity</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">run_speed</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="n">velocity</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">gravity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+<span class="w">    </span><span class="nf">get_input</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">move_and_slide</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Body</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CharacterBody2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_runSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">350</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_jumpSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1000</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">_gravity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2500</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">GetInput</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Velocity</span><span class="p">;</span>
+<span class="w">        </span><span class="n">velocity</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_right&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_left&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">jump</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">&quot;ui_select&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">IsOnFloor</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">jump</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">velocity</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_jumpSpeed</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">velocity</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">_runSpeed</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">velocity</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">_runSpeed</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocity</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Velocity</span><span class="p">;</span>
+<span class="w">        </span><span class="n">velocity</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">_gravity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">velocity</span><span class="p">;</span>
+<span class="w">        </span><span class="n">GetInput</span><span class="p">();</span>
+<span class="w">        </span><span class="n">MoveAndSlide</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>See <a class="reference internal" href="kinematic_character_2d.html#doc-kinematic-character-2d"><span class="std std-ref">Kinematic character (2D)</span></a> for more details on using <code class="docutils literal notranslate"><span class="pre">move_and_slide()</span></code>,
+including a demo project with detailed code.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Physics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="using_jolt_physics.html" class="btn btn-neutral float-right" title="Using Jolt Physics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

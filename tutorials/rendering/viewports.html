@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using Viewports" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/rendering/viewports.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: Think of a Viewport as a screen onto which the game is projected. In order to see the game, we need to have a surface on which to draw it. That surface is the Root Viewport. SubViewpo..." />
+<meta name="description" content="Introduction: Think of a Viewport as a screen onto which the game is projected. In order to see the game, we need to have a surface on which to draw it. That surface is the Root Viewport. SubViewpo..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using Viewports &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Multiple resolutions" href="multiple_resolutions.html" />
+    <link rel="prev" title="Overview of renderers" href="renderers.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/rendering/viewports" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/rendering/viewports.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Rendering</a></li>
+      <li class="breadcrumb-item active">Using Viewports</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/rendering/viewports.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-viewports">
+<span id="doc-viewports"></span><h1>Using Viewports<a class="headerlink" href="#using-viewports" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Think of a <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> as a screen onto which the game is projected. In order
+to see the game, we need to have a surface on which to draw it. That surface is
+the Root Viewport.</p>
+<img alt="../../_images/subviewportnode.webp" src="../../_images/subviewportnode.webp" />
+<p><a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewports</span></a> are a kind of Viewport that can be added to the scene so that there
+are multiple surfaces to draw on. When we are drawing to a SubViewport, we call it a render target. We can access the contents
+of a render target by accessing its corresponding <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-method-get-texture"><span class="std std-ref">texture</span></a>.
+By using a SubViewport as render target, we can either render multiple scenes simultaneously or we can render to
+a <a class="reference internal" href="../../classes/class_viewporttexture.html#class-viewporttexture"><span class="std std-ref">ViewportTexture</span></a> which is applied to an object in the scene, for example a dynamic
+skybox.</p>
+<p><a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewports</span></a> have a variety of use cases, including:</p>
+<ul class="simple">
+<li><p>Rendering 3D objects within a 2D game</p></li>
+<li><p>Rendering 2D elements in a 3D game</p></li>
+<li><p>Rendering dynamic textures</p></li>
+<li><p>Generating procedural textures at runtime</p></li>
+<li><p>Rendering multiple cameras in the same scene</p></li>
+</ul>
+<p>What all these use cases have in common is that you are given the ability to
+draw objects to a texture as if it were another screen and can then choose
+what to do with the resulting texture.</p>
+<p>Another kind of Viewports in Godot are <a class="reference internal" href="../../classes/class_window.html#class-window"><span class="std std-ref">Windows</span></a>. They allow their content to be projected onto a window. While the Root Viewport is a Window, they are less
+flexible. If you want to use the texture of a Viewport, you'll be working with <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewports</span></a> most of the time.</p>
+</section>
+<section id="input">
+<h2>Input<a class="headerlink" href="#input" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewports</span></a> are also responsible for delivering properly adjusted and
+scaled input events to their children nodes. By default <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewports</span></a> don't
+automatically receive input, unless they receive it from their direct
+<a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer"><span class="std std-ref">SubViewportContainer</span></a> parent node. In this case, input can be
+disabled with the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-gui-disable-input"><span class="std std-ref">Disable Input</span></a> property.</p>
+<img alt="../../_images/input.webp" src="../../_images/input.webp" />
+<p>For more information on how Godot handles input, please read the <a class="reference internal" href="../inputs/inputevent.html#doc-inputevent"><span class="std std-ref">Input Event Tutorial</span></a>.</p>
+</section>
+<section id="listener">
+<h2>Listener<a class="headerlink" href="#listener" title="Link to this heading"></a></h2>
+<p>Godot supports 3D sound (in both 2D and 3D nodes). More on this can be
+found in the <a class="reference internal" href="../audio/audio_streams.html#doc-audio-streams"><span class="std std-ref">Audio Streams Tutorial</span></a>. For this type of sound to be
+audible, the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> needs to be enabled as a listener (for 2D or 3D).
+If you are using a <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewport</span></a> to display your <a class="reference internal" href="../../classes/class_world3d.html#class-world3d"><span class="std std-ref">World3D</span></a> or
+<a class="reference internal" href="../../classes/class_world2d.html#class-world2d"><span class="std std-ref">World2D</span></a>, don't forget to enable this!</p>
+</section>
+<section id="cameras-2d-3d">
+<h2>Cameras (2D &amp; 3D)<a class="headerlink" href="#cameras-2d-3d" title="Link to this heading"></a></h2>
+<p>When using a <a class="reference internal" href="../../classes/class_camera3d.html#class-camera3d"><span class="std std-ref">Camera3D</span></a> or
+<a class="reference internal" href="../../classes/class_camera2d.html#class-camera2d"><span class="std std-ref">Camera2D</span></a>, it will always display on the
+closest parent <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> (going towards the root). For example, in the
+following hierarchy:</p>
+<img alt="../../_images/cameras.webp" src="../../_images/cameras.webp" />
+<p><code class="docutils literal notranslate"><span class="pre">CameraA</span></code> will display on the Root <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> and it will draw <code class="docutils literal notranslate"><span class="pre">MeshA</span></code>. <code class="docutils literal notranslate"><span class="pre">CameraB</span></code>
+will be captured by the <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewport</span></a> along with <code class="docutils literal notranslate"><span class="pre">MeshB</span></code>. Even though <code class="docutils literal notranslate"><span class="pre">MeshB</span></code> is in the scene
+hierarchy, it will still not be drawn to the Root Viewport. Similarly, <code class="docutils literal notranslate"><span class="pre">MeshA</span></code> will not
+be visible from the SubViewport because SubViewports only
+capture nodes below them in the hierarchy.</p>
+<p>There can only be one active camera per <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a>, so if there is more
+than one, make sure that the desired one has the <a class="reference internal" href="../../classes/class_camera3d.html#class-camera3d-property-current"><span class="std std-ref">current</span></a> property set,
+or make it the current camera by calling:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">camera</span><span class="o">.</span><span class="nf">make_current</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">camera</span><span class="p">.</span><span class="n">MakeCurrent</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>By default, cameras will render all objects in their world. In 3D, cameras can use their
+<a class="reference internal" href="../../classes/class_camera3d.html#class-camera3d-property-cull-mask"><span class="std std-ref">cull_mask</span></a> property combined with the
+<a class="reference internal" href="../../classes/class_visualinstance3d.html#class-visualinstance3d"><span class="std std-ref">VisualInstance3D's</span></a> <a class="reference internal" href="../../classes/class_visualinstance3d.html#class-visualinstance3d-property-layers"><span class="std std-ref">layer</span></a>
+property to restrict which objects are rendered.</p>
+</section>
+<section id="scale-stretching">
+<h2>Scale &amp; stretching<a class="headerlink" href="#scale-stretching" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewports</span></a> have a <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport-property-size"><span class="std std-ref">size</span></a> property, which represents the size of the SubViewport
+in pixels. For SubViewports which are children of <a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer"><span class="std std-ref">SubViewportContainers</span></a>,
+these values are overridden, but for all others, this sets their resolution.</p>
+<p>It is also possible to scale the 2D content and make the <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewport</span></a> resolution
+different from the one specified in size, by calling:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">sub_viewport</span><span class="o">.</span><span class="nf">set_size_2d_override</span><span class="p">(</span><span class="nb nb-Type">Vector2i</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">))</span><span class="w"> </span><span class="c1"># Custom size for 2D.</span>
+<span class="n">sub_viewport</span><span class="o">.</span><span class="nf">set_size_2d_override_stretch</span><span class="p">(</span><span class="l">true</span><span class="p">)</span><span class="w"> </span><span class="c1"># Enable stretch for custom size.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">subViewport</span><span class="p">.</span><span class="n">Size2DOverride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector2I</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">);</span><span class="w"> </span><span class="c1">// Custom size for 2D.</span>
+<span class="n">subViewport</span><span class="p">.</span><span class="n">Size2DOverrideStretch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// Enable stretch for custom size.</span>
+</pre></div>
+</div>
+</div></div>
+<p>For information on scaling and stretching with the Root Viewport visit the <a class="reference internal" href="multiple_resolutions.html#doc-multiple-resolutions"><span class="std std-ref">Multiple Resolutions Tutorial</span></a></p>
+</section>
+<section id="worlds">
+<h2>Worlds<a class="headerlink" href="#worlds" title="Link to this heading"></a></h2>
+<p>For 3D, a <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> will contain a <a class="reference internal" href="../../classes/class_world3d.html#class-world3d"><span class="std std-ref">World3D</span></a>. This
+is basically the universe that links physics and rendering together.
+Node3D-based nodes will register using the World3D of the closest Viewport.
+By default, newly created Viewports do not contain a World3D but
+use the same as their parent Viewport. The Root Viewport always contains a
+World3D, which is the one objects are rendered to by default.</p>
+<p>A <a class="reference internal" href="../../classes/class_world3d.html#class-world3d"><span class="std std-ref">World3D</span></a> can
+be set in a <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> using the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-world-3d"><span class="std std-ref">World 3D</span></a> property, that will separate
+all children nodes of this <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> and will prevent them from interacting with the parent
+Viewport's World3D. This is especially useful in scenarios where, for
+example, you might want to show a separate character in 3D imposed over
+the game (like in StarCraft).</p>
+<p>As a helper for situations where you want to create <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewports</span></a> that
+display single objects and don't want to create a <a class="reference internal" href="../../classes/class_world3d.html#class-world3d"><span class="std std-ref">World3D</span></a>, Viewport has
+the option to use its <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-own-world-3d"><span class="std std-ref">Own World3D</span></a>. This is useful when you want to
+instance 3D characters or objects in <a class="reference internal" href="../../classes/class_world2d.html#class-world2d"><span class="std std-ref">World2D</span></a>.</p>
+<p>For 2D, each <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> always contains its own <a class="reference internal" href="../../classes/class_world2d.html#class-world2d"><span class="std std-ref">World2D</span></a>.
+This suffices in most cases, but in case sharing them may be desired, it
+is possible to do so by setting <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-world-2d"><span class="std std-ref">world_2d</span></a> on the Viewport through code.</p>
+<p>For an example of how this works, see the demo projects <a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/viewport/3d_in_2d">3D in 2D</a> and <a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/viewport/2d_in_3d">2D in 3D</a> respectively.</p>
+</section>
+<section id="capture">
+<h2>Capture<a class="headerlink" href="#capture" title="Link to this heading"></a></h2>
+<p>It is possible to query a capture of the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> contents. For the Root
+Viewport, this is effectively a screen capture. This is done with the
+following code:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the captured Image using get_image().</span>
+<span class="k">var</span><span class="w"> </span><span class="n">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_viewport</span><span class="p">()</span><span class="o">.</span><span class="nf">get_texture</span><span class="p">()</span><span class="o">.</span><span class="nf">get_image</span><span class="p">()</span>
+<span class="c1"># Convert Image to ImageTexture.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">tex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ImageTexture</span><span class="o">.</span><span class="nf">create_from_image</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="c1"># Set sprite texture.</span>
+<span class="n">sprite</span><span class="o">.</span><span class="vi">texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tex</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Retrieve the captured Image using get_image().</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetViewport</span><span class="p">().</span><span class="n">GetTexture</span><span class="p">().</span><span class="n">GetImage</span><span class="p">();</span>
+<span class="c1">// Convert Image to ImageTexture.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">tex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ImageTexture</span><span class="p">.</span><span class="n">CreateFromImage</span><span class="p">(</span><span class="n">img</span><span class="p">);</span>
+<span class="c1">// Set sprite texture.</span>
+<span class="n">sprite</span><span class="p">.</span><span class="n">Texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tex</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>But if you use this in <code class="docutils literal notranslate"><span class="pre">_ready()</span></code> or from the first frame of the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport's</span></a> initialization,
+you will get an empty texture because there is nothing to get as texture. You can deal with
+it using (for example):</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Wait until the frame has finished before getting the texture.</span>
+<span class="k">await</span><span class="w"> </span><span class="nb">RenderingServer</span><span class="o">.</span><span class="vi">frame_post_draw</span>
+<span class="c1"># You can get the image after this.</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait until the frame has finished before getting the texture.</span>
+<span class="k">await</span><span class="w"> </span><span class="nf">ToSignal</span><span class="p">(</span><span class="n">RenderingServer</span><span class="p">.</span><span class="n">Singleton</span><span class="p">,</span><span class="w"> </span><span class="n">RenderingServer</span><span class="p">.</span><span class="n">SignalName</span><span class="p">.</span><span class="n">FramePostDraw</span><span class="p">);</span>
+<span class="c1">// You can get the image after this.</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="viewport-container">
+<h2>Viewport Container<a class="headerlink" href="#viewport-container" title="Link to this heading"></a></h2>
+<p>If the <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewport</span></a> is a child of a <a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer"><span class="std std-ref">SubViewportContainer</span></a>, it will become active and display anything it has inside. The layout looks like this:</p>
+<img alt="../../_images/container.webp" src="../../_images/container.webp" />
+<p>The <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewport</span></a> will cover the area of its parent <a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer"><span class="std std-ref">SubViewportContainer</span></a> completely
+if <a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer-property-stretch"><span class="std std-ref">Stretch</span></a> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> in the SubViewportContainer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The size of the <a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer"><span class="std std-ref">SubViewportContainer</span></a> cannot be smaller than the size of the <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewport</span></a>.</p>
+</div>
+</section>
+<section id="rendering">
+<h2>Rendering<a class="headerlink" href="#rendering" title="Link to this heading"></a></h2>
+<p>Due to the fact that the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> is an entryway into another rendering surface, it exposes a few
+rendering properties that can be different from the project settings. You can
+choose to use a different level of <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-msaa-2d"><span class="std std-ref">MSAA</span></a> for each Viewport. The default behavior is <code class="docutils literal notranslate"><span class="pre">Disabled</span></code>.</p>
+<p>If you know that the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> is only going to be used for 2D, you can <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-disable-3d"><span class="std std-ref">Disable 3D</span></a>. Godot will then
+restrict how the Viewport is drawn.
+Disabling 3D is slightly faster and uses less memory compared to enabled 3D. It's a good idea to disable 3D if your viewport doesn't render anything in 3D.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you need to render 3D shadows in the viewport, make sure to set the viewport's <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-positional-shadow-atlas-size"><span class="std std-ref">positional_shadow_atlas_size</span></a> property to a value higher than <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+Otherwise, shadows won't be rendered. By default, the equivalent project setting is set to <code class="docutils literal notranslate"><span class="pre">4096</span></code> on desktop platforms and <code class="docutils literal notranslate"><span class="pre">2048</span></code> on mobile platforms.</p>
+</div>
+<p>Godot also provides a way of customizing how everything is drawn inside <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewports</span></a> using <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-debug-draw"><span class="std std-ref">Debug Draw</span></a>.
+Debug Draw allows you to specify a mode which determines how the Viewport will display things drawn
+inside it. Debug Draw is <code class="docutils literal notranslate"><span class="pre">Disabled</span></code> by default. Some other options are <code class="docutils literal notranslate"><span class="pre">Unshaded</span></code>, <code class="docutils literal notranslate"><span class="pre">Overdraw</span></code>, and <code class="docutils literal notranslate"><span class="pre">Wireframe</span></code>. For a full list, refer to the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-debug-draw"><span class="std std-ref">Viewport Documentation</span></a>.</p>
+<ul class="simple">
+<li><p><strong>Debug Draw = Disabled</strong> (default): The scene is drawn normally.</p></li>
+</ul>
+<blockquote>
+<div><img alt="../../_images/default_scene.webp" src="../../_images/default_scene.webp" />
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Debug Draw = Unshaded</strong>: Unshaded draws the scene without using lighting information so all the objects appear flatly colored in their albedo color.</p></li>
+</ul>
+<blockquote>
+<div><img alt="../../_images/unshaded.webp" src="../../_images/unshaded.webp" />
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Debug Draw = Overdraw</strong>: Overdraw draws the meshes semi-transparent with an additive blend so you can see how the meshes overlap.</p></li>
+</ul>
+<blockquote>
+<div><img alt="../../_images/overdraw.webp" src="../../_images/overdraw.webp" />
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Debug Draw = Wireframe</strong>: Wireframe draws the scene using only the edges of triangles in the meshes.</p></li>
+</ul>
+<blockquote>
+<div><img alt="../../_images/wireframe.webp" src="../../_images/wireframe.webp" />
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Debug Draw modes are currently <strong>not</strong> supported when using the
+Compatibility rendering method. They will appear as regular draw modes.</p>
+</div>
+</section>
+<section id="render-target">
+<h2>Render target<a class="headerlink" href="#render-target" title="Link to this heading"></a></h2>
+<p>When rendering to a <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewport</span></a>, whatever is inside will not be
+visible in the scene editor. To display the contents, you have to draw the SubViewport's <a class="reference internal" href="../../classes/class_viewporttexture.html#class-viewporttexture"><span class="std std-ref">ViewportTexture</span></a> somewhere.
+This can be requested via code using (for example):</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># This gives us the ViewportTexture.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">tex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">viewport</span><span class="o">.</span><span class="nf">get_texture</span><span class="p">()</span>
+<span class="n">sprite</span><span class="o">.</span><span class="vi">texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tex</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This gives us the ViewportTexture.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">tex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">viewport</span><span class="p">.</span><span class="n">GetTexture</span><span class="p">();</span>
+<span class="n">sprite</span><span class="p">.</span><span class="n">Texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tex</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>Or it can be assigned in the editor by selecting &quot;New ViewportTexture&quot;</p>
+<img alt="../../_images/texturemenu.webp" src="../../_images/texturemenu.webp" />
+<p>and then selecting the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> you want to use.</p>
+<img alt="../../_images/texturepath.webp" src="../../_images/texturepath.webp" />
+<p>Every frame, the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport's</span></a> texture is cleared away with the default clear color (or a transparent
+color if <a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-transparent-bg"><span class="std std-ref">Transparent BG</span></a> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>). This can be changed by setting <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport-property-render-target-clear-mode"><span class="std std-ref">Clear Mode</span></a> to <code class="docutils literal notranslate"><span class="pre">Never</span></code> or <code class="docutils literal notranslate"><span class="pre">Next</span> <span class="pre">Frame</span></code>.
+As the name implies, Never means the texture will never be cleared, while next frame will
+clear the texture on the next frame and then set itself to Never.</p>
+<p>By default, re-rendering of the <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewport</span></a> happens when
+its <a class="reference internal" href="../../classes/class_viewporttexture.html#class-viewporttexture"><span class="std std-ref">ViewportTexture</span></a> has been drawn in a frame. If visible, it will be
+rendered, otherwise, it will not. This behavior can be changed by setting <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport-property-render-target-update-mode"><span class="std std-ref">Update Mode</span></a> to <code class="docutils literal notranslate"><span class="pre">Never</span></code>, <code class="docutils literal notranslate"><span class="pre">Once</span></code>, <code class="docutils literal notranslate"><span class="pre">Always</span></code>, or <code class="docutils literal notranslate"><span class="pre">When</span> <span class="pre">Parent</span> <span class="pre">Visible</span></code>.
+Never and Always will never or always re-render respectively. Once will re-render the next frame and change to Never afterwards. This can be used to manually update the Viewport.
+This flexibility allows users to render an image once and then use the texture without incurring the cost of rendering every frame.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure to check the Viewport demos. They are available in the
+viewport folder of the demos archive, or at
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/viewport">https://github.com/godotengine/godot-demo-projects/tree/master/viewport</a>.</p>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="renderers.html" class="btn btn-neutral float-left" title="Overview of renderers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="multiple_resolutions.html" class="btn btn-neutral float-right" title="Multiple resolutions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

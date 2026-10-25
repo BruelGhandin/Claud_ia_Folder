@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Change scenes manually" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/scripting/change_scenes_manually.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Sometimes it helps to have more control over how you swap scenes around. A Viewport&#x27;s child nodes will render to the image it generates. This holds true even for nodes outside of the &quot;cur..." />
+<meta name="description" content="Sometimes it helps to have more control over how you swap scenes around. A Viewport&#x27;s child nodes will render to the image it generates. This holds true even for nodes outside of the &quot;cur..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Change scenes manually &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Instancing with signals" href="instancing_with_signals.html" />
+    <link rel="prev" title="Evaluating expressions" href="evaluating_expressions.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/scripting/change_scenes_manually" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/scripting/change_scenes_manually.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Scripting</a></li>
+      <li class="breadcrumb-item active">Change scenes manually</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/scripting/change_scenes_manually.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="change-scenes-manually">
+<span id="doc-change-scenes-manually"></span><h1>Change scenes manually<a class="headerlink" href="#change-scenes-manually" title="Link to this heading"></a></h1>
+<p>Sometimes it helps to have more control over how you swap scenes around.
+A <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a>'s child nodes will render to the image
+it generates. This holds true even for nodes outside of the &quot;current&quot;
+scene. Autoloads fall into this category, and also scenes which you
+instantiate and add to the tree at runtime:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">simultaneous_scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://levels/level2.tscn&quot;</span><span class="p">)</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_add_a_scene_manually</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># This is like autoloading the scene, only</span>
+<span class="w">    </span><span class="c1"># it happens after already loading the main scene.</span>
+<span class="w">    </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">root</span><span class="o">.</span><span class="nf">add_child</span><span class="p">(</span><span class="n">simultaneous_scene</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">simultaneousScene</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="nf">MyClass</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">simultaneousScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResourceLoader</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">PackedScene</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://levels/level2.tscn&quot;</span><span class="p">).</span><span class="n">Instantiate</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_AddASceneManually</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// This is like autoloading the scene, only</span>
+<span class="w">    </span><span class="c1">// it happens after already loading the main scene.</span>
+<span class="w">    </span><span class="n">GetTree</span><span class="p">().</span><span class="n">Root</span><span class="p">.</span><span class="n">AddChild</span><span class="p">(</span><span class="n">simultaneousScene</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>To complete the cycle and swap out the new scene with the old one,
+you have a choice to make. Many strategies exist for removing a scene
+from view of the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a>. The tradeoffs involve
+balancing operation speed and memory consumption, as well as balancing data
+access and integrity.</p>
+<ol class="arabic">
+<li><p><strong>Delete the existing scene.</strong>
+<a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree-method-change-scene-to-file"><span class="std std-ref">SceneTree.change_scene_to_file()</span></a> and
+<a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree-method-change-scene-to-packed"><span class="std std-ref">SceneTree.change_scene_to_packed()</span></a>
+will delete the current scene immediately. You can also delete the
+main scene. Assuming the root node's name is &quot;Main&quot;, you could do
+<code class="docutils literal notranslate"><span class="pre">get_node(&quot;/root/Main&quot;).free()</span></code> to delete the whole scene.</p>
+<blockquote>
+<div><ul>
+<li><p>Unloads memory.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Pro: RAM is no longer dragging the dead weight.</p></li>
+<li><p>Con: Returning to that scene is now more expensive since it must be
+loaded back into memory again (takes time AND memory). Not a problem
+if returning soon is unnecessary.</p></li>
+<li><p>Con: No longer have access to that scene's data. Not a problem if
+using that data soon is unnecessary.</p></li>
+<li><p>Note: It can be useful to preserve the data in a soon-to-be-deleted
+scene by re-attaching one or more of its nodes to a different scene,
+or even directly to the <a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree"><span class="std std-ref">SceneTree</span></a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Processing stops.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Pro: No nodes means no processing, physics processing, or input
+handling. The CPU is available to work on the new scene's contents.</p></li>
+<li><p>Con: Those nodes' processing and input handling no longer operate.
+Not a problem if using the updated data is unnecessary.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Hide the existing scene.</strong> By changing the visibility or collision
+detection of the nodes, you can hide the entire node sub-tree from the
+player's perspective. Use
+<a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem-method-hide"><span class="std std-ref">CanvasItem.hide()</span></a> to hide a scene and
+<a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem-method-show"><span class="std std-ref">CanvasItem.show()</span></a> to show it again.</p>
+<blockquote>
+<div><ul>
+<li><p>Memory still exists.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Pro: You can still access the data if needed.</p></li>
+<li><p>Pro: There's no need to move any more nodes around to save data.</p></li>
+<li><p>Con: More data is being kept in memory, which will be become a problem
+on memory-sensitive platforms like web or mobile.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Processing continues.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Pro: Data continues to receive processing updates, so the scene will
+keep any data within it that relies on delta time or frame data
+updated.</p></li>
+<li><p>Pro: Nodes are still members of groups (since groups belong to the
+<a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree"><span class="std std-ref">SceneTree</span></a>).</p></li>
+<li><p>Con: The CPU's attention is now divided between both scenes. Too much
+load could result in low frame rates. You should be sure to test
+performance as you go to ensure the target platform can support the
+load from this approach.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Remove the existing scene from the tree.</strong> Assign a variable
+to the existing scene's root node. Then use
+<a class="reference internal" href="../../classes/class_node.html#class-node-method-remove-child"><span class="std std-ref">Node.remove_child(Node)</span></a> to detach the entire
+scene from the tree. To attach it later, use
+<a class="reference internal" href="../../classes/class_node.html#class-node-method-add-child"><span class="std std-ref">Node.add_child(Node)</span></a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Memory still exists (similar pros/cons as hiding it from view).</p></li>
+<li><p>Processing stops (similar pros/cons as deleting it completely).</p></li>
+<li><p>Pro: This variation of &quot;hiding&quot; it is much easier to show/hide. Rather
+than potentially keeping track of multiple changes to the scene, you
+only need to call the add/remove_child methods. This is similar to
+disabling game objects in other engines.</p></li>
+<li><p>Con: Unlike with hiding it from view only, the data contained within
+the scene will become stale if it relies on delta time, input, groups,
+or other data that is derived from <a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree"><span class="std std-ref">SceneTree</span></a>
+access.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p>There are also cases where you may wish to have many scenes present at the same
+time, such as adding your own singleton at runtime, or preserving
+a scene's data between scene changes (adding the scene to the root node).</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">root</span><span class="o">.</span><span class="nf">add_child</span><span class="p">(</span><span class="n">scene</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">GetTree</span><span class="p">().</span><span class="n">Root</span><span class="p">.</span><span class="n">AddChild</span><span class="p">(</span><span class="n">scene</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>Another case may be displaying multiple scenes at the same time using
+<a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer"><span class="std std-ref">SubViewportContainers</span></a>. This is optimal for
+rendering different content in different parts of the screen (e.g. minimaps,
+split-screen multiplayer).</p>
+<p>Each option will have cases where it is best appropriate, so you must examine
+the effects of each approach, and determine what path best fits your unique
+situation.</p>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="evaluating_expressions.html" class="btn btn-neutral float-left" title="Evaluating expressions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="instancing_with_signals.html" class="btn btn-neutral float-right" title="Instancing with signals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

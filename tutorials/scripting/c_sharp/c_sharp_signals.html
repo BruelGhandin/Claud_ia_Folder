@@ -1,0 +1,515 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="C# signals" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/scripting/c_sharp/c_sharp_signals.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="For a detailed explanation of signals in general, see the Using signals section in the step by step tutorial. Signals are implemented using C# events, the idiomatic way to represent the observer pa..." />
+<meta name="description" content="For a detailed explanation of signals in general, see the Using signals section in the step by step tutorial. Signals are implemented using C# events, the idiomatic way to represent the observer pa..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>C# signals &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="C# exported properties" href="c_sharp_exports.html" />
+    <link rel="prev" title="C# Variant" href="c_sharp_variant.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/scripting/c_sharp/c_sharp_signals" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/scripting/c_sharp/c_sharp_signals.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Scripting</a></li>
+          <li class="breadcrumb-item"><a href="index.html">C#/.NET</a></li>
+      <li class="breadcrumb-item active">C# signals</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/scripting/c_sharp/c_sharp_signals.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="c-signals">
+<span id="doc-c-sharp-signals"></span><h1>C# signals<a class="headerlink" href="#c-signals" title="Link to this heading"></a></h1>
+<p>For a detailed explanation of signals in general, see the <a class="reference internal" href="../../../getting_started/step_by_step/signals.html#doc-signals"><span class="std std-ref">Using signals</span></a> section in the step
+by step tutorial.</p>
+<p>Signals are implemented using C# events, the idiomatic way to represent
+<a class="reference internal" href="../../../getting_started/introduction/key_concepts_overview.html#doc-key-concepts-signals"><span class="std std-ref">the observer pattern</span></a> in C#. This is the
+recommended way to use signals in C# and the focus of this page.</p>
+<p>In some cases it's necessary to use the older
+<a class="reference internal" href="../../../classes/class_object.html#class-object-method-connect"><span class="std std-ref">Connect()</span></a> and
+<a class="reference internal" href="../../../classes/class_object.html#class-object-method-disconnect"><span class="std std-ref">Disconnect()</span></a> APIs.
+See <a class="reference internal" href="#using-connect-and-disconnect"><span class="std std-ref">Using Connect and Disconnect</span></a> for more details.</p>
+<p>If you encounter a <code class="docutils literal notranslate"><span class="pre">System.ObjectDisposedException</span></code> while handling a signal,
+you might be missing a signal disconnection. See
+<a class="reference internal" href="#disconnecting-automatically-when-the-receiver-is-freed"><span class="std std-ref">Disconnecting automatically when the receiver is freed</span></a> for more details.</p>
+<section id="signals-as-c-events">
+<h2>Signals as C# events<a class="headerlink" href="#signals-as-c-events" title="Link to this heading"></a></h2>
+<p>To provide more type-safety, Godot signals are also all available through <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/csharp/events-overview">events</a>.
+You can handle these events, as any other event, with the <code class="docutils literal notranslate"><span class="pre">+=</span></code> and <code class="docutils literal notranslate"><span class="pre">-=</span></code> operators.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Timer</span><span class="w"> </span><span class="n">myTimer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Timer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Timer&quot;</span><span class="p">);</span>
+<span class="n">myTimer</span><span class="p">.</span><span class="n">Timeout</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Timeout!&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In addition, you can always access signal names associated with a node type through its nested
+<code class="docutils literal notranslate"><span class="pre">SignalName</span></code> class. This is useful when, for example, you want to await on a signal (see <a class="reference internal" href="c_sharp_differences.html#doc-c-sharp-differences-await"><span class="std std-ref">await keyword</span></a>).</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">await</span><span class="w"> </span><span class="nf">ToSignal</span><span class="p">(</span><span class="n">GetTree</span><span class="p">(),</span><span class="w"> </span><span class="n">SceneTree</span><span class="p">.</span><span class="n">SignalName</span><span class="p">.</span><span class="n">ProcessFrame</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="custom-signals-as-c-events">
+<h2>Custom signals as C# events<a class="headerlink" href="#custom-signals-as-c-events" title="Link to this heading"></a></h2>
+<p>To declare a custom event in your C# script, use the <code class="docutils literal notranslate"><span class="pre">[Signal]</span></code> attribute on a public delegate type.
+Note that the name of this delegate needs to end with <code class="docutils literal notranslate"><span class="pre">EventHandler</span></code>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Signal]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MySignalEventHandler</span><span class="p">();</span>
+
+<span class="na">[Signal]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MySignalWithArgumentEventHandler</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">myString</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Once this is done, Godot will create the appropriate events automatically behind the scenes. You
+can then use said events as you'd do for any other Godot signal. Note that events are named using
+your delegate's name minus the final <code class="docutils literal notranslate"><span class="pre">EventHandler</span></code> part.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">MySignal</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Hello!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MySignalWithArgument</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">SayHelloTo</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SayHelloTo</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">$&quot;Hello {name}!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you want to connect to these signals in the editor, you will need to (re)build the project
+to see them appear.</p>
+<p>You can click the <strong>Build</strong> button in the upper-right corner of the editor to do so.</p>
+</div>
+</section>
+<section id="signal-emission">
+<h2>Signal emission<a class="headerlink" href="#signal-emission" title="Link to this heading"></a></h2>
+<p>To emit signals, use the <code class="docutils literal notranslate"><span class="pre">EmitSignal</span></code> method. Note that, as for signals defined by the engine,
+your custom signal names are listed under the nested <code class="docutils literal notranslate"><span class="pre">SignalName</span></code> class.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MyMethodEmittingSignals</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">EmitSignal</span><span class="p">(</span><span class="n">SignalName</span><span class="p">.</span><span class="n">MySignal</span><span class="p">);</span>
+<span class="w">    </span><span class="n">EmitSignal</span><span class="p">(</span><span class="n">SignalName</span><span class="p">.</span><span class="n">MySignalWithArgument</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In contrast with other C# events, you cannot use <code class="docutils literal notranslate"><span class="pre">Invoke</span></code> to raise events tied to Godot signals.</p>
+<p>Signals support arguments of any <a class="reference internal" href="c_sharp_variant.html#c-sharp-variant-compatible-types"><span class="std std-ref">Variant-compatible type</span></a>.</p>
+<p>Consequently, any <code class="docutils literal notranslate"><span class="pre">Node</span></code> or <code class="docutils literal notranslate"><span class="pre">RefCounted</span></code> will be compatible automatically, but custom data objects will need
+to inherit from <code class="docutils literal notranslate"><span class="pre">GodotObject</span></code> or one of its subclasses.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DataObject</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GodotObject</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">MyFirstString</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">MySecondString</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="bound-values">
+<h2>Bound values<a class="headerlink" href="#bound-values" title="Link to this heading"></a></h2>
+<p>Sometimes you'll want to bind values to a signal when the connection is established, rather than
+(or in addition to) when the signal is emitted. To do so, you can use an anonymous function like in
+the following example.</p>
+<p>Here, the <a class="reference internal" href="../../../classes/class_basebutton.html#class-basebutton-signal-pressed"><span class="std std-ref">Button.Pressed</span></a> signal does not take any argument. But we
+want to use the same <code class="docutils literal notranslate"><span class="pre">ModifyValue</span></code> for both the &quot;plus&quot; and &quot;minus&quot; buttons. So we bind the
+modifier value at the time we're connecting the signals.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Button</span><span class="w"> </span><span class="n">plusButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Button</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;PlusButton&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">plusButton</span><span class="p">.</span><span class="n">Pressed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">ModifyValue</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">Button</span><span class="w"> </span><span class="n">minusButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Button</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;MinusButton&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">minusButton</span><span class="p">.</span><span class="n">Pressed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">ModifyValue</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ModifyValue</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">modifier</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">modifier</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="signal-creation-at-runtime">
+<h2>Signal creation at runtime<a class="headerlink" href="#signal-creation-at-runtime" title="Link to this heading"></a></h2>
+<p>Finally, you can create custom signals directly while your game is running. Use the <code class="docutils literal notranslate"><span class="pre">AddUserSignal</span></code>
+method for that. Be aware that it should be executed before any use of said signals (either
+connecting to them or emitting them). Also, note that signals created this way won't be visible through the
+<code class="docutils literal notranslate"><span class="pre">SignalName</span></code> nested class.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">AddUserSignal</span><span class="p">(</span><span class="s">&quot;MyCustomSignal&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">EmitSignal</span><span class="p">(</span><span class="s">&quot;MyCustomSignal&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="using-connect-and-disconnect">
+<span id="id1"></span><h2>Using Connect and Disconnect<a class="headerlink" href="#using-connect-and-disconnect" title="Link to this heading"></a></h2>
+<p>In general, it isn't recommended to use
+<a class="reference internal" href="../../../classes/class_object.html#class-object-method-connect"><span class="std std-ref">Connect()</span></a> and
+<a class="reference internal" href="../../../classes/class_object.html#class-object-method-disconnect"><span class="std std-ref">Disconnect()</span></a>. These APIs don't provide as
+much type safety as the events. However, they're necessary for
+<a class="reference internal" href="../cross_language_scripting.html#connecting-to-signals-cross-language"><span class="std std-ref">connecting to signals defined by GDScript</span></a>
+and passing <a class="reference internal" href="../../../classes/class_object.html#enum-object-connectflags"><span class="std std-ref">ConnectFlags</span></a>.</p>
+<p>In the following example, pressing the button for the first time prints
+<code class="docutils literal notranslate"><span class="pre">Greetings!</span></code>. <code class="docutils literal notranslate"><span class="pre">OneShot</span></code> disconnects the signal, so pressing the button again
+does nothing.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Button</span><span class="w"> </span><span class="n">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Button</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;GreetButton&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">button</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">Button</span><span class="p">.</span><span class="n">SignalName</span><span class="p">.</span><span class="n">Pressed</span><span class="p">,</span><span class="w"> </span><span class="n">Callable</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">OnButtonPressed</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="kt">uint</span><span class="p">)</span><span class="n">GodotObject</span><span class="p">.</span><span class="n">ConnectFlags</span><span class="p">.</span><span class="n">OneShot</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnButtonPressed</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Greetings!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="disconnecting-automatically-when-the-receiver-is-freed">
+<span id="id2"></span><h2>Disconnecting automatically when the receiver is freed<a class="headerlink" href="#disconnecting-automatically-when-the-receiver-is-freed" title="Link to this heading"></a></h2>
+<p>Normally, when any <code class="docutils literal notranslate"><span class="pre">GodotObject</span></code> is freed (such as any <code class="docutils literal notranslate"><span class="pre">Node</span></code>), Godot
+automatically disconnects all connections associated with that object. This
+happens for both signal emitters and signal receivers.</p>
+<p>For example, a node with this code will print &quot;Hello!&quot; when the button is
+pressed, then free itself. Freeing the node disconnects the signal, so pressing
+the button again doesn't do anything:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Button</span><span class="w"> </span><span class="n">myButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Button</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;../MyButton&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">myButton</span><span class="p">.</span><span class="n">Pressed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">SayHello</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SayHello</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Hello!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Free</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When a signal receiver is freed while the signal emitter is still alive, in some
+cases automatic disconnection won't happen:</p>
+<ul class="simple">
+<li><p>The signal is connected to a lambda expression that captures a variable.</p></li>
+<li><p>The signal is a custom signal.</p></li>
+</ul>
+<p>The following sections explain these cases in more detail and include
+suggestions for how to disconnect manually.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Automatic disconnection is totally reliable if a signal emitter is freed
+before any of its receivers are freed. With a project style that prefers
+this pattern, the above limits may not be a concern.</p>
+</div>
+<section id="no-automatic-disconnection-a-lambda-expression-that-captures-a-variable">
+<h3>No automatic disconnection: a lambda expression that captures a variable<a class="headerlink" href="#no-automatic-disconnection-a-lambda-expression-that-captures-a-variable" title="Link to this heading"></a></h3>
+<p>If you connect to a lambda expression that captures variables, Godot can't tell
+that the lambda is associated with the instance that created it. This causes
+this example to have potentially unexpected behavior:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Timer</span><span class="w"> </span><span class="n">myTimer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Timer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;../Timer&quot;</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">myTimer</span><span class="p">.</span><span class="n">Timeout</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="c1">// This lambda expression captures x.</span>
+<span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">$&quot;Tick {x} my name is {Name}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Time&#39;s up!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Free</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Tick 1, my name is ExampleNode
+Tick 2, my name is ExampleNode
+Tick 3, my name is ExampleNode
+Time&#39;s up!
+[...] System.ObjectDisposedException: Cannot access a disposed object.
+</pre></div>
+</div>
+<p>On tick 4, the lambda expression tries to access the <code class="docutils literal notranslate"><span class="pre">Name</span></code> property of the
+node, but the node has already been freed. This causes the exception.</p>
+<p>To disconnect, keep a reference to the delegate created by the lambda expression
+and pass that to <code class="docutils literal notranslate"><span class="pre">-=</span></code>. For example, this node connects and disconnects using
+the <code class="docutils literal notranslate"><span class="pre">_EnterTree</span></code> and <code class="docutils literal notranslate"><span class="pre">_ExitTree</span></code> lifecycle methods:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Timer</span><span class="w"> </span><span class="n">MyTimer</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">private</span><span class="w"> </span><span class="n">Action</span><span class="w"> </span><span class="n">_tick</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_EnterTree</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">_tick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">x</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">$&quot;Tick {x} my name is {Name}&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Time&#39;s up!&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">Free</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">MyTimer</span><span class="p">.</span><span class="n">Timeout</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">_tick</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_ExitTree</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">MyTimer</span><span class="p">.</span><span class="n">Timeout</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">_tick</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example, <code class="docutils literal notranslate"><span class="pre">Free</span></code> causes the node to leave the tree, which calls
+<code class="docutils literal notranslate"><span class="pre">_ExitTree</span></code>. <code class="docutils literal notranslate"><span class="pre">_ExitTree</span></code> disconnects the signal, so <code class="docutils literal notranslate"><span class="pre">_tick</span></code> is never
+called again.</p>
+<p>The lifecycle methods to use depend on what the node does. Another option is to
+connect to signals in <code class="docutils literal notranslate"><span class="pre">_Ready</span></code> and disconnect in <code class="docutils literal notranslate"><span class="pre">Dispose</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Godot uses <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/api/system.delegate.target">Delegate.Target</a>
+to determine what instance a delegate is associated with. When a lambda
+expression doesn't capture a variable, the generated delegate's <code class="docutils literal notranslate"><span class="pre">Target</span></code>
+is the instance that created the delegate. When a variable is captured, the
+<code class="docutils literal notranslate"><span class="pre">Target</span></code> instead points at a generated type that stores the captured
+variable. This is what breaks the association. If you want to see if a
+delegate will be automatically cleaned up, try checking its <code class="docutils literal notranslate"><span class="pre">Target</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Callable.From</span></code> doesn't affect the <code class="docutils literal notranslate"><span class="pre">Delegate.Target</span></code>, so connecting a
+lambda that captures variables using <code class="docutils literal notranslate"><span class="pre">Connect</span></code> doesn't work any better
+than <code class="docutils literal notranslate"><span class="pre">+=</span></code>.</p>
+</div>
+</section>
+<section id="no-automatic-disconnection-a-custom-signal">
+<h3>No automatic disconnection: a custom signal<a class="headerlink" href="#no-automatic-disconnection-a-custom-signal" title="Link to this heading"></a></h3>
+<p>Connecting to a custom signal using <code class="docutils literal notranslate"><span class="pre">+=</span></code> doesn't disconnect automatically when
+the receiving node is freed.</p>
+<p>To disconnect, use <code class="docutils literal notranslate"><span class="pre">-=</span></code> at an appropriate time. For example:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">MyClass</span><span class="w"> </span><span class="n">Target</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_EnterTree</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Target</span><span class="p">.</span><span class="n">MySignal</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnMySignal</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_ExitTree</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Target</span><span class="p">.</span><span class="n">MySignal</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">OnMySignal</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Another solution is to use <code class="docutils literal notranslate"><span class="pre">Connect</span></code>, which does disconnect automatically with
+custom signals:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[Export]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">MyClass</span><span class="w"> </span><span class="n">Target</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_EnterTree</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Target</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">MyClass</span><span class="p">.</span><span class="n">SignalName</span><span class="p">.</span><span class="n">MySignal</span><span class="p">,</span><span class="w"> </span><span class="n">Callable</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">OnMySignal</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="c_sharp_variant.html" class="btn btn-neutral float-left" title="C# Variant" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="c_sharp_exports.html" class="btn btn-neutral float-right" title="C# exported properties" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

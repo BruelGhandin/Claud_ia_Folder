@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using SoftBody3D" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/physics/soft_body.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Soft bodies (or soft-body dynamics) simulate movement, changing shape and other physical properties of deformable objects. For example, this can be used to simulate cloth or to create more realisti..." />
+<meta name="description" content="Soft bodies (or soft-body dynamics) simulate movement, changing shape and other physical properties of deformable objects. For example, this can be used to simulate cloth or to create more realisti..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using SoftBody3D &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Collision shapes (2D)" href="collision_shapes_2d.html" />
+    <link rel="prev" title="Kinematic character (2D)" href="kinematic_character_2d.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/physics/soft_body" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/physics/soft_body.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Physics</a></li>
+      <li class="breadcrumb-item active">Using SoftBody3D</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/physics/soft_body.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-softbody3d">
+<span id="doc-soft-body"></span><h1>Using SoftBody3D<a class="headerlink" href="#using-softbody3d" title="Link to this heading"></a></h1>
+<p>Soft bodies (or <em>soft-body dynamics</em>) simulate movement, changing shape and other
+physical properties of deformable objects. For example, this can be used to simulate
+cloth or to create more realistic characters.</p>
+<section id="physics-engine-considerations">
+<h2>Physics engine considerations<a class="headerlink" href="#physics-engine-considerations" title="Link to this heading"></a></h2>
+<p>Support for soft bodies is generally more robust in Jolt Physics compared to GodotPhysics3D.
+You can switch physics engines by changing <strong>Physics &gt; 3D &gt; Physics Engine</strong>
+in the Project Settings. Projects created in Godot 4.6 and later use Jolt Physics
+by default, but existing projects will have to be switched over manually.</p>
+<p>Additionally, <a class="reference internal" href="interpolation/index.html#doc-physics-interpolation"><span class="std std-ref">physics interpolation</span></a> currently
+does not affect soft bodies. If you want soft body simulation to look smoother at
+higher framerates, you'll have to increase the <strong>Physics &gt; Common &gt; Physics Ticks per Second</strong>
+project setting, which comes at a performance cost.</p>
+</section>
+<section id="basic-setup">
+<h2>Basic setup<a class="headerlink" href="#basic-setup" title="Link to this heading"></a></h2>
+<p>A <a class="reference internal" href="../../classes/class_softbody3d.html#class-softbody3d"><span class="std std-ref">SoftBody3D</span></a> node is used for soft body simulations.
+Unlike other physics body nodes like <a class="reference internal" href="../../classes/class_rigidbody3d.html#class-rigidbody3d"><span class="std std-ref">RigidBody3D</span></a>
+or <a class="reference internal" href="../../classes/class_staticbody3d.html#class-staticbody3d"><span class="std std-ref">StaticBody3D</span></a>, it does <strong>not</strong> have a
+<a class="reference internal" href="../../classes/class_collisionshape3d.html#class-collisionshape3d"><span class="std std-ref">CollisionShape3D</span></a> or a <a class="reference internal" href="../../classes/class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a>
+child node. Instead, the collision shape is derived from the mesh assigned to the node.
+This mesh is also directly used for rendering, which means you don't need to
+create any child nodes for a functional, visible setup.</p>
+<p>We will create a bouncy cube to demonstrate the setup of a soft body.</p>
+<p>Create a new scene with a Node3D node as root. Then, create a SoftBody3D node.
+Add a BoxMesh in the <strong>Mesh</strong> property of the node in the inspector
+and increase the subdivision of the mesh for simulation.</p>
+<p>The subdivision level determines the precision level of the deformation,
+with higher values allowing for smaller and more detailed deformations,
+at the cost of performance. In this example, we'll set it to 3 on each axis:</p>
+<figure class="align-center" id="id1">
+<img alt="Adjusting BoxMesh properties in the inspector" src="../../_images/soft_body_box_mesh.webp" />
+<figcaption>
+<p><span class="caption-text">Adjusting BoxMesh properties in the inspector</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Now, set the parameters to obtain the type of soft body you aim for.
+Try to keep the <strong>Simulation Precision</strong> above 5; otherwise,
+the soft body may collapse.</p>
+<figure class="align-center" id="id2">
+<img alt="Adjusting SoftBody3D simulation properties in the inspector" src="../../_images/soft_body_inspector.webp" />
+<figcaption>
+<p><span class="caption-text">Adjusting SoftBody3D simulation properties in the inspector</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Handle some parameters with care, as some values can lead to strange results.
+For example, if the shape is not completely closed and you set pressure
+to a value greater than <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, the soft body will fly around like a plastic bag
+under strong wind.</p>
+</div>
+<p>Run the scene to view the simulation. Here's an example of what it should look like:</p>
+<div  class="sphinx-contrib-video-container align-default"><video autoplay="True" controls="True" loop="True" muted="True" preload="auto" width="100%"><source src="../../_images/soft_body_box_simulation.webm" type="video/webm">Soft body box simulation example</video></div><div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To improve the simulation's result, increase the <strong>Simulation Precision</strong>.
+This can give a significant improvement at the cost of performance.</p>
+<p>Alternatively, you can increase the <strong>Physics &gt; Common &gt; Physics Ticks per Second</strong>
+project setting, which will also affect soft body simulation quality.</p>
+</div>
+</section>
+<section id="cloak-simulation">
+<h2>Cloak simulation<a class="headerlink" href="#cloak-simulation" title="Link to this heading"></a></h2>
+<p>Let's make a cloak in the Platformer 3D demo.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can download the Platformer 3D demo on
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/3d/platformer">GitHub</a>
+or <a class="reference external" href="https://godotengine.org/asset-library/asset/2748">the Asset Library</a>.</p>
+</div>
+<p>Open the <code class="docutils literal notranslate"><span class="pre">player/player.tscn</span></code> scene, add a <code class="docutils literal notranslate"><span class="pre">SoftBody3D</span></code> node below the root node,
+then assign a PlaneMesh resource to it in its <strong>Mesh</strong> property.</p>
+<p>Open the PlaneMesh's properties and set the size to <code class="docutils literal notranslate"><span class="pre">(0.5,</span> <span class="pre">1.0)</span></code>,
+then set <strong>Subdivide Width</strong> and <strong>Subdivide Depth</strong> to <code class="docutils literal notranslate"><span class="pre">5</span></code>. Adjust the
+SoftBody3D node's position and rotation so that the plane appears to be close to
+the character's back. You should end up with something like this:</p>
+<figure class="align-center" id="id3">
+<img alt="Subdividing the PlaneMesh and placing it on the character's back" src="../../_images/soft_body_cloak_subdivide.webp" />
+<figcaption>
+<p><span class="caption-text">Subdividing the PlaneMesh and placing it on the character's back</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Subdivision generates a more tessellated mesh for better simulations.
+However, higher subdivision levels will impact performance. Try
+to find a balance between performance and quality. This depends on the number
+of soft body simulations that you expect to be active at a given time,
+as well as the distance between the camera and the soft body.</p>
+</div>
+<p>Add a <a class="reference internal" href="../../classes/class_boneattachment3d.html#class-boneattachment3d"><span class="std std-ref">BoneAttachment3D</span></a> node under the skeleton
+node and select the Neck bone to attach the cloak to the character skeleton.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The BoneAttachment3D node is used to attach objects to a bone of an armature.
+The attached object will follow the bone's movement. For example, a character's
+held weapon can be attached this way.</p>
+<p>Do <strong>not</strong> move the SoftBody3D node under the BoneAttachment3D node as of now.
+Instead, we'll configure its <em>pinned points</em> to follow the BoneAttachment3D node.</p>
+</div>
+<figure class="align-center" id="id4">
+<img alt="Configuring the BoneAttachment3D node in the inspector" src="../../_images/soft_body_cloak_bone_attach.webp" />
+<figcaption>
+<p><span class="caption-text">Configuring the BoneAttachment3D node in the inspector</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>To create pinned points, select the upper vertices in the SoftBody3D node. A pinned
+point appears blue in the 3D editor viewport:</p>
+<figure class="align-center" id="id5">
+<img alt="Pinning the SoftBody3D's points in the inspector" src="../../_images/soft_body_cloak_pinned.webp" />
+<figcaption>
+<p><span class="caption-text">Pinning the SoftBody3D's points in the inspector</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The pinned joints can be found in SoftBody3D's <strong>Attachments</strong> section,
+which is under the <strong>Collision</strong> section that must be expanded first.
+Choose the BoneAttachment3D node as the <strong>Spatial Attachment Path</strong> for each
+pinned joint. The pinned joints are now attached to the neck.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To assign the properties faster, you can drag-and-drop the BoneAttachment3D node
+from the scene tree dock to the <strong>Spatial Attachment Path</strong> property field.</p>
+</div>
+<p>Note that you may have to deselect then reselect the SoftBody3D node for the
+<strong>Attachments</strong> section to appear.</p>
+<figure class="align-center" id="id6">
+<img alt="Configuring pinned points to be attached to the BoneAttachment3D node in the SoftBody3D inspector" src="../../_images/soft_body_cloak_pinned_attach.webp" />
+<figcaption>
+<p><span class="caption-text">Configuring pinned points to be attached to the BoneAttachment3D node in the SoftBody3D inspector</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The last step is to avoid clipping by adding the CharacterBody3D <code class="docutils literal notranslate"><span class="pre">Player</span></code> (the scene's root node)
+to the <strong>Parent Collision Ignore</strong> property of the SoftBody3D.</p>
+<figure class="align-center" id="id7">
+<img alt="Setting up the collision exception in the SoftBody3D inspector" src="../../_images/soft_body_cloak_ignore.webp" />
+<figcaption>
+<p><span class="caption-text">Setting up the collision exception in the SoftBody3D inspector</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Play the scene and the cloak should simulate correctly.</p>
+<figure class="align-center" id="id8">
+<img alt="Final result when running the project's main scene" src="../../_images/soft_body_cloak_finish.webp" />
+<figcaption>
+<p><span class="caption-text">Final result when running the project's main scene</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>This covers the basic settings of a soft body simulation. Experiment with the parameters
+to achieve the effect you are aiming for when making your game.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The cloak will not appear when viewed from certain angles due to backface culling.
+To resolve this, you can disable backface culling by assigning a new StandardMaterial3D,
+then setting its cull mode to <strong>Disabled</strong>. This will make the material render
+both sides of the plane.</p>
+</div>
+</section>
+<section id="using-imported-meshes">
+<h2>Using imported meshes<a class="headerlink" href="#using-imported-meshes" title="Link to this heading"></a></h2>
+<p>The <strong>Save to File</strong> option in the Advanced Import Settings dialog allows you
+to save a mesh to a standalone resource file that you can then attach to
+SoftBody3D nodes.</p>
+<p>You may also want to disable LOD generation or change the LOD generation options
+when importing a mesh for use with SoftBody3D. The default import settings
+will produce an LOD that merges adjacent faces that are nearly flat with
+respect to each other, even at very close render distances. This works well for
+static meshes, but is often undesirable for use with SoftBody3D if you want
+these faces to be able to bend and move with respect to each other, instead of
+being rendered as a single plane.</p>
+<p>See <a class="reference internal" href="../assets_pipeline/importing_3d_scenes/import_configuration.html#doc-importing-3d-scenes-import-configuration"><span class="std std-ref">Import configuration</span></a> and <a class="reference internal" href="../3d/mesh_lod.html#doc-mesh-lod"><span class="std std-ref">Mesh level of detail (LOD)</span></a>
+for more details.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="kinematic_character_2d.html" class="btn btn-neutral float-left" title="Kinematic character (2D)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="collision_shapes_2d.html" class="btn btn-neutral float-right" title="Collision shapes (2D)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

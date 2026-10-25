@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="OpenXR composition layers" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/xr/openxr_composition_layers.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: In XR games you generally want to create user interactions that happen in 3D space and involve users touching objects as if they are touching them in real life. Sometimes however crea..." />
+<meta name="description" content="Introduction: In XR games you generally want to create user interactions that happen in 3D space and involve users touching objects as if they are touching them in real life. Sometimes however crea..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>OpenXR composition layers &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="OpenXR hand tracking" href="openxr_hand_tracking.html" />
+    <link rel="prev" title="The XR action map" href="xr_action_map.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/xr/openxr_composition_layers" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/xr/openxr_composition_layers.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">XR</a></li>
+      <li class="breadcrumb-item active">OpenXR composition layers</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/xr/openxr_composition_layers.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="openxr-composition-layers">
+<span id="doc-openxr-composition-layers"></span><h1>OpenXR composition layers<a class="headerlink" href="#openxr-composition-layers" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>In XR games you generally want to create user interactions that happen in 3D space
+and involve users touching objects as if they are touching them in real life.</p>
+<p>Sometimes however creating a more traditional 2D interface is unavoidable.
+In XR however you can't just add 2D components to your scene.
+Godot needs depth information to properly position these elements so they appear at
+a comfortable place for the user.
+Even with depth information there are headsets with slanted displays that make it impossible
+for the standard 2D pipeline to correctly render the 2D elements.</p>
+<p>The solution then is to render the UI to a <a class="reference internal" href="../../classes/class_subviewport.html#class-subviewport"><span class="std std-ref">SubViewport</span></a>
+and display the result of this using a <a class="reference internal" href="../../classes/class_viewporttexture.html#class-viewporttexture"><span class="std std-ref">ViewportTexture</span></a> on a 3D mesh.
+The <a class="reference internal" href="../../classes/class_quadmesh.html#class-quadmesh"><span class="std std-ref">QuadMesh</span></a> is a suitable option for this.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See the <a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/viewport/gui_in_3d">GUI in 3D</a>
+example project for an example of this approach.</p>
+</div>
+<p>The problem with displaying the viewport in this way is that the rendered result
+is sampled for lens distortion by the XR runtime and the resulting quality loss
+can make UI text hard to read.</p>
+<p>OpenXR offers a solution to this problem through composition layers.
+With composition layers it is possible for the contents of a viewport to be projected
+on a surface after lens distortion resulting in a much higher quality end result.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As not all XR runtimes support all composition layer types,
+Godot implements a fallback solution where we render the viewport
+as part of the normal scene but with the aforementioned quality
+limitations.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When the composition layer is supported,
+it is the XR runtime that presents the subviewport.
+This means the UI is only visible in the headset,
+it will not be accessible by Godot and will thus
+not be shown when you have a spectator view on the desktop.</p>
+</div>
+<p>There are currently 3 nodes that expose this functionality:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../classes/class_openxrcompositionlayercylinder.html#class-openxrcompositionlayercylinder"><span class="std std-ref">OpenXRCompositionLayerCylinder</span></a> shows the contents of the SubViewport on the inside of a cylinder (or &quot;slice&quot; of a cylinder).</p></li>
+<li><p><a class="reference internal" href="../../classes/class_openxrcompositionlayerequirect.html#class-openxrcompositionlayerequirect"><span class="std std-ref">OpenXRCompositionLayerEquirect</span></a> shows the contents of the SubViewport on the interior of a sphere (or &quot;slice&quot; of a sphere).</p></li>
+<li><p><a class="reference internal" href="../../classes/class_openxrcompositionlayerquad.html#class-openxrcompositionlayerquad"><span class="std std-ref">OpenXRCompositionLayerQuad</span></a> shows the contents of the SubViewport on a flat rectangle.</p></li>
+</ul>
+</section>
+<section id="setting-up-the-subviewport">
+<h2>Setting up the SubViewport<a class="headerlink" href="#setting-up-the-subviewport" title="Link to this heading"></a></h2>
+<p>The first step is adding a SubViewport for our 2D UI,
+this doesn't require any specific steps.
+For our example we do mark the viewport as transparent.</p>
+<p>You can now create the 2D UI by adding child nodes to the SubViewport as you normally would.
+It is advisable to save the 2D UI in a subscene, this makes it easier to do your layout.</p>
+<img alt="../../_images/openxr_composition_layer_subviewport.webp" src="../../_images/openxr_composition_layer_subviewport.webp" />
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The update mode &quot;When Visible&quot; will not work as Godot can't determine whether
+the viewport is visible to the user.
+When assigning our viewport to a composition layer Godot will automatically adjust this.</p>
+</div>
+</section>
+<section id="adding-a-composition-layer">
+<h2>Adding a composition layer<a class="headerlink" href="#adding-a-composition-layer" title="Link to this heading"></a></h2>
+<p>The second step is adding our composition layer.
+We can add the correct composition layer node as a child node of
+our <a class="reference internal" href="../../classes/class_xrorigin3d.html#class-xrorigin3d"><span class="std std-ref">XROrigin3D</span></a> node.
+This is very important as the XR runtime positions everything in relation to our origin.</p>
+<p>We want to position the composition layer so it is at eye height and roughly 1 to 1.5 meters
+away from the player.</p>
+<p>We now assign the SubViewport to the <code class="docutils literal notranslate"><span class="pre">Layer</span> <span class="pre">Viewport</span></code> property and enable Alpha Blend.</p>
+<img alt="../../_images/openxr_composition_layer_quad.webp" src="../../_images/openxr_composition_layer_quad.webp" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As the player can walk away from the origin point,
+you will want to reposition the composition layer when the player recenters the view.
+Using the reference space <code class="docutils literal notranslate"><span class="pre">Local</span> <span class="pre">Floor</span></code> will apply this logic automatically.</p>
+</div>
+</section>
+<section id="making-the-interface-work">
+<h2>Making the interface work<a class="headerlink" href="#making-the-interface-work" title="Link to this heading"></a></h2>
+<p>So far we're only displaying our UI, to make it work we need to add some code.
+For this example we're going to keep things simple and
+make one of the controllers work as a pointer.
+We'll then simulate mouse actions with this pointer.</p>
+<p>This code also requires a <code class="docutils literal notranslate"><span class="pre">MeshInstance3D</span></code> node called <code class="docutils literal notranslate"><span class="pre">Pointer</span></code> to be added
+as a child to our <code class="docutils literal notranslate"><span class="pre">OpenXRCompositionLayerQuad</span></code> node.
+We configure a <code class="docutils literal notranslate"><span class="pre">SphereMesh</span></code> with a radius <code class="docutils literal notranslate"><span class="pre">0.01</span></code> meters.
+We'll be using this as a helper to visualize where the user is pointing.</p>
+<p>The main function that drives this functionality is the <code class="docutils literal notranslate"><span class="pre">intersects_ray</span></code>
+function on our composition layer node.
+This function takes the global position and orientation of our pointer and returns
+the UV where our ray intersects our viewport.
+It returns <code class="docutils literal notranslate"><span class="pre">Vector2(-1.0,</span> <span class="pre">-1.0)</span></code> if we're not pointing at our viewport.</p>
+<p>We start with setting up some variables, important here are the export variables
+which identify our controller node with which we point to our screen.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">OpenXRCompositionLayerQuad</span>
+
+<span class="k">const</span><span class="w"> </span><span class="n">NO_INTERSECTION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">XRController3D</span>
+<span class="nd">@export</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">button_action</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;trigger_click&quot;</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">was_pressed</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="k">var</span><span class="w"> </span><span class="n">was_intersect</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO_INTERSECTION</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Next we define a helper function that takes the value returned from <code class="docutils literal notranslate"><span class="pre">intersects_ray</span></code>
+and gives us the global position for that intersection point.
+This implementation only works for our <code class="docutils literal notranslate"><span class="pre">OpenXRCompositionLayerQuad</span></code> node.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_intersect_to_global_pos</span><span class="p">(</span><span class="n">intersect</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">intersect</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">NO_INTERSECTION</span><span class="p">:</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">local_pos</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">intersect</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">quad_size</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">global_transform</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="n">local_pos</span><span class="o">.</span><span class="vi">x</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">local_pos</span><span class="o">.</span><span class="vi">y</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">()</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>We also define a helper function that takes our <code class="docutils literal notranslate"><span class="pre">intersect</span></code> value and
+returns our location in the viewport's local coordinate system:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_intersect_to_viewport_pos</span><span class="p">(</span><span class="n">intersect</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">Vector2i</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">layer_viewport</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">intersect</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">NO_INTERSECTION</span><span class="p">:</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intersect</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="n">layer_viewport</span><span class="o">.</span><span class="vi">size</span><span class="p">)</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb nb-Type">Vector2i</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb nb-Type">Vector2i</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>The main logic happens in our <code class="docutils literal notranslate"><span class="pre">_process</span></code> function.
+Here we start by hiding our pointer,
+we then check if we have a valid controller and viewport,
+and we call <code class="docutils literal notranslate"><span class="pre">intersects_ray</span></code> with the position and orientation of our controller:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="c1"># Called every frame. &#39;delta&#39; is the elapsed time since the previous frame.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Hide our pointer, we&#39;ll make it visible if we&#39;re interacting with the viewport.</span>
+<span class="w">    </span><span class="sx">$Pointer</span><span class="o">.</span><span class="vi">visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">layer_viewport</span><span class="p">:</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">controller_t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Transform3D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="o">.</span><span class="vi">global_transform</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">intersect</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">intersects_ray</span><span class="p">(</span><span class="n">controller_t</span><span class="o">.</span><span class="vi">origin</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">controller_t</span><span class="o">.</span><span class="vi">basis</span><span class="o">.</span><span class="vi">z</span><span class="p">)</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Next we check if we're intersecting with our viewport.
+If so, we check if our button is pressed and place our pointer at our intersection point.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">intersect</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">NO_INTERSECTION</span><span class="p">:</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">is_pressed</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="o">.</span><span class="nf">is_button_pressed</span><span class="p">(</span><span class="n">button_action</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c1"># Place our pointer where we&#39;re pointing</span>
+<span class="w">            </span><span class="k">var</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">_intersect_to_global_pos</span><span class="p">(</span><span class="n">intersect</span><span class="p">)</span>
+<span class="w">            </span><span class="sx">$Pointer</span><span class="o">.</span><span class="vi">visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="w">            </span><span class="sx">$Pointer</span><span class="o">.</span><span class="vi">global_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pos</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>If we were intersecting in our previous process call and our pointer has moved,
+we prepare an <a class="reference internal" href="../../classes/class_inputeventmousemotion.html#class-inputeventmousemotion"><span class="std std-ref">InputEventMouseMotion</span></a> object
+to simulate our mouse moving and send that to our viewport for further processing.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">was_intersect</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">NO_INTERSECTION</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">intersect</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">was_intersect</span><span class="p">:</span>
+<span class="w">                </span><span class="c1"># Pointer moved</span>
+<span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">InputEventMouseMotion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">InputEventMouseMotion</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">_intersect_to_viewport_pos</span><span class="p">(</span><span class="n">was_intersect</span><span class="p">)</span>
+<span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">_intersect_to_viewport_pos</span><span class="p">(</span><span class="n">intersect</span><span class="p">)</span>
+<span class="w">                </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">was_pressed</span><span class="p">:</span>
+<span class="w">                    </span><span class="n">event</span><span class="o">.</span><span class="vi">button_mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MOUSE_BUTTON_MASK_LEFT</span>
+<span class="w">                </span><span class="n">event</span><span class="o">.</span><span class="vi">relative</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">from</span>
+<span class="w">                </span><span class="n">event</span><span class="o">.</span><span class="vi">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">to</span>
+<span class="w">                </span><span class="n">layer_viewport</span><span class="o">.</span><span class="nf">push_input</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>If we've just released our button we also prepare
+an <a class="reference internal" href="../../classes/class_inputeventmousebutton.html#class-inputeventmousebutton"><span class="std std-ref">InputEventMouseButton</span></a> object
+to simulate a button release and send that to our viewport for further processing.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="w">            </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">is_pressed</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">was_pressed</span><span class="p">:</span>
+<span class="w">                </span><span class="c1"># Button was let go?</span>
+<span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">InputEventMouseButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">InputEventMouseButton</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">                </span><span class="n">event</span><span class="o">.</span><span class="vi">button_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                </span><span class="n">event</span><span class="o">.</span><span class="vi">pressed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">                </span><span class="n">event</span><span class="o">.</span><span class="vi">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">_intersect_to_viewport_pos</span><span class="p">(</span><span class="n">intersect</span><span class="p">)</span>
+<span class="w">                </span><span class="n">layer_viewport</span><span class="o">.</span><span class="nf">push_input</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Or if we've just pressed our button we prepare
+an <a class="reference internal" href="../../classes/class_inputeventmousebutton.html#class-inputeventmousebutton"><span class="std std-ref">InputEventMouseButton</span></a> object
+to simulate a button press and send that to our viewport for further processing.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="w">            </span><span class="k k-ControlFlow">elif</span><span class="w"> </span><span class="n">is_pressed</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">was_pressed</span><span class="p">:</span>
+<span class="w">                </span><span class="c1"># Button was pressed?</span>
+<span class="w">                </span><span class="k">var</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">InputEventMouseButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">InputEventMouseButton</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">                </span><span class="n">event</span><span class="o">.</span><span class="vi">button_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                </span><span class="n">event</span><span class="o">.</span><span class="vi">button_mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MOUSE_BUTTON_MASK_LEFT</span>
+<span class="w">                </span><span class="n">event</span><span class="o">.</span><span class="vi">pressed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="w">                </span><span class="n">event</span><span class="o">.</span><span class="vi">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">_intersect_to_viewport_pos</span><span class="p">(</span><span class="n">intersect</span><span class="p">)</span>
+<span class="w">                </span><span class="n">layer_viewport</span><span class="o">.</span><span class="nf">push_input</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Next we remember our state for next frame.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="w">            </span><span class="n">was_pressed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is_pressed</span>
+<span class="w">            </span><span class="n">was_intersect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intersect</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Finally, if we aren't intersecting, we clear our state.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="w">        </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">            </span><span class="n">was_pressed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">            </span><span class="n">was_intersect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NO_INTERSECTION</span>
+</pre></div>
+</div>
+</section>
+<section id="hole-punching">
+<h2>Hole punching<a class="headerlink" href="#hole-punching" title="Link to this heading"></a></h2>
+<p>As the composition layer is composited on top of the render result,
+it can be rendered in front of objects that are actually forward of the viewport.</p>
+<p>By enabling hole punch you instruct Godot to render a transparent object
+where our viewport is displayed.
+It does this in a way that fills the depth buffer and clears the current rendering result.
+Anything behind our viewport will now be cleared,
+while anything in front of our viewport will be rendered as usual.</p>
+<p>You also need to set <code class="docutils literal notranslate"><span class="pre">Sort</span> <span class="pre">Order</span></code> to a negative value,
+the XR compositor will now draw the viewport first, and then overlay our rendering result.</p>
+<figure class="align-center" id="id1">
+<img alt="../../_images/openxr_composition_layer_hole_punch.webp" src="../../_images/openxr_composition_layer_hole_punch.webp" />
+<figcaption>
+<p><span class="caption-text">Use case showing how the user's hand is incorrectly obscured
+by a composition layer when hole punching is not used.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="xr_action_map.html" class="btn btn-neutral float-left" title="The XR action map" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="openxr_hand_tracking.html" class="btn btn-neutral float-right" title="OpenXR hand tracking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

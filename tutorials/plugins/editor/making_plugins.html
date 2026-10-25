@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Making plugins" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/plugins/editor/making_plugins.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="About plugins: A plugin is a great way to extend the editor with useful tools. It can be made entirely with GDScript and standard scenes, without even reloading the editor. Unlike modules, you don&..." />
+<meta name="description" content="About plugins: A plugin is a great way to extend the editor with useful tools. It can be made entirely with GDScript and standard scenes, without even reloading the editor. Unlike modules, you don&..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Making plugins &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Making main screen plugins" href="making_main_screen_plugins.html" />
+    <link rel="prev" title="Installing plugins" href="installing_plugins.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/plugins/editor/making_plugins" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/plugins/editor/making_plugins.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Plugins</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Editor plugins</a></li>
+      <li class="breadcrumb-item active">Making plugins</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/plugins/editor/making_plugins.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="making-plugins">
+<span id="doc-making-plugins"></span><h1>Making plugins<a class="headerlink" href="#making-plugins" title="Link to this heading"></a></h1>
+<section id="about-plugins">
+<h2>About plugins<a class="headerlink" href="#about-plugins" title="Link to this heading"></a></h2>
+<p>A plugin is a great way to extend the editor with useful tools. It can be made
+entirely with GDScript and standard scenes, without even reloading the editor.
+Unlike modules, you don't need to create C++ code nor recompile the engine.
+While this makes plugins less powerful, there are still many things you can
+do with them. Note that a plugin is similar to any scene you can already
+make, except it is created using a script to add editor functionality.</p>
+<p>This tutorial will guide you through the creation of two plugins so
+you can understand how they work and be able to develop your own. The first
+is a custom node that you can add to any scene in the project, and the
+other is a custom dock added to the editor.</p>
+</section>
+<section id="creating-a-plugin">
+<span id="doc-making-plugins-template"></span><h2>Creating a plugin<a class="headerlink" href="#creating-a-plugin" title="Link to this heading"></a></h2>
+<p>Before starting, create a new empty project wherever you want. This will serve
+as a base to develop and test the plugins.</p>
+<p>The first thing you need for the editor to identify a new plugin is to
+create two files: a <code class="docutils literal notranslate"><span class="pre">plugin.cfg</span></code> for configuration and a tool script with the
+functionality. Plugins have a standard path like <code class="docutils literal notranslate"><span class="pre">addons/plugin_name</span></code> inside
+the project folder. Godot provides a dialog for generating those files and
+placing them where they need to be.</p>
+<p>In the main toolbar, click the <code class="docutils literal notranslate"><span class="pre">Project</span></code> dropdown. Then click
+<code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">Settings...</span></code>. Go to the <code class="docutils literal notranslate"><span class="pre">Plugins</span></code> tab and then click
+on the <span class="role-button role-ui">Create New Plugin</span> button in the top-right.</p>
+<p>You will see the dialog appear, like so:</p>
+<img alt="../../../_images/making_plugins-create_plugin_dialog.webp" src="../../../_images/making_plugins-create_plugin_dialog.webp" />
+<p>The placeholder text in each field describes how it affects the plugin's
+creation of the files and the config file's values.</p>
+<p>To continue with the example, use the following values:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">Plugin Name</span><span class="o">:</span><span class="w"> </span><span class="s">My Custom Node</span>
+<span class="na">Subfolder</span><span class="o">:</span><span class="w"> </span><span class="s">my_custom_node</span>
+<span class="na">Description</span><span class="o">:</span><span class="w"> </span><span class="s">A custom node made to extend the Godot Engine.</span>
+<span class="na">Author</span><span class="o">:</span><span class="w"> </span><span class="s">Your Name Here</span>
+<span class="na">Version</span><span class="o">:</span><span class="w"> </span><span class="s">1.0.0</span>
+<span class="na">Language</span><span class="o">:</span><span class="w"> </span><span class="s">GDScript</span>
+<span class="na">Script Name</span><span class="o">:</span><span class="w"> </span><span class="s">custom_node.gd</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">Plugin Name</span><span class="o">:</span><span class="w"> </span><span class="s">My Custom Node</span>
+<span class="na">Subfolder</span><span class="o">:</span><span class="w"> </span><span class="s">MyCustomNode</span>
+<span class="na">Description</span><span class="o">:</span><span class="w"> </span><span class="s">A custom node made to extend the Godot Engine.</span>
+<span class="na">Author</span><span class="o">:</span><span class="w"> </span><span class="s">Your Name Here</span>
+<span class="na">Version</span><span class="o">:</span><span class="w"> </span><span class="s">1.0.0</span>
+<span class="na">Language</span><span class="o">:</span><span class="w"> </span><span class="s">C</span><span class="c1">#</span>
+<span class="na">Script Name</span><span class="o">:</span><span class="w"> </span><span class="s">CustomNode.cs</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In C#, the EditorPlugin script needs to be compiled, which
+requires building the project. After building the project the plugin can be
+enabled in the <code class="docutils literal notranslate"><span class="pre">Plugins</span></code> tab of <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">Settings</span></code>.</p>
+</div>
+<p>You should end up with a directory structure like this:</p>
+<img alt="../../../_images/making_plugins-my_custom_mode_folder.webp" src="../../../_images/making_plugins-my_custom_mode_folder.webp" />
+<p><code class="docutils literal notranslate"><span class="pre">plugin.cfg</span></code> is an INI file with metadata about your plugin.
+The name and description help people understand what it does.
+Your name helps you get properly credited for your work.
+The version number helps others know if they have an outdated version;
+if you are unsure on how to come up with the version number, check out <a class="reference external" href="https://semver.org/">Semantic Versioning</a>.
+The main script file will instruct Godot what your plugin does in the editor
+once it is active.</p>
+<section id="the-script-file">
+<h3>The script file<a class="headerlink" href="#the-script-file" title="Link to this heading"></a></h3>
+<p>Upon creation of the plugin, the dialog will automatically open the
+EditorPlugin script for you. The script has two requirements that you cannot
+change: it must be a <code class="docutils literal notranslate"><span class="pre">&#64;tool</span></code> script, or else it will not load properly in the
+editor, and it must inherit from <a class="reference internal" href="../../../classes/class_editorplugin.html#class-editorplugin"><span class="std std-ref">EditorPlugin</span></a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In addition to the EditorPlugin script, any other GDScript that your plugin uses
+must <em>also</em> be a tool. Any GDScript without <code class="docutils literal notranslate"><span class="pre">&#64;tool</span></code> used by the editor
+will act like an empty file!</p>
+</div>
+<p>It's important to deal with initialization and clean-up of resources.
+A good practice is to use the virtual function
+<a class="reference internal" href="../../../classes/class_node.html#class-node-private-method-enter-tree"><span class="std std-ref">_enter_tree()</span></a> to initialize your plugin and
+<a class="reference internal" href="../../../classes/class_node.html#class-node-private-method-exit-tree"><span class="std std-ref">_exit_tree()</span></a> to clean it up. Thankfully,
+the dialog generates these callbacks for you. Your script should look something
+like this:</p>
+<div class="sphinx-tabs docutils container" id="doc-making-plugins-template-code">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorPlugin</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_enter_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Initialization of the plugin goes here.</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_exit_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Clean-up of the plugin goes here.</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="cp">#if TOOLS</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="na">[Tool]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">CustomNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">EditorPlugin</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_EnterTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Initialization of the plugin goes here.</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_ExitTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Clean-up of the plugin goes here.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div></div>
+<p>This is a good template to use when creating new plugins.</p>
+</section>
+</section>
+<section id="a-custom-node">
+<h2>A custom node<a class="headerlink" href="#a-custom-node" title="Link to this heading"></a></h2>
+<p>Sometimes you want a certain behavior in many nodes, such as a custom scene
+or control that can be reused. Instancing is helpful in a lot of cases, but
+sometimes it can be cumbersome, especially if you're using it in many
+projects. A good solution to this is to make a plugin that adds a node with a
+custom behavior.</p>
+<p>For this tutorial, we'll create a button that prints a message when
+clicked. For that, we'll need a script that extends from
+<a class="reference internal" href="../../../classes/class_button.html#class-button"><span class="std std-ref">Button</span></a>. It could also extend
+<a class="reference internal" href="../../../classes/class_basebutton.html#class-basebutton"><span class="std std-ref">BaseButton</span></a> if you prefer:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optional, add to execute in the editor.</span>
+<span class="nd">@tool</span>
+
+<span class="c1"># Icons are optional.</span>
+<span class="c1"># Alternatively, you may use the UID of the icon or the absolute path.</span>
+<span class="nd">@icon</span><span class="p">(</span><span class="s2">&quot;icon.svg&quot;</span><span class="p">)</span>
+
+<span class="c1"># Automatically register the node in the Create New Node dialog</span>
+<span class="c1"># and make it available for use with other scripts.</span>
+<span class="k">class_name</span><span class="w"> </span><span class="nc">MyButton</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">Button</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_enter_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="n">pressed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">clicked</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">clicked</span><span class="p">():</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">&quot;You clicked me!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="c1">// Optional, add to execute in the editor.</span>
+<span class="na">[Tool]</span>
+
+<span class="c1">// Icons are optional.</span>
+<span class="c1">// Alternatively, you may use the UID of the icon or the absolute path.</span>
+<span class="na">[Icon(&quot;icon.svg&quot;)]</span>
+
+<span class="c1">// Automatically register the node in the Create New Node dialog</span>
+<span class="c1">// and make it available for use with other scripts.</span>
+<span class="na">[GlobalClass]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyButton</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Button</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_EnterTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Pressed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">Clicked</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Clicked</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;You clicked me!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>That's it for our basic button. You can save this as <code class="docutils literal notranslate"><span class="pre">my_button.gd</span></code> inside the
+plugin folder. You may have a 16×16 icon to show in the scene tree. If you
+don't have one, you can grab the default one from the engine and save it in your
+<cite>addons/my_custom_node</cite> folder as <cite>icon.svg</cite>, or use the default Godot logo
+(<cite>&#64;icon(&quot;res://icon.svg&quot;)</cite>).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>SVG images that are used as custom node icons should have the
+<strong>Editor &gt; Scale With Editor Scale</strong> and <strong>Editor &gt; Convert Colors With Editor Theme</strong>
+<a class="reference internal" href="../../assets_pipeline/importing_images.html#doc-importing-images-editor-import-options"><span class="std std-ref">import options</span></a> enabled. This allows
+icons to follow the editor's scale and theming settings if the icons are designed with
+the same color palette as Godot's own icons.</p>
+</div>
+<img alt="../../../_images/making_plugins-custom_node_icon.png" src="../../../_images/making_plugins-custom_node_icon.png" />
+<p>With that done, the plugin should already be available in the plugin list in the
+<strong>Project Settings</strong>, so activate it as explained in <a class="reference internal" href="#checking-the-results">Checking the results</a>.</p>
+<p>Then try it out by adding your new node:</p>
+<img alt="../../../_images/making_plugins-custom_node_create.webp" src="../../../_images/making_plugins-custom_node_create.webp" />
+<p>When you add the node, you can see that it already has the script you created
+attached to it. Set a text to the button, save and run the scene. When you
+click the button, you can see some text in the console:</p>
+<img alt="../../../_images/making_plugins-custom_node_console.webp" src="../../../_images/making_plugins-custom_node_console.webp" />
+</section>
+<section id="a-custom-dock">
+<span id="doc-making-plugins-custom-dock"></span><h2>A custom dock<a class="headerlink" href="#a-custom-dock" title="Link to this heading"></a></h2>
+<p>Sometimes, you need to extend the editor and add tools that are always available.
+An easy way to do it is to add a new dock with a plugin. Docks are just scenes
+based on Control, so they are created in a way similar to usual GUI scenes.</p>
+<p>Creating a custom dock is done just like a custom node. Create a new
+<code class="docutils literal notranslate"><span class="pre">plugin.cfg</span></code> file in the <code class="docutils literal notranslate"><span class="pre">addons/my_custom_dock</span></code> folder, then
+add the following content to it:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">plugin</span><span class="p">]</span>
+
+<span class="n">name</span><span class="o">=</span><span class="s2">&quot;My Custom Dock&quot;</span>
+<span class="n">description</span><span class="o">=</span><span class="s2">&quot;A custom dock made so I can learn how to make plugins.&quot;</span>
+<span class="n">author</span><span class="o">=</span><span class="s2">&quot;Your Name Here&quot;</span>
+<span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span>
+<span class="n">script</span><span class="o">=</span><span class="s2">&quot;custom_dock.gd&quot;</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="na">[plugin]</span>
+
+<span class="n">name</span><span class="o">=</span><span class="s">&quot;My Custom Dock&quot;</span>
+<span class="n">description</span><span class="o">=</span><span class="s">&quot;A custom dock made so I can learn how to make plugins.&quot;</span>
+<span class="n">author</span><span class="o">=</span><span class="s">&quot;Your Name Here&quot;</span>
+<span class="n">version</span><span class="o">=</span><span class="s">&quot;1.0&quot;</span>
+<span class="n">script</span><span class="o">=</span><span class="s">&quot;CustomDock.cs&quot;</span>
+</pre></div>
+</div>
+</div></div>
+<p>Then create the script <code class="docutils literal notranslate"><span class="pre">custom_dock.gd</span></code> in the same folder. The following code
+will get you started.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nc">EditorDock</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_enter_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Initialization of the dock goes here.</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_exit_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Clean-up of the dock goes here.</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="cp">#if TOOLS</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="na">[Tool]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">CustomNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">EditorDock</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_EnterTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Initialization of the dock goes here.</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_ExitTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Clean-up of the dock goes here.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div></div>
+<p>Since we're trying to add a new custom dock, we need to create the contents of
+the dock. This is nothing more than a standard Godot scene: just create
+a new scene in the editor then edit it.</p>
+<p>For an editor dock, the root node <strong>must</strong> be a <a class="reference internal" href="../../../classes/class_control.html#class-control"><span class="std std-ref">Control</span></a>
+or one of its child classes. For this tutorial, you can create a single button.
+Don't forget to add some text to your button.</p>
+<img alt="../../../_images/making_plugins-my_custom_dock_scene.webp" src="../../../_images/making_plugins-my_custom_dock_scene.webp" />
+<p>Save this scene as <code class="docutils literal notranslate"><span class="pre">my_dock.tscn</span></code>. Now, we need to grab the scene we created
+then add it as a dock in the editor. For this, you can rely on the function
+<a class="reference internal" href="../../../classes/class_editorplugin.html#class-editorplugin-method-add-dock"><span class="std std-ref">add_dock()</span></a> from the
+<a class="reference internal" href="../../../classes/class_editorplugin.html#class-editorplugin"><span class="std std-ref">EditorPlugin</span></a> class.</p>
+<p>You need to select a dock position and define the control to add
+(which is the scene you just created). Don't forget to
+<strong>remove the dock</strong> when the plugin is deactivated.
+The script could look like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorPlugin</span>
+
+
+<span class="c1"># A class member to hold the dock during the plugin life cycle.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">dock</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_enter_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Initialization of the plugin goes here.</span>
+<span class="w">    </span><span class="c1"># Load the dock scene and instantiate it.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">dock_scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://addons/my_custom_dock/my_dock.tscn&quot;</span><span class="p">)</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># Create the dock and add the loaded scene to it.</span>
+<span class="w">    </span><span class="n">dock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EditorDock</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">dock</span><span class="o">.</span><span class="nf">add_child</span><span class="p">(</span><span class="n">dock_scene</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">dock</span><span class="o">.</span><span class="vi">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;My Dock&quot;</span>
+
+<span class="w">    </span><span class="c1"># Note that LEFT_UL means the left of the editor, upper-left dock.</span>
+<span class="w">    </span><span class="n">dock</span><span class="o">.</span><span class="vi">default_slot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EditorDock</span><span class="o">.</span><span class="vi">DOCK_SLOT_LEFT_UL</span>
+
+<span class="w">    </span><span class="c1"># Allow the dock to be on the left or right of the editor, and to be made floating.</span>
+<span class="w">    </span><span class="n">dock</span><span class="o">.</span><span class="vi">available_layouts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EditorDock</span><span class="o">.</span><span class="vi">DOCK_LAYOUT_VERTICAL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nc">EditorDock</span><span class="o">.</span><span class="vi">DOCK_LAYOUT_FLOATING</span>
+
+<span class="w">    </span><span class="nf">add_dock</span><span class="p">(</span><span class="n">dock</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_exit_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Clean-up of the plugin goes here.</span>
+<span class="w">    </span><span class="c1"># Remove the dock.</span>
+<span class="w">    </span><span class="nf">remove_dock</span><span class="p">(</span><span class="n">dock</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Erase the control from the memory.</span>
+<span class="w">    </span><span class="n">dock</span><span class="o">.</span><span class="nf">queue_free</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="cp">#if TOOLS</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="na">[Tool]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">CustomDock</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">EditorPlugin</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">EditorDock</span><span class="w"> </span><span class="n">_dock</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_EnterTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">dockScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">PackedScene</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://addons/MyCustomDock/MyDock.tscn&quot;</span><span class="p">).</span><span class="n">Instantiate</span><span class="o">&lt;</span><span class="n">Control</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Create the dock and add the loaded scene to it.</span>
+<span class="w">        </span><span class="n">_dock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EditorDock</span><span class="p">();</span>
+<span class="w">        </span><span class="n">_dock</span><span class="p">.</span><span class="n">AddChild</span><span class="p">(</span><span class="n">dockScene</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">_dock</span><span class="p">.</span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;My Dock&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Note that LeftUl means the left of the editor, upper-left dock.</span>
+<span class="w">        </span><span class="n">_dock</span><span class="p">.</span><span class="n">DefaultSlot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DockSlot</span><span class="p">.</span><span class="n">LeftUl</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Allow the dock to be on the left or right of the editor, and to be made floating.</span>
+<span class="w">        </span><span class="n">_dock</span><span class="p">.</span><span class="n">AvailableLayouts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DockLayout</span><span class="p">.</span><span class="n">Horizontal</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">DockLayout</span><span class="p">.</span><span class="n">Floating</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">AddDock</span><span class="p">(</span><span class="n">_dock</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_ExitTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Clean-up of the plugin goes here.</span>
+<span class="w">        </span><span class="c1">// Remove the dock.</span>
+<span class="w">        </span><span class="n">RemoveDock</span><span class="p">(</span><span class="n">_dock</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Erase the control from the memory.</span>
+<span class="w">        </span><span class="n">_dock</span><span class="p">.</span><span class="n">QueueFree</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div></div>
+<p>Note that, while the dock will initially appear at its specified position,
+the user can freely change its position and save the resulting layout.</p>
+<section id="checking-the-results">
+<h3>Checking the results<a class="headerlink" href="#checking-the-results" title="Link to this heading"></a></h3>
+<p>It's now time to check the results of your work. Open the <strong>Project
+Settings</strong> and click on the <strong>Plugins</strong> tab. Your plugin should be the only one
+on the list.</p>
+<img alt="../../../_images/making_plugins-project_settings.webp" src="../../../_images/making_plugins-project_settings.webp" />
+<p>You can see the plugin is not enabled.
+Click the <strong>Enable</strong> checkbox to activate the plugin.
+The dock should become visible before you even close
+the settings window. You should now have a custom dock:</p>
+<img alt="../../../_images/making_plugins-custom_dock.webp" src="../../../_images/making_plugins-custom_dock.webp" />
+</section>
+</section>
+<section id="registering-autoloads-singletons-in-plugins">
+<span id="doc-making-plugins-autoload"></span><h2>Registering autoloads/singletons in plugins<a class="headerlink" href="#registering-autoloads-singletons-in-plugins" title="Link to this heading"></a></h2>
+<p>It is possible for editor plugins to automatically register
+<a class="reference internal" href="../../scripting/singletons_autoload.html#doc-singletons-autoload"><span class="std std-ref">autoloads</span></a> when the plugin is enabled.
+This also includes unregistering the autoload when the plugin is disabled.</p>
+<p>This makes setting up plugins faster for users, as they no longer have to manually
+add autoloads to their project settings if your editor plugin requires the use of
+an autoload.</p>
+<p>Use the following code to register a singleton from an editor plugin:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-6-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-6-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-6-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorPlugin</span>
+
+<span class="c1"># Replace this value with a PascalCase autoload name, as per the GDScript style guide.</span>
+<span class="k">const</span><span class="w"> </span><span class="n">AUTOLOAD_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SomeAutoload&quot;</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_enable_plugin</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># The autoload can be a scene or script file.</span>
+<span class="w">    </span><span class="nf">add_autoload_singleton</span><span class="p">(</span><span class="n">AUTOLOAD_NAME</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;res://addons/my_addon/some_autoload.tscn&quot;</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_disable_plugin</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">remove_autoload_singleton</span><span class="p">(</span><span class="n">AUTOLOAD_NAME</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-6-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-6-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="cp">#if TOOLS</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="na">[Tool]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyEditorPlugin</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">EditorPlugin</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Replace this value with a PascalCase autoload name.</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">AutoloadName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SomeAutoload&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_EnablePlugin</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// The autoload can be a scene or script file.</span>
+<span class="w">        </span><span class="n">AddAutoloadSingleton</span><span class="p">(</span><span class="n">AutoloadName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;res://addons/MyAddon/SomeAutoload.tscn&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_DisablePlugin</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">RemoveAutoloadSingleton</span><span class="p">(</span><span class="n">AutoloadName</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="using-sub-plugins">
+<h2>Using sub-plugins<a class="headerlink" href="#using-sub-plugins" title="Link to this heading"></a></h2>
+<p>Often a plugin adds multiple things, for example a custom node and a panel.
+In those cases it might be easier to have a separate plugin script for each of those features.
+Sub-plugins can be used for this.</p>
+<p>First create all plugins and sub plugins as normal plugins:</p>
+<img alt="../../../_images/sub_plugin_creation.webp" src="../../../_images/sub_plugin_creation.webp" />
+<p>Then move the sub plugins into the main plugin folder:</p>
+<img alt="../../../_images/sub_plugin_moved.webp" src="../../../_images/sub_plugin_moved.webp" />
+<p>Godot will hide sub-plugins from the plugin list, so that a user can't enable or disable them.
+Instead the main plugin script should enable and disable sub-plugins like this:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-7-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button></div><div aria-labelledby="tab-7-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorPlugin</span>
+
+<span class="c1"># The main plugin is located at res://addons/my_plugin/</span>
+<span class="k">const</span><span class="w"> </span><span class="n">PLUGIN_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_plugin&quot;</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_enable_plugin</span><span class="p">():</span>
+<span class="w">    </span><span class="nb">EditorInterface</span><span class="o">.</span><span class="nf">set_plugin_enabled</span><span class="p">(</span><span class="n">PLUGIN_NAME</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;/node&quot;</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">EditorInterface</span><span class="o">.</span><span class="nf">set_plugin_enabled</span><span class="p">(</span><span class="n">PLUGIN_NAME</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;/panel&quot;</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_disable_plugin</span><span class="p">():</span>
+<span class="w">    </span><span class="nb">EditorInterface</span><span class="o">.</span><span class="nf">set_plugin_enabled</span><span class="p">(</span><span class="n">PLUGIN_NAME</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;/node&quot;</span><span class="p">,</span><span class="w"> </span><span class="l">false</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">EditorInterface</span><span class="o">.</span><span class="nf">set_plugin_enabled</span><span class="p">(</span><span class="n">PLUGIN_NAME</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;/panel&quot;</span><span class="p">,</span><span class="w"> </span><span class="l">false</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="going-beyond">
+<h2>Going beyond<a class="headerlink" href="#going-beyond" title="Link to this heading"></a></h2>
+<p>Now that you've learned how to make basic plugins, you can extend the editor in
+several ways. Lots of functionality can be added to the editor with GDScript;
+it is a powerful way to create specialized editors without having to delve into
+C++ modules.</p>
+<p>You can make your own plugins to help yourself and share them in the
+<a class="reference external" href="https://godotengine.org/asset-library/">Asset Library</a> so that people
+can benefit from your work.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installing_plugins.html" class="btn btn-neutral float-left" title="Installing plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="making_main_screen_plugins.html" class="btn btn-neutral float-right" title="Making main screen plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

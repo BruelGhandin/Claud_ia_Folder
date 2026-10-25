@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Main build system: Working with SCons" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/scripting/cpp/build_system/scons.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="godot-cpp uses SCons as its main build system. It is modeled after Godot&#x27;s build system, and some commands available there are also available in godot-cpp projects. Getting started: To build a..." />
+<meta name="description" content="godot-cpp uses SCons as its main build system. It is modeled after Godot&#x27;s build system, and some commands available there are also available in godot-cpp projects. Getting started: To build a..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Main build system: Working with SCons &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Secondary build system: Working with CMake" href="cmake.html" />
+    <link rel="prev" title="Build system" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/scripting/cpp/build_system/scons" />
+
+<link rel="manifest" href="../../../../manifest.webmanifest" /><link rel="icon" href="../../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../../_static/css/godot-mobile.css"><script defer src="../../../../_static/js/godot-pwa.js"></script><script defer src="../../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../../" data-godot-page="tutorials/scripting/cpp/build_system/scons.html"></div><script src="../../../../_static/js/godot-menu-data.js"></script><script src="../../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Scripting</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">C++ (godot-cpp)</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Build system</a></li>
+      <li class="breadcrumb-item active">Main build system: Working with SCons</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/scripting/cpp/build_system/scons.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="main-build-system-working-with-scons">
+<span id="doc-godot-cpp-build-system"></span><h1>Main build system: Working with SCons<a class="headerlink" href="#main-build-system-working-with-scons" title="Link to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>This page documents how to compile godot-cpp. If you're looking to compile Godot instead, see
+<a class="reference internal" href="../../../../engine_details/development/compiling/introduction_to_the_buildsystem.html#doc-introduction-to-the-buildsystem"><span class="std std-ref">Introduction to the buildsystem</span></a>.</p>
+</div>
+<p><a class="reference external" href="https://github.com/godotengine/godot-cpp">godot-cpp</a> uses <a class="reference external" href="https://scons.org">SCons</a> as its main build system.
+It is modeled after <a class="reference internal" href="../../../../engine_details/development/compiling/index.html#doc-compiling-index"><span class="std std-ref">Godot's build system</span></a>, and some commands available there are also
+available in godot-cpp projects.</p>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<p>To build a godot-cpp project, it is generally sufficient to install <a class="reference external" href="https://scons.org">SCons</a>, and simply run it
+in the project directory:</p>
+<blockquote>
+<div><p>scons</p>
+</div></blockquote>
+<p>You may want to learn about available options:</p>
+<blockquote>
+<div><p>scons --help</p>
+</div></blockquote>
+<p>To cleanly re-build your project, add <code class="docutils literal notranslate"><span class="pre">--clean</span></code> to your build command:</p>
+<blockquote>
+<div><p>scons --clean</p>
+</div></blockquote>
+<p>You can find more information about common SCons arguments and build patterns in the
+<a class="reference external" href="https://scons.org/doc/latest/HTML/scons-user/index.html">SCons User Guide</a>. Additional commands may be added by
+individual godot-cpp projects, so consult their specific documentation for more information on those.</p>
+</section>
+<section id="configuring-an-ide">
+<h2>Configuring an IDE<a class="headerlink" href="#configuring-an-ide" title="Link to this heading"></a></h2>
+<p>Most IDEs can use a <code class="docutils literal notranslate"><span class="pre">compile_commands.json</span></code> file to understand a C++ project. You can generate it with godot-cpp using
+the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate compile_commands.json while compiling.</span>
+scons<span class="w"> </span><span class="nv">compiledb</span><span class="o">=</span>yes
+
+<span class="c1"># Generate compile_commands.json without compiling.</span>
+scons<span class="w"> </span><span class="nv">compiledb</span><span class="o">=</span>yes<span class="w"> </span>compile_commands.json
+</pre></div>
+</div>
+<p>For more information, please check out the <a class="reference internal" href="../../../../engine_details/development/configuring_an_ide/index.html#doc-configuring-an-ide"><span class="std std-ref">IDE configuration guides</span></a>.
+Although written for Godot engine contributors, they are largely applicable to godot-cpp projects as well.</p>
+</section>
+<section id="loading-your-gdextension-in-godot">
+<h2>Loading your GDExtension in Godot<a class="headerlink" href="#loading-your-gdextension-in-godot" title="Link to this heading"></a></h2>
+<p>Godot loads GDExtensions by finding <a class="reference internal" href="../../../../engine_details/engine_api/gdextension/gdextension_file.html#doc-gdextension-file"><span class="std std-ref">.gdextension</span></a> files in the project directory.
+<code class="docutils literal notranslate"><span class="pre">.gdextension</span></code> files are used to select and load a binary compatible with the current computer / operating system.</p>
+<p>The <a class="reference external" href="https://github.com/godotengine/godot-cpp-template">godot-cpp-template</a>, as well as the
+<a class="reference internal" href="../gdextension_cpp_example.html#doc-godot-cpp-getting-started"><span class="std std-ref">Getting Started section</span></a>, provide example <code class="docutils literal notranslate"><span class="pre">.gdextension</span></code> files for GDExtensions
+that are widely compatible to many different systems.</p>
+</section>
+<section id="building-for-multiple-platforms">
+<h2>Building for multiple platforms<a class="headerlink" href="#building-for-multiple-platforms" title="Link to this heading"></a></h2>
+<p>GDExtensions are expected to run on many different systems, each with separate binaries and build configurations.
+If you are planning to publish your GDExtension, we recommend you provide binaries for all configurations that are
+mentioned in the <a class="reference external" href="https://github.com/godotengine/godot-cpp-template">godot-cpp-template</a>
+<a class="reference external" href="https://github.com/godotengine/godot-cpp-template/blob/main/demo/bin/example.gdextension">.gdextension file</a>.</p>
+<p>There are two popular ways by which cross platform builds can be achieved:</p>
+<ul class="simple">
+<li><p>Cross-platform build tools</p></li>
+<li><p>Continuous Integration (CI)</p></li>
+</ul>
+<p><a class="reference external" href="https://github.com/godotengine/godot-cpp-template">godot-cpp-template</a> contains an
+<a class="reference external" href="https://github.com/godotengine/godot-cpp-template/tree/main/.github/workflows">example setup</a>
+for a GitHub based CI workflow.</p>
+</section>
+<section id="using-a-custom-api-file">
+<h2>Using a custom API file<a class="headerlink" href="#using-a-custom-api-file" title="Link to this heading"></a></h2>
+<p>Every branch of godot-cpp comes with an API file (<code class="docutils literal notranslate"><span class="pre">extension_api.json</span></code>) appropriate for
+the respective Godot version (e.g. the <code class="docutils literal notranslate"><span class="pre">4.3</span></code> branch comes with the API file compatible
+with Godot version <code class="docutils literal notranslate"><span class="pre">4.3</span></code> and later).</p>
+<p>However, you may want to use a custom <code class="docutils literal notranslate"><span class="pre">extension_api.json</span></code>, for example:</p>
+<ul class="simple">
+<li><p>If you want to use the latest APIs from Godot <code class="docutils literal notranslate"><span class="pre">master</span></code>.</p></li>
+<li><p>If you <a class="reference internal" href="../../../../engine_details/development/compiling/index.html#doc-compiling-index"><span class="std std-ref">build Godot yourself</span></a> with different options than the official builds (e.g. <code class="docutils literal notranslate"><span class="pre">disable_3d=yes</span></code> or <code class="docutils literal notranslate"><span class="pre">precision=double</span></code>).</p></li>
+<li><p>If you want to use APIs exposed by custom modules.</p></li>
+</ul>
+<p>To use a custom API file, you first have to generate it from the appropriate Godot
+executable:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>godot<span class="w"> </span>--dump-extension-api
+</pre></div>
+</div>
+<p>The resulting <code class="docutils literal notranslate"><span class="pre">extension_api.json</span></code> file will be created in the executable's
+directory. To use it, you can add <code class="docutils literal notranslate"><span class="pre">custom_api_file</span></code> to your build command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>&lt;platform&gt;<span class="w"> </span><span class="nv">custom_api_file</span><span class="o">=</span>&lt;PATH_TO_FILE&gt;
+</pre></div>
+</div>
+<p>Alternatively, you can add it as the default API file to your project by adding
+the following line to your SConstruct file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">localEnv</span><span class="p">[</span><span class="s2">&quot;custom_api_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;extension_api.json&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Build system" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cmake.html" class="btn btn-neutral float-right" title="Secondary build system: Working with CMake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

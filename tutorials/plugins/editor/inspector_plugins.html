@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Inspector plugins" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/plugins/editor/inspector_plugins.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="The inspector dock allows you to create custom widgets to edit properties through plugins. This can be beneficial when working with custom datatypes and resources, although you can use the feature ..." />
+<meta name="description" content="The inspector dock allows you to create custom widgets to edit properties through plugins. This can be beneficial when working with custom datatypes and resources, although you can use the feature ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Inspector plugins &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Visual Shader plugins" href="visual_shader_plugins.html" />
+    <link rel="prev" title="3D gizmo plugins" href="3d_gizmos.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/plugins/editor/inspector_plugins" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/plugins/editor/inspector_plugins.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Plugins</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Editor plugins</a></li>
+      <li class="breadcrumb-item active">Inspector plugins</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/plugins/editor/inspector_plugins.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="inspector-plugins">
+<span id="doc-inspector-plugins"></span><h1>Inspector plugins<a class="headerlink" href="#inspector-plugins" title="Link to this heading"></a></h1>
+<p>The inspector dock allows you to create custom widgets to edit properties
+through plugins. This can be beneficial when working with custom datatypes and
+resources, although you can use the feature to change the inspector widgets for
+built-in types. You can design custom controls for specific properties, entire
+objects, and even separate controls associated with particular datatypes.</p>
+<p>This guide explains how to use the <a class="reference internal" href="../../../classes/class_editorinspectorplugin.html#class-editorinspectorplugin"><span class="std std-ref">EditorInspectorPlugin</span></a> and
+<a class="reference internal" href="../../../classes/class_editorproperty.html#class-editorproperty"><span class="std std-ref">EditorProperty</span></a> classes to create a custom interface for integers,
+replacing the default behavior with a button that generates random values
+between 0 and 99.</p>
+<figure class="align-center" id="id1">
+<img alt="../../../_images/inspector_plugin_example.png" src="../../../_images/inspector_plugin_example.png" />
+<figcaption>
+<p><span class="caption-text">The default behavior on the left and the end result on the right.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="setting-up-your-plugin">
+<h2>Setting up your plugin<a class="headerlink" href="#setting-up-your-plugin" title="Link to this heading"></a></h2>
+<p>Create a new empty plugin to get started.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="making_plugins.html#doc-making-plugins"><span class="std std-ref">Making plugins</span></a> guide to set up your new plugin.</p>
+</div>
+<p>Let's assume you've called your plugin folder <code class="docutils literal notranslate"><span class="pre">my_inspector_plugin</span></code>. If so,
+you should end up with a new <code class="docutils literal notranslate"><span class="pre">addons/my_inspector_plugin</span></code> folder that contains
+two files: <code class="docutils literal notranslate"><span class="pre">plugin.cfg</span></code> and <code class="docutils literal notranslate"><span class="pre">plugin.gd</span></code>.</p>
+<p>As before, <code class="docutils literal notranslate"><span class="pre">plugin.gd</span></code> is a script extending <a class="reference internal" href="../../../classes/class_editorplugin.html#class-editorplugin"><span class="std std-ref">EditorPlugin</span></a> and you
+need to introduce new code for its <code class="docutils literal notranslate"><span class="pre">_enter_tree</span></code> and <code class="docutils literal notranslate"><span class="pre">_exit_tree</span></code> methods.
+To set up your inspector plugin, you must load its script, then create and add
+the instance by calling <code class="docutils literal notranslate"><span class="pre">add_inspector_plugin()</span></code>. If the plugin is disabled,
+you should remove the instance you have added by calling
+<code class="docutils literal notranslate"><span class="pre">remove_inspector_plugin()</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Here, you are loading a script and not a packed scene. Therefore you
+should use <code class="docutils literal notranslate"><span class="pre">new()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">instantiate()</span></code>.</p>
+</div>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># plugin.gd</span>
+<span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorPlugin</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">plugin</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_enter_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="n">plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://addons/my_inspector_plugin/my_inspector_plugin.gd&quot;</span><span class="p">)</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">add_inspector_plugin</span><span class="p">(</span><span class="n">plugin</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_exit_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">remove_inspector_plugin</span><span class="p">(</span><span class="n">plugin</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Plugin.cs</span>
+<span class="cp">#if TOOLS</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="na">[Tool]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Plugin</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">EditorPlugin</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">MyInspectorPlugin</span><span class="w"> </span><span class="n">_plugin</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_EnterTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyInspectorPlugin</span><span class="p">();</span>
+<span class="w">        </span><span class="n">AddInspectorPlugin</span><span class="p">(</span><span class="n">_plugin</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_ExitTree</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">RemoveInspectorPlugin</span><span class="p">(</span><span class="n">_plugin</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="interacting-with-the-inspector">
+<h2>Interacting with the inspector<a class="headerlink" href="#interacting-with-the-inspector" title="Link to this heading"></a></h2>
+<p>To interact with the inspector dock, your <code class="docutils literal notranslate"><span class="pre">my_inspector_plugin.gd</span></code> script must
+extend the <a class="reference internal" href="../../../classes/class_editorinspectorplugin.html#class-editorinspectorplugin"><span class="std std-ref">EditorInspectorPlugin</span></a> class. This class provides several
+virtual methods that affect how the inspector handles properties.</p>
+<p>To have any effect at all, the script must implement the <code class="docutils literal notranslate"><span class="pre">_can_handle()</span></code>
+method. This function is called for each edited <a class="reference internal" href="../../../classes/class_object.html#class-object"><span class="std std-ref">Object</span></a> and must
+return <code class="docutils literal notranslate"><span class="pre">true</span></code> if this plugin should handle the object or its properties.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This includes any <a class="reference internal" href="../../../classes/class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> attached to the object.</p>
+</div>
+<p>You can implement four other methods to add controls to the inspector at
+specific positions. The <code class="docutils literal notranslate"><span class="pre">_parse_begin()</span></code> and <code class="docutils literal notranslate"><span class="pre">_parse_end()</span></code> methods are called
+only once at the beginning and the end of parsing for each object, respectively.
+They can add controls at the top or bottom of the inspector layout by calling
+<code class="docutils literal notranslate"><span class="pre">add_custom_control()</span></code>.</p>
+<p>As the editor parses the object, it calls the <code class="docutils literal notranslate"><span class="pre">_parse_category()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">_parse_property()</span></code> methods. There, in addition to <code class="docutils literal notranslate"><span class="pre">add_custom_control()</span></code>,
+you can call both <code class="docutils literal notranslate"><span class="pre">add_property_editor()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">add_property_editor_for_multiple_properties()</span></code>. Use these last two methods to
+specifically add <a class="reference internal" href="../../../classes/class_editorproperty.html#class-editorproperty"><span class="std std-ref">EditorProperty</span></a>-based controls.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># my_inspector_plugin.gd</span>
+<span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorInspectorPlugin</span>
+
+<span class="k">var</span><span class="w"> </span><span class="nc">RandomIntEditor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://addons/my_inspector_plugin/random_int_editor.gd&quot;</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_can_handle</span><span class="p">(</span><span class="n">object</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># We support all objects in this example.</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">true</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_parse_property</span><span class="p">(</span><span class="n">object</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">hint_type</span><span class="p">,</span><span class="w"> </span><span class="n">hint_string</span><span class="p">,</span><span class="w"> </span><span class="n">usage_flags</span><span class="p">,</span><span class="w"> </span><span class="n">wide</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># We handle properties of type integer.</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TYPE_INT</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Create an instance of the custom property editor and register</span>
+<span class="w">        </span><span class="c1"># it to a specific property path.</span>
+<span class="w">        </span><span class="nf">add_property_editor</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="nc">RandomIntEditor</span><span class="o">.</span><span class="nf">new</span><span class="p">())</span>
+<span class="w">        </span><span class="c1"># Inform the editor to remove the default property editor for</span>
+<span class="w">        </span><span class="c1"># this property type.</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">true</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">false</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// MyInspectorPlugin.cs</span>
+<span class="cp">#if TOOLS</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="na">[Tool]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyInspectorPlugin</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">EditorInspectorPlugin</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">_CanHandle</span><span class="p">(</span><span class="n">GodotObject</span><span class="w"> </span><span class="n">@object</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// We support all objects in this example.</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">_ParseProperty</span><span class="p">(</span><span class="n">GodotObject</span><span class="w"> </span><span class="n">@object</span><span class="p">,</span><span class="w"> </span><span class="n">Variant</span><span class="p">.</span><span class="n">Type</span><span class="w"> </span><span class="n">type</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">PropertyHint</span><span class="w"> </span><span class="n">hintType</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">hintString</span><span class="p">,</span>
+<span class="w">        </span><span class="n">PropertyUsageFlags</span><span class="w"> </span><span class="n">usageFlags</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">wide</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// We handle properties of type integer.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Variant</span><span class="p">.</span><span class="n">Type</span><span class="p">.</span><span class="n">Int</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Create an instance of the custom property editor and register</span>
+<span class="w">            </span><span class="c1">// it to a specific property path.</span>
+<span class="w">            </span><span class="n">AddPropertyEditor</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RandomIntEditor</span><span class="p">());</span>
+<span class="w">            </span><span class="c1">// Inform the editor to remove the default property editor for</span>
+<span class="w">            </span><span class="c1">// this property type.</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="adding-an-interface-to-edit-properties">
+<h2>Adding an interface to edit properties<a class="headerlink" href="#adding-an-interface-to-edit-properties" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="../../../classes/class_editorproperty.html#class-editorproperty"><span class="std std-ref">EditorProperty</span></a> class is a special type of <a class="reference internal" href="../../../classes/class_control.html#class-control"><span class="std std-ref">Control</span></a>
+that can interact with the inspector dock's edited objects. It doesn't display
+anything but can house any other control nodes, including complex scenes.</p>
+<p>There are three essential parts to the script extending
+<a class="reference internal" href="../../../classes/class_editorproperty.html#class-editorproperty"><span class="std std-ref">EditorProperty</span></a>:</p>
+<ol class="arabic simple">
+<li><p>You must define the <code class="docutils literal notranslate"><span class="pre">_init()</span></code> method to set up the control nodes'
+structure.</p></li>
+<li><p>You should implement the <code class="docutils literal notranslate"><span class="pre">_update_property()</span></code> to handle changes to the data
+from the outside.</p></li>
+<li><p>A signal must be emitted at some point to inform the inspector that the
+control has changed the property using <code class="docutils literal notranslate"><span class="pre">emit_changed</span></code>.</p></li>
+</ol>
+<p>You can display your custom widget in two ways. Use just the default <code class="docutils literal notranslate"><span class="pre">add_child()</span></code>
+method to display it to the right of the property name, and use <code class="docutils literal notranslate"><span class="pre">add_child()</span></code>
+followed by <code class="docutils literal notranslate"><span class="pre">set_bottom_editor()</span></code> to position it below the name.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># random_int_editor.gd</span>
+<span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorProperty</span>
+
+
+<span class="c1"># The main control for editing the property.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">property_control</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Button</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="c1"># An internal value of the property.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">current_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="c1"># A guard against internal changes when the property is updated.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">updating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_init</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Add the control as a direct child of EditorProperty node.</span>
+<span class="w">    </span><span class="nf">add_child</span><span class="p">(</span><span class="n">property_control</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Make sure the control is able to retain the focus.</span>
+<span class="w">    </span><span class="nf">add_focusable</span><span class="p">(</span><span class="n">property_control</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Setup the initial state and connect to the signal to track changes.</span>
+<span class="w">    </span><span class="nf">refresh_control_text</span><span class="p">()</span>
+<span class="w">    </span><span class="n">property_control</span><span class="o">.</span><span class="vi">pressed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_button_pressed</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_button_pressed</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Ignore the signal if the property is currently being updated.</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">updating</span><span class="p">):</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="c1"># Generate a new random integer between 0 and 99.</span>
+<span class="w">    </span><span class="n">current_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">    </span><span class="nf">refresh_control_text</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">emit_changed</span><span class="p">(</span><span class="nf">get_edited_property</span><span class="p">(),</span><span class="w"> </span><span class="n">current_value</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_update_property</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Read the current value from the property.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">new_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_edited_object</span><span class="p">()[</span><span class="nf">get_edited_property</span><span class="p">()]</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="p">(</span><span class="n">new_value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">current_value</span><span class="p">):</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="c1"># Update the control with the new value.</span>
+<span class="w">    </span><span class="n">updating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="w">    </span><span class="n">current_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_value</span>
+<span class="w">    </span><span class="nf">refresh_control_text</span><span class="p">()</span>
+<span class="w">    </span><span class="n">updating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">refresh_control_text</span><span class="p">():</span>
+<span class="w">    </span><span class="n">property_control</span><span class="o">.</span><span class="vi">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb nb-Function">str</span><span class="p">(</span><span class="n">current_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// RandomIntEditor.cs</span>
+<span class="cp">#if TOOLS</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="na">[Tool]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">RandomIntEditor</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">EditorProperty</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// The main control for editing the property.</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Button</span><span class="w"> </span><span class="n">_propertyControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// An internal value of the property.</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_currentValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// A guard against internal changes when the property is updated.</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">_updating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">RandomIntEditor</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Add the control as a direct child of EditorProperty node.</span>
+<span class="w">        </span><span class="n">AddChild</span><span class="p">(</span><span class="n">_propertyControl</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Make sure the control is able to retain the focus.</span>
+<span class="w">        </span><span class="n">AddFocusable</span><span class="p">(</span><span class="n">_propertyControl</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Setup the initial state and connect to the signal to track changes.</span>
+<span class="w">        </span><span class="n">RefreshControlText</span><span class="p">();</span>
+<span class="w">        </span><span class="n">_propertyControl</span><span class="p">.</span><span class="n">Pressed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnButtonPressed</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnButtonPressed</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Ignore the signal if the property is currently being updated.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_updating</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Generate a new random integer between 0 and 99.</span>
+<span class="w">        </span><span class="n">_currentValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">GD</span><span class="p">.</span><span class="n">Randi</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="w">        </span><span class="n">RefreshControlText</span><span class="p">();</span>
+<span class="w">        </span><span class="n">EmitChanged</span><span class="p">(</span><span class="n">GetEditedProperty</span><span class="p">(),</span><span class="w"> </span><span class="n">_currentValue</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_UpdateProperty</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Read the current value from the property.</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">newValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">GetEditedObject</span><span class="p">().</span><span class="n">Get</span><span class="p">(</span><span class="n">GetEditedProperty</span><span class="p">());</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newValue</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">_currentValue</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Update the control with the new value.</span>
+<span class="w">        </span><span class="n">_updating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_currentValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newValue</span><span class="p">;</span>
+<span class="w">        </span><span class="n">RefreshControlText</span><span class="p">();</span>
+<span class="w">        </span><span class="n">_updating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">RefreshControlText</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_propertyControl</span><span class="p">.</span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$&quot;Value: {_currentValue}&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div></div>
+<p>Using the example code above you should be able to make a custom widget that
+replaces the default <a class="reference internal" href="../../../classes/class_spinbox.html#class-spinbox"><span class="std std-ref">SpinBox</span></a> control for integers with a
+<a class="reference internal" href="../../../classes/class_button.html#class-button"><span class="std std-ref">Button</span></a> that generates random values.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="3d_gizmos.html" class="btn btn-neutral float-left" title="3D gizmo plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="visual_shader_plugins.html" class="btn btn-neutral float-right" title="Visual Shader plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

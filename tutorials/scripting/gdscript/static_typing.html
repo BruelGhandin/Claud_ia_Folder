@@ -1,0 +1,840 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Static typing in GDScript" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/scripting/gdscript/static_typing.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="In this guide, you will learn: how to use static typing in GDScript;, that static types can help you avoid bugs;, that static typing improves your experience with the editor.. Where and how you use..." />
+<meta name="description" content="In this guide, you will learn: how to use static typing in GDScript;, that static types can help you avoid bugs;, that static typing improves your experience with the editor.. Where and how you use..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Static typing in GDScript &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="GDScript warning system" href="warning_system.html" />
+    <link rel="prev" title="GDScript style guide" href="gdscript_styleguide.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/scripting/gdscript/static_typing" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/scripting/gdscript/static_typing.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Scripting</a></li>
+          <li class="breadcrumb-item"><a href="index.html">GDScript</a></li>
+      <li class="breadcrumb-item active">Static typing in GDScript</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/scripting/gdscript/static_typing.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="static-typing-in-gdscript">
+<span id="doc-gdscript-static-typing"></span><h1>Static typing in GDScript<a class="headerlink" href="#static-typing-in-gdscript" title="Link to this heading"></a></h1>
+<p>In this guide, you will learn:</p>
+<ul class="simple">
+<li><p>how to use static typing in GDScript;</p></li>
+<li><p>that static types can help you avoid bugs;</p></li>
+<li><p>that static typing improves your experience with the editor.</p></li>
+</ul>
+<p>Where and how you use this language feature is entirely up to you: you can use it
+only in some sensitive GDScript files, use it everywhere, or don't use it at all.</p>
+<p>Static types can be used on variables, constants, functions, parameters,
+and return types.</p>
+<section id="a-brief-look-at-static-typing">
+<h2>A brief look at static typing<a class="headerlink" href="#a-brief-look-at-static-typing" title="Link to this heading"></a></h2>
+<p>With static typing, GDScript can detect more errors without even running the code.
+Also type hints give you and your teammates more information as you're working,
+as the arguments' types show up when you call a method. Static typing improves
+editor autocompletion and <a class="reference internal" href="gdscript_documentation_comments.html#doc-gdscript-documentation-comments"><span class="std std-ref">documentation</span></a>
+of your scripts.</p>
+<p>Imagine you're programming an inventory system. You code an <code class="docutils literal notranslate"><span class="pre">Item</span></code> class,
+then an <code class="docutils literal notranslate"><span class="pre">Inventory</span></code>. To add items to the inventory, the people who work with
+your code should always pass an <code class="docutils literal notranslate"><span class="pre">Item</span></code> to the <code class="docutils literal notranslate"><span class="pre">Inventory.add()</span></code> method.
+With types, you can enforce this:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">class_name</span><span class="w"> </span><span class="nc">Inventory</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">add</span><span class="p">(</span><span class="n">reference</span><span class="p">:</span><span class="w"> </span><span class="nc">Item</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nf">find_item</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">item</span><span class="p">:</span>
+<span class="w">        </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">_instance_item_from_db</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+<span class="w">    </span><span class="n">item</span><span class="o">.</span><span class="vi">amount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">amount</span>
+</pre></div>
+</div>
+<p>Static types also give you better code completion options. Below, you can see
+the difference between a dynamic and a static typed completion options.</p>
+<p>You've probably encountered a lack of autocomplete suggestions after a dot:</p>
+<figure class="align-default">
+<img alt="Completion options for dynamic typed code." src="../../../_images/typed_gdscript_code_completion_dynamic.webp" />
+</figure>
+<p>This is due to dynamic code. Godot cannot know what value type you're passing
+to the function. If you write the type explicitly however, you will get all
+methods, properties, constants, etc. from the value:</p>
+<figure class="align-default">
+<img alt="Completion options for static typed code." src="../../../_images/typed_gdscript_code_completion_typed.webp" />
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you prefer static typing, we recommend enabling the
+<strong>Text Editor &gt; Completion &gt; Add Type Hints</strong> editor setting. Also consider
+enabling <a class="reference internal" href="#warning-system">some warnings</a> that are disabled by default.</p>
+</div>
+<p>Also, typed GDScript improves performance by using optimized opcodes when operand/argument
+types are known at compile time. More GDScript optimizations are planned in the future,
+such as JIT/AOT compilation.</p>
+<p>Overall, typed programming gives you a more structured experience. It
+helps prevent errors and improves the self-documenting aspect of your
+scripts. This is especially helpful when you're working in a team or on
+a long-term project: studies have shown that developers spend most of
+their time reading other people's code, or scripts they wrote in the
+past and forgot about. The clearer and the more structured the code, the
+faster it is to understand, the faster you can move forward.</p>
+</section>
+<section id="how-to-use-static-typing">
+<h2>How to use static typing<a class="headerlink" href="#how-to-use-static-typing" title="Link to this heading"></a></h2>
+<p>To define the type of a variable, parameter, or constant, write a colon after the name,
+followed by its type. E.g. <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">health:</span> <span class="pre">int</span></code>. This forces the variable's type
+to always stay the same:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">damage</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.5</span>
+<span class="k">const</span><span class="w"> </span><span class="n">MOVE_SPEED</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">50.0</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">sum</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+</pre></div>
+</div>
+<p>Godot will try to infer types if you write a colon, but you omit the type:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">damage</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mf">10.5</span>
+<span class="k">const</span><span class="w"> </span><span class="n">MOVE_SPEED</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mf">50.0</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">sum</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>There is no difference between <code class="docutils literal notranslate"><span class="pre">=</span></code> and <code class="docutils literal notranslate"><span class="pre">:=</span></code> for constants.</p></li>
+<li><p>You don't need to write type hints for constants, as Godot sets it automatically
+from the assigned value. But you can still do so to make the intent of your code clearer.
+Also, this is useful for typed arrays (like <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">A:</span> <span class="pre">Array[int]</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>),
+since untyped arrays are used by default.</p></li>
+</ol>
+</div>
+<section id="what-can-be-a-type-hint">
+<h3>What can be a type hint<a class="headerlink" href="#what-can-be-a-type-hint" title="Link to this heading"></a></h3>
+<p>Here is a complete list of what can be used as a type hint:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Variant</span></code>. Any type. In most cases this is not much different from an untyped
+declaration, but increases readability. As a return type, forces the function
+to explicitly return some value.</p></li>
+<li><p><em>(Only return type)</em> <code class="docutils literal notranslate"><span class="pre">void</span></code>. Indicates that the function does not return any value.</p></li>
+<li><p><a class="reference internal" href="gdscript_basics.html#doc-gdscript-builtin-types"><span class="std std-ref">Built-in types</span></a>.</p></li>
+<li><p>Native classes (<code class="docutils literal notranslate"><span class="pre">Object</span></code>, <code class="docutils literal notranslate"><span class="pre">Node</span></code>, <code class="docutils literal notranslate"><span class="pre">Area2D</span></code>, <code class="docutils literal notranslate"><span class="pre">Camera2D</span></code>, etc.).</p></li>
+<li><p><a class="reference internal" href="gdscript_basics.html#doc-gdscript-basics-class-name"><span class="std std-ref">Global classes</span></a>.</p></li>
+<li><p><a class="reference internal" href="gdscript_basics.html#doc-gdscript-basics-inner-classes"><span class="std std-ref">Inner classes</span></a>.</p></li>
+<li><p>Global, native and custom named enums. Note that an enum type is just an <code class="docutils literal notranslate"><span class="pre">int</span></code>,
+there is no guarantee that the value belongs to the set of enum values.</p></li>
+<li><p>Constants (including local ones) if they contain a preloaded class or enum.</p></li>
+</ol>
+<p>You can use any class, including your custom classes, as types. There are two ways
+to use them in scripts. The first method is to preload the script you want to use
+as a type in a constant:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="nc">Rifle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://player/weapons/rifle.gd&quot;</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">my_rifle</span><span class="p">:</span><span class="w"> </span><span class="nc">Rifle</span>
+</pre></div>
+</div>
+<p>The second method is to use the <code class="docutils literal notranslate"><span class="pre">class_name</span></code> keyword when you create the script.
+For the example above, your <code class="docutils literal notranslate"><span class="pre">rifle.gd</span></code> would look like this:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">class_name</span><span class="w"> </span><span class="nc">Rifle</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">Node2D</span>
+</pre></div>
+</div>
+<p>If you use <code class="docutils literal notranslate"><span class="pre">class_name</span></code>, Godot registers the <code class="docutils literal notranslate"><span class="pre">Rifle</span></code> type globally in the editor,
+and you can use it anywhere, without having to preload it into a constant:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">my_rifle</span><span class="p">:</span><span class="w"> </span><span class="nc">Rifle</span>
+</pre></div>
+</div>
+</section>
+<section id="specify-the-return-type-of-a-function-with-the-arrow">
+<h3>Specify the return type of a function with the arrow <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code><a class="headerlink" href="#specify-the-return-type-of-a-function-with-the-arrow" title="Link to this heading"></a></h3>
+<p>To define the return type of a function, write a dash and a right angle bracket <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>
+after its declaration, followed by the return type:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+</pre></div>
+</div>
+<p>The type <code class="docutils literal notranslate"><span class="pre">void</span></code> means the function does not return anything. You can use any type,
+as with variables:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">hit</span><span class="p">(</span><span class="n">damage</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="n">health_points</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">damage</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">health_points</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>You can also use your own classes as return types:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adds an item to the inventory and returns it.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">add</span><span class="p">(</span><span class="n">reference</span><span class="p">:</span><span class="w"> </span><span class="nc">Item</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Item</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">item</span><span class="p">:</span><span class="w"> </span><span class="nc">Item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">find_item</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">item</span><span class="p">:</span>
+<span class="w">        </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ItemDatabase</span><span class="o">.</span><span class="nf">get_instance</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">item</span><span class="o">.</span><span class="vi">amount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">amount</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">item</span>
+</pre></div>
+</div>
+</section>
+<section id="covariance-and-contravariance">
+<h3>Covariance and contravariance<a class="headerlink" href="#covariance-and-contravariance" title="Link to this heading"></a></h3>
+<p>When inheriting base class methods, you should follow the <a class="reference external" href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Liskov substitution
+principle</a>.</p>
+<p><strong>Covariance:</strong> When you inherit a method, you can specify a return type that is
+more specific (<strong>subtype</strong>) than the parent method.</p>
+<p><strong>Contravariance:</strong> When you inherit a method, you can specify a parameter type
+that is less specific (<strong>supertype</strong>) than the parent method.</p>
+<p>Example:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">class_name</span><span class="w"> </span><span class="nc">Parent</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">get_property</span><span class="p">(</span><span class="n">param</span><span class="p">:</span><span class="w"> </span><span class="nb">Label</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb">Node</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># ...</span>
+</pre></div>
+</div>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">class_name</span><span class="w"> </span><span class="nc">Child</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Parent</span>
+
+
+<span class="c1"># `Control` is a supertype of `Label`.</span>
+<span class="c1"># `Node2D` is a subtype of `Node`.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">get_property</span><span class="p">(</span><span class="n">param</span><span class="p">:</span><span class="w"> </span><span class="nb">Control</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb">Node2D</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># ...</span>
+</pre></div>
+</div>
+</section>
+<section id="specify-the-element-type-of-an-array">
+<h3>Specify the element type of an <code class="docutils literal notranslate"><span class="pre">Array</span></code><a class="headerlink" href="#specify-the-element-type-of-an-array" title="Link to this heading"></a></h3>
+<p>To define the type of an <code class="docutils literal notranslate"><span class="pre">Array</span></code>, enclose the type name in <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
+<p>An array's type applies to <code class="docutils literal notranslate"><span class="pre">for</span></code> loop variables, as well as some operators like
+<code class="docutils literal notranslate"><span class="pre">[]</span></code>, <code class="docutils literal notranslate"><span class="pre">[...]</span> <span class="pre">=</span></code> (assignment), and <code class="docutils literal notranslate"><span class="pre">+</span></code>. Array methods
+(such as <code class="docutils literal notranslate"><span class="pre">push_back</span></code>) and other operators (such as <code class="docutils literal notranslate"><span class="pre">==</span></code>)
+are still untyped. Built-in types, native and custom classes,
+and enums may be used as element types. Nested array types (like <code class="docutils literal notranslate"><span class="pre">Array[Array[int]]</span></code>)
+are not supported.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">scores</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nb nb-Type">int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">]</span>
+<span class="k">var</span><span class="w"> </span><span class="n">vehicles</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nb">Node</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="sx">$Car</span><span class="p">,</span><span class="w"> </span><span class="sx">$Plane</span><span class="p">]</span>
+<span class="k">var</span><span class="w"> </span><span class="n">items</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nc">Item</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nc">Item</span><span class="o">.</span><span class="nf">new</span><span class="p">()]</span>
+<span class="k">var</span><span class="w"> </span><span class="n">array_of_arrays</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nb nb-Type">Array</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[[],</span><span class="w"> </span><span class="p">[]]</span>
+<span class="c1"># var arrays: Array[Array[int]] -- disallowed</span>
+
+<span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">scores</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># score has type `int`</span>
+
+<span class="c1"># The following would be errors:</span>
+<span class="n">scores</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vehicles</span>
+<span class="k">var</span><span class="w"> </span><span class="n">s</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;lots&quot;</span>
+</pre></div>
+</div>
+<p>Since Godot 4.2, you can also specify a type for the loop variable in a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.
+For instance, you can write:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Marta&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Samantha&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Jimmy&quot;</span><span class="p">]</span>
+<span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">names</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+</pre></div>
+</div>
+<p>The array will remain untyped, but the <code class="docutils literal notranslate"><span class="pre">name</span></code> variable within the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop
+will always be of <code class="docutils literal notranslate"><span class="pre">String</span></code> type.</p>
+</section>
+<section id="specify-the-element-type-of-a-dictionary">
+<h3>Specify the element type of a <code class="docutils literal notranslate"><span class="pre">Dictionary</span></code><a class="headerlink" href="#specify-the-element-type-of-a-dictionary" title="Link to this heading"></a></h3>
+<p>To define the type of a <code class="docutils literal notranslate"><span class="pre">Dictionary</span></code>'s keys and values, enclose the type name in <code class="docutils literal notranslate"><span class="pre">[]</span></code>
+and separate the key and value type with a comma.</p>
+<p>A dictionary's value type applies to <code class="docutils literal notranslate"><span class="pre">for</span></code> loop variables, as well as some operators like
+<code class="docutils literal notranslate"><span class="pre">[]</span></code> and <code class="docutils literal notranslate"><span class="pre">[...]</span> <span class="pre">=</span></code> (assignment). Dictionary methods that return values
+and other operators (such as <code class="docutils literal notranslate"><span class="pre">==</span></code>) are still untyped. Built-in types, native
+and custom classes, and enums may be used as element types. Nested typed collections
+(like <code class="docutils literal notranslate"><span class="pre">Dictionary[String,</span> <span class="pre">Dictionary[String,</span> <span class="pre">int]]</span></code>) are not supported.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">fruit_costs</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">[</span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;apple&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;orange&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">}</span>
+<span class="k">var</span><span class="w"> </span><span class="n">vehicles</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">[</span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="nb">Node</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;car&quot;</span><span class="p">:</span><span class="w"> </span><span class="sx">$Car</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;plane&quot;</span><span class="p">:</span><span class="w"> </span><span class="sx">$Plane</span><span class="w"> </span><span class="p">}</span>
+<span class="k">var</span><span class="w"> </span><span class="n">item_tiles</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">[</span><span class="nb nb-Type">Vector2i</span><span class="p">,</span><span class="w"> </span><span class="nc">Item</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb nb-Type">Vector2i</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">):</span><span class="w"> </span><span class="nc">Item</span><span class="o">.</span><span class="nf">new</span><span class="p">(),</span><span class="w"> </span><span class="nb nb-Type">Vector2i</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">):</span><span class="w"> </span><span class="nc">Item</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="k">var</span><span class="w"> </span><span class="n">dictionary_of_dictionaries</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">[</span><span class="nb nb-Type">String</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="c1"># var dicts: Dictionary[String, Dictionary[String, int]] -- disallowed</span>
+
+<span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">fruit_costs</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># `fruit` has type `String`</span>
+
+<span class="c1"># The following would be errors:</span>
+<span class="n">fruit_costs</span><span class="p">[</span><span class="s2">&quot;pear&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vehicles</span>
+<span class="k">var</span><span class="w"> </span><span class="n">s</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fruit_costs</span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">]</span>
+<span class="n">fruit_costs</span><span class="p">[</span><span class="s2">&quot;orange&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;lots&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="type-casting">
+<h3>Type casting<a class="headerlink" href="#type-casting" title="Link to this heading"></a></h3>
+<p>Type casting is an important concept in typed languages.
+Casting is the conversion of a value from one type to another.</p>
+<p>Imagine an <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> in your game, that <code class="docutils literal notranslate"><span class="pre">extends</span> <span class="pre">Area2D</span></code>. You want it to collide
+with the <code class="docutils literal notranslate"><span class="pre">Player</span></code>, a <code class="docutils literal notranslate"><span class="pre">CharacterBody2D</span></code> with a script called <code class="docutils literal notranslate"><span class="pre">PlayerController</span></code>
+attached to it. You use the <code class="docutils literal notranslate"><span class="pre">body_entered</span></code> signal to detect the collision.
+With typed code, the body you detect is going to be a generic <code class="docutils literal notranslate"><span class="pre">PhysicsBody2D</span></code>,
+and not your <code class="docutils literal notranslate"><span class="pre">PlayerController</span></code> on the <code class="docutils literal notranslate"><span class="pre">_on_body_entered</span></code> callback.</p>
+<p>You can check if this <code class="docutils literal notranslate"><span class="pre">PhysicsBody2D</span></code> is your <code class="docutils literal notranslate"><span class="pre">Player</span></code> with the <code class="docutils literal notranslate"><span class="pre">as</span></code> keyword,
+and using the colon <code class="docutils literal notranslate"><span class="pre">:</span></code> again to force the variable to use this type.
+This forces the variable to stick to the <code class="docutils literal notranslate"><span class="pre">PlayerController</span></code> type:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">:</span><span class="w"> </span><span class="nb">PhysicsBody2D</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">player</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="ow">as</span><span class="w"> </span><span class="nc">PlayerController</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">player</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span>
+
+<span class="w">    </span><span class="n">player</span><span class="o">.</span><span class="nf">damage</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>As we're dealing with a custom type, if the <code class="docutils literal notranslate"><span class="pre">body</span></code> doesn't extend
+<code class="docutils literal notranslate"><span class="pre">PlayerController</span></code>, the <code class="docutils literal notranslate"><span class="pre">player</span></code> variable will be set to <code class="docutils literal notranslate"><span class="pre">null</span></code>.
+We can use this to check if the body is the player or not. We will also
+get full autocompletion on the player variable thanks to that cast.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">as</span></code> keyword silently casts the variable to <code class="docutils literal notranslate"><span class="pre">null</span></code> in case of a type
+mismatch at runtime, without an error/warning. While this may be convenient
+in some cases, it can also lead to bugs. Use the <code class="docutils literal notranslate"><span class="pre">as</span></code> keyword only if this
+behavior is intended. A safer alternative is to use the <code class="docutils literal notranslate"><span class="pre">is</span></code> keyword:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="p">(</span><span class="n">body</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nc">PlayerController</span><span class="p">):</span>
+<span class="w">    </span><span class="nb nb-Function">push_error</span><span class="p">(</span><span class="s2">&quot;Bug: body is not PlayerController.&quot;</span><span class="p">)</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">player</span><span class="p">:</span><span class="w"> </span><span class="nc">PlayerController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">player</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span>
+
+<span class="n">player</span><span class="o">.</span><span class="nf">damage</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You can also simplify the code by using the <code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span></code> operator:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nc">PlayerController</span><span class="p">:</span>
+<span class="w">    </span><span class="nb nb-Function">push_error</span><span class="p">(</span><span class="s2">&quot;Bug: body is not PlayerController&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively, you can use the <code class="docutils literal notranslate"><span class="pre">assert()</span></code> statement:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nb nb-Function">assert</span><span class="p">(</span><span class="n">body</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nc">PlayerController</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bug: body is not PlayerController.&quot;</span><span class="p">)</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">player</span><span class="p">:</span><span class="w"> </span><span class="nc">PlayerController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">player</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span>
+
+<span class="n">player</span><span class="o">.</span><span class="nf">damage</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you try to cast with a built-in type and it fails, Godot will throw an error.</p>
+</div>
+<section id="safe-lines">
+<span id="doc-gdscript-static-typing-safe-lines"></span><h4>Safe lines<a class="headerlink" href="#safe-lines" title="Link to this heading"></a></h4>
+<p>You can also use casting to ensure safe lines. Safe lines are a tool to tell you
+when ambiguous lines of code are type-safe. As you can mix and match typed
+and dynamic code, at times, Godot doesn't have enough information to know if
+an instruction will trigger an error or not at runtime.</p>
+<p>This happens when you get a child node. Let's take a timer for example:
+with dynamic code, you can get the node with <code class="docutils literal notranslate"><span class="pre">$Timer</span></code>. GDScript supports
+<a class="reference external" href="https://stackoverflow.com/a/4205163/8125343">duck-typing</a>,
+so even if your timer is of type <code class="docutils literal notranslate"><span class="pre">Timer</span></code>, it is also a <code class="docutils literal notranslate"><span class="pre">Node</span></code> and
+an <code class="docutils literal notranslate"><span class="pre">Object</span></code>, two classes it extends. With dynamic GDScript, you also don't
+care about the node's type as long as it has the methods you need to call.</p>
+<p>You can use casting to tell Godot the type you expect when you get a node:
+<code class="docutils literal notranslate"><span class="pre">($Timer</span> <span class="pre">as</span> <span class="pre">Timer)</span></code>, <code class="docutils literal notranslate"><span class="pre">($Player</span> <span class="pre">as</span> <span class="pre">CharacterBody2D)</span></code>, etc.
+Godot will ensure the type works and if so, the line number will turn
+green at the left of the script editor.</p>
+<figure class="align-default" id="id1">
+<img alt="Unsafe vs Safe Line" src="../../../_images/typed_gdscript_safe_unsafe_line.webp" />
+<figcaption>
+<p><span class="caption-text">Unsafe line (line 7) vs Safe Lines (line 6 and 8)</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Safe lines do not always mean better or more reliable code. See the note above
+about the <code class="docutils literal notranslate"><span class="pre">as</span></code> keyword. For example:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">node_1</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="sx">$Node1</span><span class="w"> </span><span class="ow">as</span><span class="w"> </span><span class="nc">Type1</span><span class="w"> </span><span class="c1"># Safe line.</span>
+<span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">node_2</span><span class="p">:</span><span class="w"> </span><span class="nc">Type2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Node2</span><span class="w"> </span><span class="c1"># Unsafe line.</span>
+</pre></div>
+</div>
+<p>Even though <code class="docutils literal notranslate"><span class="pre">node_2</span></code> declaration is marked as an unsafe line, it is more
+reliable than <code class="docutils literal notranslate"><span class="pre">node_1</span></code> declaration. Because if you change the node type
+in the scene and accidentally forget to change it in the script, the error
+will be detected immediately when the scene is loaded. Unlike <code class="docutils literal notranslate"><span class="pre">node_1</span></code>,
+which will be silently cast to <code class="docutils literal notranslate"><span class="pre">null</span></code> and the error will be detected later.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can turn off safe lines or change their color in the editor settings.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="typed-or-dynamic-stick-to-one-style">
+<h2>Typed or dynamic: stick to one style<a class="headerlink" href="#typed-or-dynamic-stick-to-one-style" title="Link to this heading"></a></h2>
+<p>Typed GDScript and dynamic GDScript can coexist in the same project. But
+it's recommended to stick to either style for consistency in your codebase,
+and for your peers. It's easier for everyone to work together if you follow
+the same guidelines, and faster to read and understand other people's code.</p>
+<p>Typed code takes a little more writing, but you get the benefits we discussed
+above. Here's an example of the same, empty script, in a dynamic style:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+</pre></div>
+</div>
+<p>And with static typing:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+</pre></div>
+</div>
+<p>As you can see, you can also use types with the engine's virtual methods.
+Signal callbacks, like any methods, can also use types. Here's a <code class="docutils literal notranslate"><span class="pre">body_entered</span></code>
+signal in a dynamic style:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_area_2d_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+</pre></div>
+</div>
+<p>And the same callback, with type hints:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_area_2d_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">:</span><span class="w"> </span><span class="nb">PhysicsBody2D</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="warning-system">
+<h2>Warning system<a class="headerlink" href="#warning-system" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Detailed documentation about the GDScript warning system has been moved to
+<a class="reference internal" href="warning_system.html#doc-gdscript-warning-system"><span class="std std-ref">GDScript warning system</span></a>.</p>
+</div>
+<p>Godot gives you warnings about your code as you write it. The engine identifies
+sections of your code that may lead to issues at runtime, but lets you decide
+whether or not you want to leave the code as it is.</p>
+<p>We have a number of warnings aimed specifically at users of typed GDScript.
+By default, these warnings are disabled, you can enable them in Project Settings
+(<strong>Debug &gt; GDScript</strong>, make sure <strong>Advanced Settings</strong> is enabled).</p>
+<p>You can enable the <code class="docutils literal notranslate"><span class="pre">UNTYPED_DECLARATION</span></code> warning if you want to always use
+static types. Additionally, you can enable the <code class="docutils literal notranslate"><span class="pre">INFERRED_DECLARATION</span></code> warning
+if you prefer a more readable and reliable, but more verbose syntax.</p>
+<p><code class="docutils literal notranslate"><span class="pre">UNSAFE_*</span></code> warnings make unsafe operations more noticeable, than unsafe lines.
+Currently, <code class="docutils literal notranslate"><span class="pre">UNSAFE_*</span></code> warnings do not cover all cases that unsafe lines cover.</p>
+</section>
+<section id="common-unsafe-operations-and-their-safe-counterparts">
+<h2>Common unsafe operations and their safe counterparts<a class="headerlink" href="#common-unsafe-operations-and-their-safe-counterparts" title="Link to this heading"></a></h2>
+<section id="global-scope-methods">
+<h3>Global scope methods<a class="headerlink" href="#global-scope-methods" title="Link to this heading"></a></h3>
+<p>The following global scope methods are not statically typed, but they have
+typed counterparts available. These methods return statically typed values:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Statically typed equivalents</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-abs"><span class="std std-ref">abs()</span></a></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-absf"><span class="std std-ref">absf()</span></a>,
+<a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-absi"><span class="std std-ref">absi()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector2.html#class-vector2-method-abs"><span class="std std-ref">Vector2.abs()</span></a>,
+<a class="reference internal" href="../../../classes/class_vector2i.html#class-vector2i-method-abs"><span class="std std-ref">Vector2i.abs()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector3.html#class-vector3-method-abs"><span class="std std-ref">Vector3.abs()</span></a>,
+<a class="reference internal" href="../../../classes/class_vector3i.html#class-vector3i-method-abs"><span class="std std-ref">Vector3i.abs()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector4.html#class-vector4-method-abs"><span class="std std-ref">Vector4.abs()</span></a>,
+<a class="reference internal" href="../../../classes/class_vector4i.html#class-vector4i-method-abs"><span class="std std-ref">Vector4i.abs()</span></a></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-ceil"><span class="std std-ref">ceil()</span></a></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-ceilf"><span class="std std-ref">ceilf()</span></a>,
+<a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-ceili"><span class="std std-ref">ceili()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector2.html#class-vector2-method-ceil"><span class="std std-ref">Vector2.ceil()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector3.html#class-vector3-method-ceil"><span class="std std-ref">Vector3.ceil()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector4.html#class-vector4-method-ceil"><span class="std std-ref">Vector4.ceil()</span></a></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-clamp"><span class="std std-ref">clamp()</span></a></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-clampf"><span class="std std-ref">clampf()</span></a>,
+<a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-clampi"><span class="std std-ref">clampi()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector2.html#class-vector2-method-clamp"><span class="std std-ref">Vector2.clamp()</span></a>,
+<a class="reference internal" href="../../../classes/class_vector2i.html#class-vector2i-method-clamp"><span class="std std-ref">Vector2i.clamp()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector3.html#class-vector3-method-clamp"><span class="std std-ref">Vector3.clamp()</span></a>,
+<a class="reference internal" href="../../../classes/class_vector3i.html#class-vector3i-method-clamp"><span class="std std-ref">Vector3i.clamp()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector4.html#class-vector4-method-clamp"><span class="std std-ref">Vector4.clamp()</span></a>,
+<a class="reference internal" href="../../../classes/class_vector4i.html#class-vector4i-method-clamp"><span class="std std-ref">Vector4i.clamp()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_color.html#class-color-method-clamp"><span class="std std-ref">Color.clamp()</span></a></div>
+<div class="line">(untyped <code class="docutils literal notranslate"><span class="pre">clamp()</span></code> does not work on Color)</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-floor"><span class="std std-ref">floor()</span></a></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-floorf"><span class="std std-ref">floorf()</span></a>,
+<a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-floori"><span class="std std-ref">floori()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector2.html#class-vector2-method-floor"><span class="std std-ref">Vector2.floor()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector3.html#class-vector3-method-floor"><span class="std std-ref">Vector3.floor()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector4.html#class-vector4-method-floor"><span class="std std-ref">Vector4.floor()</span></a></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-lerp"><span class="std std-ref">lerp()</span></a></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-lerpf"><span class="std std-ref">lerpf()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector2.html#class-vector2-method-lerp"><span class="std std-ref">Vector2.lerp()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector3.html#class-vector3-method-lerp"><span class="std std-ref">Vector3.lerp()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector4.html#class-vector4-method-lerp"><span class="std std-ref">Vector4.lerp()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_color.html#class-color-method-lerp"><span class="std std-ref">Color.lerp()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_quaternion.html#class-quaternion-method-slerp"><span class="std std-ref">Quaternion.slerp()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_basis.html#class-basis-method-slerp"><span class="std std-ref">Basis.slerp()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_transform2d.html#class-transform2d-method-interpolate-with"><span class="std std-ref">Transform2D.interpolate_with()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_transform3d.html#class-transform3d-method-interpolate-with"><span class="std std-ref">Transform3D.interpolate_with()</span></a></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-round"><span class="std std-ref">round()</span></a></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-roundf"><span class="std std-ref">roundf()</span></a>,
+<a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-roundi"><span class="std std-ref">roundi()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector2.html#class-vector2-method-round"><span class="std std-ref">Vector2.round()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector3.html#class-vector3-method-round"><span class="std std-ref">Vector3.round()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector4.html#class-vector4-method-round"><span class="std std-ref">Vector4.round()</span></a></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-sign"><span class="std std-ref">sign()</span></a></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-signf"><span class="std std-ref">signf()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-signi"><span class="std std-ref">signi()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector2.html#class-vector2-method-sign"><span class="std std-ref">Vector2.sign()</span></a>,
+<a class="reference internal" href="../../../classes/class_vector2i.html#class-vector2i-method-sign"><span class="std std-ref">Vector2i.sign()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector3.html#class-vector3-method-sign"><span class="std std-ref">Vector3.sign()</span></a>,
+<a class="reference internal" href="../../../classes/class_vector3i.html#class-vector3i-method-sign"><span class="std std-ref">Vector3i.sign()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector4.html#class-vector4-method-sign"><span class="std std-ref">Vector4.sign()</span></a>,
+<a class="reference internal" href="../../../classes/class_vector4i.html#class-vector4i-method-sign"><span class="std std-ref">Vector4i.sign()</span></a></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-snapped"><span class="std std-ref">snapped()</span></a></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-snappedf"><span class="std std-ref">snappedf()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_%40globalscope.html#class-globalscope-method-snappedi"><span class="std std-ref">snappedi()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector2.html#class-vector2-method-snapped"><span class="std std-ref">Vector2.snapped()</span></a>,
+<a class="reference internal" href="../../../classes/class_vector2i.html#class-vector2i-method-snapped"><span class="std std-ref">Vector2i.snapped()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector3.html#class-vector3-method-snapped"><span class="std std-ref">Vector3.snapped()</span></a>,
+<a class="reference internal" href="../../../classes/class_vector3i.html#class-vector3i-method-snapped"><span class="std std-ref">Vector3i.snapped()</span></a></div>
+<div class="line"><a class="reference internal" href="../../../classes/class_vector4.html#class-vector4-method-snapped"><span class="std std-ref">Vector4.snapped()</span></a>,
+<a class="reference internal" href="../../../classes/class_vector4i.html#class-vector4i-method-snapped"><span class="std std-ref">Vector4i.snapped()</span></a></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>When using static typing, use the typed global scope methods whenever possible.
+This ensures you have safe lines and benefit from typed instructions for
+better performance.</p>
+</section>
+<section id="unsafe-property-access-and-unsafe-method-access-warnings">
+<h3><code class="docutils literal notranslate"><span class="pre">UNSAFE_PROPERTY_ACCESS</span></code> and <code class="docutils literal notranslate"><span class="pre">UNSAFE_METHOD_ACCESS</span></code> warnings<a class="headerlink" href="#unsafe-property-access-and-unsafe-method-access-warnings" title="Link to this heading"></a></h3>
+<p>In this example, we aim to set a property and call a method on an object
+that has a script attached with <code class="docutils literal notranslate"><span class="pre">class_name</span> <span class="pre">MyScript</span></code> and that <code class="docutils literal notranslate"><span class="pre">extends</span>
+<span class="pre">Node2D</span></code>. If we have a reference to the object as a <code class="docutils literal notranslate"><span class="pre">Node2D</span></code> (for instance,
+as it was passed to us by the physics system), we can first check if the
+property and method exist and then set and call them if they do:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="s2">&quot;some_property&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">node_2d</span><span class="p">:</span>
+<span class="w">    </span><span class="n">node_2d</span><span class="o">.</span><span class="vi">some_property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="w">  </span><span class="c1"># Produces UNSAFE_PROPERTY_ACCESS warning.</span>
+
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">node_2d</span><span class="o">.</span><span class="nf">has_method</span><span class="p">(</span><span class="s2">&quot;some_function&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="n">node_2d</span><span class="o">.</span><span class="nf">some_function</span><span class="p">()</span><span class="w">  </span><span class="c1"># Produces UNSAFE_METHOD_ACCESS warning.</span>
+</pre></div>
+</div>
+<p>However, this code will produce <code class="docutils literal notranslate"><span class="pre">UNSAFE_PROPERTY_ACCESS</span></code> and
+<code class="docutils literal notranslate"><span class="pre">UNSAFE_METHOD_ACCESS</span></code> warnings as the property and method are not present
+in the referenced type - in this case a <code class="docutils literal notranslate"><span class="pre">Node2D</span></code>. To make these operations
+safe, you can first check if the object is of type <code class="docutils literal notranslate"><span class="pre">MyScript</span></code> using the
+<code class="docutils literal notranslate"><span class="pre">is</span></code> keyword and then declare a variable with the type <code class="docutils literal notranslate"><span class="pre">MyScript</span></code> on
+which you can set its properties and call its methods:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">node_2d</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nc">MyScript</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">my_script</span><span class="p">:</span><span class="w"> </span><span class="nc">MyScript</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node_2d</span>
+<span class="w">    </span><span class="n">my_script</span><span class="o">.</span><span class="vi">some_property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">    </span><span class="n">my_script</span><span class="o">.</span><span class="nf">some_function</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Alternatively, you can declare a variable and use the <code class="docutils literal notranslate"><span class="pre">as</span></code> operator to try
+to cast the object. You'll then want to check whether the cast was successful
+by confirming that the variable was assigned:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">my_script</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">node_2d</span><span class="w"> </span><span class="ow">as</span><span class="w"> </span><span class="nc">MyScript</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">my_script</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="l">null</span><span class="p">:</span>
+<span class="w">    </span><span class="n">my_script</span><span class="o">.</span><span class="vi">some_property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">    </span><span class="n">my_script</span><span class="o">.</span><span class="nf">some_function</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="unsafe-cast-warning">
+<h3><code class="docutils literal notranslate"><span class="pre">UNSAFE_CAST</span></code> warning<a class="headerlink" href="#unsafe-cast-warning" title="Link to this heading"></a></h3>
+<p>In this example, we would like the label connected to an object entering our
+collision area to show the area's name. Once the object enters the collision
+area, the physics system sends a signal with a <code class="docutils literal notranslate"><span class="pre">Node2D</span></code> object, and the most
+straightforward (but not statically typed) solution to do what we want could
+be achieved like this:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">:</span><span class="w"> </span><span class="nb">Node2D</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="n">body</span><span class="o">.</span><span class="vi">label</span><span class="o">.</span><span class="vi">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="w">  </span><span class="c1"># Produces UNSAFE_PROPERTY_ACCESS warning.</span>
+</pre></div>
+</div>
+<p>This piece of code produces an <code class="docutils literal notranslate"><span class="pre">UNSAFE_PROPERTY_ACCESS</span></code> warning because
+<code class="docutils literal notranslate"><span class="pre">label</span></code> is not defined in <code class="docutils literal notranslate"><span class="pre">Node2D</span></code>. To solve this, we could first check if the
+<code class="docutils literal notranslate"><span class="pre">label</span></code> property exist and cast it to type <code class="docutils literal notranslate"><span class="pre">Label</span></code> before settings its text
+property like so:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">:</span><span class="w"> </span><span class="nb">Node2D</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="s2">&quot;label&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">body</span><span class="p">:</span>
+<span class="w">        </span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="vi">label</span><span class="w"> </span><span class="ow">as</span><span class="w"> </span><span class="nb">Label</span><span class="p">)</span><span class="o">.</span><span class="vi">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="w">  </span><span class="c1"># Produces UNSAFE_CAST warning.</span>
+</pre></div>
+</div>
+<p>However, this produces an <code class="docutils literal notranslate"><span class="pre">UNSAFE_CAST</span></code> warning because <code class="docutils literal notranslate"><span class="pre">body.label</span></code> is of a
+<code class="docutils literal notranslate"><span class="pre">Variant</span></code> type. To safely get the property in the type you want, you can use the
+<code class="docutils literal notranslate"><span class="pre">Object.get()</span></code> method which returns the object as a <code class="docutils literal notranslate"><span class="pre">Variant</span></code> value or returns
+<code class="docutils literal notranslate"><span class="pre">null</span></code> if the property doesn't exist. You can then determine whether the
+property contains an object of the right type using the <code class="docutils literal notranslate"><span class="pre">is</span></code> keyword, and
+finally declare a statically typed variable with the object:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_body_entered</span><span class="p">(</span><span class="n">body</span><span class="p">:</span><span class="w"> </span><span class="nb">Node2D</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">label_variant</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Variant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s2">&quot;label&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">label_variant</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nb">Label</span><span class="p">:</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">label</span><span class="p">:</span><span class="w"> </span><span class="nb">Label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_variant</span>
+<span class="w">        </span><span class="n">label</span><span class="o">.</span><span class="vi">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="cases-where-you-can-t-specify-types">
+<h2>Cases where you can't specify types<a class="headerlink" href="#cases-where-you-can-t-specify-types" title="Link to this heading"></a></h2>
+<p>To wrap up this introduction, let's mention cases where you can't use type hints.
+This will trigger a <strong>syntax error</strong>.</p>
+<ol class="arabic simple">
+<li><p>You can't specify the type of individual elements in an array or a dictionary:</p></li>
+</ol>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">enemies</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="sx">$Goblin</span><span class="p">:</span><span class="w"> </span><span class="nc">Enemy</span><span class="p">,</span><span class="w"> </span><span class="sx">$Zombie</span><span class="p">:</span><span class="w"> </span><span class="nc">Enemy</span><span class="p">]</span>
+<span class="k">var</span><span class="w"> </span><span class="n">character</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Richard&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">money</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="w">    </span><span class="n">inventory</span><span class="p">:</span><span class="w"> </span><span class="nc">Inventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Inventory</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Nested types are not currently supported:</p></li>
+</ol>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">teams</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nb nb-Type">Array</span><span class="p">[</span><span class="nc">Character</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+</pre></div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>Typed GDScript is a powerful tool. It helps you write more structured code,
+avoid common errors, and create scalable and reliable systems. Static types
+improve GDScript performance and more optimizations are planned for the future.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gdscript_styleguide.html" class="btn btn-neutral float-left" title="GDScript style guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="warning_system.html" class="btn btn-neutral float-right" title="GDScript warning system" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

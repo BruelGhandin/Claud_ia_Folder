@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Your first 2D shader" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/shaders/your_first_shader/your_first_2d_shader.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: Shaders are special programs that execute on the GPU and are used for rendering graphics. All modern rendering is done with shaders. For a more detailed description of what shaders ar..." />
+<meta name="description" content="Introduction: Shaders are special programs that execute on the GPU and are used for rendering graphics. All modern rendering is done with shaders. For a more detailed description of what shaders ar..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Your first 2D shader &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Your first 3D shader" href="your_first_3d_shader.html" />
+    <link rel="prev" title="Your first shader" href="index.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/shaders/your_first_shader/your_first_2d_shader" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/shaders/your_first_shader/your_first_2d_shader.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Shaders</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Your first shader</a></li>
+      <li class="breadcrumb-item active">Your first 2D shader</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/shaders/your_first_shader/your_first_2d_shader.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="your-first-2d-shader">
+<span id="doc-your-first-canvasitem-shader"></span><h1>Your first 2D shader<a class="headerlink" href="#your-first-2d-shader" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Shaders are special programs that execute on the GPU and are used for rendering
+graphics. All modern rendering is done with shaders. For a more detailed
+description of what shaders are please see <a class="reference internal" href="../introduction_to_shaders.html#doc-introduction-to-shaders"><span class="std std-ref">What are shaders</span></a>.</p>
+<p>This tutorial will focus on the practical aspects of writing shader programs by
+walking you through the process of writing a shader with both vertex and
+fragment functions. This tutorial targets absolute beginners to shaders.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have experience writing shaders and are just looking for an
+overview of how shaders work in Godot, see the <a class="reference internal" href="../shader_reference/index.html#toc-shading-reference"><span class="std std-ref">Shading Reference</span></a>.</p>
+</div>
+</section>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../shader_reference/canvas_item_shader.html#doc-canvas-item-shader"><span class="std std-ref">CanvasItem shaders</span></a> are used to draw all 2D
+objects in Godot, while <a class="reference internal" href="../shader_reference/spatial_shader.html#doc-spatial-shader"><span class="std std-ref">Spatial</span></a> shaders are used
+to draw all 3D objects.</p>
+<p>In order to use a shader it must be attached inside a <a class="reference internal" href="../../../classes/class_material.html#class-material"><span class="std std-ref">Material</span></a> which must be attached to an object. Materials are a type of
+<a class="reference internal" href="../../scripting/resources.html#doc-resources"><span class="std std-ref">Resource</span></a>. To draw multiple objects with the same
+material, the material must be attached to each object.</p>
+<p>All objects derived from a <a class="reference internal" href="../../../classes/class_canvasitem.html#class-canvasitem"><span class="std std-ref">CanvasItem</span></a> have a material
+property. This includes all <a class="reference internal" href="../../../classes/class_control.html#class-control"><span class="std std-ref">GUI elements</span></a>, <a class="reference internal" href="../../../classes/class_sprite2d.html#class-sprite2d"><span class="std std-ref">Sprite2Ds</span></a>, <a class="reference internal" href="../../../classes/class_tilemaplayer.html#class-tilemaplayer"><span class="std std-ref">TileMapLayers</span></a>, <a class="reference internal" href="../../../classes/class_meshinstance2d.html#class-meshinstance2d"><span class="std std-ref">MeshInstance2Ds</span></a> etc. They also have an option to inherit their parent's
+material. This can be useful if you have a large number of nodes that you want
+to use the same material.</p>
+<p>To begin, create a Sprite2D node. <a class="reference internal" href="../../2d/custom_drawing_in_2d.html#doc-custom-drawing-in-2d"><span class="std std-ref">You can use any CanvasItem</span></a>,
+so long as it is drawing to the canvas, so for this tutorial we will use a Sprite2D,
+as it is the easiest CanvasItem to start drawing with.</p>
+<p>In the Inspector, click beside &quot;Texture&quot; where it says &quot;[empty]&quot; and select
+&quot;Load&quot;, then select &quot;icon.svg&quot;. For new projects, this is the Godot icon. You
+should now see the icon in the viewport.</p>
+<p>Next, look down in the Inspector, under the CanvasItem section, click beside
+&quot;Material&quot; and select &quot;New ShaderMaterial&quot;. This creates a new Material
+resource. Click on the sphere that appears. Godot currently doesn't know whether
+you are writing a CanvasItem Shader or a Spatial Shader and it previews the
+output of spatial shaders. So what you are seeing is the output of the default
+Spatial Shader.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Materials that inherit from the <a class="reference internal" href="../../../classes/class_material.html#class-material"><span class="std std-ref">Material</span></a> resource, such as <a class="reference internal" href="../../../classes/class_standardmaterial3d.html#class-standardmaterial3d"><span class="std std-ref">StandardMaterial3D</span></a>
+and <a class="reference internal" href="../../../classes/class_particleprocessmaterial.html#class-particleprocessmaterial"><span class="std std-ref">ParticleProcessMaterial</span></a>, can be converted to a <a class="reference internal" href="../../../classes/class_shadermaterial.html#class-shadermaterial"><span class="std std-ref">ShaderMaterial</span></a>
+and their existing properties will be converted to an accompanying text shader.
+To do so, right-click on the material in the FileSystem dock and choose
+<strong>Convert to ShaderMaterial</strong>. You can also do so by right-clicking on any
+property holding a reference to the material in the inspector.</p>
+</div>
+<p>Click beside &quot;Shader&quot; and select &quot;New Shader&quot;. Finally, click on the shader
+you just created and the shader editor will open. You are now ready to begin writing
+your first shader.</p>
+</section>
+<section id="your-first-canvasitem-shader">
+<h2>Your first CanvasItem shader<a class="headerlink" href="#your-first-canvasitem-shader" title="Link to this heading"></a></h2>
+<p>In Godot, all shaders start with a line specifying what type of shader they are.
+It uses the following format:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">canvas_item</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Because we are writing a CanvasItem shader, we specify <code class="docutils literal notranslate"><span class="pre">canvas_item</span></code> in the
+first line. All our code will go beneath this declaration.</p>
+<p>This line tells the engine which built-in variables and functionality to supply
+you with.</p>
+<p>In Godot you can override three functions to control how the shader operates;
+<code class="docutils literal notranslate"><span class="pre">vertex</span></code>, <code class="docutils literal notranslate"><span class="pre">fragment</span></code>, and <code class="docutils literal notranslate"><span class="pre">light</span></code>. This tutorial will walk you through
+writing a shader with both vertex and fragment functions. Light functions are
+significantly more complex than vertex and fragment functions and so will not be
+covered here.</p>
+</section>
+<section id="your-first-fragment-function">
+<h2>Your first fragment function<a class="headerlink" href="#your-first-fragment-function" title="Link to this heading"></a></h2>
+<p>The fragment function runs for every pixel in a Sprite2D and determines what color
+that pixel should be.</p>
+<p>They are restricted to the pixels covered by the Sprite2D, that means you cannot
+use one to, for example, create an outline around a Sprite2D.</p>
+<p>The most basic fragment function does nothing except assign a single color to
+every pixel.</p>
+<p>We do so by writing a <code class="docutils literal notranslate"><span class="pre">vec4</span></code> to the built-in variable <code class="docutils literal notranslate"><span class="pre">COLOR</span></code>. <code class="docutils literal notranslate"><span class="pre">vec4</span></code> is
+shorthand for constructing a vector with 4 numbers. For more information about
+vectors see the <a class="reference internal" href="../../math/vector_math.html#doc-vector-math"><span class="std std-ref">Vector math tutorial</span></a>. <code class="docutils literal notranslate"><span class="pre">COLOR</span></code> is both
+an input variable to the fragment function and the final output from it.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">(){</span>
+<span class="w">  </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<img alt="../../../_images/blue-box.png" src="../../../_images/blue-box.png" />
+<p>Congratulations! You're done. You have successfully written your first shader in
+Godot.</p>
+<p>Now let's make things more complex.</p>
+<p>There are many inputs to the fragment function that you can use for calculating
+<code class="docutils literal notranslate"><span class="pre">COLOR</span></code>. <code class="docutils literal notranslate"><span class="pre">UV</span></code> is one of them. UV coordinates are specified in your Sprite2D
+(without you knowing it!) and they tell the shader where to read from textures
+for each part of the mesh.</p>
+<p>In the fragment function you can only read from <code class="docutils literal notranslate"><span class="pre">UV</span></code>, but you can use it in
+other functions or to assign values to <code class="docutils literal notranslate"><span class="pre">COLOR</span></code> directly.</p>
+<p><code class="docutils literal notranslate"><span class="pre">UV</span></code> varies between 0-1 from left-right and from top-bottom.</p>
+<img alt="../../../_images/iconuv.png" src="../../../_images/iconuv.png" />
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="n">UV</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<img alt="../../../_images/UV.png" src="../../../_images/UV.png" />
+<section id="using-texture-built-in">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">TEXTURE</span></code> built-in<a class="headerlink" href="#using-texture-built-in" title="Link to this heading"></a></h3>
+<p>The default fragment function reads from the set Sprite2D texture and displays it.</p>
+<p>When you want to adjust a color in a Sprite2D you can adjust the color
+from the texture manually like in the code below.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">(){</span>
+<span class="w">  </span><span class="c1">// This shader will result in a blue-tinted icon</span>
+<span class="w">  </span><span class="n">COLOR</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Certain nodes, like Sprite2Ds, have a dedicated texture variable that can be accessed
+in the shader using <code class="docutils literal notranslate"><span class="pre">TEXTURE</span></code>. If you want to use the Sprite2D texture to combine
+with other colors, you can use the <code class="docutils literal notranslate"><span class="pre">UV</span></code> with the <code class="docutils literal notranslate"><span class="pre">texture</span></code> function to access
+this variable. Use them to redraw the Sprite2D with the texture.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">(){</span>
+<span class="w">  </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">TEXTURE</span><span class="p">,</span><span class="w"> </span><span class="n">UV</span><span class="p">);</span><span class="w"> </span><span class="c1">// Read from texture again.</span>
+<span class="w">  </span><span class="n">COLOR</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span><span class="w"> </span><span class="c1">//set blue channel to 1.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<img alt="../../../_images/blue-tex.png" src="../../../_images/blue-tex.png" />
+</section>
+<section id="uniform-input">
+<h3>Uniform input<a class="headerlink" href="#uniform-input" title="Link to this heading"></a></h3>
+<p>Uniform input is used to pass data into a shader that will be the same across
+the entire shader.</p>
+<p>You can use uniforms by defining them at the top of your shader like so:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">uniform</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For more information about usage see the <a class="reference internal" href="../shader_reference/shading_language.html#doc-shading-language"><span class="std std-ref">Shading Language doc</span></a>.</p>
+<p>Add a uniform to change the amount of blue in our Sprite2D.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">uniform</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">blue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// you can assign a default value to uniforms</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">(){</span>
+<span class="w">  </span><span class="n">COLOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">TEXTURE</span><span class="p">,</span><span class="w"> </span><span class="n">UV</span><span class="p">);</span><span class="w"> </span><span class="c1">// Read from texture</span>
+<span class="w">  </span><span class="n">COLOR</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blue</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now you can change the amount of blue in the Sprite2D from the editor. Look back
+at the Inspector under where you created your shader. You should see a section
+called &quot;Shader Param&quot;. Unfold that section and you will see the uniform you just
+declared. If you change the value in the editor, it will overwrite the default
+value you provided in the shader.</p>
+</section>
+<section id="interacting-with-shaders-from-code">
+<h3>Interacting with shaders from code<a class="headerlink" href="#interacting-with-shaders-from-code" title="Link to this heading"></a></h3>
+<p>You can change uniforms from code using the function <code class="docutils literal notranslate"><span class="pre">set_shader_parameter()</span></code>
+which is called on the node's material resource. With a Sprite2D node, the
+following code can be used to set the <code class="docutils literal notranslate"><span class="pre">blue</span></code> uniform.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">blue_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="n">material</span><span class="o">.</span><span class="nf">set_shader_parameter</span><span class="p">(</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">blue_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">blueValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="p">((</span><span class="n">ShaderMaterial</span><span class="p">)</span><span class="n">Material</span><span class="p">).</span><span class="n">SetShaderParameter</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">blueValue</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>Note that the name of the uniform is a string. The string must match exactly
+with how it is written in the shader, including spelling and case.</p>
+</section>
+</section>
+<section id="your-first-vertex-function">
+<h2>Your first vertex function<a class="headerlink" href="#your-first-vertex-function" title="Link to this heading"></a></h2>
+<p>Now that we have a fragment function, let's write a vertex function.</p>
+<p>Use the vertex function to calculate where on the screen each vertex should end
+up.</p>
+<p>The most important variable in the vertex function is <code class="docutils literal notranslate"><span class="pre">VERTEX</span></code>. Initially, it
+specifies the vertex coordinates in your model, but you also write to it to
+determine where to actually draw those vertices. <code class="docutils literal notranslate"><span class="pre">VERTEX</span></code> is a <code class="docutils literal notranslate"><span class="pre">vec2</span></code> that
+is initially presented in local-space (i.e. not relative to the camera,
+viewport, or parent nodes).</p>
+<p>You can offset the vertices by directly adding to <code class="docutils literal notranslate"><span class="pre">VERTEX</span></code>.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">vertex</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">VERTEX</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="kt">vec2</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Combined with the <code class="docutils literal notranslate"><span class="pre">TIME</span></code> built-in variable, this can be used for basic
+animation.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">vertex</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Animate Sprite2D moving in big circle around its location</span>
+<span class="w">  </span><span class="n">VERTEX</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="kt">vec2</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">TIME</span><span class="p">)</span><span class="o">*</span><span class="mf">100.0</span><span class="p">,</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">TIME</span><span class="p">)</span><span class="o">*</span><span class="mf">100.0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>At their core, shaders do what you have seen so far, they compute <code class="docutils literal notranslate"><span class="pre">VERTEX</span></code> and
+<code class="docutils literal notranslate"><span class="pre">COLOR</span></code>. It is up to you to dream up more complex mathematical strategies for
+assigning values to those variables.</p>
+<p>For inspiration, take a look at some of the more advanced shader tutorials, and
+look at other sites like <a class="reference external" href="https://www.shadertoy.com/results?query=&amp;sort=popular&amp;from=10&amp;num=4">Shadertoy</a> and <a class="reference external" href="https://thebookofshaders.com">The
+Book of Shaders</a>.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Your first shader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="your_first_3d_shader.html" class="btn btn-neutral float-right" title="Your first 3D shader" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

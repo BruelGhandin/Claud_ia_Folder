@@ -1,0 +1,608 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Import plugins" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/plugins/editor/import_plugins.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: An import plugin is a special type of editor tool that allows custom resources to be imported by Godot and be treated as first-class resources. The editor itself comes bundled with a ..." />
+<meta name="description" content="Introduction: An import plugin is a special type of editor tool that allows custom resources to be imported by Godot and be treated as first-class resources. The editor itself comes bundled with a ..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Import plugins &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="3D gizmo plugins" href="3d_gizmos.html" />
+    <link rel="prev" title="Making main screen plugins" href="making_main_screen_plugins.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/plugins/editor/import_plugins" />
+
+<link rel="manifest" href="../../../manifest.webmanifest" /><link rel="icon" href="../../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../../_static/css/godot-mobile.css"><script defer src="../../../_static/js/godot-pwa.js"></script><script defer src="../../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../../" data-godot-page="tutorials/plugins/editor/import_plugins.html"></div><script src="../../../_static/js/godot-menu-data.js"></script><script src="../../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Plugins</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Editor plugins</a></li>
+      <li class="breadcrumb-item active">Import plugins</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/plugins/editor/import_plugins.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+    <div class="admonition attention article-status">
+      <p class="first admonition-title">Work in progress</p>
+      <p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.7</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+    </div>
+    
+  </div>
+  
+
+  
+  <section id="import-plugins">
+<span id="doc-import-plugins"></span><h1>Import plugins<a class="headerlink" href="#import-plugins" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tutorial assumes you already know how to make generic plugins. If
+in doubt, refer to the <a class="reference internal" href="making_plugins.html#doc-making-plugins"><span class="std std-ref">Making plugins</span></a> page. This also
+assumes you are acquainted with Godot's import system.</p>
+</div>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>An import plugin is a special type of editor tool that allows custom resources
+to be imported by Godot and be treated as first-class resources. The editor
+itself comes bundled with a lot of import plugins to handle the common resources
+like PNG images, Collada and glTF models, Ogg Vorbis sounds, and many more.</p>
+<p>This tutorial shows how to create an import plugin to load a
+custom text file as a material resource. This text file will contain three
+numeric values separated by comma, which represents the three channels of a
+color, and the resulting color will be used as the albedo (main color) of the
+imported material. In this example it contains the pure blue color
+(zero red, zero green, and full blue):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>0,0,255
+</pre></div>
+</div>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<p>First we need a generic plugin that will handle the initialization and
+destruction of our import plugin. Let's add the <code class="docutils literal notranslate"><span class="pre">plugin.cfg</span></code> file first:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[plugin]</span>
+
+<span class="na">name</span><span class="o">=</span><span class="s">&quot;Silly Material Importer&quot;</span>
+<span class="na">description</span><span class="o">=</span><span class="s">&quot;Imports a 3D Material from an external text file.&quot;</span>
+<span class="na">author</span><span class="o">=</span><span class="s">&quot;Yours Truly&quot;</span>
+<span class="na">version</span><span class="o">=</span><span class="s">&quot;1.0&quot;</span>
+<span class="na">script</span><span class="o">=</span><span class="s">&quot;material_import.gd&quot;</span>
+</pre></div>
+</div>
+<p>Then we need the <code class="docutils literal notranslate"><span class="pre">material_import.gd</span></code> file to add and remove the import plugin
+when needed:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># material_import.gd</span>
+<span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorPlugin</span>
+
+
+<span class="k">var</span><span class="w"> </span><span class="n">import_plugin</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_enter_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="n">import_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;import_plugin.gd&quot;</span><span class="p">)</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">add_import_plugin</span><span class="p">(</span><span class="n">import_plugin</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_exit_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">remove_import_plugin</span><span class="p">(</span><span class="n">import_plugin</span><span class="p">)</span>
+<span class="w">    </span><span class="n">import_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">null</span>
+</pre></div>
+</div>
+<p>When this plugin is activated, it will create a new instance of the import
+plugin (which we'll soon make) and add it to the editor using the
+<a class="reference internal" href="../../../classes/class_editorplugin.html#class-editorplugin-method-add-import-plugin"><span class="std std-ref">add_import_plugin()</span></a> method. We store
+a reference to it in a class member <code class="docutils literal notranslate"><span class="pre">import_plugin</span></code> so we can refer to it
+later when removing it. The
+<a class="reference internal" href="../../../classes/class_editorplugin.html#class-editorplugin-method-remove-import-plugin"><span class="std std-ref">remove_import_plugin()</span></a> method is
+called when the plugin is deactivated to clean up the memory and let the editor
+know the import plugin isn't available anymore.</p>
+<p>Note that the import plugin is a reference type, so it doesn't need to be
+explicitly released from memory with the <code class="docutils literal notranslate"><span class="pre">free()</span></code> function. It will be
+released automatically by the engine when it goes out of scope.</p>
+</section>
+<section id="the-editorimportplugin-class">
+<h2>The EditorImportPlugin class<a class="headerlink" href="#the-editorimportplugin-class" title="Link to this heading"></a></h2>
+<p>The main character of the show is the
+<a class="reference internal" href="../../../classes/class_editorimportplugin.html#class-editorimportplugin"><span class="std std-ref">EditorImportPlugin class</span></a>. It is responsible for
+implementing the methods that are called by Godot when it needs to know how to deal
+with files.</p>
+<p>Let's begin to code our plugin, one method at time:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># import_plugin.gd</span>
+<span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorImportPlugin</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_importer_name</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="s2">&quot;demos.sillymaterial&quot;</span>
+</pre></div>
+</div>
+<p>The first method is the
+<a class="reference internal" href="../../../classes/class_editorimportplugin.html#class-editorimportplugin-private-method-get-importer-name"><span class="std std-ref">_get_importer_name()</span></a>. This is a
+unique name for your plugin that is used by Godot to know which import was used
+in a certain file. When the files needs to be reimported, the editor will know
+which plugin to call.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_visible_name</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="s2">&quot;Silly Material&quot;</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../../../classes/class_editorimportplugin.html#class-editorimportplugin-private-method-get-visible-name"><span class="std std-ref">_get_visible_name()</span></a> method is
+responsible for returning the name of the type it imports and it will be shown to the
+user in the Import dock.</p>
+<p>You should choose this name as a continuation to &quot;Import as&quot;, e.g. <em>&quot;Import as
+Silly Material&quot;</em>. You can name it whatever you want but we recommend a
+descriptive name for your plugin.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_recognized_extensions</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mtxt&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Godot's import system detects file types by their extension. In the
+<a class="reference internal" href="../../../classes/class_editorimportplugin.html#class-editorimportplugin-private-method-get-recognized-extensions"><span class="std std-ref">_get_recognized_extensions()</span></a>
+method you return an array of strings to represent each extension that this
+plugin can understand. If an extension is recognized by more than one plugin,
+the user can select which one to use when importing the files.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Common extensions like <code class="docutils literal notranslate"><span class="pre">.json</span></code> and <code class="docutils literal notranslate"><span class="pre">.txt</span></code> might be used by many
+plugins. Also, there could be files in the project that are just data
+for the game and should not be imported. You have to be careful when
+importing to validate the data. Never expect the file to be well-formed.</p>
+</div>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_save_extension</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="s2">&quot;material&quot;</span>
+</pre></div>
+</div>
+<p>The imported files are saved in the <code class="docutils literal notranslate"><span class="pre">.import</span></code> folder at the project's root.
+Their extension should match the type of resource you are importing, but since
+Godot can't tell what you'll use (because there might be multiple valid
+extensions for the same resource), you need to declare what will be used in
+the import.</p>
+<p>Since we're importing a Material, we'll use the special extension for such
+resource types. If you are importing a scene, you can use <code class="docutils literal notranslate"><span class="pre">scn</span></code>. Generic
+resources can use the <code class="docutils literal notranslate"><span class="pre">res</span></code> extension. However, this is not enforced in any
+way by the engine.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_resource_type</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="s2">&quot;StandardMaterial3D&quot;</span>
+</pre></div>
+</div>
+<p>The imported resource has a specific type, so the editor can know which property
+slot it belongs to. This allows drag and drop from the FileSystem dock to a
+property in the Inspector.</p>
+<p>In our case it's a <a class="reference internal" href="../../../classes/class_standardmaterial3d.html#class-standardmaterial3d"><span class="std std-ref">StandardMaterial3D</span></a>, which can be applied to 3D
+objects.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you need to import different types from the same extension, you
+have to create multiple import plugins. You can abstract the import
+code on another file to avoid duplication in this regard.</p>
+</div>
+</section>
+<section id="options-and-presets">
+<h2>Options and presets<a class="headerlink" href="#options-and-presets" title="Link to this heading"></a></h2>
+<p>Your plugin can provide different options to allow the user to control how the
+resource will be imported. If a set of selected options is common, you can also
+create different presets to make it easier for the user. The following image
+shows how the options will appear in the editor:</p>
+<img alt="../../../_images/import_plugin_options.png" src="../../../_images/import_plugin_options.png" />
+<p>Since there might be many presets and they are identified with a number, it's a
+good practice to use an enum so you can refer to them using names.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorImportPlugin</span>
+
+
+<span class="k">enum</span><span class="w"> </span><span class="n">Presets</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">DEFAULT</span><span class="w"> </span><span class="p">}</span>
+
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Now that the enum is defined, let's keep looking at the methods of an import
+plugin:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_preset_count</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nc">Presets</span><span class="o">.</span><span class="nf">size</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../../../classes/class_editorimportplugin.html#class-editorimportplugin-private-method-get-preset-count"><span class="std std-ref">_get_preset_count()</span></a> method
+returns the amount of presets that this plugins defines. We only have one preset
+now, but we can make this method future-proof by returning the size of our
+<code class="docutils literal notranslate"><span class="pre">Presets</span></code> enumeration.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_preset_name</span><span class="p">(</span><span class="n">preset_index</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">match</span><span class="w"> </span><span class="n">preset_index</span><span class="p">:</span>
+<span class="w">        </span><span class="nc">Presets</span><span class="o">.</span><span class="vi">DEFAULT</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="s2">&quot;Default&quot;</span>
+<span class="w">        </span><span class="n">_</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="s2">&quot;Unknown&quot;</span>
+</pre></div>
+</div>
+<p>Here we have the
+<a class="reference internal" href="../../../classes/class_editorimportplugin.html#class-editorimportplugin-private-method-get-preset-name"><span class="std std-ref">_get_preset_name()</span></a> method, which
+gives names to the presets as they will be presented to the user, so be sure to
+use short and clear names.</p>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">match</span></code> statement here to make the code more structured. This
+way it's easy to add new presets in the future. We use the catch all pattern to
+return something too. Although Godot won't ask for presets beyond the preset
+count you defined, it's always better to be on the safe side.</p>
+<p>If you have only one preset you could simply return its name directly, but if
+you do this you have to be careful when you add more presets.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_import_options</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">preset_index</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">match</span><span class="w"> </span><span class="n">preset_index</span><span class="p">:</span>
+<span class="w">        </span><span class="nc">Presets</span><span class="o">.</span><span class="vi">DEFAULT</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">                       </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;use_red_anyway&quot;</span><span class="p">,</span>
+<span class="w">                       </span><span class="s2">&quot;default_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="l">false</span>
+<span class="w">                    </span><span class="p">}]</span>
+<span class="w">        </span><span class="n">_</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="p">[]</span>
+</pre></div>
+</div>
+<p>This is the method which defines the available options.
+<a class="reference internal" href="../../../classes/class_editorimportplugin.html#class-editorimportplugin-private-method-get-import-options"><span class="std std-ref">_get_import_options()</span></a> returns
+an array of dictionaries, and each dictionary contains a few keys that are
+checked to customize the option as it's shown to the user. The following table
+shows the possible keys:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p>String</p></td>
+<td><p>The name of the option. When showed, underscores become spaces and first letters are capitalized.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">default_value</span></code></p></td>
+<td><p>Any</p></td>
+<td><p>The default value of the option for this preset.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">property_hint</span></code></p></td>
+<td><p>Enum value</p></td>
+<td><p>One of the <a class="reference internal" href="../../../classes/class_%40globalscope.html#enum-globalscope-propertyhint"><span class="std std-ref">PropertyHint</span></a> values to use as hint.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hint_string</span></code></p></td>
+<td><p>String</p></td>
+<td><p>The hint text of the property. The same as you'd add in the <code class="docutils literal notranslate"><span class="pre">export</span></code> statement in GDScript.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">usage</span></code></p></td>
+<td><p>Enum value</p></td>
+<td><p>One of the <a class="reference internal" href="../../../classes/class_%40globalscope.html#enum-globalscope-propertyusageflags"><span class="std std-ref">PropertyUsageFlags</span></a> values to define the usage.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">default_value</span></code> keys are <strong>mandatory</strong>, the rest are optional.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">_get_import_options</span></code> method receives the preset number, so you
+can configure the options for each different preset (especially the default
+value). In this example we use the <code class="docutils literal notranslate"><span class="pre">match</span></code> statement, but if you have lots of
+options and the presets only change the value you may want to create the array
+of options first and then change it based on the preset.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">_get_import_options</span></code> method is called even if you don't
+define presets (by making <code class="docutils literal notranslate"><span class="pre">_get_preset_count</span></code> return zero). You
+have to return an array even it's empty, otherwise you can get
+errors.</p>
+</div>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_option_visibility</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">option_name</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">true</span>
+</pre></div>
+</div>
+<p>For the
+<a class="reference internal" href="../../../classes/class_editorimportplugin.html#class-editorimportplugin-private-method-get-option-visibility"><span class="std std-ref">_get_option_visibility()</span></a>
+method, we simply return <code class="docutils literal notranslate"><span class="pre">true</span></code> because all of our options (i.e. the single
+one we defined) are visible all the time.</p>
+<p>If you need to make certain option visible only if another is set with a certain
+value, you can add the logic in this method.</p>
+</section>
+<section id="the-import-method">
+<h2>The <code class="docutils literal notranslate"><span class="pre">import</span></code> method<a class="headerlink" href="#the-import-method" title="Link to this heading"></a></h2>
+<p>The heavy part of the process, responsible for converting the files into
+resources, is covered by the <a class="reference internal" href="../../../classes/class_editorimportplugin.html#class-editorimportplugin-private-method-import"><span class="std std-ref">_import()</span></a>
+method. Our sample code is a bit long, so let's split in a few parts:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_import</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span><span class="w"> </span><span class="n">save_path</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">r_platform_variants</span><span class="p">,</span><span class="w"> </span><span class="n">r_gen_files</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">FileAccess</span><span class="o">.</span><span class="nf">open</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span><span class="w"> </span><span class="nb">FileAccess</span><span class="o">.</span><span class="vi">READ</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="l">null</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb">FileAccess</span><span class="o">.</span><span class="nf">get_open_error</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">.</span><span class="nf">get_line</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The first part of our import method opens and reads the source file. We use the
+<a class="reference internal" href="../../../classes/class_fileaccess.html#class-fileaccess"><span class="std std-ref">FileAccess</span></a> class to do that, passing the <code class="docutils literal notranslate"><span class="pre">source_file</span></code>
+parameter which is provided by the editor.</p>
+<p>If there's an error when opening the file, we return it to let the editor know
+that the import wasn't successful.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">channels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">line</span><span class="o">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">channels</span><span class="o">.</span><span class="nf">size</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">ERR_PARSE_ERROR</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">color</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">options</span><span class="o">.</span><span class="vi">use_red_anyway</span><span class="p">:</span>
+<span class="w">    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="nf">from_rgba8</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="nf">from_rgba8</span><span class="p">(</span><span class="nb nb-Type">int</span><span class="p">(</span><span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">(</span><span class="n">channels</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">(</span><span class="n">channels</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>This code takes the line of the file it read before and splits it in pieces
+that are separated by a comma. If there are more or less than the three values,
+it considers the file invalid and reports an error.</p>
+<p>Then it creates a new <a class="reference internal" href="../../../classes/class_color.html#class-color"><span class="std std-ref">Color</span></a> variable and sets its values
+according to the input file. If the <code class="docutils literal notranslate"><span class="pre">use_red_anyway</span></code> option is enabled, then
+it sets the color as a pure red instead.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">material</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">StandardMaterial3D</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="n">material</span><span class="o">.</span><span class="vi">albedo_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span>
+</pre></div>
+</div>
+<p>This part makes a new <a class="reference internal" href="../../../classes/class_standardmaterial3d.html#class-standardmaterial3d"><span class="std std-ref">StandardMaterial3D</span></a> that is the
+imported resource. We create a new instance of it and then set its albedo color
+as the value we got before.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb">ResourceSaver</span><span class="o">.</span><span class="nf">save</span><span class="p">(</span><span class="n">material</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">save_path</span><span class="p">,</span><span class="w"> </span><span class="nf">_get_save_extension</span><span class="p">()])</span>
+</pre></div>
+</div>
+<p>This is the last part and quite an important one, because here we save the made
+resource to the disk. The path of the saved file is generated and informed by
+the editor via the <code class="docutils literal notranslate"><span class="pre">save_path</span></code> parameter. Note that this comes <strong>without</strong> the
+extension, so we add it using <a class="reference internal" href="../../scripting/gdscript/gdscript_format_string.html#doc-gdscript-printf"><span class="std std-ref">string formatting</span></a>. For
+this we call the <code class="docutils literal notranslate"><span class="pre">_get_save_extension</span></code> method that we defined earlier, so we
+can be sure that they won't get out of sync.</p>
+<p>We also return the result from the
+<a class="reference internal" href="../../../classes/class_resourcesaver.html#class-resourcesaver-method-save"><span class="std std-ref">ResourceSaver.save()</span></a> method, so if there's an
+error in this step, the editor will know about it.</p>
+</section>
+<section id="platform-variants-and-generated-files">
+<h2>Platform variants and generated files<a class="headerlink" href="#platform-variants-and-generated-files" title="Link to this heading"></a></h2>
+<p>You may have noticed that our plugin ignored two arguments of the <code class="docutils literal notranslate"><span class="pre">import</span></code>
+method. Those are <em>return arguments</em> (hence the <code class="docutils literal notranslate"><span class="pre">r</span></code> at the beginning of their
+name), which means that the editor will read from them after calling your import
+method. Both of them are arrays that you can fill with information.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">r_platform_variants</span></code> argument is used if you need to import the resource
+differently depending on the target platform. While it's called <em>platform</em>
+variants, it is based on the presence of <a class="reference internal" href="../../export/feature_tags.html#doc-feature-tags"><span class="std std-ref">feature tags</span></a>,
+so even the same platform can have multiple variants depending on the setup.</p>
+<p>To import a platform variant, you need to save it with the feature tag before
+the extension, and then push the tag to the <code class="docutils literal notranslate"><span class="pre">r_platform_variants</span></code> array so the
+editor can know that you did.</p>
+<p>For example, let's say we save a different material for a mobile platform. We
+would need to do something like the following:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">r_platform_variants</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="s2">&quot;mobile&quot;</span><span class="p">)</span>
+<span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb">ResourceSaver</span><span class="o">.</span><span class="nf">save</span><span class="p">(</span><span class="n">mobile_material</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">save_path</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mobile&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">_get_save_extension</span><span class="p">()])</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">r_gen_files</span></code> argument is meant for extra files that are generated during
+your import process and need to be kept. The editor will look at it to
+understand the dependencies and make sure the extra file is not inadvertently
+deleted.</p>
+<p>This is also an array and should be filled with full paths of the files you
+save. As an example, let's create another material for the next pass and save it
+in a different file:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">next_pass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">StandardMaterial3D</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="n">next_pass</span><span class="o">.</span><span class="vi">albedo_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="o">.</span><span class="nf">inverted</span><span class="p">()</span>
+<span class="k">var</span><span class="w"> </span><span class="n">next_pass_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.next_pass.</span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">[</span><span class="n">save_path</span><span class="p">,</span><span class="w"> </span><span class="nf">_get_save_extension</span><span class="p">()]</span>
+
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ResourceSaver</span><span class="o">.</span><span class="nf">save</span><span class="p">(</span><span class="n">next_pass</span><span class="p">,</span><span class="w"> </span><span class="n">next_pass_path</span><span class="p">)</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">OK</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">err</span>
+<span class="n">r_gen_files</span><span class="o">.</span><span class="nf">push_back</span><span class="p">(</span><span class="n">next_pass_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="trying-the-plugin">
+<h2>Trying the plugin<a class="headerlink" href="#trying-the-plugin" title="Link to this heading"></a></h2>
+<p>This has been theoretical, but now that the import plugin is done, let's
+test it. Make sure you created the sample file (with the contents described in
+the introduction section) and save it as <code class="docutils literal notranslate"><span class="pre">test.mtxt</span></code>. Then activate the plugin
+in the Project Settings.</p>
+<p>If everything goes well, the import plugin is added to the editor and the file
+system is scanned, making the custom resource appear on the FileSystem dock. If
+you select it and focus the Import dock, you can see the only option to select
+there.</p>
+<p>Create a MeshInstance3D node in the scene, and for its Mesh property set up a new
+SphereMesh. Unfold the Material section in the Inspector and then drag the file
+from the FileSystem dock to the material property. The object will update in the
+viewport with the blue color of the imported material.</p>
+<img alt="../../../_images/import_plugin_trying.png" src="../../../_images/import_plugin_trying.png" />
+<p>Go to Import dock, enable the &quot;Use Red Anyway&quot; option, and click on &quot;Reimport&quot;.
+This will update the imported material and should automatically update the view
+showing the red color instead.</p>
+<p>And that's it! Your first import plugin is done! Now get creative and make
+plugins for your own beloved formats. This can be quite useful to write your
+data in a custom format and then use it in Godot as if they were native
+resources. This shows how the import system is powerful and extendable.</p>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="making_main_screen_plugins.html" class="btn btn-neutral float-left" title="Making main screen plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3d_gizmos.html" class="btn btn-neutral float-right" title="3D gizmo plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

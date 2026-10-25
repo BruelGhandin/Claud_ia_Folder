@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Singletons (Autoload)" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/scripting/singletons_autoload.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="Introduction: Godot&#x27;s scene system, while powerful and flexible, has a drawback: there is no method for storing information (e.g. a player&#x27;s score or inventory) that is needed by more tha..." />
+<meta name="description" content="Introduction: Godot&#x27;s scene system, while powerful and flexible, has a drawback: there is no method for storing information (e.g. a player&#x27;s score or inventory) that is needed by more tha..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Singletons (Autoload) &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using SceneTree" href="scene_tree.html" />
+    <link rel="prev" title="Resources" href="resources.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/scripting/singletons_autoload" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/scripting/singletons_autoload.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Scripting</a></li>
+      <li class="breadcrumb-item active">Singletons (Autoload)</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/scripting/singletons_autoload.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="singletons-autoload">
+<span id="doc-singletons-autoload"></span><h1>Singletons (Autoload)<a class="headerlink" href="#singletons-autoload" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Godot's scene system, while powerful and flexible, has a drawback: there is no
+method for storing information (e.g. a player's score or inventory) that is
+needed by more than one scene.</p>
+<p>It's possible to address this with some workarounds, but they come with their
+own limitations:</p>
+<ul class="simple">
+<li><p>You can use a &quot;master&quot; scene that loads and unloads other scenes as
+its children. However, this means you can no longer run those scenes
+individually and expect them to work correctly.</p></li>
+<li><p>Information can be stored to disk in <code class="docutils literal notranslate"><span class="pre">user://</span></code> and then loaded by scenes
+that require it, but frequently saving and loading data is cumbersome and
+may be slow.</p></li>
+</ul>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Singleton_pattern">Singleton pattern</a> is
+a useful tool for solving the common use case where you need to store
+persistent information between scenes. In our case, it's possible to reuse the
+same scene or class for multiple singletons as long as they have different
+names.</p>
+<p>Using this concept, you can create objects that:</p>
+<ul class="simple">
+<li><p>Are always loaded, no matter which scene is currently running.</p></li>
+<li><p>Can store global variables such as player information.</p></li>
+<li><p>Can handle switching scenes and between-scene transitions.</p></li>
+<li><p><em>Act</em> like a singleton, since GDScript does not support global variables by design.</p></li>
+</ul>
+<p>Autoloading nodes and scripts can give us these characteristics.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Godot won't make an Autoload a &quot;true&quot; singleton as per the singleton design
+pattern. It may still be instanced more than once by the user if desired.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you're creating an autoload as part of an editor plugin, consider
+<a class="reference internal" href="../plugins/editor/making_plugins.html#doc-making-plugins-autoload"><span class="std std-ref">registering it automatically in the Project Settings</span></a>
+when the plugin is enabled.</p>
+</div>
+</section>
+<section id="autoload">
+<h2>Autoload<a class="headerlink" href="#autoload" title="Link to this heading"></a></h2>
+<p>You can create an Autoload to load a scene or a script that inherits from
+<a class="reference internal" href="../../classes/class_node.html#class-node"><span class="std std-ref">Node</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When autoloading a script, a <a class="reference internal" href="../../classes/class_node.html#class-node"><span class="std std-ref">Node</span></a> will be created and the script will be
+attached to it. This node will be added to the root viewport before any
+other scenes are loaded.</p>
+</div>
+<img alt="../../_images/singleton.webp" src="../../_images/singleton.webp" />
+<p>To autoload a scene or script, start from the menu and navigate to
+<strong>Project &gt; Project Settings &gt; Globals &gt; Autoload</strong>.</p>
+<img alt="../../_images/autoload_tab.webp" src="../../_images/autoload_tab.webp" />
+<p>Here you can add any number of scenes or scripts. Each entry in the list
+requires a name, which is assigned as the node's <code class="docutils literal notranslate"><span class="pre">name</span></code> property. The order of
+the entries as they are added to the global scene tree can be manipulated using
+the up/down arrow keys. Like regular scenes, the engine will read these nodes
+in top-to-bottom order.</p>
+<img alt="../../_images/autoload_example.webp" src="../../_images/autoload_example.webp" />
+<p>If the <strong>Enable</strong> column is checked (which is the default), then the singleton can
+be accessed directly in GDScript:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nc">PlayerVariables</span><span class="o">.</span><span class="vi">health</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">10</span>
+</pre></div>
+</div>
+</div></div>
+<p>The <strong>Enable</strong> column has no effect in C# code. However, if the singleton is a
+C# script, a similar effect can be achieved by including a static property
+called <code class="docutils literal notranslate"><span class="pre">Instance</span></code> and assigning it in <code class="docutils literal notranslate"><span class="pre">_Ready()</span></code>:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-QyM=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="0">C#</button></div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">PlayerVariables</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">PlayerVariables</span><span class="w"> </span><span class="n">Instance</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Health</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>This allows the singleton to be accessed from C# code without <code class="docutils literal notranslate"><span class="pre">GetNode()</span></code> and
+without a typecast:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-QyM=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="0">C#</button></div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">PlayerVariables</span><span class="p">.</span><span class="n">Instance</span><span class="p">.</span><span class="n">Health</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>Note that autoload objects (scripts and/or scenes) are accessed just like any
+other node in the scene tree. In fact, if you look at the running scene tree,
+you'll see the autoloaded nodes appear:</p>
+<img alt="../../_images/autoload_runtime.webp" src="../../_images/autoload_runtime.webp" />
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Autoloads must <strong>not</strong> be removed using <code class="docutils literal notranslate"><span class="pre">free()</span></code> or <code class="docutils literal notranslate"><span class="pre">queue_free()</span></code> at
+runtime, or the engine will crash.</p>
+</div>
+</section>
+<section id="custom-scene-switcher">
+<h2>Custom scene switcher<a class="headerlink" href="#custom-scene-switcher" title="Link to this heading"></a></h2>
+<p>This tutorial will demonstrate building a scene switcher using autoloads.
+For basic scene switching, you can use the
+<a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree-method-change-scene-to-file"><span class="std std-ref">SceneTree.change_scene_to_file()</span></a>
+method (see <a class="reference internal" href="scene_tree.html#doc-scene-tree"><span class="std std-ref">Using SceneTree</span></a> for details). However, if you need more
+complex behavior when changing scenes, this method provides more functionality.</p>
+<p>To begin, download the template from here:
+<a class="reference external" href="https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/singleton_autoload_starter.zip">singleton_autoload_starter.zip</a>
+and open it in Godot.</p>
+<p>A window notifying you that the project was last opened in an older Godot version
+may appear, that's not an issue. Click <em>Ok</em> to open the project.</p>
+<p>The project contains two scenes: <code class="docutils literal notranslate"><span class="pre">scene_1.tscn</span></code> and <code class="docutils literal notranslate"><span class="pre">scene_2.tscn</span></code>. Each
+scene contains a label displaying the scene name and a button with its
+<code class="docutils literal notranslate"><span class="pre">pressed()</span></code> signal connected. When you run the project, it starts in
+<code class="docutils literal notranslate"><span class="pre">scene_1.tscn</span></code>. However, pressing the button does nothing.</p>
+<section id="creating-the-script">
+<h3>Creating the script<a class="headerlink" href="#creating-the-script" title="Link to this heading"></a></h3>
+<p>Open the <strong>Script</strong> window and create a new script called <code class="docutils literal notranslate"><span class="pre">global.gd</span></code>.
+Make sure it inherits from <code class="docutils literal notranslate"><span class="pre">Node</span></code>:</p>
+<img alt="../../_images/autoload_script.webp" src="../../_images/autoload_script.webp" />
+<p>The next step is to add this script to the autoload list.
+Starting from the menu, open
+<strong>Project &gt; Project Settings &gt; Globals &gt; Autoload</strong> and
+select the script by clicking the browse button or typing its path:
+<code class="docutils literal notranslate"><span class="pre">res://global.gd</span></code>. Press <strong>Add</strong> to add it to the autoload list
+and name it &quot;Global&quot;, which is required for scripts to access it
+by the name &quot;Global&quot;:</p>
+<img alt="../../_images/autoload_tutorial1.webp" src="../../_images/autoload_tutorial1.webp" />
+<p>Now whenever we run any scene in the project, this script will always be loaded.</p>
+<p>Returning to the script, it needs to fetch the current scene in the
+<cite>_ready()</cite> function. Both the current scene (the one with the button) and
+<code class="docutils literal notranslate"><span class="pre">global.gd</span></code> are children of root, but autoloaded nodes are always first. This
+means that the last child of root is always the loaded scene.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">current_scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">null</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">root</span>
+<span class="w">    </span><span class="c1"># Using a negative index counts from the end, so this gets the last child node of `root`.</span>
+<span class="w">    </span><span class="n">current_scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">root</span><span class="o">.</span><span class="nf">get_child</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Global</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">CurrentScene</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Viewport</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetTree</span><span class="p">().</span><span class="n">Root</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// Using a negative index counts from the end, so this gets the last child node of `root`.</span>
+<span class="w">        </span><span class="n">CurrentScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">root</span><span class="p">.</span><span class="n">GetChild</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Now we need a function for changing the scene. This function needs to free the
+current scene and replace it with the requested one.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">goto_scene</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># This function will usually be called from a signal callback,</span>
+<span class="w">    </span><span class="c1"># or some other function in the current scene.</span>
+<span class="w">    </span><span class="c1"># Deleting the current scene at this point is</span>
+<span class="w">    </span><span class="c1"># a bad idea, because it may still be executing code.</span>
+<span class="w">    </span><span class="c1"># This will result in a crash or unexpected behavior.</span>
+
+<span class="w">    </span><span class="c1"># The solution is to defer the load to a later time, when</span>
+<span class="w">    </span><span class="c1"># we can be sure that no code from the current scene is running:</span>
+
+<span class="w">    </span><span class="n">_deferred_goto_scene</span><span class="o">.</span><span class="nf">call_deferred</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_deferred_goto_scene</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># It is now safe to remove the current scene.</span>
+<span class="w">    </span><span class="n">current_scene</span><span class="o">.</span><span class="nf">free</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># Load the new scene.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ResourceLoader</span><span class="o">.</span><span class="nf">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Instance the new scene.</span>
+<span class="w">    </span><span class="n">current_scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1"># Add it to the active scene, as child of root.</span>
+<span class="w">    </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">root</span><span class="o">.</span><span class="nf">add_child</span><span class="p">(</span><span class="n">current_scene</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.</span>
+<span class="w">    </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">current_scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_scene</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">GotoScene</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">path</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// This function will usually be called from a signal callback,</span>
+<span class="w">    </span><span class="c1">// or some other function from the current scene.</span>
+<span class="w">    </span><span class="c1">// Deleting the current scene at this point is</span>
+<span class="w">    </span><span class="c1">// a bad idea, because it may still be executing code.</span>
+<span class="w">    </span><span class="c1">// This will result in a crash or unexpected behavior.</span>
+
+<span class="w">    </span><span class="c1">// The solution is to defer the load to a later time, when</span>
+<span class="w">    </span><span class="c1">// we can be sure that no code from the current scene is running:</span>
+
+<span class="w">    </span><span class="n">CallDeferred</span><span class="p">(</span><span class="n">MethodName</span><span class="p">.</span><span class="n">DeferredGotoScene</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">DeferredGotoScene</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">path</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// It is now safe to remove the current scene.</span>
+<span class="w">    </span><span class="n">CurrentScene</span><span class="p">.</span><span class="n">Free</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Load a new scene.</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">nextScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">PackedScene</span><span class="o">&gt;</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Instance the new scene.</span>
+<span class="w">    </span><span class="n">CurrentScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nextScene</span><span class="p">.</span><span class="n">Instantiate</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Add it to the active scene, as child of root.</span>
+<span class="w">    </span><span class="n">GetTree</span><span class="p">().</span><span class="n">Root</span><span class="p">.</span><span class="n">AddChild</span><span class="p">(</span><span class="n">CurrentScene</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.</span>
+<span class="w">    </span><span class="n">GetTree</span><span class="p">().</span><span class="n">CurrentScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CurrentScene</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Using <a class="reference internal" href="../../classes/class_object.html#class-object-method-call-deferred"><span class="std std-ref">Object.call_deferred()</span></a>,
+the second function will only run once all code from the current scene has
+completed. Thus, the current scene will not be removed while it is
+still being used (i.e. its code is still running).</p>
+<p>Finally, we need to fill the empty callback functions in the two scenes:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add to &#39;scene_1.gd&#39;.</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_button_pressed</span><span class="p">():</span>
+<span class="w">    </span><span class="nc">Global</span><span class="o">.</span><span class="nf">goto_scene</span><span class="p">(</span><span class="s2">&quot;res://scene_2.tscn&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Add to &#39;Scene1.cs&#39;.</span>
+
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnButtonPressed</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">global</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Global</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;/root/Global&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">global</span><span class="p">.</span><span class="n">GotoScene</span><span class="p">(</span><span class="s">&quot;res://Scene2.tscn&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>and</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-6-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-6-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-6-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add to &#39;scene_2.gd&#39;.</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_button_pressed</span><span class="p">():</span>
+<span class="w">    </span><span class="nc">Global</span><span class="o">.</span><span class="nf">goto_scene</span><span class="p">(</span><span class="s2">&quot;res://scene_1.tscn&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-6-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-6-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Add to &#39;Scene2.cs&#39;.</span>
+
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnButtonPressed</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">global</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Global</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;/root/Global&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">global</span><span class="p">.</span><span class="n">GotoScene</span><span class="p">(</span><span class="s">&quot;res://Scene1.tscn&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Run the project and test that you can switch between scenes by pressing
+the button.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When scenes are small, the transition is instantaneous. However, if your
+scenes are more complex, they may take a noticeable amount of time to appear.
+To learn how to handle this, see the next tutorial: <a class="reference internal" href="../io/background_loading.html#doc-background-loading"><span class="std std-ref">Background loading</span></a>.</p>
+<p>Alternatively, if the loading time is relatively short (less than 3 seconds or so),
+you can display a &quot;loading plaque&quot; by showing some kind of 2D element just before
+changing the scene. You can then hide it just after the scene is changed. This can
+be used to indicate to the player that a scene is being loaded.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="resources.html" class="btn btn-neutral float-left" title="Resources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scene_tree.html" class="btn btn-neutral float-right" title="Using SceneTree" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

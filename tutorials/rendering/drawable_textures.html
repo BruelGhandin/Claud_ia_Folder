@@ -1,0 +1,510 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Using DrawableTextures" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/rendering/drawable_textures.html" />
+<meta property="og:site_name" content="Godot Engine documentation" />
+<meta property="og:description" content="DrawableTextures are a type of Texture2D with additional functions for modifying the texture via the GPU. This can be used for procedural texturing, real-time effects, and much more. Basic rectangl..." />
+<meta name="description" content="DrawableTextures are a type of Texture2D with additional functions for modifying the texture via the GPU. This can be used for procedural texturing, real-time effects, and much more. Basic rectangl..." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Using DrawableTextures &mdash; Godot Engine (4.7) documentation in English</title>
+
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=8c39be60" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/dev.css?v=b28a5b3c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=54dcc610"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/js/custom.js?v=156b5a5e"></script>
+    <script src="../../_static/js/theme.js"></script><meta name="theme-color" content="#3d8fcc" />
+  
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="HDR output" href="hdr_output.html" />
+    <link rel="prev" title="The Compositor" href="compositor.html" />
+<meta name="doc_version" content="4.7" />
+<meta name="doc_is_latest" content="False" />
+<meta name="doc_pagename" content="tutorials/rendering/drawable_textures" />
+
+<link rel="manifest" href="../../manifest.webmanifest" /><link rel="icon" href="../../favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="../../apple-touch-icon.png" /><link rel="stylesheet" type="text/css" href="../../_static/css/godot-mobile.css"><script defer src="../../_static/js/godot-pwa.js"></script><script defer src="../../_static/js/godot-search.js"></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/docs_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu" data-godot-root="../../" data-godot-page="tutorials/rendering/drawable_textures.html"></div><script src="../../_static/js/godot-menu-data.js"></script><script src="../../_static/js/godot-menu.js"></script>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Godot Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+<li>
+	<div style="font-size: 105%;font-weight: 600;">
+		Godot Engine 4.7 documentation in English
+	</div>
+	<ul class="wy-breadcrumbs">
+		
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Rendering</a></li>
+      <li class="breadcrumb-item active">Using DrawableTextures</li>
+	</ul>
+</li>
+
+
+<li style="float: right; text-align: right;">
+	<ul>
+		
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/godotengine/godot-docs/blob/master/tutorials/rendering/drawable_textures.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+	</ul>
+
+	<style>
+		.godot-edit-guidelines {
+			font-size: 14px;
+			float: right;
+			clear: both;
+			padding-top: 4px;
+		}
+
+		@media screen and (max-width: 480px) {
+			.godot-edit-guidelines {
+				display: none;
+			}
+		}
+	</style>
+	<a class="godot-edit-guidelines" href="https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html">
+		Learn how to contribute!
+	</a>
+</li>
+
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody">
+  
+  <div class="admonition-grid">
+    
+
+    
+  </div>
+  
+
+  
+  <section id="using-drawabletextures">
+<span id="doc-drawable-textures"></span><h1>Using DrawableTextures<a class="headerlink" href="#using-drawabletextures" title="Link to this heading"></a></h1>
+<p>DrawableTextures are a type of Texture2D with additional functions for modifying
+the texture via the GPU. This can be used for procedural texturing, real-time effects,
+and much more.</p>
+<section id="basic-rectangle-blitting">
+<h2>Basic rectangle blitting<a class="headerlink" href="#basic-rectangle-blitting" title="Link to this heading"></a></h2>
+<p>The most basic operation on a drawable texture is
+<a class="reference internal" href="../../classes/class_drawabletexture2d.html#class-drawabletexture2d-method-blit-rect"><span class="std std-ref">blit_rect()</span></a>.
+Blitting (copying) the whole of one texture into the given rectangle on the <code class="docutils literal notranslate"><span class="pre">DrawableTexture</span></code>.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-0-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-0-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">texture</span><span class="o">.</span><span class="nf">blit_rect</span><span class="p">(</span><span class="nb nb-Type">Rect2</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">),</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://circle.svg&quot;</span><span class="p">))</span>
+<span class="n">texture</span><span class="o">.</span><span class="nf">blit_rect</span><span class="p">(</span><span class="nb nb-Type">Rect2</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">),</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://circle.svg&quot;</span><span class="p">),</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="vi">WHITE</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">texture</span><span class="p">.</span><span class="n">BlitRect</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Rect2I</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">),</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://circle.svg&quot;</span><span class="p">));</span>
+<span class="n">texture</span><span class="p">.</span><span class="n">BlitRect</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Rect2I</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">),</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://circle.svg&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">Colors</span><span class="p">.</span><span class="n">White</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>The code above blits the circle texture into the rectangle <code class="docutils literal notranslate"><span class="pre">(20,</span> <span class="pre">50,</span> <span class="pre">60,</span> <span class="pre">60)</span></code>
+on the <code class="docutils literal notranslate"><span class="pre">DrawableTexture</span></code>. <code class="docutils literal notranslate"><span class="pre">(20,</span> <span class="pre">50)</span></code> is the top left corner of the rectangle
+being drawn to, and <code class="docutils literal notranslate"><span class="pre">(60,</span> <span class="pre">60)</span></code> is its size. If you wanted to draw over the
+whole texture, simply match the <code class="docutils literal notranslate"><span class="pre">rect</span></code> parameter to the <code class="docutils literal notranslate"><span class="pre">DrawableTexture</span></code>'s
+size.</p>
+<p>The third parameter in <code class="docutils literal notranslate"><span class="pre">blit_rect()</span></code> is an optional parameter, <code class="docutils literal notranslate"><span class="pre">modulate</span></code>.
+This is a color that the output is multiplied by (in the default behavior). This
+can be used to recolor, or even mask the drawn output of <code class="docutils literal notranslate"><span class="pre">blit_rect()</span></code>. For
+example, using a modulate of <code class="docutils literal notranslate"><span class="pre">Color(0,</span> <span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">0)</span></code> will only draw to and update
+the blue values of each pixel on the <code class="docutils literal notranslate"><span class="pre">DrawableTexture</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">blit_rect()</span></code>'s fourth parameter, <code class="docutils literal notranslate"><span class="pre">mipmap</span></code>, can specify a mipmap level to
+draw to. You only need to use this if you want fine control over each mipmap
+layer. Keep in mind, you do not need to adjust the rectangle size; it is
+converted to a portion of the texture's whole size. If you just want to update
+all the mipmap layers, you should draw to the texture, then call
+<code class="docutils literal notranslate"><span class="pre">generate_mipmaps()</span></code> on it.</p>
+</section>
+<section id="blend-modes-and-texture-blit-shaders">
+<h2>Blend modes and texture blit shaders<a class="headerlink" href="#blend-modes-and-texture-blit-shaders" title="Link to this heading"></a></h2>
+<p>The drawing process for <code class="docutils literal notranslate"><span class="pre">blit_rect()</span></code> and DrawableTextures is controlled by a
+<a class="reference internal" href="../shaders/shader_reference/texture_blit_shader.html#doc-texture-blit-shader"><span class="std std-ref">texture blit shader</span></a>. Even when the user does
+not supply one, the engine has a default texture blit shader it uses.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="c1">// Default texture blit shader.</span>
+
+<span class="n">shader_type</span><span class="w"> </span><span class="n">texture_blit</span><span class="p">;</span>
+<span class="n">render_mode</span><span class="w"> </span><span class="n">blend_mix</span><span class="p">;</span>
+
+<span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">source_texture0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_blit_source0</span><span class="p">;</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">source_texture1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_blit_source1</span><span class="p">;</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">source_texture2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_blit_source2</span><span class="p">;</span>
+<span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">source_texture3</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">hint_blit_source3</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">blit</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Copies from each whole source texture to a rect on each output texture.</span>
+<span class="w">    </span><span class="n">COLOR0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">source_texture0</span><span class="p">,</span><span class="w"> </span><span class="n">UV</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MODULATE</span><span class="p">;</span>
+<span class="w">    </span><span class="n">COLOR1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">source_texture1</span><span class="p">,</span><span class="w"> </span><span class="n">UV</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MODULATE</span><span class="p">;</span>
+<span class="w">    </span><span class="n">COLOR2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">source_texture2</span><span class="p">,</span><span class="w"> </span><span class="n">UV</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MODULATE</span><span class="p">;</span>
+<span class="w">    </span><span class="n">COLOR3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">source_texture3</span><span class="p">,</span><span class="w"> </span><span class="n">UV</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MODULATE</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The blend mode specified in <code class="docutils literal notranslate"><span class="pre">render_mode</span></code> defines how the output color value
+is blended with the current color of the pixel on the DrawableTexture. The
+engine defaults to <code class="docutils literal notranslate"><span class="pre">blend_mix</span></code> if no blend mode is specified in
+<code class="docutils literal notranslate"><span class="pre">render_mode</span></code>. Texture blit shaders also support <code class="docutils literal notranslate"><span class="pre">blend_add</span></code> (additive),
+<code class="docutils literal notranslate"><span class="pre">blend_sub</span></code> (subtractive), <code class="docutils literal notranslate"><span class="pre">blend_mul</span></code> (multiply), and <code class="docutils literal notranslate"><span class="pre">blend_disabled</span></code>
+(alpha does not act as transparency and is written as-is).
+The premultiplied alpha blend mode is <em>not</em> supported here.</p>
+<p>It is also possible to use a different blend mode than the one specified in the shader.
+To do so, you can instantiate and pass in a new <a class="reference internal" href="../../classes/class_blitmaterial.html#class-blitmaterial"><span class="std std-ref">BlitMaterial</span></a>
+in the script.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-1-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-1-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">blit_material</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">BlitMaterial</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="n">blit_material</span><span class="o">.</span><span class="vi">blend_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">BlitMaterial</span><span class="o">.</span><span class="vi">BLEND_MODE_DISABLED</span>
+<span class="n">texture</span><span class="o">.</span><span class="nf">blit_rect</span><span class="p">(</span><span class="nb nb-Type">Rect2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">),</span><span class="w"> </span><span class="nb nb-Function">load</span><span class="p">(</span><span class="s2">&quot;res://icon.svg&quot;</span><span class="p">),</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="vi">WHITE</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">blit_material</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">blitMaterial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BlitMaterial</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">BlendMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BlitMaterial</span><span class="p">.</span><span class="n">BlendModeEnum</span><span class="p">.</span><span class="n">Disabled</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">texture</span><span class="p">.</span><span class="n">BlitRect</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Rect2I</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">),</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://icon.svg&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">Colors</span><span class="p">.</span><span class="n">White</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">blitMaterial</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>If you want more complex behavior, you can write your own texture blit shader.
+Create a new shader with the <code class="docutils literal notranslate"><span class="pre">texture_blit</span></code> shader type, write your shader
+code, and load it into a material to pass to the function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The material is passed as a function parameter, rather than bound to the
+resource. This makes it easier to perform multiple types of draws to the
+same texture.</p>
+</div>
+</section>
+<section id="using-multiple-blits-in-a-single-texture">
+<h2>Using multiple blits in a single texture<a class="headerlink" href="#using-multiple-blits-in-a-single-texture" title="Link to this heading"></a></h2>
+<p>DrawableTextures also have a <a class="reference internal" href="../../classes/class_drawabletexture2d.html#class-drawabletexture2d-method-blit-rect-multi"><span class="std std-ref">blit_rect_multi()</span></a>
+method, which allows for up to 4 inputs and outputs in the same step.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-2-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-2-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">texture</span><span class="o">.</span><span class="nf">blit_rect_multi</span><span class="p">(</span>
+<span class="w">        </span><span class="nb nb-Type">Rect2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">),</span>
+<span class="w">        </span><span class="p">[</span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://icon.svg&quot;</span><span class="p">),</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://circle.svg&quot;</span><span class="p">)],</span>
+<span class="w">        </span><span class="p">[</span><span class="n">other_drawable_texture</span><span class="p">]</span>
+<span class="w">    </span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">texture</span><span class="p">.</span><span class="n">BlitRectMulti</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Rect2I</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">),</span>
+<span class="w">    </span><span class="na">[GD.Load&lt;Texture2D&gt;(&quot;res://icon.svg&quot;),</span>
+<span class="na">    GD.Load&lt;Texture2D&gt;(&quot;res://circle.svg&quot;)]</span><span class="p">,</span>
+<span class="w">    </span><span class="na">[otherDrawableTexture]</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>The default behavior of this is to just match each input and output in order.
+For example, this can be useful for drawing to an albedo, normal, and height
+texture simultaneously.</p>
+<p>Of course, this behavior can also be customized via the texture blit shader.
+In the shader, the extra outputs are written to via <code class="docutils literal notranslate"><span class="pre">COLOR1</span></code>, <code class="docutils literal notranslate"><span class="pre">COLOR2</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">COLOR3</span></code> (with <code class="docutils literal notranslate"><span class="pre">COLOR0</span></code> being the primary output). The extra inputs
+can be read as uniforms with <code class="docutils literal notranslate"><span class="pre">hint_blit_source1</span></code>, <code class="docutils literal notranslate"><span class="pre">hint_blit_source2</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">hint_blit_source3</span></code>.</p>
+</section>
+<section id="example-1-simple-painting">
+<span id="doc-drawable-textures-example-1"></span><h2>Example 1: Simple painting<a class="headerlink" href="#example-1-simple-painting" title="Link to this heading"></a></h2>
+<p>One of the most intuitive uses for DrawableTextures is for, well, drawing!
+For this example, we're going to start a new project, and create
+a new UI scene with a Control node at its root.</p>
+<p>Next, you'll need to create a <a class="reference internal" href="../../classes/class_texturerect.html#class-texturerect"><span class="std std-ref">TextureRect</span></a> node, which is going to
+be our user's canvas. Size it appropriately for your screen, and then attach a
+new script to it. The start of this script should initialize the TextureRect's
+texture to a new DrawableTexture.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-3-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-3-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">TextureRect</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="n">texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DrawableTexture2D</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Be careful; if the dimensions of the node are not equal to the size set here,</span>
+<span class="w">    </span><span class="c1"># our draw call later will seem to happen at the wrong spot.</span>
+<span class="w">    </span><span class="n">texture</span><span class="o">.</span><span class="nf">setup</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="n">DrawableTexture2D</span><span class="o">.</span><span class="vi">DRAWABLE_FORMAT_RGBA8</span><span class="p">,</span><span class="w"> </span><span class="l">false</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="n">DrawableTexture2D</span><span class="w"> </span><span class="n">_texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DrawableTexture2D</span><span class="p">();</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Be careful; if the dimensions of the node are not equal to the size set here,</span>
+<span class="w">    </span><span class="c1">// our draw call later will seem to happen at the wrong spot.</span>
+<span class="w">    </span><span class="n">_texture</span><span class="p">.</span><span class="n">Setup</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="n">DrawableTexture2D</span><span class="p">.</span><span class="n">DrawableFormat</span><span class="p">.</span><span class="n">Rgba8</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_texture</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Next, we need the TextureRect to respond to the player clicking and dragging as
+if they are painting. To do this, we can override the <code class="docutils literal notranslate"><span class="pre">_gui_input()</span></code> method
+from the TextureRect in our script, and parse InputMouseButton and
+InputMouseMotion events:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-4-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-4-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">drawing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_gui_input</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nb">InputEventMouseButton</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Mouse click/unclick - start/stop drawing.</span>
+<span class="w">        </span><span class="n">drawing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">drawing</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nb">InputEventMouseMotion</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">drawing</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Calculate rect to center our drawn rectangle on mouse position</span>
+<span class="w">        </span><span class="c1"># instead of mouse at top left.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Rect2</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="vi">position</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="vi">position</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
+<span class="w">        </span><span class="n">texture</span><span class="o">.</span><span class="nf">blit_rect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span><span class="w"> </span><span class="l">null</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-4-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">drawing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_GuiInput</span><span class="p">(</span><span class="n">InputEvent</span><span class="w"> </span><span class="n">@event</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">@event</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">InputEventMouseButton</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Mouse click/unclick - start/stop drawing.</span>
+<span class="w">        </span><span class="n">drawing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">drawing</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">@event</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">InputEventMouseMotion</span><span class="w"> </span><span class="n">eventMouseMotion</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">drawing</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Calculate rect to center our drawn rectangle on mouse position</span>
+<span class="w">        </span><span class="c1">// instead of mouse at top left.</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rect2I</span><span class="p">(</span>
+<span class="w">            </span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">eventMouseMotion</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">),</span>
+<span class="w">            </span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">eventMouseMotion</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">),</span>
+<span class="w">            </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_texture</span><span class="p">.</span><span class="n">BlitRect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>This should now draw black squares as you click and drag around the TextureRect.
+For more natural drawing, we probably want to be drawing a circle shape, and
+actually coloring it.</p>
+<p>We can adjust what's being drawn by using a Texture to copy from, and the
+modulate parameter. We will use this <a class="reference download internal" download="" href="../../_downloads/6a17015b28f74e91ae7ce6075b111614/circle.svg"><code class="xref download docutils literal notranslate"><span class="pre">plain</span> <span class="pre">white</span> <span class="pre">circle</span> <span class="pre">texture</span></code></a>,
+which we load as the <code class="docutils literal notranslate"><span class="pre">texture</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">blit_rect()</span></code>,
+and use a red color as the <code class="docutils literal notranslate"><span class="pre">modulate</span></code> parameter.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-5-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-5-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-5-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nb">InputEventMouseMotion</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">drawing</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Calculate rect to center our drawn rectangle on mouse position</span>
+<span class="w">    </span><span class="c1"># instead of mouse at top left.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Rect2</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="vi">position</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="vi">position</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
+<span class="w">    </span><span class="n">texture</span><span class="o">.</span><span class="nf">blit_rect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://circle.svg&quot;</span><span class="p">),</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="vi">RED</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-5-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">@event</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">InputEventMouseMotion</span><span class="w"> </span><span class="n">eventMouseMotion</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">drawing</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Calculate rect to center our drawn rectangle on mouse position</span>
+<span class="w">    </span><span class="c1">// instead of mouse at top left.</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rect2I</span><span class="p">(</span>
+<span class="w">        </span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">eventMouseMotion</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">eventMouseMotion</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">),</span>
+<span class="w">        </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+<span class="w">    </span><span class="n">_texture</span><span class="p">.</span><span class="n">BlitRect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://circle.svg&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">Colors</span><span class="p">.</span><span class="n">Red</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>The drawing now looks much more natural and colorful. To further customize this,
+you could connect a <a class="reference internal" href="../../classes/class_colorpickerbutton.html#class-colorpickerbutton"><span class="std std-ref">ColorPickerButton</span></a> node to the script to store
+the user's color choice for the <code class="docutils literal notranslate"><span class="pre">modulate</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">blit_rect()</span></code>. You
+could also store a brush size variable, give the user a way to adjust it, and
+incorporate it into the rectangle calculation so the user can draw larger or
+smaller strokes.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-6-R0RTY3JpcHQ=" aria-selected="true" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button aria-controls="panel-6-QyM=" aria-selected="false" class="sphinx-tabs-tab code-tab group-tab" id="tab-6-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div aria-labelledby="tab-6-R0RTY3JpcHQ=" class="sphinx-tabs-panel code-tab group-tab" id="panel-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">drawing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="k">var</span><span class="w"> </span><span class="n">my_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="vi">RED</span>
+<span class="k">var</span><span class="w"> </span><span class="n">my_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">20.0</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_gui_input</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nb">InputEventMouseButton</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Mouse click/unclick - start/stop drawing.</span>
+<span class="w">        </span><span class="n">drawing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">drawing</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nb">InputEventMouseMotion</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">drawing</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Calculate rect to center our drawn rectangle on mouse position</span>
+<span class="w">        </span><span class="c1"># instead of mouse at top left.</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Rect2</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="vi">position</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">my_size</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="vi">position</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">my_size</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">my_size</span><span class="p">,</span><span class="w"> </span><span class="n">my_size</span><span class="p">)</span>
+<span class="w">        </span><span class="n">texture</span><span class="o">.</span><span class="nf">blit_rect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">&quot;res://circle.svg&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">my_color</span><span class="p">)</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_color_picker_button_color_changed</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+<span class="w">    </span><span class="n">my_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span>
+
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_h_slider_value_changed</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="n">my_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-6-QyM=" class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-6-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">_drawing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="k">private</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="n">_myColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Colors</span><span class="p">.</span><span class="n">Red</span><span class="p">;</span>
+<span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_mySize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_GuiInput</span><span class="p">(</span><span class="n">InputEvent</span><span class="w"> </span><span class="n">@event</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">@event</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">InputEventMouseButton</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Mouse click/unclick - start/stop drawing.</span>
+<span class="w">        </span><span class="n">_drawing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">_drawing</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">@event</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">InputEventMouseMotion</span><span class="w"> </span><span class="n">eventMouseMotion</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">_drawing</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Calculate rect to center our drawn rectangle on mouse position</span>
+<span class="w">        </span><span class="c1">// instead of mouse at top left.</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rect2I</span><span class="p">(</span>
+<span class="w">            </span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">eventMouseMotion</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">_mySize</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span>
+<span class="w">            </span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">eventMouseMotion</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">_mySize</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span>
+<span class="w">            </span><span class="n">_mySize</span><span class="p">,</span><span class="w"> </span><span class="n">_mySize</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_texture</span><span class="p">.</span><span class="n">BlitRect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;res://circle.svg&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">_myColor</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnColorPickerButtonColorChanged</span><span class="p">(</span><span class="n">Color</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">_myColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnHSliderValueChanged</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="k">value</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">_mySize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="k">value</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+
+
+
+
+</div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="compositor.html" class="btn btn-neutral float-left" title="The Compositor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hdr_output.html" class="btn btn-neutral float-right" title="HDR output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-present Juan Linietsky, Ariel Manzur and the Godot community (CC BY 3.0).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 4.7
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    
+
+    <dl>
+      <dt>Languages</dt>
+      
+        <dd><a href="#">en</a></dd>
+      
+        <dd><a href="#">de</a></dd>
+      
+        <dd><a href="#">es</a></dd>
+      
+        <dd><a href="#">fr</a></dd>
+      
+    </dl>
+    <dl>
+      <dt>Versions</dt>
+      
+        <dd><a href="#">stable</a></dd>
+      
+        <dd><a href="#">latest</a></dd>
+      
+    </dl>
+    <dl>
+      
+      <dt>On Read the Docs</dt>
+        <dd>
+          <a href="///projects/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="///projects//builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="///projects//downloads/">Downloads</a>
+        </dd>
+    </dl>
+
+    <hr>
+    <small>
+      <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+      <span> · </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+    </small>
+
+    
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
