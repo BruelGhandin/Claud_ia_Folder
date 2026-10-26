@@ -23,6 +23,8 @@ self.addEventListener("fetch", function (event) {
   if (req.method !== "GET") return;
   var url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+  // l'application Value Bet (dossier value-bet/) a son propre service worker : ne pas l'intercepter
+  if (url.pathname.indexOf("/value-bet/") !== -1) return;
   // sw.js et precache.json doivent toujours venir du réseau quand il est disponible
   var base = url.pathname.split("/").pop();
   if (base === "sw.js" || base === "precache.json") return;
